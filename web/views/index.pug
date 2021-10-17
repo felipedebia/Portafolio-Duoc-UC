@@ -1,0 +1,62 @@
+extends layout
+
+block content
+
+  nav.navbar.navbar-expand-md.navbar-dark.bg-dark.mb-4
+    a.navbar-brand(href='#') Maipo Grande
+    button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarCollapse' aria-controls='navbarCollapse' aria-expanded='false' aria-label='Toggle navigation')
+      span.navbar-toggler-icon
+    #navbarCollapse.collapse.navbar-collapse
+      ul.navbar-nav.mr-auto
+        li.nav-item.active
+          a.nav-link(href='/')
+            | Inicio
+            span.sr-only (current)
+        li.nav-item
+          a.nav-link(href='nosotros') Nosotros
+        li.nav-item
+          a.nav-link(href='servicios') Servicios
+        li.nav-item
+          a.nav-link(href='contacto') Contacto
+        if(session.isLoggedIn)
+          li.nav-item
+            a.nav-link(href='panel') Administración
+      
+      if(session.isLoggedIn)
+        ul.navbar-nav.float-right
+          a.nav-link.text-white(href='logout') 
+            i.bi-power
+            |  Cerrar sesión
+      else
+        ul.navbar-nav.float-right
+          a.nav-link.text-success(href='login')
+            i.bi.bi-box-arrow-in-right
+            |  Ingresar
+  main.container(role='main')
+    .jumbotron
+      h1 Inicio
+      p.lead
+        | Estás en la página principal
+      a.btn.btn-lg.btn-primary(href='login' role='button') Iniciar sesión &raquo;
+    .container
+    
+    .row
+      .col-md-4
+        h2 Contenido
+        p
+          | Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+        p
+          a.btn.btn-secondary(href='#' role='button') Ver más &raquo;
+      .col-md-4
+        h2 Contenido
+        p
+          | Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+        p
+          a.btn.btn-secondary(href='#' role='button') Ver más &raquo;
+      .col-md-4
+        h2 Contenido
+        p
+          | Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+        p
+          a.btn.btn-secondary(href='#' role='button') Ver más &raquo;
+    hr
