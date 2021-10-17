@@ -156,6 +156,14 @@ router.get('/verUsuario/:id_usuario', async function(req, res, next){
 
 })
 
+router.get('/plantilla', function(req, res) {
+    if (req.session.isLoggedIn) {
+        res.render('plantilla', { title: 'Maipo Grande - plantilla' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
 
 // CRUD VENTAS
 
