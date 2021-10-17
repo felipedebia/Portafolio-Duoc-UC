@@ -1,0 +1,87 @@
+<%- include('partials/nav.ejs') %> 
+
+<div id="wrapper">
+  <div class="container-fluid">
+      <p class="lead">
+      <h3>Bienvenido <%= session.nombre %> <%= session.apellido %> - <%= session.tipo_usuario %></h3>
+      </p>
+  </div>
+  <div class="container-fluid">
+      <div class="row mb-4">
+         <div class="col">
+            <div class="card">
+               <div class="card-body">
+                  <h5 class="card-title">Crear usuario</h5>
+                  <a class="card-link" href="/crearusuario">Crear usuario</a>
+               </div>
+            </div>
+         </div>
+         <div class="col">
+            <div class="card">
+               <div class="card-body">
+                  <h5 class="card-title">Listado de usuarios registrados </h5>
+                  <a class="card-link" href="/listadousuarios">Ver usuarios registrados</a>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col mb-4">
+            <div class="card">
+               <div class="card-body">
+                  <h5 class="card-title">Try Other</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Bootstrap 4.0.0 Snippet by pradeep330</h6>
+                  <p class="card-text">You can also try different version of Bootstrap V4 side menu. Click below link to view all Bootstrap Menu versions.</p>
+                  <a class="card-link" href="https://bootsnipp.com/pradeep330">link</a><a class="card-link" href="http://websitedesigntamilnadu.com">Another link</a>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col">
+            <div class="card">
+               <div class="card-body">
+                  <h5 class="card-title">Últimas ventas</h5>
+                  <table class="table">
+                     <thead>
+                        <tr>
+                           <th scope="col">#</th>
+                           <th scope="col">Nombre</th>
+                           <th scope="col">Apellido</th>
+                           <th scope="col">Correo electrónico</th>
+                           <th scope="col">Fecha de registro</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <th scope="row">1</th>
+                           <td>Mark</td>
+                           <td>Otto</td>
+                           <td>@mdo</td>
+                           <td>@mdo</td>
+                        </tr>
+                        <tr>
+                           <th scope="row">2</th>
+                           <td>Jacob</td>
+                           <td>Thornton</td>
+                           <td>@fat</td>
+                           <td>@mdo</td>
+                        </tr>
+                        <tr>
+                           <th scope="row">3</th>
+                           <td>Larry</td>
+                           <td>the Bird</td>
+                           <td>@twitter</td>
+                           <td>@mdo</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<%- include('partials/nav.ejs') %> 
+
+<script>
+    var data =<%-JSON.stringify(mydata)%>
+</script>
+
+      <div id="wrapper">
+         <div class="container-fluid">
+            <p class="lead">
+            <h3>Listado de usuarios registrados</h3>
+            </p>
+            <div class="row">
+               <div class="col">
+                  <div class="card">
+                     <div class="card-body">
+                        <table class="table">
+                           <thead>
+                              <tr>
+                                 <th scope="col">#</th>
+                                 <th scope="col">Nombre</th>
+                                 <th scope="col">Apellido</th>
+                                 <th scope="col">Correo electrónico</th>
+                                 <th scope="col">Opciones</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                            <% for(var i=0; i < data.length; i++) { %>
+                              <tr>
+                                 <th scope="row"><%= data[i].id %></th>
+                                 <td><%= data[i].nombre %></td>
+                                 <td><%= data[i].apellido %></td>
+                                 <td><%= data[i].correo %></td>
+                                 <td><a class="card-link" href="/modificarUsuario/">Modificar</a><a class="card-link" href="/eliminarUsuario/">Eliminar</a></td>
+                              </tr>
+                            <% } %>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+</body>
+</html>

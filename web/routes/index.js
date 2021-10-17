@@ -17,32 +17,14 @@ function requestApiListadoUsuarios() {
 
 var listadoUsuariosPromesa = requestApiListadoUsuarios();
 
-// Rutas principales
-
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Maipo Grande - Inicio' });
-});
-
-router.get('/nosotros', function(req, res, next) {
-  res.render('nosotros', { title: 'Maipo Grande - Nosotros' });
-});
-
-router.get('/servicios', function(req, res, next) {
-  res.render('servicios', { title: 'Maipo Grande - Servicios' });
-});
-
-router.get('/contacto', function(req, res, next) {
-  res.render('contacto', { title: 'Maipo Grande - Contacto' });
-});
-
 // Rutas de usuarios
 
-router.get('/login', function(req, res, next) {
+router.get('/', function(req, res, next) {
 	if (req.session.isLoggedIn) {
 		res.redirect('panel');
 	}
 	else {
-		res.render('login', { title: 'Ingresar' });
+		res.render('login', { title: 'Ingresar - Maipo Grande' });
 	}
 });
 
@@ -84,7 +66,7 @@ router.get('/panel', function(req, res) {
 	if (req.session.isLoggedIn) {
 		res.render('panel', { title: 'Maipo Grande - Panel de Administración' });
 	} else {
-		res.redirect('/login');
+		res.redirect('/');
 	}
 	res.end();
 });
@@ -108,7 +90,7 @@ router.get('/listadoUsuarios', function(req, res, next) {
 			res.send('Error al obtener datos de la API');
 		});
 	} else {
-		res.redirect('/login');
+		res.redirect('/');
 	}
 	res.end();
 })
@@ -118,7 +100,7 @@ router.get('/crearUsuario', function(req, res, next) {
 	if (req.session.isLoggedIn) {
 		res.render('crearUsuario', { title: 'Crear nuevo usuario - Panel de Administración' });
 	} else {
-		res.redirect('/login');
+		res.redirect('/');
 	}
 	res.end();
 });
@@ -160,7 +142,7 @@ router.get('/modificarUsuario/:id_usuario', async function(req, res, next){
 			res.send('Error al obtener datos de la base de datos');
 		}
 	} else {
-		res.redirect('/login');
+		res.redirect('/');
 	}
 	res.end();
 })
