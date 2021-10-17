@@ -1,43 +1,48 @@
 <body>
-  <%- include('partials/head_login.ejs') %> 
-  <script>
-      var msgStr = ;
-      alert(msgStr)
-  </script>
-  <link rel="stylesheet" href="/js/jquery.min.js">
-  <link rel="stylesheet" href="/js/popper.js">
-  <link rel="stylesheet" href="/js/bootstrap.min.js">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-  
+  <%- include('partials/head_login.ejs') %>
+      <link rel="stylesheet" href="/js/jquery.min.js">
+      <link rel="stylesheet" href="/js/popper.js">
+      <link rel="stylesheet" href="/js/bootstrap.min.js">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+      <style>
+      </style>
+      <div class="container-fluid ps-md-0">
+          <div class="row g-0">
+              <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+              <div class="col-md-8 col-lg-6">
+                  <div class="login d-flex align-items-center py-5">
+                      <div class="container">
+                          <div class="row">
+                              <div class="col-md-9 col-lg-8 mx-auto">
+                                  <img class="col-md-9 col-lg-8 mx-auto" src="/images/Logo_Maipo_Grande.jpg">
 
-<div class="global-container">
-  <div class="card login-form">
-    <div class="card-body">
-      <h3 class="card-title text-center">Bienvenido</h3>
-      <img src="/images/Logo_Maipo_Grande.jpg" width="360" height="105">
-      <div class="card-text">
-        <!-- to error: add class "has-danger" -->
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div>
-        <form action="auth" method="POST">
-          <!-- to error: add class "has-danger" -->
-          <div class="form-group">
-            <label for="exampleInputEmail1">Correo electrónico</label>
-            <input type="email" class="form-control form-control-sm" name="correo" aria-describedby="emailHelp">
+                                  <!-- Sign In Form -->
+                                  <form action="auth" method="POST">
+                                      <div class="form-floating mb-3">
+                                          <label for="floatingInput">Correo electrónico</label>
+                                          <input type="email" class="form-control" name="correo" id="floatingInput" placeholder="Correo electrónico">
+                                      </div>
+                                      <div class="form-floating mb-3">
+                                          <label for="floatingPassword">Contraseña</label>
+                                          <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Contraseña">
+                                      </div>
+
+                                      <div class="d-grid">
+                                          <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" type="submit">Iniciar sesión</button>
+                                          <div class="text-center">
+                                              <a class="small" href="#">¿Has olvidado tu contraseña?</a>
+                                          </div>
+                                      </div>
+
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
           </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Contraseña</label>
-            <input type="password" class="form-control form-control-sm" name="password">
-          </div>
-          <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
-          
-          <div class="sign-up">
-            <a href="#">¿Has olvidado tu contraseña?</a>
-          </div>
-        </form>
       </div>
-    </div>
-  </div>
-</div>
+
 
 </body>
-</html>
+</html> 
