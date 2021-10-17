@@ -113,12 +113,12 @@ router.get('/modificarUsuario', async function(req, res, next){
 router.get('/modificarUsuario/:id_usuario', async function(req, res, next){
 	if (req.session.isLoggedIn) {
 
-		const { usuario_id } = req.body;
+		const { id_usuario } = req.body;
 
 		// Hacemos una consulta trayendo todos los datos del usuario
 		sql = "SELECT num_documento, tipo_usuario, nombre, apellido, fecha_nacimiento, genero, correo, estado_cuenta, telefono, password FROM usuario WHERE id_usuario = :id_usuario";
 
-		binds = {"id_usuario": usuario_id};
+		binds = {"id_usuario": id_usuario};
 
 		result = await BD.Open(sql, binds, false);
 

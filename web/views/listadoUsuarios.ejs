@@ -1,13 +1,9 @@
 <%- include('partials/nav.ejs') %> 
 
-<script>
-    var data =<%-JSON.stringify(mydata)%>
-</script>
-
       <div id="wrapper">
          <div class="container-fluid">
             <p class="lead">
-            <h3>Listado de usuarios registrados</h3>
+            <h3>Listado de usuarios registradosxD</h3>
             </p>
             <div class="row">
                <div class="col">
@@ -24,13 +20,13 @@
                               </tr>
                            </thead>
                            <tbody>
-                            <% for(var i=0; i < data.length; i++) { %>
+                              <% for(var i=0; i < Usuarios.length; i++) { %>
                               <tr>
-                                 <th scope="row"><%= data[i].id %></th>
-                                 <td><%= data[i].nombre %></td>
-                                 <td><%= data[i].apellido %></td>
-                                 <td><%= data[i].correo %></td>
-                                 <td><a class="card-link" href="/modificarUsuario/">Modificar</a><a class="card-link" href="/eliminarUsuario/">Eliminar</a></td>
+                                 <th scope="row"><%= i %></th>
+                                 <td><%= Usuarios[i].nombre %></td>
+                                 <td><%= Usuarios[i].apellido %></td>
+                                 <td><%= Usuarios[i].correo %></td>
+                                 <td><a class="card-link" href="/modificarUsuario/<%= Usuarios[i].id_usuario %>">Modificar</a><a class="card-link" href="/eliminarUsuario/<%= Usuarios[i].id_usuario %>">Eliminar</a></td>
                               </tr>
                             <% } %>
                            </tbody>
