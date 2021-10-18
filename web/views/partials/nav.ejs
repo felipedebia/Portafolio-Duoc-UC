@@ -1,12 +1,3 @@
-<!--
-=========================================================
-Material Dashboard - v2.1.2
-=========================================================
-Product Page: https://www.creative-tim.com/product/material-dashboard
-Copyright 2020 Creative Tim (https://www.creative-tim.com)
-Coded by Creative Tim
-=========================================================
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
 <!DOCTYPE html>
 <html lang="es">
 
@@ -19,147 +10,140 @@ The above copyright notice and this permission notice shall be included in all c
         <%= title %>
     </title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-    <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-    <!-- CSS Files -->
     <link href="../css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
-    <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="../css/demo.css" rel="stylesheet" />
 </head>
 
 <body class="">
     <div class="wrapper ">
         <div class="sidebar" data-color="purple" data-background-color="white" data-image="../images/sidebar-1.jpg">
-            <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-        Tip 2: you can also add an image using data-image tag
-    -->
             <div class="logo"><a href="../" class="simple-text logo-normal">
           Maipo Grande
         </a></div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
-                    <li class="nav-item active  ">
-                        <a class="nav-link" href="./">
-                            <i class="material-icons">dashboard</i>
-                            <p>Inicio</p>
+                  <li class="nav-item active  ">
+                      <a class="nav-link" href="./">
+                          <i class="material-icons">dashboard</i>
+                          <p>Inicio</p>
+                      </a>
+                  </li>
+                  <!--Menú administrador-->
+                  <% if( session.tipo_usuario == 1){ %>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="./usuarios">
+                            <i class="material-icons">person</i>
+                            <p>Usuarios</p>
                         </a>
                     </li>
-                    <!--Menú administrador-->
-                    <% if( session.tipo_usuario == 1){ %>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="./usuarios">
-                                <i class="material-icons">person</i>
-                                <p>Usuarios</p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="./user.html">
-                                <i class="material-icons">history_edu</i>
-                                <p>Contratos</p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="./user.html">
-                                <i class="material-icons">monetization_on</i>
-                                <p>Ventas Externas</p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="./user.html">
-                                <i class="material-icons">monetization_on</i>
-                                <p>Ventas Locales</p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="./user.html">
-                                <i class="material-icons">gavel</i>
-                                <p>Subastas Frutas</p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="./user.html">
-                                <i class="material-icons">local_shipping</i>
-                                <p>Subastas Transportes</p>
-                            </a>
-                        </li>
-                        <% } %>
-                            <!--Menú Productor-->
-                            <% if( session.tipo_usuario == 5){ %>
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="./tables.html">
-                                        <i class="material-icons">content_paste</i>
-                                        <p>Productos</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="./tables.html">
-                                        <i class="material-icons">gavel</i>
-                                        <p>Subastas</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="./tables.html">
-                                        <i class="material-icons">content_paste</i>
-                                        <p>Ventas</p>
-                                    </a>
-                                </li>
-                                <% } %>
-                                    <!--Menú Cliente Externo-->
-                                    <% if( session.tipo_usuario == 3){ %>
-                                        <li class="nav-item ">
-                                            <a class="nav-link" href="./typography.html">
-                                                <i class="material-icons">library_books</i>
-                                                <p>Solicitudes</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item ">
-                                            <a class="nav-link" href="./icons.html">
-                                                <i class="material-icons">bubble_chart</i>
-                                                <p>Mis Compras</p>
-                                            </a>
-                                        </li>
-                                        <% } %>
-                                            <!--Menú Cliente Interno-->
-                                            <% if( session.tipo_usuario == 4){ %>
-                                                <li class="nav-item ">
-                                                    <a class="nav-link" href="./typography.html">
-                                                        <i class="material-icons">library_books</i>
-                                                        <p>Solicitudes</p>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item ">
-                                                    <a class="nav-link" href="./icons.html">
-                                                        <i class="material-icons">bubble_chart</i>
-                                                        <p>Mis Compras</p>
-                                                    </a>
-                                                </li>
-                                                <% } %>
-                                                    <!--Menú Transportista-->
-                                                    <% if( session.tipo_usuario == 2){ %>
-                                                        <li class="nav-item ">
-                                                            <a class="nav-link" href="./map.html">
-                                                                <i class="material-icons">location_ons</i>
-                                                                <p>Subastas</p>
-                                                            </a>
-                                                        </li>
-                                                        <% } %>
-                                                            <!--Menú Consultor-->
-                                                            <% if( session.tipo_usuario == 6){ %>
-                                                                <li class="nav-item ">
-                                                                    <a class="nav-link" href="./notifications.html">
-                                                                        <i class="material-icons">notifications</i>
-                                                                        <p>Reportes</p>
-                                                                    </a>
-                                                                </li>
-                                                                <% } %>
-                                                                    <li class="nav-item active-pro ">
-                                                                        <a class="nav-link" href="./upgrade.html">
-                                                                            <i class="material-icons">contact_support</i>
-                                                                            <p>Soporte</p>
-                                                                        </a>
-                                                                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="./contratos">
+                            <i class="material-icons">history_edu</i>
+                            <p>Contratos</p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="./ventas_externas">
+                            <i class="material-icons">monetization_on</i>
+                            <p>Ventas Externas</p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="./ventas_locales">
+                            <i class="material-icons">monetization_on</i>
+                            <p>Ventas Locales</p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="./subastas_frutas">
+                            <i class="material-icons">gavel</i>
+                            <p>Subastas Frutas</p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="./subastas_transportes">
+                            <i class="material-icons">local_shipping</i>
+                            <p>Subastas Transportes</p>
+                        </a>
+                    </li>
+                  <% } %>
+                  <!--Menú Productor-->
+                  <% if( session.tipo_usuario == 5){ %>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="./productos">
+                            <i class="material-icons">content_paste</i>
+                            <p>Productos</p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="./subastas_productor">
+                            <i class="material-icons">gavel</i>
+                            <p>Subastas</p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="./ventas">
+                            <i class="material-icons">content_paste</i>
+                            <p>Ventas</p>
+                        </a>
+                    </li>
+                  <% } %>
+                  <!--Menú Cliente Externo-->
+                  <% if( session.tipo_usuario == 3){ %>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="./solicitudes">
+                            <i class="material-icons">library_books</i>
+                            <p>Solicitudes</p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="./miscompras">
+                            <i class="material-icons">bubble_chart</i>
+                            <p>Mis Compras</p>
+                        </a>
+                    </li>
+                  <% } %>
+                  <!--Menú Cliente Interno-->
+                  <% if( session.tipo_usuario == 4){ %>
+                      <li class="nav-item ">
+                          <a class="nav-link" href="./solicitudes">
+                              <i class="material-icons">library_books</i>
+                              <p>Solicitudes</p>
+                          </a>
+                      </li>
+                      <li class="nav-item ">
+                          <a class="nav-link" href="./miscompras">
+                              <i class="material-icons">bubble_chart</i>
+                              <p>Mis Compras</p>
+                          </a>
+                      </li>
+                  <% } %>
+                  <!--Menú Transportista-->
+                  <% if( session.tipo_usuario == 2){ %>
+                      <li class="nav-item ">
+                          <a class="nav-link" href="./subastas_transportes">
+                              <i class="material-icons">location_ons</i>
+                              <p>Subastas Transportes</p>
+                          </a>
+                      </li>
+                  <% } %>
+                  <!--Menú Consultor-->
+                  <% if( session.tipo_usuario == 6){ %>
+                      <li class="nav-item ">
+                          <a class="nav-link" href="./reportes">
+                              <i class="material-icons">notifications</i>
+                              <p>Reportes</p>
+                          </a>
+                      </li>
+                          <li class="nav-item active-pro ">
+                              <a class="nav-link" href="./soporte">
+                                  <i class="material-icons">contact_support</i>
+                                  <p>Soporte</p>
+                              </a>
+                          </li>
+                  <% } %>
                 </ul>
             </div>
         </div>

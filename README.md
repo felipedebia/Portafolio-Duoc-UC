@@ -22,26 +22,30 @@ Iniciar node en la carpeta web
 - http://localhost:3000/
 - http://localhost:3000/plantilla
 
-### CRUD Usuario
+### Menú Administrador
+- http://localhost:3000/usuarios
+- http://localhost:3000/contratos
+- http://localhost:3000/ventas_externas
+- http://localhost:3000/ventas_locales
+- http://localhost:3000/subastas_frutas
+- http://localhost:3000/subastas_transportes
 
-| Tipo | URL | Retorna |
-| ------------- | ------------- | ------------- |
-| GET  | http://localhost:3000/usuarios  |  |
-| GET  | http://localhost:3000/crearusuario  |  |
-| POST | http://localhost:3000/api/crearusuario  | |
-| GET  | http://localhost:3000/modificarUsuario/:id_usuario  |  |
-| PUT  | http://localhost:3000/api/modificarUsuario/:id_usuario  | |
-| POST | http://localhost:3000/api/desactivarUsuario/:id_usuario  | |
-| GET  | http://localhost:3000/listadousuarios  |  |
-| GET  | http://localhost:3000/api/listadousuarios  | JSON |
-| GET  | http://localhost:3000/verUsuario/:id_usuario  |  |
+### Menú Productor
 
+- http://localhost:3000/productos
+- http://localhost:3000/subastas_productor
+- http://localhost:3000/ventas
 
-### CRUD Ventas
+### Menú Cliente Externo e Interno
+- http://localhost:3000/solicitudes
+- http://localhost:3000/miscompras
 
-| Tipo | URL | Retorna |
-| ------------- | ------------- | ------------- |
-| DELETE  | http://localhost:3000/api/eliminarVenta/:id_venta  |  |
+### Menú Transportista
+- http://localhost:3000/subastas_transportes
+
+### Menú Consultor
+- http://localhost:3000/reportes
+- http://localhost:3000/soporte
 
 ## Roles
 - 1 administrador
