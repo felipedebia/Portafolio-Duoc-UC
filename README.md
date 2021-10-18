@@ -21,6 +21,7 @@ Iniciar node en la carpeta web
 ## Rutas principales
 - http://localhost:3000/
 - http://localhost:3000/plantilla
+- http://localhost:3000/perfil *
 
 * PENDIENTE
 
@@ -50,12 +51,12 @@ Iniciar node en la carpeta web
 - http://localhost:3000/soporte * 
 
 ## Roles
-- 1 administrador
-- 2 transportista
-- 3 cliente externo
-- 4 cliente interno
-- 5 productor
-- 6 consultor
+- 1 Administrador
+- 2 Transportista
+- 3 Cliente externo
+- 4 Cliente interno
+- 5 Productor
+- 6 Consultor
 
 ## Género
 - 1 Femenino

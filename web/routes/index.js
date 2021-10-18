@@ -43,12 +43,25 @@ router.post('/auth', async (req, res) => {
 
 		  	// Si los datos estan correctos
 			if (result.rows.length > 0) {
+
+				var tiposUsuarios = {
+					1 : "Administrador",
+					2 : "Transportista",
+					3 : "Cliente Externo",
+					4 : "Cliente Interno",
+					5 : "Productor",
+					6 : "Consultor"
+				};
+
+				var tipoUsuarioTexto = tiposUsuarios[result.rows[0][3]];
+
 				req.session.isLoggedIn = true;
 				// Guardamos datos del usuario en session
 				req.session.correo = result.rows[0][0];
 				req.session.nombre = result.rows[0][1];
 				req.session.apellido = result.rows[0][2];
 				req.session.tipo_usuario = result.rows[0][3];
+				req.session.tipo_usuario_texto = tipoUsuarioTexto;
 				req.session.num_documento = result.rows[0][4];
 				res.redirect('/panel');
 				console.log("[!] Usuario " + correo_var + " conectado con éxito");
@@ -104,7 +117,7 @@ router.get('/crearUsuario', function(req, res, next) {
 
 // Modificar
 router.get('/modificarUsuario', async function(req, res, next) {
-	res.render('listadoUsuarios', { msgAlert: 'Debes ingresar un ID para modificar un usuario' });
+	res.render('usuarios', { msgAlert: 'Debes ingresar un ID para modificar un usuario' });
 })
 
 router.get('/modificarUsuario/:id_usuario', async function(req, res, next) {
@@ -134,7 +147,7 @@ router.get('/modificarUsuario/:id_usuario', async function(req, res, next) {
 			password = result.rows[0][9];
 
 			// Mostramos la vista
-			res.render('modificarUsuario', { title: 'Modificar usuario - Maipo Grande' });
+			res.render('usuarios', { title: 'Usuarios - Maipo Grande' });
 		} else {
 			res.send('Error al obtener datos de la base de datos');
 		}
@@ -145,11 +158,11 @@ router.get('/modificarUsuario/:id_usuario', async function(req, res, next) {
 })
 
 // Ver
-router.get('/verUsuario', async function(req, res, next) {
-	res.render('listadoUsuarios', { msgAlert: 'Debes ingresar un ID para ver el perfil de un usuario' });
+router.get('/perfil', async function(req, res, next) {
+	
 })
 
-router.get('/verUsuario/:id_usuario', async function(req, res, next) {
+router.get('/perfil/:id_usuario', async function(req, res, next) {
 
 })
 

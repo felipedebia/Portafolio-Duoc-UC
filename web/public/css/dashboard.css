@@ -13836,11 +13836,12 @@ fieldset[disabled] .form-group .form-control {
   position: relative;
   color: inherit;
   height: 50px;
-  font-size: 1.125rem;
+  font-size: 1.5rem;
   line-height: 30px;
   padding: 0.625rem 0;
   font-weight: 300;
   margin-left: 1rem;
+  padding-top: 29px;
 }
 
 .navbar>.container {

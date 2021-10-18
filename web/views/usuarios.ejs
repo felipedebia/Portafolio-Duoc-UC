@@ -10,20 +10,14 @@
                                     <span class="nav-tabs-title">Usuarios:</span>
                                     <ul class="nav nav-tabs" data-tabs="tabs">
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="#profile" data-toggle="tab">
+                                            <a class="nav-link active" href="#listadousuarios" data-toggle="tab">
                                                 <i class="material-icons">bug_report</i> Ver Usuarios
                                                 <div class="ripple-container"></div>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#messages" data-toggle="tab">
+                                            <a class="nav-link" href="#crearusuario" data-toggle="tab">
                                                 <i class="material-icons">code</i> Agregar nuevo usuario
-                                                <div class="ripple-container"></div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#settings" data-toggle="tab">
-                                                <i class="material-icons">cloud</i> Server
                                                 <div class="ripple-container"></div>
                                             </a>
                                         </li>
@@ -33,7 +27,7 @@
                         </div>
                         <div class="card-body">
                             <div class="tab-content">
-                                <div class="tab-pane active" id="profile">
+                                <div class="tab-pane active" id="listadousuarios">
                                     <div class="card-body table-responsive">
                                         <table class="table table-hover">
                                             <thead class="text-info">
@@ -41,6 +35,7 @@
                                                 <th scope="col">Nombre</th>
                                                 <th scope="col">Apellido</th>
                                                 <th scope="col">Correo electrónico</th>
+                                                <th scope="col">Tipo de usuario</th>
                                                 <th scope="col">Opciones</th>
                                             </thead>
                                             <tbody>
@@ -58,6 +53,9 @@
                                                         <td>
                                                             <%= Usuarios[i].correo %>
                                                         </td>
+                                                        <td>
+                                                            <%= Usuarios[i].tipo_usuario %>
+                                                        </td>
                                                         <td><a class="card-link" href="/modificarUsuario/<%= Usuarios[i].id_usuario %>">Modificar</a><a class="card-link" href="/eliminarUsuario/<%= Usuarios[i].id_usuario %>">Eliminar</a></td>
                                                     </tr>
                                                     <% } %>
@@ -65,13 +63,13 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="messages">
+                                <div class="tab-pane" id="crearusuario">
                                     <div class="card login-form">
                                         <div class="card-body">
-                                            <h3 class="card-title text-center">Ingresa los datos del nuevo usuario</h3>
+                                            <h3 class="card-title text-center mb-4">Ingresa los datos del nuevo usuario</h3>
                                             <div class="card-text">
                                                 <!-- to error: add class "has-danger" -->
-                                                <form action="/api/crearUsuario" method="POST">
+                                                <form action="../api/crearUsuario" method="POST">
                                                     <!-- to error: add class "has-danger" -->
                                                     <div class="row">
                                                         <div class="col-xs-6 col-sm-6 col-md-6">
@@ -116,84 +114,10 @@
                                                         </div>
                                                     </div>
                                                     <button class="btn btn-primary btn-block mb-2" type="submit"><i class="fas fa-sign-in-alt"></i> Registrar nueva cuenta</button>
-
-                                                    <div class="sign-up">
-                                                        <a href="#">¿Has olvidado tu contraseña?</a>
-                                                    </div>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="tab-pane" id="settings">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="form-check">
-                                                        <label class="form-check-label">
-                                                            <input class="form-check-input" type="checkbox" value="">
-                                                            <span class="form-check-sign">
-                                                            <span class="check"></span>
-                                                            </span>
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                                        <i class="material-icons">edit</i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                                        <i class="material-icons">close</i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="form-check">
-                                                        <label class="form-check-label">
-                                                            <input class="form-check-input" type="checkbox" value="" checked>
-                                                            <span class="form-check-sign">
-                                                            <span class="check"></span>
-                                                            </span>
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                                                </td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                                        <i class="material-icons">edit</i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                                        <i class="material-icons">close</i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="form-check">
-                                                        <label class="form-check-label">
-                                                            <input class="form-check-input" type="checkbox" value="" checked>
-                                                            <span class="form-check-sign">
-                                                            <span class="check"></span>
-                                                            </span>
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td>Sign contract for "What are conference organizers afraid of?"</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                                        <i class="material-icons">edit</i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                                        <i class="material-icons">close</i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
                                 </div>
                             </div>
                         </div>
