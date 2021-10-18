@@ -55,10 +55,8 @@ router.post('/auth', async (req, res) => {
 				console.log("[!] Usuario " + correo_var + " conectado con éxito");
 			} else {
 				console.log("[!] Intento de conexión fallido usando " + correo_var);
-				res.render('login', { msgAlert: 'Correo electrónico o contraseña incorrecta' });
+				res.redirect('/');
 			}
-	} else {
-		res.render('login', { msgAlert: 'Correo electrónico o contraseña incorrecta' });
 	}
 });
 
