@@ -117,7 +117,7 @@ router.get('/crearUsuario', function(req, res, next) {
 
 // Modificar
 router.get('/modificarUsuario', async function(req, res, next) {
-	res.render('usuarios', { msgAlert: 'Debes ingresar un ID para modificar un usuario' });
+	res.send('Debes ingresar un ID para modificar un usuario');
 })
 
 router.get('/modificarUsuario/:id_usuario', async function(req, res, next) {

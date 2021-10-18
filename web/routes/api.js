@@ -47,10 +47,10 @@ router.post('/crearUsuario', async (req, res) => {
   // Si tuvo conexión a la DB
   if(res.status(200)) {
     console.log("[!] Usuario " + correo + " creado con éxito");
-    res.render('crearUsuario', { msgAlert: 'Usuario creado con éxito' });
+    res.redirect('/usuarios');
 	} else {
 		console.log("[!] Ocurrió un error al intentar registrar el usuario " + correo);
-    res.render('crearUsuario', { msgAlert: 'Ocurrió un error al intentar registrar el usuario' });
+    res.redirect('/usuarios');
 	}
 })
 
@@ -65,10 +65,10 @@ router.put("/modificarUsuario/:id_usuario", async (req, res) => {
   // Si tuvo conexión a la DB
   if(res.status(200)) {
     console.log("[!] Usuario " + correo + " modificado con éxito");
-    res.render('listadoUsuarios', { msgAlert: 'Usuario modificado con éxito' });
+    res.redirect('/usuarios');
   } else {
     console.log("[!] Ocurrió un error al intentar modificar el usuario " + correo);
-    res.render('listadoUsuarios', { msgAlert: 'Ocurrió un error al intentar modificar el usuario' });
+    res.redirect('/usuarios');
   }
 
 })
@@ -84,10 +84,10 @@ router.post("/desactivarUsuario/:id_usuario", async (req, res) => {
 
   if(res.status(200)) {
     console.log("[!] Usuario " + correo + " eliminado con éxito");
-    res.render('listadoUsuarios', { msgAlert: 'Usuario eliminado con éxito' });
+    res.redirect('/usuarios');
 	} else {
 		console.log("[!] Ocurrió un error al intentar eliminar el usuario " + correo);
-    res.render('listadoUsuarios', { msgAlert: 'Ocurrió un error al intentar eliminar el usuario' });
+    res.redirect('/usuarios');
 	}
 })
 

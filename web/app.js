@@ -14,7 +14,7 @@ var session = require('express-session');
 
 // Iniciamos aplicación
 var app = express();
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
+app.use(favicon(path.join(__dirname, 'public', 'images/favicon.ico')))
 
 // Se indica el directorio donde se almacenarán las plantillas 
 app.set('views', path.join(__dirname, 'views'));

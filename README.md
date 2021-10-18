@@ -66,3 +66,13 @@ Iniciar node en la carpeta web
 - 1 Activado
 - 2 Desactivado
 
+## Otros
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| POST | http://localhost:3000/api/crearusuario  | |
+| GET  | http://localhost:3000/modificarUsuario/:id_usuario  |  |
+| PUT  | http://localhost:3000/api/modificarUsuario/:id_usuario  | |
+| POST | http://localhost:3000/api/desactivarUsuario/:id_usuario  | |
+| GET  | http://localhost:3000/api/listadousuarios  | JSON |
+| GET  | http://localhost:3000/perfil/:id_usuario  |  |
+
