@@ -20,11 +20,13 @@ Iniciar node en la carpeta web
 
 ## Rutas principales
 - http://localhost:3000/
+- http://localhost:3000/plantilla
 
 ### CRUD Usuario
 
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/usuarios  |  |
 | GET  | http://localhost:3000/crearusuario  |  |
 | POST | http://localhost:3000/api/crearusuario  | |
 | GET  | http://localhost:3000/modificarUsuario/:id_usuario  |  |
