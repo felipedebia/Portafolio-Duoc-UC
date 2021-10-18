@@ -89,32 +89,6 @@ router.get('/logout', function(req, res, next) {
 
 // CRUD USUARIOS
 
-// Leer - Todos los usuarios
-router.get('/listadoUsuarios', function(req, res, next) {
-	if (req.session.isLoggedIn) {
-		res.render('listadoUsuarios', { title: 'Todos los usuarios - Maipo Grande'});
-
-		// Ocurrio algun error...
-		listadoUsuariosPromesa.catch(function(error) {
-			console.log(error);
-			res.send('Error al obtener datos de la API');
-		});
-	} else {
-		res.redirect('/');
-	}
-	res.end();
-})
-
-// Agregar
-router.get('/crearUsuario', function(req, res, next) {
-	if (req.session.isLoggedIn) {
-		res.render('crearUsuario', { title: 'Crear nuevo usuario - Maipo Grande' });
-	} else {
-		res.redirect('/');
-	}
-	res.end();
-});
-
 // Modificar
 router.get('/modificarUsuario', async function(req, res, next) {
 	res.send('Debes ingresar un ID para modificar un usuario');
