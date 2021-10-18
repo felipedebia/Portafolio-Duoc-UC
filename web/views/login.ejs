@@ -13,24 +13,26 @@
                       <div class="container">
                           <div class="row">
                               <div class="col-md-9 col-lg-8 mx-auto">
-                                  <img class="col-md-9 col-lg-8 mx-auto" src="/images/Logo_Maipo_Grande.jpg">
-
+                                    <div class="mb-5">
+                                        <img class="" src="/images/Logo_Maipo_Grande.jpg">
+                                    </div>
                                   <!-- Sign In Form -->
                                   <form action="auth" method="POST" class="chrisValidation" novalidate>
+                                    <p class="mb-5">El acceso a este sistema solo debe ser realizado por personal autorizado por la empresa Maipo Grande. El uso fraudulento de este sistema puede ser penado por la ley.</p>
                                       <div class="form-floating mb-3">
                                           <label for="floatingInput">Correo electrónico</label>
-                                          <input type="email" class="form-control" name="correo" id="floatingInput" placeholder="Correo electrónico" required>
+                                          <input type="email" class="form-control" name="correo" id="floatingInput" placeholder="Escribe tu Correo electrónico" required>
                                           <div class="invalid-feedback">Correo electrónico no válido</div>
                                       </div>
                                       <div class="form-floating mb-3">
                                           <label for="floatingPassword">Contraseña</label>
-                                          <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Contraseña" required>
+                                          <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Escribe tu Contraseña" required>
                                           <div class="invalid-feedback">Contraseña no válida</div>
                                       </div>
 
-                                      <div class="d-grid">
+                                      <div class="d-grid mt-5">
                                           <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" type="submit">Iniciar sesión</button>
-                                          <div class="text-center">
+                                          <div>
                                               <a class="small" href="#">¿Has olvidado tu contraseña?</a>
                                           </div>
                                       </div>
