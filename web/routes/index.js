@@ -97,7 +97,7 @@ router.get('/modificarUsuario', async function(req, res, next) {
 router.get('/modificarUsuario/:id_usuario', async function(req, res, next) {
 	if (req.session.isLoggedIn) {
 
-		const { id_usuario } = req.body;
+		const { id_usuario } = req.params;
 
 		// Hacemos una consulta trayendo todos los datos del usuario
 		sql = "SELECT num_documento, tipo_usuario, nombre, apellido, fecha_nacimiento, genero, correo, estado_cuenta, telefono, password FROM usuario WHERE id_usuario = :id_usuario";
@@ -105,28 +105,33 @@ router.get('/modificarUsuario/:id_usuario', async function(req, res, next) {
 		binds = {"id_usuario": id_usuario};
 
 		result = await BD.Open(sql, binds, false);
-
+		console.log(result.rows.length);
+		console.log(usuarioData);
 		// Si los datos estan correctos
 		if (result.rows.length > 0) {
 			// Asignamos los valores de la consulta a las variables
-			num_documento = result.rows[0][0];
-			tipo_usuario = result.rows[0][1];
-			nombre = result.rows[0][2];
-			apellido = result.rows[0][3];
-			fecha_nacimiento = result.rows[0][4];
-			genero = result.rows[0][5];
-			correo = result.rows[0][6];
-			estado_cuenta = result.rows[0][7];
-			telefono = result.rows[0][8];
-			password = result.rows[0][9];
+			var usuarioData = [
+				{
+					num_documento: result.rows[0][0],
+					tipo_usuario: result.rows[0][1],
+					nombre: result.rows[0][2],
+					apellido: result.rows[0][3],
+					fecha_nacimiento: result.rows[0][4],
+					genero: result.rows[0][5],
+					correo: result.rows[0][6],
+					estado_cuenta: result.rows[0][7],
+					telefono: result.rows[0][8],
+					password: result.rows[0][9]
+				  }
+			];
 
 			// Mostramos la vista
-			res.render('usuarios', { title: 'Usuarios - Maipo Grande' });
+			res.render('modificarUsuario', { title: 'Usuarios - Maipo Grande', data:usuarioData });
 		} else {
 			res.send('Error al obtener datos de la base de datos');
 		}
 	} else {
-		res.redirect('/');
+		res.redirect('/usuarios');
 	}
 	res.end();
 })

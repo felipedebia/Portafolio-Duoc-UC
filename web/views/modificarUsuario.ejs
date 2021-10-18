@@ -15,28 +15,25 @@
     <div class="card-body">
       <h3 class="card-title text-center">Ingresa los datos del nuevo usuario</h3>
       <div class="card-text">
-        <!-- to error: add class "has-danger" -->
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div>
         <form action="/api/crearUsuario" method="POST">
-          <!-- to error: add class "has-danger" -->
           <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6">
-              <div class="form-group"><label>Nombre *</label><input class="form-control mb-4 input-sm" id="nombre" type="text" name="nombre" placeholder="Nombre" size="25" required=""></div>
+              <div class="form-group"><label>Nombre *</label><input class="form-control mb-4 input-sm" id="nombre" type="text" name="nombre" placeholder="Nombre" size="25" required="" value=""></div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
-              <div class="form-group"><label>Apellido *</label><input class="form-control input-sm" id="apellido" type="text" name="apellido" placeholder="Apellido" size="25" required=""></div>
+              <div class="form-group"><label>Apellido *</label><input class="form-control input-sm" id="apellido" type="text" name="apellido" placeholder="Apellido" size="25" required="" value=""></div>
             </div>
           </div>
           <label>Correo electrónico *</label>
-          <input class="form-control mb-4" id="inputEmail" type="email" name="correo" placeholder="Correo electrónico" size="30" required="">
+          <input class="form-control mb-4" id="inputEmail" type="email" name="correo" placeholder="Correo electrónico" size="30" required="" value="">
           <label>Contraseña *</label>
-          <input class="form-control mb-4" id="inputPassword" type="password" name="password" placeholder="Contraseña" size="40" required="">
+          <input class="form-control mb-4" id="inputPassword" type="password" name="password" placeholder="Contraseña" size="40" required="" value="">
           <label>Número de documento *</label>
-          <input class="form-control mb-4" id="inputNumDocumento" type="number" name="num_documento" placeholder="Número de documento" size="20" required="">
+          <input class="form-control mb-4" id="inputNumDocumento" type="number" name="num_documento" placeholder="Número de documento" size="20" required="" value="">
           <label>Fecha de nacimiento *</label>
-          <input class="form-control mb-4" id="inputFechaNacimiento" type="date" name="fecha_nacimiento" placeholder="Fecha de nacimiento" required="">
+          <input class="form-control mb-4" id="inputFechaNacimiento" type="date" name="fecha_nacimiento" placeholder="Fecha de nacimiento" required="" value="">
           <label>Teléfono *</label>
-          <input class="form-control mb-4" id="inputTelefono" type="number" name="telefono" placeholder="Teléfono" size="15" required="">
+          <input class="form-control mb-4" id="inputTelefono" type="number" name="telefono" placeholder="Teléfono" size="15" required="" value="">
           <div class="form-group">
             <label>Género *</label>
             <select class="form-control" name="genero">

@@ -56,7 +56,8 @@ router.post('/crearUsuario', async (req, res) => {
 
 // Modificar
 router.put("/modificarUsuario/:id_usuario", async (req, res) => {
-  const usuario_id = req.body;
+  
+  const { id_usuario } = req.params;
 
   sql = "UPDATE usuario SET correo=:correo, nombre=:nombre, apellido=:apellido, num_documento=:num_documento, tipo_usuario=:tipo_usuario, fecha_nacimiento=:fecha_nacimiento, genero=:genero, estado_cuenta=:estado_cuenta, telefono=:telefono, password=:password WHERE id_usuario=:id_usuario";
 
@@ -67,7 +68,7 @@ router.put("/modificarUsuario/:id_usuario", async (req, res) => {
     console.log("[!] Usuario " + correo + " modificado con éxito");
     res.redirect('/usuarios');
   } else {
-    console.log("[!] Ocurrió un error al intentar modificar el usuario " + correo);
+    console.log("[!] 2- Ocurrió un error al intentar modificar el usuario " + correo);
     res.redirect('/usuarios');
   }
 
