@@ -22,30 +22,32 @@ Iniciar node en la carpeta web
 - http://localhost:3000/
 - http://localhost:3000/plantilla
 
+* PENDIENTE
+
 ### Menú Administrador
 - http://localhost:3000/usuarios
-- http://localhost:3000/contratos
-- http://localhost:3000/ventas_externas
-- http://localhost:3000/ventas_locales
-- http://localhost:3000/subastas_frutas
-- http://localhost:3000/subastas_transportes
+- http://localhost:3000/contratos *
+- http://localhost:3000/ventas_externas *
+- http://localhost:3000/ventas_locales *
+- http://localhost:3000/subastas_frutas *
+- http://localhost:3000/subastas_transportes *
 
 ### Menú Productor
 
-- http://localhost:3000/productos
-- http://localhost:3000/subastas_productor
-- http://localhost:3000/ventas
+- http://localhost:3000/productos *
+- http://localhost:3000/subastas_productor *
+- http://localhost:3000/ventas *
 
-### Menú Cliente Externo e Interno
-- http://localhost:3000/solicitudes
-- http://localhost:3000/miscompras
+### Menú Cliente Externo e Interno *
+- http://localhost:3000/solicitudes *
+- http://localhost:3000/miscompras *
 
 ### Menú Transportista
-- http://localhost:3000/subastas_transportes
+- http://localhost:3000/subastas_transportes *
 
 ### Menú Consultor
-- http://localhost:3000/reportes
-- http://localhost:3000/soporte
+- http://localhost:3000/reportes *
+- http://localhost:3000/soporte * 
 
 ## Roles
 - 1 administrador
