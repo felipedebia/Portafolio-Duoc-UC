@@ -22,8 +22,7 @@ var listadoUsuariosPromesa = requestApiListadoUsuarios();
 router.get('/', function(req, res, next) {
 	if (req.session.isLoggedIn) {
 		res.redirect('panel');
-	}
-	else {
+	} else {
 		res.render('login', { title: 'Ingresar - Maipo Grande' });
 	}
 });
@@ -38,7 +37,7 @@ router.post('/auth', async (req, res) => {
 		//sql = 'SELECT * FROM usuario WHERE correo = :d1 AND password = :d2';
 		sql = 'SELECT correo, nombre, apellido, tipo_usuario, num_documento FROM usuario WHERE correo = :d1';
 		//binds = {"d1": req.body.correo, "d2": req.body.password};
-		binds = {"d1": req.body.correo};
+		binds = { "d1": req.body.correo };
 
         result = await BD.Open(sql, binds, false);
 
@@ -104,11 +103,11 @@ router.get('/crearUsuario', function(req, res, next) {
 });
 
 // Modificar
-router.get('/modificarUsuario', async function(req, res, next){
+router.get('/modificarUsuario', async function(req, res, next) {
 	res.render('listadoUsuarios', { msgAlert: 'Debes ingresar un ID para modificar un usuario' });
 })
 
-router.get('/modificarUsuario/:id_usuario', async function(req, res, next){
+router.get('/modificarUsuario/:id_usuario', async function(req, res, next) {
 	if (req.session.isLoggedIn) {
 
 		const { id_usuario } = req.body;
@@ -146,11 +145,11 @@ router.get('/modificarUsuario/:id_usuario', async function(req, res, next){
 })
 
 // Ver
-router.get('/verUsuario', async function(req, res, next){
+router.get('/verUsuario', async function(req, res, next) {
 	res.render('listadoUsuarios', { msgAlert: 'Debes ingresar un ID para ver el perfil de un usuario' });
 })
 
-router.get('/verUsuario/:id_usuario', async function(req, res, next){
+router.get('/verUsuario/:id_usuario', async function(req, res, next) {
 
 })
 
