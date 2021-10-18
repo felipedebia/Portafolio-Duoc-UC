@@ -1,42 +1,48 @@
-<%- include('partials/nav.ejs') %> 
-
-      <div id="wrapper">
-         <div class="container-fluid">
-            <p class="lead">
-            <h3>Listado de usuarios registrados</h3>
-            </p>
+<%- include('partials/nav.ejs') %>
+    <div class="content">
+        <div class="container-fluid">
             <div class="row">
-               <div class="col">
-                  <div class="card">
-                     <div class="card-body">
-                        <table class="table">
-                           <thead>
-                              <tr>
-                                 <th scope="col">#</th>
-                                 <th scope="col">Nombre</th>
-                                 <th scope="col">Apellido</th>
-                                 <th scope="col">Correo electrónico</th>
-                                 <th scope="col">Opciones</th>
-                              </tr>
-                           </thead>
-                           <tbody>
-                              <% for(var i=0; i < Usuarios.length; i++) { %>
-                              <tr>
-                                 <th scope="row"><%= i %></th>
-                                 <td><%= Usuarios[i].nombre %></td>
-                                 <td><%= Usuarios[i].apellido %></td>
-                                 <td><%= Usuarios[i].correo %></td>
-                                 <td><a class="card-link" href="/modificarUsuario/<%= Usuarios[i].id_usuario %>">Modificar</a><a class="card-link" href="/eliminarUsuario/<%= Usuarios[i].id_usuario %>">Eliminar</a></td>
-                              </tr>
-                            <% } %>
-                           </tbody>
-                        </table>
-                     </div>
-                  </div>
-               </div>
+                <div class="col-lg-12 col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-info">
+                            <h4 class="card-title">Employees Stats</h4>
+                            <p class="card-category">New employees on 15th September, 2016</p>
+                        </div>
+                        <div class="card-body table-responsive">
+                            <table class="table table-hover">
+                                <thead class="text-info">
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Apellido</th>
+                                    <th scope="col">Correo electrónico</th>
+                                    <th scope="col">Opciones</th>
+                                </thead>
+                                <tbody>
+                                    <% for(var i=0; i < Usuarios.length; i++) { %>
+                                        <tr>
+                                            <th scope="row">
+                                                <%= i %>
+                                            </th>
+                                            <td>
+                                                <%= Usuarios[i].nombre %>
+                                            </td>
+                                            <td>
+                                                <%= Usuarios[i].apellido %>
+                                            </td>
+                                            <td>
+                                                <%= Usuarios[i].correo %>
+                                            </td>
+                                            <td><a class="card-link" href="/modificarUsuario/<%= Usuarios[i].id_usuario %>">Modificar</a><a class="card-link" href="/eliminarUsuario/<%= Usuarios[i].id_usuario %>">Eliminar</a></td>
+                                        </tr>
+                                        <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-         </div>
-      </div>
+        </div>
+    </div>
+    </div>
 
-</body>
-</html>
+    <%- include('partials/footer.ejs') %>

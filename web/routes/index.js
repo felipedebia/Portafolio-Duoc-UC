@@ -62,7 +62,7 @@ router.post('/auth', async (req, res) => {
 
 router.get('/panel', function(req, res) {
 	if (req.session.isLoggedIn) {
-		res.render('panel', { title: 'Maipo Grande - Panel de Administración' });
+		res.render('panel', { title: 'Panel de Administración - Maipo Grande' });
 	} else {
 		res.redirect('/');
 	}
@@ -80,7 +80,7 @@ router.get('/logout', function(req, res, next) {
 // Leer - Todos los usuarios
 router.get('/listadoUsuarios', function(req, res, next) {
 	if (req.session.isLoggedIn) {
-		res.render('listadoUsuarios', { title: 'Todos los usuarios - Panel de Administración'});
+		res.render('listadoUsuarios', { title: 'Todos los usuarios - Maipo Grande'});
 
 		// Ocurrio algun error...
 		listadoUsuariosPromesa.catch(function(error) {
@@ -96,7 +96,7 @@ router.get('/listadoUsuarios', function(req, res, next) {
 // Agregar
 router.get('/crearUsuario', function(req, res, next) {
 	if (req.session.isLoggedIn) {
-		res.render('crearUsuario', { title: 'Crear nuevo usuario - Panel de Administración' });
+		res.render('crearUsuario', { title: 'Crear nuevo usuario - Maipo Grande' });
 	} else {
 		res.redirect('/');
 	}
@@ -135,7 +135,7 @@ router.get('/modificarUsuario/:id_usuario', async function(req, res, next){
 			password = result.rows[0][9];
 
 			// Mostramos la vista
-			res.render('modificarUsuario', { title: 'Modificar usuario - Panel de Administración' });
+			res.render('modificarUsuario', { title: 'Modificar usuario - Maipo Grande' });
 		} else {
 			res.send('Error al obtener datos de la base de datos');
 		}
@@ -154,9 +154,18 @@ router.get('/verUsuario/:id_usuario', async function(req, res, next){
 
 })
 
+router.get('/usuarios', function(req, res) {
+    if (req.session.isLoggedIn) {
+        res.render('usuarios', { title: 'Usuarios - Maipo Grande' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
+
 router.get('/plantilla', function(req, res) {
     if (req.session.isLoggedIn) {
-        res.render('plantilla', { title: 'Maipo Grande - plantilla' });
+        res.render('plantilla', { title: 'Plantilla - Maipo Grande' });
     } else {
         res.redirect('/');
     }
