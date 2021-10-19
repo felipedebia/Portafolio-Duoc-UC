@@ -16,7 +16,12 @@
                                     <div class="mb-5">
                                         <img class="" src="/images/Logo_Maipo_Grande.jpg">
                                     </div>
-                                  <!-- Sign In Form -->
+                                    <!-- Sign In Form -->
+                                    <% if (funca == true){ %>
+                                    <div class="alert alert-danger" role="alert">
+                                        El correo electrónico o contraseña es incorrecto
+                                    </div>
+                                    <% } %>
                                   <form action="auth" method="POST" class="chrisValidation" novalidate>
                                     <p class="mb-5">El acceso a este sistema solo debe ser realizado por personal autorizado por la empresa Maipo Grande. El uso fraudulento de este sistema puede ser penado por la ley.</p>
                                       <div class="form-floating mb-3">

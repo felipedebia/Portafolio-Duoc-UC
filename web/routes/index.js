@@ -67,7 +67,7 @@ router.post('/auth', async (req, res) => {
 				console.log("[!] Usuario " + correo_var + " conectado con éxito");
 			} else {
 				console.log("[!] Intento de conexión fallido usando " + correo_var);
-				res.redirect('/');
+				res.render('login', {title: 'Ingresar - Maipo Grande',funca:true});
 			}
 	}
 });
