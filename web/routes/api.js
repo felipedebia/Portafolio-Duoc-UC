@@ -6,8 +6,8 @@ const BD = require('../bin/configbd');
 // CRUD USUARIOS
 
 // Leer - Todos los usuarios
-router.get('/listadousuarios', async (req, res) => {
-  sql = "SELECT * FROM usuario";
+router.get('/listarUsuarios', async (req, res) => {
+  sql = "SELECT id_usuario, num_documento, tipo_usuario, nombre, apellido, fecha_nacimiento, genero, correo, estado_cuenta, telefono, password FROM usuario";
   binds = {};
   result = await BD.Open(sql, binds, false);
 
@@ -23,8 +23,36 @@ router.get('/listadousuarios', async (req, res) => {
           "fecha_nacimiento": user[5],
           "genero": user[6],
           "correo": user[7],
-          "estado_cuenta": user[9],
           "telefono": user[8],
+          "estado_cuenta": user[9],
+          "password": user[10]
+      }
+
+      Usuarios.push(userSchema);
+  })
+  res.json({title: 'Usuarios', 'mydata': Usuarios});
+});
+
+// Leer - Usuario en especifico
+router.get('/listarUsuarios/:id_usuario', async (req, res) => {
+  binds = { "id_usuario_bind": req.params.id_usuario };
+  sql = "SELECT id_usuario, num_documento, tipo_usuario, nombre, apellido, fecha_nacimiento, genero, correo, estado_cuenta, telefono, password FROM usuario WHERE id_usuario = :id_usuario_bind";
+  result = await BD.Open(sql, binds, false);
+
+  Usuarios = [];
+
+  result.rows.map(user => {
+      let userSchema = {
+          "id_usuario": user[0],
+          "num_documento": user[1],
+          "tipo_usuario": user[2],
+          "nombre": user[3],
+          "apellido": user[4],
+          "fecha_nacimiento": user[5],
+          "genero": user[6],
+          "correo": user[7],
+          "telefono": user[8],
+          "estado_cuenta": user[9],
           "password": user[10]
       }
 

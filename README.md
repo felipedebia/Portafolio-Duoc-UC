@@ -76,4 +76,5 @@ Iniciar node en la carpeta web
 | POST | http://localhost:3000/api/desactivarUsuario/:id_usuario  | |
 | GET  | http://localhost:3000/api/listadousuarios  | JSON |
 | GET  | http://localhost:3000/perfil/:id_usuario  |  |
+| GET  | http://localhost:3000/api/listarUsuarios/:id_usuario  |  |
 

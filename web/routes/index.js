@@ -7,7 +7,7 @@ var request = require('request');
 // Función que devuelve una promesa
 function requestApiListadoUsuarios() {
 	return new Promise(function(resolve, reject) {
-		request('http://localhost:3000/api/listadousuarios', function (error, response, body) {
+		request('http://localhost:3000/api/listarUsuarios', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
 				return resolve(importedJSON);
@@ -30,14 +30,9 @@ router.get('/', function(req, res, next) {
 
 // POST: Login de usuario
 router.post('/auth', async (req, res) => {
-	var correo_var = req.body.correo;
-	var password_var = req.body.password;
-	if (correo_var && password_var) {
-		//const result = await conn.execute('SELECT * FROM usuario WHERE correo = :correo and password = :password',[request.body.correo, request.body.password])
-		//sql = 'SELECT * FROM usuario WHERE correo = :d1 AND password = :d2';
-		sql = 'SELECT correo, nombre, apellido, tipo_usuario, num_documento FROM usuario WHERE correo = :d1';
-		//binds = {"d1": req.body.correo, "d2": req.body.password};
-		binds = { "d1": req.body.correo };
+	if (req.body.correo && req.body.password) {
+		binds = { "correo_bind": req.body.correo, "password_bind": req.body.password };
+		sql = 'SELECT correo, nombre, apellido, tipo_usuario, num_documento FROM usuario WHERE correo = :correo_bind AND password = :password_bind';
 
         result = await BD.Open(sql, binds, false);
 
@@ -64,9 +59,9 @@ router.post('/auth', async (req, res) => {
 				req.session.tipo_usuario_texto = tipoUsuarioTexto;
 				req.session.num_documento = result.rows[0][4];
 				res.redirect('/panel');
-				console.log("[!] Usuario " + correo_var + " conectado con éxito");
+				console.log("[!] Usuario " + req.body.correo + " conectado con éxito");
 			} else {
-				console.log("[!] Intento de conexión fallido usando " + correo_var);
+				console.log("[!] Intento de conexión fallido usando " + req.body.correo);
 				res.render('login', {title: 'Ingresar - Maipo Grande',funca:true});
 			}
 	}
