@@ -21,6 +21,7 @@ Iniciar node en la carpeta web
 ## Rutas principales
 - http://localhost:3000/
 - http://localhost:3000/plantilla
+- http://localhost:3000/plantilla_con_tabla
 - http://localhost:3000/perfil *
 
 * PENDIENTE

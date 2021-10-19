@@ -126,7 +126,7 @@ router.get('/modificarUsuario/:id_usuario', async function(req, res, next) {
 			];
 
 			// Mostramos la vista
-			res.render('modificarUsuario', { title: 'Usuarios - Maipo Grande', data:usuarioData });
+			res.render('modificarUsuario', { title: 'Modificar Usuario - Maipo Grande', data:usuarioData });
 		} else {
 			res.send('Error al obtener datos de la base de datos');
 		}
@@ -157,6 +157,15 @@ router.get('/usuarios', function(req, res) {
 router.get('/plantilla', function(req, res) {
     if (req.session.isLoggedIn) {
         res.render('plantilla', { title: 'Plantilla - Maipo Grande' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
+
+router.get('/plantilla_con_tabla', function(req, res) {
+    if (req.session.isLoggedIn) {
+        res.render('plantilla_con_tabla', { title: 'Plantilla - Maipo Grande' });
     } else {
         res.redirect('/');
     }
