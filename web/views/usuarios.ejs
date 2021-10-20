@@ -56,7 +56,7 @@
                                                         <td>
                                                             <%= Usuarios[i].tipo_usuario %>
                                                         </td>
-                                                        <td><a class="card-link" href="/modificarUsuario/<%= Usuarios[i].id_usuario %>">Modificar</a><a class="card-link" href="/eliminarUsuario/<%= Usuarios[i].id_usuario %>">Eliminar</a></td>
+                                                        <td><a class="card-link" href="/modificarUsuario/<%= Usuarios[i].id_usuario %>">Modificar</a><a class="card-link" href="../api/eliminarUsuario/<%= Usuarios[i].id_usuario %>">Eliminar</a></td>
                                                     </tr>
                                                     <% } %>
                                             </tbody>
@@ -89,8 +89,7 @@
                                                 <div class="form-group">
                                                     <label>Género *</label>
                                                     <select class="form-control" name="genero">
-                                                        <option name="" value="0" selected="">Escoger...</option>
-                                                        <option name="femenino" value="1">Femenino</option>
+                                                        <option name="femenino" value="1" selected="">Femenino</option>
                                                         <option name="masculino" value="2">Masculino</option>
                                                     </select>
                                                 </div>
@@ -99,9 +98,8 @@
                                                         <div class="form-group">
                                                             <label>Tipo de usuario *</label>
                                                             <select class="form-control" name="tipo_usuario">
-                                                                <option name="" value="0" selected="">Escoger...</option>
+                                                                <option name="transportista" value="2" selected="">Transportista</option>
                                                                 <option name="administrador" value="1">Administrador</option>
-                                                                <option name="transportista" value="2">Transportista</option>
                                                                 <option name="clienteExterno" value="3">Cliente externo</option>
                                                                 <option name="clienteInterno" value="4">Cliente interno</option>
                                                                 <option name="productor" value="5">Productor</option>
