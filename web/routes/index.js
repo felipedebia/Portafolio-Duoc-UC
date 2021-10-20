@@ -111,7 +111,7 @@ router.get('/modificarUsuario/:id_usuario', async function(req, res, next) {
 
 		// Hacemos una consulta trayendo todos los datos del usuario
 		const { id_usuario } = req.params;
-		
+
 		binds = {"id_usuario": id_usuario};
 		sql = "SELECT num_documento, tipo_usuario, nombre, apellido, fecha_nacimiento, genero, correo, estado_cuenta, telefono, password FROM usuario WHERE id_usuario = :id_usuario";
 		result = await BD.Open(sql, binds, false);
@@ -119,23 +119,10 @@ router.get('/modificarUsuario/:id_usuario', async function(req, res, next) {
 		// Si los datos estan correctos
 		if (result.rows.length > 0) {
 			// Asignamos los valores de la consulta a las variables
-
-			// Convertimos el id de tipo_usuario a texto
-			var tiposUsuarios = {
-				1 : "Administrador",
-				2 : "Transportista",
-				3 : "Cliente Externo",
-				4 : "Cliente Interno",
-				5 : "Productor",
-				6 : "Consultor"
-			};
-
-			var tipoUsuarioTexto = tiposUsuarios[result.rows[0][1]];
-
 			var usuarioData = [
 				{
 					num_documento: result.rows[0][0],
-					tipo_usuario: tipoUsuarioTexto,
+					tipo_usuario: result.rows[0][1],
 					nombre: result.rows[0][2],
 					apellido: result.rows[0][3],
 					fecha_nacimiento: result.rows[0][4],
@@ -149,7 +136,7 @@ router.get('/modificarUsuario/:id_usuario', async function(req, res, next) {
 			];
 
 			// Mostramos la vista
-			res.render('modificarUsuario', { title: 'Modificar Usuario - Maipo Grande', data:usuarioData });
+			res.render('modificarUsuario', { title: 'Modificar usuario - Maipo Grande', data:usuarioData });
 		} else {
 			res.send('Error al obtener datos de la base de datos');
 		}
@@ -200,7 +187,7 @@ router.get('/miperfil', async function(req, res, next) {
 			];
 
 			// Mostramos la vista
-			res.render('miperfil', { title: 'Mi Perfil - Maipo Grande', data:usuarioData });
+			res.render('miperfil', { title: 'Mi perfil - Maipo Grande', data:usuarioData });
 		} else {
 			res.send('Error al obtener datos de la base de datos');
 		}

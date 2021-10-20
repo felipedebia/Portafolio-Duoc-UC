@@ -4,6 +4,33 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12">
                     <div class="card">
+                      <div class="card-header card-header-tabs card-header-primary">
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <span class="nav-tabs-title">Usuarios:</span>
+                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="../usuarios/#listadousuarios">
+                                            <i class="material-icons">format_list_bulleted</i> Listado de usuarios
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="../usuarios/#crearusuario">
+                                            <i class="material-icons">add</i> Crear nuevo usuario
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                      <a class="nav-link" data-toggle="tab">
+                                          <i class="material-icons">settings</i> Modificar usuario
+                                          <div class="ripple-container"></div>
+                                      </a>
+                                  </li>
+                                </ul>
+                            </div>
+                        </div>
+                      </div>
                       <div class="card-body">
                         <h3 class="card-title mb-4">Ingresa los nuevos datos del usuario</h3>
                         <div class="card-text">
@@ -105,7 +132,7 @@
                             </div>
 
 
-                            <button class="btn btn-primary btn-block mb-2" type="submit"><i class="fas fa-sign-in-alt"></i> Modificar usuario</button>
+                            <button class="btn btn-primary mb-2 pull-right" type="submit"><i class="fas fa-sign-in-alt"></i> Modificar usuario</button>
                           </form>
                         </div>
                       </div>
