@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var favicon = require('serve-favicon')
+var moment = require('moment');
 
 // Rutas
 var indexRouter = require('./routes/index');
