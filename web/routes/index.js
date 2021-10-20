@@ -98,7 +98,7 @@ router.get('/modificarUsuario/:id_usuario', async function(req, res, next) {
 		binds = {"id_usuario": id_usuario};
 		sql = "SELECT num_documento, tipo_usuario, nombre, apellido, fecha_nacimiento, genero, correo, estado_cuenta, telefono, password FROM usuario WHERE id_usuario = :id_usuario";
 		result = await BD.Open(sql, binds, false);
-		
+
 		// Si los datos estan correctos
 		if (result.rows.length > 0) {
 			// Asignamos los valores de la consulta a las variables
@@ -139,6 +139,8 @@ router.get('/perfil/:id_usuario', async function(req, res, next) {
 
 router.get('/usuarios', function(req, res) {
     if (req.session.isLoggedIn) {
+		// Actualizamos listado de usuarios
+		requestApiListadoUsuarios();
         res.render('usuarios', { title: 'Usuarios - Maipo Grande' });
     } else {
         res.redirect('/');

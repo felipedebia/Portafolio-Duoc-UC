@@ -75,6 +75,7 @@ router.post('/crearUsuario', async (req, res) => {
   if(res.status(200)) {
     console.log("[!] Usuario " + correo + " creado con éxito");
     res.redirect('/usuarios');
+    res.refresh();
 	} else {
 		console.log("[!] Ocurrió un error al intentar registrar el usuario " + correo);
     res.redirect('/usuarios');
