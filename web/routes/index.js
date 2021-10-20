@@ -9,7 +9,7 @@ var SimpleCrypto = require("simple-crypto-js").default
 const secretKey = "1X42JJKLjkuid"
 const simpleCryp = new SimpleCrypto(secretKey)
 
-// Función que devuelve una promesa
+// Función API ListadoUsuarios
 async function requestApiListadoUsuarios() {
 	return new Promise(function(resolve, reject) {
 		request('http://localhost:3000/api/listarUsuarios', function (error, response, body) {
@@ -20,7 +20,48 @@ async function requestApiListadoUsuarios() {
 	});
 };
 
-var listadoUsuariosPromesa = requestApiListadoUsuarios();
+var listadoUsuarios = requestApiListadoUsuarios();
+
+// Función API ListadoUsuarios
+async function requestApiListadoContratos() {
+	return new Promise(function(resolve, reject) {
+		request('http://localhost:3000/api/listarContratos', function (error, response, body) {
+			if (error) return reject(error);
+				importedJSON = JSON.parse(body);
+				return resolve(importedJSON);
+		});
+	});
+};
+
+var listadoContratos = requestApiListadoContratos();
+
+// Función API ListadoUsuarios
+async function requestApiListadoSubastas() {
+	return new Promise(function(resolve, reject) {
+		request('http://localhost:3000/api/listarSubastas', function (error, response, body) {
+			if (error) return reject(error);
+				importedJSON = JSON.parse(body);
+				return resolve(importedJSON);
+		});
+	});
+};
+
+var listadoSubastas = requestApiListadoSubastas();
+
+// Función API ListadoUsuarios
+async function requestApiListadoSubastasT() {
+	return new Promise(function(resolve, reject) {
+		request('http://localhost:3000/api/listarSubastasTransportes', function (error, response, body) {
+			if (error) return reject(error);
+				importedJSON = JSON.parse(body);
+				return resolve(importedJSON);
+		});
+	});
+};
+
+var listadoSubastasT = requestApiListadoSubastasT();
+
+
 
 // Rutas de usuarios
 
@@ -212,6 +253,18 @@ router.get('/usuarios', function(req, res) {
     res.end();
 });
 
+
+// CRUD CONTRATOS
+router.get('/contratos', function(req, res) {
+    if (req.session.isLoggedIn) {
+        res.render('contratos', { title: 'Contratos - Maipo Grande' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
+
+
 router.get('/plantilla', function(req, res) {
     if (req.session.isLoggedIn) {
         res.render('plantilla', { title: 'Plantilla - Maipo Grande' });
@@ -229,7 +282,5 @@ router.get('/plantilla_con_tabla', function(req, res) {
     }
     res.end();
 });
-
-// CRUD VENTAS
 
 module.exports = router;

@@ -67,7 +67,7 @@ Iniciar node en la carpeta web
 - 1 Activado
 - 2 Desactivado
 
-## Otros
+## CRUD Usuario
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
 | POST | http://localhost:3000/api/crearusuario  | |
@@ -78,3 +78,20 @@ Iniciar node en la carpeta web
 | GET  | http://localhost:3000/api/listarUsuarios/:id_usuario  | JSON |
 | GET  | http://localhost:3000/perfil/:id_usuario  |  |
 
+## CRUD Contrato
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/api/listarContratos  | JSON |
+| GET  | http://localhost:3000/api/listarContratos/:id_contrato  | JSON |
+
+## CRUD Subasta
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/api/listarSubastas  | JSON |
+| GET  | http://localhost:3000/api/listarSubastas/:id_subasta  | JSON |
+
+## CRUD Subasta Transporte
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/api/listarSubastasTransportes  | JSON |
+| GET  | http://localhost:3000/api/listarSubastasTransportes/:id_subastaT  | JSON |
