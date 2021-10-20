@@ -22,7 +22,7 @@ async function requestApiListadoUsuarios() {
 
 var listadoUsuarios = requestApiListadoUsuarios();
 
-// Función API ListadoUsuarios
+// Función API ListadoContratos
 async function requestApiListadoContratos() {
 	return new Promise(function(resolve, reject) {
 		request('http://localhost:3000/api_otros/listarContratos', function (error, response, body) {
@@ -35,7 +35,7 @@ async function requestApiListadoContratos() {
 
 var listadoContratos = requestApiListadoContratos();
 
-// Función API ListadoUsuarios
+// Función API ListadoSubastasFrutas
 async function requestApiListadoSubastasFrutas() {
 	return new Promise(function(resolve, reject) {
 		request('http://localhost:3000/api_otros/listarSubastasFrutas', function (error, response, body) {
@@ -48,7 +48,7 @@ async function requestApiListadoSubastasFrutas() {
 
 var listadoSubastasFrutas = requestApiListadoSubastasFrutas();
 
-// Función API ListadoUsuarios
+// Función API ListadoSubastasTransportes
 async function requestApiListadoSubastasTransportes() {
 	return new Promise(function(resolve, reject) {
 		request('http://localhost:3000/api_otros/listarSubastasTransportes', function (error, response, body) {
