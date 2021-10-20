@@ -67,11 +67,8 @@ router.get('/listarUsuarios/:id_usuario', async (req, res) => {
 // Falta hacer filtro de que no se repita el correo
 router.post('/crearUsuario', async (req, res) => {
   const { num_documento, tipo_usuario, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password } = req.body;
-
   const estado_cuenta = 1;
-
   sql = "INSERT INTO usuario(num_documento, tipo_usuario, nombre, apellido, fecha_nacimiento, genero, correo, estado_cuenta, telefono, password) VALUES (:num_documento,:tipo_usuario,:nombre,:apellido,to_DATE(:fecha_nacimiento,'YYYY/MM/DD'),:genero,:correo,:estado_cuenta,:telefono,:password)";
-
   await BD.Open(sql, [num_documento, tipo_usuario, nombre, apellido, fecha_nacimiento, genero, correo, estado_cuenta, telefono, password], true);
 
   // Si tuvo conexión a la DB
@@ -86,10 +83,10 @@ router.post('/crearUsuario', async (req, res) => {
 
 // Modificar
 router.post("/modificarUsuario/:id_usuario", async (req, res) => {
-  
-  binds = { "id_usuario_bind": req.params.id_usuario, "correo_bind": req.body.correo, "nombre_bind": req.body.nombre, "num_documento_bind": req.body.num_documento, "tipo_usuario_bind": req.body.tipo_usuario, "fecha_nacimiento_bind": req.body.fecha_nacimiento, "genero_bind": req.body.genero, "estado_cuenta_bind": req.body.estado_cuenta, "telefono_bind": req.body.telefono };
-  sql = "UPDATE usuario SET correo= :correo_bind, nombre= :nombre_bind, num_documento= :num_documento_bind, tipo_usuario= :tipo_usuario_bind, fecha_nacimiento= :fecha_nacimiento_bind, genero= :genero_bind, estado_cuenta= :estado_cuenta_bind, telefono= :telefono_bind WHERE id_usuario= :id_usuario_bind";
-  result = await BD.Open(sql, binds, true);
+  const { id_usuario } = req.params;
+  const { num_documento, tipo_usuario, nombre, apellido, fecha_nacimiento, genero, correo, estado_cuenta, telefono, password } = req.body;
+  sql = "UPDATE usuario SET correo= :correo, nombre= :nombre, num_documento= :num_documento, tipo_usuario= :tipo_usuario, fecha_nacimiento= :fecha_nacimiento, genero= :genero, estado_cuenta= :estado_cuenta, telefono= :telefono, password= :password WHERE id_usuario= :id_usuario";
+  result = await BD.Open(sql, [num_documento, tipo_usuario, nombre, apellido, fecha_nacimiento, genero, correo, estado_cuenta, telefono, password, id_usuario], true);
 
   // Si tuvo conexión a la DB
   if(res.status(200)) {
@@ -105,11 +102,10 @@ router.post("/modificarUsuario/:id_usuario", async (req, res) => {
 
 // Desactivar
 router.get("/desactivarUsuario/:id_usuario", async (req, res) => {
-
-  binds = { "id_usuario_bind": req.params.id_usuario };
-  sql = "DELETE FROM usuario WHERE id_usuario = :id_usuario_bind";
-  //sql = "UPDATE usuario SET estado_cuenta=0 WHERE id_usuario = :id_usuario_bind";
-  result = await BD.Open(sql, binds, true);
+  const { id_usuario} = req.params;
+  sql = "DELETE FROM usuario WHERE id_usuario = :id_usuario";
+  //sql = "UPDATE usuario SET estado_cuenta=0 WHERE id_usuario = :id_usuario";
+  result = await BD.Open(sql, [id_usuario], true);
 
   if(res.status(200)) {
     console.log("[!] Usuario " + req.params.id_usuario + " desactivado con éxito");
@@ -122,8 +118,5 @@ router.get("/desactivarUsuario/:id_usuario", async (req, res) => {
 
 
 // CRUD VENTAS
-
-router.post("/eliminarVenta/:id_venta", async (req, res) => {
-})
 
 module.exports = router;
