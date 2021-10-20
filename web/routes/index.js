@@ -25,7 +25,7 @@ var listadoUsuarios = requestApiListadoUsuarios();
 // Función API ListadoUsuarios
 async function requestApiListadoContratos() {
 	return new Promise(function(resolve, reject) {
-		request('http://localhost:3000/api/listarContratos', function (error, response, body) {
+		request('http://localhost:3000/api_otros/listarContratos', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
 				return resolve(importedJSON);
@@ -38,7 +38,7 @@ var listadoContratos = requestApiListadoContratos();
 // Función API ListadoUsuarios
 async function requestApiListadoSubastas() {
 	return new Promise(function(resolve, reject) {
-		request('http://localhost:3000/api/listarSubastas', function (error, response, body) {
+		request('http://localhost:3000/api_otros/listarSubastas', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
 				return resolve(importedJSON);
@@ -51,7 +51,7 @@ var listadoSubastas = requestApiListadoSubastas();
 // Función API ListadoUsuarios
 async function requestApiListadoSubastasT() {
 	return new Promise(function(resolve, reject) {
-		request('http://localhost:3000/api/listarSubastasTransportes', function (error, response, body) {
+		request('http://localhost:3000/api_otros/listarSubastasTransportes', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
 				return resolve(importedJSON);

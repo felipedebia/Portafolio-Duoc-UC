@@ -9,7 +9,7 @@ var moment = require('moment');
 // Rutas
 var indexRouter = require('./routes/index');
 var usuarioRouter = require('./routes/usuario');
-var apiRouter = require('./routes/api');
+var otrosRouter = require('./routes/otros');
 
 // Login
 var bodyParser = require('body-parser');
@@ -52,7 +52,7 @@ app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 
 app.use('/', indexRouter);
 app.use('/api_usuarios', usuarioRouter);
-app.use('/api', apiRouter);
+app.use('/api_otros', otrosRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

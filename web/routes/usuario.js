@@ -39,6 +39,7 @@ router.get('/listarUsuarios', async (req, res) => {
   res.json({title: 'Usuarios', 'mydata': Usuarios});
 });
 
+
 // Leer - Usuario en especifico
 router.get('/listarUsuarios/:id_usuario', async (req, res) => {
   
@@ -68,6 +69,7 @@ router.get('/listarUsuarios/:id_usuario', async (req, res) => {
   res.json({title: 'Usuarios', 'mydata': Usuarios});
 });
 
+
 // Agregar
 // Falta hacer filtro de que no se repita el correo
 router.post('/crearUsuario', async (req, res) => {
@@ -90,6 +92,7 @@ router.post('/crearUsuario', async (req, res) => {
     res.redirect('/usuarios');
 	}
 })
+
 
 // Modificar
 router.post("/modificarUsuario/:id_usuario", async (req, res) => {

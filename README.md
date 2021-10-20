@@ -70,28 +70,28 @@ Iniciar node en la carpeta web
 ## CRUD Usuario
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
-| POST | http://localhost:3000/api/crearusuario  | |
+| POST | http://localhost:3000/api_usuarios/crearusuario  | |
 | GET  | http://localhost:3000/modificarUsuario/:id_usuario  |  |
-| PUT  | http://localhost:3000/api/modificarUsuario/:id_usuario  | |
-| POST | http://localhost:3000/api/desactivarUsuario/:id_usuario  | |
-| GET  | http://localhost:3000/api/listarUsuarios  | JSON |
-| GET  | http://localhost:3000/api/listarUsuarios/:id_usuario  | JSON |
+| PUT  | http://localhost:3000/api_usuarios/modificarUsuario/:id_usuario  | |
+| POST | http://localhost:3000/api_usuarios/desactivarUsuario/:id_usuario  | |
+| GET  | http://localhost:3000/api_usuarios/listarUsuarios  | JSON |
+| GET  | http://localhost:3000/api_usuarios/listarUsuarios/:id_usuario  | JSON |
 | GET  | http://localhost:3000/perfil/:id_usuario  |  |
 
 ## CRUD Contrato
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
-| GET  | http://localhost:3000/api/listarContratos  | JSON |
-| GET  | http://localhost:3000/api/listarContratos/:id_contrato  | JSON |
+| GET  | http://localhost:3000/api_otros/listarContratos  | JSON |
+| GET  | http://localhost:3000/api_otros/listarContratos/:id_contrato  | JSON |
 
 ## CRUD Subasta
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
-| GET  | http://localhost:3000/api/listarSubastas  | JSON |
-| GET  | http://localhost:3000/api/listarSubastas/:id_subasta  | JSON |
+| GET  | http://localhost:3000/api_otros/listarSubastas  | JSON |
+| GET  | http://localhost:3000/api_otros/listarSubastas/:id_subasta  | JSON |
 
 ## CRUD Subasta Transporte
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
-| GET  | http://localhost:3000/api/listarSubastasTransportes  | JSON |
-| GET  | http://localhost:3000/api/listarSubastasTransportes/:id_subastaT  | JSON |
+| GET  | http://localhost:3000/api_otros/listarSubastasTransportes  | JSON |
+| GET  | http://localhost:3000/api_otros/listarSubastasTransportes/:id_subastaT  | JSON |

@@ -27,6 +27,7 @@ router.get('/listarContratos', async (req, res) => {
   res.json({title: 'Contratos', 'mydata': Contratos});
 });
 
+
 // Leer - Contrato en especifico
 router.get('/listarContratos/:id_contrato', async (req, res) => {
   
@@ -74,6 +75,7 @@ router.get('/listarSubastas', async (req, res) => {
   })
   res.json({title: 'Subastas', 'mydata': Subastas});
 });
+
 
 // Leer - Subasta en especifico
 router.get('/listarSubastas/:id_subasta', async (req, res) => {
@@ -123,6 +125,7 @@ router.get('/listarSubastasTransportes', async (req, res) => {
   })
   res.json({title: 'Subastas', 'mydata': Subastas});
 });
+
 
 // Leer - Subasta en especifico
 router.get('/listarSubastasTransportes/:id_subastaT', async (req, res) => {
