@@ -5,7 +5,7 @@ const BD = require('../bin/configbd');
 var request = require('request');
 
 // Función que devuelve una promesa
-function requestApiListadoUsuarios() {
+async function requestApiListadoUsuarios() {
 	return new Promise(function(resolve, reject) {
 		request('http://localhost:3000/api/listarUsuarios', function (error, response, body) {
 			if (error) return reject(error);
