@@ -54,7 +54,7 @@ router.get('/listarContratos/:id_contrato', async (req, res) => {
 // CRUD SUBASTA
 
 // Leer - Todos las subastas
-router.get('/listarSubastas', async (req, res) => {
+router.get('/listarSubastasFrutas', async (req, res) => {
   
   binds = {};
   sql = "SELECT id_subasta, fecha_creacion, fecha_actualizacion, fecha_termino, estado_subasta FROM subasta";
@@ -78,7 +78,7 @@ router.get('/listarSubastas', async (req, res) => {
 
 
 // Leer - Subasta en especifico
-router.get('/listarSubastas/:id_subasta', async (req, res) => {
+router.get('/listarSubastasFrutas/:id_subasta', async (req, res) => {
   
   binds = { "id_subasta_bind": req.params.id_subasta };
   sql = "SELECT id_subasta, fecha_creacion, fecha_actualizacion, fecha_termino, estado_subasta FROM subasta WHERE id_subasta = :id_subasta_bind";

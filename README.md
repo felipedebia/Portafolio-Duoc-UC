@@ -88,8 +88,8 @@ Iniciar node en la carpeta web
 ## CRUD Subasta
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
-| GET  | http://localhost:3000/api_otros/listarSubastas  | JSON |
-| GET  | http://localhost:3000/api_otros/listarSubastas/:id_subasta  | JSON |
+| GET  | http://localhost:3000/api_otros/listarSubastasFrutas  | JSON |
+| GET  | http://localhost:3000/api_otros/listarSubastasFrutas/:id_subasta  | JSON |
 
 ## CRUD Subasta Transporte
 | Tipo | URL | Retorna |

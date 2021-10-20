@@ -98,8 +98,8 @@ router.post('/crearUsuario', async (req, res) => {
 router.post("/modificarUsuario/:id_usuario", async (req, res) => {
   var { id_usuario } = req.params;
   var { correo, nombre, apellido, num_documento, tipo_usuario, fecha_nacimiento, genero, estado_cuenta, telefono} = req.body;
-  sql = "UPDATE usuario SET correo= :correo, nombre= :nombre, apellido= :apellido, num_documento= :num_documento, tipo_usuario= :tipo_usuario, genero= :genero, estado_cuenta= :estado_cuenta, telefono= :telefono WHERE id_usuario= :id_usuario";
-  await BD.Open(sql, [correo, nombre, apellido, num_documento, tipo_usuario, genero, estado_cuenta, telefono, id_usuario], true);
+  sql = "UPDATE usuario SET correo= :correo, nombre= :nombre, apellido= :apellido, num_documento= :num_documento, tipo_usuario= :tipo_usuario, fecha_nacimiento= to_DATE(:fecha_nacimiento,'YYYY/MM/DD'), genero= :genero, estado_cuenta= :estado_cuenta, telefono= :telefono WHERE id_usuario= :id_usuario";
+  await BD.Open(sql, [correo, nombre, apellido, num_documento, tipo_usuario, fecha_nacimiento, genero, estado_cuenta, telefono, id_usuario], true);
 
   // Si tuvo conexión a la DB
   if(res.status(200)) {
