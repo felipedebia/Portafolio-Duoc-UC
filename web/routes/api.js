@@ -73,6 +73,7 @@ router.post('/crearUsuario', async (req, res) => {
   sql = "INSERT INTO usuario(num_documento, tipo_usuario, nombre, apellido, fecha_nacimiento, genero, correo, estado_cuenta, telefono, password) VALUES (:num_documento,:tipo_usuario,:nombre,:apellido,to_DATE(:fecha_nacimiento,'YYYY/MM/DD'),:genero,:correo,:estado_cuenta,:telefono,:password)";
 
   await BD.Open(sql, [num_documento, tipo_usuario, nombre, apellido, fecha_nacimiento, genero, correo, estado_cuenta, telefono, password], true);
+  result = await BD.Open(sql, binds, false);
 
   // Si tuvo conexión a la DB
   if(res.status(200)) {
@@ -93,10 +94,10 @@ router.post("/modificarUsuario/:id_usuario", async (req, res) => {
 
   // Si tuvo conexión a la DB
   if(res.status(200)) {
-    console.log("[!] Usuario " + correo + " modificado con éxito");
+    console.log("[!] Usuario " + req.body.correo + " modificado con éxito");
     res.redirect('/usuarios');
   } else {
-    console.log("[!] 2- Ocurrió un error al intentar modificar el usuario " + correo);
+    console.log("[!] 2- Ocurrió un error al intentar modificar el usuario " + req.body.correo);
     res.redirect('/usuarios');
   }
 
@@ -104,7 +105,7 @@ router.post("/modificarUsuario/:id_usuario", async (req, res) => {
 
 
 // Desactivar
-router.post("/desactivarUsuario/:id_usuario", async (req, res) => {
+router.get("/desactivarUsuario/:id_usuario", async (req, res) => {
 
   binds = { "id_usuario_bind": req.params.id_usuario };
   sql = "DELETE FROM usuario WHERE id_usuario = :id_usuario_bind";
@@ -112,10 +113,10 @@ router.post("/desactivarUsuario/:id_usuario", async (req, res) => {
   result = await BD.Open(sql, binds, false);
 
   if(res.status(200)) {
-    console.log("[!] Usuario " + correo + " eliminado con éxito");
+    console.log("[!] Usuario " + req.params.id_usuario + " desactivado con éxito");
     res.redirect('/usuarios');
 	} else {
-		console.log("[!] Ocurrió un error al intentar eliminar el usuario " + correo);
+		console.log("[!] Ocurrió un error al intentar desactivar el usuario " + req.params.id_usuario);
     res.redirect('/usuarios');
 	}
 })
