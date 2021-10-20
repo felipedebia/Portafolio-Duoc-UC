@@ -1,8 +1,13 @@
-var express = require('express');
-var router = express.Router();
+// Importaciones
+const express = require('express');
+const router = express.Router();
 const BD = require('../bin/configbd');
+const request = require('request');
 
-var request = require('request');
+// Contraseña
+var SimpleCrypto = require("simple-crypto-js").default
+const secretKey = "1X42JJKLjkuid"
+const simpleCryp = new SimpleCrypto(secretKey)
 
 // Función que devuelve una promesa
 async function requestApiListadoUsuarios() {
@@ -23,7 +28,7 @@ router.get('/', function(req, res, next) {
 	if (req.session.isLoggedIn) {
 		res.redirect('panel');
 	} else {
-		res.render('login', { title: 'Ingresar - Maipo Grande',funca:false});
+		res.render('login', { title: 'Ingresar - Maipo Grande', funca:false});
 	}
 });
 
@@ -31,38 +36,48 @@ router.get('/', function(req, res, next) {
 // POST: Login de usuario
 router.post('/auth', async (req, res) => {
 	if (req.body.correo && req.body.password) {
-		binds = { "correo_bind": req.body.correo, "password_bind": req.body.password };
-		sql = 'SELECT correo, nombre, apellido, tipo_usuario, num_documento FROM usuario WHERE correo = :correo_bind AND password = :password_bind';
+		binds = { "correo_bind": req.body.correo};
+		sql = 'SELECT correo, nombre, apellido, tipo_usuario, num_documento, password FROM usuario WHERE correo = :correo_bind';
 
         result = await BD.Open(sql, binds, false);
 
-		  	// Si los datos estan correctos
+		  	// Si encuentra los datos
 			if (result.rows.length > 0) {
 
-				var tiposUsuarios = {
-					1 : "Administrador",
-					2 : "Transportista",
-					3 : "Cliente Externo",
-					4 : "Cliente Interno",
-					5 : "Productor",
-					6 : "Consultor"
-				};
+				var passwordDecrypted = simpleCryp.decrypt(result.rows[0][5])
+				// Si la contraseña desencriptada es igual a la que viene por post
+				if(req.body.password == passwordDecrypted) {
+					
+					// Convertimos el id de tipo_usuario a texto
+					var tiposUsuarios = {
+						1 : "Administrador",
+						2 : "Transportista",
+						3 : "Cliente Externo",
+						4 : "Cliente Interno",
+						5 : "Productor",
+						6 : "Consultor"
+					};
+	
+					var tipoUsuarioTexto = tiposUsuarios[result.rows[0][3]];
+	
+					req.session.isLoggedIn = true;
+					// Guardamos datos del usuario en session
+					req.session.correo = result.rows[0][0];
+					req.session.nombre = result.rows[0][1];
+					req.session.apellido = result.rows[0][2];
+					req.session.tipo_usuario = result.rows[0][3];
+					req.session.tipo_usuario_texto = tipoUsuarioTexto;
+					req.session.num_documento = result.rows[0][4];
+					res.redirect('/panel');
+					console.log("[!] Usuario " + req.body.correo + " conectado con éxito");
 
-				var tipoUsuarioTexto = tiposUsuarios[result.rows[0][3]];
+				} else {
+					console.log("[!] Intento de conexión fallido usando " + req.body.correo);
+				res.render('login', {title: 'Ingresar - Maipo Grande', funca:true});
+				}
 
-				req.session.isLoggedIn = true;
-				// Guardamos datos del usuario en session
-				req.session.correo = result.rows[0][0];
-				req.session.nombre = result.rows[0][1];
-				req.session.apellido = result.rows[0][2];
-				req.session.tipo_usuario = result.rows[0][3];
-				req.session.tipo_usuario_texto = tipoUsuarioTexto;
-				req.session.num_documento = result.rows[0][4];
-				res.redirect('/panel');
-				console.log("[!] Usuario " + req.body.correo + " conectado con éxito");
 			} else {
-				console.log("[!] Intento de conexión fallido usando " + req.body.correo);
-				res.render('login', {title: 'Ingresar - Maipo Grande',funca:true});
+				res.send('Error al obtener datos de la base de datos');
 			}
 	}
 });

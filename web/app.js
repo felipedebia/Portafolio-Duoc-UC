@@ -1,3 +1,4 @@
+// Importaciones
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -9,7 +10,7 @@ var moment = require('moment');
 var indexRouter = require('./routes/index');
 var apiRouter = require('./routes/api');
 
-// Para login
+// Login
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
