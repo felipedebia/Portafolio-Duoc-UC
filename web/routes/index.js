@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const BD = require('../bin/configbd');
 const request = require('request');
+var moment = require('moment');
 
 // Contraseña
 var SimpleCrypto = require("simple-crypto-js").default
@@ -166,7 +167,7 @@ router.get('/modificarUsuario/:id_usuario', async function(req, res, next) {
 					tipo_usuario: result.rows[0][1],
 					nombre: result.rows[0][2],
 					apellido: result.rows[0][3],
-					fecha_nacimiento: result.rows[0][4],
+					fecha_nacimiento: moment(result.rows[0][4]).format('YYYY-MM-DD'),
 					genero: result.rows[0][5],
 					correo: result.rows[0][6],
 					estado_cuenta: result.rows[0][7],
@@ -217,7 +218,7 @@ router.get('/miperfil', async function(req, res, next) {
 					tipo_usuario: tipoUsuarioTexto,
 					nombre: result.rows[0][2],
 					apellido: result.rows[0][3],
-					fecha_nacimiento: result.rows[0][4],
+					fecha_nacimiento: moment(result.rows[0][4]).format('YYYY-MM-DD'),
 					genero: result.rows[0][5],
 					correo: result.rows[0][6],
 					estado_cuenta: result.rows[0][7],
