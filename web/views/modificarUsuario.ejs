@@ -18,8 +18,14 @@
                             </div>
                             <label>Correo electrónico *</label>
                             <input class="form-control mb-4" id="inputEmail" type="email" name="correo" placeholder="Correo electrónico" size="30" required="" value="<%= data[0].correo%>">
-                            <label>Contraseña *</label>
-                            <input class="form-control mb-4" id="inputPassword" type="password" name="password" placeholder="Contraseña" size="40" required="" value="<%= data[0].password%>">
+                            <div class="row">
+                              <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group"><label>Contraseña *</label><input class="form-control mb-4" id="inputPassword" type="password" name="password" placeholder="Contraseña" size="40" required="" value="<%= data[0].password%>"></div>
+                              </div>
+                              <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group"><input type="checkbox" onclick="showPassword()">Mostrar contraseña</div>
+                              </div>
+                            </div>
                             <label>Número de documento *</label>
                             <input class="form-control mb-4" id="inputNumDocumento" type="number" name="num_documento" placeholder="Número de documento" size="20" required="" value="<%= data[0].num_documento%>">
                             <label>Fecha de nacimiento *</label>
@@ -108,4 +114,16 @@
             </div>
         </div>
     </div>
+
+    <script>
+      function showPassword() {
+        var x = document.getElementById("inputPassword");
+        if (x.type === "password") {
+          x.type = "text";
+        } else {
+          x.type = "password";
+        }
+      }
+    </script>
+
     <%- include('partials/footer.ejs') %>

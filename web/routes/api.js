@@ -87,7 +87,7 @@ router.post("/modificarUsuario/:id_usuario", async (req, res) => {
   const { id_usuario } = req.params;
   const { num_documento, tipo_usuario, nombre, apellido, fecha_nacimiento, genero, correo, estado_cuenta, telefono, password } = req.body;
   sql = "UPDATE usuario SET correo= :correo, nombre= :nombre, num_documento= :num_documento, tipo_usuario= :tipo_usuario, fecha_nacimiento= :fecha_nacimiento, genero= :genero, estado_cuenta= :estado_cuenta, telefono= :telefono, password= :password WHERE id_usuario= :id_usuario";
-  result = await BD.Open(sql, [num_documento, tipo_usuario, nombre, apellido, fecha_nacimiento, genero, correo, estado_cuenta, telefono, password, id_usuario], true);
+  await BD.Open(sql, [num_documento, tipo_usuario, nombre, apellido, fecha_nacimiento, genero, correo, estado_cuenta, telefono, password, id_usuario], true);
 
   // Si tuvo conexión a la DB
   if(res.status(200)) {
@@ -106,7 +106,7 @@ router.get("/desactivarUsuario/:id_usuario", async (req, res) => {
   const { id_usuario} = req.params;
   sql = "DELETE FROM usuario WHERE id_usuario = :id_usuario";
   //sql = "UPDATE usuario SET estado_cuenta=0 WHERE id_usuario = :id_usuario";
-  result = await BD.Open(sql, [id_usuario], true);
+  await BD.Open(sql, [id_usuario], true);
 
   if(res.status(200)) {
     console.log("[!] Usuario " + req.params.id_usuario + " desactivado con éxito");
