@@ -73,11 +73,12 @@ router.post('/auth', async (req, res) => {
 
 				} else {
 					console.log("[!] Intento de conexión fallido usando " + req.body.correo);
-				res.render('login', {title: 'Ingresar - Maipo Grande', funca:true});
+					res.render('login', {title: 'Ingresar - Maipo Grande', funca:true});
 				}
 
 			} else {
-				res.send('Error al obtener datos de la base de datos');
+				console.log("[!] Intento de conexión fallido usando " + req.body.correo);
+				res.render('login', {title: 'Ingresar - Maipo Grande', funca:true});
 			}
 	}
 });
