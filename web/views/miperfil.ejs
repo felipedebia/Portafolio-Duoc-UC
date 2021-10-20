@@ -11,7 +11,7 @@
                     </div>
                     <div class="card-body">
                         <div class="card-text">
-                            <form action="/api/modificarUsuario/<%= data[0].id_usuario%>" method="POST">
+                            <form action="/api_usuarios/modificarUsuario/<%= data[0].id_usuario%>" method="POST">
                               <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-6">
                                   <div class="form-group"><label>Nombre *</label><input class="form-control mb-4 input-sm" id="nombre" type="text" name="nombre" placeholder="Nombre" size="25" required="" value="<%= data[0].nombre%>"></div>

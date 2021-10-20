@@ -12,7 +12,7 @@ const simpleCryp = new SimpleCrypto(secretKey)
 // Función API ListadoUsuarios
 async function requestApiListadoUsuarios() {
 	return new Promise(function(resolve, reject) {
-		request('http://localhost:3000/api/listarUsuarios', function (error, response, body) {
+		request('http://localhost:3000/api_usuarios/listarUsuarios', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
 				return resolve(importedJSON);

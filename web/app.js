@@ -8,6 +8,7 @@ var moment = require('moment');
 
 // Rutas
 var indexRouter = require('./routes/index');
+var usuarioRouter = require('./routes/usuario');
 var apiRouter = require('./routes/api');
 
 // Login
@@ -50,6 +51,7 @@ app.use('/js', express.static(__dirname + '/node_modules/popper.js/dist'));
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 
 app.use('/', indexRouter);
+app.use('/api_usuarios', usuarioRouter);
 app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler

@@ -56,7 +56,7 @@
                                                         <td>
                                                             <%= Usuarios[i].tipo_usuario %>
                                                         </td>
-                                                        <td><a class="card-link" href="/modificarUsuario/<%= Usuarios[i].id_usuario %>">Modificar</a><a class="card-link" href="../api/desactivarUsuario/<%= Usuarios[i].id_usuario %>">Desactivar</a></td>
+                                                        <td><a class="card-link" href="/modificarUsuario/<%= Usuarios[i].id_usuario %>">Modificar</a><a class="card-link" href="../api_usuarios/desactivarUsuario/<%= Usuarios[i].id_usuario %>">Desactivar</a></td>
                                                     </tr>
                                                     <% } %>
                                             </tbody>
@@ -67,7 +67,7 @@
                                     <div class="card-body">
                                         <h3 class="card-title mb-4">Ingresa los datos del nuevo usuario</h3>
                                         <div class="card-text">
-                                            <form action="../api/crearUsuario" method="POST">
+                                            <form action="../api_usuarios/crearUsuario" method="POST">
                                                 <div class="row">
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                                         <div class="form-group"><label>Nombre *</label><input class="form-control mb-4 input-sm" id="nombre" type="text" name="nombre" placeholder="Nombre" size="25" required=""></div>
