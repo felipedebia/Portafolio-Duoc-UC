@@ -7,7 +7,7 @@
                       <div class="card-body">
                         <h3 class="card-title mb-4">Ingresa los nuevos datos del usuario</h3>
                         <div class="card-text">
-                          <form action="/api/modificarUsuario" method="POST">
+                          <form action="/api/modificarUsuario/<%= data[0].id_usuario%>" method="POST">
                             <div class="row">
                               <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group"><label>Nombre *</label><input class="form-control mb-4 input-sm" id="nombre" type="text" name="nombre" placeholder="Nombre" size="25" required="" value="<%= data[0].nombre%>"></div>

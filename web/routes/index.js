@@ -113,7 +113,8 @@ router.get('/modificarUsuario/:id_usuario', async function(req, res, next) {
 					correo: result.rows[0][6],
 					estado_cuenta: result.rows[0][7],
 					telefono: result.rows[0][8],
-					password: result.rows[0][9]
+					password: result.rows[0][9],
+					id_usuario: id_usuario
 				  }
 			];
 

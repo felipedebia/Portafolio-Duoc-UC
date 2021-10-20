@@ -86,7 +86,7 @@ router.post('/crearUsuario', async (req, res) => {
 router.post("/modificarUsuario/:id_usuario", async (req, res) => {
   const { id_usuario } = req.params;
   const { num_documento, tipo_usuario, nombre, apellido, fecha_nacimiento, genero, correo, estado_cuenta, telefono, password } = req.body;
-  sql = "UPDATE usuario SET correo= :correo, nombre= :nombre, num_documento= :num_documento, tipo_usuario= :tipo_usuario, fecha_nacimiento= :fecha_nacimiento, genero= :genero, estado_cuenta= :estado_cuenta, telefono= :telefono, password= :password WHERE id_usuario= :id_usuario";
+  sql = "UPDATE usuario SET correo= :correo, nombre= :nombre, apellido= :apellido, num_documento= :num_documento, tipo_usuario= :tipo_usuario, fecha_nacimiento= :fecha_nacimiento, genero= :genero, estado_cuenta= :estado_cuenta, telefono= :telefono, password= :password WHERE id_usuario= :id_usuario";
   await BD.Open(sql, [num_documento, tipo_usuario, nombre, apellido, fecha_nacimiento, genero, correo, estado_cuenta, telefono, password, id_usuario], true);
 
   // Si tuvo conexión a la DB
