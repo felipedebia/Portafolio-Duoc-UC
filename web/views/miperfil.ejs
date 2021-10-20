@@ -1,0 +1,107 @@
+<%- include('partials/nav.ejs') %>
+        <!-- your content here -->
+          <div class="content">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="card">
+                    <div class="card-header card-header-primary">
+                      <h4 class="card-title">Modificar Perfil</h4>
+                      
+                    </div>
+                    <div class="card-body">
+                      <form>
+                        <div class="row">
+                          <div class="col-md-5">
+                            <div class="form-group">
+                              <label class="bmd-label-floating">Compañia</label>
+                              <input type="text" class="form-control" disabled>
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <label class="bmd-label-floating">Nombre de usuario</label>
+                              <input type="text" class="form-control">
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="bmd-label-floating">E-mail</label>
+                              <input type="email" class="form-control">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="bmd-label-floating">Nombres</label>
+                              <input type="text" class="form-control">
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="bmd-label-floating">Apellidos</label>
+                              <input type="text" class="form-control">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label class="bmd-label-floating">Direccion</label>
+                              <input type="text" class="form-control">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="bmd-label-floating">Pais</label>
+                              <input type="text" class="form-control">
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="bmd-label-floating">Ciudad</label>
+                              <input type="text" class="form-control">
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="bmd-label-floating">Codigo postal</label>
+                              <input type="text" class="form-control">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label>Comentarios</label>
+                              <div class="form-group">
+                                <label class="bmd-label-floating">Informacion que el usuario desee mostrar</label>
+                                <textarea class="form-control" rows="5"></textarea>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary pull-right">Modificar Perfil</button>
+                        <div class="clearfix"></div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card card-profile">
+                    <div class="card-body">
+                      <h6 class="card-category text-gray"><%= data[0].tipo_usuario%></h6>
+                      <h4 class="card-title"><%= data[0].nombre%> <%= data[0].apellido%></h4>
+                      <p class="card-description">
+                        Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<%- include('partials/footer.ejs') %>
