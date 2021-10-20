@@ -22,7 +22,7 @@ Iniciar node en la carpeta web
 - http://localhost:3000/
 - http://localhost:3000/plantilla
 - http://localhost:3000/plantilla_con_tabla
-- http://localhost:3000/miperfil *
+- http://localhost:3000/miperfil *haciendo
 
 * PENDIENTE
 
@@ -83,6 +83,7 @@ Iniciar node en la carpeta web
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/api_otros/listarContratos  | JSON |
 | GET  | http://localhost:3000/api_otros/listarContratos/:id_contrato  | JSON |
+| GET  | http://localhost:3000/contrato/:id_contrato  |  |
 
 ## CRUD Subasta
 | Tipo | URL | Retorna |

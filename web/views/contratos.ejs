@@ -15,12 +15,6 @@
                                                 <div class="ripple-container"></div>
                                             </a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#crearcontrato" data-toggle="tab">
-                                                <i class="material-icons">add</i> Crear nuevo contrato
-                                                <div class="ripple-container"></div>
-                                            </a>
-                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -32,85 +26,34 @@
                                         <table class="table table-hover">
                                             <thead class="text-info">
                                                 <th scope="col">Contrato N°</th>
-                                                <th scope="col">Nombre</th>
-                                                <th scope="col">Apellido</th>
-                                                <th scope="col">Correo electrónico</th>
-                                                <th scope="col">Tipo de usuario</th>
+                                                <th scope="col">Fecha de vigencia</th>
+                                                <th scope="col">Fecha de vencimiento</th>
+                                                <th scope="col">Estado del contrato</th>
                                                 <th scope="col">Opciones</th>
                                             </thead>
                                             <tbody>
-                                                <% for(var i=0; i < Usuarios.length; i++) { %>
+                                                <% for(var i=0; i < Contratos.length; i++) { %>
                                                     <tr>
                                                         <th scope="row">
                                                             <%= i %>
                                                         </th>
                                                         <td>
-                                                            <%= Usuarios[i].nombre %>
+                                                            <%= Contratos[i].id_contrato %>
                                                         </td>
                                                         <td>
-                                                            <%= Usuarios[i].apellido %>
+                                                            <%= Contratos[i].fecha_vigencia %>
                                                         </td>
                                                         <td>
-                                                            <%= Usuarios[i].correo %>
+                                                            <%= Contratos[i].fecha_vencimiento %>
                                                         </td>
                                                         <td>
-                                                            <%= Usuarios[i].tipo_usuario %>
+                                                            <%= Contratos[i].estado_contrato %>
                                                         </td>
-                                                        <td><a class="card-link" href="/modificarUsuario/<%= Usuarios[i].id_usuario %>">Modificar</a><a class="card-link" href="../api/desactivarUsuario/<%= Usuarios[i].id_usuario %>">Desactivar</a></td>
+                                                        <td><a class="card-link" href="/contrato/<%= Contratos[i].id_contrato %>">Ver</a></td>
                                                     </tr>
                                                     <% } %>
                                             </tbody>
                                         </table>
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="crearusuario">
-                                    <div class="card-body">
-                                        <h3 class="card-title mb-4">Ingresa los datos del nuevo usuario</h3>
-                                        <div class="card-text">
-                                            <form action="../api/crearUsuario" method="POST">
-                                                <div class="row">
-                                                    <div class="col-xs-6 col-sm-6 col-md-6">
-                                                        <div class="form-group"><label>Nombre *</label><input class="form-control mb-4 input-sm" id="nombre" type="text" name="nombre" placeholder="Nombre" size="25" required=""></div>
-                                                    </div>
-                                                    <div class="col-xs-6 col-sm-6 col-md-6">
-                                                        <div class="form-group"><label>Apellido *</label><input class="form-control input-sm" id="apellido" type="text" name="apellido" placeholder="Apellido" size="25" required=""></div>
-                                                    </div>
-                                                </div>
-                                                <label>Correo electrónico *</label>
-                                                <input class="form-control mb-4" id="inputEmail" type="email" name="correo" placeholder="Correo electrónico" size="30" required="">
-                                                <label>Contraseña *</label>
-                                                <input class="form-control mb-4" id="inputPassword" type="password" name="password" placeholder="Contraseña" size="40" required="">
-                                                <label>Número de documento *</label>
-                                                <input class="form-control mb-4" id="inputNumDocumento" type="number" name="num_documento" placeholder="Número de documento" size="20" required="">
-                                                <label>Fecha de nacimiento *</label>
-                                                <input class="form-control mb-4" id="inputFechaNacimiento" type="date" name="fecha_nacimiento" placeholder="Fecha de nacimiento" required="">
-                                                <label>Teléfono *</label>
-                                                <input class="form-control mb-4" id="inputTelefono" type="number" name="telefono" placeholder="Teléfono" size="15" required="">
-                                                <div class="form-group">
-                                                    <label>Género *</label>
-                                                    <select class="form-control" name="genero">
-                                                        <option name="femenino" value="1" selected="">Femenino</option>
-                                                        <option name="masculino" value="2">Masculino</option>
-                                                    </select>
-                                                </div>
-                                                <div class="row mb-4">
-                                                    <div class="col-xs-6 col-sm-6 col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Tipo de usuario *</label>
-                                                            <select class="form-control" name="tipo_usuario">
-                                                                <option name="transportista" value="2" selected="">Transportista</option>
-                                                                <option name="administrador" value="1">Administrador</option>
-                                                                <option name="clienteExterno" value="3">Cliente externo</option>
-                                                                <option name="clienteInterno" value="4">Cliente interno</option>
-                                                                <option name="productor" value="5">Productor</option>
-                                                                <option name="consultor" value="6">Consultor</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-primary mb-2 pull-right" type="submit"><i class="fas fa-sign-in-alt"></i> Crear nuevo usuario</button>
-                                            </form>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
