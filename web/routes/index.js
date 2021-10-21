@@ -16,6 +16,7 @@ async function requestApiListadoUsuarios() {
 		request('http://localhost:3000/api_usuarios/listarUsuarios', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
+				console.log('\x1b[37m','[!] requestApiListadoUsuarios cargado en memoria');
 				return resolve(importedJSON);
 		});
 	});
@@ -29,6 +30,7 @@ async function requestApiListadoContratos() {
 		request('http://localhost:3000/api_otros/listarContratos', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
+				console.log('\x1b[37m','[!] requestApiListadoContratos cargado en memoria');
 				return resolve(importedJSON);
 		});
 	});
@@ -42,6 +44,7 @@ async function requestApiListadoSubastasFrutas() {
 		request('http://localhost:3000/api_otros/listarSubastasFrutas', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
+				console.log('\x1b[37m','[!] requestApiListadoSubastasFrutas cargado en memoria');
 				return resolve(importedJSON);
 		});
 	});
@@ -55,6 +58,7 @@ async function requestApiListadoSubastasTransportes() {
 		request('http://localhost:3000/api_otros/listarSubastasTransportes', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
+				console.log('\x1b[37m','[!] requestApiListadoSubastasTransportes cargado en memoria');
 				return resolve(importedJSON);
 		});
 	});
