@@ -70,7 +70,7 @@ router.get('/', function(req, res, next) {
 	if (req.session.isLoggedIn) {
 		res.redirect('panel');
 	} else {
-		res.render('login', { title: 'Ingresar - Maipo Grande', funca:false});
+		res.render('login', { title: 'Ingresar - Maipo Grande', alertError: false});
 	}
 });
 
@@ -116,12 +116,12 @@ router.post('/auth', async (req, res) => {
 
 				} else {
 					console.log("[!] Intento de conexión fallido usando " + req.body.correo);
-					res.render('login', {title: 'Ingresar - Maipo Grande', funca:true});
+					res.render('login', {title: 'Ingresar - Maipo Grande', alertError: true});
 				}
 
 			} else {
 				console.log("[!] Intento de conexión fallido usando " + req.body.correo);
-				res.render('login', {title: 'Ingresar - Maipo Grande', funca:true});
+				res.render('login', {title: 'Ingresar - Maipo Grande', alertError: true});
 			}
 	}
 });

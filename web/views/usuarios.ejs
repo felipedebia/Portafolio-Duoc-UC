@@ -67,25 +67,41 @@
                                     <div class="card-body">
                                         <h3 class="card-title mb-4">Ingresa los datos del nuevo usuario</h3>
                                         <div class="card-text">
-                                            <form action="../api_usuarios/crearUsuario" method="POST">
+                                            <form action="../api_usuarios/crearUsuario" method="POST" class="formValidation" novalidate>
                                                 <div class="row">
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
-                                                        <div class="form-group"><label>Nombre *</label><input class="form-control mb-4 input-sm" id="nombre" type="text" name="nombre" placeholder="Nombre" size="25" required=""></div>
+                                                        <div class="form-group">
+                                                            <label class="bmd-label-floating">Nombre *</label><input class="form-control input-sm" id="nombre" type="text" name="nombre" placeholder="Nombre" size="25" required>
+                                                            <div class="invalid-feedback">Ingresa Nombre</div>
+                                                        </div>
                                                     </div>
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
-                                                        <div class="form-group"><label>Apellido *</label><input class="form-control input-sm" id="apellido" type="text" name="apellido" placeholder="Apellido" size="25" required=""></div>
+                                                        <div class="form-group">
+                                                            <label class="bmd-label-floating">Apellido *</label><input class="form-control input-sm" id="apellido" type="text" name="apellido" placeholder="Apellido" size="25" required>
+                                                            <div class="invalid-feedback">Ingresa Apellido</div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <label>Correo electrónico *</label>
-                                                <input class="form-control mb-4" id="inputEmail" type="email" name="correo" placeholder="Correo electrónico" size="30" required="">
-                                                <label>Contraseña *</label>
-                                                <input class="form-control mb-4" id="inputPassword" type="password" name="password" placeholder="Contraseña" size="40" required="">
-                                                <label>Número de documento *</label>
-                                                <input class="form-control mb-4" id="inputNumDocumento" type="number" name="num_documento" placeholder="Número de documento" size="20" required="">
-                                                <label>Fecha de nacimiento *</label>
-                                                <input class="form-control mb-4" id="inputFechaNacimiento" type="date" name="fecha_nacimiento" placeholder="Fecha de nacimiento" required="">
-                                                <label>Teléfono *</label>
-                                                <input class="form-control mb-4" id="inputTelefono" type="number" name="telefono" placeholder="Teléfono" size="15" required="">
+                                                <div class="form-group">
+                                                    <label class="bmd-label-floating">Correo electrónico *</label><input class="form-control input-sm" id="inputEmail" type="email" name="correo" size="30" required>
+                                                    <div class="invalid-feedback">Ingresa Correo electrónico</div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="bmd-label-floating">Contraseña *</label><input class="form-control input-sm" id="inputPassword" type="password" name="password" size="40" required>
+                                                    <div class="invalid-feedback">Ingresa Contraseña</div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="bmd-label-floating">Número de documento *</label><input class="form-control input-sm" id="inputNumDocumento" type="number" name="num_documento" size="20" required>
+                                                    <div class="invalid-feedback">Ingresa Número de documento</div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Fecha de nacimiento *</label><input class="form-control input-sm" id="inputFechaNacimiento" type="date" name="fecha_nacimiento" required>
+                                                    <div class="invalid-feedback">Ingresa Fecha de nacimiento</div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="bmd-label-floating">Teléfono *</label><input class="form-control input-sm" id="inputTelefono" type="number" name="telefono" size="15" required>
+                                                    <div class="invalid-feedback">Ingresa Teléfono</div>
+                                                </div>
                                                 <div class="form-group">
                                                     <label>Género *</label>
                                                     <select class="form-control" name="genero">
@@ -120,4 +136,22 @@
             </div>
         </div>
     </div>
-    <%- include('partials/footer.ejs') %>
+
+    <script> (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('formValidation');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+      })();
+      </script>
+
+<%- include('partials/footer.ejs') %>

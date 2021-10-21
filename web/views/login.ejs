@@ -17,12 +17,12 @@
                                         <img class="" src="/images/Logo_Maipo_Grande.jpg">
                                     </div>
                                     <!-- Sign In Form -->
-                                    <% if (funca == true){ %>
+                                    <% if (alertError == true){ %>
                                     <div class="alert alert-danger" role="alert">
                                         El correo electrónico o contraseña es incorrecto
                                     </div>
                                     <% } %>
-                                  <form action="auth" method="POST" class="chrisValidation" novalidate>
+                                  <form action="auth" method="POST" class="formValidation" novalidate>
                                     <p class="mb-5">El acceso a este sistema solo debe ser realizado por personal autorizado por la empresa Maipo Grande. El uso fraudulento de este sistema puede ser penado por la ley.</p>
                                       <div class="form-floating mb-3">
                                           <label for="floatingInput">Correo electrónico</label>
@@ -54,7 +54,7 @@
       <script> (function () {
         'use strict';
         window.addEventListener('load', function () {
-            var forms = document.getElementsByClassName('chrisValidation');
+            var forms = document.getElementsByClassName('formValidation');
             var validation = Array.prototype.filter.call(forms, function (form) {
                 form.addEventListener('submit', function (event) {
                     if (form.checkValidity() === false) {
