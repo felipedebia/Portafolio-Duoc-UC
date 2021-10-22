@@ -10,8 +10,14 @@
                                     <span class="nav-tabs-title">Contratos:</span>
                                     <ul class="nav nav-tabs" data-tabs="tabs">
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="#listadocontratos" data-toggle="tab">
+                                            <a class="nav-link active" href="#listadoContratos" data-toggle="tab">
                                                 <i class="material-icons">format_list_bulleted</i> Listado de Contratos
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#crearContrato" data-toggle="tab">
+                                                <i class="material-icons">add</i> Crear nuevo contrato
                                                 <div class="ripple-container"></div>
                                             </a>
                                         </li>
@@ -21,7 +27,7 @@
                         </div>
                         <div class="card-body">
                             <div class="tab-content">
-                                <div class="tab-pane active" id="listadocontratos">
+                                <div class="tab-pane active" id="listadoContratos">
                                     <div class="card-body table-responsive">
                                         <table class="table table-hover">
                                             <thead class="text-info">
@@ -35,11 +41,8 @@
                                                 <% for(var i=0; i < Contratos.length; i++) { %>
                                                     <tr>
                                                         <th scope="row">
-                                                            <%= i %>
-                                                        </th>
-                                                        <td>
                                                             <%= Contratos[i].id_contrato %>
-                                                        </td>
+                                                        </th>
                                                         <td>
                                                             <%= Contratos[i].fecha_vigencia %>
                                                         </td>
@@ -49,11 +52,43 @@
                                                         <td>
                                                             <%= Contratos[i].estado_contrato %>
                                                         </td>
-                                                        <td><a class="card-link" href="/contrato/<%= Contratos[i].id_contrato %>">Ver</a></td>
+                                                        <td><a class="card-link" href="/modificarContrato/<%= Contratos[i].id_contrato %>">Ver</a><a class="card-link" href="../api_contratos/anularContrato/<%= Contratos[i].id_contrato %>">Anular</a></td>
                                                     </tr>
-                                                    <% } %>
+                                                <% } %>
                                             </tbody>
                                         </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="crearContrato">
+                                    <div class="card-body">
+                                        <h3 class="card-title mb-4">Ingresa los datos del nuevo contrato</h3>
+                                        <div class="card-text">
+                                            <form action="../api_contratos/crearContrato" method="POST" class="formValidation" novalidate>
+                                                <div class="row">
+                                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Fecha de inicio *</label><input class="form-control input-sm" id="inputFechaInicio" type="date" name="fecha_inicio" required>
+                                                            <div class="invalid-feedback">Ingresa Fecha de inicio</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Fecha de vencimiento *</label><input class="form-control input-sm" id="inputFechaVencimiento" type="date" name="fecha_vencimiento" required>
+                                                            <div class="invalid-feedback">Ingresa Fecha de vencimiento</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Asignar al productor *</label>
+                                                    <select class="form-control" name="genero">
+                                                        <% for(var i=0; i < Usuarios.length; i++) { %>
+                                                        <option name="<%= Usuarios[i].nombre %> <%= Usuarios[i].apellido %>" value="<%= Usuarios[i].id_usuario %>"><%= Usuarios[i].nombre %> <%= Usuarios[i].apellido %></option>
+                                                        <% } %>
+                                                    </select>
+                                                </div>
+                                                <button class="btn btn-primary mb-2 pull-right" type="submit"><i class="fas fa-sign-in-alt"></i> Crear nuevo contrato</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

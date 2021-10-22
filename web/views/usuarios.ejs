@@ -10,13 +10,13 @@
                                     <span class="nav-tabs-title">Usuarios:</span>
                                     <ul class="nav nav-tabs" data-tabs="tabs">
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="#listadousuarios" data-toggle="tab">
+                                            <a class="nav-link active" href="#listadoUsuarios" data-toggle="tab">
                                                 <i class="material-icons">format_list_bulleted</i> Listado de usuarios
                                                 <div class="ripple-container"></div>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#crearusuario" data-toggle="tab">
+                                            <a class="nav-link" href="#crearUsuario" data-toggle="tab">
                                                 <i class="material-icons">add</i> Crear nuevo usuario
                                                 <div class="ripple-container"></div>
                                             </a>
@@ -27,7 +27,7 @@
                         </div>
                         <div class="card-body">
                             <div class="tab-content">
-                                <div class="tab-pane active" id="listadousuarios">
+                                <div class="tab-pane active" id="listadoUsuarios">
                                     <div class="card-body table-responsive">
                                         <table class="table table-hover">
                                             <thead class="text-info">
@@ -42,7 +42,7 @@
                                                 <% for(var i=0; i < Usuarios.length; i++) { %>
                                                     <tr>
                                                         <th scope="row">
-                                                            <%= i %>
+                                                            <%= Usuarios[i].id_usuario %>
                                                         </th>
                                                         <td>
                                                             <%= Usuarios[i].nombre %>
@@ -56,14 +56,14 @@
                                                         <td>
                                                             <%= Usuarios[i].tipo_usuario %>
                                                         </td>
-                                                        <td><a class="card-link" href="/modificarUsuario/<%= Usuarios[i].id_usuario %>">Modificar</a><a class="card-link" href="../api_usuarios/desactivarUsuario/<%= Usuarios[i].id_usuario %>">Desactivar</a></td>
+                                                        <td><a class="card-link" href="/perfil/<%= Usuarios[i].id_usuario %>">Ver perfil</a><a class="card-link" href="/modificarUsuario/<%= Usuarios[i].id_usuario %>">Modificar</a><a class="card-link" href="../api_usuarios/desactivarUsuario/<%= Usuarios[i].id_usuario %>">Desactivar</a></td>
                                                     </tr>
                                                     <% } %>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="crearusuario">
+                                <div class="tab-pane" id="crearUsuario">
                                     <div class="card-body">
                                         <h3 class="card-title mb-4">Ingresa los datos del nuevo usuario</h3>
                                         <div class="card-text">
@@ -71,13 +71,13 @@
                                                 <div class="row">
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                                         <div class="form-group">
-                                                            <label class="bmd-label-floating">Nombre *</label><input class="form-control input-sm" id="nombre" type="text" name="nombre" placeholder="Nombre" size="25" required>
+                                                            <label class="bmd-label-floating">Nombre *</label><input class="form-control input-sm" id="nombre" type="text" name="nombre" size="25" required>
                                                             <div class="invalid-feedback">Ingresa Nombre</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                                         <div class="form-group">
-                                                            <label class="bmd-label-floating">Apellido *</label><input class="form-control input-sm" id="apellido" type="text" name="apellido" placeholder="Apellido" size="25" required>
+                                                            <label class="bmd-label-floating">Apellido *</label><input class="form-control input-sm" id="apellido" type="text" name="apellido" size="25" required>
                                                             <div class="invalid-feedback">Ingresa Apellido</div>
                                                         </div>
                                                     </div>

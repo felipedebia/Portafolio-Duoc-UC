@@ -8,8 +8,9 @@ var moment = require('moment');
 
 // Rutas
 var indexRouter = require('./routes/index');
-var usuarioRouter = require('./routes/usuario');
-var otrosRouter = require('./routes/otros');
+var usuariosRouter = require('./routes/usuarios');
+var contratosRouter = require('./routes/contratos');
+var subastasRouter = require('./routes/subastas');
 
 // Login
 var bodyParser = require('body-parser');
@@ -51,8 +52,9 @@ app.use('/js', express.static(__dirname + '/node_modules/popper.js/dist'));
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 
 app.use('/', indexRouter);
-app.use('/api_usuarios', usuarioRouter);
-app.use('/api_otros', otrosRouter);
+app.use('/api_usuarios', usuariosRouter);
+app.use('/api_contratos', contratosRouter);
+app.use('/api_subastas', subastasRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

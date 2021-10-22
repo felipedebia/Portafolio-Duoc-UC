@@ -27,7 +27,7 @@ var listadoUsuarios = requestApiListadoUsuarios();
 // Función API ListadoContratos
 async function requestApiListadoContratos() {
 	return new Promise(function(resolve, reject) {
-		request('http://localhost:3000/api_otros/listarContratos', function (error, response, body) {
+		request('http://localhost:3000/api_contratos/listarContratos', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
 				console.log('\x1b[37m','[!] requestApiListadoContratos cargado en memoria');
@@ -41,7 +41,7 @@ var listadoContratos = requestApiListadoContratos();
 // Función API ListadoSubastasFrutas
 async function requestApiListadoSubastasFrutas() {
 	return new Promise(function(resolve, reject) {
-		request('http://localhost:3000/api_otros/listarSubastasFrutas', function (error, response, body) {
+		request('http://localhost:3000/api_subastas/listarSubastasFrutas', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
 				console.log('\x1b[37m','[!] requestApiListadoSubastasFrutas cargado en memoria');
@@ -55,7 +55,7 @@ var listadoSubastasFrutas = requestApiListadoSubastasFrutas();
 // Función API ListadoSubastasTransportes
 async function requestApiListadoSubastasTransportes() {
 	return new Promise(function(resolve, reject) {
-		request('http://localhost:3000/api_otros/listarSubastasTransportes', function (error, response, body) {
+		request('http://localhost:3000/api_subastas/listarSubastasTransportes', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
 				console.log('\x1b[37m','[!] requestApiListadoSubastasTransportes cargado en memoria');
@@ -244,7 +244,12 @@ router.get('/miperfil', async function(req, res, next) {
 })
 
 router.get('/perfil/:id_usuario', async function(req, res, next) {
-
+	if (req.session.isLoggedIn) {
+        res.render('perfil', { title: 'Viendo perfil - Maipo Grande' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
 })
 
 router.get('/usuarios', function(req, res) {

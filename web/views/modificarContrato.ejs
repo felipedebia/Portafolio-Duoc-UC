@@ -1,0 +1,75 @@
+<%- include('partials/nav.ejs') %>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="card">
+                      <div class="card-header card-header-tabs card-header-primary">
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <span class="nav-tabs-title">Usuarios:</span>
+                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="../contratos/#listadoContratos">
+                                            <i class="material-icons">format_list_bulleted</i> Listado de contratos
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="../contratos/#crearContrato">
+                                            <i class="material-icons">add</i> Crear nuevo contrato
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                      <a class="nav-link active" data-toggle="tab">
+                                          <i class="material-icons">settings</i> Modificar contrato
+                                          <div class="ripple-container"></div>
+                                      </a>
+                                  </li>
+                                </ul>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="card-body">
+                        <h3 class="card-title mb-4">Ingresa los nuevos datos del contrato</h3>
+                        <div class="card-text">
+                          <form action="/api_contratos/modificarContrato/<%= data[0].id_contrato%>" method="POST">
+                            <div class="row">
+                              <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group"><label>Fecha de inicio *</label><input class="form-control input-sm" id="inputFechaInicio" type="date" name="fecha_inicio" required value="<%= data[0].fecha_inicio%>"></div>
+                              </div>
+                              <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group"><label>Fecha de vencimiento *</label><input class="form-control input-sm" id="inputFechaVencimiento" type="date" name="fecha_vencimiento" required value="<%= data[0].fecha_vencimiento%>"></div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label>Asignar al productor *</label>
+                              <select class="form-control" name="genero">
+                                  <% for(var i=0; i < Usuarios.length; i++) { %>
+                                  <option name="<%= Usuarios[i].nombre %> <%= Usuarios[i].apellido %>" value="<%= Usuarios[i].id_usuario %>"><%= Usuarios[i].nombre %> <%= Usuarios[i].apellido %></option>
+                                  <% } %>
+                              </select>
+                            </div>
+                            <button class="btn btn-primary mb-2 pull-right" type="submit"><i class="fas fa-sign-in-alt"></i> Modificar contrato</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+      function showPassword() {
+        var x = document.getElementById("inputPassword");
+        if (x.type === "password") {
+          x.type = "text";
+        } else {
+          x.type = "password";
+        }
+      }
+    </script>
+
+    <%- include('partials/footer.ejs') %>

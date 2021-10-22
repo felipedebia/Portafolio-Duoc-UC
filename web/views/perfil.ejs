@@ -1,0 +1,130 @@
+<%- include('partials/nav.ejs') %>
+        <!-- your content here -->
+          <div class="content">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="card">
+                    <div class="card-header card-header-primary">
+                      <h4 class="card-title">Viendo el perfil de <%= data[0].nombre%> <%= data[0].apellido%></h4>
+                      
+                    </div>
+                    <div class="card-body">
+                        <div class="card-text">
+                            <form action="/api_usuarios/modificarUsuario/<%= data[0].id_usuario%>" method="POST">
+                              <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                  <div class="form-group"><label>Nombre *</label><input class="form-control mb-4 input-sm" id="nombre" type="text" name="nombre" placeholder="Nombre" size="25" required="" value="<%= data[0].nombre%>"></div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                  <div class="form-group"><label>Apellido *</label><input class="form-control input-sm" id="apellido" type="text" name="apellido" placeholder="Apellido" size="25" required="" value="<%= data[0].apellido%>"></div>
+                                </div>
+                              </div>
+                              <label>Correo electrónico *</label>
+                              <input class="form-control mb-4" id="inputEmail" type="email" name="correo" placeholder="Correo electrónico" size="30" required="" value="<%= data[0].correo%>">
+                              <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                  <div class="form-group"><label>Contraseña *</label><input class="form-control mb-4" id="inputPassword" type="password" name="password" placeholder="Contraseña" size="40" required="" value="<%= data[0].password%>"></div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                  <div class="form-group"><input type="checkbox" onclick="showPassword()">Mostrar contraseña</div>
+                                </div>
+                              </div>
+                              <label>Número de documento *</label>
+                              <input class="form-control mb-4" id="inputNumDocumento" type="number" name="num_documento" placeholder="Número de documento" size="20" required="" value="<%= data[0].num_documento%>">
+                              <label>Fecha de nacimiento *</label>
+                              <input class="form-control mb-4" id="inputFechaNacimiento" type="date" name="fecha_nacimiento" placeholder="Fecha de nacimiento" required="" value="<%= data[0].fecha_nacimiento%>">
+                              <label>Teléfono *</label>
+                              <input class="form-control mb-4" id="inputTelefono" type="number" name="telefono" placeholder="Teléfono" size="15" required="" value="<%= data[0].telefono%>">
+                              <div class="form-group">
+                                <label>Género *</label>
+                                <select class="form-control" name="genero">
+                                  <% if(data[0].genero == 1){ %>
+                                    <option name="femenino" selected value="1">Femenino</option>
+                                  <% } else { %>
+                                    <option name="femenino" value="1">Femenino</option>
+                                  <% } %>
+                                  <% if(data[0].genero == 2){ %>
+                                    <option name="masculino" selected value="2">Masculino</option>
+                                  <% } else { %>
+                                    <option name="masculino" value="2">Masculino</option>
+                                  <% } %>
+                                </select>
+                              </div>
+                              <div class="row mb-4">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                  <div class="form-group">
+                                    <label>Tipo de usuario *</label>
+                                    <select class="form-control" name="tipo_usuario">
+                                      <% if(data[0].tipo_usuario == 1){ %>
+                                        <option name="administrador" selected value="1">Administrador</option>
+                                      <% } else { %>
+                                        <option name="administrador" value="1">Administrador</option>
+                                      <% } %>
+                                      <% if(data[0].tipo_usuario == 2){ %>
+                                        <option name="transportista" selected value="2">Transportista</option>
+                                      <% } else { %>
+                                        <option name="transportista" value="2">Transportista</option>
+                                      <% } %>
+                                      <% if(data[0].tipo_usuario == 3){ %>
+                                        <option name="clienteExterno" selected value="3">Cliente externo</option>
+                                      <% } else { %>
+                                        <option name="clienteExterno" value="3">Cliente externo</option>
+                                      <% } %>
+                                      <% if(data[0].tipo_usuario == 4){ %>
+                                        <option name="clienteInterno" selected value="4">Cliente interno</option>
+                                      <% } else { %>
+                                        <option name="clienteInterno" value="4">Cliente interno</option>
+                                      <% } %>
+                                      <% if(data[0].tipo_usuario == 5){ %>
+                                        <option name="productor" selected value="5">Productor</option>
+                                      <% } else { %>
+                                        <option name="productor" value="5">Productor</option>
+                                      <% } %>
+                                      <% if(data[0].tipo_usuario == 6){ %>
+                                        <option name="consultor" selected value="6">Consultor</option>
+                                      <% } else { %>
+                                        <option name="consultor" value="6">Consultor</option>
+                                      <% } %>
+                                    </select>
+                                  </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                  <div class="form-group">
+                                    <label>Estado de cuenta *</label>
+                                    <select class="form-control" name="estado_cuenta">
+                                      <% if(data[0].estado_cuenta == 1){ %>
+                                        <option name="activada" selected value="1">Activada</option>
+                                      <% } else { %>
+                                        <option name="activada" value="1">Activada</option>
+                                      <% } %>
+                                      <% if(data[0].estado_cuenta == 2){ %>
+                                        <option name="desactivada" selected value="2">Desactivada</option>
+                                      <% } else { %>
+                                        <option name="desactivada" value="2">Desactivada</option>
+                                      <% } %>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                              <button class="btn btn-primary mb-2 pull-right" type="submit"><i class="fas fa-sign-in-alt"></i> Modificar perfil</button>
+                            </form>
+                          </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card card-profile">
+                    <div class="card-body">
+                      <h6 class="card-category text-gray"><%= data[0].tipo_usuario%></h6>
+                      <h4 class="card-title"><%= data[0].nombre%> <%= data[0].apellido%></h4>
+                      <p class="card-description">
+                        Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<%- include('partials/footer.ejs') %>
