@@ -36,7 +36,7 @@ Iniciar node en la carpeta web
 
 ### Menú Productor
 
-- http://localhost:3000/productos *
+- http://localhost:3000/frutas *
 - http://localhost:3000/subastas_productor *
 - http://localhost:3000/ventas *
 

@@ -56,12 +56,12 @@
                             <div class="card-icon">
                                 <i class="material-icons">inventory_2</i>
                             </div>
-                            <p class="card-category">Productos</p>
+                            <p class="card-category">Frutas</p>
                             <h3 class="card-title">245</h3>
                         </div>
                         <div class="card-footer">
                             <div class="stats">
-                                <i class="material-icons">arrow_forward</i> <a href="/Productos">Ir a página de Productos</a>
+                                <i class="material-icons">arrow_forward</i> <a href="/Frutas">Ir a página de Frutas</a>
                             </div>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
                         </div>
                         <div class="card-footer">
                             <div class="stats">
-                                <i class="material-icons">arrow_forward</i> <a href="/Reportes">Ver más gráficos de productos</a>
+                                <i class="material-icons">arrow_forward</i> <a href="/Reportes">Ver más gráficos de frutas</a>
                             </div>
                         </div>
                     </div>
@@ -368,7 +368,7 @@
                     <div class="card">
                         <div class="card-header card-header-warning">
                             <h4 class="card-title">Employees Stats</h4>
-                            <p class="card-category">New employees on 15th September, 2016</p>
+                            <p class="card-category">New employees on 15th September, 2016 <button class="btn btn-default" data-toggle="notify" data-placement="top" data-align="right" data-type="default" data-icon="notifications">Top Right</button></p>
                         </div>
                         <div class="card-body table-responsive">
                             <table class="table table-hover">
@@ -412,6 +412,37 @@
         </div>
     </div>
 <%- include('partials/footer.ejs') %>
+
+<script>
+    Notify = (function () {
+        var e = $('[data-toggle="notify"]');
+        e.length &&
+            e.on("click", function (e) {
+                e.preventDefault(),
+                    (function (e, a, t, n, i, o) {
+                        $.notify(
+                            { icon: t, title: " Bootstrap Notify", message: "Turning standard Bootstrap alerts into awesome notifications", url: "" },
+                            {
+                                element: "body",
+                                type: n,
+                                allow_dismiss: !0,
+                                placement: { from: e, align: a },
+                                offset: { x: 15, y: 15 },
+                                spacing: 10,
+                                z_index: 1080,
+                                delay: 2500,
+                                timer: 25e3,
+                                url_target: "_blank",
+                                mouse_over: !1,
+                                animate: { enter: i, exit: o },
+                                template:
+                                    '<div data-notify="container" class="alert alert-dismissible alert-{0} alert-notify" role="alert"><span class="alert-icon material-icons" data-notify="icon">notifications</span> <div class="alert-text"</div> <span class="alert-title" data-notify="title">{1}</span> <span class="message-notify" data-notify="message">{2}</span></div><button type="button" class="close" data-notify="dismiss" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>',
+                            }
+                        );
+                    })($(this).attr("data-placement"), $(this).attr("data-align"), $(this).attr("data-icon"), $(this).attr("data-type"), $(this).attr("data-animation-in"), $(this).attr("data-animation-out"));
+            });
+    })();
+</script>
 
 </body>
 </html>

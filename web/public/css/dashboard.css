@@ -14066,7 +14066,7 @@ fieldset[disabled] .form-group .form-control {
 
 .alert,
 .alert.alert-default {
-  background-color: white;
+  background-color: rgba(0,0,0,.95);
   color: #555555;
 }
 
@@ -14162,7 +14162,11 @@ fieldset[disabled] .form-group .form-control {
 
 .alert span {
   display: block;
-  max-width: 89%;
+  max-width: 90%;
+}
+
+span.message-notify {
+  margin-top: 20px;
 }
 
 .alert.alert-danger {
@@ -14214,7 +14218,8 @@ fieldset[disabled] .form-group .form-control {
 }
 
 .alert.alert-with-icon {
-  padding-left: 66px;
+  padding-left: 30px;
+  color: rgba(255,255,255,.85);
 }
 
 .alert.alert-with-icon i[data-notify="icon"] {
