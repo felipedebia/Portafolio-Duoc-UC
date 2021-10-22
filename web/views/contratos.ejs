@@ -67,20 +67,20 @@
                                                 <div class="row">
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                                         <div class="form-group">
-                                                            <label>Fecha de inicio *</label><input class="form-control input-sm" id="inputFechaInicio" type="date" name="fecha_inicio" required>
+                                                            <label>Fecha de inicio *</label><input class="form-control input-sm" id="inputFechaInicio" type="date" name="fecha_inicio" required data-toggle="datepicker">
                                                             <div class="invalid-feedback">Ingresa Fecha de inicio</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                                         <div class="form-group">
-                                                            <label>Fecha de vencimiento *</label><input class="form-control input-sm" id="inputFechaVencimiento" type="date" name="fecha_vencimiento" required>
+                                                            <label>Fecha de vencimiento *</label><input class="form-control input-sm" id="inputFechaVencimiento" type="date" name="fecha_vencimiento" required data-toggle="datepicker">
                                                             <div class="invalid-feedback">Ingresa Fecha de vencimiento</div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Asignar al productor *</label>
-                                                    <select class="selectpicker form-control" data-size="<% Usuarios.length %>" name="id_usuario" data-style="select-with-transition btn btn-round" title="Selecciona una opción">
+                                                    <select class="selectpicker form-control" data-size="<% Usuarios.length %>" name="id_usuario" data-style="select-with-transition btn" title="Selecciona una opción">
                                                         <% for(var i=0; i < Usuarios.length; i++) { %>
                                                         <option name="<%= Usuarios[i].nombre %> <%= Usuarios[i].apellido %>" value="<%= Usuarios[i].id_usuario %>"><%= Usuarios[i].nombre %> <%= Usuarios[i].apellido %></option>
                                                         <% } %>
@@ -99,3 +99,4 @@
         </div>
     </div>
     <%- include('partials/footer.ejs') %>
+    <%- include('partials/footer_scripts.ejs') %>

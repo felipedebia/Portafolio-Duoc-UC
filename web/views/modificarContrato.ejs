@@ -37,15 +37,15 @@
                           <form action="/api_contratos/modificarContrato/<%= data[0].id_contrato%>" method="POST">
                             <div class="row">
                               <div class="col-xs-6 col-sm-6 col-md-6">
-                                <div class="form-group"><label>Fecha de inicio *</label><input class="form-control input-sm" id="inputFechaInicio" type="date" name="fecha_inicio" required value="<%= data[0].fecha_inicio%>"></div>
+                                <div class="form-group"><label>Fecha de inicio *</label><input class="form-control input-sm" id="inputFechaInicio" type="date" name="fecha_inicio" required value="<%= data[0].fecha_inicio%>" data-toggle="datepicker"></div>
                               </div>
                               <div class="col-xs-6 col-sm-6 col-md-6">
-                                <div class="form-group"><label>Fecha de vencimiento *</label><input class="form-control input-sm" id="inputFechaVencimiento" type="date" name="fecha_vencimiento" required value="<%= data[0].fecha_vencimiento%>"></div>
+                                <div class="form-group"><label>Fecha de vencimiento *</label><input class="form-control input-sm" id="inputFechaVencimiento" type="date" name="fecha_vencimiento" required value="<%= data[0].fecha_vencimiento%>" data-toggle="datepicker"></div>
                               </div>
                             </div>
                             <div class="form-group">
                               <label>Asignar al productor *</label>
-                              <select class="selectpicker form-control" data-size="2" name="id_usuario" data-style="select-with-transition btn btn-round" title="Selecciona una opción">
+                              <select class="selectpicker form-control" data-size="2" name="id_usuario" data-style="select-with-transition btn" title="Selecciona una opción">
                                   <% for(var i=0; i < Usuarios.length; i++) { %>
                                   <option name="<%= Usuarios[i].nombre %> <%= Usuarios[i].apellido %>" value="<%= Usuarios[i].id_usuario %>"><%= Usuarios[i].nombre %> <%= Usuarios[i].apellido %></option>
                                   <% } %>
@@ -73,3 +73,4 @@
     </script>
 
     <%- include('partials/footer.ejs') %>
+    <%- include('partials/footer_scripts.ejs') %>
