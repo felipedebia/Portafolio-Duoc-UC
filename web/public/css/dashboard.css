@@ -13229,7 +13229,7 @@ fieldset[disabled][disabled] .has-rose .form-control,
 
 .bmd-form-group:not(.has-success):not(.has-danger) [class^='bmd-label'].bmd-label-floating,
 .bmd-form-group:not(.has-success):not(.has-danger) [class*=' bmd-label'].bmd-label-floating {
-  color: #AAAAAA;
+  color: rgba(0,0,0, 0.87);
 }
 
 .bmd-form-group [class^='bmd-label'],
@@ -13285,7 +13285,7 @@ fieldset[disabled][disabled] .has-rose .form-control,
 }
 
 .bmd-form-group label {
-  color: #AAAAAA;
+  color: rgba(0,0,0, 0.87);
 }
 
 .bmd-form-group .radio label,
@@ -13513,7 +13513,7 @@ input::placeholder {
 }
 
 label {
-  color: #AAAAAA;
+  color: rgba(0,0,0, 0.87);
 }
 
 .radio label,
@@ -17031,7 +17031,7 @@ a .material-icons {
 label {
   font-size: 14px;
   line-height: 1.42857;
-  color: #AAAAAA;
+  color: rgba(0,0,0, 0.87);
   font-weight: 400;
 }
 
