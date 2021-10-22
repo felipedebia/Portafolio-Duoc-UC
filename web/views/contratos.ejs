@@ -29,13 +29,13 @@
                             <div class="tab-content">
                                 <div class="tab-pane active" id="listadoContratos">
                                     <div class="card-body table-responsive">
-                                        <table class="table table-hover">
+                                        <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                             <thead class="text-info">
                                                 <th scope="col">Contrato N°</th>
                                                 <th scope="col">Fecha de vigencia</th>
                                                 <th scope="col">Fecha de vencimiento</th>
                                                 <th scope="col">Estado del contrato</th>
-                                                <th scope="col">Opciones</th>
+                                                <th class="disabled-sorting">Opciones</th>
                                             </thead>
                                             <tbody>
                                                 <% for(var i=0; i < Contratos.length; i++) { %>
@@ -52,7 +52,9 @@
                                                         <td>
                                                             <%= Contratos[i].estado_contrato %>
                                                         </td>
-                                                        <td><a class="card-link" href="/modificarContrato/<%= Contratos[i].id_contrato %>">Ver</a><a class="card-link" href="../api_contratos/anularContrato/<%= Contratos[i].id_contrato %>">Anular</a></td>
+                                                        <td>
+                                                            <a class="card-link" href="/modificarContrato/<%= Contratos[i].id_contrato %>">Ver</a><a class="card-link" href="../api_contratos/anularContrato/<%= Contratos[i].id_contrato %>">Anular</a>
+                                                        </td>
                                                     </tr>
                                                 <% } %>
                                             </tbody>
@@ -98,5 +100,38 @@
             </div>
         </div>
     </div>
-    <%- include('partials/footer.ejs') %>
-    <%- include('partials/footer_scripts.ejs') %>
+<%- include('partials/footer.ejs') %>
+
+<script>
+    $(document).ready(function() {
+      $('#datatables').DataTable({
+        "pagingType": "full_numbers",
+        "pageLength": 15,
+        "bLengthChange": false,
+        responsive: true,
+        language: {
+          search: "_INPUT_",
+          info: "Viendo página _PAGE_ de _PAGES_",
+          zeroRecords: "No hay información que mostrar",
+          infoEmpty: "Sin información",
+          searchPlaceholder: "Buscar usuario",
+        }
+      });
+
+      var table = $('#datatable').DataTable();
+
+    });
+</script>
+
+<script>
+    $(function() {
+      $('[data-toggle="datepicker"]').datepicker({
+        autoHide: true,
+        language: 'es-ES',
+        format: 'dd-mm-yyyy'
+      });
+    });
+</script>
+
+</body>
+</html>

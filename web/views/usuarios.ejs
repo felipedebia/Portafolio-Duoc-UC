@@ -29,14 +29,14 @@
                             <div class="tab-content">
                                 <div class="tab-pane active" id="listadoUsuarios">
                                     <div class="card-body table-responsive">
-                                        <table class="table table-hover">
+                                        <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                             <thead class="text-info">
                                                 <th scope="col">#</th>
                                                 <th scope="col">Nombre</th>
                                                 <th scope="col">Apellido</th>
                                                 <th scope="col">Correo electrónico</th>
                                                 <th scope="col">Tipo de usuario</th>
-                                                <th scope="col">Opciones</th>
+                                                <th class="disabled-sorting">Opciones</th>
                                             </thead>
                                             <tbody>
                                                 <% for(var i=0; i < Usuarios.length; i++) { %>
@@ -56,7 +56,9 @@
                                                         <td>
                                                             <%= Usuarios[i].tipo_usuario %>
                                                         </td>
-                                                        <td><a class="card-link" href="/perfil/<%= Usuarios[i].id_usuario %>">Ver perfil</a><a class="card-link" href="/modificarUsuario/<%= Usuarios[i].id_usuario %>">Modificar</a><a class="card-link" href="../api_usuarios/desactivarUsuario/<%= Usuarios[i].id_usuario %>">Desactivar</a></td>
+                                                        <td>
+                                                            <a class="card-link" href="/perfil/<%= Usuarios[i].id_usuario %>">Ver perfil</a><a class="card-link" href="/modificarUsuario/<%= Usuarios[i].id_usuario %>">Modificar</a><a class="card-link" href="../api_usuarios/desactivarUsuario/<%= Usuarios[i].id_usuario %>">Desactivar</a>
+                                                        </td>
                                                     </tr>
                                                     <% } %>
                                             </tbody>
@@ -139,21 +141,56 @@
         </div>
     </div>
 
-    <script> (function () {
-        'use strict';
-        window.addEventListener('load', function () {
-            var forms = document.getElementsByClassName('formValidation');
-            var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-      })();
-      </script>
+    
 <%- include('partials/footer.ejs') %>
-<%- include('partials/footer_scripts.ejs') %>
+
+<script>
+    $(document).ready(function() {
+      $('#datatables').DataTable({
+        "pagingType": "full_numbers",
+        "pageLength": 15,
+        "bLengthChange": false,
+        responsive: true,
+        language: {
+          search: "_INPUT_",
+          info: "Viendo página _PAGE_ de _PAGES_",
+          zeroRecords: "No hay información que mostrar",
+          infoEmpty: "Sin información",
+          searchPlaceholder: "Buscar usuario"
+        }
+      });
+
+      var table = $('#datatable').DataTable();
+
+    });
+</script>
+
+<script> (function () {
+    'use strict';
+    window.addEventListener('load', function () {
+        var forms = document.getElementsByClassName('formValidation');
+        var validation = Array.prototype.filter.call(forms, function (form) {
+            form.addEventListener('submit', function (event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+  })();
+  </script>
+
+<script>
+    $(function() {
+      $('[data-toggle="datepicker"]').datepicker({
+        autoHide: true,
+        language: 'es-ES',
+        format: 'dd-mm-yyyy'
+      });
+    });
+</script>
+
+</body>
+</html>

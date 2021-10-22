@@ -72,5 +72,17 @@
       }
     </script>
 
-    <%- include('partials/footer.ejs') %>
-    <%- include('partials/footer_scripts.ejs') %>
+<%- include('partials/footer.ejs') %>
+
+<script>
+  $(function() {
+    $('[data-toggle="datepicker"]').datepicker({
+      autoHide: true,
+      language: 'es-ES',
+      format: 'dd-mm-yyyy'
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -142,16 +142,27 @@
         </div>
     </div>
 
-    <script>
-      function showPassword() {
-        var x = document.getElementById("inputPassword");
-        if (x.type === "password") {
-          x.type = "text";
-        } else {
-          x.type = "password";
-        }
-      }
-    </script>
+<%- include('partials/footer.ejs') %>
+<script>
+    $(function() {
+      $('[data-toggle="datepicker"]').datepicker({
+        autoHide: true,
+        language: 'es-ES',
+        format: 'dd-mm-yyyy'
+      });
+    });
+</script>
 
-    <%- include('partials/footer.ejs') %>
-    <%- include('partials/footer_scripts.ejs') %>
+<script>
+  function showPassword() {
+    var x = document.getElementById("inputPassword");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+</script>
+
+</body>
+</html>
