@@ -10,6 +10,7 @@ var SimpleCrypto = require("simple-crypto-js").default
 const secretKey = "1X42JJKLjkuid"
 const simpleCryp = new SimpleCrypto(secretKey)
 
+
 // Función API ListadoUsuarios
 async function requestApiListadoUsuarios() {
 	return new Promise(function(resolve, reject) {
@@ -23,6 +24,7 @@ async function requestApiListadoUsuarios() {
 };
 
 var listadoUsuarios = requestApiListadoUsuarios();
+
 
 // Función API ListadoContratos
 async function requestApiListadoContratos() {
@@ -38,6 +40,7 @@ async function requestApiListadoContratos() {
 
 var listadoContratos = requestApiListadoContratos();
 
+
 // Función API ListadoSubastasFrutas
 async function requestApiListadoSubastasFrutas() {
 	return new Promise(function(resolve, reject) {
@@ -52,6 +55,7 @@ async function requestApiListadoSubastasFrutas() {
 
 var listadoSubastasFrutas = requestApiListadoSubastasFrutas();
 
+
 // Función API ListadoSubastasTransportes
 async function requestApiListadoSubastasTransportes() {
 	return new Promise(function(resolve, reject) {
@@ -65,6 +69,21 @@ async function requestApiListadoSubastasTransportes() {
 };
 
 var listadoSubastasT = requestApiListadoSubastasTransportes();
+
+
+// Función API ListadoFrutas
+async function requestApiListadoFrutas() {
+	return new Promise(function(resolve, reject) {
+		request('http://localhost:3000/api_frutas/listarFrutas', function (error, response, body) {
+			if (error) return reject(error);
+				importedJSON = JSON.parse(body);
+				console.log('\x1b[37m','[!] requestApiListadoFrutas cargado en memoria');
+				return resolve(importedJSON);
+		});
+	});
+};
+
+var listadoFrutas = requestApiListadoFrutas();
 
 
 
@@ -268,6 +287,18 @@ router.get('/usuarios', function(req, res) {
 router.get('/contratos', function(req, res) {
     if (req.session.isLoggedIn) {
         res.render('contratos', { title: 'Contratos - Maipo Grande' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
+
+
+
+// CRUD FRUTAS
+router.get('/frutas', function(req, res) {
+    if (req.session.isLoggedIn) {
+        res.render('Frutas', { title: 'Frutas - Maipo Grande' });
     } else {
         res.redirect('/');
     }

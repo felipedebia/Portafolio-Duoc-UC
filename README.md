@@ -63,7 +63,7 @@ Iniciar node en la carpeta web
 - 1 Femenino
 - 2 Masculino
 
-## Estado cuenta
+## Estado cuenta - subasta - contrato - solicitud
 - 1 Activado
 - 2 Desactivado
 
@@ -81,18 +81,33 @@ Iniciar node en la carpeta web
 ## CRUD Contrato
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
-| GET  | http://localhost:3000/api_otros/listarContratos  | JSON |
-| GET  | http://localhost:3000/api_otros/listarContratos/:id_contrato  | JSON |
+| POST | http://localhost:3000/api_contratos/anularContrato/:id_contrato  | |
+| GET  | http://localhost:3000/api_contratos/listarContratos  | JSON |
+| GET  | http://localhost:3000/api_contratos/listarContratos/:id_contrato  | JSON |
 | GET  | http://localhost:3000/contrato/:id_contrato  |  |
 
-## CRUD Subasta
+## CRUD Subasta Frutas
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
-| GET  | http://localhost:3000/api_otros/listarSubastasFrutas  | JSON |
-| GET  | http://localhost:3000/api_otros/listarSubastasFrutas/:id_subasta  | JSON |
+| GET  | http://localhost:3000/api_subastas/listarSubastasFrutas  | JSON |
+| GET  | http://localhost:3000/api_subastas/listarSubastasFrutas/:id_subasta  | JSON |
 
 ## CRUD Subasta Transporte
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
-| GET  | http://localhost:3000/api_otros/listarSubastasTransportes  | JSON |
-| GET  | http://localhost:3000/api_otros/listarSubastasTransportes/:id_subastaT  | JSON |
+| GET  | http://localhost:3000/api_subastas/listarSubastasTransportes  | JSON |
+| GET  | http://localhost:3000/api_subastas/listarSubastasTransportes/:id_subastaT  | JSON |
+
+## CRUD Fruta
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| POST | http://localhost:3000/api_frutas/eliminarFruta/:id_fruta  | |
+| GET  | http://localhost:3000/api_frutas/listarFrutas  | JSON |
+| GET  | http://localhost:3000/api_frutas/listarFrutas/:id_fruta  | JSON |
+
+## CRUD Solicitud
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| POST | http://localhost:3000/api_solicitudes/anularSolicitud/:id_solicitud  | |
+| GET  | http://localhost:3000/api_solicitudes/listarSolicitudes  | JSON |
+| GET  | http://localhost:3000/api_solicitudes/listarSolicitudes/:id_solicitud  | JSON |

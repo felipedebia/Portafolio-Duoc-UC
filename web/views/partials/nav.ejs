@@ -32,7 +32,7 @@
                           <p>Inicio</p>
                       </a>
                   </li>
-                  <% if( session.tipo_usuario == 1){ %>
+                  <% if(session.tipo_usuario == 1){ %>
                     <!--Menú Administrador-->
                     <li class="nav-item ">
                         <a class="nav-link" href="../usuarios">
@@ -71,7 +71,7 @@
                         </a>
                     </li>
                   <% } %>
-                  <% if( session.tipo_usuario == 5){ %>
+                  <% if(session.tipo_usuario == 5){ %>
                     <!--Menú Productor-->
                     <li class="nav-item ">
                         <a class="nav-link" href="../productos">
@@ -92,7 +92,7 @@
                         </a>
                     </li>
                   <% } %>
-                  <% if( session.tipo_usuario == 3){ %>
+                  <% if(session.tipo_usuario == 3){ %>
                     <!--Menú Cliente Externo-->
                     <li class="nav-item ">
                         <a class="nav-link" href="../solicitudes">
@@ -107,7 +107,7 @@
                         </a>
                     </li>
                   <% } %>
-                  <% if( session.tipo_usuario == 4){ %>
+                  <% if(session.tipo_usuario == 4){ %>
                     <!--Menú Cliente Interno-->
                       <li class="nav-item ">
                           <a class="nav-link" href="../solicitudes">
@@ -122,7 +122,7 @@
                           </a>
                       </li>
                   <% } %>
-                  <% if( session.tipo_usuario == 2){ %>
+                  <% if(session.tipo_usuario == 2){ %>
                     <!--Menú Transportista-->
                       <li class="nav-item ">
                           <a class="nav-link" href="../subastas_transportes">
@@ -131,7 +131,7 @@
                           </a>
                       </li>
                   <% } %>
-                  <% if( session.tipo_usuario == 6){ %>
+                  <% if(session.tipo_usuario == 6){ %>
                     <!--Menú Consultor-->
                       <li class="nav-item ">
                           <a class="nav-link" href="../reportes">

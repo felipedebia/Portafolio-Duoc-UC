@@ -115,7 +115,7 @@ router.post("/modificarUsuario/:id_usuario", async (req, res) => {
 
 // Desactivar
 router.get("/desactivarUsuario/:id_usuario", async (req, res) => {
-  var { id_usuario} = req.params;
+  var { id_usuario } = req.params;
   sql = "DELETE FROM usuario WHERE id_usuario = :id_usuario";
   //sql = "UPDATE usuario SET estado_cuenta=0 WHERE id_usuario = :id_usuario";
   await BD.Open(sql, [id_usuario], true);
