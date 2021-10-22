@@ -37,28 +37,28 @@
                           <form action="/api_usuarios/modificarUsuario/<%= data[0].id_usuario%>" method="POST">
                             <div class="row">
                               <div class="col-xs-6 col-sm-6 col-md-6">
-                                <div class="form-group"><label>Nombre *</label><input class="form-control input-sm" id="nombre" type="text" name="nombre" placeholder="Nombre" size="25" required value="<%= data[0].nombre%>"></div>
+                                <div class="form-group"><label>Nombre *</label><input class="form-control input-sm" id="nombre" type="text" name="nombre" placeholder="Nombre" maxLength="25" required value="<%= data[0].nombre%>"></div>
                               </div>
                               <div class="col-xs-6 col-sm-6 col-md-6">
-                                <div class="form-group"><label>Apellido *</label><input class="form-control input-sm" id="apellido" type="text" name="apellido" placeholder="Apellido" size="25" required value="<%= data[0].apellido%>"></div>
+                                <div class="form-group"><label>Apellido *</label><input class="form-control input-sm" id="apellido" type="text" name="apellido" placeholder="Apellido" maxLength="25" required value="<%= data[0].apellido%>"></div>
                               </div>
                             </div>
                             <label>Correo electrónico *</label>
-                            <input class="form-control mb-4" id="inputEmail" type="email" name="correo" placeholder="Correo electrónico" size="30" required value="<%= data[0].correo%>">
+                            <input class="form-control mb-4" id="inputEmail" type="email" name="correo" placeholder="Correo electrónico" maxLength="30" required value="<%= data[0].correo%>">
                             <div class="row">
                               <div class="col-xs-6 col-sm-6 col-md-6">
-                                <div class="form-group"><label>Contraseña *</label><input class="form-control mb-4" id="inputPassword" type="password" name="password" placeholder="Contraseña" size="40" required value="<%= data[0].password%>"></div>
+                                <div class="form-group"><label>Contraseña *</label><input class="form-control mb-4" id="inputPassword" type="password" name="password" placeholder="Contraseña" maxLength="40" required value="<%= data[0].password%>"></div>
                               </div>
                               <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group"><input type="checkbox" onclick="showPassword()">Mostrar contraseña</div>
                               </div>
                             </div>
                             <label>Número de documento *</label>
-                            <input class="form-control mb-4" id="inputNumDocumento" type="number" name="num_documento" placeholder="Número de documento" size="20" required value="<%= data[0].num_documento%>">
+                            <input class="form-control mb-4" id="inputNumDocumento" type="number" name="num_documento" placeholder="Número de documento" maxLength="20" required value="<%= data[0].num_documento%>">
                             <label>Fecha de nacimiento *</label>
                             <input class="form-control mb-4" id="inputFechaNacimiento" type="date" name="fecha_nacimiento" placeholder="Fecha de nacimiento" required value="<%= data[0].fecha_nacimiento%>" data-toggle="datepicker">
                             <label>Teléfono *</label>
-                            <input class="form-control mb-4" id="inputTelefono" type="number" name="telefono" placeholder="Teléfono" size="15" required value="<%= data[0].telefono%>">
+                            <input class="form-control mb-4" id="inputTelefono" type="number" name="telefono" placeholder="Teléfono" maxLength="15" required value="<%= data[0].telefono%>">
                             <div class="row mb-4">
                               <div class="col-xs-4 col-sm-4 col-md-4">
                                 <div class="form-group">
