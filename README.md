@@ -51,7 +51,7 @@ Iniciar node en la carpeta web
 - http://localhost:3000/reportes *
 - http://localhost:3000/soporte * 
 
-## Roles
+## Tipo Usuario
 - 1 Administrador
 - 2 Transportista
 - 3 Cliente externo
@@ -59,11 +59,27 @@ Iniciar node en la carpeta web
 - 5 Productor
 - 6 Consultor
 
+## Tipo Contrato
+- 1 
+- 2 
+
+## Tipo Pedido
+- 1 
+- 2 
+
+## Tipo Venta
+- 1 
+- 2 
+
+## Tipo Pago
+- 1 
+- 2 
+
 ## Género
 - 1 Femenino
 - 2 Masculino
 
-## Estado cuenta - subasta - contrato - solicitud
+## Estado usuario - contrato - pedido - venta - bodega - transporte
 - 1 Activado
 - 2 Desactivado
 
