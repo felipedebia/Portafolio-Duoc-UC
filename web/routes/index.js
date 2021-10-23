@@ -102,14 +102,14 @@ router.get('/', function(req, res, next) {
 router.post('/auth', async (req, res) => {
 	if (req.body.correo && req.body.password) {
 		binds = { "correo_bind": req.body.correo};
-		sql = 'SELECT correo, nombre, apellido, tipo_usuario, num_documento, password, id_usuario FROM usuario WHERE correo = :correo_bind';
+		sql = 'SELECT correo, nombre, apellido, num_documento, password, id_usuario, fk_id_tipo, fk_id_estado FROM usuario WHERE correo = :correo_bind';
 
         result = await BD.Open(sql, binds, false);
 
 		  	// Si encuentra los datos
 			if (result.rows.length > 0) {
 
-				var passwordDecrypted = simpleCryp.decrypt(result.rows[0][5])
+				var passwordDecrypted = simpleCryp.decrypt(result.rows[0][4])
 				// Si la contraseña desencriptada es igual a la que viene por post
 				if(req.body.password == passwordDecrypted) {
 					
@@ -123,17 +123,18 @@ router.post('/auth', async (req, res) => {
 						6 : "Consultor"
 					};
 	
-					var tipoUsuarioTexto = tiposUsuarios[result.rows[0][3]];
+					var tipoUsuarioTexto = tiposUsuarios[result.rows[0][6]];
 	
 					req.session.isLoggedIn = true;
 					// Guardamos datos del usuario en session
 					req.session.correo = result.rows[0][0];
 					req.session.nombre = result.rows[0][1];
 					req.session.apellido = result.rows[0][2];
-					req.session.tipo_usuario = result.rows[0][3];
+					req.session.num_documento = result.rows[0][3];
+					req.session.id_usuario = result.rows[0][5];
+					req.session.tipo_usuario = result.rows[0][6];
 					req.session.tipo_usuario_texto = tipoUsuarioTexto;
-					req.session.num_documento = result.rows[0][4];
-					req.session.id_usuario = result.rows[0][6];
+					req.session.estado_usuario = result.rows[0][7];
 					res.redirect('/panel');
 					console.log("[!] Usuario " + req.body.correo + " conectado con éxito");
 
@@ -178,7 +179,7 @@ router.get('/modificarUsuario/:id_usuario', async function(req, res, next) {
 		const { id_usuario } = req.params;
 
 		binds = {"id_usuario": id_usuario};
-		sql = "SELECT num_documento, tipo_usuario, nombre, apellido, fecha_nacimiento, genero, correo, estado_cuenta, telefono, password FROM usuario WHERE id_usuario = :id_usuario";
+		sql = "SELECT num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password, fk_id_estado, fk_id_tipo FROM usuario WHERE id_usuario = :id_usuario";
 		result = await BD.Open(sql, binds, false);
 
 		// Si los datos estan correctos
@@ -187,15 +188,15 @@ router.get('/modificarUsuario/:id_usuario', async function(req, res, next) {
 			var usuarioData = [
 				{
 					num_documento: result.rows[0][0],
-					tipo_usuario: result.rows[0][1],
-					nombre: result.rows[0][2],
-					apellido: result.rows[0][3],
-					fecha_nacimiento: moment(result.rows[0][4]).format('YYYY-MM-DD'),
-					genero: result.rows[0][5],
-					correo: result.rows[0][6],
-					estado_cuenta: result.rows[0][7],
-					telefono: result.rows[0][8],
-					password: result.rows[0][9],
+					nombre: result.rows[0][1],
+					apellido: result.rows[0][2],
+					fecha_nacimiento: moment(result.rows[0][3]).format('YYYY-MM-DD'),
+					genero: result.rows[0][4],
+					correo: result.rows[0][5],
+					telefono: result.rows[0][6],
+					password: result.rows[0][7],
+					fk_id_estado: result.rows[0][8],
+					fk_id_tipo: result.rows[0][9],
 					id_usuario: id_usuario
 				  }
 			];
@@ -217,7 +218,7 @@ router.get('/miperfil', async function(req, res, next) {
 
 		// Hacemos una consulta trayendo todos los datos del usuario
 		binds = {"id_usuario": req.session.id_usuario};
-		sql = "SELECT num_documento, tipo_usuario, nombre, apellido, fecha_nacimiento, genero, correo, estado_cuenta, telefono, password FROM usuario WHERE id_usuario = :id_usuario";
+		sql = "SELECT num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password, fk_id_estado, fk_id_tipo FROM usuario WHERE id_usuario = :id_usuario";
 		result = await BD.Open(sql, binds, false);
 
 		// Si los datos estan correctos
@@ -232,22 +233,22 @@ router.get('/miperfil', async function(req, res, next) {
 				6 : "Consultor"
 			};
 
-			var tipoUsuarioTexto = tiposUsuarios[result.rows[0][1]];
+			var tipoUsuarioTexto = tiposUsuarios[result.rows[0][9]];
 			
 			// Asignamos los valores de la consulta a las variables
 			var usuarioData = [
 				{
 					num_documento: result.rows[0][0],
-					tipo_usuario: tipoUsuarioTexto,
-					nombre: result.rows[0][2],
-					apellido: result.rows[0][3],
-					fecha_nacimiento: moment(result.rows[0][4]).format('YYYY-MM-DD'),
-					genero: result.rows[0][5],
-					correo: result.rows[0][6],
-					estado_cuenta: result.rows[0][7],
-					telefono: result.rows[0][8],
-					password: result.rows[0][9],
-					id_usuario: req.session.id_usuario
+					nombre: result.rows[0][1],
+					apellido: result.rows[0][2],
+					fecha_nacimiento: moment(result.rows[0][3]).format('YYYY-MM-DD'),
+					genero: result.rows[0][4],
+					correo: result.rows[0][5],
+					telefono: result.rows[0][6],
+					password: result.rows[0][7],
+					fk_id_estado: result.rows[0][8],
+					tipo_usuario_texto: tipoUsuarioTexto,
+					id_usuario: id_usuario
 				  }
 			];
 

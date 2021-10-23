@@ -6,7 +6,7 @@
                 <div class="col-md-8">
                   <div class="card">
                     <div class="card-header card-header-primary">
-                      <h4 class="card-title">Modificar perfil</h4>
+                      <h4 class="card-title">Mi Perfil</h4>
                       
                     </div>
                     <div class="card-body">
@@ -56,32 +56,32 @@
                                   <div class="form-group">
                                     <label>Tipo de usuario *</label>
                                     <select class="form-control" name="tipo_usuario">
-                                      <% if(data[0].tipo_usuario == 1){ %>
+                                      <% if(data[0].fk_id_tipo == 1){ %>
                                         <option name="administrador" selected value="1">Administrador</option>
                                       <% } else { %>
                                         <option name="administrador" value="1">Administrador</option>
                                       <% } %>
-                                      <% if(data[0].tipo_usuario == 2){ %>
+                                      <% if(data[0].fk_id_tipo == 2){ %>
                                         <option name="transportista" selected value="2">Transportista</option>
                                       <% } else { %>
                                         <option name="transportista" value="2">Transportista</option>
                                       <% } %>
-                                      <% if(data[0].tipo_usuario == 3){ %>
+                                      <% if(data[0].fk_id_tipo == 3){ %>
                                         <option name="clienteExterno" selected value="3">Cliente externo</option>
                                       <% } else { %>
                                         <option name="clienteExterno" value="3">Cliente externo</option>
                                       <% } %>
-                                      <% if(data[0].tipo_usuario == 4){ %>
+                                      <% if(data[0].fk_id_tipo == 4){ %>
                                         <option name="clienteInterno" selected value="4">Cliente interno</option>
                                       <% } else { %>
                                         <option name="clienteInterno" value="4">Cliente interno</option>
                                       <% } %>
-                                      <% if(data[0].tipo_usuario == 5){ %>
+                                      <% if(data[0].fk_id_tipo == 5){ %>
                                         <option name="productor" selected value="5">Productor</option>
                                       <% } else { %>
                                         <option name="productor" value="5">Productor</option>
                                       <% } %>
-                                      <% if(data[0].tipo_usuario == 6){ %>
+                                      <% if(data[0].fk_id_tipo == 6){ %>
                                         <option name="consultor" selected value="6">Consultor</option>
                                       <% } else { %>
                                         <option name="consultor" value="6">Consultor</option>
@@ -93,12 +93,12 @@
                                   <div class="form-group">
                                     <label>Estado de cuenta *</label>
                                     <select class="form-control" name="estado_cuenta">
-                                      <% if(data[0].estado_cuenta == 1){ %>
+                                      <% if(data[0].fk_id_estado == 1){ %>
                                         <option name="activada" selected value="1">Activada</option>
                                       <% } else { %>
                                         <option name="activada" value="1">Activada</option>
                                       <% } %>
-                                      <% if(data[0].estado_cuenta == 2){ %>
+                                      <% if(data[0].fk_id_estado == 2){ %>
                                         <option name="desactivada" selected value="2">Desactivada</option>
                                       <% } else { %>
                                         <option name="desactivada" value="2">Desactivada</option>
@@ -116,7 +116,7 @@
                 <div class="col-md-4">
                   <div class="card card-profile">
                     <div class="card-body">
-                      <h6 class="card-category text-gray"><%= data[0].tipo_usuario%></h6>
+                      <h6 class="card-category text-gray"><%= data[0].tipo_usuario_texto%></h6>
                       <h4 class="card-title"><%= data[0].nombre%> <%= data[0].apellido%></h4>
                       <p class="card-description">
                         Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...

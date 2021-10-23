@@ -54,7 +54,7 @@
                                                             <%= Usuarios[i].correo %>
                                                         </td>
                                                         <td>
-                                                            <%= Usuarios[i].tipo_usuario %>
+                                                            <%= Usuarios[i].fk_id_tipo %>
                                                         </td>
                                                         <td>
                                                             <a class="card-link" href="/perfil/<%= Usuarios[i].id_usuario %>">Ver perfil</a><a class="card-link" href="/modificarUsuario/<%= Usuarios[i].id_usuario %>">Modificar</a><a class="card-link" href="../api_usuarios/desactivarUsuario/<%= Usuarios[i].id_usuario %>">Desactivar</a>
@@ -117,7 +117,7 @@
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                                         <div class="form-group">
                                                             <label>Tipo de usuario *</label>
-                                                            <select class="selectpicker form-control" data-size="6" name="tipo_usuario" data-style="select-with-transition btn" title="Selecciona una opción">
+                                                            <select class="selectpicker form-control" data-size="6" name="fk_id_tipo" data-style="select-with-transition btn" title="Selecciona una opción">
                                                                 <option name="transportista" value="2">Transportista</option>
                                                                 <option name="administrador" value="1">Administrador</option>
                                                                 <option name="clienteExterno" value="3">Cliente externo</option>

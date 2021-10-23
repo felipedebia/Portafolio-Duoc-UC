@@ -81,32 +81,32 @@
                                 <div class="form-group">
                                   <label>Tipo de usuario *</label>
                                   <select class="selectpicker form-control" data-size="6" name="tipo_usuario" data-style="select-with-transition btn" title="Selecciona una opción">
-                                    <% if(data[0].tipo_usuario == 1){ %>
+                                    <% if(data[0].fk_id_tipo == 1){ %>
                                       <option name="administrador" selected value="1">Administrador</option>
                                     <% } else { %>
                                       <option name="administrador" value="1">Administrador</option>
                                     <% } %>
-                                    <% if(data[0].tipo_usuario == 2){ %>
+                                    <% if(data[0].fk_id_tipo == 2){ %>
                                       <option name="transportista" selected value="2">Transportista</option>
                                     <% } else { %>
                                       <option name="transportista" value="2">Transportista</option>
                                     <% } %>
-                                    <% if(data[0].tipo_usuario == 3){ %>
+                                    <% if(data[0].fk_id_tipo == 3){ %>
                                       <option name="clienteExterno" selected value="3">Cliente externo</option>
                                     <% } else { %>
                                       <option name="clienteExterno" value="3">Cliente externo</option>
                                     <% } %>
-                                    <% if(data[0].tipo_usuario == 4){ %>
+                                    <% if(data[0].fk_id_tipo == 4){ %>
                                       <option name="clienteInterno" selected value="4">Cliente interno</option>
                                     <% } else { %>
                                       <option name="clienteInterno" value="4">Cliente interno</option>
                                     <% } %>
-                                    <% if(data[0].tipo_usuario == 5){ %>
+                                    <% if(data[0].fk_id_tipo == 5){ %>
                                       <option name="productor" selected value="5">Productor</option>
                                     <% } else { %>
                                       <option name="productor" value="5">Productor</option>
                                     <% } %>
-                                    <% if(data[0].tipo_usuario == 6){ %>
+                                    <% if(data[0].fk_id_tipo == 6){ %>
                                       <option name="consultor" selected value="6">Consultor</option>
                                     <% } else { %>
                                       <option name="consultor" value="6">Consultor</option>
@@ -118,12 +118,12 @@
                                 <div class="form-group">
                                   <label>Estado de cuenta *</label>
                                   <select class="selectpicker form-control" data-size="2" name="estado_cuenta" data-style="select-with-transition btn" title="Selecciona una opción">
-                                    <% if(data[0].estado_cuenta == 1){ %>
+                                    <% if(data[0].fk_id_estado == 1){ %>
                                       <option name="activada" selected value="1">Activada</option>
                                     <% } else { %>
                                       <option name="activada" value="1">Activada</option>
                                     <% } %>
-                                    <% if(data[0].estado_cuenta == 2){ %>
+                                    <% if(data[0].fk_id_estado == 2){ %>
                                       <option name="desactivada" selected value="2">Desactivada</option>
                                     <% } else { %>
                                       <option name="desactivada" value="2">Desactivada</option>
