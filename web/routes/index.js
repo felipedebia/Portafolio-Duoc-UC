@@ -28,50 +28,6 @@ var listadoUsuarios = requestApiListadoUsuarios();
 
 
 
-// Función API ListadoSubastasFrutas
-async function requestApiListadoSubastasFrutas() {
-	return new Promise(function(resolve, reject) {
-		request('http://localhost:3000/api_subastas/listarSubastasFrutas', function (error, response, body) {
-			if (error) return reject(error);
-				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListadoSubastasFrutas cargado en memoria');
-				return resolve(importedJSON);
-		});
-	});
-};
-
-var listadoSubastasFrutas = requestApiListadoSubastasFrutas();
-
-
-// Función API ListadoSubastasTransportes
-async function requestApiListadoSubastasTransportes() {
-	return new Promise(function(resolve, reject) {
-		request('http://localhost:3000/api_subastas/listarSubastasTransportes', function (error, response, body) {
-			if (error) return reject(error);
-				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListadoSubastasTransportes cargado en memoria');
-				return resolve(importedJSON);
-		});
-	});
-};
-
-var listadoSubastasT = requestApiListadoSubastasTransportes();
-
-
-// Función API ListadoFrutas
-async function requestApiListadoFrutas() {
-	return new Promise(function(resolve, reject) {
-		request('http://localhost:3000/api_frutas/listarFrutas', function (error, response, body) {
-			if (error) return reject(error);
-				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListadoFrutas cargado en memoria');
-				return resolve(importedJSON);
-		});
-	});
-};
-
-var listadoFrutas = requestApiListadoFrutas();
-
 
 
 // Rutas de usuarios

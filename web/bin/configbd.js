@@ -1,3 +1,14 @@
+var DEBUG = (function(){
+    var timestamp = function(){};
+    timestamp.toString = function(){
+        return "[DEBUG " + (new Date).toLocaleTimeString() + "]";    
+    };
+
+    return {
+        log: console.log.bind(console, '%s', timestamp)
+    }
+})();
+
 const oracledb = require('oracledb');
 
 config = {
@@ -7,11 +18,11 @@ config = {
 }
 
 async function Open(sql, binds, autoCommit) {
-    console.log('\x1b[36m','[!] Trying to connect to database');
+    DEBUG.log('\x1b[36m','[!] Trying to connect to database');
     let cnn = await oracledb.getConnection(config);
-    console.log('\x1b[36m','[!] Connected to Oracle DB');
+    DEBUG.log('\x1b[36m','[!] Connected to Oracle DB');
     let result = await cnn.execute(sql, binds, { autoCommit });
-    console.log('\x1b[36m','[!] Query executed');
+    DEBUG.log('\x1b[36m','[!] Query executed');
     cnn.release();
     return result;
 }

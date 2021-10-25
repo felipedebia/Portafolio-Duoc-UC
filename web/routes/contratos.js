@@ -15,22 +15,23 @@ router.get('/listarContratos', async (req, res) => {
   sql1 = "SELECT id_contrato, url_documento, fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado FROM contrato";
   result1 = await BD.Open(sql1, binds, true);
 
-  var usuarioData = [
-    {
-      id_contrato: result1.rows[0][0],
-      url_contrato: result1.rows[0][1],
-      fecha_inicio: result1.rows[0][2],
-      fecha_vencimiento: result1.rows[0][3],
-      fk_id_tipo: result1.rows[0][4],
-      fk_id_estado: result1.rows[0][5]
-      }
-  ];
+
+  var id_contrato = result1.rows[0][0];
+  var url_contrato = result1.rows[0][1];
+  var fecha_inicio = result1.rows[0][2];
+  var fecha_vencimiento = result1.rows[0][3];
+  var fk_id_tipo = result1.rows[0][4];
+  var fk_id_estado = result1.rows[0][5];
+
+  
+  console.log(result1.rows[0][0])
 
   // Obtenemos el id_usuario usando la tabla REL_CONTRATO_USUARIO
   binds = {};
-  sql2 = "SELECT fk_usuario_id FROM REL_CONTRATO_USUARIO WHERE fk_id_contrato = :result1.rows[0][0]";
+  sql2 = "SELECT fk_id_usuario FROM REL_CONTRATO_USUARIO WHERE fk_id_contrato = :result1.rows[0][0]";
   result2 = await BD.Open(sql2, binds, true);
-  console.log(contrato[0]);
+  console.log("aaa")
+  console.log(result2.rows[0][0]);
 
   result2.rows.map(contrato => {
     let contratoSchema = {
