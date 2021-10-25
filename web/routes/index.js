@@ -11,21 +11,6 @@ const secretKey = "1X42JJKLjkuid"
 const simpleCryp = new SimpleCrypto(secretKey)
 
 
-// Función API ListadoUsuarios
-async function requestApiListadoUsuarios() {
-	return new Promise(function(resolve, reject) {
-		request('http://localhost:3000/api_usuarios/listarUsuarios', function (error, response, body) {
-			if (error) console.log("error");
-				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListadoUsuarios cargado en memoria');
-				return resolve(importedJSON);
-		});
-	});
-};
-
-var listadoUsuarios = requestApiListadoUsuarios();
-
-
 
 
 
@@ -217,9 +202,44 @@ router.get('/perfil/:id_usuario', async function(req, res, next) {
 
 router.get('/usuarios', function(req, res) {
     if (req.session.isLoggedIn) {
-		// Actualizamos listado de usuarios
-		requestApiListadoUsuarios();
-        res.render('usuarios', { title: 'Usuarios - Maipo Grande' });
+		
+		var url = "http://localhost:3000/api_usuarios/listarUsuarios";
+    	var id_usuario;
+    	var num_documento;
+		var nombre;
+		var apellido;
+		var fecha_nacimiento;
+		var genero;
+		var correo;
+		var telefono;
+		var password;
+		var fk_id_estado;
+		var fk_id_tipo;
+
+		request({
+			url: url,
+			json: true
+		}, function(err, res, data) {
+			if(!err) {
+				// Asignamos los valores de la consulta a las variables
+				var usuarioData = [
+					{
+						id_usuario: data.response.id_usuario,
+						num_documento: data.response.num_documento,
+						nombre: data.response.nombre,
+						apellido: data.response.apellido,
+						fecha_nacimiento: data.response.fecha_nacimiento,
+						genero: data.response.genero,
+						correo: data.response.correo,
+						telefono: data.response.telefono,
+						password: data.response.password,
+						fk_id_estado: data.response.fk_id_estado,
+						fk_id_tipo: data.response.fk_id_tipo
+					}
+				];
+			}
+			res.render('usuarios', { title: 'Usuarios - Maipo Grande', data:usuarioData });
+		});
     } else {
         res.redirect('/');
     }

@@ -60,20 +60,24 @@ Iniciar node en la carpeta web
 - 6 Consultor
 
 ## Tipo Contrato
-- 1 
-- 2 
+- 1 Productor
+- 2 Cliente interno
+- 3 Cliente Externo
+- 4 Transportista
 
 ## Tipo Pedido
-- 1 
-- 2 
+- 1 Local 
+- 2 Externo
 
 ## Tipo Venta
-- 1 
-- 2 
+- 1 Local 
+- 2 Externo
 
 ## Tipo Pago
-- 1 
-- 2 
+- 1 Productor
+- 2 Transporte
+- 3 Cliente
+- 4 Seguro
 
 ## Género
 - 1 Femenino
