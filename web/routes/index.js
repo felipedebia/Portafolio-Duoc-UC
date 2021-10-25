@@ -15,7 +15,7 @@ const simpleCryp = new SimpleCrypto(secretKey)
 async function requestApiListadoUsuarios() {
 	return new Promise(function(resolve, reject) {
 		request('http://localhost:3000/api_usuarios/listarUsuarios', function (error, response, body) {
-			if (error) return reject(error);
+			if (error) console.log("error");
 				importedJSON = JSON.parse(body);
 				console.log('\x1b[37m','[!] requestApiListadoUsuarios cargado en memoria');
 				return resolve(importedJSON);
@@ -26,19 +26,6 @@ async function requestApiListadoUsuarios() {
 var listadoUsuarios = requestApiListadoUsuarios();
 
 
-// Función API ListadoContratos
-async function requestApiListadoContratos() {
-	return new Promise(function(resolve, reject) {
-		request('http://localhost:3000/api_contratos/listarContratos', function (error, response, body) {
-			if (error) return reject(error);
-				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListadoContratos cargado en memoria');
-				return resolve(importedJSON);
-		});
-	});
-};
-
-var listadoContratos = requestApiListadoContratos();
 
 
 // Función API ListadoSubastasFrutas

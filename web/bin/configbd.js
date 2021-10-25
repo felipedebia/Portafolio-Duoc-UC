@@ -1,8 +1,8 @@
 const oracledb = require('oracledb');
 
 config = {
-    user: "portafolio_final",
-    password: "portafolio_final",
+    user: "portafolio_final1",
+    password: "portafolio_final1",
     connectString: "localhost:1521/xe"
 }
 
