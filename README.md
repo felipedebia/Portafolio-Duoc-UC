@@ -29,14 +29,16 @@ Iniciar node en la carpeta web
 ### Menú Administrador
 - http://localhost:3000/usuarios
 - http://localhost:3000/contratos *
+- http://localhost:3000/ordenes *
 - http://localhost:3000/ventas_externas *
 - http://localhost:3000/ventas_locales *
 - http://localhost:3000/subastas_frutas *
 - http://localhost:3000/subastas_transportes *
+- http://localhost:3000/frutas *
 
 ### Menú Productor
 
-- http://localhost:3000/frutas *
+- http://localhost:3000/productos *
 - http://localhost:3000/subastas_productor *
 - http://localhost:3000/ventas *
 
@@ -118,14 +120,14 @@ Iniciar node en la carpeta web
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/api_subastas/listarSubastasFrutas  | JSON |
 | GET  | http://localhost:3000/api_subastas/listarSubastasFrutas/:id_subastaF  | JSON |
-| POST | http://localhost:3000/api_subastas/anularSubastaFruta/:id_subasta  | |
+| POST | http://localhost:3000/api_subastas/anularSubastaFruta/:id_subastaF  | |
 
 ## CRUD Subasta Transporte
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/api_subastas/listarSubastasTransportes  | JSON |
 | GET  | http://localhost:3000/api_subastas/listarSubastasTransportes/:id_subastaT  | JSON |
-| POST | http://localhost:3000/api_subastas/anularSubastaTransporte/:id_subasta  | |
+| POST | http://localhost:3000/api_subastas/anularSubastaTransporte/:id_subastaT  | |
 
 ## CRUD Fruta
 | Tipo | URL | Retorna |
