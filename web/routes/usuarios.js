@@ -74,13 +74,12 @@ router.get('/listarUsuarios/:id_usuario', async (req, res) => {
 // Falta hacer filtro de que no se repita el correo
 router.post('/crearUsuario', async (req, res) => {
   var { num_documento, fk_id_tipo, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password } = req.body;
-  var fk_id_estado = 1;
 
   // Encriptamos la contraseña del usuario
   var passwordEncrypted = simpleCryp.encrypt(password)
 
-  sql = "EXECUTE PA_CREAR_USUARIO(num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password, fk_id_estado, fk_id_tipo) VALUES (:num_documento,:nombre,:apellido,to_DATE(:fecha_nacimiento,'YYYY/MM/DD'),:genero,:correo,:telefono,:passwordEncrypted,:fk_id_estado,:fk_id_tipo)";
-  await BD.Open(sql, [num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, passwordEncrypted, fk_id_estado, fk_id_tipo], true);
+  sql = "EXECUTE PA_CREAR_USUARIO(num_documento, nombre, apellido, to_DATE(fecha_nacimiento,'YYYY/MM/DD'), genero, correo,telefono, passwordEncrypted, fk_id_tipo)";
+  await BD.Open(sql, [num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, passwordEncrypted, fk_id_tipo], true);
 
   // Si tuvo conexión a la DB
   if(res.status(200)) {

@@ -125,9 +125,9 @@ Iniciar node en la carpeta web
 | GET  | http://localhost:3000/api_frutas/listarFrutas  | JSON |
 | GET  | http://localhost:3000/api_frutas/listarFrutas/:id_fruta  | JSON |
 
-## CRUD Solicitud
+## CRUD Pedido
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
-| POST | http://localhost:3000/api_solicitudes/anularSolicitud/:id_solicitud  | |
-| GET  | http://localhost:3000/api_solicitudes/listarSolicitudes  | JSON |
-| GET  | http://localhost:3000/api_solicitudes/listarSolicitudes/:id_solicitud  | JSON |
+| POST | http://localhost:3000/api_pedidos/anularPedido/:id_pedido  | |
+| GET  | http://localhost:3000/api_pedidos/listarPedidos  | JSON |
+| GET  | http://localhost:3000/api_pedidos/listarPedidos/:id_pedido  | JSON |
