@@ -137,9 +137,9 @@ Iniciar node en la carpeta web
 ## CRUD Producto
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
-| GET  | http://localhost:3000/api_frutas/listarProductos  | JSON |
-| GET  | http://localhost:3000/api_frutas/listarProductos/:id_producto  | JSON |
-| POST | http://localhost:3000/api_frutas/eliminarProducto/:id_producto  | |
+| GET  | http://localhost:3000/api_productos/listarProductos  | JSON |
+| GET  | http://localhost:3000/api_productos/listarProductos/:id_producto  | JSON |
+| POST | http://localhost:3000/api_productos/eliminarProducto/:id_producto  | |
 
 ## CRUD Pedido
 | Tipo | URL | Retorna |
@@ -151,9 +151,9 @@ Iniciar node en la carpeta web
 ## CRUD Venta
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
-| GET  | http://localhost:3000/api_pedidos/listarVentas  | JSON |
-| GET  | http://localhost:3000/api_pedidos/listarVentas/:id_venta  | JSON |
-| POST | http://localhost:3000/api_pedidos/anularVenta/:id_venta  | |
+| GET  | http://localhost:3000/api_ventas/listarVentas  | JSON |
+| GET  | http://localhost:3000/api_ventas/listarVentas/:id_venta  | JSON |
+| POST | http://localhost:3000/api_ventas/anularVenta/:id_venta  | |
 
 ## CRUD Orden Bodega
 | Tipo | URL | Retorna |
