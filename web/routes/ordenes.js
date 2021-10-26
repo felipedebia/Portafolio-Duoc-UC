@@ -60,11 +60,11 @@ router.get("/anularOrdenBodega/:id_ordenb", async (req, res) => {
   await BD.Open(sql, [id_ordenb], true);
 
   if(res.status(200)) {
-    console.log("[!] Orden de Bodega " + req.params.id_subasta + " anulada con éxito");
-    res.redirect('/ventas');
+    console.log("[!] Orden de Bodega " + req.params.id_ordenb + " anulada con éxito");
+    res.redirect('/ordenes');
 	} else {
-		console.log("[!] Ocurrió un error al intentar anular la orden de Bodega " + req.params.id_subasta);
-    res.redirect('/ventas');
+		console.log("[!] Ocurrió un error al intentar anular la orden de Bodega " + req.params.id_ordenb);
+    res.redirect('/ordenes');
 	}
 })
 
@@ -131,10 +131,10 @@ router.get("/anularOrdenTransporte/:id_ordenT", async (req, res) => {
 
   if(res.status(200)) {
     console.log("[!] Orden de Bodega " + req.params.id_ordenT + " anulada con éxito");
-    res.redirect('/ventas');
+    res.redirect('/ordenes');
 	} else {
 		console.log("[!] Ocurrió un error al intentar anular la orden de Bodega " + req.params.id_ordenT);
-    res.redirect('/ventas');
+    res.redirect('/ordenes');
 	}
 })
 
