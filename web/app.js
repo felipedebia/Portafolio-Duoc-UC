@@ -15,6 +15,7 @@ var frutasRouter = require('./routes/frutas');
 var productosRouter = require('./routes/productos');
 var pedidosRouter = require('./routes/pedidos');
 var ventasRouter = require('./routes/ventas');
+var ordenesRouter = require('./routes/ordenes');
 
 // Login
 var bodyParser = require('body-parser');
@@ -63,6 +64,7 @@ app.use('/api_frutas', frutasRouter);
 app.use('/api_productos', productosRouter);
 app.use('/api_pedidos', pedidosRouter);
 app.use('/api_ventas', ventasRouter);
+app.use('/api_ordenes', ordenesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
