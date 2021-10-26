@@ -108,31 +108,31 @@ Iniciar node en la carpeta web
 ## CRUD Contrato
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
-| POST | http://localhost:3000/api_contratos/anularContrato/:id_contrato  | |
 | GET  | http://localhost:3000/api_contratos/listarContratos  | JSON |
 | GET  | http://localhost:3000/api_contratos/listarContratos/:id_contrato  | JSON |
+| POST | http://localhost:3000/api_contratos/anularContrato/:id_contrato  | |
 | GET  | http://localhost:3000/contrato/:id_contrato  |  |
 
 ## CRUD Subasta Frutas
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
-| POST | http://localhost:3000/api_subastas/anularSubastaFruta/:id_subasta  | |
 | GET  | http://localhost:3000/api_subastas/listarSubastasFrutas  | JSON |
 | GET  | http://localhost:3000/api_subastas/listarSubastasFrutas/:id_subastaF  | JSON |
+| POST | http://localhost:3000/api_subastas/anularSubastaFruta/:id_subasta  | |
 
 ## CRUD Subasta Transporte
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
-| POST | http://localhost:3000/api_subastas/anularSubastaTransporte/:id_subasta  | |
 | GET  | http://localhost:3000/api_subastas/listarSubastasTransportes  | JSON |
 | GET  | http://localhost:3000/api_subastas/listarSubastasTransportes/:id_subastaT  | JSON |
+| POST | http://localhost:3000/api_subastas/anularSubastaTransporte/:id_subasta  | |
 
 ## CRUD Fruta
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
-| POST | http://localhost:3000/api_frutas/desactivarFruta/:id_fruta  | |
 | GET  | http://localhost:3000/api_frutas/listarFrutas  | JSON |
 | GET  | http://localhost:3000/api_frutas/listarFrutas/:id_fruta  | JSON |
+| POST | http://localhost:3000/api_frutas/desactivarFruta/:id_fruta  | |
 
 ## CRUD Producto
 | Tipo | URL | Retorna |
