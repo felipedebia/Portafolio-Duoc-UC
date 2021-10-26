@@ -79,6 +79,13 @@ Iniciar node en la carpeta web
 - 3 Cliente
 - 4 Seguro
 
+## Fruta Calidad
+- 1 Primera calidad
+- 2 Segunda calidad
+- 3 Tercera calidad
+- 4 Cuarta calidad
+- 5 Quinta calidad
+
 ## Género
 - 1 Femenino
 - 2 Masculino
@@ -110,7 +117,7 @@ Iniciar node en la carpeta web
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/api_subastas/listarSubastasFrutas  | JSON |
-| GET  | http://localhost:3000/api_subastas/listarSubastasFrutas/:id_subasta  | JSON |
+| GET  | http://localhost:3000/api_subastas/listarSubastasFrutas/:id_subastaF  | JSON |
 
 ## CRUD Subasta Transporte
 | Tipo | URL | Retorna |
@@ -121,9 +128,16 @@ Iniciar node en la carpeta web
 ## CRUD Fruta
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
-| POST | http://localhost:3000/api_frutas/eliminarFruta/:id_fruta  | |
+| POST | http://localhost:3000/api_frutas/desactivarFruta/:id_fruta  | |
 | GET  | http://localhost:3000/api_frutas/listarFrutas  | JSON |
 | GET  | http://localhost:3000/api_frutas/listarFrutas/:id_fruta  | JSON |
+
+## CRUD Producto
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| POST | http://localhost:3000/api_frutas/eliminarProducto/:id_producto  | |
+| GET  | http://localhost:3000/api_frutas/listarProductos  | JSON |
+| GET  | http://localhost:3000/api_frutas/listarProductos/:id_producto  | JSON |
 
 ## CRUD Pedido
 | Tipo | URL | Retorna |
@@ -131,3 +145,10 @@ Iniciar node en la carpeta web
 | POST | http://localhost:3000/api_pedidos/anularPedido/:id_pedido  | |
 | GET  | http://localhost:3000/api_pedidos/listarPedidos  | JSON |
 | GET  | http://localhost:3000/api_pedidos/listarPedidos/:id_pedido  | JSON |
+
+## CRUD Venta
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| POST | http://localhost:3000/api_pedidos/anularVenta/:id_venta  | |
+| GET  | http://localhost:3000/api_pedidos/listarVentas  | JSON |
+| GET  | http://localhost:3000/api_pedidos/listarVentas/:id_venta  | JSON |
