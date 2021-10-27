@@ -62,10 +62,10 @@ router.get("/anularSubastaFruta/:id_subastaF", async (req, res) => {
   await BD.Open(sql, [id_subastaF_bind], true);
 
   if(res.status(200)) {
-    console.log("[!] Subasta de Frutas " + req.params.id_subastaF_bind + " anulada con éxito");
+    console.log("[!] Subasta de Frutas " + req.params.id_subastaF + " anulada con éxito");
     res.redirect('/subastas_frutas');
 	} else {
-		console.log("[!] Ocurrió un error al intentar anular la subasta de Frutas " + req.params.id_subastaF_bind);
+		console.log("[!] Ocurrió un error al intentar anular la subasta de Frutas " + req.params.id_subastaF);
     res.redirect('/subastas_frutas');
 	}
 })

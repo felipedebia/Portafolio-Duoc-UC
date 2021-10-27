@@ -92,7 +92,7 @@ Iniciar node en la carpeta web
 - 1 Femenino
 - 2 Masculino
 
-## Estado usuario - contrato - pedido - venta - bodega - transporte
+## Estado usuario - contrato - pedido - subasta - venta - orden - oferta
 - 1 Activado
 - 2 Desactivado
 
