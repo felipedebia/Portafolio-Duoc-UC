@@ -62,9 +62,9 @@ router.get('/listarVentas/:id_venta', async (req, res) => {
 
 // Anular
 router.get("/anularVenta/:id_venta", async (req, res) => {
-  var { id_venta } = req.params;
-  sql = "UPDATE venta SET fk_id_estado=2 WHERE id_venta = :id_venta";
-  await BD.Open(sql, [id_venta], true);
+  var { id_venta_bind } = req.params;
+  sql = "UPDATE venta SET fk_id_estado=2 WHERE id_venta = :id_venta_bind";
+  await BD.Open(sql, [id_venta_bind], true);
 
   if(res.status(200)) {
     console.log("[!] Venta " + req.params.id_venta + " anulada con éxito");

@@ -59,12 +59,12 @@ router.get('/listarProductos/:id_producto', async (req, res) => {
 
 // Eliminar
 router.get("/eliminarProducto/:id_producto", async (req, res) => {
-  var { id_producto } = req.params;
-  sql = "DELETE FROM producto WHERE id_producto = :id_producto";
-  await BD.Open(sql, [id_producto], true);
+  var { id_producto_bind } = req.params;
+  sql = "DELETE FROM producto WHERE id_producto = :id_producto_bind";
+  await BD.Open(sql, [id_producto_bind], true);
 
   if(res.status(200)) {
-    console.log("[!] Producto " + req.params.id_fruta + " eliminado con éxito");
+    console.log("[!] Producto " + req.params.id_producto + " eliminado con éxito");
     res.redirect('/productos');
 	} else {
 		console.log("[!] Ocurrió un error al intentar eliminar el producto " + req.params.id_producto);

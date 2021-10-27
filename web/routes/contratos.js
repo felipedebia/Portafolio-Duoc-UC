@@ -112,9 +112,9 @@ router.get('/listarContratos/:id_contrato', async (req, res) => {
 
 // Anular
 router.get("/anularContrato/:id_contrato", async (req, res) => {
-  var { id_contrato } = req.params;
-  sql = "UPDATE contrato SET fk_id_estado=2 WHERE id_contrato = :id_contrato";
-  await BD.Open(sql, [id_contrato], true);
+  var { id_contrato_bind } = req.params;
+  sql = "UPDATE contrato SET fk_id_estado=2 WHERE id_contrato = :id_contrato_bind";
+  await BD.Open(sql, [id_contrato_bind], true);
 
   if(res.status(200)) {
     console.log("[!] Contrato " + req.params.id_contrato + " anulado con éxito");

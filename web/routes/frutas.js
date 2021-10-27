@@ -53,9 +53,9 @@ router.get('/listarFrutas/:id_fruta', async (req, res) => {
 
 // Desactivar
 router.get("/desactivarFruta/:id_fruta", async (req, res) => {
-  var { id_fruta } = req.params;
-  sql = "UPDATE fruta SET fk_id_estado=2 WHERE id_fruta = :id_fruta";
-  await BD.Open(sql, [id_fruta], true);
+  var { id_fruta_bind } = req.params;
+  sql = "UPDATE fruta SET fk_id_estado=2 WHERE id_fruta = :id_fruta_bind";
+  await BD.Open(sql, [id_fruta_bind], true);
 
   if(res.status(200)) {
     console.log("[!] Fruta " + req.params.id_fruta + " desactivada con éxito");

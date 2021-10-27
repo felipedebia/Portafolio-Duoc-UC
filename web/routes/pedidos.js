@@ -62,9 +62,9 @@ router.get('/listarPedidos/:id_pedido', async (req, res) => {
 
 // Anular
 router.get("/anularPedido/:id_pedido", async (req, res) => {
-  var { id_pedido } = req.params;
-  sql = "UPDATE pedido SET fk_id_estado=2 WHERE id_pedido = :id_pedido";
-  await BD.Open(sql, [id_pedido], true);
+  var { id_pedido_bind } = req.params;
+  sql = "UPDATE pedido SET fk_id_estado=2 WHERE id_pedido = :id_pedido_bind";
+  await BD.Open(sql, [id_pedido_bind], true);
 
   if(res.status(200)) {
     console.log("[!] Pedido " + req.params.id_pedido + " anulada con éxito");

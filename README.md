@@ -170,3 +170,17 @@ Iniciar node en la carpeta web
 | GET  | http://localhost:3000/api_ordenes/listarOrdenesTransportes  | JSON |
 | GET  | http://localhost:3000/api_ordenes/listarOrdenesTransportes/:id_ordenT  | JSON |
 | POST | http://localhost:3000/api_ordenes/anularOrdenTransporte/:id_ordenT  | |
+
+## CRUD Oferta Productor
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/api_ofertas/listarOfertasProductores  | JSON |
+| GET  | http://localhost:3000/api_ofertas/listarOfertasProductores/:id_ofertaP  | JSON |
+| POST | http://localhost:3000/api_ofertas/anularOfertaProductor/:id_ofertaP  | |
+
+## CRUD Oferta Transporte
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/api_ofertas/listarOfertasTransportes  | JSON |
+| GET  | http://localhost:3000/api_ofertas/listarOfertasTransportes/:id_ofertaT  | JSON |
+| POST | http://localhost:3000/api_ofertas/anularOfertaTransporte/:id_ofertaT  | |
