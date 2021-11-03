@@ -193,7 +193,7 @@ router.get('/modificarUsuario/:id_usuario', async function(req, res, next) {
 					genero: result.rows[0][4],
 					correo: result.rows[0][5],
 					telefono: result.rows[0][6],
-					password: result.rows[0][7],
+					password: simpleCryp.decrypt(result.rows[0][7]),
 					fk_id_estado: result.rows[0][8],
 					fk_id_tipo: result.rows[0][9],
 					id_usuario: id_usuario
@@ -217,7 +217,7 @@ router.get('/miperfil', async function(req, res, next) {
 
 		// Hacemos una consulta trayendo todos los datos del usuario
 		binds = {"id_usuario": req.session.id_usuario};
-		sql = "SELECT num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password, fk_id_estado, fk_id_tipo FROM usuario WHERE id_usuario = :id_usuario";
+		sql = "SELECT num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password, fk_id_tipo FROM usuario WHERE id_usuario = :id_usuario";
 		result = await BD.Open(sql, binds, false);
 
 		// Si los datos estan correctos
@@ -232,7 +232,7 @@ router.get('/miperfil', async function(req, res, next) {
 				6 : "Consultor"
 			};
 
-			var tipoUsuarioTexto = tiposUsuarios[result.rows[0][9]];
+			var tipoUsuarioTexto = tiposUsuarios[result.rows[0][8]];
 			
 			// Asignamos los valores de la consulta a las variables
 			var usuarioData = [
@@ -244,10 +244,9 @@ router.get('/miperfil', async function(req, res, next) {
 					genero: result.rows[0][4],
 					correo: result.rows[0][5],
 					telefono: result.rows[0][6],
-					password: result.rows[0][7],
-					fk_id_estado: result.rows[0][8],
+					password: simpleCryp.decrypt(result.rows[0][7]),
 					tipo_usuario_texto: tipoUsuarioTexto,
-					id_usuario: id_usuario
+					id_usuario: req.session.id_usuario
 				  }
 			];
 
@@ -264,11 +263,55 @@ router.get('/miperfil', async function(req, res, next) {
 
 router.get('/perfil/:id_usuario', async function(req, res, next) {
 	if (req.session.isLoggedIn) {
-        res.render('perfil', { title: 'Viendo perfil - Maipo Grande' });
-    } else {
-        res.redirect('/');
-    }
-    res.end();
+
+		// Hacemos una consulta trayendo todos los datos del usuario
+		const { id_usuario } = req.params;
+
+		// Hacemos una consulta trayendo todos los datos del usuario
+		binds = {"id_usuario": id_usuario};
+		sql = "SELECT num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, fk_id_estado, fk_id_tipo FROM usuario WHERE id_usuario = :id_usuario";
+		result = await BD.Open(sql, binds, false);
+
+		// Si los datos estan correctos
+		if (result.rows.length > 0) {
+			// Convertimos el id de tipo_usuario a texto
+			var tiposUsuarios = {
+				1 : "Administrador",
+				2 : "Transportista",
+				3 : "Cliente Externo",
+				4 : "Cliente Interno",
+				5 : "Productor",
+				6 : "Consultor"
+			};
+
+			var tipoUsuarioTexto = tiposUsuarios[result.rows[0][8]];
+			
+			// Asignamos los valores de la consulta a las variables
+			var usuarioData = [
+				{
+					num_documento: result.rows[0][0],
+					nombre: result.rows[0][1],
+					apellido: result.rows[0][2],
+					fecha_nacimiento: moment(result.rows[0][3]).format('YYYY-MM-DD'),
+					genero: result.rows[0][4],
+					correo: result.rows[0][5],
+					telefono: result.rows[0][6],
+					fk_id_estado: result.rows[0][7],
+					fk_id_tipo: result.rows[0][8],
+					tipo_usuario_texto: tipoUsuarioTexto,
+					id_usuario: req.session.id_usuario
+				  }
+			];
+
+			// Mostramos la vista
+			res.render('perfil', { title: 'Viendo perfil - Maipo Grande', data:usuarioData });
+		} else {
+			res.send('Error al obtener datos de la base de datos');
+		}
+	} else {
+		res.redirect('/');
+	}
+	res.end();
 })
 
 router.get('/usuarios', function(req, res) {

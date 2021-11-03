@@ -23,7 +23,7 @@
                                     </li>
                                     <li class="nav-item active">
                                       <a class="nav-link" data-toggle="tab">
-                                          <i class="material-icons">settings</i> Modificar usuario
+                                          <i class="material-icons">settings</i> Modificar usuario <%= data[0].id_usuario%>
                                           <div class="ripple-container"></div>
                                       </a>
                                   </li>
@@ -143,15 +143,6 @@
     </div>
 
 <%- include('partials/footer.ejs') %>
-<script>
-    $(function() {
-      $('[data-toggle="datepicker"]').datepicker({
-        autoHide: true,
-        language: 'es-ES',
-        format: 'dd-mm-yyyy'
-      });
-    });
-</script>
 
 <script>
   function showPassword() {
