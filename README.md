@@ -101,7 +101,8 @@ Iniciar node en la carpeta web
 | ------------- | ------------- | ------------- |
 | POST | http://localhost:3000/api_usuarios/crearusuario  | |
 | GET  | http://localhost:3000/modificarUsuario/:id_usuario  |  |
-| PUT  | http://localhost:3000/api_usuarios/modificarUsuario/:id_usuario  | |
+| POST | http://localhost:3000/api_usuarios/modificarUsuario/:id_usuario  | |
+| POST | http://localhost:3000/api_usuarios/modificarMiPerfil/:id_usuario  | |
 | POST | http://localhost:3000/api_usuarios/desactivarUsuario/:id_usuario  | |
 | GET  | http://localhost:3000/api_usuarios/listarUsuarios  | JSON |
 | GET  | http://localhost:3000/api_usuarios/listarUsuarios/:id_usuario  | JSON |
@@ -111,7 +112,6 @@ Iniciar node en la carpeta web
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/api_contratos/listarContratos  | JSON |
-| GET  | http://localhost:3000/api_contratos/listarContratos/:id_contrato  | JSON |
 | POST | http://localhost:3000/api_contratos/anularContrato/:id_contrato  | |
 | GET  | http://localhost:3000/contrato/:id_contrato  |  |
 

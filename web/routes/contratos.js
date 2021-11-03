@@ -12,10 +12,9 @@ router.get('/listarContratos', async (req, res, next) => {
     array1 = await sql_datos1()
     array2 = await sql_datos2()
 
-    console.log(array1.concat(array2));
-
     // Unimos los 2 array en uno solo
-    var Contratosfinal = array1.concat(array2); 
+    var Contratosfinal = array1.concat(array2);
+    console.log(Contratosfinal);
 
     res.json({title: 'Contratos', 'mydata': Contratosfinal});
 
@@ -69,64 +68,6 @@ router.get('/listarContratos', async (req, res, next) => {
 });
 
 
-// Leer - Contrato en especifico
-router.get('/listarContratos/:id_contrato', async (req, res) => {
-  
-  Contratos = [];  
-
-  try {
-
-    // Obtenemos los datos del contrato
-    binds = { "id_contrato_bind": req.params.id_contrato };
-    sql1 = "SELECT url_documento, fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado FROM contrato WHERE id_contrato = :id_contrato_bind";
-    result1 = await BD.Open(sql1, binds, true);
-
-    var usuarioData = [
-      {
-        url_contrato: result1.rows[0][0],
-        fecha_inicio: result1.rows[0][1],
-        fecha_vencimiento: result1.rows[0][2],
-        fk_id_tipo: result1.rows[0][3],
-        fk_id_estado: result1.rows[0][4]
-        }
-    ];
-
-    try {
-
-      // Obtenemos el id_usuario usando la tabla REL_CONTRATO_USUARIO
-      binds = {};
-      sql2 = "SELECT fk_usuario_id FROM REL_CONTRATO_USUARIO WHERE fk_id_contrato = :id_contrato_bind";
-      result2 = await BD.Open(sql2, binds, true);
-      console.log(contrato[0]);
-  
-      result2.rows.map(contrato => {
-        let contratoSchema = {
-            "id_contrato": id_contrato_bind,
-            "url_contrato": url_contrato,
-            "fecha_inicio": fecha_inicio,
-            "fecha_vencimiento": fecha_vencimiento,
-            "fk_id_tipo": fk_id_tipo,
-            "fk_id_estado": fk_id_estado,
-            "usuario_id": result2.rows[0][0]
-        }
-  
-        Contratos.push(contratoSchema);
-      })
-      res.json({title: 'Contratos', 'mydata': Contratos});
-  
-    }
-    catch (e) {
-        // sentencias para manejar cualquier excepción
-        console.log(e); // pasa el objeto de la excepción al manejador de errores
-    }
-
-  }
-  catch (e) {
-    res.send('No hay datos para mostrar');
-  }
-});
-
-
 // Agregar
 router.post('/crearContrato', async (req, res) => {
   var { fecha_inicio, fecha_vencimiento, url_documento, fk_id_tipo, id_usuario } = req.body;
@@ -145,6 +86,26 @@ router.post('/crearContrato', async (req, res) => {
 		console.log("[!] Ocurrió un error al intentar crear el contrato ");
     res.redirect('/contratos');
 	}
+})
+
+
+// Modificar
+router.post("/modificarContrato/:id_contrato", async (req, res) => {
+  var { id_contrato } = req.params.id_contrato;
+  var { correo, nombre, apellido, num_documento, fk_id_tipo, fecha_nacimiento, genero, fk_id_estado, telefono, password} = req.body;
+
+  sql = "UPDATE contrato SET correo= :correo, nombre= :nombre, apellido= :apellido, num_documento= :num_documento, fk_id_tipo= :fk_id_tipo, fecha_nacimiento= to_DATE(:fecha_nacimiento,'YYYY/MM/DD'), genero= :genero, fk_id_estado= :fk_id_estado, telefono= :telefono, password= :passwordEncrypted WHERE id_usuario= :id_usuario";
+  await BD.Open(sql, [correo, nombre, apellido, num_documento, fk_id_tipo, fecha_nacimiento, genero, fk_id_estado, telefono, passwordEncrypted, id_usuario], true);
+
+  // Si tuvo conexión a la DB
+  if(res.status(200)) {
+    console.log("[!] Contrato " + id_contrato + " modificado con éxito");
+    res.redirect('/contratos');
+  } else {
+    console.log("[!] 2- Ocurrió un error al intentar modificar el contrato " + id_contrato);
+    res.redirect('/contratos');
+  }
+
 })
 
 // Anular
