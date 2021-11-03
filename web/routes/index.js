@@ -299,7 +299,7 @@ router.get('/perfil/:id_usuario', async function(req, res, next) {
 					fk_id_estado: result.rows[0][7],
 					fk_id_tipo: result.rows[0][8],
 					tipo_usuario_texto: tipoUsuarioTexto,
-					id_usuario: req.session.id_usuario
+					id_usuario: id_usuario
 				  }
 			];
 

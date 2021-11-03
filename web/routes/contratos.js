@@ -15,17 +15,22 @@ router.get('/listarContratos', async (req, res) => {
   sql1 = "SELECT id_contrato, url_documento, fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado FROM contrato";
   result1 = await BD.Open(sql1, binds, true);
 
-
   var id_contrato = result1.rows[0][0];
-  var url_contrato = result1.rows[0][1];
+  var url_documento = result1.rows[0][1];
   var fecha_inicio = result1.rows[0][2];
   var fecha_vencimiento = result1.rows[0][3];
   var fk_id_tipo = result1.rows[0][4];
   var fk_id_estado = result1.rows[0][5];
 
-  
+  console.log("PASO 1")
   console.log(result1.rows[0][0])
+  console.log(result1.rows[0][1])
+  console.log(result1.rows[0][2])
+  console.log(result1.rows[0][3])
+  console.log(result1.rows[0][4])
+  console.log(result1.rows[0][5])
 
+  console.log("PASO 2 COMIENZO")
   // Obtenemos el id_usuario usando la tabla REL_CONTRATO_USUARIO
   binds = {};
   sql2 = "SELECT fk_id_usuario FROM REL_CONTRATO_USUARIO WHERE fk_id_contrato = :result1.rows[0][0]";
@@ -33,10 +38,12 @@ router.get('/listarContratos', async (req, res) => {
   console.log("aaa")
   console.log(result2.rows[0][0]);
 
+  console.log("PASO 2")
+
   result2.rows.map(contrato => {
     let contratoSchema = {
         "id_contrato": id_contrato,
-        "url_contrato": url_contrato,
+        "url_documento": url_documento,
         "fecha_inicio": fecha_inicio,
         "fecha_vencimiento": fecha_vencimiento,
         "fk_id_tipo": fk_id_tipo,
@@ -109,6 +116,25 @@ router.get('/listarContratos/:id_contrato', async (req, res) => {
 });
 
 
+// Agregar
+router.post('/crearContrato', async (req, res) => {
+  var { fecha_inicio, fecha_vencimiento, url_documento, fk_id_tipo, id_usuario } = req.body;
+  // Definimos el contrato activado
+  var fk_id_estado = 1;
+
+  sql = "INSERT INTO contrato(fecha_inicio, fecha_vencimiento, url_documento, fk_id_estado, fk_id_tipo) VALUES (:fecha_inicio,:fecha_vencimiento,:url_documento,:fk_id_estado,:fk_id_tipo)";
+  await BD.Open(sql, [fecha_inicio, fecha_vencimiento, url_documento, fk_id_estado, fk_id_tipo], true);
+
+  // Si tuvo conexión a la DB
+  if(res.status(200)) {
+    console.log("[!] Contrato creado con éxito");
+    res.redirect('/contratos');
+    //res.refresh();
+	} else {
+		console.log("[!] Ocurrió un error al intentar crear el contrato ");
+    res.redirect('/contratos');
+	}
+})
 
 // Anular
 router.get("/anularContrato/:id_contrato", async (req, res) => {

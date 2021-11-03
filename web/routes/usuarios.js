@@ -118,6 +118,30 @@ router.post("/modificarUsuario/:id_usuario", async (req, res) => {
 })
 
 
+// Modificar
+// Agregar restriccion, solo modificar el perfil del usuario conectado
+router.post("/modificarMiPerfil/:id_usuario", async (req, res) => {
+  var { id_usuario } = req.params.id_usuario;
+  var { correo, nombre, apellido, num_documento, fecha_nacimiento, genero, telefono, password} = req.body;
+
+  // Encriptamos la contraseña del usuario
+  var passwordEncrypted = simpleCryp.encrypt(password)
+
+  sql = "UPDATE usuario SET correo= :correo, nombre= :nombre, apellido= :apellido, num_documento= :num_documento, fecha_nacimiento= to_DATE(:fecha_nacimiento,'YYYY/MM/DD'), genero= :genero, telefono= :telefono, password= :passwordEncrypted WHERE id_usuario= :id_usuario";
+  await BD.Open(sql, [correo, nombre, apellido, num_documento, fecha_nacimiento, genero, telefono, passwordEncrypted, id_usuario], true);
+
+  // Si tuvo conexión a la DB
+  if(res.status(200)) {
+    console.log("[!] Usuario " + req.body.correo + " modificado con éxito");
+    res.redirect('/usuarios');
+  } else {
+    console.log("[!] 2- Ocurrió un error al intentar modificar el usuario " + req.body.correo);
+    res.redirect('/usuarios');
+  }
+
+})
+
+
 // Desactivar
 router.get("/desactivarUsuario/:id_usuario", async (req, res) => {
   var { id_usuario_bind } = req.params.id_usuario;
