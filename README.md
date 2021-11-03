@@ -30,10 +30,9 @@ Iniciar node en la carpeta web
 - http://localhost:3000/usuarios
 - http://localhost:3000/contratos *
 - http://localhost:3000/ordenes *
-- http://localhost:3000/ventas_externas *
-- http://localhost:3000/ventas_locales *
-- http://localhost:3000/subastas_frutas *
-- http://localhost:3000/subastas_transportes *
+- http://localhost:3000/ventas *
+- http://localhost:3000/subastas_fruta *
+- http://localhost:3000/subastas_transporte *
 - http://localhost:3000/frutas *
 
 ### Menú Productor
@@ -47,7 +46,7 @@ Iniciar node en la carpeta web
 - http://localhost:3000/miscompras *
 
 ### Menú Transportista
-- http://localhost:3000/subastas_transportes *
+- http://localhost:3000/subastas_transporte *
 
 ### Menú Consultor
 - http://localhost:3000/reportes *
@@ -99,6 +98,7 @@ Iniciar node en la carpeta web
 ## CRUD Usuario
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/usuarios  |  |
 | POST | http://localhost:3000/api_usuarios/crearusuario  | |
 | GET  | http://localhost:3000/modificarUsuario/:id_usuario  |  |
 | POST | http://localhost:3000/api_usuarios/modificarUsuario/:id_usuario  | |
@@ -107,39 +107,32 @@ Iniciar node en la carpeta web
 | GET  | http://localhost:3000/api_usuarios/listarUsuarios  | JSON |
 | GET  | http://localhost:3000/api_usuarios/listarUsuarios/:id_usuario  | JSON |
 | GET  | http://localhost:3000/perfil/:id_usuario  |  |
+| GET  | http://localhost:3000/miperfil/:id_usuario  |  |
 
 ## CRUD Contrato
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/contratos  |  |
 | GET  | http://localhost:3000/api_contratos/listarContratos  | JSON |
+| GET  | http://localhost:3000/modificarContrato/:id_contrato  |  |
 | POST | http://localhost:3000/api_contratos/anularContrato/:id_contrato  | |
 | GET  | http://localhost:3000/contrato/:id_contrato  |  |
-
-## CRUD Subasta Frutas
-| Tipo | URL | Retorna |
-| ------------- | ------------- | ------------- |
-| GET  | http://localhost:3000/api_subastas/listarSubastasFrutas  | JSON |
-| POST | http://localhost:3000/api_subastas/anularSubastaFruta/:id_subastaF  | |
-| GET  | http://localhost:3000/subasta-fruta/:id_subastaF  |  |
-
-## CRUD Subasta Transporte
-| Tipo | URL | Retorna |
-| ------------- | ------------- | ------------- |
-| GET  | http://localhost:3000/api_subastas/listarSubastasTransportes  | JSON |
-| POST | http://localhost:3000/api_subastas/anularSubastaTransporte/:id_subastaT  | |
-| GET  | http://localhost:3000/subasta-transporte/:id_subastaT  |  |
 
 ## CRUD Fruta
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/frutas  |  |
 | GET  | http://localhost:3000/api_frutas/listarFrutas  | JSON |
+| GET  | http://localhost:3000/modificarFruta/:id_fruta  |  |
 | POST | http://localhost:3000/api_frutas/desactivarFruta/:id_fruta  | |
 | GET  | http://localhost:3000/fruta/:id_fruta  |  |
 
 ## CRUD Producto
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/productos  |  |
 | GET  | http://localhost:3000/api_productos/listarProductos  | JSON |
+| GET  | http://localhost:3000/modificarProducto/:id_producto  |  |
 | POST | http://localhost:3000/api_productos/eliminarProducto/:id_producto  | |
 | GET  | http://localhost:3000/producto/:id_producto  |  |
 
@@ -147,40 +140,69 @@ Iniciar node en la carpeta web
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/api_pedidos/listarPedidos  | JSON |
+| GET  | http://localhost:3000/modificarPedido/:id_pedido  |  |
 | POST | http://localhost:3000/api_pedidos/anularPedido/:id_pedido  | |
 | GET  | http://localhost:3000/pedido/:id_pedido  |  |
 
 ## CRUD Venta
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/ventas  |  |
 | GET  | http://localhost:3000/api_ventas/listarVentas  | JSON |
+| GET  | http://localhost:3000/modificarVenta/:id_venta  |  |
 | POST | http://localhost:3000/api_ventas/anularVenta/:id_venta  | |
 | GET  | http://localhost:3000/venta/:id_venta  |  |
+
+## CRUD Subasta Frutas
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/subastas_frutas  |  |
+| GET  | http://localhost:3000/api_subastas/listarSubastasFrutas  | JSON |
+| GET  | http://localhost:3000/modificarSubastaFruta/:id_subastaF  |  |
+| POST | http://localhost:3000/api_subastas/anularSubastaFruta/:id_subastaF  | |
+| GET  | http://localhost:3000/subasta_fruta/:id_subastaF  |  |
+
+## CRUD Subasta Transporte
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/subastas_transportes  |  |
+| GET  | http://localhost:3000/api_subastas/listarSubastasTransportes  | JSON |
+| GET  | http://localhost:3000/modificarSubastaTransporte/:id_subastaT  |  |
+| POST | http://localhost:3000/api_subastas/anularSubastaTransporte/:id_subastaT  | |
+| GET  | http://localhost:3000/subasta_transporte/:id_subastaT  |  |
 
 ## CRUD Orden Bodega
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/ordenes_bodegas  |  |
 | GET  | http://localhost:3000/api_ordenes/listarOrdenesBodegas  | JSON |
+| GET  | http://localhost:3000/modificarOrdenBodega/:id_ordenB  |  |
 | POST | http://localhost:3000/api_ordenes/anularOrdenBodega/:id_ordenB  | |
-| GET  | http://localhost:3000/orden-bodega/:id_ordenB  |  |
+| GET  | http://localhost:3000/orden_bodega/:id_ordenB  |  |
 
 ## CRUD Orden Transporte
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/ordenes_transportes  |  |
 | GET  | http://localhost:3000/api_ordenes/listarOrdenesTransportes  | JSON |
+| GET  | http://localhost:3000/modificarOrdenTransporte/:id_ordenT  |  |
 | POST | http://localhost:3000/api_ordenes/anularOrdenTransporte/:id_ordenT  | |
-| GET  | http://localhost:3000/orden-transporte/:id_ordenT  |  |
+| GET  | http://localhost:3000/orden_transporte/:id_ordenT  |  |
 
 ## CRUD Oferta Productor
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/ofertas_productores  |  |
 | GET  | http://localhost:3000/api_ofertas/listarOfertasProductores  | JSON |
+| GET  | http://localhost:3000/modificarOfertaProductor/:id_ofertaP  |  |
 | POST | http://localhost:3000/api_ofertas/anularOfertaProductor/:id_ofertaP  | |
-| GET  | http://localhost:3000/oferta-productor/:id_ofertaP  |  |
+| GET  | http://localhost:3000/oferta_productor/:id_ofertaP  |  |
 
 ## CRUD Oferta Transporte
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/ofertas_transportes  |  |
 | GET  | http://localhost:3000/api_ofertas/listarOfertasTransportes  | JSON |
+| GET  | http://localhost:3000/modificarOfertaTransporte/:id_ofertaT  |  |
 | POST | http://localhost:3000/api_ofertas/anularOfertaTransporte/:id_ofertaT  | |
-| GET  | http://localhost:3000/oferta-transporte/:id_ofertaT  |  |
+| GET  | http://localhost:3000/oferta_transporte/:id_ofertaT  |  |
