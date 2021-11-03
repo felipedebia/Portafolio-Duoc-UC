@@ -6,54 +6,65 @@ const BD = require('../bin/configbd');
 // CRUD CONTRATOS
 
 // Leer - Todos los contratos
-router.get('/listarContratos', async (req, res) => {
+router.get('/listarContratos', async (req, res, next) => {
+
+  async function runAsync () {
+    array1 = await sql_datos1()
+    array2 = await sql_datos2()
+
+    console.log(array1.concat(array2));
+
+    // Unimos los 2 array en uno solo
+    var Contratosfinal = array1.concat(array2); 
+
+    res.json({title: 'Contratos', 'mydata': Contratosfinal});
+
+  }
+
+  runAsync()
+    .catch(next)
+
+  async function sql_datos1() {
+    // Obtenemos los datos del contrato
+    binds = {};
+    sql1 = "SELECT id_contrato, url_documento, fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado FROM contrato";
+    result1 = await BD.Open(sql1, binds, true);
+
+    Contratos = [];
+
+    result1.rows.map(contrato => {
+      let contratoSchema = {
+          "id_contrato": result1.rows[0][0],
+          "url_documento": result1.rows[0][1],
+          "fecha_inicio": result1.rows[0][2],
+          "fecha_vencimiento": result1.rows[0][3],
+          "fk_id_tipo": result1.rows[0][4],
+          "fk_id_estado": result1.rows[0][5]
+      }
   
-  Contratos = [];
+      Contratos.push(contratoSchema);
+    })
 
-  // Obtenemos los datos del contrato
-  binds = {};
-  sql1 = "SELECT id_contrato, url_documento, fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado FROM contrato";
-  result1 = await BD.Open(sql1, binds, true);
+    return Contratos;
+  }
 
-  var id_contrato = result1.rows[0][0];
-  var url_documento = result1.rows[0][1];
-  var fecha_inicio = result1.rows[0][2];
-  var fecha_vencimiento = result1.rows[0][3];
-  var fk_id_tipo = result1.rows[0][4];
-  var fk_id_estado = result1.rows[0][5];
 
-  console.log("PASO 1")
-  console.log(result1.rows[0][0])
-  console.log(result1.rows[0][1])
-  console.log(result1.rows[0][2])
-  console.log(result1.rows[0][3])
-  console.log(result1.rows[0][4])
-  console.log(result1.rows[0][5])
+  async function sql_datos2() {
+    // Obtenemos el id_usuario usando la tabla REL_CONTRATO_USUARIO
+    binds = {};
+    sql2 = "SELECT fk_id_usuario FROM REL_CONTRATO_USUARIO";
+    result2 = await BD.Open(sql2, binds, true);
 
-  console.log("PASO 2 COMIENZO")
-  // Obtenemos el id_usuario usando la tabla REL_CONTRATO_USUARIO
-  binds = {};
-  sql2 = "SELECT fk_id_usuario FROM REL_CONTRATO_USUARIO WHERE fk_id_contrato = :result1.rows[0][0]";
-  result2 = await BD.Open(sql2, binds, true);
-  console.log("aaa")
-  console.log(result2.rows[0][0]);
+    result2.rows.map(contrato => {
+      let contratoSchema = {
+          "usuario_id": result2.rows[0][0]
+      }
+  
+      Contratos.push(contratoSchema);
+    })
 
-  console.log("PASO 2")
-
-  result2.rows.map(contrato => {
-    let contratoSchema = {
-        "id_contrato": id_contrato,
-        "url_documento": url_documento,
-        "fecha_inicio": fecha_inicio,
-        "fecha_vencimiento": fecha_vencimiento,
-        "fk_id_tipo": fk_id_tipo,
-        "fk_id_estado": fk_id_estado,
-        "usuario_id": result2.rows[0][0]
-    }
-
-    Contratos.push(contratoSchema);
-  })
-  res.json({title: 'Contratos', 'mydata': Contratos});
+    return Contratos;
+  }
 
 });
 
