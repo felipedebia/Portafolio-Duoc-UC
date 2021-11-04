@@ -2,44 +2,13 @@
 const express = require('express');
 const router = express.Router();
 const BD = require('../bin/configbd');
-const request = require('request');
 var moment = require('moment');
+var functions = require('./functions');
 
 // Contraseña
 var SimpleCrypto = require("simple-crypto-js").default
 const secretKey = "1X42JJKLjkuid"
 const simpleCryp = new SimpleCrypto(secretKey)
-
-
-// Función API ListadoUsuarios
-async function requestApiListadoUsuarios() {
-	return new Promise(function(resolve, reject) {
-		request('http://localhost:3000/api_usuarios/listarUsuarios', function (error, response, body) {
-			if (error) console.log("error");
-				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListadoUsuarios cargado en memoria');
-				return resolve(importedJSON);
-		});
-	});
-};
-
-var listadoUsuarios = requestApiListadoUsuarios();
-
-
-// Función API ListadoContratos
-async function requestApiListadoContratos() {
-	return new Promise(function(resolve, reject) {
-		request('http://localhost:3000/api_contratos/listarContratos', function (error, response, body) {
-			if (error) return reject(error);
-				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListadoContratos cargado en memoria');
-				return resolve(importedJSON);
-		});
-	});
-};
-
-var listadoContratos = requestApiListadoContratos();
-
 
 
 // Rutas de usuarios
@@ -220,7 +189,6 @@ router.get('/miperfil', async function(req, res, next) {
 router.get('/perfil/:id_usuario', async function(req, res, next) {
 	if (req.session.isLoggedIn) {
 
-		// Hacemos una consulta trayendo todos los datos del usuario
 		const { id_usuario } = req.params;
 
 		// Hacemos una consulta trayendo todos los datos del usuario
@@ -272,8 +240,6 @@ router.get('/perfil/:id_usuario', async function(req, res, next) {
 
 router.get('/usuarios', function(req, res) {
     if (req.session.isLoggedIn) {
-		// Actualizamos listado de usuarios
-		requestApiListadoUsuarios();
         res.render('usuarios', { title: 'Usuarios - Maipo Grande' });
     } else {
         res.redirect('/');
@@ -333,6 +299,42 @@ router.get('/modificarContrato/:id_contrato', async function(req, res, next) {
 	res.end();
 })
 
+router.get('/contrato/:id_contrato', async function(req, res, next) {
+	if (req.session.isLoggedIn) {
+
+		// Hacemos una consulta trayendo todos los datos del usuario
+		const { id_contrato } = req.params;
+
+		// Hacemos una consulta trayendo todos los datos del usuario
+		binds = {"id_contrato": id_contrato};
+		sql = "SELECT url_documento, fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado FROM contrato WHERE id_contrato = :id_contrato";
+		result = await BD.Open(sql, binds, false);
+
+		// Si los datos estan correctos
+		if (result.rows.length > 0) {
+			
+			// Asignamos los valores de la consulta a las variables
+			var contratoData = [
+				{
+					id_contrato: id_contrato,
+					url_documento: result.rows[0][0],
+					fecha_inicio: result.rows[0][1],
+					fecha_vencimiento: result.rows[0][2],
+					fk_id_tipo: result.rows[0][3],
+					fk_id_estado: result.rows[0][4]
+				  }
+			];
+
+			// Mostramos la vista
+			res.render('contrato', { title: 'Viendo contrato - Maipo Grande', data:contratoData });
+		} else {
+			res.send('Error al obtener datos de la base de datos');
+		}
+	} else {
+		res.redirect('/');
+	}
+	res.end();
+})
 
 
 // CRUD FRUTAS
@@ -344,6 +346,10 @@ router.get('/frutas', function(req, res) {
     }
     res.end();
 });
+
+
+
+
 
 
 router.get('/plantilla', function(req, res) {

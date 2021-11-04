@@ -74,7 +74,7 @@ router.post('/crearContrato', async (req, res) => {
   // Definimos el contrato activado
   var fk_id_estado = 1;
 
-  sql = "INSERT INTO contrato(fecha_inicio, fecha_vencimiento, url_documento, fk_id_estado, fk_id_tipo) VALUES (:fecha_inicio,:fecha_vencimiento,:url_documento,:fk_id_estado,:fk_id_tipo)";
+  sql = "INSERT INTO contrato(fecha_inicio, fecha_vencimiento, url_documento, fk_id_estado, fk_id_tipo) VALUES (to_DATE(:fecha_inicio,'YYYY/MM/DD'),to_DATE(:fecha_vencimiento,'YYYY/MM/DD'),:url_documento,:fk_id_estado,:fk_id_tipo)";
   await BD.Open(sql, [fecha_inicio, fecha_vencimiento, url_documento, fk_id_estado, fk_id_tipo], true);
 
   // Si tuvo conexión a la DB

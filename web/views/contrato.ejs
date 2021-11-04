@@ -1,0 +1,92 @@
+<%- include('partials/nav.ejs') %>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-warning">
+                            <h4 class="card-title">Viendo el contrato <%= data[0].id_contrato%></h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-text">
+                                <div class="row mt-4">
+                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>Fecha de inicio *</label>
+                                            <input class="form-control mb-4" readonly id="inputFechaInicio" type="date" name="fecha_inicio" required value="<%= data[0].fecha_inicio%>">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>Fecha de vencimiento *</label>
+                                            <input class="form-control mb-4" readonly id="inputFechaVencimiento" type="date" name="fecha_vencimiento" required value="<%= data[0].fecha_vencimiento%>">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-xs-4 col-sm-4 col-md-4">
+                                        <div class="form-group">
+                                            <label>Tipo de Contrato *</label>
+                                            <% if(data[0].fk_id_tipo == 1){ %>
+                                                <input class="form-control mb-4" readonly id="inputTipo" type="text" name="fk_id_tipo" maxLength="50" required value="Productor">
+                                            <% } %>
+                                            <% if(data[0].fk_id_tipo == 2){ %>
+                                                <input class="form-control mb-4" readonly id="inputTipo" type="text" name="fk_id_tipo" maxLength="50" required value="Cliente Interno">
+                                            <% } %>
+                                            <% if(data[0].fk_id_tipo == 3){ %>
+                                                <input class="form-control mb-4" readonly id="inputTipo" type="text" name="fk_id_tipo" maxLength="50" required value="Cliente Externo">
+                                            <% } %>
+                                            <% if(data[0].fk_id_tipo == 4){ %>
+                                                <input class="form-control mb-4" readonly id="inputTipo" type="text" name="fk_id_tipo" maxLength="50" required value="Transportista">
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-4 col-md-4">
+                                        <div class="form-group">
+                                            <label>Estado del Contrato *</label>
+                                            <% if(data[0].fk_id_estado == 1){ %>
+                                                <input class="form-control mb-4" readonly id="inputTipo" type="text" name="fk_id_estado" maxLength="50" required value="Activado">
+                                            <% } %>
+                                            <% if(data[0].fk_id_estado == 2){ %>
+                                                <input class="form-control mb-4" readonly id="inputTipo" type="text" name="fk_id_estado" maxLength="50" required value="Desactivado">
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-4 col-md-4">
+                                        <div class="form-group">
+                                            <label>Asignar al usuario *</label>
+                                            <input class="form-control mb-4" readonly id="inputUsuario" type="text" name="fk_id_usuario" maxLength="50" required value="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="/files/contrato/<%= data[0].url_documento %>"><button class="btn btn-warning mb-2 pull-left" type="button"><i class="fas fa-sign-in-alt"></i> Ver documento PDF</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<%- include('partials/footer.ejs') %>
+
+<script>
+    $(document).ready(function() {
+      $('#datatables').DataTable({
+        "pagingType": "full_numbers",
+        "pageLength": 15,
+        "bLengthChange": false,
+        responsive: true,
+        language: {
+          search: "_INPUT_",
+          info: "Viendo página _PAGE_ de _PAGES_",
+          zeroRecords: "No hay información que mostrar",
+          infoEmpty: "Sin información",
+          searchPlaceholder: "Buscar contrato",
+        }
+      });
+      var table = $('#datatable').DataTable();
+    });
+</script>
+
+</body>
+</html>

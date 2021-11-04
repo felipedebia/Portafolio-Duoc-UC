@@ -69,13 +69,15 @@
                                                 <div class="row">
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                                         <div class="form-group">
-                                                            <label>Fecha de inicio *</label><input class="form-control input-sm" id="inputFechaInicio" type="date" name="fecha_inicio" required data-toggle="datepicker">
+                                                            <label>Fecha de inicio *</label>
+                                                            <input class="form-control mb-4" id="inputFechaInicio" type="date" name="fecha_inicio" required>
                                                             <div class="invalid-feedback">Ingresa Fecha de inicio</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                                         <div class="form-group">
-                                                            <label>Fecha de vencimiento *</label><input class="form-control input-sm" id="inputFechaVencimiento" type="date" name="fecha_vencimiento" required data-toggle="datepicker">
+                                                            <label>Fecha de vencimiento *</label>
+                                                            <input class="form-control mb-4" id="inputFechaVencimiento" type="date" name="fecha_vencimiento" required>
                                                             <div class="invalid-feedback">Ingresa Fecha de vencimiento</div>
                                                         </div>
                                                     </div>
@@ -85,8 +87,8 @@
                                                         <div class="form-group">
                                                             <label>Tipo de Contrato *</label>
                                                             <select class="selectpicker form-control" data-size="6" name="fk_id_tipo" data-style="select-with-transition btn" title="Selecciona una opción">
-                                                                <option name="productor" value="2">Productor</option>
-                                                                <option name="clienteInterno" value="1">Cliente Interno</option>
+                                                                <option name="productor" value="1">Productor</option>
+                                                                <option name="clienteInterno" value="2">Cliente Interno</option>
                                                                 <option name="clienteExterno" value="3">Cliente Externo</option>
                                                                 <option name="transportista" value="4">Transportista</option>
                                                             </select>
@@ -103,10 +105,10 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="btn btn-warning btn-sm float-left mt-2">
+                                                <div class="btn btn-warning mb-2 mt-2 float-left">
                                                     <input type="file" name="url_documento">
                                                 </div>
-                                                <button class="btn btn-warning mb-2 pull-right mt-2" type="submit"><i class="fas fa-sign-in-alt"></i> Crear nuevo contrato</button>
+                                                <button class="btn btn-warning mb-2 mt-2 pull-right" type="submit"><i class="fas fa-sign-in-alt"></i> Crear nuevo contrato</button>
                                             </form>
                                         </div>
                                     </div>

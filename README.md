@@ -136,6 +136,15 @@ Iniciar node en la carpeta web
 | POST | http://localhost:3000/api_productos/eliminarProducto/:id_producto  | |
 | GET  | http://localhost:3000/producto/:id_producto  |  |
 
+## CRUD Pago
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/pagos  |  |
+| GET  | http://localhost:3000/api_pagos/listarPagos  | JSON |
+| GET  | http://localhost:3000/modificarPago/:id_pago  |  |
+| POST | http://localhost:3000/api_pagos/eliminarPago/:id_pago  | |
+| GET  | http://localhost:3000/pago/:id_pago  |  |
+
 ## CRUD Pedido
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
@@ -152,6 +161,15 @@ Iniciar node en la carpeta web
 | GET  | http://localhost:3000/modificarVenta/:id_venta  |  |
 | POST | http://localhost:3000/api_ventas/anularVenta/:id_venta  | |
 | GET  | http://localhost:3000/venta/:id_venta  |  |
+
+## CRUD Informe
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/informes  |  |
+| GET  | http://localhost:3000/api_informes/listarInformes  | JSON |
+| GET  | http://localhost:3000/modificarInforme/:id_informe  |  |
+| POST | http://localhost:3000/api_informes/anularInforme/:id_informe  | |
+| GET  | http://localhost:3000/informe/:id_venta  |  |
 
 ## CRUD Subasta Frutas
 | Tipo | URL | Retorna |
