@@ -18,6 +18,29 @@ Configurar web/bin/configdb.js con sus datos de Oracle
 Iniciar node en la carpeta web
 - nodemon start
 
+## GFlujo: 
+
+Hacer pedido, vista donde admin apruebe o rechaze pedidos
+Hacer subasta de frutas (el admin la levanta)
+Productores subes sus ofertas de productos
+-- sistema elije mejor oferta en base a precio calidad --
+Hacer subasta de transporte
+Transportistas suben sus ofertas de transporte
+-- El administrador elije mejor oferta de transporte --
+Administrador completa datos de detalle_venta
+Si administrador acepta negociación con cliente externo, se cambia estado de venta, se crea orden transporte, orden de bodega y se notifica a productores que deben enviar sus productos. Si se rechaza la negociacón se cancela la venta.
+El sistema debe reconocer cuando llegan productos a bodega, se debe marcar como recepcionado en bodega, en bodega se pone "Revisión de producto"
+Luego de la revisión, se genera informe (reporte_bodega) y el estado cambia a "Producto revisado" 
+Esperar que llegue el transportista, cuando llegue cambiar estado a "Producto entregado a transportista"
+Cuando el paquete llegue al cliente final, el estado cambia "Arribado a ciudad", luego se lleva al cliente final y cuando esta entregada cambia estado a "Producto entregado". Si el cliente lo rechaza se crea un informe de problema, si no se marca como "Producto entregado satisfactoriamente".
+
+## Funciones pendientes:
+
+- Gráficos
+- Contadores de Usuarios, Frutas, Ventas y Subastas
+- Subir archivo PDF a Contrato
+- Cambiar secuencias SQL a procedimientos
+
 ## Rutas principales
 - http://localhost:3000/
 - http://localhost:3000/plantilla
@@ -91,9 +114,14 @@ Iniciar node en la carpeta web
 - 1 Femenino
 - 2 Masculino
 
-## Estado usuario - contrato - pedido - subasta - venta - orden - oferta
+## Estado usuario - contrato - subasta - venta - orden - oferta
 - 1 Activado
 - 2 Desactivado
+
+## Estado Pedido
+- 1 Sin revisar
+- 2 Aprobado
+- 3 Rechazado
 
 ## Necesita - fruta - oferta_Transporte
 - 1 Si
