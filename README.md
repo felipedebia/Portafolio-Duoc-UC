@@ -95,6 +95,10 @@ Iniciar node en la carpeta web
 - 1 Activado
 - 2 Desactivado
 
+## Necesita - fruta - oferta_Transporte
+- 1 Si
+- 2 No
+
 ## CRUD Usuario
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
@@ -124,7 +128,7 @@ Iniciar node en la carpeta web
 | GET  | http://localhost:3000/frutas  |  |
 | GET  | http://localhost:3000/api_frutas/listarFrutas  | JSON |
 | GET  | http://localhost:3000/modificarFruta/:id_fruta  |  |
-| POST | http://localhost:3000/api_frutas/desactivarFruta/:id_fruta  | |
+| POST | http://localhost:3000/api_frutas/eliminarFruta/:id_fruta  | |
 | GET  | http://localhost:3000/fruta/:id_fruta  |  |
 
 ## CRUD Producto

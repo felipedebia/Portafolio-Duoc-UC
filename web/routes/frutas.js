@@ -49,19 +49,36 @@ router.get('/listarFrutas/:id_fruta', async (req, res) => {
 });
 
 
+// Agregar
+router.post('/crearFruta', async (req, res) => {
+  var { nombre, necesita_refrigeracion } = req.body;
+
+  sql = "INSERT INTO fruta(nombre, necesita_refrigeracion) VALUES (:nombre,:necesita_refrigeracion)";
+  await BD.Open(sql, [nombre, necesita_refrigeracion], true);
+
+  // Si tuvo conexión a la DB
+  if(res.status(200)) {
+    console.log("[!] Fruta creada con éxito");
+    res.redirect('/frutas');
+    //res.refresh();
+	} else {
+		console.log("[!] Ocurrió un error al intentar crear la fruta");
+    res.redirect('/frutas');
+	}
+})
 
 
-// Desactivar
-router.get("/desactivarFruta/:id_fruta", async (req, res) => {
+// Eliminar
+router.get("/eliminarFruta/:id_fruta", async (req, res) => {
   var { id_fruta_bind } = req.params;
-  sql = "UPDATE fruta SET fk_id_estado=2 WHERE id_fruta = :id_fruta_bind";
+  sql = "DELETE FROM fruta WHERE id_fruta = :id_fruta_bind";
   await BD.Open(sql, [id_fruta_bind], true);
 
   if(res.status(200)) {
-    console.log("[!] Fruta " + req.params.id_fruta + " desactivada con éxito");
+    console.log("[!] Fruta " + req.params.id_fruta + " eliminada con éxito");
     res.redirect('/frutas');
 	} else {
-		console.log("[!] Ocurrió un error al intentar desactivar la fruta " + req.params.id_fruta);
+		console.log("[!] Ocurrió un error al intentar eliminar la fruta " + req.params.id_fruta);
     res.redirect('/frutas');
 	}
 })

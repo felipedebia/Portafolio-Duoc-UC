@@ -12,7 +12,7 @@ router.get('/listarSubastasFrutas', async (req, res) => {
   sql = "SELECT id_subastaF, fecha_creacion, fecha_actualizacion, fecha_termino, fk_id_pedido, fk_id_estado FROM subasta_fruta";
   result = await BD.Open(sql, binds, true);
 
-  Subastas = [];
+  SubastasFrutas = [];
 
   result.rows.map(subasta => {
       let subastaSchema = {
@@ -24,9 +24,9 @@ router.get('/listarSubastasFrutas', async (req, res) => {
           "fk_id_estado": subasta[5]
       }
 
-      Subastas.push(subastaSchema);
+      SubastasFrutas.push(subastaSchema);
   })
-  res.json({title: 'Subastas', 'mydata': Subastas});
+  res.json({title: 'SubastasFrutas', 'mydata': SubastasFrutas});
 });
 
 
@@ -37,7 +37,7 @@ router.get('/listarSubastasFrutas/:id_subastaF', async (req, res) => {
   sql = "SELECT fecha_creacion, fecha_actualizacion, fecha_termino, fk_id_pedido, fk_id_estado FROM subasta_fruta WHERE id_subastaF = :id_subastaF_bind";
   result = await BD.Open(sql, binds, true);
 
-  Subastas = [];
+  SubastasFrutas = [];
 
   result.rows.map(subasta => {
       let subastaSchema = {
@@ -49,9 +49,9 @@ router.get('/listarSubastasFrutas/:id_subastaF', async (req, res) => {
         "fk_id_estado": subasta[4]
       }
 
-      Subastas.push(subastaSchema);
+      SubastasFrutas.push(subastaSchema);
   })
-  res.json({title: 'Subastas', 'mydata': Subastas});
+  res.json({title: 'SubastasFrutas', 'mydata': SubastasFrutas});
 });
 
 
@@ -80,7 +80,7 @@ router.get('/listarSubastasTransportes', async (req, res) => {
   sql = "SELECT id_subastaT, fecha_creacion, fecha_actualizacion, fecha_termino, cantidad, direccion_despacho, fk_id_pedido, fk_id_estado FROM subasta_transporte";
   result = await BD.Open(sql, binds, true);
 
-  Subastas = [];
+  SubastasTransportes = [];
 
   result.rows.map(subasta => {
       let subastaSchema = {
@@ -94,9 +94,9 @@ router.get('/listarSubastasTransportes', async (req, res) => {
           "fk_id_estado": subasta[7]
       }
 
-      Subastas.push(subastaSchema);
+      SubastasTransportes.push(subastaSchema);
   })
-  res.json({title: 'Subastas', 'mydata': Subastas});
+  res.json({title: 'SubastasTransportes', 'mydata': SubastasTransportes});
 });
 
 
@@ -107,7 +107,7 @@ router.get('/listarSubastasTransportes/:id_subastaT', async (req, res) => {
   sql = "SELECT fecha_creacion, fecha_actualizacion, fecha_termino, cantidad, direccion_despacho, fk_id_pedido, fk_id_estado FROM subasta_transporte WHERE id_subastaT = :id_subastaT_bind";
   result = await BD.Open(sql, binds, true);
 
-  Subastas = [];
+  SubastasTransportes = [];
 
   result.rows.map(subasta => {
       let subastaSchema = {
@@ -121,9 +121,9 @@ router.get('/listarSubastasTransportes/:id_subastaT', async (req, res) => {
         "fk_id_estado": subasta[6]
       }
 
-      Subastas.push(subastaSchema);
+      SubastasTransportes.push(subastaSchema);
   })
-  res.json({title: 'Subastas', 'mydata': Subastas});
+  res.json({title: 'SubastasTransportes', 'mydata': SubastasTransportes});
 });
 
 

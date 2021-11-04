@@ -348,7 +348,27 @@ router.get('/frutas', function(req, res) {
 });
 
 
+// CRUD SUBASTAS
 
+
+router.get('/subastas_frutas', function(req, res) {
+    if (req.session.isLoggedIn) {
+        res.render('Subastas_Frutas', { title: 'Subastas Frutas - Maipo Grande' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
+
+
+router.get('/subastas_transportes', function(req, res) {
+    if (req.session.isLoggedIn) {
+        res.render('Subastas_Transportes', { title: 'Subastas Transportes - Maipo Grande' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
 
 
 
