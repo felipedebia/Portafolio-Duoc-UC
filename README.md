@@ -18,7 +18,7 @@ Configurar web/bin/configdb.js con sus datos de Oracle
 Iniciar node en la carpeta web
 - nodemon start
 
-## GFlujo: 
+## Flujo: 
 
 Hacer pedido, vista donde admin apruebe o rechaze pedidos
 Hacer subasta de frutas (el admin la levanta)
@@ -33,6 +33,11 @@ El sistema debe reconocer cuando llegan productos a bodega, se debe marcar como 
 Luego de la revisión, se genera informe (reporte_bodega) y el estado cambia a "Producto revisado" 
 Esperar que llegue el transportista, cuando llegue cambiar estado a "Producto entregado a transportista"
 Cuando el paquete llegue al cliente final, el estado cambia "Arribado a ciudad", luego se lleva al cliente final y cuando esta entregada cambia estado a "Producto entregado". Si el cliente lo rechaza se crea un informe de problema, si no se marca como "Producto entregado satisfactoriamente".
+
+## Pendiente:
+
+- FALTA MODIFICAR_FRUTA
+- FALTA AGREGAR NUEVA SUBASTA_FRUTA
 
 ## Funciones pendientes:
 

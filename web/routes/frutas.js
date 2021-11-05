@@ -70,7 +70,7 @@ router.post('/crearFruta', async (req, res) => {
 
 // Eliminar
 router.get("/eliminarFruta/:id_fruta", async (req, res) => {
-  var { id_fruta_bind } = req.params;
+  var id_fruta_bind = req.params;
   sql = "DELETE FROM fruta WHERE id_fruta = :id_fruta_bind";
   await BD.Open(sql, [id_fruta_bind], true);
 

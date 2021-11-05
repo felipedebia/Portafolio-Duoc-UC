@@ -121,7 +121,7 @@ router.get('/listarOrdenesTransportes/:id_ordenT', async (req, res) => {
 
 // Anular orden Transportes
 router.get("/anularOrdenTransporte/:id_ordenT", async (req, res) => {
-  var { id_ordenT_bind } = req.params;
+  var id_ordenT_bind = req.params;
   sql = "UPDATE orden_transporte SET fk_id_estado=2 WHERE id_ordenT = :id_ordenT_bind";
   await BD.Open(sql, [id_ordenT_bind], true);
 

@@ -137,7 +137,7 @@ router.get('/listarOfertasTransportes/:id_ofertaT', async (req, res) => {
 
 // Anular oferta Transportes
 router.get("/anularOfertaTransporte/:id_ofertaT", async (req, res) => {
-  var { id_ofertaT_bind } = req.params;
+  var id_ofertaT_bind = req.params;
   sql = "UPDATE oferta_transporte SET fk_id_estado=2 WHERE id_ofertaT = :id_ofertaT_bind";
   await BD.Open(sql, [id_ofertaT_bind], true);
 

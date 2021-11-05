@@ -59,7 +59,7 @@ router.get('/listarProductos/:id_producto', async (req, res) => {
 
 // Eliminar
 router.get("/eliminarProducto/:id_producto", async (req, res) => {
-  var { id_producto_bind } = req.params;
+  var id_producto_bind = req.params;
   sql = "DELETE FROM producto WHERE id_producto = :id_producto_bind";
   await BD.Open(sql, [id_producto_bind], true);
 

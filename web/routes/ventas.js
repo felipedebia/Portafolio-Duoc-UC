@@ -62,7 +62,7 @@ router.get('/listarVentas/:id_venta', async (req, res) => {
 
 // Anular
 router.get("/anularVenta/:id_venta", async (req, res) => {
-  var { id_venta_bind } = req.params;
+  var id_venta_bind = req.params;
   sql = "UPDATE venta SET fk_id_estado=2 WHERE id_venta = :id_venta_bind";
   await BD.Open(sql, [id_venta_bind], true);
 

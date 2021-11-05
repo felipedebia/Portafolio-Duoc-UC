@@ -72,7 +72,7 @@ router.post("/modificarContrato/:id_contrato", async (req, res) => {
 
 // Anular
 router.get("/anularContrato/:id_contrato", async (req, res) => {
-  var { id_contrato_bind } = req.params;
+  var id_contrato_bind = req.params;
   sql = "UPDATE contrato SET fk_id_estado=2 WHERE id_contrato = :id_contrato_bind";
   await BD.Open(sql, [id_contrato_bind], true);
 

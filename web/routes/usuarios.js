@@ -97,7 +97,7 @@ router.post('/crearUsuario', async (req, res) => {
 
 // Modificar
 router.post("/modificarUsuario/:id_usuario", async (req, res) => {
-  var { id_usuario } = req.params.id_usuario;
+  var id_usuario = req.params.id_usuario;
   var { correo, nombre, apellido, num_documento, fk_id_tipo, fecha_nacimiento, genero, fk_id_estado, telefono, password} = req.body;
 
   // Encriptamos la contraseña del usuario
@@ -121,7 +121,7 @@ router.post("/modificarUsuario/:id_usuario", async (req, res) => {
 // Modificar
 // Agregar restriccion, solo modificar el perfil del usuario conectado
 router.post("/modificarMiPerfil/:id_usuario", async (req, res) => {
-  var { id_usuario } = req.params.id_usuario;
+  var id_usuario = req.params.id_usuario;
   var { correo, nombre, apellido, num_documento, fecha_nacimiento, genero, telefono, password} = req.body;
 
   // Encriptamos la contraseña del usuario
@@ -144,7 +144,7 @@ router.post("/modificarMiPerfil/:id_usuario", async (req, res) => {
 
 // Desactivar
 router.get("/desactivarUsuario/:id_usuario", async (req, res) => {
-  var { id_usuario_bind } = req.params.id_usuario;
+  var id_usuario_bind = req.params.id_usuario;
   
   sql = "DELETE FROM usuario WHERE id_usuario = :id_usuario_bind";
   //sql = "UPDATE usuario SET fk_id_estado=0 WHERE id_usuario = :id_usuario";

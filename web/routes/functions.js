@@ -77,5 +77,10 @@ var ListarFrutas = requestApiListarFrutas();
 
 
 module.exports ={
-    listarUsuarios, listarContratos, ListarSubastasFrutas, ListarSubastasTransportes, ListarFrutas
+    listarUsuarios, 
+	listarContratos, 
+	ListarSubastasFrutas, 
+	ListarSubastasTransportes, 
+	ListarFrutas,
+	'requestApiListarUsuarios': requestApiListarUsuarios
 }

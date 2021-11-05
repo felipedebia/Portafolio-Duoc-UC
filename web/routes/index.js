@@ -371,6 +371,17 @@ router.get('/subastas_transportes', function(req, res) {
 });
 
 
+// CRUD PEDIDOS
+router.get('/pedidos', function(req, res) {
+    if (req.session.isLoggedIn) {
+        res.render('Pedidos', { title: 'Pedidos - Maipo Grande' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
+
+
 
 router.get('/plantilla', function(req, res) {
     if (req.session.isLoggedIn) {

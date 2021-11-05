@@ -129,7 +129,7 @@ router.get('/listarSubastasTransportes/:id_subastaT', async (req, res) => {
 
 // Anular Transportes
 router.get("/anularSubastaTransport/:id_subastaT", async (req, res) => {
-  var { id_subastaT_bind } = req.params;
+  var id_subastaT_bind = req.params;
   sql = "UPDATE subasta_transporte SET fk_id_estado=2 WHERE id_subastaT = :id_subastaT_bind";
   await BD.Open(sql, [id_subastaT_bind], true);
 
