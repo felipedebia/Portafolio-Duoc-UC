@@ -283,14 +283,15 @@ router.get('/modificarContrato/:id_contrato', async function(req, res, next) {
 				{
 					id_contrato: id_contrato,
 					url_documento: result.rows[0][0],
-					fecha_inicio: result.rows[0][1],
-					fecha_vencimiento: result.rows[0][2],
+					fecha_inicio: moment(result.rows[0][1]).format('YYYY-MM-DD'),
+					fecha_vencimiento: moment(result.rows[0][2]).format('YYYY-MM-DD'),
 					fk_id_tipo: result.rows[0][3],
 					fk_id_estado: result.rows[0][4]
 				  }
 			];
 
 			// Mostramos la vista
+			console.log(contratoData);
 			res.render('modificarContrato', { title: 'Modificar contrato - Maipo Grande', data:contratoData });
 		} else {
 			res.send('Error al obtener datos de la base de datos');
@@ -320,8 +321,8 @@ router.get('/contrato/:id_contrato', async function(req, res, next) {
 				{
 					id_contrato: id_contrato,
 					url_documento: result.rows[0][0],
-					fecha_inicio: result.rows[0][1],
-					fecha_vencimiento: result.rows[0][2],
+					fecha_inicio: moment(result.rows[0][1]).format('YYYY-MM-DD'),
+					fecha_vencimiento: moment(result.rows[0][2]).format('YYYY-MM-DD'),
 					fk_id_tipo: result.rows[0][3],
 					fk_id_estado: result.rows[0][4]
 				  }

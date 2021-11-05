@@ -31,31 +31,31 @@
                                     <div class="card-body table-responsive">
                                         <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                             <thead class="text-info">
-                                                <th scope="col">Contrato N°</th>
-                                                <th scope="col">Fecha de inicio</th>
-                                                <th scope="col">Fecha de vencimiento</th>
-                                                <th scope="col">Estado del contrato</th>
+                                                <th scope="col">Orden N°</th>
+                                                <th scope="col">Fecha de ingreso</th>
+                                                <th scope="col">Fecha de retiro</th>
+                                                <th scope="col">Estado de la orden</th>
                                                 <th class="disabled-sorting">Opciones</th>
                                             </thead>
                                             <tbody>
-                                                <% for(var i=0; i < OrdenesBodegas.length; i++) { %>
+                                                <% for(var ordenBodega of OrdenesBodegas) { %>
                                                     <tr>
                                                         <th scope="row">
-                                                            <%= OrdenesBodegas[i].id_ordenB %>
+                                                            <%= ordenBodega.id_ordenB %>
                                                         </th>
                                                         <td>
-                                                            <%= OrdenesBodegas[i].fecha_inicio %>
+                                                            <%= ordenBodega.fecha_ingreso %>
                                                         </td>
                                                         <td>
-                                                            <%= OrdenesBodegas[i].fecha_vencimiento %>
+                                                            <%= ordenBodega.fecha_retiro %>
                                                         </td>
                                                         <td>
-                                                            <%= OrdenesBodegas[i].fk_id_estado %>
+                                                            <%= ordenBodega.fk_id_estado %>
                                                         </td>
                                                         <td>
-                                                            <a class="card-link" href="/orden_bodega/<%= OrdenesBodegas[i].id_ordenB %>">Ver contrato</a>
-                                                            <a class="card-link" href="/modificarOrdenBodega/<%= OrdenesBodegas[i].id_ordenB %>">Modificar</a>
-                                                            <a class="card-link" href="../api_ordenes/anularOrdenBodega/<%= OrdenesBodegas[i].id_ordenB %>">Anular</a>
+                                                            <a class="card-link" href="/orden_bodega/<%= ordenBodega.id_ordenB %>">Ver contrato</a>
+                                                            <a class="card-link" href="/modificarOrdenBodega/<%= ordenBodega.id_ordenB %>">Modificar</a>
+                                                            <a class="card-link" href="../api_ordenes/anularOrdenBodega/<%= ordenBodega.id_ordenB %>">Anular</a>
                                                         </td>
                                                     </tr>
                                                 <% } %>

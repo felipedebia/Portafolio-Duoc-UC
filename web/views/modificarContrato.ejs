@@ -47,11 +47,27 @@
                               <div class="col-xs-6 col-sm-6 col-md-6">
                                   <div class="form-group">
                                       <label>Tipo de Contrato *</label>
-                                      <select class="selectpicker form-control" data-size="6" name="fk_id_tipo" data-style="select-with-transition btn" title="Selecciona una opción">
-                                          <option name="productor" value="2">Productor</option>
-                                          <option name="clienteInterno" value="1">Cliente Interno</option>
+                                      <select class="selectpicker form-control" data-size="4" name="fk_id_tipo" data-style="select-with-transition btn" title="Selecciona una opción">
+                                        <% if(data[0].fk_id_tipo == 1){ %>
+                                          <option name="productor" selected value="1">Productor</option>
+                                        <% } else { %>
+                                          <option name="productor" value="1">Productor</option>
+                                        <% } %>
+                                        <% if(data[0].fk_id_tipo == 2){ %>
+                                          <option name="clienteInterno" selected value="2">Cliente Interno</option>
+                                        <% } else { %>
+                                          <option name="clienteInterno" value="2">Cliente Interno</option>
+                                        <% } %>
+                                        <% if(data[0].fk_id_tipo == 3){ %>
+                                          <option name="clienteExterno" selected value="3">Cliente Externo</option>
+                                        <% } else { %>
                                           <option name="clienteExterno" value="3">Cliente Externo</option>
+                                        <% } %>
+                                        <% if(data[0].fk_id_tipo == 4){ %>
+                                          <option name="transportista" selected value="4">Transportista</option>
+                                        <% } else { %>
                                           <option name="transportista" value="4">Transportista</option>
+                                        <% } %>
                                       </select>
                                   </div>
                               </div>
@@ -59,8 +75,8 @@
                                   <div class="form-group">
                                       <label>Asignar al usuario *</label>
                                       <select class="selectpicker form-control" data-size="<% Usuarios.length %>" name="id_usuario" data-style="select-with-transition btn" title="Selecciona una opción">
-                                          <% for(var i=0; i < Usuarios.length; i++) { %>
-                                          <option name="<%= Usuarios[i].nombre %> <%= Usuarios[i].apellido %>" value="<%= Usuarios[i].id_usuario %>"><%= Usuarios[i].nombre %> <%= Usuarios[i].apellido %></option>
+                                          <% for(var usuario of Usuarios) { %>
+                                          <option name="<%= usuario.nombre %> <%= usuario.apellido %>" value="<%= usuario.id_usuario %>"><%= usuario.nombre %> <%= usuario.apellido %></option>
                                           <% } %>
                                       </select>
                                   </div>

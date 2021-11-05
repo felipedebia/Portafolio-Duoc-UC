@@ -32,24 +32,24 @@
                                                 <th class="disabled-sorting">Opciones</th>
                                             </thead>
                                             <tbody>
-                                                <% for(var i=0; i < SubastasFrutas.length; i++) { %>
+                                                <% for(var subastaFruta of SubastasFrutas) { %>
                                                     <tr>
                                                         <th scope="row">
-                                                            <%= SubastasFrutas[i].id_subastaF %>
+                                                            <%= subastaFruta.id_subastaF %>
                                                         </th>
                                                         <td>
-                                                            <%= SubastasFrutas[i].fecha_creacion %>
+                                                            <%= subastaFruta.fecha_creacion %>
                                                         </td>
                                                         <td>
-                                                            <%= SubastasFrutas[i].fecha_termino %>
+                                                            <%= subastaFruta.fecha_termino %>
                                                         </td>
                                                         <td>
-                                                            <%= SubastasFrutas[i].fk_id_estado %>
+                                                            <%= subastaFruta.fk_id_estado %>
                                                         </td>
                                                         <td>
-                                                            <a class="card-link" href="/subasta_fruta/<%= SubastasFrutas[i].id_subastaF %>">Ver subasta</a>
-                                                            <a class="card-link" href="/modificarSubastaFruta/<%= SubastasFrutas[i].id_subastaF %>">Modificar</a>
-                                                            <a class="card-link" href="../api_subastas/anularSubastaFruta/<%= SubastasFrutas[i].id_subastaF %>">Anular</a>
+                                                            <a class="card-link" href="/subasta_fruta/<%= subastaFruta.id_subastaF %>">Ver subasta</a>
+                                                            <a class="card-link" href="/modificarSubastaFruta/<%= subastaFruta.id_subastaF %>">Modificar</a>
+                                                            <a class="card-link" href="../api_subastas/anularSubastaFruta/<%= subastaFruta.id_subastaF %>">Anular</a>
                                                         </td>
                                                     </tr>
                                                 <% } %>
