@@ -53,7 +53,9 @@
                                                             <%= OrdenesTransportes[i].fk_id_estado %>
                                                         </td>
                                                         <td>
-                                                            <a class="card-link" href="/orden_transporte/<%= OrdenesTransportes[i].id_ordenT %>">Ver contrato</a><a class="card-link" href="/modificarOrdenTransporte/<%= OrdenesTransportes[i].id_ordenT %>">Modificar</a><a class="card-link" href="../api_ordenes/anularOrdenTransporte/<%= OrdenesTransportes[i].id_ordenT %>">Anular</a>
+                                                            <a class="card-link" href="/orden_transporte/<%= OrdenesTransportes[i].id_ordenT %>">Ver contrato</a>
+                                                            <a class="card-link" href="/modificarOrdenTransporte/<%= OrdenesTransportes[i].id_ordenT %>">Modificar</a>
+                                                            <a class="card-link" href="../api_ordenes/anularOrdenTransporte/<%= OrdenesTransportes[i].id_ordenT %>">Anular</a>
                                                         </td>
                                                     </tr>
                                                 <% } %>

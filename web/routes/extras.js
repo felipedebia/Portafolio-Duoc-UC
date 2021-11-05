@@ -3,7 +3,8 @@ const express = require('express');
 const router = express.Router();
 const BD = require('../bin/configbd');
 
-//Extras pais y ciudad
+
+// Listar Paises
 router.get('/listarPaises', async(req, res) => {
 
     binds = {};
@@ -23,6 +24,8 @@ router.get('/listarPaises', async(req, res) => {
     res.json({ title: 'Paises', 'mydata': Paises });
 });
 
+
+// Listar Ciudades
 router.get('/listarCiudades', async(req, res) => {
 
     binds = {};
@@ -32,13 +35,13 @@ router.get('/listarCiudades', async(req, res) => {
     Ciudades = [];
 
     result.rows.map(ciudad => {
-        let paisSchema = {
+        let ciudadSchema = {
             "id_ciudad": ciudad[0],
             "nombre": ciudad[1],
             "pais_cod_pais": ciudad[2]
         }
 
-        Ciudades.push(paisSchema);
+        Ciudades.push(ciudadSchema);
     })
     res.json({ title: 'Ciudades', 'mydata': Ciudades });
 });

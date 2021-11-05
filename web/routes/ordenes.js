@@ -56,15 +56,15 @@ router.get('/listarOrdenesBodegas/:id_ordenB', async (req, res) => {
 
 // Anular orden Bodega
 router.get("/anularOrdenBodega/:id_ordenb", async (req, res) => {
-  var { id_ordenB_bind } = req.params;
+  var { id_ordenB_bind } = req.params.id_ordenB;
   sql = "UPDATE orden_bodega SET fk_id_estado=2 WHERE id_ordenb = :id_ordenB_bind";
   await BD.Open(sql, [id_ordenB_bind], true);
 
   if(res.status(200)) {
-    console.log("[!] Orden de Bodega " + req.params.id_ordenB + " anulada con éxito");
+    console.log("[!] Orden de Bodega " + id_ordenB_bind + " anulada con éxito");
     res.redirect('/ordenes');
 	} else {
-		console.log("[!] Ocurrió un error al intentar anular la orden de Bodega " + req.params.id_ordenB);
+		console.log("[!] Ocurrió un error al intentar anular la orden de Bodega " + id_ordenB_bind);
     res.redirect('/ordenes');
 	}
 })
@@ -124,15 +124,15 @@ router.get('/listarOrdenesTransportes/:id_ordenT', async (req, res) => {
 
 // Anular orden Transportes
 router.get("/anularOrdenTransporte/:id_ordenT", async (req, res) => {
-  var id_ordenT_bind = req.params;
+  var id_ordenT_bind = req.params.id_ordenT;
   sql = "UPDATE orden_transporte SET fk_id_estado=2 WHERE id_ordenT = :id_ordenT_bind";
   await BD.Open(sql, [id_ordenT_bind], true);
 
   if(res.status(200)) {
-    console.log("[!] Orden de Transporte " + req.params.id_ordenT + " anulada con éxito");
+    console.log("[!] Orden de Transporte " + id_ordenT_bind + " anulada con éxito");
     res.redirect('/ordenes');
 	} else {
-		console.log("[!] Ocurrió un error al intentar anular la orden de Transporte " + req.params.id_ordenT);
+		console.log("[!] Ocurrió un error al intentar anular la orden de Transporte " + id_ordenT_bind);
     res.redirect('/ordenes');
 	}
 })

@@ -152,10 +152,10 @@ router.get("/desactivarUsuario/:id_usuario", async (req, res) => {
   await BD.Open(sql, [id_usuario_bind], true);
 
   if(res.status(200)) {
-    console.log("[!] Usuario " + req.params.id_usuario + " desactivado con éxito");
+    console.log("[!] Usuario " + id_usuario_bind + " desactivado con éxito");
     res.redirect('/usuarios');
 	} else {
-		console.log("[!] Ocurrió un error al intentar desactivar el usuario " + req.params.id_usuario);
+		console.log("[!] Ocurrió un error al intentar desactivar el usuario " + id_usuario_bind);
     res.redirect('/usuarios');
 	}
 })

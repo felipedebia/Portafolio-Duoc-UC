@@ -252,6 +252,7 @@ router.get('/usuarios', function(req, res) {
 // CRUD CONTRATOS
 router.get('/contratos', function(req, res) {
     if (req.session.isLoggedIn) {
+		functions.requestApiListarContratos();
         res.render('contratos', { title: 'Contratos - Maipo Grande' });
     } else {
         res.redirect('/');
@@ -341,6 +342,7 @@ router.get('/contrato/:id_contrato', async function(req, res, next) {
 // CRUD FRUTAS
 router.get('/frutas', function(req, res) {
     if (req.session.isLoggedIn) {
+		functions.requestApiListarFrutas();
         res.render('Frutas', { title: 'Frutas - Maipo Grande' });
     } else {
         res.redirect('/');
@@ -354,6 +356,7 @@ router.get('/frutas', function(req, res) {
 
 router.get('/subastas_frutas', function(req, res) {
     if (req.session.isLoggedIn) {
+		functions.requestApiListarSubastasFrutas();
         res.render('Subastas_Frutas', { title: 'Subastas Frutas - Maipo Grande' });
     } else {
         res.redirect('/');
@@ -364,6 +367,7 @@ router.get('/subastas_frutas', function(req, res) {
 
 router.get('/subastas_transportes', function(req, res) {
     if (req.session.isLoggedIn) {
+		functions.requestApiListarSubastasTransportes();
         res.render('Subastas_Transportes', { title: 'Subastas Transportes - Maipo Grande' });
     } else {
         res.redirect('/');
@@ -388,6 +392,7 @@ router.get('/pedidos', function(req, res) {
 // CRUD ORDENES
 router.get('/ordenes_bodegas', function(req, res) {
     if (req.session.isLoggedIn) {
+		functions.requestApiListarOrdenesBodegas();
         res.render('Ordenes_Bodegas', { title: 'Ordenes Bodegas - Maipo Grande' });
     } else {
         res.redirect('/');
@@ -398,6 +403,7 @@ router.get('/ordenes_bodegas', function(req, res) {
 
 router.get('/ordenes_transportes', function(req, res) {
     if (req.session.isLoggedIn) {
+		functions.requestApiListarOrdenesTransportes();
         res.render('Ordenes_Transportes', { title: 'Ordenes Transportes - Maipo Grande' });
     } else {
         res.redirect('/');

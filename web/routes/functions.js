@@ -194,17 +194,17 @@ var ListarCiudades = requestApiListarCiudades();
 
 
 module.exports ={
-	listarContratos, 
-	ListarSubastasFrutas, 
-	ListarSubastasTransportes,
-	ListarOrdenesBodegas,
-	ListarOrdenesTransportes,
-	ListarFrutas,
-	ListarOfertasProductores,
-	ListarOfertasTransportes,
-	ListarVentas,
 	'requestApiListarUsuarios': requestApiListarUsuarios,
+	'requestApiListarContratos': requestApiListarContratos,
+	'requestApiListarSubastasFrutas': requestApiListarSubastasFrutas,
+	'requestApiListarSubastasTransportes': requestApiListarSubastasTransportes,
+	'requestApiListarOrdenesBodegas': requestApiListarOrdenesBodegas,
+	'requestApiListarOrdenesTransportes': requestApiListarOrdenesTransportes,
+	'requestApiListarFrutas': requestApiListarFrutas,
     'requestApiListarPedidos': requestApiListarPedidos,
+	'requestApiListarOfertasProductores': requestApiListarOfertasProductores,
+	'requestApiListarOfertasTransportes': requestApiListarOfertasTransportes,
+	'requestApiListarVentas': requestApiListarVentas,
     'requestApiListarPaises': requestApiListarPaises,
     'requestApiListarCiudades': requestApiListarCiudades
 }

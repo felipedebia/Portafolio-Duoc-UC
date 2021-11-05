@@ -58,15 +58,15 @@ router.get('/listarSubastasFrutas/:id_subastaF', async (req, res) => {
 
 // Anular Frutas
 router.get("/anularSubastaFruta/:id_subastaF", async (req, res) => {
-  var { id_subastaF_bind } = req.params;
+  var { id_subastaF_bind } = req.params.id_subastaF;
   sql = "UPDATE subasta_fruta SET fk_id_estado=2 WHERE id_subastaF = :id_subastaF_bind";
   await BD.Open(sql, [id_subastaF_bind], true);
 
   if(res.status(200)) {
-    console.log("[!] Subasta de Frutas " + req.params.id_subastaF + " anulada con éxito");
+    console.log("[!] Subasta de Frutas " + id_subastaF_bind + " anulada con éxito");
     res.redirect('/subastas_frutas');
 	} else {
-		console.log("[!] Ocurrió un error al intentar anular la subasta de Frutas " + req.params.id_subastaF);
+		console.log("[!] Ocurrió un error al intentar anular la subasta de Frutas " + id_subastaF_bind);
     res.redirect('/subastas_frutas');
 	}
 })
@@ -130,15 +130,15 @@ router.get('/listarSubastasTransportes/:id_subastaT', async (req, res) => {
 
 // Anular Transportes
 router.get("/anularSubastaTransport/:id_subastaT", async (req, res) => {
-  var id_subastaT_bind = req.params;
+  var id_subastaT_bind = req.params.id_subastaT;
   sql = "UPDATE subasta_transporte SET fk_id_estado=2 WHERE id_subastaT = :id_subastaT_bind";
   await BD.Open(sql, [id_subastaT_bind], true);
 
   if(res.status(200)) {
-    console.log("[!] Subasta de Transportes " + req.params.id_subastaT + " anulada con éxito");
+    console.log("[!] Subasta de Transportes " + id_subastaT_bind + " anulada con éxito");
     res.redirect('/subastas_transportes');
 	} else {
-		console.log("[!] Ocurrió un error al intentar anular la subasta de Transporte " + req.params.id_subastaT);
+		console.log("[!] Ocurrió un error al intentar anular la subasta de Transporte " + id_subastaT_bind);
     res.redirect('/subastas_transportes');
 	}
 })

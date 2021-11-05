@@ -47,7 +47,9 @@
                                                             <%= SubastasTransportes[i].fk_id_estado %>
                                                         </td>
                                                         <td>
-                                                            <a class="card-link" href="/subasta_transporte/<%= SubastasTransportes[i].id_subastaT %>">Ver subasta</a><a class="card-link" href="/modificarSubastaTransporte/<%= SubastasTransportes[i].id_subastaT %>">Modificar</a><a class="card-link" href="../api_subastas/anularSubastaTransporte/<%= SubastasTransportes[i].id_subastaT %>">Anular</a>
+                                                            <a class="card-link" href="/subasta_transporte/<%= SubastasTransportes[i].id_subastaT %>">Ver subasta</a>
+                                                            <a class="card-link" href="/modificarSubastaTransporte/<%= SubastasTransportes[i].id_subastaT %>">Modificar</a>
+                                                            <a class="card-link" href="../api_subastas/anularSubastaTransporte/<%= SubastasTransportes[i].id_subastaT %>">Anular</a>
                                                         </td>
                                                     </tr>
                                                 <% } %>

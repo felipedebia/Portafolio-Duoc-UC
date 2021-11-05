@@ -70,15 +70,16 @@ router.post('/crearFruta', async (req, res) => {
 
 // Eliminar
 router.get("/eliminarFruta/:id_fruta", async (req, res) => {
-  var id_fruta_bind = req.params;
+  var id_fruta_bind = req.params.id_fruta;
+  
   sql = "DELETE FROM fruta WHERE id_fruta = :id_fruta_bind";
   await BD.Open(sql, [id_fruta_bind], true);
 
   if(res.status(200)) {
-    console.log("[!] Fruta " + req.params.id_fruta + " eliminada con éxito");
+    console.log("[!] Fruta " + id_fruta_bind + " eliminada con éxito");
     res.redirect('/frutas');
 	} else {
-		console.log("[!] Ocurrió un error al intentar eliminar la fruta " + req.params.id_fruta);
+		console.log("[!] Ocurrió un error al intentar eliminar la fruta " + id_fruta_bind);
     res.redirect('/frutas');
 	}
 })

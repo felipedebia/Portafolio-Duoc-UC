@@ -39,25 +39,27 @@
                                                 <th class="disabled-sorting">Opciones</th>
                                             </thead>
                                             <tbody>
-                                                <% for(var i=0; i < Usuarios.length; i++) { %>
+                                                <% for(var usuario of Usuarios) { %>
                                                     <tr>
                                                         <th scope="row">
-                                                            <%= Usuarios[i].id_usuario %>
+                                                            <%= usuario.id_usuario %>
                                                         </th>
                                                         <td>
-                                                            <%= Usuarios[i].nombre %>
+                                                            <%= usuario.nombre %>
                                                         </td>
                                                         <td>
-                                                            <%= Usuarios[i].apellido %>
+                                                            <%= usuario.apellido %>
                                                         </td>
                                                         <td>
-                                                            <%= Usuarios[i].correo %>
+                                                            <%= usuario.correo %>
                                                         </td>
                                                         <td>
-                                                            <%= Usuarios[i].fk_id_tipo %>
+                                                            <%= usuario.fk_id_tipo %>
                                                         </td>
                                                         <td>
-                                                            <a class="card-link" href="/perfil/<%= Usuarios[i].id_usuario %>">Ver perfil</a><a class="card-link" href="/modificarUsuario/<%= Usuarios[i].id_usuario %>">Modificar</a><a class="card-link" href="../api_usuarios/desactivarUsuario/<%= Usuarios[i].id_usuario %>">Desactivar</a>
+                                                            <a class="card-link" href="/perfil/<%= usuario.id_usuario %>">Ver perfil</a>
+                                                            <a class="card-link" href="/modificarUsuario/<%= usuario.id_usuario %>">Modificar</a>
+                                                            <a class="card-link" href="../api_usuarios/desactivarUsuario/<%= usuario.id_usuario %>">Desactivar</a>
                                                         </td>
                                                     </tr>
                                                     <% } %>

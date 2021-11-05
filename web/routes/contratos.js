@@ -73,15 +73,15 @@ router.post("/modificarContrato/:id_contrato", async (req, res) => {
 
 // Anular
 router.get("/anularContrato/:id_contrato", async (req, res) => {
-  var id_contrato_bind = req.params;
+  var id_contrato_bind = req.params.id_contrato;
   sql = "UPDATE contrato SET fk_id_estado=2 WHERE id_contrato = :id_contrato_bind";
   await BD.Open(sql, [id_contrato_bind], true);
 
   if(res.status(200)) {
-    console.log("[!] Contrato " + req.params.id_contrato + " anulado con éxito");
+    console.log("[!] Contrato " + id_contrato_bind + " anulado con éxito");
     res.redirect('/contratos');
 	} else {
-		console.log("[!] Ocurrió un error al intentar anular el contrato " + req.params.id_contrato);
+		console.log("[!] Ocurrió un error al intentar anular el contrato " + id_contrato_bind);
     res.redirect('/contratos');
 	}
 })

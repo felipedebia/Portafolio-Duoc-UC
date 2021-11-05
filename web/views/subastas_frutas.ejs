@@ -47,7 +47,9 @@
                                                             <%= SubastasFrutas[i].fk_id_estado %>
                                                         </td>
                                                         <td>
-                                                            <a class="card-link" href="/subasta_fruta/<%= SubastasFrutas[i].id_subastaF %>">Ver subasta</a><a class="card-link" href="/modificarSubastaFruta/<%= SubastasFrutas[i].id_subastaF %>">Modificar</a><a class="card-link" href="../api_subastas/anularSubastaFruta/<%= SubastasFrutas[i].id_subastaF %>">Anular</a>
+                                                            <a class="card-link" href="/subasta_fruta/<%= SubastasFrutas[i].id_subastaF %>">Ver subasta</a>
+                                                            <a class="card-link" href="/modificarSubastaFruta/<%= SubastasFrutas[i].id_subastaF %>">Modificar</a>
+                                                            <a class="card-link" href="../api_subastas/anularSubastaFruta/<%= SubastasFrutas[i].id_subastaF %>">Anular</a>
                                                         </td>
                                                     </tr>
                                                 <% } %>
