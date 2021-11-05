@@ -15,7 +15,7 @@ const simpleCryp = new SimpleCrypto(secretKey)
 router.get('/listarUsuarios', async (req, res) => {
   binds = {};
 
-  sql = "SELECT id_usuario, num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password, fk_id_estado, fk_id_tipo FROM usuario";
+  sql = "SELECT usuario.id_usuario, usuario.num_documento, usuario.nombre, usuario.apellido, usuario.fecha_nacimiento, usuario.genero, usuario.correo, usuario.telefono, usuario.password, usuario.fk_id_estado, estado_usuario.descripcion, usuario.fk_id_tipo, tipo_usuario.nombre FROM usuario JOIN tipo_usuario ON usuario.fk_id_tipo = tipo_usuario.id_tipo JOIN estado_usuario ON usuario.fk_id_estado = estado_usuario.id_estado";
   result = await BD.Open(sql, binds, true);
 
   Usuarios = [];
@@ -32,7 +32,9 @@ router.get('/listarUsuarios', async (req, res) => {
         "telefono": user[7],
         "password": user[8],
         "fk_id_estado": user[9],
-        "fk_id_tipo": user[10]
+        "fk_texto_estado": user[10],
+        "fk_id_tipo": user[11],
+        "fk_texto_tipo": user[12]
       }
 
       Usuarios.push(userSchema);

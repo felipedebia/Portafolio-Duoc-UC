@@ -7,7 +7,7 @@ async function requestApiListarUsuarios() {
 		request('http://localhost:3000/api_usuarios/listarUsuarios', function (error, response, body) {
 			if (error) console.log("error");
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListarUsuarios cargado en memoria');
+				console.log('\x1b[37m','[!] requestApiListarUsuarios cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -22,7 +22,7 @@ async function requestApiListarContratos() {
 		request('http://localhost:3000/api_contratos/listarContratos', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListarContratos cargado en memoria');
+				console.log('\x1b[37m','[!] requestApiListarContratos cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -37,7 +37,7 @@ async function requestApiListarSubastasFrutas() {
 		request('http://localhost:3000/api_subastas/listarSubastasFrutas', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListarSubastasFrutas cargado en memoria');
+				console.log('\x1b[37m','[!] requestApiListarSubastasFrutas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -52,7 +52,7 @@ async function requestApiListarSubastasTransportes() {
 		request('http://localhost:3000/api_subastas/listarSubastasTransportes', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListarSubastasTransportes cargado en memoria');
+				console.log('\x1b[37m','[!] requestApiListarSubastasTransportes cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -67,7 +67,7 @@ async function requestApiListarOrdenesBodegas() {
 		request('http://localhost:3000/api_ordenes/listarOrdenesBodegas', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListarOrdenesBodegas cargado en memoria');
+				console.log('\x1b[37m','[!] requestApiListarOrdenesBodegas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -82,7 +82,7 @@ async function requestApiListarOrdenesTransportes() {
 		request('http://localhost:3000/api_ordenes/listarOrdenesTransportes', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListarOrdenesTransportes cargado en memoria');
+				console.log('\x1b[37m','[!] requestApiListarOrdenesTransportes cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -97,7 +97,7 @@ async function requestApiListarFrutas() {
 		request('http://localhost:3000/api_frutas/listarFrutas', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListarFrutas cargado en memoria');
+				console.log('\x1b[37m','[!] requestApiListarFrutas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -112,7 +112,7 @@ async function requestApiListarPedidos() {
 		request('http://localhost:3000/api_pedidos/listarPedidos', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListarPedidos cargado en memoria');
+				console.log('\x1b[37m','[!] requestApiListarPedidos cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -127,7 +127,7 @@ async function requestApiListarOfertasProductores() {
 		request('http://localhost:3000/api_ofertas/listarOfertasProductores', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListarOfertasProductores cargado en memoria');
+				console.log('\x1b[37m','[!] requestApiListarOfertasProductores cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -142,7 +142,7 @@ async function requestApiListarOfertasTransportes() {
 		request('http://localhost:3000/api_ofertas/listarOfertasTransportes', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListarOfertasTransportes cargado en memoria');
+				console.log('\x1b[37m','[!] requestApiListarOfertasTransportes cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -157,7 +157,7 @@ async function requestApiListarVentas() {
 		request('http://localhost:3000/api_ventas/listarVentas', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListarVentas cargado en memoria');
+				console.log('\x1b[37m','[!] requestApiListarVentas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -172,7 +172,7 @@ async function requestApiListarPaises() {
         request('http://localhost:3000/api_extras/listarPaises', function(error, response, body) {
             if (error) return reject(error);
             importedJSON = JSON.parse(body);
-            console.log('\x1b[37m', '[!] requestApiListarPaises cargado en memoria');
+            console.log('\x1b[37m', '[!] requestApiListarPaises cargado');
             return resolve(importedJSON);
         });
     });
@@ -185,7 +185,7 @@ async function requestApiListarCiudades() {
         request('http://localhost:3000/api_extras/listarCiudades', function(error, response, body) {
             if (error) return reject(error);
             importedJSON = JSON.parse(body);
-            console.log('\x1b[37m', '[!] requestApiListarCiudades cargado en memoria');
+            console.log('\x1b[37m', '[!] requestApiListarCiudades cargado');
             return resolve(importedJSON);
         });
     });
