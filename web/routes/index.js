@@ -90,7 +90,7 @@ router.get('/modificarUsuario/:id_usuario', async function(req, res, next) {
 	if (req.session.isLoggedIn) {
 
 		// Hacemos una consulta trayendo todos los datos del usuario
-		const id_usuario = req.params;
+		const { id_usuario } = req.params;
 
 		binds = {"id_usuario": id_usuario};
 		sql = "SELECT num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password, fk_id_estado, fk_id_tipo FROM usuario WHERE id_usuario = :id_usuario";
@@ -114,7 +114,6 @@ router.get('/modificarUsuario/:id_usuario', async function(req, res, next) {
 					id_usuario: id_usuario
 				  }
 			];
-
 			// Mostramos la vista
 			res.render('modificarUsuario', { title: 'Modificar usuario - Maipo Grande', data:usuarioData });
 		} else {
@@ -179,7 +178,7 @@ router.get('/miperfil', async function(req, res, next) {
 router.get('/perfil/:id_usuario', async function(req, res, next) {
 	if (req.session.isLoggedIn) {
 
-		const id_usuario = req.params;
+		const { id_usuario } = req.params;
 
 		// Hacemos una consulta trayendo todos los datos del usuario
 		binds = {"id_usuario": id_usuario};
@@ -260,7 +259,7 @@ router.get('/modificarContrato/:id_contrato', async function(req, res, next) {
 	if (req.session.isLoggedIn) {
 
 		// Hacemos una consulta trayendo todos los datos del contrato
-		const id_contrato = req.params;
+		const { id_contrato } = req.params;
 
 		binds = {"id_contrato": id_contrato};
 		sql = "SELECT url_documento, fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado FROM contrato WHERE id_contrato = :id_contrato";
@@ -296,7 +295,7 @@ router.get('/contrato/:id_contrato', async function(req, res, next) {
 	if (req.session.isLoggedIn) {
 
 		// Hacemos una consulta trayendo todos los datos del usuario
-		const id_contrato = req.params;
+		const { id_contrato } = req.params;
 
 		// Hacemos una consulta trayendo todos los datos del usuario
 		binds = {"id_contrato": id_contrato};
