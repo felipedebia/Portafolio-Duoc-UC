@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const BD = require('../bin/configbd');
+var moment = require('moment');
 
 // CRUD PRODUCTOS
 
@@ -18,7 +19,7 @@ router.get('/listarProductos', async (req, res) => {
       let productoSchema = {
           "id_producto": producto[0],
           "cantidad": producto[1],
-          "fecha_modificacion": producto[2],
+          "fecha_modificacion": moment(producto[2]).format('DD-MM-YYYY'),
           "fk_id_fruta": producto[3],
           "fk_id_calidad": producto[4],
           "fk_id_usuario": producto[5]
@@ -43,7 +44,7 @@ router.get('/listarProductos/:id_producto', async (req, res) => {
       let productoSchema = {
           "id_producto": id_producto_bind,
           "cantidad": producto[0],
-          "fecha_modificacion": producto[1],
+          "fecha_modificacion": moment(producto[1]).format('DD-MM-YYYY'),
           "fk_id_fruta": producto[2],
           "fk_id_calidad": producto[3],
           "fk_id_usuario": producto[4]

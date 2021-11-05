@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const BD = require('../bin/configbd');
+var moment = require('moment');
 
 // CRUD OFERTA PRODUCTOR
 
@@ -18,7 +19,7 @@ router.get('/listarOfertasProductores', async (req, res) => {
       let ofertaSchema = {
           "id_ofertaP": oferta[0],
           "cantidad": oferta[1],
-          "fecha_creacion": oferta[2],
+          "fecha_creacion": moment(oferta[2]).format('DD-MM-YYYY'),
           "precio_por_kilo": oferta[3],
           "fk_id_estado": oferta[4],
           "fk_id_producto": oferta[5],
@@ -46,7 +47,7 @@ router.get('/listarOfertasProductores/:id_ofertaP', async (req, res) => {
       let ofertaSchema = {
           "id_ofertaP": req.params.id_ofertaP,
           "cantidad": oferta[0],
-          "fecha_creacion": oferta[1],
+          "fecha_creacion": moment(oferta[1]).format('DD-MM-YYYY'),
           "precio_por_kilo": oferta[2],
           "fk_id_estado": oferta[3],
           "fk_id_producto": oferta[4],

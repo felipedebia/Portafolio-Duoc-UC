@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const BD = require('../bin/configbd');
+var moment = require('moment');
 
 // Contraseña
 var SimpleCrypto = require("simple-crypto-js").default
@@ -25,7 +26,7 @@ router.get('/listarUsuarios', async (req, res) => {
         "num_documento": user[1],
         "nombre": user[2],
         "apellido": user[3],
-        "fecha_nacimiento": user[4],
+        "fecha_nacimiento": moment(user[4]).format('DD-MM-YYYY'),
         "genero": user[5],
         "correo": user[6],
         "telefono": user[7],
@@ -44,24 +45,24 @@ router.get('/listarUsuarios', async (req, res) => {
 router.get('/listarUsuarios/:id_usuario', async (req, res) => {
   binds = { "id_usuario_bind": req.params.id_usuario };
 
-  sql = "SELECT id_usuario, num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password, fk_id_estado, fk_id_tipo FROM usuario WHERE id_usuario = :id_usuario_bind";
+  sql = "SELECT num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password, fk_id_estado, fk_id_tipo FROM usuario WHERE id_usuario = :id_usuario_bind";
   result = await BD.Open(sql, binds, true);
 
   Usuarios = [];
 
   result.rows.map(user => {
       let userSchema = {
-        "id_usuario": user[0],
-        "num_documento": user[1],
-        "nombre": user[2],
-        "apellido": user[3],
-        "fecha_nacimiento": user[4],
-        "genero": user[5],
-        "correo": user[6],
-        "telefono": user[7],
-        "password": user[8],
-        "fk_id_estado": user[9],
-        "fk_id_tipo": user[10]
+        "id_usuario": id_usuario_bind,
+        "num_documento": user[0],
+        "nombre": user[1],
+        "apellido": user[2],
+        "fecha_nacimiento": moment(user[3]).format('DD-MM-YYYY'),
+        "genero": user[4],
+        "correo": user[5],
+        "telefono": user[6],
+        "password": user[7],
+        "fk_id_estado": user[8],
+        "fk_id_tipo": user[9]
       }
 
       Usuarios.push(userSchema);

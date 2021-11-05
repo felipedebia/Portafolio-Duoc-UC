@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const BD = require('../bin/configbd');
+var moment = require('moment');
 
 // CRUD SUBASTA TRANSPORTES
 
@@ -17,9 +18,9 @@ router.get('/listarSubastasFrutas', async (req, res) => {
   result.rows.map(subasta => {
       let subastaSchema = {
           "id_subastaF": subasta[0],
-          "fecha_creacion": subasta[1],
-          "fecha_actualizacion": subasta[2],
-          "fecha_termino": subasta[3],
+          "fecha_creacion": moment(subasta[1]).format('DD-MM-YYYY'),
+          "fecha_actualizacion": moment(subasta[2]).format('DD-MM-YYYY'),
+          "fecha_termino": moment(subasta[3]).format('DD-MM-YYYY'),
           "fk_id_pedido": subasta[4],
           "fk_id_estado": subasta[5]
       }
@@ -42,9 +43,9 @@ router.get('/listarSubastasFrutas/:id_subastaF', async (req, res) => {
   result.rows.map(subasta => {
       let subastaSchema = {
         "id_subastaF": id_subastaF_bind,
-        "fecha_creacion": subasta[0],
-        "fecha_actualizacion": subasta[1],
-        "fecha_termino": subasta[2],
+        "fecha_creacion": moment(subasta[0]).format('DD-MM-YYYY'),
+        "fecha_actualizacion": moment(subasta[1]).format('DD-MM-YYYY'),
+        "fecha_termino": moment(subasta[2]).format('DD-MM-YYYY'),
         "fk_id_pedido": subasta[3],
         "fk_id_estado": subasta[4]
       }

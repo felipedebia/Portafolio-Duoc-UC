@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const BD = require('../bin/configbd');
+var moment = require('moment');
 
 // CRUD VENTAS
 
@@ -17,8 +18,8 @@ router.get('/listarVentas', async (req, res) => {
   result.rows.map(venta => {
       let ventaSchema = {
           "id_venta": venta[0],
-          "fecha_creacion": venta[1],
-          "fecha_actualizacion": venta[2],
+          "fecha_creacion": moment(venta[1]).format('DD-MM-YYYY'),
+          "fecha_actualizacion": moment(venta[2]).format('DD-MM-YYYY'),
           "fk_id_pedido": venta[3],
           "fk_id_seguro": venta[4],
           "fk_id_tipo": venta[5],
@@ -43,8 +44,8 @@ router.get('/listarVentas/:id_venta', async (req, res) => {
   result.rows.map(venta => {
       let ventaSchema = {
           "id_venta": id_venta_bind,
-          "fecha_creacion": venta[0],
-          "fecha_actualizacion": venta[1],
+          "fecha_creacion": moment(venta[1]).format('DD-MM-YYYY'),
+          "fecha_actualizacion": moment(venta[2]).format('DD-MM-YYYY'),
           "fk_id_pedido": venta[2],
           "fk_id_seguro": venta[3],
           "fk_id_tipo": venta[4],

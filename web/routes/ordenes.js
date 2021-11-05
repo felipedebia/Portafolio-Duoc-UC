@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const BD = require('../bin/configbd');
+var moment = require('moment');
 
 // CRUD ORDEN BODEGA
 
@@ -17,8 +18,8 @@ router.get('/listarOrdenesBodegas', async (req, res) => {
   result.rows.map(orden => {
       let ordenSchema = {
           "id_ordenB": orden[0],
-          "fecha_ingreso": orden[1],
-          "fecha_retiro": orden[2],
+          "fecha_ingreso": moment(orden[1]).format('DD-MM-YYYY'),
+          "fecha_retiro": moment(orden[2]).format('DD-MM-YYYY'),
           "fk_id_estado": orden[3],
           "fk_id_venta": orden[4]
       }
@@ -41,8 +42,8 @@ router.get('/listarOrdenesBodegas/:id_ordenB', async (req, res) => {
   result.rows.map(orden => {
       let ordenSchema = {
           "id_ordenB": id_ordenB_bind,
-          "fecha_ingreso": orden[0],
-          "fecha_retiro": orden[1],
+          "fecha_ingreso": moment(oferta[0]).format('DD-MM-YYYY'),
+          "fecha_retiro": moment(oferta[1]).format('DD-MM-YYYY'),
           "fk_id_estado": orden[2],
           "fk_id_venta": orden[3]
       }
