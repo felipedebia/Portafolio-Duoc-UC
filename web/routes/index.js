@@ -400,6 +400,16 @@ router.get('/pedidos', function(req, res) {
 
 
 // CRUD ORDENES
+router.get('/ordenes', function(req, res) {
+    if (req.session.isLoggedIn) {
+        res.render('Ordenes', { title: 'Ordenes - Maipo Grande' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
+
+
 router.get('/ordenes_bodegas', function(req, res) {
     if (req.session.isLoggedIn) {
 		functions.requestApiListarOrdenesBodegas();
