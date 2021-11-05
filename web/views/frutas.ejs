@@ -50,7 +50,7 @@
                                                               </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                              <span><strong>Nombre:</strong> <%= fruta.nombre %></span></br>
+                                                              <span><strong>Nombre:</strong> <%= fruta.nombre %></span></br></br>
                                                               <span><strong>¿Necesita refrigeración?:</strong> <%= fruta.necesita_refrigeracion %></span>
                                                             </div>
                                                             <div class="modal-footer">
@@ -124,26 +124,20 @@
                                     <div class="card-body">
                                         <h3 class="card-title mb-4">Ingresa los datos de la nueva fruta</h3>
                                         <div class="card-text">
-                                            <form action="../api_frutas/crearFruta" method="POST" class="formValidation" novalidate>
-                                                <div class="row">
-                                                    <div class="col-xs-6 col-sm-6 col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Nombre *</label>
-                                                            <input class="form-control mb-4" id="inputFechaInicio" type="text" name="nombre" required data-toggle="datepicker">
-                                                            <div class="invalid-feedback">Ingresa Nombre</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-6 col-sm-6 col-md-6">
-                                                        <div class="form-group">
-                                                            <label>¿Necesita refrigeración? *</label>
-                                                            <select class="selectpicker form-control" data-size="6" name="necesita_refrigeracion" data-style="select-with-transition btn" title="Selecciona una opción">
-                                                                <option name="si" value="1">Si</option>
-                                                                <option name="no" value="2">No</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
+                                            <form action="../api_frutas/crearFruta" method="POST" class="formValidation" novalidate> 
+                                                <div class="form-group">
+                                                    <label>Nombre *</label>
+                                                    <input class="form-control mb-4" id="inputNombre" type="text" name="nombre" required data-toggle="datepicker">
+                                                    <div class="invalid-feedback">Ingresa Nombre</div>
                                                 </div>
-                                                <button class="btn btn-info mb-2 pull-right" type="submit"><i class="fas fa-sign-in-alt"></i> Crear nueva fruta</button>
+                                                <div class="form-group">
+                                                    <label>¿Necesita refrigeración? *</label>
+                                                    <select class="selectpicker form-control" data-size="6" name="necesita_refrigeracion" data-style="select-with-transition btn" title="Selecciona una opción">
+                                                        <option name="si" value="1">Si</option>
+                                                        <option name="no" value="2">No</option>
+                                                    </select>
+                                                </div>
+                                                <button class="btn btn-info mb-2 pull-right mt-4" type="submit"><i class="fas fa-sign-in-alt"></i> Crear nueva fruta</button>
                                             </form>
                                         </div>
                                     </div>

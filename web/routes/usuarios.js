@@ -114,7 +114,7 @@ router.post("/modificarUsuario/:id_usuario", async (req, res) => {
     console.log("[!] Usuario " + req.body.correo + " modificado con éxito");
     res.redirect('/usuarios');
   } else {
-    console.log("[!] 2- Ocurrió un error al intentar modificar el usuario " + req.body.correo);
+    console.log("[!] Ocurrió un error al intentar modificar el usuario " + req.body.correo);
     res.redirect('/usuarios');
   }
 
@@ -138,7 +138,7 @@ router.post("/modificarMiPerfil/:id_usuario", async (req, res) => {
     console.log("[!] Usuario " + req.body.correo + " modificado con éxito");
     res.redirect('/usuarios');
   } else {
-    console.log("[!] 2- Ocurrió un error al intentar modificar el usuario " + req.body.correo);
+    console.log("[!] Ocurrió un error al intentar modificar el usuario " + req.body.correo);
     res.redirect('/usuarios');
   }
 
