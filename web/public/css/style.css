@@ -1,0 +1,9 @@
+.rgba-black-strong {
+    background-color: rgba(0,0,0,0.7);
+}
+
+.card.card-image.mb-3 {
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+}
