@@ -36,8 +36,7 @@ Iniciar node en la carpeta web
 
 ## Pendiente:
 
-- FALTA MODIFICAR_FRUTA
-- FALTA AGREGAR NUEVA SUBASTA_FRUTA
+- FALTA AGREGAR NUEVA SUBASTA_FRUTA (haciendo mario)
 - FALTA AGREGAR NUEVA ORDEN_BODEGA Y ORDEN_TRANSPORTE
 
 ## Funciones pendientes:
@@ -125,9 +124,12 @@ Iniciar node en la carpeta web
 - 2 Desactivado
 
 ## Estado Pedido
-- 1 Sin revisar
-- 2 Aprobado
-- 3 Rechazado
+- 1 En preparación
+- 2 Enviado
+- 3 En revisión
+- 4 En subasta
+- 5 Finalizado
+- 6 Anular
 
 ## Necesita - fruta - oferta_Transporte
 - 1 Si
