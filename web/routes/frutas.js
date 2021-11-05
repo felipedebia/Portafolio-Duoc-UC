@@ -68,6 +68,27 @@ router.post('/crearFruta', async (req, res) => {
 })
 
 
+// Modificar
+router.post("/modificarFruta/:id_fruta", async (req, res) => {
+  var { id_fruta } = req.params.id_fruta;
+  var { nombre, necesita_refrigeracion} = req.body;
+  console.log(nombre);
+  console.log(necesita_refrigeracion);
+  console.log("uwu")
+  sql = "UPDATE fruta SET nombre= :nombre, necesita_refrigeracion= :necesita_refrigeracion WHERE id_fruta= :id_fruta";
+  await BD.Open(sql, [nombre, necesita_refrigeracion], true);
+
+  // Si tuvo conexión a la DB
+  if(res.status(200)) {
+    console.log("[!] Fruta " + id_fruta + " modificado con éxito");
+    res.redirect('/contratos');
+  } else {
+    console.log("[!] Ocurrió un error al intentar modificar la fruta " + id_fruta);
+    res.redirect('/contratos');
+  }
+
+})
+
 // Eliminar
 router.get("/eliminarFruta/:id_fruta", async (req, res) => {
   var id_fruta_bind = req.params.id_fruta;

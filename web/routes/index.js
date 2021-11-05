@@ -344,6 +344,43 @@ router.get('/frutas', function(req, res) {
 });
 
 
+router.get('/modificarFruta/:id_fruta', async function(req, res, next) {
+	if (req.session.isLoggedIn) {
+
+		// Hacemos una consulta trayendo todos los datos del contrato
+		const { id_contrato } = req.params;
+
+		binds = {"id_contrato": id_contrato};
+		sql = "SELECT url_documento, fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado FROM contrato WHERE id_contrato = :id_contrato";
+		result = await BD.Open(sql, binds, false);
+
+		// Si los datos estan correctos
+		if (result.rows.length > 0) {
+			// Asignamos los valores de la consulta a las variables
+			var contratoData = [
+				{
+					id_contrato: id_contrato,
+					url_documento: result.rows[0][0],
+					fecha_inicio: moment(result.rows[0][1]).format('YYYY-MM-DD'),
+					fecha_vencimiento: moment(result.rows[0][2]).format('YYYY-MM-DD'),
+					fk_id_tipo: result.rows[0][3],
+					fk_id_estado: result.rows[0][4]
+				  }
+			];
+
+			// Mostramos la vista
+			console.log(contratoData);
+			res.render('modificarContrato', { title: 'Modificar contrato - Maipo Grande', data:contratoData });
+		} else {
+			res.send('Error al obtener datos de la base de datos');
+		}
+	} else {
+		res.redirect('/');
+	}
+	res.end();
+})
+
+
 // CRUD SUBASTAS
 
 router.get('/subastas', function(req, res) {

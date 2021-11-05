@@ -33,13 +33,12 @@
                                             <thead class="text-info">
                                                 <th scope="col">N°</th>
                                                 <th scope="col">Nombre</th>
-                                                <th scope="col">¿Necesita refrigeración?</th>
                                                 <th class="disabled-sorting">Opciones</th>
                                             </thead>
                                             <tbody>
                                                 <% for(var fruta of Frutas) { %>
 
-                                                    <div class="modal fade" id="modalFruta<%= fruta.id_fruta %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="modalVerFruta<%= fruta.id_fruta %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                           <div class="modal-content">
                                                             <div class="modal-header">
@@ -61,7 +60,47 @@
                                                         </div>
                                                     </div>
 
-
+                                                    <div class="modal fade" id="modalModificarFruta<%= fruta.id_fruta %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                          <div class="modal-content">
+                                                            <form action="/api_frutas/modificarFruta/<%= fruta.id_fruta%>" method="POST">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">
+                                                                    Viendo fruta <%= fruta.nombre %>
+                                                                </h5>
+                                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                              </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="form-group mt-4">
+                                                                    <label>Nombre *</label>
+                                                                    <input class="form-control mb-4" id="inputNombre" type="text" name="nombre" maxLength="30" required value="<%= fruta.nombre %>">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>¿Necesita refrigeración? *</label>
+                                                                    <select class="form-control" data-size="2" name="necesita_refrigeracion" data-style="select-with-transition btn" title="Selecciona una opción">
+                                                                        <% if(fruta.necesita_refrigeracion == 1){ %>
+                                                                            <option name="si" selected value="1">Si</option>
+                                                                        <% } else { %>
+                                                                            <option name="si" value="1">Si</option>
+                                                                        <% } %>
+                                                                        <% if(fruta.necesita_refrigeracion == 2){ %>
+                                                                            <option name="no" selected value="2">No</option>
+                                                                        <% } else { %>
+                                                                            <option name="no" value="2">No</option>
+                                                                        <% } %>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button class="btn btn-primary" type="submit">Guardar cambios</button>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                            </div>
+                                                            </form>
+                                                          </div>
+                                                        </div>
+                                                    </div>
                                                     <tr>
                                                         <th scope="row">
                                                             <%= fruta.id_fruta %>
@@ -70,11 +109,9 @@
                                                             <%= fruta.nombre %>
                                                         </td>
                                                         <td>
-                                                            <%= fruta.necesita_refrigeracion %>
-                                                        </td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalFruta<%= fruta.id_fruta %>">Ver</button>
-                                                            <a href="/modificarFruta/<%= fruta.id_fruta %>"><button type="button" class="btn btn-info btn-sm">Modificar</button></a>
+                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalVerFruta<%= fruta.id_fruta %>">Ver</button>
+                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalModificarFruta<%= fruta.id_fruta %>">Modificar</button>
+                                                            <a href="/modificarFruta/<%= fruta.id_fruta %>"><button type="button" class="btn btn-info btn-sm">Modificarold</button></a>
                                                             <a href="../api_frutas/eliminarFruta/<%= fruta.id_fruta %>"><button type="button" class="btn btn-info btn-sm">Eliminar</button></a>
                                                         </td>
                                                     </tr>

@@ -67,7 +67,7 @@ router.post("/modificarContrato/:id_contrato", async (req, res) => {
     console.log("[!] Contrato " + id_contrato + " modificado con éxito");
     res.redirect('/contratos');
   } else {
-    console.log("[!] 2- Ocurrió un error al intentar modificar el contrato " + id_contrato);
+    console.log("[!] Ocurrió un error al intentar modificar el contrato " + id_contrato);
     res.redirect('/contratos');
   }
 
