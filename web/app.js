@@ -8,6 +8,7 @@ var moment = require('moment');
 
 // Rutas
 var indexRouter = require('./routes/index');
+var extrasRouter = require('./routes/extras');
 var contratosRouter = require('./routes/contratos');
 var frutasRouter = require('./routes/frutas');
 var ofertasRouter = require('./routes/ofertas');
@@ -60,6 +61,7 @@ app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 
 
 app.use('/', indexRouter);
+app.use('/api_extras', extrasRouter);
 app.use('/api_contratos', contratosRouter);
 app.use('/api_frutas', frutasRouter);
 app.use('/api_ofertas', ofertasRouter);

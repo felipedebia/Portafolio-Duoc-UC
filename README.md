@@ -20,19 +20,19 @@ Iniciar node en la carpeta web
 
 ## Flujo: 
 
-Hacer pedido, vista donde admin apruebe o rechaze pedidos
-Hacer subasta de frutas (el admin la levanta)
-Productores subes sus ofertas de productos
--- sistema elije mejor oferta en base a precio calidad --
-Hacer subasta de transporte
-Transportistas suben sus ofertas de transporte
--- El administrador elije mejor oferta de transporte --
-Administrador completa datos de detalle_venta
-Si administrador acepta negociación con cliente externo, se cambia estado de venta, se crea orden transporte, orden de bodega y se notifica a productores que deben enviar sus productos. Si se rechaza la negociacón se cancela la venta.
-El sistema debe reconocer cuando llegan productos a bodega, se debe marcar como recepcionado en bodega, en bodega se pone "Revisión de producto"
-Luego de la revisión, se genera informe (reporte_bodega) y el estado cambia a "Producto revisado" 
-Esperar que llegue el transportista, cuando llegue cambiar estado a "Producto entregado a transportista"
-Cuando el paquete llegue al cliente final, el estado cambia "Arribado a ciudad", luego se lleva al cliente final y cuando esta entregada cambia estado a "Producto entregado". Si el cliente lo rechaza se crea un informe de problema, si no se marca como "Producto entregado satisfactoriamente".
+- Hacer pedido, vista donde admin apruebe o rechaze pedidos
+- Hacer subasta de frutas (el admin la levanta)
+- Productores subes sus ofertas de productos
+- Sistema elije mejor oferta en base a precio calidad
+- Hacer subasta de transporte
+- Transportistas suben sus ofertas de transporte
+- El administrador elije mejor oferta de transporte
+- Administrador completa datos de detalle_venta
+- Si administrador acepta negociación con cliente externo, se cambia estado de venta, se crea orden transporte, orden de bodega y se notifica a productores que deben enviar sus productos. Si se rechaza la negociacón se cancela la venta.
+- El sistema debe reconocer cuando llegan productos a bodega, se debe marcar como recepcionado en bodega, en bodega se pone "Revisión de producto"
+- Luego de la revisión, se genera informe (reporte_bodega) y el estado cambia a "Producto revisado" 
+- Esperar que llegue el transportista, cuando llegue cambiar estado a "Producto entregado a transportista"
+- Cuando el paquete llegue al cliente final, el estado cambia "Arribado a ciudad", luego se lleva al cliente final y cuando esta entregada cambia estado a "Producto entregado". Si el cliente lo rechaza se crea un informe de problema, si no se marca como "Producto entregado satisfactoriamente".
 
 ## Pendiente:
 
@@ -148,6 +148,12 @@ Cuando el paquete llegue al cliente final, el estado cambia "Arribado a ciudad",
 | GET  | http://localhost:3000/api_usuarios/listarUsuarios/:id_usuario  | JSON |
 | GET  | http://localhost:3000/perfil/:id_usuario  |  |
 | GET  | http://localhost:3000/miperfil/:id_usuario  |  |
+
+## CRUD Extras
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/api_extras/listarCiudades  | JSON |
+| GET  | http://localhost:3000/api_extras/listarPaises  | JSON |
 
 ## CRUD Contrato
 | Tipo | URL | Retorna |

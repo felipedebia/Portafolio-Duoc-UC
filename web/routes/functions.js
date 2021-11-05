@@ -166,17 +166,45 @@ async function requestApiListarVentas() {
 var ListarVentas = requestApiListarVentas();
 
 
+// Función API ListarPaises
+async function requestApiListarPaises() {
+    return new Promise(function(resolve, reject) {
+        request('http://localhost:3000/api_extras/listarPaises', function(error, response, body) {
+            if (error) return reject(error);
+            importedJSON = JSON.parse(body);
+            console.log('\x1b[37m', '[!] requestApiListarPaises cargado en memoria');
+            return resolve(importedJSON);
+        });
+    });
+};
+var ListarPaises = requestApiListarPaises();
+
+// Función API ListarCiudades
+async function requestApiListarCiudades() {
+    return new Promise(function(resolve, reject) {
+        request('http://localhost:3000/api_extras/listarCiudades', function(error, response, body) {
+            if (error) return reject(error);
+            importedJSON = JSON.parse(body);
+            console.log('\x1b[37m', '[!] requestApiListarCiudades cargado en memoria');
+            return resolve(importedJSON);
+        });
+    });
+};
+var ListarCiudades = requestApiListarCiudades();
+
+
 module.exports ={
-    listarUsuarios, 
 	listarContratos, 
 	ListarSubastasFrutas, 
 	ListarSubastasTransportes,
 	ListarOrdenesBodegas,
 	ListarOrdenesTransportes,
 	ListarFrutas,
-	ListarPedidos,
 	ListarOfertasProductores,
 	ListarOfertasTransportes,
 	ListarVentas,
-	'requestApiListarUsuarios': requestApiListarUsuarios
+	'requestApiListarUsuarios': requestApiListarUsuarios,
+    'requestApiListarPedidos': requestApiListarPedidos,
+    'requestApiListarPaises': requestApiListarPaises,
+    'requestApiListarCiudades': requestApiListarCiudades
 }

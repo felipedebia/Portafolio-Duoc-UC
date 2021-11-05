@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const BD = require('../bin/configbd');
+var moment = require('moment');
 
 // CRUD PEDIDOS
 
@@ -18,7 +19,7 @@ router.get('/listarPedidos', async (req, res) => {
       let pedidoSchema = {
           "id_pedido": pedido[0],
           "direccion_despacho": pedido[1],
-          "fecha_creacion": pedido[2],
+          "fecha_creacion": moment(pedido[2]).format('DD-MM-YYYY'),
           "fk_id_tipo": pedido[3],
           "fk_id_ciudad": pedido[4],
           "fk_id_usuario": pedido[5],
@@ -44,7 +45,7 @@ router.get('/listarPedidos/:id_pedido', async (req, res) => {
       let pedidoSchema = {
           "id_pedido": id_pedido_bind,
           "direccion_despacho": pedido[0],
-          "fecha_creacion": pedido[1],
+          "fecha_creacion": moment(pedido[1]).format('DD-MM-YYYY'),
           "fk_id_tipo": pedido[2],
           "fk_id_ciudad": pedido[3],
           "fk_id_usuario": pedido[4],

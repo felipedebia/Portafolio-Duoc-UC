@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const BD = require('../bin/configbd');
+var moment = require('moment');
 
 // CRUD CONTRATOS
 
@@ -16,13 +17,13 @@ router.get('/listarContratos', async (req, res) => {
 
   result.rows.map(contrato => {
     let contratoSchema = {
-        "id_contrato": result.rows[0][0],
-        "url_documento": result.rows[0][1],
-        "fecha_inicio": result.rows[0][2],
-        "fecha_vencimiento": result.rows[0][3],
-        "fk_id_tipo": result.rows[0][4],
-        "fk_id_estado": result.rows[0][5],
-        "fk_id_usuario": result.rows[0][6]
+        "id_contrato": contrato[0],
+        "url_documento": contrato[1],
+        "fecha_inicio": moment(contrato[2]).format('DD-MM-YYYY'),
+        "fecha_vencimiento": moment(contrato[3]).format('DD-MM-YYYY'),
+        "fk_id_tipo": contrato[4],
+        "fk_id_estado": contrato[5],
+        "fk_id_usuario": contrato[6]
     }
 
     Contratos.push(contratoSchema);
