@@ -12,7 +12,7 @@ router.get('/listarOfertasProductores', async (req, res) => {
   sql = "SELECT id_ofertaP, cantidad, fecha_creacion, precio_por_kilo, fk_id_estado, fk_id_producto, fk_id_usuario, fk_id_pdetalle, fk_id_subastaF FROM oferta_productor";
   result = await BD.Open(sql, binds, true);
 
-  Ofertas = [];
+  OfertasProductores = [];
 
   result.rows.map(oferta => {
       let ofertaSchema = {
@@ -27,9 +27,9 @@ router.get('/listarOfertasProductores', async (req, res) => {
           "fk_id_subastaF": oferta[8]
       }
 
-      Ofertas.push(ofertaSchema);
+      OfertasProductores.push(ofertaSchema);
   })
-  res.json({title: 'Ofertas', 'mydata': Ofertas});
+  res.json({title: 'OfertasProductores', 'mydata': OfertasProductores});
 });
 
 
@@ -40,7 +40,7 @@ router.get('/listarOfertasProductores/:id_ofertaP', async (req, res) => {
   sql = "SELECT cantidad, fecha_creacion, precio_por_kilo, fk_id_estado, fk_id_producto, fk_id_usuario, fk_id_pdetalle, fk_id_subastaF FROM oferta_productor WHERE id_ofertaP = :id_ofertaP_bind";
   result = await BD.Open(sql, binds, true);
 
-  Ofertas = [];
+  OfertasProductores = [];
 
   result.rows.map(oferta => {
       let ofertaSchema = {
@@ -55,9 +55,9 @@ router.get('/listarOfertasProductores/:id_ofertaP', async (req, res) => {
           "fk_id_subastaF": oferta[7]
       }
 
-      Ofertas.push(ofertaSchema);
+      OfertasProductores.push(ofertaSchema);
   })
-  res.json({title: 'Ofertas', 'mydata': Ofertas});
+  res.json({title: 'OfertasProductores', 'mydata': OfertasProductores});
 });
 
 
@@ -86,7 +86,7 @@ router.get('/listarOfertasTransportes', async (req, res) => {
   sql = "SELECT id_ofertaT, cantidad, fecha_creacion, tiene_refrigeracion, precio_final, peso_total, fk_id_usuario, fk_id_subastaT, fk_id_estado FROM oferta_transporte";
   result = await BD.Open(sql, binds, true);
 
-  Ofertas = [];
+  OfertasTransportes = [];
 
   result.rows.map(oferta => {
       let ofertaSchema = {
@@ -101,9 +101,9 @@ router.get('/listarOfertasTransportes', async (req, res) => {
           "fk_id_estado": oferta[8]
       }
 
-      Ofertas.push(ofertaSchema);
+      OfertasTransportes.push(ofertaSchema);
   })
-  res.json({title: 'Ofertas', 'mydata': Ofertas});
+  res.json({title: 'OfertasTransportes', 'mydata': OfertasTransportes});
 });
 
 
@@ -114,7 +114,7 @@ router.get('/listarOfertasTransportes/:id_ofertaT', async (req, res) => {
   sql = "SELECT cantidad, fecha_creacion, tiene_refrigeracion, precio_final, peso_total, fk_id_usuario, fk_id_subastaT, fk_id_estado FROM oferta_transporte WHERE id_ofertaT = :id_ofertaT_bind";
   result = await BD.Open(sql, binds, true);
 
-  Ofertas = [];
+  OfertasTransportes = [];
 
   result.rows.map(oferta => {
       let ofertaSchema = {
@@ -129,9 +129,9 @@ router.get('/listarOfertasTransportes/:id_ofertaT', async (req, res) => {
           "fk_id_estado": oferta[7]
       }
 
-      Ofertas.push(ofertaSchema);
+      OfertasTransportes.push(ofertaSchema);
   })
-  res.json({title: 'Ofertas', 'mydata': Ofertas});
+  res.json({title: 'OfertasTransportes', 'mydata': OfertasTransportes});
 });
 
 

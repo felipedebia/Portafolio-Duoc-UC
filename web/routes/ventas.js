@@ -9,7 +9,7 @@ const BD = require('../bin/configbd');
 router.get('/listarVentas', async (req, res) => {
   
   binds = {};
-  sql = "SELECT id_venta, tipo_venta, fecha_creacion, fecha_actualizacion, fk_id_pedido, fk_id_seguro, fk_id_tipo, fk_id_estado FROM venta";
+  sql = "SELECT id_venta, fecha_creacion, fecha_actualizacion, fk_id_pedido, fk_id_seguro, fk_id_tipo, fk_id_estado FROM venta";
   result = await BD.Open(sql, binds, true);
 
   Ventas = [];
@@ -17,13 +17,12 @@ router.get('/listarVentas', async (req, res) => {
   result.rows.map(venta => {
       let ventaSchema = {
           "id_venta": venta[0],
-          "tipo_venta": venta[1],
-          "fecha_creacion": venta[2],
-          "fecha_actualizacion": venta[3],
-          "fk_id_pedido": venta[4],
-          "fk_id_seguro": venta[5],
-          "fk_id_tipo": venta[6],
-          "fk_id_estado": venta[7]
+          "fecha_creacion": venta[1],
+          "fecha_actualizacion": venta[2],
+          "fk_id_pedido": venta[3],
+          "fk_id_seguro": venta[4],
+          "fk_id_tipo": venta[5],
+          "fk_id_estado": venta[6]
       }
 
       Ventas.push(ventaSchema);
@@ -36,7 +35,7 @@ router.get('/listarVentas', async (req, res) => {
 router.get('/listarVentas/:id_venta', async (req, res) => {
   
   binds = { "id_venta_bind": req.params.id_venta };
-  sql = "SELECT tipo_venta, fecha_creacion, fecha_actualizacion, fk_id_pedido, fk_id_seguro, fk_id_tipo, fk_id_estado FROM venta WHERE id_venta = :id_venta_bind";
+  sql = "SELECT fecha_creacion, fecha_actualizacion, fk_id_pedido, fk_id_seguro, fk_id_tipo, fk_id_estado FROM venta WHERE id_venta = :id_venta_bind";
   result = await BD.Open(sql, binds, true);
 
   Ventas = [];
@@ -44,13 +43,12 @@ router.get('/listarVentas/:id_venta', async (req, res) => {
   result.rows.map(venta => {
       let ventaSchema = {
           "id_venta": id_venta_bind,
-          "tipo_venta": venta[0],
-          "fecha_creacion": venta[1],
-          "fecha_actualizacion": venta[2],
-          "fk_id_pedido": venta[3],
-          "fk_id_seguro": venta[4],
-          "fk_id_tipo": venta[5],
-          "fk_id_estado": venta[6]
+          "fecha_creacion": venta[0],
+          "fecha_actualizacion": venta[1],
+          "fk_id_pedido": venta[2],
+          "fk_id_seguro": venta[3],
+          "fk_id_tipo": venta[4],
+          "fk_id_estado": venta[5]
       }
 
       Ventas.push(ventaSchema);

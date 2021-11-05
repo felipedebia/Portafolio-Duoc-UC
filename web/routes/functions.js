@@ -61,6 +61,36 @@ async function requestApiListarSubastasTransportes() {
 var ListarSubastasTransportes = requestApiListarSubastasTransportes();
 
 
+// Función API ListarOrdenesBodegas
+async function requestApiListarOrdenesBodegas() {
+	return new Promise(function(resolve, reject) {
+		request('http://localhost:3000/api_ordenes/listarOrdenesBodegas', function (error, response, body) {
+			if (error) return reject(error);
+				importedJSON = JSON.parse(body);
+				console.log('\x1b[37m','[!] requestApiListarOrdenesBodegas cargado en memoria');
+				return resolve(importedJSON);
+		});
+	});
+};
+
+var ListarOrdenesBodegas = requestApiListarOrdenesBodegas();
+
+
+// Función API ListarOrdenesTransportes
+async function requestApiListarOrdenesTransportes() {
+	return new Promise(function(resolve, reject) {
+		request('http://localhost:3000/api_ordenes/listarOrdenesTransportes', function (error, response, body) {
+			if (error) return reject(error);
+				importedJSON = JSON.parse(body);
+				console.log('\x1b[37m','[!] requestApiListarOrdenesTransportes cargado en memoria');
+				return resolve(importedJSON);
+		});
+	});
+};
+
+var ListarOrdenesTransportes = requestApiListarOrdenesTransportes();
+
+
 // Función API ListarFrutas
 async function requestApiListarFrutas() {
 	return new Promise(function(resolve, reject) {
@@ -76,11 +106,77 @@ async function requestApiListarFrutas() {
 var ListarFrutas = requestApiListarFrutas();
 
 
+// Función API ListarPedidos
+async function requestApiListarPedidos() {
+	return new Promise(function(resolve, reject) {
+		request('http://localhost:3000/api_pedidos/listarPedidos', function (error, response, body) {
+			if (error) return reject(error);
+				importedJSON = JSON.parse(body);
+				console.log('\x1b[37m','[!] requestApiListarPedidos cargado en memoria');
+				return resolve(importedJSON);
+		});
+	});
+};
+
+var ListarPedidos = requestApiListarPedidos();
+
+
+// Función API ListarOfertasProductores
+async function requestApiListarOfertasProductores() {
+	return new Promise(function(resolve, reject) {
+		request('http://localhost:3000/api_ofertas/listarOfertasProductores', function (error, response, body) {
+			if (error) return reject(error);
+				importedJSON = JSON.parse(body);
+				console.log('\x1b[37m','[!] requestApiListarOfertasProductores cargado en memoria');
+				return resolve(importedJSON);
+		});
+	});
+};
+
+var ListarOfertasProductores = requestApiListarOfertasProductores();
+
+
+// Función API ListarOfertasTransportes
+async function requestApiListarOfertasTransportes() {
+	return new Promise(function(resolve, reject) {
+		request('http://localhost:3000/api_ofertas/listarOfertasTransportes', function (error, response, body) {
+			if (error) return reject(error);
+				importedJSON = JSON.parse(body);
+				console.log('\x1b[37m','[!] requestApiListarOfertasTransportes cargado en memoria');
+				return resolve(importedJSON);
+		});
+	});
+};
+
+var ListarOfertasTransportes = requestApiListarOfertasTransportes();
+
+
+// Función API ListarVentas
+async function requestApiListarVentas() {
+	return new Promise(function(resolve, reject) {
+		request('http://localhost:3000/api_ventas/listarVentas', function (error, response, body) {
+			if (error) return reject(error);
+				importedJSON = JSON.parse(body);
+				console.log('\x1b[37m','[!] requestApiListarVentas cargado en memoria');
+				return resolve(importedJSON);
+		});
+	});
+};
+
+var ListarVentas = requestApiListarVentas();
+
+
 module.exports ={
     listarUsuarios, 
 	listarContratos, 
 	ListarSubastasFrutas, 
-	ListarSubastasTransportes, 
+	ListarSubastasTransportes,
+	ListarOrdenesBodegas,
+	ListarOrdenesTransportes,
 	ListarFrutas,
+	ListarPedidos,
+	ListarOfertasProductores,
+	ListarOfertasTransportes,
+	ListarVentas,
 	'requestApiListarUsuarios': requestApiListarUsuarios
 }

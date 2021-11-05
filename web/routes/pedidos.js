@@ -9,7 +9,7 @@ const BD = require('../bin/configbd');
 router.get('/listarPedidos', async (req, res) => {
   
   binds = {};
-  sql = "SELECT id_pedido, estado_pedido, direccion_despacho, fecha_creacion, fk_id_tipo, fk_id_ciudad, fk_id_usuario, fk_id_estado FROM pedido";
+  sql = "SELECT id_pedido, direccion_despacho, fecha_creacion, fk_id_tipo, fk_id_ciudad, fk_id_usuario, fk_id_estado FROM pedido";
   result = await BD.Open(sql, binds, true);
 
   Pedidos = [];
@@ -17,13 +17,12 @@ router.get('/listarPedidos', async (req, res) => {
   result.rows.map(pedido => {
       let pedidoSchema = {
           "id_pedido": pedido[0],
-          "estado_pedido": pedido[1],
-          "direccion_despacho": pedido[2],
-          "fecha_creacion": pedido[3],
-          "fk_id_tipo": pedido[4],
-          "fk_id_ciudad": pedido[5],
-          "fk_id_usuario": pedido[6],
-          "fk_id_estado": pedido[7]
+          "direccion_despacho": pedido[1],
+          "fecha_creacion": pedido[2],
+          "fk_id_tipo": pedido[3],
+          "fk_id_ciudad": pedido[4],
+          "fk_id_usuario": pedido[5],
+          "fk_id_estado": pedido[6]
       }
 
       Pedidos.push(pedidoSchema);
@@ -36,7 +35,7 @@ router.get('/listarPedidos', async (req, res) => {
 router.get('/listarPedidos/:id_pedido', async (req, res) => {
   
   binds = { "id_pedido_bind": req.params.id_pedido };
-  sql = "SELECT estado_pedido, direccion_despacho, fecha_creacion, fk_id_tipo, fk_id_ciudad, fk_id_usuario, fk_id_estado FROM pedido WHERE id_pedido = :id_pedido_bind";
+  sql = "SELECT direccion_despacho, fecha_creacion, fk_id_tipo, fk_id_ciudad, fk_id_usuario, fk_id_estado FROM pedido WHERE id_pedido = :id_pedido_bind";
   result = await BD.Open(sql, binds, true);
 
   Pedidos = [];
@@ -44,13 +43,12 @@ router.get('/listarPedidos/:id_pedido', async (req, res) => {
   result.rows.map(pedido => {
       let pedidoSchema = {
           "id_pedido": id_pedido_bind,
-          "estado_pedido": pedido[0],
-          "direccion_despacho": pedido[1],
-          "fecha_creacion": pedido[2],
-          "fk_id_tipo": pedido[3],
-          "fk_id_ciudad": pedido[4],
-          "fk_id_usuario": pedido[5],
-          "fk_id_estado": pedido[6]
+          "direccion_despacho": pedido[0],
+          "fecha_creacion": pedido[1],
+          "fk_id_tipo": pedido[2],
+          "fk_id_ciudad": pedido[3],
+          "fk_id_usuario": pedido[4],
+          "fk_id_estado": pedido[5]
       }
 
       Pedidos.push(pedidoSchema);
@@ -67,7 +65,7 @@ router.get("/anularPedido/:id_pedido", async (req, res) => {
   await BD.Open(sql, [id_pedido_bind], true);
 
   if(res.status(200)) {
-    console.log("[!] Pedido " + req.params.id_pedido + " anulada con éxito");
+    console.log("[!] Pedido " + req.params.id_pedido + " anulado con éxito");
     res.redirect('/pedidos');
 	} else {
 		console.log("[!] Ocurrió un error al intentar anular el pedido " + req.params.id_pedido);

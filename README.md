@@ -38,6 +38,7 @@ Cuando el paquete llegue al cliente final, el estado cambia "Arribado a ciudad",
 
 - FALTA MODIFICAR_FRUTA
 - FALTA AGREGAR NUEVA SUBASTA_FRUTA
+- FALTA AGREGAR NUEVA ORDEN_BODEGA Y ORDEN_TRANSPORTE
 
 ## Funciones pendientes:
 
@@ -45,6 +46,7 @@ Cuando el paquete llegue al cliente final, el estado cambia "Arribado a ciudad",
 - Contadores de Usuarios, Frutas, Ventas y Subastas
 - Subir archivo PDF a Contrato
 - Cambiar secuencias SQL a procedimientos
+- Agregar join a las querys para traer nombres de estados y tipos
 
 ## Rutas principales
 - http://localhost:3000/
@@ -57,7 +59,8 @@ Cuando el paquete llegue al cliente final, el estado cambia "Arribado a ciudad",
 ### Menú Administrador
 - http://localhost:3000/usuarios
 - http://localhost:3000/contratos *
-- http://localhost:3000/ordenes *
+- http://localhost:3000/ordenes_bodega *
+- http://localhost:3000/ordenes_transportes *
 - http://localhost:3000/ventas *
 - http://localhost:3000/subastas_fruta *
 - http://localhost:3000/subastas_transporte *
@@ -198,6 +201,15 @@ Cuando el paquete llegue al cliente final, el estado cambia "Arribado a ciudad",
 | GET  | http://localhost:3000/modificarVenta/:id_venta  |  |
 | POST | http://localhost:3000/api_ventas/anularVenta/:id_venta  | |
 | GET  | http://localhost:3000/venta/:id_venta  |  |
+
+## CRUD Oferta
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/ofertas  |  |
+| GET  | http://localhost:3000/api_ofertas/listarOfertas  | JSON |
+| GET  | http://localhost:3000/modificarOferta/:id_ofertap  |  |
+| POST | http://localhost:3000/api_ofertas/anularOferta/:id_ofertap  | |
+| GET  | http://localhost:3000/oferta/:id_ofertap  |  |
 
 ## CRUD Informe
 | Tipo | URL | Retorna |

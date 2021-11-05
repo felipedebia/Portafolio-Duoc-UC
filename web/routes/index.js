@@ -240,6 +240,7 @@ router.get('/perfil/:id_usuario', async function(req, res, next) {
 
 router.get('/usuarios', function(req, res) {
     if (req.session.isLoggedIn) {
+		functions.requestApiListarUsuarios();
         res.render('usuarios', { title: 'Usuarios - Maipo Grande' });
     } else {
         res.redirect('/');
@@ -375,6 +376,28 @@ router.get('/subastas_transportes', function(req, res) {
 router.get('/pedidos', function(req, res) {
     if (req.session.isLoggedIn) {
         res.render('Pedidos', { title: 'Pedidos - Maipo Grande' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
+
+
+
+// CRUD ORDENES
+router.get('/ordenes_bodegas', function(req, res) {
+    if (req.session.isLoggedIn) {
+        res.render('Ordenes_Bodegas', { title: 'Ordenes Bodegas - Maipo Grande' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
+
+
+router.get('/ordenes_transportes', function(req, res) {
+    if (req.session.isLoggedIn) {
+        res.render('Ordenes_Transportes', { title: 'Ordenes Transportes - Maipo Grande' });
     } else {
         res.redirect('/');
     }

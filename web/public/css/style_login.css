@@ -3,7 +3,7 @@
 }
 
 .bg-image {
-  background-image: url('http://localhost:3000/images/banner-login.jpg');
+  background-image: url('../images/banner-login.jpg');
   background-size: cover;
   background-position: center;
 }

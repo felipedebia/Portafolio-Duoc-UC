@@ -12,7 +12,7 @@ router.get('/listarOrdenesBodegas', async (req, res) => {
   sql = "SELECT id_ordenB, fecha_ingreso, fecha_retiro, fk_id_estado, fk_id_venta FROM orden_bodega";
   result = await BD.Open(sql, binds, true);
 
-  Ordenes = [];
+  OrdenesBodegas = [];
 
   result.rows.map(orden => {
       let ordenSchema = {
@@ -23,9 +23,9 @@ router.get('/listarOrdenesBodegas', async (req, res) => {
           "fk_id_venta": orden[4]
       }
 
-      Ordenes.push(ordenSchema);
+      OrdenesBodegas.push(ordenSchema);
   })
-  res.json({title: 'Ordenes', 'mydata': Ordenes});
+  res.json({title: 'OrdenesBodega', 'mydata': OrdenesBodegas});
 });
 
 
@@ -36,7 +36,7 @@ router.get('/listarOrdenesBodegas/:id_ordenB', async (req, res) => {
   sql = "SELECT fecha_ingreso, fecha_retiro, fk_id_estado, fk_id_venta FROM orden_bodega WHERE id_ordenB = :id_ordenB_bind";
   result = await BD.Open(sql, binds, true);
 
-  Ordenes = [];
+  OrdenesBodegas = [];
 
   result.rows.map(orden => {
       let ordenSchema = {
@@ -47,9 +47,9 @@ router.get('/listarOrdenesBodegas/:id_ordenB', async (req, res) => {
           "fk_id_venta": orden[3]
       }
 
-      Ordenes.push(ordenSchema);
+      OrdenesBodegas.push(ordenSchema);
   })
-  res.json({title: 'Ordenes', 'mydata': Ordenes});
+  res.json({title: 'OrdenesBodega', 'mydata': OrdenesBodegas});
 });
 
 
@@ -75,23 +75,24 @@ router.get("/anularOrdenBodega/:id_ordenb", async (req, res) => {
 router.get('/listarOrdenesTransportes', async (req, res) => {
   
   binds = {};
-  sql = "SELECT id_ordenT, fecha_ingreso, fecha_retiro, fk_id_estado, fk_id_venta FROM orden_bodega";
+  sql = "SELECT id_ordenT, fecha_llegada, fecha_retiro, url_documento, fk_id_estado, fk_id_venta FROM orden_transporte";
   result = await BD.Open(sql, binds, true);
 
-  Ordenes = [];
+  OrdenesTransportes = [];
 
   result.rows.map(orden => {
       let ordenSchema = {
           "id_ordenT": orden[0],
-          "fecha_ingreso": orden[1],
+          "fecha_llegada": orden[1],
           "fecha_retiro": orden[2],
-          "fk_id_estado": orden[3],
-          "fk_id_venta": orden[4]
+          "url_documento": orden[3],
+          "fk_id_estado": orden[4],
+          "fk_id_venta": orden[5]
       }
 
-      Ordenes.push(ordenSchema);
+      OrdenesTransportes.push(ordenSchema);
   })
-  res.json({title: 'Ordenes', 'mydata': Ordenes});
+  res.json({title: 'OrdenesTransportes', 'mydata': OrdenesTransportes});
 });
 
 
@@ -99,23 +100,24 @@ router.get('/listarOrdenesTransportes', async (req, res) => {
 router.get('/listarOrdenesTransportes/:id_ordenT', async (req, res) => {
   
   binds = { "id_ordenT_bind": req.params.id_ordenT };
-  sql = "SELECT fecha_ingreso, fecha_retiro, fk_id_estado, fk_id_venta FROM orden_bodega WHERE id_ordenT = :id_ordenT_bind";
+  sql = "SELECT fecha_ingreso, fecha_retiro, url_documento, fk_id_estado, fk_id_venta FROM orden_transporte WHERE id_ordenT = :id_ordenT_bind";
   result = await BD.Open(sql, binds, true);
 
-  Ordenes = [];
+  OrdenesTransportes = [];
 
   result.rows.map(orden => {
       let ordenSchema = {
           "id_ordenT": id_ordenT_bind,
           "fecha_ingreso": orden[0],
           "fecha_retiro": orden[1],
-          "fk_id_estado": orden[2],
-          "fk_id_venta": orden[3]
+          "url_documento": orden[2],
+          "fk_id_estado": orden[3],
+          "fk_id_venta": orden[4]
       }
 
-      Ordenes.push(ordenSchema);
+      OrdenesTransportes.push(ordenSchema);
   })
-  res.json({title: 'Ordenes', 'mydata': Ordenes});
+  res.json({title: 'OrdenesTransportes', 'mydata': OrdenesTransportes});
 });
 
 
