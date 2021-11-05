@@ -354,6 +354,15 @@ router.get('/frutas', function(req, res) {
 
 // CRUD SUBASTAS
 
+router.get('/subastas', function(req, res) {
+    if (req.session.isLoggedIn) {
+        res.render('Subastas', { title: 'Subastas - Maipo Grande' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
+
 
 router.get('/subastas_frutas', function(req, res) {
     if (req.session.isLoggedIn) {
