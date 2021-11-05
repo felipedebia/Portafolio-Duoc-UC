@@ -7,7 +7,7 @@
                         <div class="card-header card-header-tabs card-header-info">
                             <div class="nav-tabs-navigation">
                                 <div class="nav-tabs-wrapper">
-                                    <span class="nav-tabs-title">Pedidos:</span>
+                                    <span class="nav-tabs-title">Mis pedidos:</span>
                                     <ul class="nav nav-tabs" data-tabs="tabs">
                                         <li class="nav-item">
                                             <a class="nav-link active" href="#listadoPedidos" data-toggle="tab">
@@ -71,12 +71,12 @@
                                                             <%= pedido.fecha_creacion %>
                                                         </td>
                                                         <td>
-                                                            <%= pedido.fk_id_estado %>
+                                                            <%= pedido.fk_texto_estado %>
                                                         </td>
                                                         <td>
                                                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPedido<%= pedido.id_pedido %>">Ver</button>
                                                             <a href="/modificarPedido/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Modificar</button></a>
-                                                            <a href="../api_pedidos/eliminarPedido/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Eliminar</button></a>
+                                                            <a href="../api_pedidos/anularPedido/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Anular</button></a>
                                                         </td>
                                                     </tr>
                                                     <% } %>
@@ -92,8 +92,8 @@
                                                 <div class="row">
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                                         <div class="form-group">
-                                                            <label>País destino</label>
-                                                            <select class="form-control" data-size="10" name="pais" data-style="select-with-transition btn" title="Selecciona una opción">
+                                                            <label>Pais de destino *</label>
+                                                            <select class="form-control" name="pais" data-style="select-with-transition btn" title="Selecciona una opción">
                                                                 <%
                                                                     Paises.sort((a,b) => {
                                                                         const nombreA = a.nombre.toLowerCase();
@@ -115,8 +115,8 @@
                                                     </div>
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                                         <div class="form-group">
-                                                            <label>Ciudad destino *</label>
-                                                            <select class="form-control" data-size="5" name="ciudad" data-style="select-with-transition btn" title="Selecciona una opción">
+                                                            <label>Ciudad de destino *</label>
+                                                            <select class="form-control" name="fk_id_ciudad" data-style="select-with-transition btn" title="Selecciona una opción">
                                                                 <%
                                                                     Ciudades.sort((a,b) => {
                                                                         const nombreA = a.nombre.toLowerCase();
@@ -131,19 +131,18 @@
                                                                     });
                                                                     %>
                                                                 <% for(var ciudad of Ciudades){ %>
-                                                                    <option name="<%=ciudad.nombre%>" value="<%=ciudad.nombre%>"><%=ciudad.nombre%></option>
+                                                                    <option name="fk_id_ciudad" value="<%=ciudad.id_ciudad%>"><%=ciudad.nombre%></option>
                                                                 <% } %>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
                                                         <div class="form-group">
-                                                            <label>Direccion despacho *</label>
-                                                            <input class="form-control mb-4" id="inputFechaInicio" type="text" name="nombre" required data-toggle="datepicker">
+                                                            <label>Dirección de despacho *</label>
+                                                            <input class="form-control mb-4" id="inputDireccion" type="text" name="direccion_despacho" required>
                                                             <div class="invalid-feedback">Ingresa la direccion de despacho</div>
                                                         </div>
                                                     </div>
-
                                                 </div>
                                                 <button class="btn btn-info mb-2 pull-right" type="submit"><i class="fas fa-sign-in-alt"></i> Crear nuevo pedido</button>
                                             </form>
