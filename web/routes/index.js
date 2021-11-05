@@ -26,39 +26,29 @@ router.get('/', function(req, res, next) {
 router.post('/auth', async (req, res) => {
 	if (req.body.correo && req.body.password) {
 		binds = { "correo_bind": req.body.correo};
-		sql = 'SELECT correo, nombre, apellido, num_documento, password, id_usuario, fk_id_tipo, fk_id_estado FROM usuario WHERE correo = :correo_bind';
+		sql = 'SELECT usuario.id_usuario, usuario.num_documento, usuario.nombre, usuario.apellido, usuario.correo, usuario.password, usuario.fk_id_tipo, tipo_usuario.nombre, usuario.fk_id_estado FROM usuario JOIN tipo_usuario ON usuario.fk_id_tipo = tipo_usuario.id_tipo WHERE usuario.correo = :correo_bind';
 
         result = await BD.Open(sql, binds, false);
 
 		  	// Si encuentra los datos
 			if (result.rows.length > 0) {
 
-				var passwordDecrypted = simpleCryp.decrypt(result.rows[0][4])
+				var passwordDecrypted = simpleCryp.decrypt(result.rows[0][5])
 				// Si la contraseña desencriptada es igual a la que viene por post
 				if(req.body.password == passwordDecrypted) {
 					
-					// Convertimos el id de tipo_usuario a texto
-					var tiposUsuarios = {
-						1 : "Administrador",
-						2 : "Transportista",
-						3 : "Cliente Externo",
-						4 : "Cliente Interno",
-						5 : "Productor",
-						6 : "Consultor"
-					};
-	
-					var tipoUsuarioTexto = tiposUsuarios[result.rows[0][6]];
-	
+					// Asignamos true al isLoggedIn
 					req.session.isLoggedIn = true;
+
 					// Guardamos datos del usuario en session
-					req.session.correo = result.rows[0][0];
-					req.session.nombre = result.rows[0][1];
-					req.session.apellido = result.rows[0][2];
-					req.session.num_documento = result.rows[0][3];
-					req.session.id_usuario = result.rows[0][5];
+					req.session.id_usuario = result.rows[0][0];
+					req.session.num_documento = result.rows[0][1];
+					req.session.nombre = result.rows[0][2];
+					req.session.apellido = result.rows[0][3];
+					req.session.correo = result.rows[0][4];
 					req.session.tipo_usuario = result.rows[0][6];
-					req.session.tipo_usuario_texto = tipoUsuarioTexto;
-					req.session.estado_usuario = result.rows[0][7];
+					req.session.tipo_usuario_texto = result.rows[0][7];
+					req.session.estado_usuario = result.rows[0][8];
 					res.redirect('/panel');
 					console.log("[!] Usuario " + req.body.correo + " conectado con éxito");
 
@@ -310,7 +300,7 @@ router.get('/contrato/:id_contrato', async function(req, res, next) {
 
 		// Hacemos una consulta trayendo todos los datos del usuario
 		binds = {"id_contrato": id_contrato};
-		sql = "SELECT url_documento, fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado FROM contrato WHERE id_contrato = :id_contrato";
+		sql = "SELECT contrato.url_documento, contrato.fecha_inicio, contrato.fecha_vencimiento, contrato.fk_id_tipo, contrato.fk_id_estado, rel_contrato_usuario.fk_id_usuario, usuario.nombre, usuario.apellido FROM contrato JOIN rel_contrato_usuario ON contrato.id_contrato = rel_contrato_usuario.fk_id_contrato JOIN usuario ON rel_contrato_usuario.fk_id_usuario = usuario.id_usuario WHERE contrato.id_contrato = :id_contrato";
 		result = await BD.Open(sql, binds, false);
 
 		// Si los datos estan correctos
@@ -324,7 +314,10 @@ router.get('/contrato/:id_contrato', async function(req, res, next) {
 					fecha_inicio: moment(result.rows[0][1]).format('YYYY-MM-DD'),
 					fecha_vencimiento: moment(result.rows[0][2]).format('YYYY-MM-DD'),
 					fk_id_tipo: result.rows[0][3],
-					fk_id_estado: result.rows[0][4]
+					fk_id_estado: result.rows[0][4],
+					fk_id_usuario: result.rows[0][5],
+					usuario_nombre: result.rows[0][6],
+					usuario_apellido: result.rows[0][7]
 				  }
 			];
 

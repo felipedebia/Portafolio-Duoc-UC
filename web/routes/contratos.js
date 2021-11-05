@@ -10,7 +10,7 @@ var moment = require('moment');
 router.get('/listarContratos', async (req, res) => {
   
   binds = {};
-  sql = "SELECT id_contrato, url_documento, fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado, fk_id_usuario FROM contrato JOIN rel_contrato_usuario ON contrato.id_contrato = rel_contrato_usuario.fk_id_contrato";
+  sql = "SELECT id_contrato, url_documento, fecha_inicio, fecha_vencimiento, fk_id_tipo, tipo_contrato.nombre, fk_id_estado, estado_contrato.descripcion, rel_contrato_usuario.fk_id_usuario FROM contrato JOIN rel_contrato_usuario ON contrato.id_contrato = rel_contrato_usuario.fk_id_contrato JOIN tipo_contrato ON contrato.fk_id_tipo = tipo_contrato.id_tipo JOIN estado_contrato ON contrato.fk_id_estado = estado_contrato.id_estado";
   result = await BD.Open(sql, binds, true);
 
   Contratos = [];
@@ -22,8 +22,10 @@ router.get('/listarContratos', async (req, res) => {
         "fecha_inicio": moment(contrato[2]).format('DD-MM-YYYY'),
         "fecha_vencimiento": moment(contrato[3]).format('DD-MM-YYYY'),
         "fk_id_tipo": contrato[4],
-        "fk_id_estado": contrato[5],
-        "fk_id_usuario": contrato[6]
+        "fk_texto_tipo": contrato[5],
+        "fk_id_estado": contrato[6],
+        "fk_texto_estado": contrato[7],
+        "fk_id_usuario": contrato[8]
     }
 
     Contratos.push(contratoSchema);

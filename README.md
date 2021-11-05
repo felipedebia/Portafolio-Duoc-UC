@@ -59,11 +59,9 @@ Iniciar node en la carpeta web
 ### Menú Administrador
 - http://localhost:3000/usuarios
 - http://localhost:3000/contratos *
-- http://localhost:3000/ordenes_bodega *
-- http://localhost:3000/ordenes_transportes *
+- http://localhost:3000/ordenes *
 - http://localhost:3000/ventas *
-- http://localhost:3000/subastas_fruta *
-- http://localhost:3000/subastas_transporte *
+- http://localhost:3000/subastas *
 - http://localhost:3000/frutas *
 
 ### Menú Productor
