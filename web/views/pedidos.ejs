@@ -41,7 +41,7 @@
                                                 <% for(var pedido of Pedidos) { %>
                                                     <% if (pedido.fk_id_usuario == session.id_usuario && pedido.id_estado != 6){ %>
                                                         <div class="modal fade" id="modalPedido<%= pedido.id_pedido %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog" role="document">
+                                                            <div class="modal-dialog modal-lg" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title" id="exampleModalLabel">ID Pedido #
@@ -54,17 +54,34 @@
                                                                     <div class="modal-body">
                                                                         <span><strong>Direccion de despacho:</strong> <%= pedido.direccion_despacho %></span></br>
                                                                         <span><strong>Fecha del pedido:</strong> <%= pedido.fecha_creacion %></span></br>
-                                                                        <span><strong>Estado del pedido:</strong> <%= pedido.descripcion %></span>
+                                                                        <span><strong>Estado del pedido:</strong> <%= pedido.fk_texto_estado %></span>
+                                                                        <div class="mt-4">
+                                                                            <span><strong>Detalles del pedido:</strong></span></br>
+                                                                            <ul>
+                                                                            <% for(var detalle of Detalles){ %>
+                                                                                <%if(detalle.id_pedido == pedido.id_pedido){%>
+                                                                                    <li><strong>Fruta:</strong> <%= detalle.nombre %> - <strong>Calidad:</strong> <%= detalle.calidad %> - <strong>Cantidad:</strong> <%= detalle.cantidad %></li>
+                                                                                <% } %>
+                                                                            <% } %>
+                                                                            </ul>
+                                                                        </div>
+                                                                        
+                                                                        <div class="callout callout-warning">
+                                                                            <h4>Proceso de Subasta de Fruta disponible</h4>
+                                                                            Selecciona el botón "Iniciar Subasta de Fruta" para comenzar
+                                                                        </div>
+
+                                                                        <div class="callout callout-warning">
+                                                                            <h4>Proceso de Subasta de Transporte disponible</h4>
+                                                                            Selecciona el botón "Iniciar Subasta de Transporte" para comenzar
+                                                                        </div>
+
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <span><strong>Detalle del pedido:</strong></span></br>
+                                                                        <button class="btn btn-primary" type="submit">Iniciar Subasta de Fruta</button>
+                                                                        <button class="btn btn-primary" type="submit">Iniciar Subasta de Transporte</button>
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                                                     </div>
-                                                                    <% for(var detalle of Detalles){ %>
-                                                                        <%if(detalle.id_pedido == pedido.id_pedido){%>
-                                                                            <span class="ml-4">Fruta: <%= detalle.nombre %> - Calidad: <%= detalle.calidad %> - Cantidad: <%= detalle.cantidad %></span>
-                                                                        <% } %>
-                                                                    <% } %>
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                                                 </div>
                                                             </div>
                                                         </div>

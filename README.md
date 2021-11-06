@@ -21,12 +21,12 @@ Iniciar node en la carpeta web
 ## Flujo: 
 
 - Hacer pedido, vista donde admin apruebe o rechaze pedidos
-- Hacer subasta de frutas (el admin la levanta)
+- Administrador hace subasta de frutas
 - Productores subes sus ofertas de productos
 - Sistema elije mejor oferta en base a precio calidad
-- Hacer subasta de transporte
+- Administrador hace subasta de transporte
 - Transportistas suben sus ofertas de transporte
-- El administrador elije mejor oferta de transporte
+- Administrador elije mejor oferta de transporte
 - Administrador completa datos de detalle_venta
 - Si administrador acepta negociación con cliente externo, se cambia estado de venta, se crea orden transporte, orden de bodega y se notifica a productores que deben enviar sus productos. Si se rechaza la negociacón se cancela la venta.
 - El sistema debe reconocer cuando llegan productos a bodega, se debe marcar como recepcionado en bodega, en bodega se pone "Revisión de producto"
@@ -59,6 +59,7 @@ Iniciar node en la carpeta web
 - http://localhost:3000/usuarios
 - http://localhost:3000/contratos *
 - http://localhost:3000/ordenes *
+- http://localhost:3000/pedidos *
 - http://localhost:3000/ventas *
 - http://localhost:3000/subastas *
 - http://localhost:3000/frutas *
@@ -70,7 +71,7 @@ Iniciar node en la carpeta web
 - http://localhost:3000/ventas *
 
 ### Menú Cliente Externo e Interno *
-- http://localhost:3000/pedidos *
+- http://localhost:3000/mispedidos *
 - http://localhost:3000/miscompras *
 
 ### Menú Transportista
@@ -197,7 +198,7 @@ Iniciar node en la carpeta web
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/api_pedidos/listarPedidos  | JSON |
 | GET  | http://localhost:3000/modificarPedido/:id_pedido  |  |
-| POST | http://localhost:3000/api_pedidos/anularPedido/:id_pedido  | |
+| GET  | http://localhost:3000/api_pedidos/eliminarPedido/:id_pedido  | |
 | GET  | http://localhost:3000/pedido/:id_pedido  |  |
 
 ## CRUD Pedido_Detalle
@@ -205,6 +206,7 @@ Iniciar node en la carpeta web
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/api_pedidos/listarPedidoDetalles  | JSON |
 | GET  | http://localhost:3000/pedido_detalles/:id_pedido  | |
+| GET  | http://localhost:3000/api_pedidos/eliminarPedidoDetalles/:id_pedido  | |
 
 ## CRUD Venta
 | Tipo | URL | Retorna |
