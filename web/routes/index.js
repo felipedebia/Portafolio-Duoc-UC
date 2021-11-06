@@ -229,7 +229,7 @@ router.get('/perfil/:id_usuario', async function(req, res, next) {
 
 router.get('/usuarios', function(req, res) {
     if (req.session.isLoggedIn) {
-		functions.requestApiListarUsuarios();
+		functions.ListarUsuarios();
         res.render('usuarios', { title: 'Usuarios - Maipo Grande' });
     } else {
         res.redirect('/');
@@ -241,7 +241,7 @@ router.get('/usuarios', function(req, res) {
 // CRUD CONTRATOS
 router.get('/contratos', function(req, res) {
     if (req.session.isLoggedIn) {
-		functions.requestApiListarContratos();
+		functions.ListarContratos();
         res.render('contratos', { title: 'Contratos - Maipo Grande' });
     } else {
         res.redirect('/');
@@ -334,7 +334,7 @@ router.get('/contrato/:id_contrato', async function(req, res, next) {
 // CRUD FRUTAS
 router.get('/frutas', function(req, res) {
     if (req.session.isLoggedIn) {
-		functions.requestApiListarFrutas();
+		functions.ListarFrutas();
         res.render('Frutas', { title: 'Frutas - Maipo Grande' });
     } else {
         res.redirect('/');
@@ -356,7 +356,7 @@ router.get('/subastas', function(req, res) {
 
 router.get('/subastas_frutas', function(req, res) {
     if (req.session.isLoggedIn) {
-		functions.requestApiListarSubastasFrutas();
+		functions.ListarSubastasFrutas();
         res.render('Subastas_Frutas', { title: 'Subastas Frutas - Maipo Grande' });
     } else {
         res.redirect('/');
@@ -404,7 +404,7 @@ router.get('/subasta_fruta/:id_subastaF', async function(req, res, next) {
 
 router.get('/subastas_transportes', function(req, res) {
     if (req.session.isLoggedIn) {
-		functions.requestApiListarSubastasTransportes();
+		functions.ListarSubastasTransportes();
         res.render('Subastas_Transportes', { title: 'Subastas Transportes - Maipo Grande' });
     } else {
         res.redirect('/');
@@ -455,7 +455,7 @@ router.get('/subasta_transporte/:id_subastaT', async function(req, res, next) {
 // CRUD MISPEDIDOS
 router.get('/mispedidos', function(req, res) {
     if (req.session.isLoggedIn) {
-        functions.requestApiListarPedidos();
+        functions.ListarPedidos();
         res.render('mispedidos', { title: 'Mis Pedidos - Maipo Grande' });
     } else {
         res.redirect('/');
@@ -469,7 +469,7 @@ router.get('/pedido_detalles/:id_pedido', function(req, res) {
         id_Pedido: req.params.id_pedido
     }];
     if (req.session.isLoggedIn) {
-        functions.requestApiListarPedidoDetalles();
+        functions.ListarPedidoDetalles();
         res.render('pedido_detalles', { title: 'Pedido Detalles - Maipo Grande', data: pedidoIdData });
     } else {
         res.redirect('/');
@@ -481,7 +481,7 @@ router.get('/pedido_detalles/:id_pedido', function(req, res) {
 // CRUD PEDIDOS
 router.get('/pedidos', function(req, res) {
     if (req.session.isLoggedIn) {
-        functions.requestApiListarPedidos();
+        functions.ListarPedidos();
         res.render('pedidos', { title: 'Pedidos - Maipo Grande' });
     } else {
         res.redirect('/');
@@ -503,7 +503,7 @@ router.get('/ordenes', function(req, res) {
 
 router.get('/ordenes_bodegas', function(req, res) {
     if (req.session.isLoggedIn) {
-		functions.requestApiListarOrdenesBodegas();
+		functions.ListarOrdenesBodegas();
         res.render('Ordenes_Bodegas', { title: 'Ordenes Bodegas - Maipo Grande' });
     } else {
         res.redirect('/');
@@ -514,7 +514,7 @@ router.get('/ordenes_bodegas', function(req, res) {
 
 router.get('/ordenes_transportes', function(req, res) {
     if (req.session.isLoggedIn) {
-		functions.requestApiListarOrdenesTransportes();
+		functions.ListarOrdenesTransportes();
         res.render('Ordenes_Transportes', { title: 'Ordenes Transportes - Maipo Grande' });
     } else {
         res.redirect('/');
@@ -536,7 +536,7 @@ router.get('/ofertas', function(req, res) {
 
 router.get('/ofertas_productores', function(req, res) {
     if (req.session.isLoggedIn) {
-		//functions.requestApiListarOrdenesTransportes();
+		//functions.ListarOfertasTransportes();
         res.render('Ofertas_Productores', { title: 'Ofertas de Productores - Maipo Grande' });
     } else {
         res.redirect('/');
@@ -547,7 +547,7 @@ router.get('/ofertas_productores', function(req, res) {
 
 router.get('/ofertas_transportes', function(req, res) {
     if (req.session.isLoggedIn) {
-		//functions.requestApiListarOrdenesTransportes();
+		//functions.ListarOfertasTransportes();
         res.render('Ofertas_Transportes', { title: 'Ofertas de Transportes- Maipo Grande' });
     } else {
         res.redirect('/');

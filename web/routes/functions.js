@@ -16,241 +16,241 @@ function obtenerFechaActual() {
 }
 
 // Función API ListarUsuarios
-async function requestApiListarUsuarios() {
+async function ListarUsuarios() {
 	return new Promise(function(resolve, reject) {
 		request('http://localhost:3000/api_usuarios/listarUsuarios', function (error, response, body) {
 			if (error) console.log("error");
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListarUsuarios cargado');
+				console.log('\x1b[37m','[!] ListarUsuarios cargado');
 				return resolve(importedJSON);
 		});
 	});
 };
 
-var listarUsuarios = requestApiListarUsuarios();
+var listarUsuarios = ListarUsuarios();
 
 
 // Función API ListarContratos
-async function requestApiListarContratos() {
+async function ListarContratos() {
 	return new Promise(function(resolve, reject) {
 		request('http://localhost:3000/api_contratos/listarContratos', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListarContratos cargado');
+				console.log('\x1b[37m','[!] ListarContratos cargado');
 				return resolve(importedJSON);
 		});
 	});
 };
 
-var listarContratos = requestApiListarContratos();
+var listarContratos = ListarContratos();
 
 
 // Función API ListarSubastasFrutas
-async function requestApiListarSubastasFrutas() {
+async function ListarSubastasFrutas() {
 	return new Promise(function(resolve, reject) {
 		request('http://localhost:3000/api_subastas/listarSubastasFrutas', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListarSubastasFrutas cargado');
+				console.log('\x1b[37m','[!] ListarSubastasFrutas cargado');
 				return resolve(importedJSON);
 		});
 	});
 };
 
-var ListarSubastasFrutas = requestApiListarSubastasFrutas();
+var ListarSubastasFrutas = ListarSubastasFrutas();
 
 
 // Función API ListarSubastasTransportes
-async function requestApiListarSubastasTransportes() {
+async function ListarSubastasTransportes() {
 	return new Promise(function(resolve, reject) {
 		request('http://localhost:3000/api_subastas/listarSubastasTransportes', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListarSubastasTransportes cargado');
+				console.log('\x1b[37m','[!] ListarSubastasTransportes cargado');
 				return resolve(importedJSON);
 		});
 	});
 };
 
-var ListarSubastasTransportes = requestApiListarSubastasTransportes();
+var ListarSubastasTransportes = ListarSubastasTransportes();
 
 
 // Función API ListarOrdenesBodegas
-async function requestApiListarOrdenesBodegas() {
+async function ListarOrdenesBodegas() {
 	return new Promise(function(resolve, reject) {
 		request('http://localhost:3000/api_ordenes/listarOrdenesBodegas', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListarOrdenesBodegas cargado');
+				console.log('\x1b[37m','[!] ListarOrdenesBodegas cargado');
 				return resolve(importedJSON);
 		});
 	});
 };
 
-var ListarOrdenesBodegas = requestApiListarOrdenesBodegas();
+var ListarOrdenesBodegas = ListarOrdenesBodegas();
 
 
 // Función API ListarOrdenesTransportes
-async function requestApiListarOrdenesTransportes() {
+async function ListarOrdenesTransportes() {
 	return new Promise(function(resolve, reject) {
 		request('http://localhost:3000/api_ordenes/listarOrdenesTransportes', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListarOrdenesTransportes cargado');
+				console.log('\x1b[37m','[!] ListarOrdenesTransportes cargado');
 				return resolve(importedJSON);
 		});
 	});
 };
 
-var ListarOrdenesTransportes = requestApiListarOrdenesTransportes();
+var ListarOrdenesTransportes = ListarOrdenesTransportes();
 
 
 // Función API ListarFrutas
-async function requestApiListarFrutas() {
+async function ListarFrutas() {
 	return new Promise(function(resolve, reject) {
 		request('http://localhost:3000/api_frutas/listarFrutas', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListarFrutas cargado');
+				console.log('\x1b[37m','[!] ListarFrutas cargado');
 				return resolve(importedJSON);
 		});
 	});
 };
 
-var ListarFrutas = requestApiListarFrutas();
+var ListarFrutas = ListarFrutas();
 
 
 // Función API ListarPedidos
-async function requestApiListarPedidos() {
+async function ListarPedidos() {
 	return new Promise(function(resolve, reject) {
 		request('http://localhost:3000/api_pedidos/listarPedidos', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListarPedidos cargado');
+				console.log('\x1b[37m','[!] ListarPedidos cargado');
 				return resolve(importedJSON);
 		});
 	});
 };
 
-var ListarPedidos = requestApiListarPedidos();
+var ListarPedidos = ListarPedidos();
 
 
 // Función API ListarOfertasProductores
-async function requestApiListarOfertasProductores() {
+async function ListarOfertasProductores() {
 	return new Promise(function(resolve, reject) {
 		request('http://localhost:3000/api_ofertas/listarOfertasProductores', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListarOfertasProductores cargado');
+				console.log('\x1b[37m','[!] ListarOfertasProductores cargado');
 				return resolve(importedJSON);
 		});
 	});
 };
 
-var ListarOfertasProductores = requestApiListarOfertasProductores();
+var ListarOfertasProductores = ListarOfertasProductores();
 
 
 // Función API ListarOfertasTransportes
-async function requestApiListarOfertasTransportes() {
+async function ListarOfertasTransportes() {
 	return new Promise(function(resolve, reject) {
 		request('http://localhost:3000/api_ofertas/listarOfertasTransportes', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListarOfertasTransportes cargado');
+				console.log('\x1b[37m','[!] ListarOfertasTransportes cargado');
 				return resolve(importedJSON);
 		});
 	});
 };
 
-var ListarOfertasTransportes = requestApiListarOfertasTransportes();
+var ListarOfertasTransportes = ListarOfertasTransportes();
 
 
 // Función API ListarVentas
-async function requestApiListarVentas() {
+async function ListarVentas() {
 	return new Promise(function(resolve, reject) {
 		request('http://localhost:3000/api_ventas/listarVentas', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] requestApiListarVentas cargado');
+				console.log('\x1b[37m','[!] ListarVentas cargado');
 				return resolve(importedJSON);
 		});
 	});
 };
 
-var ListarVentas = requestApiListarVentas();
+var ListarVentas = ListarVentas();
 
 
 // Función API ListarPaises
-async function requestApiListarPaises() {
+async function ListarPaises() {
     return new Promise(function(resolve, reject) {
         request('http://localhost:3000/api_extras/listarPaises', function(error, response, body) {
             if (error) return reject(error);
             importedJSON = JSON.parse(body);
-            console.log('\x1b[37m', '[!] requestApiListarPaises cargado');
+            console.log('\x1b[37m', '[!] ListarPaises cargado');
             return resolve(importedJSON);
         });
     });
 };
-var ListarPaises = requestApiListarPaises();
+var ListarPaises = ListarPaises();
 
 
 // Función API ListarCiudades
-async function requestApiListarCiudades() {
+async function ListarCiudades() {
     return new Promise(function(resolve, reject) {
         request('http://localhost:3000/api_extras/listarCiudades', function(error, response, body) {
             if (error) return reject(error);
             importedJSON = JSON.parse(body);
-            console.log('\x1b[37m', '[!] requestApiListarCiudades cargado');
+            console.log('\x1b[37m', '[!] ListarCiudades cargado');
             return resolve(importedJSON);
         });
     });
 };
-var ListarCiudades = requestApiListarCiudades();
+var ListarCiudades = ListarCiudades();
 
 
 // Función API ListarCalidadesFrutas
-async function requestApiListarCalidadesFrutas() {
+async function ListarCalidadesFrutas() {
     return new Promise(function(resolve, reject) {
         request('http://localhost:3000/api_extras/listarCalidadesFrutas', function(error, response, body) {
             if (error) return reject(error);
             importedJSON = JSON.parse(body);
-            console.log('\x1b[37m', '[!] requestApiListarCalidadesFrutas cargado en memoria');
+            console.log('\x1b[37m', '[!] ListarCalidadesFrutas cargado en memoria');
             return resolve(importedJSON);
         });
     });
 };
-var listarCalidadesFrutas = requestApiListarCalidadesFrutas();
+var listarCalidadesFrutas = ListarCalidadesFrutas();
 
 
 // Función API ListarPedidoDetalles
-async function requestApiListarPedidoDetalles() {
+async function ListarPedidoDetalles() {
     return new Promise(function(resolve, reject) {
         request('http://localhost:3000/api_pedidos/listarPedidoDetalles', function(error, response, body) {
             if (error) return reject(error);
             importedJSON = JSON.parse(body);
-            console.log('\x1b[37m', '[!] requestApiListarPedidoDetalles cargado en memoria');
+            console.log('\x1b[37m', '[!] ListarPedidoDetalles cargado en memoria');
             return resolve(importedJSON);
         });
     });
 };
-var ListarPedidoDetalles = requestApiListarPedidoDetalles();
+var ListarPedidoDetalles = ListarPedidoDetalles();
 
 
 module.exports ={
 	'obtenerFechaActual': obtenerFechaActual,
-	'requestApiListarUsuarios': requestApiListarUsuarios,
-	'requestApiListarContratos': requestApiListarContratos,
-	'requestApiListarSubastasFrutas': requestApiListarSubastasFrutas,
-	'requestApiListarSubastasTransportes': requestApiListarSubastasTransportes,
-	'requestApiListarOrdenesBodegas': requestApiListarOrdenesBodegas,
-	'requestApiListarOrdenesTransportes': requestApiListarOrdenesTransportes,
-	'requestApiListarFrutas': requestApiListarFrutas,
-    'requestApiListarPedidos': requestApiListarPedidos,
-	'requestApiListarOfertasProductores': requestApiListarOfertasProductores,
-	'requestApiListarOfertasTransportes': requestApiListarOfertasTransportes,
-	'requestApiListarVentas': requestApiListarVentas,
-    'requestApiListarPaises': requestApiListarPaises,
-    'requestApiListarCiudades': requestApiListarCiudades,
-	'requestApiListarCalidadesFrutas': requestApiListarCalidadesFrutas,
-    'requestApiListarPedidoDetalles': requestApiListarPedidoDetalles
+	'ListarUsuarios': ListarUsuarios,
+	'ListarContratos': ListarContratos,
+	'ListarSubastasFrutas': ListarSubastasFrutas,
+	'ListarSubastasTransportes': ListarSubastasTransportes,
+	'ListarOrdenesBodegas': ListarOrdenesBodegas,
+	'ListarOrdenesTransportes': ListarOrdenesTransportes,
+	'ListarFrutas': ListarFrutas,
+    'ListarPedidos': ListarPedidos,
+	'ListarOfertasProductores': ListarOfertasProductores,
+	'ListarOfertasTransportes': ListarOfertasTransportes,
+	'ListarVentas': ListarVentas,
+    'ListarPaises': ListarPaises,
+    'ListarCiudades': ListarCiudades,
+	'ListarCalidadesFrutas': ListarCalidadesFrutas,
+    'ListarPedidoDetalles': ListarPedidoDetalles
 }

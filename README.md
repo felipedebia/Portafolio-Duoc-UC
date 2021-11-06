@@ -244,6 +244,7 @@ Iniciar node en la carpeta web
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/subastas_frutas  |  |
+| GET  | http://localhost:3000/api_subastas/crearSubastaFruta/:id_subastaF  | |
 | GET  | http://localhost:3000/api_subastas/listarSubastasFrutas  | JSON |
 | GET  | http://localhost:3000/modificarSubastaFruta/:id_subastaF  |  |
 | POST | http://localhost:3000/api_subastas/anularSubastaFruta/:id_subastaF  | |

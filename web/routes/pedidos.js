@@ -145,7 +145,7 @@ router.post('/crearPedidoDetalle', async(req, res) => {
   // Si tuvo conexión a la DB
   if (res.status(200)) {
       console.log("[!] Pedido creado con éxito");
-      functions.requestApiListarPedidoDetalles();
+      functions.ListarPedidoDetalles();
       res.redirect('/pedido_detalles/' + fk_id_pedido);
   } else {
       console.log("[!] Ocurrió un error al intentar registrar el pedido ");
@@ -178,7 +178,7 @@ router.get("/eliminarPedidoDetalles/:id_detalle_pedido", async(req, res) => {
 
   if (consulta) {
       console.log("[!] Detalle pedido " + req.params.id_detalle_pedido + " eliminado con éxito");
-      functions.requestApiListarDetallePedido();
+      functions.ListarDetallePedido();
       res.redirect(req.get('referer'));
   } else {
       console.log("[!] Ocurrió un error al intentar eliminar el detalle pedido " + req.params.id_pedido);
