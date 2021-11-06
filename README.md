@@ -45,8 +45,7 @@ Iniciar node en la carpeta web
 - Contadores de Usuarios, Frutas, Ventas y Subastas
 - Subir archivo PDF a Contrato
 - Cambiar secuencias SQL a procedimientos
-- Agregar join a las querys para traer nombres de estados y tipos
-- Enviar correos
+- Hacer templates de correos y agregarlos (ya tenemos el paquete configurado y funcionando)
 
 ## Rutas principales
 - http://localhost:3000/
