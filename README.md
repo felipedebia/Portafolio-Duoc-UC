@@ -193,13 +193,18 @@ Iniciar node en la carpeta web
 | POST | http://localhost:3000/api_pagos/eliminarPago/:id_pago  | |
 | GET  | http://localhost:3000/pago/:id_pago  |  |
 
-## CRUD Pedido
+## CRUD Pedidos
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/pedidos  |  |
+
+## CRUD Mis Pedidos
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/mispedidos  |  |
 | GET  | http://localhost:3000/api_pedidos/listarPedidos  | JSON |
 | GET  | http://localhost:3000/modificarPedido/:id_pedido  |  |
 | GET  | http://localhost:3000/api_pedidos/eliminarPedido/:id_pedido  | |
-| GET  | http://localhost:3000/pedido/:id_pedido  |  |
 
 ## CRUD Pedido_Detalle
 | Tipo | URL | Retorna |
