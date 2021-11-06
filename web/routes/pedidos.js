@@ -121,7 +121,7 @@ router.post('/crearPedido', async(req, res) => {
       }
   } else {
       console.log("[!] Ocurrió un error al intentar registrar el pedido ");
-      res.redirect('/pedidos');
+      res.redirect('/mispedidos');
   }
 })
 
@@ -134,10 +134,10 @@ router.get("/anularPedido/:id_pedido", async (req, res) => {
 
   if(res.status(200)) {
     console.log("[!] Pedido " + id_pedido_bind + " anulado con éxito");
-    res.redirect('/pedidos');
+    res.redirect('/mispedidos');
 	} else {
 		console.log("[!] Ocurrió un error al intentar anular el pedido " + id_pedido_bind);
-    res.redirect('/pedidos');
+    res.redirect('/mispedidos');
 	}
 })
 
@@ -167,7 +167,7 @@ router.post('/crearPedidoDetalle', async(req, res) => {
       res.redirect('/pedido_detalles/' + fk_id_pedido);
   } else {
       console.log("[!] Ocurrió un error al intentar registrar el pedido ");
-      res.redirect('/pedidos');
+      res.redirect('/mispedidos');
   }
 })
 
@@ -180,10 +180,10 @@ router.get("/confirmarPedido/:id_pedido", async(req, res) => {
 
   if (consulta) {
       console.log("[!] Pedido " + req.params.id_pedido + " enviado con éxito");
-      res.redirect('/pedidos');
+      res.redirect('/mispedidos');
   } else {
       console.log("[!] Ocurrió un error al intentar enviar el pedido " + req.params.id_pedido);
-      res.redirect('/pedidos');
+      res.redirect('/mispedidos');
   }
 })
 
@@ -212,10 +212,10 @@ router.get("/eliminarPedido/:id_pedido", async(req, res) => {
 
   if (consulta) {
       console.log("[!] Pedido " + req.params.id_pedido + " eliminado con éxito");
-      res.redirect('/pedidos');
+      res.redirect('/mispedidos');
   } else {
       console.log("[!] Ocurrió un error al intentar eliminar el pedido " + req.params.id_pedido);
-      res.redirect('/pedidos');
+      res.redirect('/mispedidos');
   }
 })
 

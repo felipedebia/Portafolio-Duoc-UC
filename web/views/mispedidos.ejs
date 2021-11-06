@@ -7,7 +7,7 @@
                         <div class="card-header card-header-tabs card-header-info">
                             <div class="nav-tabs-navigation">
                                 <div class="nav-tabs-wrapper">
-                                    <span class="nav-tabs-title">Pedidos:</span>
+                                    <span class="nav-tabs-title">Mis pedidos:</span>
                                     <ul class="nav nav-tabs" data-tabs="tabs">
                                         <li class="nav-item">
                                             <a class="nav-link active" href="#listadoPedidos" data-toggle="tab">
@@ -39,71 +39,60 @@
                                             </thead>
                                             <tbody>
                                                 <% for(var pedido of Pedidos) { %>
-                                                    <div class="modal fade" id="modalPedido<%= pedido.id_pedido %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-lg" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">ID Pedido #
-                                                                        <%= pedido.id_pedido %>
-                                                                    </h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <span><strong>Direccion de despacho:</strong> <%= pedido.direccion_despacho %></span></br>
-                                                                    <span><strong>Fecha del pedido:</strong> <%= pedido.fecha_creacion %></span></br>
-                                                                    <span><strong>Estado del pedido:</strong> <%= pedido.fk_texto_estado %></span>
-                                                                    <div class="mt-4">
-                                                                        <span><strong>Detalles del pedido:</strong></span></br>
-                                                                        <ul>
-                                                                        <% for(var detalle of Detalles){ %>
-                                                                            <%if(detalle.id_pedido == pedido.id_pedido){%>
-                                                                                <li><strong>Fruta:</strong> <%= detalle.nombre %> - <strong>Calidad:</strong> <%= detalle.calidad %> - <strong>Cantidad:</strong> <%= detalle.cantidad %></li>
+                                                    <% if (pedido.fk_id_usuario == session.id_usuario && pedido.id_estado != 6){ %>
+                                                        <div class="modal fade" id="modalPedido<%= pedido.id_pedido %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">ID Pedido #
+                                                                            <%= pedido.id_pedido %>
+                                                                        </h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <span><strong>Direccion de despacho:</strong> <%= pedido.direccion_despacho %></span></br>
+                                                                        <span><strong>Fecha del pedido:</strong> <%= pedido.fecha_creacion %></span></br>
+                                                                        <span><strong>Estado del pedido:</strong> <%= pedido.fk_texto_estado %></span>
+                                                                        <div class="mt-4">
+                                                                            <span><strong>Detalles del pedido:</strong></span></br>
+                                                                            <ul>
+                                                                            <% for(var detalle of Detalles){ %>
+                                                                                <%if(detalle.id_pedido == pedido.id_pedido){%>
+                                                                                    <li><strong>Fruta:</strong> <%= detalle.nombre %> - <strong>Calidad:</strong> <%= detalle.calidad %> - <strong>Cantidad:</strong> <%= detalle.cantidad %></li>
+                                                                                <% } %>
                                                                             <% } %>
-                                                                        <% } %>
-                                                                        </ul>
+                                                                            </ul>
+                                                                        </div>
                                                                     </div>
-                                                                    
-                                                                    <div class="callout callout-warning">
-                                                                        <h4>Proceso de Subasta de Fruta disponible</h4>
-                                                                        Selecciona el botón "Iniciar Subasta de Fruta" para comenzar
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                                                     </div>
-
-                                                                    <div class="callout callout-warning">
-                                                                        <h4>Proceso de Subasta de Transporte disponible</h4>
-                                                                        Selecciona el botón "Iniciar Subasta de Transporte" para comenzar
-                                                                    </div>
-
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button class="btn btn-primary" type="submit">Iniciar Subasta de Fruta</button>
-                                                                    <button class="btn btn-primary" type="submit">Iniciar Subasta de Transporte</button>
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <tr>
-                                                        <th scope="row">
-                                                            <%= pedido.id_pedido %>
-                                                        </th>
-                                                        <td>
-                                                            <%= pedido.direccion_despacho %>
-                                                        </td>
-                                                        <td>
-                                                            <%= pedido.fecha_creacion %>
-                                                        </td>
-                                                        <td>
-                                                            <%= pedido.fk_texto_estado %>
-                                                        </td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPedido<%= pedido.id_pedido %>">Ver</button>
-                                                            <a href="/ventas"><button type="button" class="btn btn-info btn-sm">Generar Venta</button></a>
-                                                            <a href="../api_pedidos/anularPedido/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Anular</button></a>
-                                                        </td>
-                                                    </tr>
-                                                    <% } %>
+                                                        <tr>
+                                                            <th scope="row">
+                                                                <%= pedido.id_pedido %>
+                                                            </th>
+                                                            <td>
+                                                                <%= pedido.direccion_despacho %>
+                                                            </td>
+                                                            <td>
+                                                                <%= pedido.fecha_creacion %>
+                                                            </td>
+                                                            <td>
+                                                                <%= pedido.descripcion %>
+                                                            </td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPedido<%= pedido.id_pedido %>">Ver</button>
+                                                                <a href="/pedido_detalles/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Modificar</button></a>
+                                                                <a href="../api_pedidos/eliminarPedido/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Eliminar</button></a>
+                                                            </td>
+                                                        </tr>
+                                                        <% } %>
+                                                            <% } %>
                                             </tbody>
                                         </table>
                                     </div>
@@ -116,7 +105,7 @@
                                                 <div class="row">
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                                         <div class="form-group">
-                                                            <label>Pais de destino *</label>
+                                                            <label>País de destino *</label>
                                                             <select class="form-control" name="pais" data-style="select-with-transition btn" title="Selecciona una opción">
                                                                 <%
                                                                     Paises.sort((a,b) => {
@@ -164,9 +153,10 @@
                                                         <div class="form-group">
                                                             <label>Dirección de despacho *</label>
                                                             <input class="form-control mb-4" id="inputDireccion" type="text" name="direccion_despacho" required>
-                                                            <div class="invalid-feedback">Ingresa la direccion de despacho</div>
+                                                            <div class="invalid-feedback">Ingresa la Dirección de Despacho</div>
                                                         </div>
                                                     </div>
+                                                    <input id="fk_id_usuario" name="fk_id_usuario" type="hidden" value="<%= session.id_usuario %>">
                                                 </div>
                                                 <button class="btn btn-info mb-2 pull-right" type="submit"><i class="fas fa-sign-in-alt"></i> Crear nuevo pedido</button>
                                             </form>
@@ -198,7 +188,7 @@
             info: "Viendo página _PAGE_ de _PAGES_",
             zeroRecords: "No hay información que mostrar",
             infoEmpty: "Sin información",
-            searchPlaceholder: "Buscar Pedido",
+            searchPlaceholder: "Buscar contrato",
             "paginate": {
                 "first": "Primero",
                 "last": "Último",

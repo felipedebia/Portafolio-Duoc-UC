@@ -452,11 +452,11 @@ router.get('/subasta_transporte/:id_subastaT', async function(req, res, next) {
 })
 
 
-// CRUD PEDIDOS
-router.get('/pedidos', function(req, res) {
+// CRUD MISPEDIDOS
+router.get('/mispedidos', function(req, res) {
     if (req.session.isLoggedIn) {
         functions.requestApiListarPedidos();
-        res.render('pedidos', { title: 'Pedidos - Maipo Grande' });
+        res.render('mispedidos', { title: 'Mis Pedidos - Maipo Grande' });
     } else {
         res.redirect('/');
     }
@@ -470,7 +470,19 @@ router.get('/pedido_detalles/:id_pedido', function(req, res) {
     }];
     if (req.session.isLoggedIn) {
         functions.requestApiListarPedidoDetalles();
-        res.render('pedido_detalles', { title: 'Pedido Detalle - Maipo Grande', data: pedidoIdData });
+        res.render('pedido_detalles', { title: 'Pedido Detalles - Maipo Grande', data: pedidoIdData });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
+
+
+// CRUD PEDIDOS
+router.get('/pedidos', function(req, res) {
+    if (req.session.isLoggedIn) {
+        functions.requestApiListarPedidos();
+        res.render('pedidos', { title: 'Pedidos - Maipo Grande' });
     } else {
         res.redirect('/');
     }
@@ -542,6 +554,19 @@ router.get('/ofertas_transportes', function(req, res) {
     }
     res.end();
 });
+
+
+
+// CRUD VENTAS
+router.get('/ventas', function(req, res) {
+    if (req.session.isLoggedIn) {
+        res.render('Ventas', { title: 'Ventas - Maipo Grande' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
+
 
 
 router.get('/plantilla', function(req, res) {
