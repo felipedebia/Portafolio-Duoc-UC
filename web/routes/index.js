@@ -258,9 +258,9 @@ router.get('/modificarContrato', async function(req, res, next) {
 router.get('/modificarContrato/:id_contrato', async function(req, res, next) {
 	if (req.session.isLoggedIn) {
 
-		// Hacemos una consulta trayendo todos los datos del contrato
 		const { id_contrato } = req.params;
 
+		// Hacemos una consulta trayendo todos los datos del contrato
 		binds = {"id_contrato": id_contrato};
 		sql = "SELECT url_documento, fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado FROM contrato WHERE id_contrato = :id_contrato";
 		result = await BD.Open(sql, binds, false);
@@ -294,7 +294,6 @@ router.get('/modificarContrato/:id_contrato', async function(req, res, next) {
 router.get('/contrato/:id_contrato', async function(req, res, next) {
 	if (req.session.isLoggedIn) {
 
-		// Hacemos una consulta trayendo todos los datos del usuario
 		const { id_contrato } = req.params;
 
 		// Hacemos una consulta trayendo todos los datos del usuario
@@ -344,45 +343,7 @@ router.get('/frutas', function(req, res) {
 });
 
 
-router.get('/modificarFruta/:id_fruta', async function(req, res, next) {
-	if (req.session.isLoggedIn) {
-
-		// Hacemos una consulta trayendo todos los datos del contrato
-		const { id_contrato } = req.params;
-
-		binds = {"id_contrato": id_contrato};
-		sql = "SELECT url_documento, fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado FROM contrato WHERE id_contrato = :id_contrato";
-		result = await BD.Open(sql, binds, false);
-
-		// Si los datos estan correctos
-		if (result.rows.length > 0) {
-			// Asignamos los valores de la consulta a las variables
-			var contratoData = [
-				{
-					id_contrato: id_contrato,
-					url_documento: result.rows[0][0],
-					fecha_inicio: moment(result.rows[0][1]).format('YYYY-MM-DD'),
-					fecha_vencimiento: moment(result.rows[0][2]).format('YYYY-MM-DD'),
-					fk_id_tipo: result.rows[0][3],
-					fk_id_estado: result.rows[0][4]
-				  }
-			];
-
-			// Mostramos la vista
-			console.log(contratoData);
-			res.render('modificarContrato', { title: 'Modificar contrato - Maipo Grande', data:contratoData });
-		} else {
-			res.send('Error al obtener datos de la base de datos');
-		}
-	} else {
-		res.redirect('/');
-	}
-	res.end();
-})
-
-
 // CRUD SUBASTAS
-
 router.get('/subastas', function(req, res) {
     if (req.session.isLoggedIn) {
         res.render('Subastas', { title: 'Subastas - Maipo Grande' });
@@ -404,6 +365,43 @@ router.get('/subastas_frutas', function(req, res) {
 });
 
 
+router.get('/subasta_fruta/:id_subastaF', async function(req, res, next) {
+	if (req.session.isLoggedIn) {
+
+		const { id_subastaF } = req.params;
+
+		// Hacemos una consulta trayendo todos los datos del usuario
+		binds = {"id_subastaF": id_subastaF};
+		sql = "SELECT fecha_creacion, fecha_actualizacion, fecha_termino, fk_id_pedido, fk_id_estado FROM subasta_fruta WHERE subasta_fruta.id_subastaF = :id_subastaF";
+		result = await BD.Open(sql, binds, false);
+
+		// Si los datos estan correctos
+		if (result.rows.length > 0) {
+			
+			// Asignamos los valores de la consulta a las variables
+			var subastaData = [
+				{
+					id_subastaF: id_subastaF,
+					fecha_creacion: moment(result.rows[0][0]).format('YYYY-MM-DD'),
+					fecha_actualizacion: moment(result.rows[0][1]).format('YYYY-MM-DD'),
+					fecha_termino: moment(result.rows[0][2]).format('YYYY-MM-DD'),
+					fk_id_pedido: result.rows[0][3],
+					fk_id_estado: result.rows[0][4]
+				  }
+			];
+
+			// Mostramos la vista
+			res.render('subasta_Fruta', { title: 'Viendo Subasta - Maipo Grande', data:subastaData });
+		} else {
+			res.send('Error al obtener datos de la base de datos');
+		}
+	} else {
+		res.redirect('/');
+	}
+	res.end();
+})
+
+
 router.get('/subastas_transportes', function(req, res) {
     if (req.session.isLoggedIn) {
 		functions.requestApiListarSubastasTransportes();
@@ -413,6 +411,45 @@ router.get('/subastas_transportes', function(req, res) {
     }
     res.end();
 });
+
+
+router.get('/subasta_transporte/:id_subastaT', async function(req, res, next) {
+	if (req.session.isLoggedIn) {
+
+		const { id_subastaT } = req.params;
+
+		// Hacemos una consulta trayendo todos los datos del usuario
+		binds = {"id_subastaT": id_subastaT};
+		sql = "SELECT fecha_creacion, fecha_actualizacion, fecha_termino, cantidad, direccion_despacho, fk_id_pedido, fk_id_estado FROM subasta_transporte WHERE subasta_transporte.id_subastaT = :id_subastaT";
+		result = await BD.Open(sql, binds, false);
+
+		// Si los datos estan correctos
+		if (result.rows.length > 0) {
+			
+			// Asignamos los valores de la consulta a las variables
+			var subastaData = [
+				{
+					id_subastaT: id_subastaT,
+					fecha_creacion: moment(result.rows[0][0]).format('YYYY-MM-DD'),
+					fecha_actualizacion: moment(result.rows[0][1]).format('YYYY-MM-DD'),
+					fecha_termino: moment(result.rows[0][2]).format('YYYY-MM-DD'),
+					cantidad: result.rows[0][3],
+					direccion_despacho: result.rows[0][4],
+					fk_id_pedido: result.rows[0][5],
+					fk_id_estado: result.rows[0][6]
+				  }
+			];
+
+			// Mostramos la vista
+			res.render('subasta_Transporte', { title: 'Viendo Subasta - Maipo Grande', data:subastaData });
+		} else {
+			res.send('Error al obtener datos de la base de datos');
+		}
+	} else {
+		res.redirect('/');
+	}
+	res.end();
+})
 
 
 // CRUD PEDIDOS
@@ -460,6 +497,38 @@ router.get('/ordenes_transportes', function(req, res) {
     res.end();
 });
 
+
+// CRUD OFERTAS
+router.get('/ofertas', function(req, res) {
+    if (req.session.isLoggedIn) {
+        res.render('ofertas', { title: 'Ofertas - Maipo Grande' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
+
+
+router.get('/ofertas_productores', function(req, res) {
+    if (req.session.isLoggedIn) {
+		//functions.requestApiListarOrdenesTransportes();
+        res.render('Ofertas_Productores', { title: 'Ofertas de Productores - Maipo Grande' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
+
+
+router.get('/ofertas_transportes', function(req, res) {
+    if (req.session.isLoggedIn) {
+		//functions.requestApiListarOrdenesTransportes();
+        res.render('Ofertas_Transportes', { title: 'Ofertas de Transportes- Maipo Grande' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
 
 
 router.get('/plantilla', function(req, res) {
