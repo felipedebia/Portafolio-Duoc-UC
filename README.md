@@ -46,6 +46,7 @@ Iniciar node en la carpeta web
 - Subir archivo PDF a Contrato
 - Cambiar secuencias SQL a procedimientos
 - Agregar join a las querys para traer nombres de estados y tipos
+- Enviar correos
 
 ## Rutas principales
 - http://localhost:3000/

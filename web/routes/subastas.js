@@ -71,13 +71,17 @@ router.get('/crearSubastaFruta/:id_subastaF', async (req, res) => {
   var fecha_creacion = functions.obtenerFechaActual();
   var fecha_actualizacion = functions.obtenerFechaActual();
   // Agregamos 1 mes más de plazo para terminar la subasta
-  var fecha_termino = functions.obtenerFechaActual();
+  var fecha_termino_actual = functions.obtenerFechaActual();
+  var fecha_termino = functions.agregarMesAFecha(new Date(fecha_termino_actual),1)
 
+  console.log(fecha_termino_actual)
+  console.log(fecha_termino)
+  console.log("fin")
   sql = "INSERT INTO subasta_fruta(id_subastaF, fecha_creacion, fecha_actualizacion, fecha_termino, fk_id_pedido, fk_id_estado) VALUES (:id_subastaF, to_DATE(:fecha_creacion,'YYYY/MM/DD'), to_DATE(:fecha_actualizacion,'YYYY/MM/DD'), to_DATE(:fecha_termino,'YYYY/MM/DD'), :fk_id_pedido, :fk_id_estado)";
-  var consulta = await BD.Open(sql, [id_subastaF, fecha_creacion, fecha_actualizacion, fecha_termino, fk_id_pedido, fk_id_estado], true);
+  await BD.Open(sql, [id_subastaF, fecha_creacion, fecha_actualizacion, fecha_termino, fk_id_pedido, fk_id_estado], true);
 
   // Si tuvo conexión a la DB
-  if(consulta) {
+  if(res.status(200)) {
     console.log("[!] Subasta creada con éxito");
     res.redirect('/pedidos');
     //res.refresh();

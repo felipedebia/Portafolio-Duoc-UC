@@ -1,6 +1,7 @@
 // Importaciones
 const request = require('request');
 
+
 function obtenerFechaActual() {
 	var fecha = new Date(); //Fecha actual
 	var mes = fecha.getMonth() + 1; //obteniendo mes
@@ -14,6 +15,16 @@ function obtenerFechaActual() {
 	var result = ano + "-" + mes + "-" + dia;
 	return result;
 }
+
+function agregarMesAFecha(date, months) {
+    var d = date.getDate();
+    date.setMonth(date.getMonth() + +months);
+    if (date.getDate() != d) {
+      date.setDate(0);
+    }
+    return date;
+}
+
 
 // Función API ListarUsuarios
 async function ListarUsuarios() {
@@ -253,6 +264,7 @@ var listarPedidoDetalles = ListarPedidoDetalles();
 
 module.exports ={
 	'obtenerFechaActual': obtenerFechaActual,
+	'agregarMesAFecha': agregarMesAFecha,
 	'ListarUsuarios': ListarUsuarios,
 	'ListarContratos': ListarContratos,
 	'ListarSubastasFrutas': ListarSubastasFrutas,
