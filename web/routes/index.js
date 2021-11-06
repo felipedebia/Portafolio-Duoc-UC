@@ -5,6 +5,22 @@ const BD = require('../bin/configbd');
 var moment = require('moment');
 var functions = require('./functions');
 
+const multer = require('multer');
+var path = require('path');
+
+// Configurar carpeta de destino de las subidas
+var storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+	  cb(null, 'uploads')
+	},
+	filename: function (req, file, cb) {
+		cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+	}
+  })
+  
+var upload = multer({ storage: storage })
+
+
 // Contraseña
 var SimpleCrypto = require("simple-crypto-js").default
 const secretKey = "1X42JJKLjkuid"
@@ -567,6 +583,28 @@ router.get('/ventas', function(req, res) {
     res.end();
 });
 
+
+
+router.post('/uploadfile', upload.single('myFile'), (req, res, next) => {
+	const file = req.file
+	if (!file) {
+	  const error = new Error('Please upload a file')
+	  error.httpStatusCode = 400
+	  return next(error)
+	}
+	  res.send(file)
+   
+  })
+
+
+router.get('/test', function(req, res) {
+    if (req.session.isLoggedIn) {
+        res.render('test', { title: 'tEsT - Maipo Grande' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
 
 
 router.get('/plantilla', function(req, res) {

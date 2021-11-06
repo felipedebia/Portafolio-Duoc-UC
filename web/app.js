@@ -5,6 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var favicon = require('serve-favicon')
 
+// Para enviar correos
 const nodemailer = require("nodemailer");
 
 const user_name     = 'portafolioduocuc.2021@gmail.com';
@@ -14,6 +15,7 @@ const client_id     = '784728793947-u496rgrjf062e7nlfe649pj70u6q7bid.apps.google
 const client_secret = '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';
 
 const email_to = 'fabyold@gmail.com';
+
 
 // Rutas
 var indexRouter = require('./routes/index');
@@ -27,7 +29,6 @@ var productosRouter = require('./routes/productos');
 var subastasRouter = require('./routes/subastas');
 var usuariosRouter = require('./routes/usuarios');
 var ventasRouter = require('./routes/ventas');
-
 
 // Login
 var bodyParser = require('body-parser');
@@ -104,6 +105,5 @@ session: function (req, res) {
     return req.session;
     }
 });
-
 
 module.exports = app;

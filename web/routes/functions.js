@@ -1,6 +1,7 @@
 // Importaciones
 const request = require('request');
 
+// FUNCIONES
 
 function obtenerFechaActual() {
 	var fecha = new Date(); //Fecha actual
