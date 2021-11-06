@@ -2,6 +2,8 @@
 const express = require('express');
 const router = express.Router();
 const BD = require('../bin/configbd');
+var moment = require('moment');
+
 
 // CRUD FRUTAS
 
@@ -9,7 +11,7 @@ const BD = require('../bin/configbd');
 router.get('/listarFrutas', async (req, res) => {
   
   binds = {};
-  sql = "SELECT id_fruta, nombre, necesita_refrigeracion FROM fruta";
+  sql = "SELECT id_fruta, nombre, fecha_creacion, necesita_refrigeracion FROM fruta";
   result = await BD.Open(sql, binds, true);
 
   Frutas = [];
@@ -18,7 +20,8 @@ router.get('/listarFrutas', async (req, res) => {
       let frutaSchema = {
           "id_fruta": fruta[0],
           "nombre": fruta[1],
-          "necesita_refrigeracion": fruta[2]
+          "fecha_creacion": moment(fruta[2]).format('DD-MM-YYYY'),
+          "necesita_refrigeracion": fruta[3]
       }
 
       Frutas.push(frutaSchema);
@@ -31,7 +34,7 @@ router.get('/listarFrutas', async (req, res) => {
 router.get('/listarFrutas/:id_fruta', async (req, res) => {
   
   binds = { "id_fruta_bind": req.params.id_fruta };
-  sql = "SELECT nombre, necesita_refrigeracion FROM fruta WHERE id_fruta = :id_fruta_bind";
+  sql = "SELECT nombre, fecha_creacion, necesita_refrigeracion FROM fruta WHERE id_fruta = :id_fruta_bind";
   result = await BD.Open(sql, binds, true);
 
   Frutas = [];
@@ -40,6 +43,7 @@ router.get('/listarFrutas/:id_fruta', async (req, res) => {
       let frutaSchema = {
         "id_fruta": id_fruta_bind,
         "nombre": fruta[0],
+        "fecha_creacion": moment(fruta[2]).format('DD-MM-YYYY'),
         "necesita_refrigeracion": fruta[1]
       }
 
@@ -53,8 +57,22 @@ router.get('/listarFrutas/:id_fruta', async (req, res) => {
 router.post('/crearFruta', async (req, res) => {
   var { nombre, necesita_refrigeracion } = req.body;
 
-  sql = "INSERT INTO fruta(nombre, necesita_refrigeracion) VALUES (:nombre,:necesita_refrigeracion)";
-  await BD.Open(sql, [nombre, necesita_refrigeracion], true);
+  var fecha = new Date(); //Fecha actual
+  var mes = fecha.getMonth() + 1; //obteniendo mes
+  var dia = fecha.getDate(); //obteniendo dia
+  var ano = fecha.getFullYear(); //obteniendo año
+  if (dia < 10)
+      dia = '0' + dia; //agrega cero si el menor de 10
+  if (mes < 10)
+      mes = '0' + mes //agrega cero si el menor de 10
+
+  var fecha_creacion = ano + "-" + mes + "-" + dia;
+
+    console.log(nombre)
+    console.log(fecha_creacion)
+    console.log(necesita_refrigeracion)
+  sql = "INSERT INTO fruta(nombre, fecha_creacion, necesita_refrigeracion) VALUES (:nombre, to_DATE(:fecha_creacion,'YYYY/MM/DD'), :necesita_refrigeracion)";
+  await BD.Open(sql, [nombre, fecha_creacion, necesita_refrigeracion], true);
 
   // Si tuvo conexión a la DB
   if(res.status(200)) {
