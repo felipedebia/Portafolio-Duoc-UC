@@ -92,16 +92,7 @@ router.post('/crearPedido', async(req, res) => {
   var fk_id_tipo = 1;
   var fk_id_estado = 1;
 
-  var fecha = new Date(); //Fecha actual
-  var mes = fecha.getMonth() + 1; //obteniendo mes
-  var dia = fecha.getDate(); //obteniendo dia
-  var ano = fecha.getFullYear(); //obteniendo año
-  if (dia < 10)
-      dia = '0' + dia; //agrega cero si el menor de 10
-  if (mes < 10)
-      mes = '0' + mes //agrega cero si el menor de 10
-
-  var fecha_creacion = ano + "-" + mes + "-" + dia;
+  var fecha_creacion = functions.obtenerFechaActual();
 
   sql = "INSERT INTO pedido(direccion_despacho, fecha_creacion, fk_id_tipo, fk_id_ciudad, fk_id_usuario, fk_id_estado) VALUES (:direccion_despacho,to_DATE(:fecha_creacion,'YYYY/MM/DD'),:fk_id_tipo,:fk_id_ciudad,:fk_id_usuario,:fk_id_estado)";
   await BD.Open(sql, [direccion_despacho, fecha_creacion, fk_id_tipo, fk_id_ciudad, fk_id_usuario, fk_id_estado], true);
@@ -146,16 +137,7 @@ router.get("/anularPedido/:id_pedido", async (req, res) => {
 router.post('/crearPedidoDetalle', async(req, res) => {
   var { fk_id_fruta, fk_id_calidad, fk_id_pedido, cantidad } = req.body;
 
-  var fecha = new Date(); //Fecha actual
-  var mes = fecha.getMonth() + 1; //obteniendo mes
-  var dia = fecha.getDate(); //obteniendo dia
-  var ano = fecha.getFullYear(); //obteniendo año
-  if (dia < 10)
-      dia = '0' + dia; //agrega cero si el menor de 10
-  if (mes < 10)
-      mes = '0' + mes //agrega cero si el menor de 10
-
-  var fecha_creacion = ano + "-" + mes + "-" + dia;
+  var fecha_creacion = functions.obtenerFechaActual();
 
   sql = "INSERT INTO pedido_detalle(CANTIDAD, FECHA_CREACION, FECHA_ACTUALIZACION, FK_ID_CALIDAD, FK_ID_FRUTA, FK_ID_PEDIDO) VALUES (:cantidad,to_DATE(:fecha_creacion,'YYYY/MM/DD'),to_DATE(:fecha_creacion,'YYYY/MM/DD'),:fk_id_calidad,:fk_id_fruta,:fk_id_pedido)";
   await BD.Open(sql, [cantidad, fecha_creacion, fecha_creacion, fk_id_calidad, fk_id_fruta, fk_id_pedido], true);

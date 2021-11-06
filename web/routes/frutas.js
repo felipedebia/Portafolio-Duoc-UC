@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const BD = require('../bin/configbd');
 var moment = require('moment');
+var functions = require('./functions');
 
 
 // CRUD FRUTAS
@@ -56,17 +57,7 @@ router.get('/listarFrutas/:id_fruta', async (req, res) => {
 // Agregar
 router.post('/crearFruta', async (req, res) => {
   var { nombre, necesita_refrigeracion } = req.body;
-
-  var fecha = new Date(); //Fecha actual
-  var mes = fecha.getMonth() + 1; //obteniendo mes
-  var dia = fecha.getDate(); //obteniendo dia
-  var ano = fecha.getFullYear(); //obteniendo año
-  if (dia < 10)
-      dia = '0' + dia; //agrega cero si el menor de 10
-  if (mes < 10)
-      mes = '0' + mes //agrega cero si el menor de 10
-
-  var fecha_creacion = ano + "-" + mes + "-" + dia;
+  var fecha_creacion = functions.obtenerFechaActual();
 
     console.log(nombre)
     console.log(fecha_creacion)
