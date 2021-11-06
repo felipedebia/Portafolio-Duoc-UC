@@ -47,5 +47,26 @@ router.get('/listarCiudades', async(req, res) => {
 });
 
 
+//Leer calidad de la fruta
+router.get('/listarCalidadesFrutas', async(req, res) => {
+
+    binds = {};
+    sql = "SELECT id_calidad, nombre FROM fruta_calidad";
+    result = await BD.Open(sql, binds, true);
+  
+    Calidades = [];
+  
+    result.rows.map(calidad => {
+        let calidadSchema = {
+            "id_calidad": calidad[0],
+            "nombre": calidad[1]
+        }
+  
+        Calidades.push(calidadSchema);
+    })
+    res.json({ title: 'Calidades', 'mydata': Calidades });
+  });
+
+
 
 module.exports = router; 

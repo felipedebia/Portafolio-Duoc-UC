@@ -464,6 +464,19 @@ router.get('/pedidos', function(req, res) {
 });
 
 
+router.get('/pedido_detalles/:id_pedido', function(req, res) {
+    var pedidoIdData = [{
+        id_Pedido: req.params.id_pedido
+    }];
+    if (req.session.isLoggedIn) {
+        functions.requestApiListarPedidoDetalles();
+        res.render('pedido_detalles', { title: 'Pedido Detalle - Maipo Grande', data: pedidoIdData });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
+
 
 // CRUD ORDENES
 router.get('/ordenes', function(req, res) {

@@ -135,6 +135,13 @@ Iniciar node en la carpeta web
 - 1 Si
 - 2 No
 
+## CRUD Extras
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/api_extras/listarCiudades  | JSON |
+| GET  | http://localhost:3000/api_extras/listarPaises  | JSON |
+| GET  | http://localhost:3000/api_extras/listarCalidadesFrutas  | JSON |
+
 ## CRUD Usuario
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
@@ -143,17 +150,11 @@ Iniciar node en la carpeta web
 | GET  | http://localhost:3000/modificarUsuario/:id_usuario  |  |
 | POST | http://localhost:3000/api_usuarios/modificarUsuario/:id_usuario  | |
 | POST | http://localhost:3000/api_usuarios/modificarMiPerfil/:id_usuario  | |
-| POST | http://localhost:3000/api_usuarios/desactivarUsuario/:id_usuario  | |
+| GET  | http://localhost:3000/api_usuarios/desactivarUsuario/:id_usuario  | |
 | GET  | http://localhost:3000/api_usuarios/listarUsuarios  | JSON |
 | GET  | http://localhost:3000/api_usuarios/listarUsuarios/:id_usuario  | JSON |
 | GET  | http://localhost:3000/perfil/:id_usuario  |  |
 | GET  | http://localhost:3000/miperfil/:id_usuario  |  |
-
-## CRUD Extras
-| Tipo | URL | Retorna |
-| ------------- | ------------- | ------------- |
-| GET  | http://localhost:3000/api_extras/listarCiudades  | JSON |
-| GET  | http://localhost:3000/api_extras/listarPaises  | JSON |
 
 ## CRUD Contrato
 | Tipo | URL | Retorna |
@@ -198,6 +199,12 @@ Iniciar node en la carpeta web
 | GET  | http://localhost:3000/modificarPedido/:id_pedido  |  |
 | POST | http://localhost:3000/api_pedidos/anularPedido/:id_pedido  | |
 | GET  | http://localhost:3000/pedido/:id_pedido  |  |
+
+## CRUD Pedido_Detalle
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/api_pedidos/listarPedidoDetalles  | JSON |
+| GET  | http://localhost:3000/pedido_detalles/:id_pedido  | |
 
 ## CRUD Venta
 | Tipo | URL | Retorna |

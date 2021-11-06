@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const BD = require('../bin/configbd');
 var moment = require('moment');
+var functions = require('./functions');
 
 // CRUD PEDIDOS
 
@@ -59,6 +60,30 @@ router.get('/listarPedidos/:id_pedido', async (req, res) => {
 });
 
 
+//Listar detalles de un pedido especifico
+router.get('/listarPedidoDetalles', async(req, res) => {
+
+  binds = {};
+  sql = "select pedido_detalle.id_pdetalle, pedido_detalle.cantidad, fruta.nombre, fruta_calidad.nombre, pedido_detalle.fk_id_pedido from pedido_detalle join fruta on pedido_detalle.fk_id_fruta = fruta.id_fruta join fruta_calidad on pedido_detalle.fk_id_calidad = fruta_calidad.id_calidad";
+  result = await BD.Open(sql, binds, true);
+
+  Detalles = [];
+
+  result.rows.map(detalle => {
+      let detalleSchema = {
+          "id_pdetalle": detalle[0],
+          "cantidad": detalle[1],
+          "nombre": detalle[2],
+          "calidad": detalle[3],
+          "id_pedido": detalle[4]
+      }
+
+      Detalles.push(detalleSchema);
+  })
+  res.json({ title: 'Detalles', 'mydata': Detalles });
+});
+
+
 // Agregar
 router.post('/crearPedido', async(req, res) => {
   var { direccion_despacho, fk_id_ciudad} = req.body;
@@ -84,7 +109,16 @@ router.post('/crearPedido', async(req, res) => {
   // Si tuvo conexión a la DB
   if (res.status(200)) {
       console.log("[!] Pedido creado con éxito");
-      res.redirect('/pedidos');
+
+      //Con esto tomamos el ultimo registro en la tabla pedido para redirigir al detalle pedido y pueda agregar frutas
+      sql2 = "Select id_pedido from (select * from pedido order by id_pedido desc ) where rownum = 1";
+      result = await BD.Open(sql2, [], true);
+
+      var idPedidoSql = result.rows[0];
+
+      if (idPedidoSql) {
+          res.redirect('/pedido_detalles/' + idPedidoSql);
+      }
   } else {
       console.log("[!] Ocurrió un error al intentar registrar el pedido ");
       res.redirect('/pedidos');
@@ -92,7 +126,7 @@ router.post('/crearPedido', async(req, res) => {
 })
 
 
-// Anular
+// Anular Pedido
 router.get("/anularPedido/:id_pedido", async (req, res) => {
   var id_pedido_bind = req.params.id_pedido;
   sql = "UPDATE pedido SET fk_id_estado=2 WHERE id_pedido = :id_pedido_bind";
@@ -105,6 +139,84 @@ router.get("/anularPedido/:id_pedido", async (req, res) => {
 		console.log("[!] Ocurrió un error al intentar anular el pedido " + id_pedido_bind);
     res.redirect('/pedidos');
 	}
+})
+
+
+// Agregar Pedido Detalle
+router.post('/crearPedidoDetalle', async(req, res) => {
+  var { fk_id_fruta, fk_id_calidad, fk_id_pedido, cantidad } = req.body;
+
+  var fecha = new Date(); //Fecha actual
+  var mes = fecha.getMonth() + 1; //obteniendo mes
+  var dia = fecha.getDate(); //obteniendo dia
+  var ano = fecha.getFullYear(); //obteniendo año
+  if (dia < 10)
+      dia = '0' + dia; //agrega cero si el menor de 10
+  if (mes < 10)
+      mes = '0' + mes //agrega cero si el menor de 10
+
+  var fecha_creacion = ano + "-" + mes + "-" + dia;
+
+  sql = "INSERT INTO pedido_detalle(CANTIDAD, FECHA_CREACION, FECHA_ACTUALIZACION, FK_ID_CALIDAD, FK_ID_FRUTA, FK_ID_PEDIDO) VALUES (:cantidad,to_DATE(:fecha_creacion,'YYYY/MM/DD'),to_DATE(:fecha_creacion,'YYYY/MM/DD'),:fk_id_calidad,:fk_id_fruta,:fk_id_pedido)";
+  await BD.Open(sql, [cantidad, fecha_creacion, fecha_creacion, fk_id_calidad, fk_id_fruta, fk_id_pedido], true);
+
+  // Si tuvo conexión a la DB
+  if (res.status(200)) {
+      console.log("[!] Pedido creado con éxito");
+      functions.requestApiListarPedidoDetalles();
+      res.redirect('/pedido_detalles/' + fk_id_pedido);
+  } else {
+      console.log("[!] Ocurrió un error al intentar registrar el pedido ");
+      res.redirect('/pedidos');
+  }
+})
+
+
+//Confirmar pedido
+router.get("/confirmarPedido/:id_pedido", async(req, res) => {
+  var id_pedido_bind = req.params.id_pedido;
+  sql = "UPDATE pedido SET fk_id_estado=2 WHERE id_pedido = :id_pedido_bind";
+  var consulta = await BD.Open(sql, [id_pedido_bind], true);
+
+  if (consulta) {
+      console.log("[!] Pedido " + req.params.id_pedido + " enviado con éxito");
+      res.redirect('/pedidos');
+  } else {
+      console.log("[!] Ocurrió un error al intentar enviar el pedido " + req.params.id_pedido);
+      res.redirect('/pedidos');
+  }
+})
+
+
+//Eliminar Pedido Detalle
+router.get("/eliminarPedidoDetalles/:id_detalle_pedido", async(req, res) => {
+  var id_pedido_bind = req.params.id_detalle_pedido;
+  sql = "DELETE FROM pedido_detalle WHERE id_pdetalle = :id_detalle_pedido";
+  var consulta = await BD.Open(sql, [id_pedido_bind], true);
+
+  if (consulta) {
+      console.log("[!] Detalle pedido " + req.params.id_detalle_pedido + " eliminado con éxito");
+      functions.requestApiListarDetallePedido();
+      res.redirect(req.get('referer'));
+  } else {
+      console.log("[!] Ocurrió un error al intentar eliminar el detalle pedido " + req.params.id_pedido);
+  }
+})
+
+
+//Eliminar pedido
+router.get("/eliminarPedido/:id_pedido", async(req, res) => {
+  var id_pedido_bind = req.params.id_pedido;
+  sql = "UPDATE pedido SET fk_id_estado=6 WHERE id_pedido = :id_pedido_bind";
+  var consulta = await BD.Open(sql, [id_pedido_bind], true);
+
+  if (consulta) {
+      console.log("[!] Pedido " + req.params.id_pedido + " eliminado con éxito");
+      res.redirect('/pedidos');
+  } else {
+      console.log("[!] Ocurrió un error al intentar eliminar el pedido " + req.params.id_pedido);
+      res.redirect('/pedidos');
+  }
 })
 
 module.exports = router;

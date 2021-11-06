@@ -179,6 +179,7 @@ async function requestApiListarPaises() {
 };
 var ListarPaises = requestApiListarPaises();
 
+
 // Función API ListarCiudades
 async function requestApiListarCiudades() {
     return new Promise(function(resolve, reject) {
@@ -191,6 +192,34 @@ async function requestApiListarCiudades() {
     });
 };
 var ListarCiudades = requestApiListarCiudades();
+
+
+// Función API ListarCalidadesFrutas
+async function requestApiListarCalidadesFrutas() {
+    return new Promise(function(resolve, reject) {
+        request('http://localhost:3000/api_extras/listarCalidadesFrutas', function(error, response, body) {
+            if (error) return reject(error);
+            importedJSON = JSON.parse(body);
+            console.log('\x1b[37m', '[!] requestApiListarCalidadesFrutas cargado en memoria');
+            return resolve(importedJSON);
+        });
+    });
+};
+var listarCalidadesFrutas = requestApiListarCalidadesFrutas();
+
+
+// Función API ListarPedidoDetalles
+async function requestApiListarPedidoDetalles() {
+    return new Promise(function(resolve, reject) {
+        request('http://localhost:3000/api_pedidos/listarPedidoDetalles', function(error, response, body) {
+            if (error) return reject(error);
+            importedJSON = JSON.parse(body);
+            console.log('\x1b[37m', '[!] requestApiListarPedidoDetalles cargado en memoria');
+            return resolve(importedJSON);
+        });
+    });
+};
+var ListarPedidoDetalles = requestApiListarPedidoDetalles();
 
 
 module.exports ={
@@ -206,5 +235,7 @@ module.exports ={
 	'requestApiListarOfertasTransportes': requestApiListarOfertasTransportes,
 	'requestApiListarVentas': requestApiListarVentas,
     'requestApiListarPaises': requestApiListarPaises,
-    'requestApiListarCiudades': requestApiListarCiudades
+    'requestApiListarCiudades': requestApiListarCiudades,
+	'requestApiListarCalidadesFrutas': requestApiListarCalidadesFrutas,
+    'requestApiListarPedidoDetalles': requestApiListarPedidoDetalles
 }
