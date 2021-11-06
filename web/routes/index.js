@@ -455,7 +455,7 @@ router.get('/subasta_transporte/:id_subastaT', async function(req, res, next) {
 // CRUD MISPEDIDOS
 router.get('/mispedidos', function(req, res) {
     if (req.session.isLoggedIn) {
-        functions.ListarPedidos();
+        functions.ListarMisPedidos();
         res.render('mispedidos', { title: 'Mis Pedidos - Maipo Grande' });
     } else {
         res.redirect('/');

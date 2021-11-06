@@ -57,7 +57,7 @@ async function ListarSubastasFrutas() {
 	});
 };
 
-var ListarSubastasFrutas = ListarSubastasFrutas();
+var listarSubastasFrutas = ListarSubastasFrutas();
 
 
 // Función API ListarSubastasTransportes
@@ -72,7 +72,7 @@ async function ListarSubastasTransportes() {
 	});
 };
 
-var ListarSubastasTransportes = ListarSubastasTransportes();
+var listarSubastasTransportes = ListarSubastasTransportes();
 
 
 // Función API ListarOrdenesBodegas
@@ -87,7 +87,7 @@ async function ListarOrdenesBodegas() {
 	});
 };
 
-var ListarOrdenesBodegas = ListarOrdenesBodegas();
+var listarOrdenesBodegas = ListarOrdenesBodegas();
 
 
 // Función API ListarOrdenesTransportes
@@ -102,7 +102,7 @@ async function ListarOrdenesTransportes() {
 	});
 };
 
-var ListarOrdenesTransportes = ListarOrdenesTransportes();
+var listarOrdenesTransportes = ListarOrdenesTransportes();
 
 
 // Función API ListarFrutas
@@ -117,7 +117,7 @@ async function ListarFrutas() {
 	});
 };
 
-var ListarFrutas = ListarFrutas();
+var listarFrutas = ListarFrutas();
 
 
 // Función API ListarPedidos
@@ -132,7 +132,22 @@ async function ListarPedidos() {
 	});
 };
 
-var ListarPedidos = ListarPedidos();
+var listarPedidos = ListarPedidos();
+
+
+// Función API ListarMisPedidos
+async function ListarMisPedidos() {
+	return new Promise(function(resolve, reject) {
+		request('http://localhost:3000/api_pedidos/listarMisPedidos', function (error, response, body) {
+			if (error) return reject(error);
+				importedJSON = JSON.parse(body);
+				console.log('\x1b[37m','[!] ListarMisPedidos cargado');
+				return resolve(importedJSON);
+		});
+	});
+};
+
+var listarMisPedidos = ListarMisPedidos();
 
 
 // Función API ListarOfertasProductores
@@ -147,7 +162,7 @@ async function ListarOfertasProductores() {
 	});
 };
 
-var ListarOfertasProductores = ListarOfertasProductores();
+var listarOfertasProductores = ListarOfertasProductores();
 
 
 // Función API ListarOfertasTransportes
@@ -162,7 +177,7 @@ async function ListarOfertasTransportes() {
 	});
 };
 
-var ListarOfertasTransportes = ListarOfertasTransportes();
+var listarOfertasTransportes = ListarOfertasTransportes();
 
 
 // Función API ListarVentas
@@ -177,7 +192,7 @@ async function ListarVentas() {
 	});
 };
 
-var ListarVentas = ListarVentas();
+var listarVentas = ListarVentas();
 
 
 // Función API ListarPaises
@@ -191,7 +206,7 @@ async function ListarPaises() {
         });
     });
 };
-var ListarPaises = ListarPaises();
+var listarPaises = ListarPaises();
 
 
 // Función API ListarCiudades
@@ -205,7 +220,7 @@ async function ListarCiudades() {
         });
     });
 };
-var ListarCiudades = ListarCiudades();
+var listarCiudades = ListarCiudades();
 
 
 // Función API ListarCalidadesFrutas
@@ -214,7 +229,7 @@ async function ListarCalidadesFrutas() {
         request('http://localhost:3000/api_extras/listarCalidadesFrutas', function(error, response, body) {
             if (error) return reject(error);
             importedJSON = JSON.parse(body);
-            console.log('\x1b[37m', '[!] ListarCalidadesFrutas cargado en memoria');
+            console.log('\x1b[37m', '[!] ListarCalidadesFrutas cargado');
             return resolve(importedJSON);
         });
     });
@@ -228,12 +243,12 @@ async function ListarPedidoDetalles() {
         request('http://localhost:3000/api_pedidos/listarPedidoDetalles', function(error, response, body) {
             if (error) return reject(error);
             importedJSON = JSON.parse(body);
-            console.log('\x1b[37m', '[!] ListarPedidoDetalles cargado en memoria');
+            console.log('\x1b[37m', '[!] ListarPedidoDetalles cargado');
             return resolve(importedJSON);
         });
     });
 };
-var ListarPedidoDetalles = ListarPedidoDetalles();
+var listarPedidoDetalles = ListarPedidoDetalles();
 
 
 module.exports ={
@@ -246,6 +261,7 @@ module.exports ={
 	'ListarOrdenesTransportes': ListarOrdenesTransportes,
 	'ListarFrutas': ListarFrutas,
     'ListarPedidos': ListarPedidos,
+	'ListarMisPedidos': ListarMisPedidos,
 	'ListarOfertasProductores': ListarOfertasProductores,
 	'ListarOfertasTransportes': ListarOfertasTransportes,
 	'ListarVentas': ListarVentas,

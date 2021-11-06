@@ -34,14 +34,14 @@ router.get('/listarPedidos', async (req, res) => {
 });
 
 
-// Leer - Pedido en especifico
-router.get('/listarPedidos/:id_pedido', async (req, res) => {
+// Leer - Mis Pedidos filtrados por session
+router.get('/listarMisPedidos/', async (req, res) => {
   
   binds = { "id_pedido_bind": req.params.id_pedido };
-  sql = "SELECT direccion_despacho, fecha_creacion, fk_id_tipo, fk_id_ciudad, fk_id_usuario, fk_id_estado FROM pedido WHERE id_pedido = :id_pedido_bind";
+  sql = "SELECT direccion_despacho, fecha_creacion, fk_id_tipo, fk_id_ciudad, fk_id_usuario, fk_id_estado FROM pedido WHERE fk_id_usuario = :req.session.id_usuario";
   result = await BD.Open(sql, binds, true);
 
-  Pedidos = [];
+  MisPedidos = [];
 
   result.rows.map(pedido => {
       let pedidoSchema = {
@@ -54,9 +54,9 @@ router.get('/listarPedidos/:id_pedido', async (req, res) => {
           "fk_id_estado": pedido[5]
       }
 
-      Pedidos.push(pedidoSchema);
+      MisPedidos.push(pedidoSchema);
   })
-  res.json({title: 'Pedidos', 'mydata': Pedidos});
+  res.json({title: 'Pedidos', 'mydata': MisPedidos});
 });
 
 
