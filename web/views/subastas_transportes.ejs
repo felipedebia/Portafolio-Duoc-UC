@@ -15,12 +15,6 @@
                                                 <div class="ripple-container"></div>
                                             </a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#crearSubasta" data-toggle="tab">
-                                                <i class="material-icons">add</i> Crear nueva subasta
-                                                <div class="ripple-container"></div>
-                                            </a>
-                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -65,7 +59,7 @@
                                 </div>
                                 <div class="tab-pane" id="crearSubasta">
                                     <div class="card-body">
-                                        <h3 class="card-title mb-4">Ingresa los datos del nuevo contrato</h3>
+                                        <h3 class="card-title mb-4">Ingresa los datos de la nueva subasta</h3>
                                         <div class="card-text">
                                             <form action="../api_contratos/crearContrato" method="POST" class="formValidation" novalidate>
                                                 <div class="row">
@@ -98,8 +92,8 @@
                                                     </div>
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                                         <div class="form-group">
-                                                            <label>Asignar al usuario *</label>
-                                                            <select class="selectpicker form-control" data-size="<% Usuarios.length %>" name="id_usuario" data-style="select-with-transition btn" title="Selecciona una opción">
+                                                            <label>Asignar al pedido *</label>
+                                                            <select class="selectpicker form-control" data-size="<% Usuarios.length %>" name="fk_id_pedido" data-style="select-with-transition btn" title="Selecciona una opción">
                                                                 <% for(var usuario of Usuarios) { %>
                                                                 <option name="<%= usuario.nombre %> <%= usuario.apellido %>" value="<%= usuario.id_usuario %>"><%= usuario.nombre %> <%= usuario.apellido %></option>
                                                                 <% } %>

@@ -70,11 +70,10 @@ router.post('/crearFruta', async (req, res) => {
 
 // Modificar
 router.post("/modificarFruta/:id_fruta", async (req, res) => {
+  
   var id_fruta = req.params.id_fruta;
   var { nombre, necesita_refrigeracion} = req.body;
-  console.log(nombre);
-  console.log(necesita_refrigeracion);
-  console.log("uwu")
+
   sql = "UPDATE fruta SET nombre= :nombre, necesita_refrigeracion= :necesita_refrigeracion WHERE id_fruta= :id_fruta";
   await BD.Open(sql, [nombre, necesita_refrigeracion, id_fruta], true);
 
