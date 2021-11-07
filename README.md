@@ -38,6 +38,7 @@ Iniciar node en la carpeta web
 
 - FALTA AGREGAR NUEVA SUBASTA_FRUTA (haciendo mario)
 - FALTA AGREGAR NUEVA ORDEN_BODEGA Y ORDEN_TRANSPORTE
+- FALTA MODIFICAR CONTRATO
 
 ## Funciones pendientes:
 
@@ -46,6 +47,7 @@ Iniciar node en la carpeta web
 - Implementar subida de archivos a Contrato
 - Cambiar secuencias SQL a procedimientos
 - Hacer templates de correos y agregarlos (ya tenemos el paquete configurado y funcionando)
+- Agregar validaciones de fechas a los formularios
 
 ## Rutas principales
 - http://localhost:3000/

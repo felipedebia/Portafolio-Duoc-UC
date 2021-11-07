@@ -102,7 +102,7 @@ router.post('/crearPedido', async(req, res) => {
       console.log("[!] Pedido creado con éxito");
 
       //Con esto tomamos el ultimo registro en la tabla pedido para redirigir al detalle pedido y pueda agregar frutas
-      sql2 = "Select id_pedido from (select * from pedido order by id_pedido desc ) where rownum = 1";
+      sql2 = "SELECT id_pedido FROM (SELECT * FROM pedido ORDER BY id_pedido DESC ) WHERE rownum = 1";
       result = await BD.Open(sql2, [], true);
 
       var idPedidoSql = result.rows[0];

@@ -12,7 +12,7 @@
                             <form action="../api_contratos/subirDocumento/<%= data[0].id_contrato%>" enctype="multipart/form-data" method="POST"> 
                                 <div class="drag-image mt-4">
                                     <div class="icon"><i class="material-icons" style="font-size: 50px">cloud_upload</i></div>
-                                    <input type="file" name="url_documento"/>
+                                    <input type="file" name="url_documento" onchange="return fileValidation()"/>
                                 </div>
                                 <div class="col text-center">
                                     <button class="btn btn-warning mb-2 mt-4 medium-size-btn" type="submit">Subir documento</button>
@@ -25,6 +25,24 @@
         </div>
     </div>
 <%- include('partials/footer.ejs') %>
+
+<script>
+    function fileValidation() {
+        var fileInput = 
+            document.getElementById('file');
+          
+        var filePath = fileInput.value;
+      
+        // Allowing file type
+        var allowedExtensions = /(\.doc|\.docx|\.odt|\.pdf|\.tex|\.txt|\.rtf|\.wps|\.wks|\.wpd)$/i;
+          
+        if (!allowedExtensions.exec(filePath)) {
+            alert('El tipo de archivo no está permitido');
+            fileInput.value = '';
+            return false;
+        } 
+    }
+</script>
 
 </body>
 </html> 

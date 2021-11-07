@@ -11,7 +11,7 @@ var path = require('path');
 // Configurar carpeta de destino de las subidas
 var storage = multer.diskStorage({
 	destination: function (req, file, cb) {
-	  cb(null, 'public/subidas')
+	  cb(null, 'public/subidas/contratos')
 	},
 	filename: function (req, file, cb) {
 		cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
@@ -52,20 +52,63 @@ router.get('/listarContratos', async (req, res) => {
 
 // Agregar
 router.post('/crearContrato', async (req, res) => {
-  var { fecha_inicio, fecha_vencimiento, url_documento, fk_id_tipo, id_usuario } = req.body;
+  var { fecha_inicio, fecha_vencimiento, fk_id_tipo, id_usuario } = req.body;
   // Definimos el contrato activado
   var fk_id_estado = 1;
 
-  sql = "INSERT INTO contrato(fecha_inicio, fecha_vencimiento, url_documento, fk_id_estado, fk_id_tipo) VALUES (to_DATE(:fecha_inicio,'YYYY/MM/DD'),to_DATE(:fecha_vencimiento,'YYYY/MM/DD'),:url_documento,:fk_id_estado,:fk_id_tipo)";
-  await BD.Open(sql, [fecha_inicio, fecha_vencimiento, url_documento, fk_id_estado, fk_id_tipo], true);
+  sql = "INSERT INTO contrato(fecha_inicio, fecha_vencimiento, fk_id_estado, fk_id_tipo) VALUES (to_DATE(:fecha_inicio,'YYYY/MM/DD'),to_DATE(:fecha_vencimiento,'YYYY/MM/DD'),:fk_id_estado,:fk_id_tipo)";
+  await BD.Open(sql, [fecha_inicio, fecha_vencimiento, fk_id_estado, fk_id_tipo], true);
 
   // Si tuvo conexión a la DB
   if(res.status(200)) {
     console.log("[!] Contrato creado con éxito");
-    res.redirect('/contratos');
+
+    //Con esto tomamos el ultimo registro en la tabla contrato para crear tabla rel y redirigir al documentoContrato y pueda agregar el documento
+    sql2 = "SELECT id_contrato FROM (SELECT * FROM contrato ORDER BY id_contrato DESC ) WHERE rownum = 1";
+    result2 = await BD.Open(sql2, [], true);
+
+    var idContratoSql = result2.rows[0];
+
+    if (idContratoSql) {
+      var value_id_contrato = idContratoSql.toString();
+      var value_id_usuario = req.session.id_usuario;
+
+      sql3 = "INSERT INTO rel_contrato_usuario(fk_id_contrato, fk_id_usuario) VALUES (:idContratoSql, :id_usuario)";
+      await BD.Open(sql3, [value_id_contrato, value_id_usuario], true);
+
+      res.redirect('/documentoContrato/' + idContratoSql);
+    }
+
     //res.refresh();
 	} else {
 		console.log("[!] Ocurrió un error al intentar crear el contrato ");
+    res.redirect('/contratos');
+	}
+})
+
+
+router.post('/subirDocumento/:id_contrato', uploadFile.single('url_documento'), async (req, res, next) => {
+	const file = req.file
+	if (!file) {
+	  const error = new Error('Debes seleccionar un archivo')
+	  error.httpStatusCode = 400
+	  return next(error)
+	}
+	//var fileLocation = req.file.path.replace('public','');
+	//res.send(`You have uploaded this image: <hr/><img src="${fileLocation}" width="500"><hr />`);
+
+	// Hacemos un update agregando el nombre del archivo al campo url_documento
+	var id_contrato_bind = req.params.id_contrato;
+  var url_documento = req.file.filename;
+
+	sql = "UPDATE contrato SET url_documento= :url_documento WHERE id_contrato = :id_contrato_bind";
+  await BD.Open(sql, [url_documento, id_contrato_bind], true);
+
+  if(res.status(200)) {
+    console.log("[!] Documento de contrato " + id_contrato_bind + " agregado con éxito");
+    res.redirect('/contratos');
+	} else {
+		console.log("[!] Ocurrió un error al intentar agregar un documento al contrato " + id_contrato_bind);
     res.redirect('/contratos');
 	}
 })
@@ -93,6 +136,7 @@ router.post("/modificarContrato/:id_contrato", async (req, res) => {
 // Anular
 router.get("/anularContrato/:id_contrato", async (req, res) => {
   var id_contrato_bind = req.params.id_contrato;
+  
   sql = "UPDATE contrato SET fk_id_estado=2 WHERE id_contrato = :id_contrato_bind";
   await BD.Open(sql, [id_contrato_bind], true);
 
@@ -104,20 +148,6 @@ router.get("/anularContrato/:id_contrato", async (req, res) => {
     res.redirect('/contratos');
 	}
 })
-
-
-router.post('/subirDocumento/:id_contrato', uploadFile.single('url_documento'), (req, res, next) => {
-	const file = req.file
-	if (!file) {
-	  const error = new Error('Debes seleccionar un archivo')
-	  error.httpStatusCode = 400
-	  return next(error)
-	}
-	var fileLocation = req.file.path.replace('public','');
-	console.log(req.file.filename);
-	res.send(`You have uploaded this image: <hr/><img src="${fileLocation}" width="500"><hr />`);
-})
-
 
 
 module.exports = router;
