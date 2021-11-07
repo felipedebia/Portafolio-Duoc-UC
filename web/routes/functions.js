@@ -263,6 +263,20 @@ async function ListarPedidoDetalles() {
 var listarPedidoDetalles = ListarPedidoDetalles();
 
 
+// Función API ListarSeguros
+async function ListarSeguros() {
+    return new Promise(function(resolve, reject) {
+        request('http://localhost:3000/api_seguros/listarSeguros', function(error, response, body) {
+            if (error) return reject(error);
+            importedJSON = JSON.parse(body);
+            console.log('\x1b[37m', '[!] ListarSeguros cargado');
+            return resolve(importedJSON);
+        });
+    });
+};
+var listarSeguros = ListarSeguros();
+
+
 module.exports ={
 	'obtenerFechaActual': obtenerFechaActual,
 	'agregarMesAFecha': agregarMesAFecha,
@@ -281,5 +295,6 @@ module.exports ={
     'ListarPaises': ListarPaises,
     'ListarCiudades': ListarCiudades,
 	'ListarCalidadesFrutas': ListarCalidadesFrutas,
-    'ListarPedidoDetalles': ListarPedidoDetalles
+    'ListarPedidoDetalles': ListarPedidoDetalles,
+	'ListarSeguros': ListarSeguros
 }

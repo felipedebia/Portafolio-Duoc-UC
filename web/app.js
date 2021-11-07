@@ -29,6 +29,7 @@ var productosRouter = require('./routes/productos');
 var subastasRouter = require('./routes/subastas');
 var usuariosRouter = require('./routes/usuarios');
 var ventasRouter = require('./routes/ventas');
+var segurosRouter = require('./routes/seguros');
 
 // Login
 var bodyParser = require('body-parser');
@@ -81,6 +82,7 @@ app.use('/api_productos', productosRouter);
 app.use('/api_subastas', subastasRouter);
 app.use('/api_usuarios', usuariosRouter);
 app.use('/api_ventas', ventasRouter);
+app.use('/api_seguros', segurosRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

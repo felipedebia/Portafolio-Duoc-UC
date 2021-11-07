@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const BD = require('../bin/configbd');
 var moment = require('moment');
+var functions = require('./functions');
 
 // CRUD VENTAS
 
@@ -59,14 +60,14 @@ router.get('/listarVentas/:id_venta', async (req, res) => {
 
 
 // Agregar
-router.get('/crearVenta/:id_venta', async (req, res) => {
+router.post('/crearVenta/:id_venta', async (req, res) => {
   var id_venta_bind = req.params;
   console.log(id_venta_bind);
   var fecha_creacion = functions.obtenerFechaActual();
   var fecha_actualizacion = functions.obtenerFechaActual();
 
   sql = "INSERT INTO venta(id_venta, fecha_creacion, fecha_actualizacion, fk_id_pedido, fk_id_seguro, fk_id_tipo, fk_id_estado) VALUES (:id_venta_bind, to_DATE(:fecha_creacion,'YYYY/MM/DD'), to_DATE(:fecha_actualizacion,'YYYY/MM/DD'), :fk_id_pedido, :fk_id_seguro, :fk_id_tipo, :fk_id_estado)";
-  await BD.Open(sql, [nombre, fecha_creacion, fecha_actualizacion, fk_id_pedido, fk_id_seguro, fk_id_tipo, fk_id_estado], true);
+  await BD.Open(sql, [id_venta_bind, fecha_creacion, fecha_actualizacion, fk_id_pedido, fk_id_seguro, fk_id_tipo, fk_id_estado], true);
 
   // Si tuvo conexión a la DB
   if(res.status(200)) {

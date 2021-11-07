@@ -39,6 +39,7 @@ Iniciar node en la carpeta web
 - FALTA AGREGAR NUEVA SUBASTA_FRUTA (haciendo mario)
 - FALTA AGREGAR NUEVA ORDEN_BODEGA Y ORDEN_TRANSPORTE
 - FALTA MODIFICAR CONTRATO
+- CREAR CRUD SEGURO
 
 ## Funciones pendientes:
 
@@ -197,6 +198,15 @@ Iniciar node en la carpeta web
 | POST | http://localhost:3000/api_pagos/eliminarPago/:id_pago  | |
 | GET  | http://localhost:3000/pago/:id_pago  |  |
 
+## CRUD Seguro
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/seguros  |  |
+| GET  | http://localhost:3000/api_seguros/listarSeguros  | JSON |
+| GET  | http://localhost:3000/modificarSeguro/:id_seguro  |  |
+| POST | http://localhost:3000/api_seguros/eliminarSeguro/:id_seguro  | |
+| GET  | http://localhost:3000/seguro/:id_seguro  |  |
+
 ## CRUD Pedidos
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
@@ -221,7 +231,7 @@ Iniciar node en la carpeta web
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/ventas  |  |
-| GET  | http://localhost:3000/api_ventas/crearVenta  | |
+| POST | http://localhost:3000/api_ventas/crearVenta  | |
 | GET  | http://localhost:3000/api_ventas/listarVentas  | JSON |
 | GET  | http://localhost:3000/modificarVenta/:id_venta  |  |
 | GET  | http://localhost:3000/api_ventas/anularVenta/:id_venta  | |

@@ -66,39 +66,39 @@
                                                         <div class="modal-dialog" role="document">
                                                           <div class="modal-content">
                                                             <form action="/api_frutas/modificarFruta/<%= fruta.id_fruta%>" method="POST">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">
-                                                                    Viendo fruta <%= fruta.nombre %>
-                                                                </h5>
-                                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                              </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="form-group mt-4">
-                                                                    <label>Nombre *</label>
-                                                                    <input class="form-control mb-4" id="inputNombre" type="text" name="nombre" maxLength="30" required value="<%= fruta.nombre %>">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">
+                                                                        Viendo fruta <%= fruta.nombre %>
+                                                                    </h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
                                                                 </div>
-                                                                <div class="form-group">
-                                                                    <label>¿Necesita refrigeración? *</label>
-                                                                    <select class="form-control" data-size="2" name="necesita_refrigeracion" data-style="select-with-transition btn" title="Selecciona una opción" required>
-                                                                        <% if(fruta.necesita_refrigeracion == 1){ %>
-                                                                            <option name="si" selected value="1">Si</option>
-                                                                        <% } else { %>
-                                                                            <option name="si" value="1">Si</option>
-                                                                        <% } %>
-                                                                        <% if(fruta.necesita_refrigeracion == 2){ %>
-                                                                            <option name="no" selected value="2">No</option>
-                                                                        <% } else { %>
-                                                                            <option name="no" value="2">No</option>
-                                                                        <% } %>
-                                                                    </select>
+                                                                <div class="modal-body">
+                                                                    <div class="form-group mt-4 my-label required">
+                                                                        <label>Nombre</label>
+                                                                        <input class="form-control mb-4" id="inputNombre" type="text" name="nombre" maxLength="30" required value="<%= fruta.nombre %>">
+                                                                    </div>
+                                                                    <div class="form-group my-label required">
+                                                                        <label>¿Necesita refrigeración?</label>
+                                                                        <select class="form-control" data-size="2" name="necesita_refrigeracion" data-style="select-with-transition btn" title="Selecciona una opción" required>
+                                                                            <% if(fruta.necesita_refrigeracion == 1){ %>
+                                                                                <option name="si" selected value="1">Si</option>
+                                                                            <% } else { %>
+                                                                                <option name="si" value="1">Si</option>
+                                                                            <% } %>
+                                                                            <% if(fruta.necesita_refrigeracion == 2){ %>
+                                                                                <option name="no" selected value="2">No</option>
+                                                                            <% } else { %>
+                                                                                <option name="no" value="2">No</option>
+                                                                            <% } %>
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button class="btn btn-primary" type="submit">Guardar cambios</button>
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                            </div>
+                                                                <div class="modal-footer">
+                                                                    <button class="btn btn-primary" type="submit">Guardar cambios</button>
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                </div>
                                                             </form>
                                                           </div>
                                                         </div>
@@ -201,6 +201,23 @@
       });
       var table = $('#datatable').DataTable();
     });
+</script>
+
+<script> (function () {
+    'use strict';
+    window.addEventListener('load', function () {
+        var forms = document.getElementsByClassName('formValidation');
+        var validation = Array.prototype.filter.call(forms, function (form) {
+            form.addEventListener('submit', function (event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+  })();
 </script>
 
 </body>
