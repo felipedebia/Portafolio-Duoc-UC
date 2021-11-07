@@ -70,15 +70,15 @@
                                             <form action="../api_contratos/crearContrato" method="POST" class="formValidation" novalidate>
                                                 <div class="row">
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Fecha de inicio *</label>
+                                                        <div class="form-group my-label required">
+                                                            <label>Fecha de inicio</label>
                                                             <input class="form-control mb-4" id="inputFechaInicio" type="date" name="fecha_inicio" required>
                                                             <div class="invalid-feedback">Ingresa Fecha de inicio</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Fecha de vencimiento *</label>
+                                                        <div class="form-group my-label required">
+                                                            <label>Fecha de vencimiento</label>
                                                             <input class="form-control mb-4" id="inputFechaVencimiento" type="date" name="fecha_vencimiento" required>
                                                             <div class="invalid-feedback">Ingresa Fecha de vencimiento</div>
                                                         </div>
@@ -86,8 +86,8 @@
                                                 </div>
                                                 <div class="row mb-4">
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Tipo de Contrato *</label>
+                                                        <div class="form-group my-label required">
+                                                            <label>Tipo de Contrato</label>
                                                             <select class="selectpicker form-control" data-size="6" name="fk_id_tipo" data-style="select-with-transition btn" title="Selecciona una opción">
                                                                 <option name="productor" value="1">Productor</option>
                                                                 <option name="clienteInterno" value="2">Cliente Interno</option>
@@ -97,8 +97,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Asignar al usuario *</label>
+                                                        <div class="form-group my-label required">
+                                                            <label>Asignar al usuario</label>
                                                             <select class="selectpicker form-control" data-size="<% Usuarios.length %>" name="fk_id_usuario" data-style="select-with-transition btn" title="Selecciona una opción">
                                                                 <% for(var usuario of Usuarios) { %>
                                                                 <option name="<%= usuario.nombre %> <%= usuario.apellido %>" value="<%= usuario.id_usuario %>"><%= usuario.nombre %> <%= usuario.apellido %></option>

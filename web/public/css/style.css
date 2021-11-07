@@ -1,3 +1,16 @@
+.my-label > label {
+  display: inline-flex;
+}
+.my-label.required > label:before {
+  color: red;
+  content: " *";
+  order: 1;
+}
+.my-label > label:after {
+  content: "-";
+  color: white;
+}
+
 .rgba-black-strong {
     background-color: rgba(0,0,0,0.7);
 }
@@ -249,11 +262,4 @@
     font-size: 14px;
     font-weight: 300;
     margin: 10px 0 15px 0
-}
-
-.drag-image img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 5px
 }

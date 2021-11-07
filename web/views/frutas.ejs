@@ -129,13 +129,13 @@
                                         <h3 class="card-title mb-4">Ingresa los datos de la nueva fruta</h3>
                                         <div class="card-text">
                                             <form action="../api_frutas/crearFruta" method="POST" class="formValidation" novalidate> 
-                                                <div class="form-group">
-                                                    <label>Nombre *</label>
+                                                <div class="form-group my-label required">
+                                                    <label>Nombre</label>
                                                     <input class="form-control mb-4" id="inputNombre" type="text" name="nombre" required data-toggle="datepicker">
                                                     <div class="invalid-feedback">Ingresa Nombre</div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label>¿Necesita refrigeración? *</label>
+                                                <div class="form-group my-label required">
+                                                    <label>¿Necesita refrigeración?</label>
                                                     <select class="selectpicker form-control" data-size="6" name="necesita_refrigeracion" data-style="select-with-transition btn" title="Selecciona una opción" required>
                                                         <option name="si" value="1">Si</option>
                                                         <option name="no" value="2">No</option>
