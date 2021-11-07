@@ -88,7 +88,7 @@
                                                             <td>
                                                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPedido<%= pedido.id_pedido %>">Ver</button>
                                                                 <a href="/pedido_detalles/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Modificar</button></a>
-                                                                <a href="../api_pedidos/eliminarPedido/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Eliminar</button></a>
+                                                                <a href="../api_pedidos/anularPedido/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Anular</button></a>
                                                             </td>
                                                         </tr>
                                                         <% } %>
@@ -218,6 +218,23 @@
       });
       var table = $('#datatable').DataTable();
     });
+</script>
+
+<script> (function () {
+    'use strict';
+    window.addEventListener('load', function () {
+        var forms = document.getElementsByClassName('formValidation');
+        var validation = Array.prototype.filter.call(forms, function (form) {
+            form.addEventListener('submit', function (event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+  })();
 </script>
 
 </body>

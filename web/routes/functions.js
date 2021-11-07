@@ -147,21 +147,6 @@ async function ListarPedidos() {
 var listarPedidos = ListarPedidos();
 
 
-// Función API ListarMisPedidos
-async function ListarMisPedidos() {
-	return new Promise(function(resolve, reject) {
-		request('http://localhost:3000/api_pedidos/listarMisPedidos', function (error, response, body) {
-			if (error) return reject(error);
-				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarMisPedidos cargado');
-				return resolve(importedJSON);
-		});
-	});
-};
-
-var listarMisPedidos = ListarMisPedidos();
-
-
 // Función API ListarOfertasProductores
 async function ListarOfertasProductores() {
 	return new Promise(function(resolve, reject) {
@@ -288,7 +273,6 @@ module.exports ={
 	'ListarOrdenesTransportes': ListarOrdenesTransportes,
 	'ListarFrutas': ListarFrutas,
     'ListarPedidos': ListarPedidos,
-	'ListarMisPedidos': ListarMisPedidos,
 	'ListarOfertasProductores': ListarOfertasProductores,
 	'ListarOfertasTransportes': ListarOfertasTransportes,
 	'ListarVentas': ListarVentas,

@@ -36,10 +36,10 @@ Iniciar node en la carpeta web
 
 ## Pendiente:
 
-- FALTA AGREGAR NUEVA SUBASTA_FRUTA (haciendo mario)
-- FALTA AGREGAR NUEVA ORDEN_BODEGA Y ORDEN_TRANSPORTE
-- FALTA MODIFICAR CONTRATO
-- CREAR CRUD SEGURO
+- AGREGAR NUEVA SUBASTA_FRUTA (haciendo mario)
+- AGREGAR NUEVA ORDEN_BODEGA Y ORDEN_TRANSPORTE
+- MODIFICAR CONTRATO
+- CREAR (DEBE SER COMO CONTRATO) Y MODIFICAR SEGURO
 
 ## Funciones pendientes:
 
@@ -66,6 +66,7 @@ Iniciar node en la carpeta web
 - http://localhost:3000/ventas *
 - http://localhost:3000/subastas *
 - http://localhost:3000/frutas *
+- http://localhost:3000/seguros *
 
 ### Menú Productor
 
@@ -133,7 +134,7 @@ Iniciar node en la carpeta web
 - 3 En revisión
 - 4 En subasta
 - 5 Finalizado
-- 6 Anular
+- 6 Anulado
 
 ## Necesita - fruta - oferta_Transporte
 - 1 Si
@@ -205,12 +206,12 @@ Iniciar node en la carpeta web
 | GET  | http://localhost:3000/api_seguros/listarSeguros  | JSON |
 | GET  | http://localhost:3000/modificarSeguro/:id_seguro  |  |
 | POST | http://localhost:3000/api_seguros/eliminarSeguro/:id_seguro  | |
-| GET  | http://localhost:3000/seguro/:id_seguro  |  |
 
-## CRUD Pedidos
+## CRUD Pedido
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/pedidos  |  |
+| GET  | http://localhost:3000/api_pedidos/anularPedido/:id_pedido  | |
 
 ## CRUD Mis Pedidos
 | Tipo | URL | Retorna |
@@ -218,7 +219,7 @@ Iniciar node en la carpeta web
 | GET  | http://localhost:3000/mispedidos  |  |
 | GET  | http://localhost:3000/api_pedidos/listarPedidos  | JSON |
 | GET  | http://localhost:3000/modificarPedido/:id_pedido  |  |
-| GET  | http://localhost:3000/api_pedidos/eliminarPedido/:id_pedido  | |
+| GET  | http://localhost:3000/api_pedidos/anularPedido/:id_pedido  | |
 
 ## CRUD Pedido_Detalle
 | Tipo | URL | Retorna |

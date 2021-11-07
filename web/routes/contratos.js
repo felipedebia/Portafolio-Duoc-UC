@@ -4,7 +4,6 @@ const router = express.Router();
 const BD = require('../bin/configbd');
 var moment = require('moment');
 
-
 const multer = require('multer');
 var path = require('path');
 

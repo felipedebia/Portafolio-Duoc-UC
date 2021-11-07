@@ -72,8 +72,6 @@ router.get('/panel', function(req, res) {
 				
 			}
 		];
-
-		console.log(contadoresData)
 		res.render('panel', { title: 'Panel de Administración - Maipo Grande', data:contadoresData  });
 	} else {
 		res.redirect('/');
@@ -496,15 +494,42 @@ router.get('/subasta_transporte/:id_subastaT', async function(req, res, next) {
 
 
 // CRUD MISPEDIDOS
-router.get('/mispedidos', function(req, res) {
-    if (req.session.isLoggedIn) {
-        functions.ListarMisPedidos();
-        res.render('mispedidos', { title: 'Mis Pedidos - Maipo Grande' });
-    } else {
-        res.redirect('/');
-    }
-    res.end();
-});
+router.get('/mispedidos', async function(req, res) {
+	if (req.session.isLoggedIn) {
+
+		const { id_usuario } = req.params;
+
+		// Hacemos una consulta trayendo todos los pedidos del usuario
+		binds = {"id_usuario": req.params};
+		sql = "SELECT id_pedido, direccion_despacho, fecha_creacion, fk_id_tipo, fk_id_ciudad, fk_id_estado FROM pedido WHERE fk_id_usuario = :id_usuario";
+		result = await BD.Open(sql, binds, false);
+
+		// Si los datos estan correctos
+		if (result.rows.length > 0) {
+			// Asignamos los valores de la consulta a las variables
+			var pedidosData = [
+				{
+					id_pedido: result.rows[0][0],
+					direccion_despacho: result.rows[0][1],
+					fecha_creacion: moment(result.rows[0][2]).format('YYYY-MM-DD'),
+					fk_id_tipo: result.rows[0][3],
+					fk_id_ciudad: result.rows[0][4],
+					fk_id_usuario: id_usuario,
+					fk_id_estado: result.rows[0][6]
+				  }
+			];
+
+			// Mostramos la vista
+			console.log(pedidosData);
+			res.render('mispedidos', { title: 'Mis pedidos - Maipo Grande', data:pedidosData });
+		} else {
+			res.send('Error al obtener datos de la base de datos');
+		}
+	} else {
+		res.redirect('/');
+	}
+	res.end();
+})
 
 
 router.get('/pedido_detalles/:id_pedido', function(req, res) {
@@ -579,7 +604,7 @@ router.get('/ofertas', function(req, res) {
 
 router.get('/ofertas_productores', function(req, res) {
     if (req.session.isLoggedIn) {
-		//functions.ListarOfertasTransportes();
+		functions.ListarOfertasTransportes();
         res.render('Ofertas_Productores', { title: 'Ofertas de Productores - Maipo Grande' });
     } else {
         res.redirect('/');
@@ -590,7 +615,7 @@ router.get('/ofertas_productores', function(req, res) {
 
 router.get('/ofertas_transportes', function(req, res) {
     if (req.session.isLoggedIn) {
-		//functions.ListarOfertasTransportes();
+		functions.ListarOfertasTransportes();
         res.render('Ofertas_Transportes', { title: 'Ofertas de Transportes- Maipo Grande' });
     } else {
         res.redirect('/');
@@ -604,6 +629,19 @@ router.get('/ofertas_transportes', function(req, res) {
 router.get('/ventas', function(req, res) {
     if (req.session.isLoggedIn) {
         res.render('Ventas', { title: 'Ventas - Maipo Grande' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
+
+
+
+// CRUD SEGUROS
+router.get('/seguros', function(req, res) {
+    if (req.session.isLoggedIn) {
+		functions.ListarSeguros();
+        res.render('seguros', { title: 'Seguros - Maipo Grande' });
     } else {
         res.redirect('/');
     }

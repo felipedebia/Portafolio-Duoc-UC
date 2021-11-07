@@ -149,8 +149,7 @@ router.post("/modificarMiPerfil/:id_usuario", async (req, res) => {
 router.get("/desactivarUsuario/:id_usuario", async (req, res) => {
   var id_usuario_bind = req.params.id_usuario;
   
-  sql = "DELETE FROM usuario WHERE id_usuario = :id_usuario_bind";
-  //sql = "UPDATE usuario SET fk_id_estado=0 WHERE id_usuario = :id_usuario";
+  sql = "UPDATE usuario SET fk_id_estado=2 WHERE id_usuario = :id_usuario";
   await BD.Open(sql, [id_usuario_bind], true);
 
   if(res.status(200)) {

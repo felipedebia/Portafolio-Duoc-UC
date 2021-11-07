@@ -34,32 +34,6 @@ router.get('/listarPedidos', async (req, res) => {
 });
 
 
-// Leer - Mis Pedidos filtrados por session
-router.get('/listarMisPedidos/', async (req, res) => {
-  
-  binds = { "id_pedido_bind": req.params.id_pedido };
-  sql = "SELECT direccion_despacho, fecha_creacion, fk_id_tipo, fk_id_ciudad, fk_id_usuario, fk_id_estado FROM pedido WHERE fk_id_usuario = :req.session.id_usuario";
-  result = await BD.Open(sql, binds, true);
-
-  MisPedidos = [];
-
-  result.rows.map(pedido => {
-      let pedidoSchema = {
-          "id_pedido": id_pedido_bind,
-          "direccion_despacho": pedido[0],
-          "fecha_creacion": moment(pedido[1]).format('DD-MM-YYYY'),
-          "fk_id_tipo": pedido[2],
-          "fk_id_ciudad": pedido[3],
-          "fk_id_usuario": pedido[4],
-          "fk_id_estado": pedido[5]
-      }
-
-      MisPedidos.push(pedidoSchema);
-  })
-  res.json({title: 'Pedidos', 'mydata': MisPedidos});
-});
-
-
 //Listar detalles de un pedido especifico
 router.get('/listarPedidoDetalles', async(req, res) => {
 
@@ -89,7 +63,7 @@ router.post('/crearPedido', async(req, res) => {
   var { direccion_despacho, fk_id_ciudad} = req.body;
   var fk_id_usuario = req.session.id_usuario;
 
-  var fk_id_tipo = 1;
+  var fk_id_tipo = 1; // Ver si esta bien ya que hay pedido externo y local
   var fk_id_estado = 1;
 
   var fecha_creacion = functions.obtenerFechaActual();
@@ -186,17 +160,19 @@ router.get("/eliminarPedidoDetalles/:id_detalle_pedido", async(req, res) => {
 })
 
 
-//Eliminar pedido
-router.get("/eliminarPedido/:id_pedido", async(req, res) => {
+//Anular pedido
+router.get("/anularPedido/:id_pedido", async(req, res) => {
   var id_pedido_bind = req.params.id_pedido;
-  sql = "UPDATE pedido SET fk_id_estado=6 WHERE id_pedido = :id_pedido_bind";
-  var consulta = await BD.Open(sql, [id_pedido_bind], true);
+  console.log(id_pedido_bind)
+  console.log("leeme po ctm")
+  sql = "UPDATE pedido SET fk_id_estado=2 WHERE id_pedido = :id_pedido_bind";
+  await BD.Open(sql, [id_pedido_bind], true);
 
-  if (consulta) {
-      console.log("[!] Pedido " + req.params.id_pedido + " eliminado con éxito");
+  if(res.status(200)) {
+      console.log("[!] Pedido " + id_pedido_bind + " anulado con éxito");
       res.redirect('/mispedidos');
   } else {
-      console.log("[!] Ocurrió un error al intentar eliminar el pedido " + req.params.id_pedido);
+      console.log("[!] Ocurrió un error al intentar anular el pedido " + id_pedido_bind);
       res.redirect('/mispedidos');
   }
 })
