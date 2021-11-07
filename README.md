@@ -85,6 +85,10 @@ Iniciar node en la carpeta web
 - http://localhost:3000/reportes *
 - http://localhost:3000/soporte * 
 
+## alertError Login
+- 1 Contraseña o correo incorrecto
+- 2 Usuario desactivado
+
 ## Tipo Usuario
 - 1 Administrador
 - 2 Transportista

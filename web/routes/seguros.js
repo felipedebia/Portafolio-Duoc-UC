@@ -11,7 +11,7 @@ var path = require('path');
 // Configurar carpeta de destino de las subidas
 var storage = multer.diskStorage({
 	destination: function (req, file, cb) {
-	  cb(null, 'public/subidas/contratos')
+	  cb(null, 'public/subidas/seguros')
 	},
 	filename: function (req, file, cb) {
 		cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));

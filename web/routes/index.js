@@ -36,30 +36,38 @@ router.post('/auth', async (req, res) => {
 				var passwordDecrypted = simpleCryp.decrypt(result.rows[0][5])
 				// Si la contraseña desencriptada es igual a la que viene por post
 				if(req.body.password == passwordDecrypted) {
-					
-					// Asignamos true al isLoggedIn
-					req.session.isLoggedIn = true;
 
-					// Guardamos datos del usuario en session
-					req.session.id_usuario = result.rows[0][0];
-					req.session.num_documento = result.rows[0][1];
-					req.session.nombre = result.rows[0][2];
-					req.session.apellido = result.rows[0][3];
-					req.session.correo = result.rows[0][4];
-					req.session.tipo_usuario = result.rows[0][6];
-					req.session.tipo_usuario_texto = result.rows[0][7];
-					req.session.estado_usuario = result.rows[0][8];
-					res.redirect('/panel');
-					console.log("[!] Usuario " + req.body.correo + " conectado con éxito");
+					// Comprobamos que el usuario no tenga la cuenta desactivada
+					if(result.rows[0][8] == '2') {
+						console.log("[!] Intento de conexión fallido usando " + req.body.correo);
+						res.render('login', {title: 'Ingresar - Maipo Grande', alertError: 2});
+					} else {
+						// Asignamos true al isLoggedIn
+						req.session.isLoggedIn = true;
+
+						// Guardamos datos del usuario en session
+						req.session.id_usuario = result.rows[0][0];
+						req.session.num_documento = result.rows[0][1];
+						req.session.nombre = result.rows[0][2];
+						req.session.apellido = result.rows[0][3];
+						req.session.correo = result.rows[0][4];
+						req.session.tipo_usuario = result.rows[0][6];
+						req.session.tipo_usuario_texto = result.rows[0][7];
+						req.session.estado_usuario = result.rows[0][8];
+						res.redirect('/panel');
+						console.log("[!] Usuario " + req.body.correo + " conectado con éxito");
+					}
+					
+					
 
 				} else {
 					console.log("[!] Intento de conexión fallido usando " + req.body.correo);
-					res.render('login', {title: 'Ingresar - Maipo Grande', alertError: true});
+					res.render('login', {title: 'Ingresar - Maipo Grande', alertError: 1});
 				}
 
 			} else {
 				console.log("[!] Intento de conexión fallido usando " + req.body.correo);
-				res.render('login', {title: 'Ingresar - Maipo Grande', alertError: true});
+				res.render('login', {title: 'Ingresar - Maipo Grande', alertError: 1});
 			}
 	}
 });

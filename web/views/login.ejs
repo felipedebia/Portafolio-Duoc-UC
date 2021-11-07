@@ -17,31 +17,36 @@
                                         <img class="" src="/images/Logo_Maipo_Grande.jpg">
                                     </div>
                                     <!-- Sign In Form -->
-                                    <% if (alertError == true){ %>
-                                    <div class="alert alert-danger" role="alert">
+                                    <% if (alertError == 1){ %>
+                                    <div class="callout callout-danger">
+                                        <h4>Error!</h4>
                                         El correo electrónico o contraseña es incorrecto
                                     </div>
+                                    <% } else if (alertError == 2) { %>
+                                    <div class="callout callout-danger">
+                                        <h4>Error!</h4>
+                                        La cuenta con la que estás intentando ingresar actualmente está desactivada
+                                    </div>
                                     <% } %>
-                                  <form action="auth" method="POST" class="formValidation" novalidate>
-                                    <p class="mb-5">El acceso a este sistema solo debe ser realizado por personal autorizado por la empresa Maipo Grande. El uso fraudulento de este sistema puede ser penado por la ley.</p>
-                                      <div class="form-floating mb-3">
-                                          <label for="floatingInput">Correo electrónico</label>
-                                          <input type="email" class="form-control" name="correo" id="floatingInput" placeholder="Escribe tu Correo electrónico" required>
-                                          <div class="invalid-feedback">Correo electrónico no válido</div>
-                                      </div>
-                                      <div class="form-floating mb-3">
-                                          <label for="floatingPassword">Contraseña</label>
-                                          <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Escribe tu Contraseña" required>
-                                          <div class="invalid-feedback">Contraseña no válida</div>
-                                      </div>
+                                    <form action="auth" method="POST" class="formValidation" novalidate>
+                                        <p class="mb-5">El acceso a este sistema solo debe ser realizado por personal autorizado por la empresa Maipo Grande. El uso fraudulento de este sistema puede ser penado por ley.</p>
+                                        <div class="form-floating mb-3">
+                                            <label for="floatingInput">Correo electrónico</label>
+                                            <input type="email" class="form-control" name="correo" id="floatingInput" placeholder="Escribe tu Correo electrónico" required>
+                                            <div class="invalid-feedback">Correo electrónico no válido</div>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <label for="floatingPassword">Contraseña</label>
+                                            <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Escribe tu Contraseña" required>
+                                            <div class="invalid-feedback">Contraseña no válida</div>
+                                        </div>
 
-                                      <div class="d-grid mt-5">
-                                          <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" type="submit">Iniciar sesión</button>
-                                          <div>
-                                              <a class="small" href="#">¿Has olvidado tu contraseña?</a>
-                                          </div>
-                                      </div>
-
+                                        <div class="d-grid mt-5">
+                                            <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" type="submit">Iniciar sesión</button>
+                                            <div>
+                                                <a class="small" href="#">¿Has olvidado tu contraseña?</a>
+                                            </div>
+                                        </div>
                                   </form>
                               </div>
                           </div>
