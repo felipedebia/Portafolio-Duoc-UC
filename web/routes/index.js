@@ -636,6 +636,7 @@ router.get('/ofertas_transportes', function(req, res) {
 // CRUD VENTAS
 router.get('/ventas', function(req, res) {
     if (req.session.isLoggedIn) {
+		functions.ListarVentas();
         res.render('Ventas', { title: 'Ventas - Maipo Grande' });
     } else {
         res.redirect('/');

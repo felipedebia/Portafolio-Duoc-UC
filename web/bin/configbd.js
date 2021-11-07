@@ -12,8 +12,8 @@ var DEBUG = (function() {
 const oracledb = require('oracledb');
 
 config = {
-    user: "portafoliofinal6",
-    password: "portafoliofinal6",
+    user: "portafoliofinal7",
+    password: "portafoliofinal7",
     connectString: "localhost:1521/xe"
 }
 

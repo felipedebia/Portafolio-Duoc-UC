@@ -50,6 +50,9 @@ Iniciar node en la carpeta web
 - Hacer templates de correos y agregarlos (ya tenemos el paquete configurado y funcionando)
 - Agregar validaciones de fechas a los formularios
 - Filtrar opciones anular y desactivar, si ya estan entonces ocultar opción
+- Arreglar if de botón confirmar pedido en pedido_detalle
+- Arreglar error de si no existen pedidos, pagina se cae
+- Ocultar botón "Generar venta" si ya esta generada en pedidos (venta y pedido tienen misma id si estan generados)
 
 ## Rutas principales
 - http://localhost:3000/
