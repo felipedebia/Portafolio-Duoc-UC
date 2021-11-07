@@ -38,28 +38,28 @@
                                                 <th scope="col">Opciones</th>
                                             </thead>
                                             <tbody>
-                                                <% for(var pedido of Pedidos) { %>
-                                                    <% if (pedido.fk_id_usuario == session.id_usuario && pedido.id_estado != 6){ %>
+                                                <% for(var i=0; i < data.length; i++) { %>
+                                                    <% if (data[i].fk_id_usuario == session.id_usuario && data[i].fk_id_estado != 6){ %>
                                                         <div class="modal fade" id="modalPedido<%= pedido.id_pedido %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title" id="exampleModalLabel">ID Pedido #
-                                                                            <%= pedido.id_pedido %>
+                                                                            <%= data[i].id_pedido %>
                                                                         </h5>
                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <span><strong>Direccion de despacho:</strong> <%= pedido.direccion_despacho %></span></br>
-                                                                        <span><strong>Fecha del pedido:</strong> <%= pedido.fecha_creacion %></span></br>
-                                                                        <span><strong>Estado del pedido:</strong> <%= pedido.fk_texto_estado %></span>
+                                                                        <span><strong>Direccion de despacho:</strong> <%= data[i].direccion_despacho %></span></br>
+                                                                        <span><strong>Fecha del pedido:</strong> <%= data[i].fecha_creacion %></span></br>
+                                                                        <span><strong>Estado del pedido:</strong> <%= data[i].fk_texto_estado %></span>
                                                                         <div class="mt-4">
                                                                             <span><strong>Detalles del pedido:</strong></span></br>
                                                                             <ul>
                                                                             <% for(var detalle of Detalles){ %>
-                                                                                <%if(detalle.id_pedido == pedido.id_pedido){%>
+                                                                                <%if(detalle.id_pedido == data[i].id_pedido){%>
                                                                                     <li><strong>Fruta:</strong> <%= detalle.nombre %> - <strong>Calidad:</strong> <%= detalle.calidad %> - <strong>Cantidad:</strong> <%= detalle.cantidad %></li>
                                                                                 <% } %>
                                                                             <% } %>
@@ -74,25 +74,25 @@
                                                         </div>
                                                         <tr>
                                                             <th scope="row">
-                                                                <%= pedido.id_pedido %>
+                                                                <%= data[i].id_pedido %>
                                                             </th>
                                                             <td>
-                                                                <%= pedido.direccion_despacho %>
+                                                                <%= data[i].direccion_despacho %>
                                                             </td>
                                                             <td>
-                                                                <%= pedido.fecha_creacion %>
+                                                                <%= data[i].fecha_creacion %>
                                                             </td>
                                                             <td>
-                                                                <%= pedido.fk_texto_estado %>
+                                                                <%= data[i].fk_texto_estado %>
                                                             </td>
                                                             <td>
-                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPedido<%= pedido.id_pedido %>">Ver</button>
-                                                                <a href="/pedido_detalles/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Modificar</button></a>
-                                                                <a href="../api_pedidos/anularPedido/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Anular</button></a>
+                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPedido<%= data[i].id_pedido %>">Ver</button>
+                                                                <a href="/pedido_detalles/<%= data[i].id_pedido %>"><button type="button" class="btn btn-info btn-sm">Modificar</button></a>
+                                                                <a href="../api_pedidos/anularMiPedido/<%= data[i].id_pedido %>"><button type="button" class="btn btn-info btn-sm">Anular</button></a>
                                                             </td>
                                                         </tr>
-                                                        <% } %>
-                                                            <% } %>
+                                                    <% } %>
+                                                <% } %>
                                             </tbody>
                                         </table>
                                     </div>

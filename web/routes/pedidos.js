@@ -91,22 +91,6 @@ router.post('/crearPedido', async(req, res) => {
 })
 
 
-// Anular Pedido
-router.get("/anularPedido/:id_pedido", async (req, res) => {
-  var id_pedido_bind = req.params.id_pedido;
-  sql = "UPDATE pedido SET fk_id_estado=2 WHERE id_pedido = :id_pedido_bind";
-  await BD.Open(sql, [id_pedido_bind], true);
-
-  if(res.status(200)) {
-    console.log("[!] Pedido " + id_pedido_bind + " anulado con éxito");
-    res.redirect('/mispedidos');
-	} else {
-		console.log("[!] Ocurrió un error al intentar anular el pedido " + id_pedido_bind);
-    res.redirect('/mispedidos');
-	}
-})
-
-
 // Agregar Pedido Detalle
 router.post('/crearPedidoDetalle', async(req, res) => {
   var { fk_id_fruta, fk_id_calidad, fk_id_pedido, cantidad } = req.body;
@@ -163,9 +147,24 @@ router.get("/eliminarPedidoDetalles/:id_detalle_pedido", async(req, res) => {
 //Anular pedido
 router.get("/anularPedido/:id_pedido", async(req, res) => {
   var id_pedido_bind = req.params.id_pedido;
-  console.log(id_pedido_bind)
-  console.log("leeme po ctm")
-  sql = "UPDATE pedido SET fk_id_estado=2 WHERE id_pedido = :id_pedido_bind";
+
+  sql = "UPDATE pedido SET fk_id_estado=6 WHERE id_pedido = :id_pedido_bind";
+  await BD.Open(sql, [id_pedido_bind], true);
+
+  if(res.status(200)) {
+      console.log("[!] Pedido " + id_pedido_bind + " anulado con éxito");
+      res.redirect('/pedidos');
+  } else {
+      console.log("[!] Ocurrió un error al intentar anular el pedido " + id_pedido_bind);
+      res.redirect('/pedidos');
+  }
+})
+
+//Anular pedido
+router.get("/anularMiPedido/:id_pedido", async(req, res) => {
+  var id_pedido_bind = req.params.id_pedido;
+
+  sql = "UPDATE pedido SET fk_id_estado=6 WHERE id_pedido = :id_pedido_bind";
   await BD.Open(sql, [id_pedido_bind], true);
 
   if(res.status(200)) {

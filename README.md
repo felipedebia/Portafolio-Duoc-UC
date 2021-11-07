@@ -49,6 +49,7 @@ Iniciar node en la carpeta web
 - Cambiar secuencias SQL a procedimientos
 - Hacer templates de correos y agregarlos (ya tenemos el paquete configurado y funcionando)
 - Agregar validaciones de fechas a los formularios
+- Filtrar opciones anular y desactivar, si ya estan entonces ocultar opción
 
 ## Rutas principales
 - http://localhost:3000/

@@ -39,41 +39,6 @@
   }
 }
 
-.callout.callout-default {
-  border-left-color: #777;
-    h4 {
-      color: #777;
-    }
-}
-
-.callout.callout-primary {
-  border-left-color: #428bca;
-    h4 {
-      color: #428bca;
-    }
-}
-
-.callout.callout-success {
-  border-left-color: #5cb85c;
-    h4 {
-      color: #5cb85c;
-    }
-}
-
-.callout.callout-info {
-  border-left-color: #5bc0de;
-    h4 {
-      color: #5bc0de;
-    }
-}
-
-.callout.callout-warning {
-  border-left-color: #f0ad4e;
-    h4 {
-      color: #f0ad4e;
-    }
-}
-
 .callout.callout-danger {
   border-left-color: #d9534f;
     h4 {

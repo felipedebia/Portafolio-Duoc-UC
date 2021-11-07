@@ -62,20 +62,21 @@ router.get('/listarVentas/:id_venta', async (req, res) => {
 // Agregar
 router.post('/crearVenta/:id_venta', async (req, res) => {
   var id_venta_bind = req.params;
-  console.log(id_venta_bind);
+  var fk_id_pedido = req.params;
+  var { fk_id_seguro, fk_id_tipo } = req.body;
   var fecha_creacion = functions.obtenerFechaActual();
   var fecha_actualizacion = functions.obtenerFechaActual();
+  var fk_id_estado = 1;
 
   sql = "INSERT INTO venta(id_venta, fecha_creacion, fecha_actualizacion, fk_id_pedido, fk_id_seguro, fk_id_tipo, fk_id_estado) VALUES (:id_venta_bind, to_DATE(:fecha_creacion,'YYYY/MM/DD'), to_DATE(:fecha_actualizacion,'YYYY/MM/DD'), :fk_id_pedido, :fk_id_seguro, :fk_id_tipo, :fk_id_estado)";
   await BD.Open(sql, [id_venta_bind, fecha_creacion, fecha_actualizacion, fk_id_pedido, fk_id_seguro, fk_id_tipo, fk_id_estado], true);
 
   // Si tuvo conexión a la DB
   if(res.status(200)) {
-    console.log("[!] Venta creada con éxito");
+    console.log("[!] Venta " + id_venta_bind + " creada con éxito");
     res.redirect('/ventas');
-    //res.refresh();
 	} else {
-		console.log("[!] Ocurrió un error al intentar crear la venta");
+		console.log("[!] Ocurrió un error al intentar crear la venta " + id_venta_bind);
     res.redirect('/ventas');
 	}
 })
@@ -88,10 +89,10 @@ router.get("/anularVenta/:id_venta", async (req, res) => {
   await BD.Open(sql, [id_venta_bind], true);
 
   if(res.status(200)) {
-    console.log("[!] Venta " + req.params.id_venta + " anulada con éxito");
+    console.log("[!] Venta " + id_venta_bind + " anulada con éxito");
     res.redirect('/ventas');
 	} else {
-		console.log("[!] Ocurrió un error al intentar anular la venta " + req.params.id_venta);
+		console.log("[!] Ocurrió un error al intentar anular la venta " + id_venta_bind);
     res.redirect('/ventas');
 	}
 })
