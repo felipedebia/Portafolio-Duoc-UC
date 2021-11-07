@@ -226,7 +226,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column
+    flex-direction: column;
+	background-color: #d2ecf9;
 }
 
 .drag-image.active {

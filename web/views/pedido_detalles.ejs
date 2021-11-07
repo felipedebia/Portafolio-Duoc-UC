@@ -11,7 +11,7 @@
                         <div class="card-body">
                             <form action="../api_pedidos/crearPedidoDetalle" method="POST" class="formValidation" novalidate>
                                 <div class="row">
-                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="col-xs-4 col-sm-4 col-md-4">
                                         <label>Elige una fruta *</label>
                                         <select class="form-control" name="fk_id_fruta" data-style="select-with-transition btn" title="Selecciona una opción">
                                         <%
@@ -32,7 +32,7 @@
                                             <% } %>
                                         </select>
                                     </div>
-                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="col-xs-4 col-sm-4 col-md-4">
                                         <label>Elige la calidad buscada *</label>
                                         <select class="form-control" name="fk_id_calidad" data-style="select-with-transition btn" title="Selecciona una opción">
                                                 <% for(var calidad of Calidades){ %>
@@ -40,14 +40,14 @@
                                                 <% } %>
                                             </select>
                                     </div>
-                                    <div class="col-xs-6 col-sm-6 col-md-6 mt-4">
+                                    <div class="col-xs-4 col-sm-4 col-md-4">
                                         <label>Digite la cantidad de KG buscados *</label>
                                         <input class="form-control" id="cantidad" type="number" name="cantidad" maxLength="6" required>
                                         <div class="invalid-feedback">Ingresa Número de kg de fruta</div>
                                     </div>
                                     <input id="fk_id_pedido" name="fk_id_pedido" type="hidden" value="<%= data[0].id_Pedido%>">
                                 </div>
-                                <button class="btn btn-info mb-2 pull-right" type="submit">Añadir producto</button>
+                                <button class="btn btn-info mt-4 mb-2 pull-right" type="submit">Añadir producto</button>
                             </form>
                             <table class="table table-hover">
                                 <thead class="text-warning">
@@ -83,6 +83,11 @@
 
                                 </tbody>
                             </table>
+                            <% if( data[0].rows < 0 ){ %>
+                                si
+                            <% } else { %>
+                                no
+                            <% } %>
                             <div class="col text-center">
                                 <button type="button" onclick="window.location.href='../api_pedidos/confirmarPedido/<%= data[0].id_Pedido %>'" class="btn btn-success mb-2 mt-4 medium-size-btn">Confirmar pedido</button>
                             </div>

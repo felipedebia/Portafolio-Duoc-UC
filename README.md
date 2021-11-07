@@ -44,7 +44,7 @@ Iniciar node en la carpeta web
 
 - Gráficos
 - Contadores de Usuarios, Frutas, Ventas y Subastas
-- Implementar subida de archivos a Contrato
+- Implementar subida de archivos a Pago
 - Cambiar secuencias SQL a procedimientos
 - Hacer templates de correos y agregarlos (ya tenemos el paquete configurado y funcionando)
 - Agregar validaciones de fechas a los formularios
@@ -149,7 +149,7 @@ Iniciar node en la carpeta web
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/usuarios  |  |
-| POST | http://localhost:3000/api_usuarios/crearusuario  | |
+| POST | http://localhost:3000/api_usuarios/crearUsuario  | |
 | GET  | http://localhost:3000/modificarUsuario/:id_usuario  |  |
 | POST | http://localhost:3000/api_usuarios/modificarUsuario/:id_usuario  | |
 | POST | http://localhost:3000/api_usuarios/modificarMiPerfil/:id_usuario  | |
@@ -173,6 +173,7 @@ Iniciar node en la carpeta web
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/frutas  |  |
+| POST | http://localhost:3000/api_frutas/crearFruta  | |
 | GET  | http://localhost:3000/api_frutas/listarFrutas  | JSON |
 | GET  | http://localhost:3000/modificarFruta/:id_fruta  |  |
 | POST | http://localhost:3000/api_frutas/eliminarFruta/:id_fruta  | |
@@ -220,9 +221,10 @@ Iniciar node en la carpeta web
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/ventas  |  |
+| GET  | http://localhost:3000/api_ventas/crearVenta  | |
 | GET  | http://localhost:3000/api_ventas/listarVentas  | JSON |
 | GET  | http://localhost:3000/modificarVenta/:id_venta  |  |
-| POST | http://localhost:3000/api_ventas/anularVenta/:id_venta  | |
+| GET  | http://localhost:3000/api_ventas/anularVenta/:id_venta  | |
 | GET  | http://localhost:3000/venta/:id_venta  |  |
 
 ## CRUD Oferta
