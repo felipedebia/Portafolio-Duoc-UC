@@ -104,7 +104,7 @@ router.get('/modificarUsuario/:id_usuario', async function(req, res, next) {
 	if (req.session.isLoggedIn) {
 
 		// Hacemos una consulta trayendo todos los datos del usuario
-		const { id_usuario } = req.params;
+		const { id_usuario } = req.params.id_usuario;
 
 		binds = {"id_usuario": id_usuario};
 		sql = "SELECT num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password, fk_id_estado, fk_id_tipo FROM usuario WHERE id_usuario = :id_usuario";
@@ -192,7 +192,7 @@ router.get('/miperfil', async function(req, res, next) {
 router.get('/perfil/:id_usuario', async function(req, res, next) {
 	if (req.session.isLoggedIn) {
 
-		const { id_usuario } = req.params;
+		const { id_usuario } = req.params.id_usuario;
 
 		// Hacemos una consulta trayendo todos los datos del usuario
 		binds = {"id_usuario": id_usuario};
@@ -272,7 +272,7 @@ router.get('/modificarContrato', async function(req, res, next) {
 router.get('/modificarContrato/:id_contrato', async function(req, res, next) {
 	if (req.session.isLoggedIn) {
 
-		const { id_contrato } = req.params;
+		const { id_contrato } = req.params.id_contrato;
 
 		// Hacemos una consulta trayendo todos los datos del contrato
 		binds = {"id_contrato": id_contrato};
@@ -308,7 +308,7 @@ router.get('/modificarContrato/:id_contrato', async function(req, res, next) {
 router.get('/contrato/:id_contrato', async function(req, res, next) {
 	if (req.session.isLoggedIn) {
 
-		const { id_contrato } = req.params;
+		const { id_contrato } = req.params.id_contrato;
 
 		// Hacemos una consulta trayendo todos los datos del contrato
 		binds = {"id_contrato": id_contrato};
@@ -348,7 +348,7 @@ router.get('/contrato/:id_contrato', async function(req, res, next) {
 router.get('/documentoContrato/:id_contrato', async function(req, res, next) {
 	if (req.session.isLoggedIn) {
 
-		const { id_contrato } = req.params;
+		const { id_contrato } = req.params.id_contrato;
 
 		// Hacemos una consulta trayendo todos los datos del contrato
 		binds = {"id_contrato": id_contrato};
@@ -417,7 +417,7 @@ router.get('/subastas_frutas', function(req, res) {
 router.get('/subasta_fruta/:id_subastaF', async function(req, res, next) {
 	if (req.session.isLoggedIn) {
 
-		const { id_subastaF } = req.params;
+		const { id_subastaF } = req.params.id_subastaF;
 
 		// Hacemos una consulta trayendo todos los datos del usuario
 		binds = {"id_subastaF": id_subastaF};
@@ -465,7 +465,7 @@ router.get('/subastas_transportes', function(req, res) {
 router.get('/subasta_transporte/:id_subastaT', async function(req, res, next) {
 	if (req.session.isLoggedIn) {
 
-		const { id_subastaT } = req.params;
+		const { id_subastaT } = req.params.id_subastaT;
 
 		// Hacemos una consulta trayendo todos los datos del usuario
 		binds = {"id_subastaT": id_subastaT};
@@ -505,7 +505,7 @@ router.get('/subasta_transporte/:id_subastaT', async function(req, res, next) {
 router.get('/mispedidos', async function(req, res) {
 	if (req.session.isLoggedIn) {
 
-		const { id_usuario } = req.params;
+		const { id_usuario } = req.params.id_usuario;
 
 		// Hacemos una consulta trayendo todos los pedidos del usuario
 		binds = {"id_usuario": req.params};

@@ -61,8 +61,8 @@ router.get('/listarVentas/:id_venta', async (req, res) => {
 
 // Agregar
 router.post('/crearVenta/:id_venta', async (req, res) => {
-  var id_venta_bind = req.params;
-  var fk_id_pedido = req.params;
+  var id_venta_bind = req.params.id_venta;
+  var fk_id_pedido = req.params.id_venta;
   var { fk_id_seguro, fk_id_tipo } = req.body;
   var fecha_creacion = functions.obtenerFechaActual();
   var fecha_actualizacion = functions.obtenerFechaActual();
@@ -84,7 +84,7 @@ router.post('/crearVenta/:id_venta', async (req, res) => {
 
 // Anular
 router.get("/anularVenta/:id_venta", async (req, res) => {
-  var id_venta_bind = req.params;
+  var id_venta_bind = req.params.id_venta;
   sql = "UPDATE venta SET fk_id_estado=2 WHERE id_venta = :id_venta_bind";
   await BD.Open(sql, [id_venta_bind], true);
 
