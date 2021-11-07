@@ -4,6 +4,23 @@ const router = express.Router();
 const BD = require('../bin/configbd');
 var moment = require('moment');
 
+
+const multer = require('multer');
+var path = require('path');
+
+// Configurar carpeta de destino de las subidas
+var storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+	  cb(null, 'public/subidas')
+	},
+	filename: function (req, file, cb) {
+		cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+	}
+  })
+  
+var uploadFile = multer({ storage: storage })
+
+
 // CRUD CONTRATOS
 
 // Leer - Todos los contratos
@@ -87,5 +104,20 @@ router.get("/anularContrato/:id_contrato", async (req, res) => {
     res.redirect('/contratos');
 	}
 })
+
+
+router.post('/subirDocumento/:id_contrato', uploadFile.single('url_documento'), (req, res, next) => {
+	const file = req.file
+	if (!file) {
+	  const error = new Error('Debes seleccionar un archivo')
+	  error.httpStatusCode = 400
+	  return next(error)
+	}
+	var fileLocation = req.file.path.replace('public','');
+	console.log(req.file.filename);
+	res.send(`You have uploaded this image: <hr/><img src="${fileLocation}" width="500"><hr />`);
+})
+
+
 
 module.exports = router;

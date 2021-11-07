@@ -5,22 +5,6 @@ const BD = require('../bin/configbd');
 var moment = require('moment');
 var functions = require('./functions');
 
-const multer = require('multer');
-var path = require('path');
-
-// Configurar carpeta de destino de las subidas
-var storage = multer.diskStorage({
-	destination: function (req, file, cb) {
-	  cb(null, 'uploads')
-	},
-	filename: function (req, file, cb) {
-		cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-	}
-  })
-  
-var upload = multer({ storage: storage })
-
-
 // Contraseña
 var SimpleCrypto = require("simple-crypto-js").default
 const secretKey = "1X42JJKLjkuid"
@@ -82,7 +66,15 @@ router.post('/auth', async (req, res) => {
 
 router.get('/panel', function(req, res) {
 	if (req.session.isLoggedIn) {
-		res.render('panel', { title: 'Panel de Administración - Maipo Grande' });
+
+		var contadoresData = [
+			{
+				
+			}
+		];
+
+		console.log(contadoresData)
+		res.render('panel', { title: 'Panel de Administración - Maipo Grande', data:contadoresData  });
 	} else {
 		res.redirect('/');
 	}
@@ -312,7 +304,7 @@ router.get('/contrato/:id_contrato', async function(req, res, next) {
 
 		const { id_contrato } = req.params;
 
-		// Hacemos una consulta trayendo todos los datos del usuario
+		// Hacemos una consulta trayendo todos los datos del contrato
 		binds = {"id_contrato": id_contrato};
 		sql = "SELECT contrato.url_documento, contrato.fecha_inicio, contrato.fecha_vencimiento, contrato.fk_id_tipo, contrato.fk_id_estado, rel_contrato_usuario.fk_id_usuario, usuario.nombre, usuario.apellido FROM contrato JOIN rel_contrato_usuario ON contrato.id_contrato = rel_contrato_usuario.fk_id_contrato JOIN usuario ON rel_contrato_usuario.fk_id_usuario = usuario.id_usuario WHERE contrato.id_contrato = :id_contrato";
 		result = await BD.Open(sql, binds, false);
@@ -346,6 +338,41 @@ router.get('/contrato/:id_contrato', async function(req, res, next) {
 	res.end();
 })
 
+
+router.get('/documentoContrato/:id_contrato', async function(req, res, next) {
+	if (req.session.isLoggedIn) {
+
+		const { id_contrato } = req.params;
+
+		// Hacemos una consulta trayendo todos los datos del contrato
+		binds = {"id_contrato": id_contrato};
+		sql = "SELECT fecha_vencimiento, url_documento FROM contrato WHERE id_contrato = :id_contrato";
+		result = await BD.Open(sql, binds, false);
+
+		// Si los datos estan correctos
+		if (result.rows.length > 0) {
+			// Si url_contrato es NULL se podrá subir archivo
+			if (result.rows[0][1] === null) {
+				// Asignamos los valores de la consulta a las variables
+				var contratoData = [
+					{
+						id_contrato: id_contrato,
+						fecha_vencimiento: moment(result.rows[0][0]).format('YYYY-MM-DD'),
+					}
+				];
+			} else {
+				res.send('Este contrato ya tiene un documento asignado');
+			}
+			// Mostramos la vista
+			res.render('documentoContrato', { title: 'Subir documento - Maipo Grande', data:contratoData });
+		} else {
+			res.send('Error al obtener datos de la base de datos');
+		}
+	} else {
+		res.redirect('/');
+	}
+	res.end();
+})
 
 // CRUD FRUTAS
 router.get('/frutas', function(req, res) {
@@ -584,29 +611,6 @@ router.get('/ventas', function(req, res) {
 });
 
 
-
-router.post('/uploadfile', upload.single('myFile'), (req, res, next) => {
-	const file = req.file
-	if (!file) {
-	  const error = new Error('Please upload a file')
-	  error.httpStatusCode = 400
-	  return next(error)
-	}
-	  res.send(file)
-   
-  })
-
-
-router.get('/test', function(req, res) {
-    if (req.session.isLoggedIn) {
-        res.render('test', { title: 'tEsT - Maipo Grande' });
-    } else {
-        res.redirect('/');
-    }
-    res.end();
-});
-
-
 router.get('/plantilla', function(req, res) {
     if (req.session.isLoggedIn) {
         res.render('plantilla', { title: 'Plantilla - Maipo Grande' });
@@ -615,6 +619,7 @@ router.get('/plantilla', function(req, res) {
     }
     res.end();
 });
+
 
 router.get('/plantilla_con_tabla', function(req, res) {
     if (req.session.isLoggedIn) {

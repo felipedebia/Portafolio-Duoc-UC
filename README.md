@@ -43,7 +43,7 @@ Iniciar node en la carpeta web
 
 - Gráficos
 - Contadores de Usuarios, Frutas, Ventas y Subastas
-- Subir archivo PDF a Contrato
+- Implementar subida de archivos a Contrato
 - Cambiar secuencias SQL a procedimientos
 - Hacer templates de correos y agregarlos (ya tenemos el paquete configurado y funcionando)
 
@@ -165,6 +165,7 @@ Iniciar node en la carpeta web
 | GET  | http://localhost:3000/modificarContrato/:id_contrato  |  |
 | POST | http://localhost:3000/api_contratos/anularContrato/:id_contrato  | |
 | GET  | http://localhost:3000/contrato/:id_contrato  |  |
+| GET  | http://localhost:3000/documentoContrato/:id_contrato  |  |
 
 ## CRUD Fruta
 | Tipo | URL | Retorna |

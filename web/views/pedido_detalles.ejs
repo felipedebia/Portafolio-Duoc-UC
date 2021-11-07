@@ -47,7 +47,7 @@
                                     </div>
                                     <input id="fk_id_pedido" name="fk_id_pedido" type="hidden" value="<%= data[0].id_Pedido%>">
                                 </div>
-                                <button class="btn btn-info mb-2 pull-right" type="submit"><i class="fas fa-sign-in-alt"></i> Añadir producto</button>
+                                <button class="btn btn-info mb-2 pull-right" type="submit">Añadir producto</button>
                             </form>
                             <table class="table table-hover">
                                 <thead class="text-warning">
@@ -78,12 +78,14 @@
                                                     <button type="button" onclick="window.location.href='../api_pedidos/eliminarPedidoDetalles/<%= detalle.id_pdetalle %>'" class="btn btn-danger btn-sm">Eliminar</button>
                                                 </td>
                                             </tr>
-                                            <% } %>
-                                                <% } %>
+                                        <% } %>
+                                    <% } %>
 
                                 </tbody>
                             </table>
-                            <button type="button" onclick="window.location.href='../api_pedidos/confirmarPedido/<%= data[0].id_Pedido %>'" class="btn btn-info btn-lg btn-block">Confirmar Pedido</button>
+                            <div class="col text-center">
+                                <button type="button" onclick="window.location.href='../api_pedidos/confirmarPedido/<%= data[0].id_Pedido %>'" class="btn btn-success mb-2 mt-4 medium-size-btn">Confirmar pedido</button>
+                            </div>
                         </div>
                     </div>
                 </div>
