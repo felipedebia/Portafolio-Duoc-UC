@@ -43,36 +43,6 @@ router.get('/listarUsuarios', async (req, res) => {
 });
 
 
-// Leer - Usuario en especifico
-router.get('/listarUsuarios/:id_usuario', async (req, res) => {
-  binds = { "id_usuario_bind": req.params.id_usuario };
-
-  sql = "SELECT num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password, fk_id_estado, fk_id_tipo FROM usuario WHERE id_usuario = :id_usuario_bind";
-  result = await BD.Open(sql, binds, true);
-
-  Usuarios = [];
-
-  result.rows.map(user => {
-      let userSchema = {
-        "id_usuario": id_usuario_bind,
-        "num_documento": user[0],
-        "nombre": user[1],
-        "apellido": user[2],
-        "fecha_nacimiento": moment(user[3]).format('DD-MM-YYYY'),
-        "genero": user[4],
-        "correo": user[5],
-        "telefono": user[6],
-        "password": user[7],
-        "fk_id_estado": user[8],
-        "fk_id_tipo": user[9]
-      }
-
-      Usuarios.push(userSchema);
-  })
-  res.json({title: 'Usuarios', 'mydata': Usuarios});
-});
-
-
 // Agregar
 // Falta hacer filtro de que no se repita el correo
 router.post('/crearUsuario', async (req, res) => {

@@ -35,34 +35,6 @@ router.get('/listarVentas', async (req, res) => {
 });
 
 
-// Leer - Venta en especifico
-router.get('/listarVentas/:id_venta', async (req, res) => {
-  
-  binds = { "id_venta_bind": req.params.id_venta };
-  sql = "SELECT venta.fecha_creacion, venta.fecha_actualizacion, venta.fk_id_pedido, venta.fk_id_seguro, venta.fk_id_tipo, tipo_venta.nombre, venta.fk_id_estado, estado_venta.descripcion FROM venta WHERE id_venta = :id_venta_bind";
-  result = await BD.Open(sql, binds, true);
-
-  Ventas = [];
-
-  result.rows.map(venta => {
-      let ventaSchema = {
-          "id_venta": id_venta_bind,
-          "fecha_creacion": moment(venta[1]).format('DD-MM-YYYY'),
-          "fecha_actualizacion": moment(venta[2]).format('DD-MM-YYYY'),
-          "fk_id_pedido": venta[2],
-          "fk_id_seguro": venta[3],
-          "fk_id_tipo": venta[4],
-          "fk_texto_tipo": venta[5],
-          "fk_id_estado": venta[6],
-          "fk_texto_estado": venta[7]
-      }
-
-      Ventas.push(ventaSchema);
-  })
-  res.json({title: 'Ventas', 'mydata': Ventas});
-});
-
-
 // Agregar
 router.post('/crearVenta/:id_venta', async (req, res) => {
   var id_venta_bind = req.params.id_venta;

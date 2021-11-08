@@ -41,6 +41,7 @@ Iniciar node en la carpeta web
 - AGREGAR NUEVA ORDEN_BODEGA Y ORDEN_TRANSPORTE
 - MODIFICAR CONTRATO
 - CREAR (DEBE SER COMO CONTRATO) Y MODIFICAR SEGURO
+- CREAR PRODUCTO
 
 ## Funciones pendientes:
 
@@ -178,7 +179,6 @@ Iniciar node en la carpeta web
 | POST | http://localhost:3000/api_usuarios/modificarMiPerfil/:id_usuario  | |
 | GET  | http://localhost:3000/api_usuarios/desactivarUsuario/:id_usuario  | |
 | GET  | http://localhost:3000/api_usuarios/listarUsuarios  | JSON |
-| GET  | http://localhost:3000/api_usuarios/listarUsuarios/:id_usuario  | JSON |
 | GET  | http://localhost:3000/perfil/:id_usuario  |  |
 | GET  | http://localhost:3000/miperfil/:id_usuario  |  |
 
@@ -258,15 +258,6 @@ Iniciar node en la carpeta web
 | GET  | http://localhost:3000/modificarVenta/:id_venta  |  |
 | GET  | http://localhost:3000/api_ventas/anularVenta/:id_venta  | |
 | GET  | http://localhost:3000/venta/:id_venta  |  |
-
-## CRUD Oferta
-| Tipo | URL | Retorna |
-| ------------- | ------------- | ------------- |
-| GET  | http://localhost:3000/ofertas  |  |
-| GET  | http://localhost:3000/api_ofertas/listarOfertas  | JSON |
-| GET  | http://localhost:3000/modificarOferta/:id_ofertap  |  |
-| POST | http://localhost:3000/api_ofertas/anularOferta/:id_ofertap  | |
-| GET  | http://localhost:3000/oferta/:id_ofertap  |  |
 
 ## CRUD Informe
 | Tipo | URL | Retorna |

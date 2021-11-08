@@ -33,32 +33,6 @@ router.get('/listarSubastasFrutas', async (req, res) => {
 });
 
 
-// Leer - Subasta en especifico Frutas
-router.get('/listarSubastasFrutas/:id_subastaF', async (req, res) => {
-  
-  binds = { "id_subastaF_bind": req.params.id_subastaF };
-  sql = "SELECT fecha_creacion, fecha_actualizacion, fecha_termino, fk_id_pedido, fk_id_estado, estado_subastaF.descripcion FROM subasta_fruta JOIN estado_subastaF ON subasta_fruta.fk_id_estado = estado_subastaF.id_estado WHERE id_subastaF = :id_subastaF_bind";
-  result = await BD.Open(sql, binds, true);
-
-  SubastasFrutas = [];
-
-  result.rows.map(subasta => {
-      let subastaSchema = {
-        "id_subastaF": req.params.id_subastaF,
-        "fecha_creacion": moment(subasta[0]).format('DD-MM-YYYY'),
-        "fecha_actualizacion": moment(subasta[1]).format('DD-MM-YYYY'),
-        "fecha_termino": moment(subasta[2]).format('DD-MM-YYYY'),
-        "fk_id_pedido": subasta[3],
-        "fk_id_estado": subasta[4],
-        "fk_texto_estado": subasta[5]
-      }
-
-      SubastasFrutas.push(subastaSchema);
-  })
-  res.json({title: 'SubastasFrutas', 'mydata': SubastasFrutas});
-});
-
-
 // Crear Subasta Fruta
 router.get('/crearSubastaFruta/:id_subastaF', async (req, res) => {
 
@@ -133,34 +107,6 @@ router.get('/listarSubastasTransportes', async (req, res) => {
           "fk_id_pedido": subasta[6],
           "fk_id_estado": subasta[7],
           "fk_texto_estado": subasta[8]
-      }
-
-      SubastasTransportes.push(subastaSchema);
-  })
-  res.json({title: 'SubastasTransportes', 'mydata': SubastasTransportes});
-});
-
-
-// Leer - Subasta en especifico Transportes
-router.get('/listarSubastasTransportes/:id_subastaT', async (req, res) => {
-  
-  binds = { "id_subastaT_bind": req.params.id_subastaT };
-  sql = "SELECT fecha_creacion, fecha_actualizacion, fecha_termino, cantidad, direccion_despacho, fk_id_pedido, fk_id_estado, estado_subastaT.descripcion FROM subasta_transporte JOIN estado_subastaT ON subasta_transporte.fk_id_estado = estado_subastaT.id_estado WHERE id_subastaT = :id_subastaT_bind";
-  result = await BD.Open(sql, binds, true);
-
-  SubastasTransportes = [];
-
-  result.rows.map(subasta => {
-      let subastaSchema = {
-        "id_subastaT": id_subastaT_bind,
-        "fecha_creacion": subasta[0],
-        "fecha_actualizacion": subasta[1],
-        "fecha_termino": subasta[2],
-        "cantidad": subasta[3],
-        "direccion_despacho": subasta[4],
-        "fk_id_pedido": subasta[5],
-        "fk_id_estado": subasta[6],
-        "fk_texto_estado": subasta[7]
       }
 
       SubastasTransportes.push(subastaSchema);

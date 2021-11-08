@@ -31,33 +31,6 @@ router.get('/listarProductos', async (req, res) => {
 });
 
 
-// Leer - Productos en especifico
-router.get('/listarProductos/:id_producto', async (req, res) => {
-  
-  binds = { "id_producto_bind": req.params.id_producto };
-  sql = "SELECT cantidad, fecha_modificacion, fk_id_fruta, fk_id_calidad, fk_id_usuario FROM producto WHERE id_producto = :id_producto_bind";
-  result = await BD.Open(sql, binds, true);
-
-  Productos = [];
-
-  result.rows.map(producto => {
-      let productoSchema = {
-          "id_producto": id_producto_bind,
-          "cantidad": producto[0],
-          "fecha_modificacion": moment(producto[1]).format('DD-MM-YYYY'),
-          "fk_id_fruta": producto[2],
-          "fk_id_calidad": producto[3],
-          "fk_id_usuario": producto[4]
-      }
-
-      Productos.push(productoSchema);
-  })
-  res.json({title: 'Productos', 'mydata': Productos});
-});
-
-
-
-
 // Eliminar
 router.get("/eliminarProducto/:id_producto", async (req, res) => {
   var id_producto_bind = req.params.id_producto;

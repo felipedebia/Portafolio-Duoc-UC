@@ -30,30 +30,6 @@ router.get('/listarOrdenesBodegas', async (req, res) => {
 });
 
 
-// Leer - Orden en especifico Bodega
-router.get('/listarOrdenesBodegas/:id_ordenB', async (req, res) => {
-  
-  binds = { "id_ordenB_bind": req.params.id_ordenB };
-  sql = "SELECT fecha_ingreso, fecha_retiro, fk_id_estado, fk_id_venta FROM orden_bodega WHERE id_ordenB = :id_ordenB_bind";
-  result = await BD.Open(sql, binds, true);
-
-  OrdenesBodegas = [];
-
-  result.rows.map(orden => {
-      let ordenSchema = {
-          "id_ordenB": id_ordenB_bind,
-          "fecha_ingreso": moment(oferta[0]).format('DD-MM-YYYY'),
-          "fecha_retiro": moment(oferta[1]).format('DD-MM-YYYY'),
-          "fk_id_estado": orden[2],
-          "fk_id_venta": orden[3]
-      }
-
-      OrdenesBodegas.push(ordenSchema);
-  })
-  res.json({title: 'OrdenesBodega', 'mydata': OrdenesBodegas});
-});
-
-
 // Anular orden Bodega
 router.get("/anularOrdenBodega/:id_ordenb", async (req, res) => {
   var { id_ordenB_bind } = req.params.id_ordenB;
@@ -89,31 +65,6 @@ router.get('/listarOrdenesTransportes', async (req, res) => {
           "url_documento": orden[3],
           "fk_id_estado": orden[4],
           "fk_id_venta": orden[5]
-      }
-
-      OrdenesTransportes.push(ordenSchema);
-  })
-  res.json({title: 'OrdenesTransportes', 'mydata': OrdenesTransportes});
-});
-
-
-// Leer - Orden en especifico Transportes
-router.get('/listarOrdenesTransportes/:id_ordenT', async (req, res) => {
-  
-  binds = { "id_ordenT_bind": req.params.id_ordenT };
-  sql = "SELECT fecha_ingreso, fecha_retiro, url_documento, fk_id_estado, fk_id_venta FROM orden_transporte WHERE id_ordenT = :id_ordenT_bind";
-  result = await BD.Open(sql, binds, true);
-
-  OrdenesTransportes = [];
-
-  result.rows.map(orden => {
-      let ordenSchema = {
-          "id_ordenT": id_ordenT_bind,
-          "fecha_ingreso": orden[0],
-          "fecha_retiro": orden[1],
-          "url_documento": orden[2],
-          "fk_id_estado": orden[3],
-          "fk_id_venta": orden[4]
       }
 
       OrdenesTransportes.push(ordenSchema);

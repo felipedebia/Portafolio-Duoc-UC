@@ -31,37 +31,11 @@ router.get('/listarFrutas', async (req, res) => {
 });
 
 
-// Leer - Frutas en especifico
-router.get('/listarFrutas/:id_fruta', async (req, res) => {
-  
-  binds = { "id_fruta_bind": req.params.id_fruta };
-  sql = "SELECT nombre, fecha_creacion, necesita_refrigeracion FROM fruta WHERE id_fruta = :id_fruta_bind";
-  result = await BD.Open(sql, binds, true);
-
-  Frutas = [];
-
-  result.rows.map(fruta => {
-      let frutaSchema = {
-        "id_fruta": id_fruta_bind,
-        "nombre": fruta[0],
-        "fecha_creacion": moment(fruta[2]).format('DD-MM-YYYY'),
-        "necesita_refrigeracion": fruta[1]
-      }
-
-      Frutas.push(frutaSchema);
-  })
-  res.json({title: 'Frutas', 'mydata': Frutas});
-});
-
-
 // Agregar
 router.post('/crearFruta', async (req, res) => {
   var { nombre, necesita_refrigeracion } = req.body;
   var fecha_creacion = functions.obtenerFechaActual();
 
-    console.log(nombre)
-    console.log(fecha_creacion)
-    console.log(necesita_refrigeracion)
   sql = "INSERT INTO fruta(nombre, fecha_creacion, necesita_refrigeracion) VALUES (:nombre, to_DATE(:fecha_creacion,'YYYY/MM/DD'), :necesita_refrigeracion)";
   await BD.Open(sql, [nombre, fecha_creacion, necesita_refrigeracion], true);
 
