@@ -93,8 +93,6 @@ router.post('/subirDocumento/:id_contrato', uploadFile.single('url_documento'), 
 	  error.httpStatusCode = 400
 	  return next(error)
 	}
-	//var fileLocation = req.file.path.replace('public','');
-	//res.send(`You have uploaded this image: <hr/><img src="${fileLocation}" width="500"><hr />`);
 
 	// Hacemos un update agregando el nombre del archivo al campo url_documento
 	var id_contrato_bind = req.params.id_contrato;

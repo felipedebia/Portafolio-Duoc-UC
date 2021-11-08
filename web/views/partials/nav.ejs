@@ -54,12 +54,6 @@
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="../ventas">
-                            <i class="material-icons">monetization_on</i>
-                            <p>Ventas</p>
-                        </a>
-                    </li>
-                    <li class="nav-item ">
                         <a class="nav-link" href="../subastas">
                             <i class="material-icons">loyalty</i>
                             <p>Subastas</p>
@@ -81,6 +75,24 @@
                         <a class="nav-link" href="../seguros">
                             <i class="material-icons">local_police</i>
                             <p>Seguros</p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="../productos">
+                            <i class="material-icons">inventory_2</i>
+                            <p>Productos (Productor)</p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="../ventas">
+                            <i class="material-icons">monetization_on</i>
+                            <p>Ventas (Productor)</p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="../reportes">
+                            <i class="material-icons">equalizer</i>
+                            <p>Reportes (Consultor)</p>
                         </a>
                     </li>
                   <% } %>
@@ -123,9 +135,9 @@
                   <% if(session.tipo_usuario == 4){ %>
                     <!--Menú Cliente Interno-->
                       <li class="nav-item ">
-                          <a class="nav-link" href="../pedidos">
+                          <a class="nav-link" href="../mispedidos">
                               <i class="material-icons">library_books</i>
-                              <p>Pedidos</p>
+                              <p>Mis Pedidos</p>
                           </a>
                       </li>
                       <li class="nav-item ">
@@ -140,7 +152,7 @@
                       <li class="nav-item ">
                           <a class="nav-link" href="../subastas_transportes">
                               <i class="material-icons">local_shipping</i>
-                              <p>Subastas Transportes</p>
+                              <p>Subastas</p>
                           </a>
                       </li>
                   <% } %>

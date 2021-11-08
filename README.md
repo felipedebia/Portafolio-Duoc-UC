@@ -72,7 +72,6 @@ Iniciar node en la carpeta web
 - http://localhost:3000/contratos *
 - http://localhost:3000/ordenes *
 - http://localhost:3000/pedidos *
-- http://localhost:3000/ventas *
 - http://localhost:3000/subastas *
 - http://localhost:3000/frutas *
 - http://localhost:3000/seguros *
@@ -92,7 +91,6 @@ Iniciar node en la carpeta web
 
 ### Menú Consultor
 - http://localhost:3000/reportes *
-- http://localhost:3000/soporte * 
 
 ## alertError Login
 - 1 Contraseña o correo incorrecto
