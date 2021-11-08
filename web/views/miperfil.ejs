@@ -9,18 +9,21 @@
                       <h4 class="card-title">Mi Perfil</h4>
                     </div>
                     <div class="card-body">
+                      <h3 class="card-title mb-4 mt-3">Ingresa tus nuevos datos</h3>
                       <div class="card-text">
                         <form action="/api_usuarios/modificarMiPerfil/<%= data[0].id_usuario%>" method="POST">
                           <div class="row mt-4">
                             <div class="col-xs-6 col-sm-6 col-md-6">
                               <div class="form-group my-label required">
                                 <label>Nombre</label>
-                                <input class="form-control mb-4" id="nombre" type="text" name="nombre" placeholder="Nombre" maxLength="25" required value="<%= data[0].nombre%>"></div>
+                                <input class="form-control mb-4" id="nombre" type="text" name="nombre" placeholder="Nombre" maxLength="25" required value="<%= data[0].nombre%>">
+                              </div>
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-6">
                               <div class="form-group my-label required">
                                 <label>Apellido</label>
-                                <input class="form-control mb-4" id="apellido" type="text" name="apellido" placeholder="Apellido" maxLength="25" required value="<%= data[0].apellido%>"></div>
+                                <input class="form-control mb-4" id="apellido" type="text" name="apellido" placeholder="Apellido" maxLength="25" required value="<%= data[0].apellido%>">
+                              </div>
                             </div>
                           </div>
                           <label>Correo electrónico *</label>
@@ -29,11 +32,13 @@
                             <div class="col-xs-6 col-sm-6 col-md-6">
                               <div class="form-group my-label required">
                                 <label>Contraseña</label>
-                                <input class="form-control mb-4" id="inputPassword" type="password" name="password" placeholder="Contraseña" maxLength="40" required value="<%= data[0].password%>"></div>
+                                <input class="form-control mb-4" id="inputPassword" type="password" name="password" placeholder="Contraseña" maxLength="40" required value="<%= data[0].password%>">
+                              </div>
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-6">
                               <div class="form-group">
-                                <input type="checkbox" onclick="showPassword()">Mostrar contraseña</div>
+                                <input type="checkbox" onclick="showPassword()">Mostrar contraseña</input>
+                              </div>
                             </div>
                           </div>
                           <label>Número de documento *</label>

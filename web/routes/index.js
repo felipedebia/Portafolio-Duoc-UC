@@ -104,7 +104,7 @@ router.get('/modificarUsuario/:id_usuario', async function(req, res, next) {
 	if (req.session.isLoggedIn) {
 
 		// Hacemos una consulta trayendo todos los datos del usuario
-		const { id_usuario } = req.params.id_usuario;
+		const { id_usuario } = req.params;
 
 		binds = {"id_usuario": id_usuario};
 		sql = "SELECT num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password, fk_id_estado, fk_id_tipo FROM usuario WHERE id_usuario = :id_usuario";
@@ -165,6 +165,7 @@ router.get('/miperfil', async function(req, res, next) {
 			// Asignamos los valores de la consulta a las variables
 			var usuarioData = [
 				{
+					id_usuario: req.session.id_usuario,
 					num_documento: result.rows[0][0],
 					nombre: result.rows[0][1],
 					apellido: result.rows[0][2],
@@ -173,8 +174,7 @@ router.get('/miperfil', async function(req, res, next) {
 					correo: result.rows[0][5],
 					telefono: result.rows[0][6],
 					password: simpleCryp.decrypt(result.rows[0][7]),
-					tipo_usuario_texto: tipoUsuarioTexto,
-					id_usuario: req.session.id_usuario
+					tipo_usuario_texto: tipoUsuarioTexto
 				  }
 			];
 
@@ -192,7 +192,7 @@ router.get('/miperfil', async function(req, res, next) {
 router.get('/perfil/:id_usuario', async function(req, res, next) {
 	if (req.session.isLoggedIn) {
 
-		const { id_usuario } = req.params.id_usuario;
+		const { id_usuario } = req.params;
 
 		// Hacemos una consulta trayendo todos los datos del usuario
 		binds = {"id_usuario": id_usuario};
@@ -272,7 +272,7 @@ router.get('/modificarContrato', async function(req, res, next) {
 router.get('/modificarContrato/:id_contrato', async function(req, res, next) {
 	if (req.session.isLoggedIn) {
 
-		const { id_contrato } = req.params.id_contrato;
+		const { id_contrato } = req.params;
 
 		// Hacemos una consulta trayendo todos los datos del contrato
 		binds = {"id_contrato": id_contrato};
@@ -308,7 +308,7 @@ router.get('/modificarContrato/:id_contrato', async function(req, res, next) {
 router.get('/contrato/:id_contrato', async function(req, res, next) {
 	if (req.session.isLoggedIn) {
 
-		const { id_contrato } = req.params.id_contrato;
+		const { id_contrato } = req.params;
 
 		// Hacemos una consulta trayendo todos los datos del contrato
 		binds = {"id_contrato": id_contrato};
@@ -348,7 +348,7 @@ router.get('/contrato/:id_contrato', async function(req, res, next) {
 router.get('/documentoContrato/:id_contrato', async function(req, res, next) {
 	if (req.session.isLoggedIn) {
 
-		const { id_contrato } = req.params.id_contrato;
+		const { id_contrato } = req.params;
 
 		// Hacemos una consulta trayendo todos los datos del contrato
 		binds = {"id_contrato": id_contrato};
@@ -417,11 +417,11 @@ router.get('/subastas_frutas', function(req, res) {
 router.get('/subasta_fruta/:id_subastaF', async function(req, res, next) {
 	if (req.session.isLoggedIn) {
 
-		const { id_subastaF } = req.params.id_subastaF;
+		const { id_subastaF } = req.params;
 
 		// Hacemos una consulta trayendo todos los datos del usuario
 		binds = {"id_subastaF": id_subastaF};
-		sql = "SELECT fecha_creacion, fecha_actualizacion, fecha_termino, fk_id_pedido, fk_id_estado FROM subasta_fruta WHERE subasta_fruta.id_subastaF = :id_subastaF";
+		sql = "SELECT fecha_creacion, fecha_actualizacion, fecha_termino, fk_id_pedido, fk_id_estado, estado_subastaF.descripcion FROM subasta_fruta JOIN estado_subastaF ON subasta_fruta.fk_id_estado = estado_subastaF.id_estado WHERE subasta_fruta.id_subastaF = :id_subastaF";
 		result = await BD.Open(sql, binds, false);
 
 		// Si los datos estan correctos
@@ -435,7 +435,8 @@ router.get('/subasta_fruta/:id_subastaF', async function(req, res, next) {
 					fecha_actualizacion: moment(result.rows[0][1]).format('YYYY-MM-DD'),
 					fecha_termino: moment(result.rows[0][2]).format('YYYY-MM-DD'),
 					fk_id_pedido: result.rows[0][3],
-					fk_id_estado: result.rows[0][4]
+					fk_id_estado: result.rows[0][4],
+					fk_texto_estado: result.rows[0][5]
 				  }
 			];
 
@@ -465,7 +466,7 @@ router.get('/subastas_transportes', function(req, res) {
 router.get('/subasta_transporte/:id_subastaT', async function(req, res, next) {
 	if (req.session.isLoggedIn) {
 
-		const { id_subastaT } = req.params.id_subastaT;
+		const { id_subastaT } = req.params;
 
 		// Hacemos una consulta trayendo todos los datos del usuario
 		binds = {"id_subastaT": id_subastaT};
