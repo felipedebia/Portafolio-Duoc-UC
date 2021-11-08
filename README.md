@@ -39,7 +39,6 @@ Iniciar node en la carpeta web
 - AGREGAR NUEVA OFERTA_PRODUCTOR (haciendo mario)
 - LISTADO DE OFERTAS PRODUCTORES EN SUBASTAS_FRUTAS
 - AGREGAR NUEVA ORDEN_BODEGA Y ORDEN_TRANSPORTE
-- MODIFICAR CONTRATO
 - CREAR (DEBE SER COMO CONTRATO) Y MODIFICAR SEGURO
 - CRUD PRODUCTO
 
@@ -54,7 +53,7 @@ Iniciar node en la carpeta web
 - Arreglar error de si no existen pedidos, pagina se cae
 - Ocultar botón "Generar venta" si ya esta generada en pedidos (venta y pedido tienen misma id si estan generados)
 - La página debe tener activo su sección en el navbar
-- Hacer join a tabla pedido y detalle_pedido del listar de subasta_fruta y subasta_transporte
+- Hacer join a tabla pedido y pedido_detalle, luego a fruta y calidad del listar de subasta_fruta y subasta_transporte
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Comprobación de rango para entrar a las páginas
