@@ -54,6 +54,7 @@ Iniciar node en la carpeta web
 - Arreglar error de si no existen pedidos, pagina se cae
 - Ocultar botón "Generar venta" si ya esta generada en pedidos (venta y pedido tienen misma id si estan generados)
 - La página debe tener activo su sección en el navbar
+- Hacer join a tabla pedido y detalle_pedido del listar de subasta_fruta y subasta_transporte
 
 ## Rutas principales
 - http://localhost:3000/

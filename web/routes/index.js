@@ -406,6 +406,7 @@ router.get('/subastas', function(req, res) {
 router.get('/subastas_frutas', function(req, res) {
     if (req.session.isLoggedIn) {
 		functions.ListarSubastasFrutas();
+		functions.ListarOfertasProductores();
         res.render('Subastas_Frutas', { title: 'Subastas Frutas - Maipo Grande' });
     } else {
         res.redirect('/');
@@ -456,6 +457,7 @@ router.get('/subasta_fruta/:id_subastaF', async function(req, res, next) {
 router.get('/subastas_transportes', function(req, res) {
     if (req.session.isLoggedIn) {
 		functions.ListarSubastasTransportes();
+		functions.ListarOfertasTransportes();
         res.render('Subastas_Transportes', { title: 'Subastas Transportes - Maipo Grande' });
     } else {
         res.redirect('/');
@@ -599,36 +601,43 @@ router.get('/ordenes_transportes', function(req, res) {
 
 
 // CRUD OFERTAS
-router.get('/ofertas', function(req, res) {
-    if (req.session.isLoggedIn) {
-        res.render('ofertas', { title: 'Ofertas - Maipo Grande' });
-    } else {
-        res.redirect('/');
-    }
-    res.end();
-});
 
+router.get('/crearOfertaProductor/:id_subastaF', async function(req, res, next) {
+	if (req.session.isLoggedIn) {
 
-router.get('/ofertas_productores', function(req, res) {
-    if (req.session.isLoggedIn) {
-		functions.ListarOfertasTransportes();
-        res.render('Ofertas_Productores', { title: 'Ofertas de Productores - Maipo Grande' });
-    } else {
-        res.redirect('/');
-    }
-    res.end();
-});
+		const { id_subastaF } = req.params;
 
+		// Hacemos una consulta trayendo todos los datos del usuario
+		binds = {"id_subastaF": id_subastaF};
+		sql = "SELECT fecha_creacion, fecha_actualizacion, fecha_termino, fk_id_pedido, fk_id_estado, estado_subastaF.descripcion FROM subasta_fruta JOIN estado_subastaF ON subasta_fruta.fk_id_estado = estado_subastaF.id_estado WHERE subasta_fruta.id_subastaF = :id_subastaF";
+		result = await BD.Open(sql, binds, false);
 
-router.get('/ofertas_transportes', function(req, res) {
-    if (req.session.isLoggedIn) {
-		functions.ListarOfertasTransportes();
-        res.render('Ofertas_Transportes', { title: 'Ofertas de Transportes- Maipo Grande' });
-    } else {
-        res.redirect('/');
-    }
-    res.end();
-});
+		// Si los datos estan correctos
+		if (result.rows.length > 0) {
+			
+			// Asignamos los valores de la consulta a las variables
+			var subastaData = [
+				{
+					id_subastaF: id_subastaF,
+					fecha_creacion: moment(result.rows[0][0]).format('YYYY-MM-DD'),
+					fecha_actualizacion: moment(result.rows[0][1]).format('YYYY-MM-DD'),
+					fecha_termino: moment(result.rows[0][2]).format('YYYY-MM-DD'),
+					fk_id_pedido: result.rows[0][3],
+					fk_id_estado: result.rows[0][4],
+					fk_texto_estado: result.rows[0][5]
+				  }
+			];
+
+			// Mostramos la vista
+			res.render('crearSubastaFruta', { title: 'Crear nueva oferta - Maipo Grande', data:subastaData });
+		} else {
+			res.send('Error al obtener datos de la base de datos');
+		}
+	} else {
+		res.redirect('/');
+	}
+	res.end();
+})
 
 
 

@@ -9,7 +9,7 @@
                       <h4 class="card-title">Subasta de Fruta <%= data[0].id_subastaF%></h4>
                     </div>
                     <div class="card-body">
-                      <h3 class="card-title mb-4 mt-3">Ofertas de la subasta de fruta</h3>
+                      <h3 class="card-title mb-4 mt-3">Proponer nueva oferta</h3>
                       <div class="card-text">
                         <form action="/api_usuarios/modificarMiPerfil/" method="POST">
                           
@@ -68,10 +68,7 @@
                       <span class="mt-4"><strong>Fecha de creación:</strong></span> <span id="fecha_creacion"><%= data[0].fecha_creacion %></span></br>
                       <span><strong>Fecha de última actualización:</strong></span> <span id="fecha_actualizacion"><%= data[0].fecha_actualizacion %></span></br>
                       <span class="mb-4"><strong>Fecha de termino:</strong></span> <span id="fecha_termino"><%= data[0].fecha_termino %></span></br></br>
-                      <span class="mb-4"><strong>Estado de la subasta:</strong></span> <span class="badge badge-pill badge-success"><%= data[0].fk_texto_estado %></span></span></br></br>
-
-                      <h4 class="card-title mt-4 mb-4">Opciones de la subasta</h4>
-                      <a href="/crearOfertaProductor/<%= data[0].id_subastaF %>"><button class="btn btn-warning mb-2" type="submit">Crear una nueva oferta</button></a>
+                      <span class="mb-4"><strong>Estado de la subasta:</strong> <span class="badge badge-pill badge-success"><%= data[0].fk_texto_estado %></span></span>
                     </div>
                   </div>
                 </div>
