@@ -72,14 +72,14 @@
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                                         <div class="form-group my-label required">
                                                             <label>Fecha de inicio</label>
-                                                            <input class="form-control mb-4" id="inputFechaInicio" type="date" name="fecha_inicio" required>
+                                                            <input class="form-control mb-4" id="inputFechaInicio" type="date" name="fecha_inicio" min="<%= fecha_hoy %>" required>
                                                             <div class="invalid-feedback">Ingresa Fecha de inicio</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                                         <div class="form-group my-label required">
                                                             <label>Fecha de vencimiento</label>
-                                                            <input class="form-control mb-4" id="inputFechaVencimiento" type="date" name="fecha_vencimiento" required>
+                                                            <input class="form-control mb-4" id="inputFechaVencimiento" type="date" name="fecha_vencimiento" min="<%= fecha_hoy %>" required>
                                                             <div class="invalid-feedback">Ingresa Fecha de vencimiento</div>
                                                         </div>
                                                     </div>

@@ -256,7 +256,10 @@ router.get('/usuarios', function(req, res) {
 router.get('/contratos', function(req, res) {
     if (req.session.isLoggedIn) {
 		functions.ListarContratos();
-        res.render('contratos', { title: 'Contratos - Maipo Grande' });
+
+		var fecha_hoy = functions.obtenerFechaActual();
+
+        res.render('contratos', { title: 'Contratos - Maipo Grande', fecha_hoy: fecha_hoy });
     } else {
         res.redirect('/');
     }
