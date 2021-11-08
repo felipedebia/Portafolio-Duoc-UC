@@ -46,9 +46,9 @@
                                                             <%= venta.fk_texto_estado %>
                                                         </td>
                                                         <td>
-                                                            <a class="card-link" href="/venta/<%= venta.id_venta %>">Ver detalle venta</a>
-                                                            <a class="card-link" href="/modificarVenta/<%= venta.id_venta %>">Modificar</a>
-                                                            <a class="card-link" href="../api_ventas/anularVenta/<%= venta.id_venta %>">Anular</a>
+                                                            <a href="/venta/<%= venta.id_venta %>"><button type="button" class="btn btn-warning btn-sm">Ver detalle venta</button></a>
+                                                            <a href="/modificarVenta/<%= venta.id_venta %>"><button type="button" class="btn btn-warning btn-sm">Modificar</button></a>
+                                                            <a href="../api_ventas/anularVenta/<%= venta.id_venta %>"><button type="button" class="btn btn-warning btn-sm">Anular</button></a>
                                                         </td>
                                                     </tr>
                                                 <% } %>
