@@ -144,7 +144,7 @@ router.get("/eliminarPedidoDetalles/:id_detalle_pedido", async(req, res) => {
 })
 
 
-//Anular pedido
+//Anular pedido - tambien se tienen que cancelar las subastas y todo
 router.get("/anularPedido/:id_pedido", async(req, res) => {
   var id_pedido_bind = req.params.id_pedido;
 
