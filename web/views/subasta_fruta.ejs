@@ -5,7 +5,7 @@
               <div class="row">
                 <div class="col-md-8">
                   <div class="card">
-                    <div class="card-header card-header-primary">
+                    <div class="card-header card-header-warning">
                       <h4 class="card-title">Subasta de Fruta <%= data[0].id_subastaF%></h4>
                     </div>
                     <div class="card-body">
@@ -14,40 +14,46 @@
                         <form action="/api_usuarios/modificarMiPerfil/" method="POST">
                           
                           <ul class="timeline timeline-simple mr-5">
-                            <li class="timeline-inverted">
-                              <div class="timeline-badge success">
-                                <i class="material-icons">card_travel</i>
-                              </div>
-                              <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                  <span class="badge badge-pill badge-success">OFERTA DE PRODUCTOR</span>
-                                </div>
-                                <div class="timeline-body">
-                                  <p>ID Oferta:</p>
-                                  <p>Cantidad propuesta:</p>
-                                  <p>Precio por kilo:</p>
-                                  <hr>
-                                  <a href="../api_ofertas/aceptarOferta/"><button type="button" class="btn btn-success btn-sm pull-right">Aceptar oferta</button></a>
-                                  <a href="../api_ofertas/rechazarOferta/"><button type="button" class="btn btn-danger btn-sm pull-right">Rechazar oferta</button></a>
-                                </div>
-                                <h6>
-                                  <i class="ti-time"></i> Fecha de creación con moment
-                                </h6>
-                              </div>
-                            </li>
-                            <li class="timeline-inverted">
-                              <div class="timeline-badge danger">
-                                <i class="material-icons">card_travel</i>
-                              </div>
-                              <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                  <span class="badge badge-pill badge-danger">NINGUNA</span>
-                                </div>
-                                <div class="timeline-body">
-                                  <p>Actualmente no tienes ninguna oferta de frutas, es posiblemente que en algunos días te lleguen ofertas.</p>
-                                </div>
-                              </div>
-                            </li>
+                            <% for(var ofertaProductor of OfertasProductores) { %>
+                              <% if (ofertaProductor.fk_id_subastaf == data[0].id_subastaF){ %>
+                                <li class="timeline-inverted">
+                                  <div class="timeline-badge success">
+                                    <i class="material-icons">card_travel</i>
+                                  </div>
+                                  <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                      <span class="badge badge-pill badge-success">OFERTA DE PRODUCTOR</span>
+                                    </div>
+                                    <div class="timeline-body">
+                                      <p>ID Oferta: <%= ofertaProductor.id_ofertaP %></p>
+                                      <p>Cantidad propuesta: <%= ofertaProductor.cantidad %></p>
+                                      <p>Precio por kilo: <%= ofertaProductor.precio_por_kilo %></p>
+                                      <hr>
+                                      <a href="../api_ofertas/aceptarOferta/"><button type="button" class="btn btn-success btn-sm pull-right">Aceptar oferta</button></a>
+                                      <a href="../api_ofertas/rechazarOferta/"><button type="button" class="btn btn-danger btn-sm pull-right">Rechazar oferta</button></a>
+                                    </div>
+                                    <h6>
+                                      <i class="ti-time"></i> Fecha de creación con moment
+                                    </h6>
+                                  </div>
+                                </li>
+                                
+                              <% } else { %> Si tiene 0 filas entonces mostrar
+                                <li class="timeline-inverted">
+                                  <div class="timeline-badge danger">
+                                    <i class="material-icons">card_travel</i>
+                                  </div>
+                                  <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                      <span class="badge badge-pill badge-danger">NINGUNA</span>
+                                    </div>
+                                    <div class="timeline-body">
+                                      <p>Actualmente no tienes ninguna oferta de frutas, regresa en algunos días.</p>
+                                    </div>
+                                  </div>
+                                </li>
+                              <% } %>
+                            <% } %>
                           </ul>
 
                         </form>
@@ -62,7 +68,10 @@
                       <span class="mt-4"><strong>Fecha de creación:</strong> <%= data[0].fecha_creacion %></span></br>
                       <span><strong>Fecha de última actualización:</strong> <%= data[0].fecha_actualizacion %></span></br>
                       <span class="mb-4"><strong>Fecha de termino:</strong> <%= data[0].fecha_termino %></span></br></br>
-                      <span class="mb-4"><strong>Estado de la subasta:</strong> <span class="badge badge-pill badge-success"><%= data[0].fk_texto_estado %></span></span>
+                      <span class="mb-4"><strong>Estado de la subasta:</strong> <span class="badge badge-pill badge-success"><%= data[0].fk_texto_estado %></span></span></br></br>
+
+                      <h4 class="card-title mt-4 mb-4">Opciones de la subasta</h4>
+                      <button class="btn btn-warning mb-2" type="submit">Crear una nueva oferta</button>
                     </div>
                   </div>
                 </div>

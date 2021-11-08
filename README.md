@@ -133,9 +133,18 @@ Iniciar node en la carpeta web
 - 1 Femenino
 - 2 Masculino
 
-## Estado usuario - contrato - subasta - venta - orden - oferta
+## Estado usuario - contrato - venta - orden
 - 1 Activado
 - 2 Desactivado
+
+## Estado subasta
+- 1 Abierta
+- 2 Cerrada
+
+## Estado oferta
+- 1 Sin revisar
+- 2 Aceptada
+- 3 Rechazada
 
 ## Estado Pedido
 - 1 En preparación

@@ -441,6 +441,7 @@ router.get('/subasta_fruta/:id_subastaF', async function(req, res, next) {
 			];
 
 			// Mostramos la vista
+			functions.ListarSubastasFrutas();
 			res.render('subasta_Fruta', { title: 'Viendo Subasta - Maipo Grande', data:subastaData });
 		} else {
 			res.send('Error al obtener datos de la base de datos');
@@ -506,10 +507,8 @@ router.get('/subasta_transporte/:id_subastaT', async function(req, res, next) {
 router.get('/mispedidos', async function(req, res) {
 	if (req.session.isLoggedIn) {
 
-		const { id_usuario } = req.params.id_usuario;
-
 		// Hacemos una consulta trayendo todos los pedidos del usuario
-		binds = {"id_usuario": req.params};
+		binds = {"id_usuario": req.session.id_usuario};
 		sql = "SELECT id_pedido, direccion_despacho, fecha_creacion, fk_id_tipo, fk_id_ciudad, fk_id_estado FROM pedido WHERE fk_id_usuario = :id_usuario";
 		result = await BD.Open(sql, binds, false);
 
@@ -523,13 +522,12 @@ router.get('/mispedidos', async function(req, res) {
 					fecha_creacion: moment(result.rows[0][2]).format('YYYY-MM-DD'),
 					fk_id_tipo: result.rows[0][3],
 					fk_id_ciudad: result.rows[0][4],
-					fk_id_usuario: id_usuario,
+					fk_id_usuario: req.session.id_usuario,
 					fk_id_estado: result.rows[0][6]
 				  }
 			];
 
 			// Mostramos la vista
-			console.log(pedidosData);
 			res.render('mispedidos', { title: 'Mis pedidos - Maipo Grande', data:pedidosData });
 		} else {
 			res.send('Error al obtener datos de la base de datos');
