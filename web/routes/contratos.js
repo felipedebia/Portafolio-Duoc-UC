@@ -147,4 +147,21 @@ router.get("/anularContrato/:id_contrato", async (req, res) => {
 })
 
 
+// Activar
+router.get("/activarContrato/:id_contrato", async (req, res) => {
+  var id_contrato_bind = req.params.id_contrato;
+  
+  sql = "UPDATE contrato SET fk_id_estado=1 WHERE id_contrato = :id_contrato_bind";
+  await BD.Open(sql, [id_contrato_bind], true);
+
+  if(res.status(200)) {
+    console.log("[!] Contrato " + id_contrato_bind + " activado con éxito");
+    res.redirect('/contratos');
+	} else {
+		console.log("[!] Ocurrió un error al intentar activar el contrato " + id_contrato_bind);
+    res.redirect('/contratos');
+	}
+})
+
+
 module.exports = router;

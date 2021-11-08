@@ -132,4 +132,21 @@ router.get("/desactivarUsuario/:id_usuario", async (req, res) => {
 })
 
 
+// Activar
+router.get("/activarUsuario/:id_usuario", async (req, res) => {
+  var id_usuario_bind = req.params.id_usuario;
+  
+  sql = "UPDATE usuario SET fk_id_estado=1 WHERE id_usuario = :id_usuario";
+  await BD.Open(sql, [id_usuario_bind], true);
+
+  if(res.status(200)) {
+    console.log("[!] Usuario " + id_usuario_bind + " activado con éxito");
+    res.redirect('/usuarios');
+	} else {
+		console.log("[!] Ocurrió un error al intentar activar el usuario " + id_usuario_bind);
+    res.redirect('/usuarios');
+	}
+})
+
+
 module.exports = router;

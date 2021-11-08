@@ -41,7 +41,7 @@ Iniciar node en la carpeta web
 - AGREGAR NUEVA ORDEN_BODEGA Y ORDEN_TRANSPORTE
 - MODIFICAR CONTRATO
 - CREAR (DEBE SER COMO CONTRATO) Y MODIFICAR SEGURO
-- CREAR PRODUCTO
+- CRUD PRODUCTO
 
 ## Funciones pendientes:
 
@@ -50,7 +50,7 @@ Iniciar node en la carpeta web
 - Implementar subida de archivos a Pago como en Contrato
 - Cambiar secuencias SQL a procedimientos
 - Hacer templates de correos y agregarlos (ya tenemos el paquete configurado y funcionando)
-- Filtrar opciones anular y desactivar, si ya estan entonces ocultar opción
+- Filtrar opciones anular y desactivar, si ya estan entonces ocultar opción (como en usuario y contrato)
 - Arreglar if de botón confirmar pedido en pedido_detalle
 - Arreglar error de si no existen pedidos, pagina se cae
 - Ocultar botón "Generar venta" si ya esta generada en pedidos (venta y pedido tienen misma id si estan generados)
@@ -58,6 +58,7 @@ Iniciar node en la carpeta web
 - Hacer join a tabla pedido y detalle_pedido del listar de subasta_fruta y subasta_transporte
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
+- PARA EL FINAL: Comprobación de rango para entrar a las páginas
 
 ## Rutas principales
 - http://localhost:3000/
@@ -135,9 +136,13 @@ Iniciar node en la carpeta web
 - 1 Femenino
 - 2 Masculino
 
-## Estado usuario - contrato - venta - orden
+## Estado usuario - venta - orden
 - 1 Activado
 - 2 Desactivado
+
+## Estado contrato
+- 1 Vigente
+- 2 Anulado
 
 ## Estado subasta
 - 1 Abierta
@@ -171,12 +176,13 @@ Iniciar node en la carpeta web
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/usuarios  |  |
+| GET  | http://localhost:3000/api_usuarios/listarUsuarios  | JSON |
 | POST | http://localhost:3000/api_usuarios/crearUsuario  | |
 | GET  | http://localhost:3000/modificarUsuario/:id_usuario  |  |
 | POST | http://localhost:3000/api_usuarios/modificarUsuario/:id_usuario  | |
 | POST | http://localhost:3000/api_usuarios/modificarMiPerfil/:id_usuario  | |
 | GET  | http://localhost:3000/api_usuarios/desactivarUsuario/:id_usuario  | |
-| GET  | http://localhost:3000/api_usuarios/listarUsuarios  | JSON |
+| GET  | http://localhost:3000/api_usuarios/activarUsuario/:id_usuario  | |
 | GET  | http://localhost:3000/perfil/:id_usuario  |  |
 | GET  | http://localhost:3000/miperfil/:id_usuario  |  |
 
@@ -187,6 +193,7 @@ Iniciar node en la carpeta web
 | GET  | http://localhost:3000/api_contratos/listarContratos  | JSON |
 | GET  | http://localhost:3000/modificarContrato/:id_contrato  |  |
 | POST | http://localhost:3000/api_contratos/anularContrato/:id_contrato  | |
+| POST | http://localhost:3000/api_contratos/activarContrato/:id_contrato  | |
 | GET  | http://localhost:3000/contrato/:id_contrato  |  |
 | GET  | http://localhost:3000/documentoContrato/:id_contrato  |  |
 
