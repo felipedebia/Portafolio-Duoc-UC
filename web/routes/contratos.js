@@ -114,10 +114,10 @@ router.post('/subirDocumento/:id_contrato', uploadFile.single('url_documento'), 
 // Modificar
 router.post("/modificarContrato/:id_contrato", async (req, res) => {
   var { id_contrato } = req.params.id_contrato;
-  var { correo, nombre, apellido, num_documento, fk_id_tipo, fecha_nacimiento, genero, fk_id_estado, telefono, password} = req.body;
+  var { fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado } = req.body;
 
-  sql = "UPDATE contrato SET correo= :correo, nombre= :nombre, apellido= :apellido, num_documento= :num_documento, fk_id_tipo= :fk_id_tipo, fecha_nacimiento= to_DATE(:fecha_nacimiento,'YYYY/MM/DD'), genero= :genero, fk_id_estado= :fk_id_estado, telefono= :telefono, password= :passwordEncrypted WHERE id_usuario= :id_usuario";
-  await BD.Open(sql, [correo, nombre, apellido, num_documento, fk_id_tipo, fecha_nacimiento, genero, fk_id_estado, telefono, passwordEncrypted, id_usuario], true);
+  sql = "UPDATE contrato SET fecha_inicio= to_DATE(:fecha_inicio,'YYYY/MM/DD'), fecha_vencimiento= to_DATE(:fecha_vencimiento,'YYYY/MM/DD'), fk_id_tipo= :fk_id_tipo, fk_id_estado= :fk_id_estado WHERE id_usuario= :id_usuario";
+  await BD.Open(sql, [fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado], true);
 
   // Si tuvo conexión a la DB
   if(res.status(200)) {
@@ -128,39 +128,6 @@ router.post("/modificarContrato/:id_contrato", async (req, res) => {
     res.redirect('/contratos');
   }
 
-})
-
-// Anular
-router.get("/anularContrato/:id_contrato", async (req, res) => {
-  var id_contrato_bind = req.params.id_contrato;
-  
-  sql = "UPDATE contrato SET fk_id_estado=2 WHERE id_contrato = :id_contrato_bind";
-  await BD.Open(sql, [id_contrato_bind], true);
-
-  if(res.status(200)) {
-    console.log("[!] Contrato " + id_contrato_bind + " anulado con éxito");
-    res.redirect('/contratos');
-	} else {
-		console.log("[!] Ocurrió un error al intentar anular el contrato " + id_contrato_bind);
-    res.redirect('/contratos');
-	}
-})
-
-
-// Activar
-router.get("/activarContrato/:id_contrato", async (req, res) => {
-  var id_contrato_bind = req.params.id_contrato;
-  
-  sql = "UPDATE contrato SET fk_id_estado=1 WHERE id_contrato = :id_contrato_bind";
-  await BD.Open(sql, [id_contrato_bind], true);
-
-  if(res.status(200)) {
-    console.log("[!] Contrato " + id_contrato_bind + " activado con éxito");
-    res.redirect('/contratos');
-	} else {
-		console.log("[!] Ocurrió un error al intentar activar el contrato " + id_contrato_bind);
-    res.redirect('/contratos');
-	}
 })
 
 

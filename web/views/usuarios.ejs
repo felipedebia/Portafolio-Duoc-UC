@@ -57,13 +57,8 @@
                                                             <%= usuario.fk_texto_tipo %>
                                                         </td>
                                                         <td>
-                                                            <a class="card-link" href="/perfil/<%= usuario.id_usuario %>">Ver perfil</a>
-                                                            <a class="card-link" href="/modificarUsuario/<%= usuario.id_usuario %>">Modificar</a>
-                                                            <% if (usuario.fk_id_estado == 1) { %>
-                                                                <a class="card-link" href="../api_usuarios/desactivarUsuario/<%= usuario.id_usuario %>">Desactivar</a>
-                                                            <% } else { %>
-                                                                <a class="card-link" href="../api_usuarios/activarUsuario/<%= usuario.id_usuario %>">Activar</a>
-                                                            <% } %>
+                                                            <a href="/perfil/<%= usuario.id_usuario %>"><button type="button" class="btn btn-primary btn-sm">Ver perfil</button></a>
+                                                            <a href="/modificarUsuario/<%= usuario.id_usuario %>"><button type="button" class="btn btn-primary btn-sm">Modificar</button></a>
                                                         </td>
                                                     </tr>
                                                     <% } %>

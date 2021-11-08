@@ -53,13 +53,8 @@
                                                             <%= contrato.fk_texto_estado %>
                                                         </td>
                                                         <td>
-                                                            <a class="card-link" href="/contrato/<%= contrato.id_contrato %>">Ver contrato</a>
-                                                            <a class="card-link" href="/modificarContrato/<%= contrato.id_contrato %>">Modificar</a>
-                                                            <% if (contrato.fk_id_estado == 1) { %>
-                                                                <a class="card-link" href="../api_contratos/anularContrato/<%= contrato.id_contrato %>">Anular</a>
-                                                            <% } else { %>
-                                                                <a class="card-link" href="../api_contratos/activarContrato/<%= contrato.id_contrato %>">Activar</a>
-                                                            <% } %>
+                                                            <a href="/contrato/<%= contrato.id_contrato %>"><button type="button" class="btn btn-warning btn-sm">Ver contrato</button></a>
+                                                            <a href="/modificarContrato/<%= contrato.id_contrato %>"><button type="button" class="btn btn-warning btn-sm">Modificar</button></a>
                                                         </td>
                                                     </tr>
                                                 <% } %>

@@ -53,9 +53,9 @@
                                                             <%= ordenBodega.fk_id_estado %>
                                                         </td>
                                                         <td>
-                                                            <a class="card-link" href="/orden_bodega/<%= ordenBodega.id_ordenB %>">Ver contrato</a>
-                                                            <a class="card-link" href="/modificarOrdenBodega/<%= ordenBodega.id_ordenB %>">Modificar</a>
-                                                            <a class="card-link" href="../api_ordenes/anularOrdenBodega/<%= ordenBodega.id_ordenB %>">Anular</a>
+                                                            <a href="/orden_bodega/<%= ordenBodega.id_ordenB %>"><button type="button" class="btn btn-success btn-sm">Ver orden</button></a>
+                                                            <a href="/modificarOrdenBodega/<%= ordenBodega.id_ordenB %>"><button type="button" class="btn btn-success btn-sm">Modificar</button></a>
+                                                            <a href="../api_ordenes/anularOrdenBodega/<%= ordenBodega.id_ordenB %>"><button type="button" class="btn btn-success btn-sm">Anular</button></a>
                                                         </td>
                                                     </tr>
                                                 <% } %>
