@@ -69,7 +69,14 @@
                       <span><strong>Fecha de última actualización:</strong></span> <span id="fecha_actualizacion"><%= data[0].fecha_actualizacion %></span></br>
                       <span class="mb-4"><strong>Fecha de termino:</strong></span> <span id="fecha_termino"><%= data[0].fecha_termino %></span></br></br>
                       <span class="mb-4"><strong>Estado de la subasta:</strong></span> <span class="badge badge-pill badge-success"><%= data[0].fk_texto_estado %></span></span></br></br>
-
+                      <h4 class="card-title mt-4 mb-4">Se necesita</h4>
+                      <span class="mt-4"><strong>Fruta:</strong></span> <span> </span></br>
+                      <span class="mt-4"><strong>Calidad:</strong></span> <span> </span></br>
+                      <span class="mt-4"><strong>Cantidad:</strong></span> <span> </span></br>
+                      <h4 class="card-title mt-4 mb-4">Información del pedido</h4>
+                      <span class="mt-4"><strong>Tipo de pedido:</strong></span> <span><%= data[0].pedido_id_tipo %></span></br>
+                      <span class="mt-4"><strong>Estado de pedido:</strong></span> <span><%= data[0].pedido_id_estado %></span></br>
+                      <span class="mt-4"><strong>Solicitado por:</strong></span> <span><%= data[0].pedido_id_usuario %></span></br>
                       <h4 class="card-title mt-4 mb-4">Opciones de la subasta</h4>
                       <a href="/crearOfertaProductor/<%= data[0].id_subastaF %>"><button class="btn btn-warning mb-2" type="submit">Crear una nueva oferta</button></a>
                     </div>

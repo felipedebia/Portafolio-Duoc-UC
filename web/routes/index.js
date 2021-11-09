@@ -425,7 +425,8 @@ router.get('/subasta_fruta/:id_subastaF', async function(req, res, next) {
 
 		// Hacemos una consulta trayendo todos los datos del usuario
 		binds = {"id_subastaF": id_subastaF};
-		sql = "SELECT fecha_creacion, fecha_actualizacion, fecha_termino, fk_id_pedido, fk_id_estado, estado_subastaF.descripcion FROM subasta_fruta JOIN estado_subastaF ON subasta_fruta.fk_id_estado = estado_subastaF.id_estado WHERE subasta_fruta.id_subastaF = :id_subastaF";
+		sql = "SELECT subasta_fruta.fecha_creacion, subasta_fruta.fecha_actualizacion, subasta_fruta.fecha_termino, subasta_fruta.fk_id_pedido, subasta_fruta.fk_id_estado, estado_subastaF.descripcion, pedido.fk_id_tipo, pedido.fk_id_usuario, pedido.fk_id_estado FROM subasta_fruta JOIN estado_subastaF ON subasta_fruta.fk_id_estado = estado_subastaF.id_estado JOIN pedido ON subasta_fruta.fk_id_pedido = pedido.id_pedido WHERE subasta_fruta.id_subastaF = :id_subastaF";
+		// JOIN pedido_detalle ON pedido.id_pedido = pedido_detalle.id_pdetalle
 		result = await BD.Open(sql, binds, false);
 
 		// Si los datos estan correctos
@@ -440,10 +441,13 @@ router.get('/subasta_fruta/:id_subastaF', async function(req, res, next) {
 					fecha_termino: moment(result.rows[0][2]).format('YYYY-MM-DD'),
 					fk_id_pedido: result.rows[0][3],
 					fk_id_estado: result.rows[0][4],
-					fk_texto_estado: result.rows[0][5]
+					fk_texto_estado: result.rows[0][5],
+					pedido_fk_id_tipo: result.rows[0][6],
+					pedido_fk_id_usuario: result.rows[0][7],
+					pedido_fk_id_estado: result.rows[0][8]
 				  }
 			];
-
+			console.log(subastaData)
 			// Mostramos la vista
 			functions.ListarSubastasFrutas();
 			res.render('subasta_Fruta', { title: 'Viendo Subasta - Maipo Grande', data:subastaData });
