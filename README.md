@@ -52,7 +52,7 @@ Iniciar node en la carpeta web
 - Arreglar if de botón confirmar pedido en pedido_detalle, no debe aparecer si aun no se ingresan frutas
 - Arreglar error de si no existen pedidos, pagina se cae
 - Ocultar botón "Generar venta" si ya esta generada en pedidos (venta y pedido tienen misma id si estan generados)
-- Hacer join a tabla pedido y pedido_detalle, luego a fruta y calidad del listar de subasta_fruta y subasta_transporte
+- Cliente interno no tiene contrato, filtrar usuarios en contratos
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Comprobación de rango para entrar a las páginas

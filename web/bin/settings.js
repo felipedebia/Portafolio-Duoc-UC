@@ -39,4 +39,8 @@ const client_secret = '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';
 
 const email_to = 'fabyold@gmail.com';
 
+let transporter = nodemailer
+
+
+
 exports.OpenConnection = OpenConnection;

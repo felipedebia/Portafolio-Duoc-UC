@@ -197,9 +197,9 @@ async function ListarPaises() {
     return new Promise(function(resolve, reject) {
         request('http://localhost:3000/api_extras/listarPaises', function(error, response, body) {
             if (error) return reject(error);
-            importedJSON = JSON.parse(body);
-            console.log('\x1b[37m', '[!] ListarPaises cargado');
-            return resolve(importedJSON);
+            	importedJSON = JSON.parse(body);
+            	console.log('\x1b[37m', '[!] ListarPaises cargado');
+            	return resolve(importedJSON);
         });
     });
 };
@@ -211,9 +211,9 @@ async function ListarCiudades() {
     return new Promise(function(resolve, reject) {
         request('http://localhost:3000/api_extras/listarCiudades', function(error, response, body) {
             if (error) return reject(error);
-            importedJSON = JSON.parse(body);
-            console.log('\x1b[37m', '[!] ListarCiudades cargado');
-            return resolve(importedJSON);
+            	importedJSON = JSON.parse(body);
+            	console.log('\x1b[37m', '[!] ListarCiudades cargado');
+            	return resolve(importedJSON);
         });
     });
 };
@@ -225,9 +225,9 @@ async function ListarCalidadesFrutas() {
     return new Promise(function(resolve, reject) {
         request('http://localhost:3000/api_extras/listarCalidadesFrutas', function(error, response, body) {
             if (error) return reject(error);
-            importedJSON = JSON.parse(body);
-            console.log('\x1b[37m', '[!] ListarCalidadesFrutas cargado');
-            return resolve(importedJSON);
+            	importedJSON = JSON.parse(body);
+            	console.log('\x1b[37m', '[!] ListarCalidadesFrutas cargado');
+            	return resolve(importedJSON);
         });
     });
 };
@@ -239,9 +239,9 @@ async function ListarPedidoDetalles() {
     return new Promise(function(resolve, reject) {
         request('http://localhost:3000/api_pedidos/listarPedidoDetalles', function(error, response, body) {
             if (error) return reject(error);
-            importedJSON = JSON.parse(body);
-            console.log('\x1b[37m', '[!] ListarPedidoDetalles cargado');
-            return resolve(importedJSON);
+            	importedJSON = JSON.parse(body);
+            	console.log('\x1b[37m', '[!] ListarPedidoDetalles cargado');
+            	return resolve(importedJSON);
         });
     });
 };
@@ -253,13 +253,26 @@ async function ListarSeguros() {
     return new Promise(function(resolve, reject) {
         request('http://localhost:3000/api_seguros/listarSeguros', function(error, response, body) {
             if (error) return reject(error);
-            importedJSON = JSON.parse(body);
-            console.log('\x1b[37m', '[!] ListarSeguros cargado');
-            return resolve(importedJSON);
+            	importedJSON = JSON.parse(body);
+            	console.log('\x1b[37m', '[!] ListarSeguros cargado');
+            	return resolve(importedJSON);
         });
     });
 };
 var listarSeguros = ListarSeguros();
+
+
+//Funcion API ListarProductos
+async function ListarProductos() {
+	return new Promise(function(resolve, reject) {
+		request('http://localhost:3000/api_productos/listarProductos', function (error, response, body) {
+			if (error) return reject(error);
+				importedJSON = JSON.parse(body);
+				console.log('\x1b[37m','[!] ListarProductos cargado');
+				return resolve(importedJSON);
+		});
+	});
+};
 
 
 module.exports ={
@@ -280,5 +293,6 @@ module.exports ={
     'ListarCiudades': ListarCiudades,
 	'ListarCalidadesFrutas': ListarCalidadesFrutas,
     'ListarPedidoDetalles': ListarPedidoDetalles,
-	'ListarSeguros': ListarSeguros
+	'ListarSeguros': ListarSeguros,
+	'ListarProductos': ListarProductos
 }
