@@ -84,7 +84,7 @@ Iniciar node en la carpeta web
 
 ### Menú Cliente Externo e Interno *
 - http://localhost:3000/mispedidos *
-- http://localhost:3000/miscompras *
+- http://localhost:3000/miscompras * que es esto?
 
 ### Menú Transportista
 - http://localhost:3000/misofertas *

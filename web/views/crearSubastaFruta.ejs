@@ -1,110 +1,139 @@
 <%- include('partials/nav.ejs') %>
-        <!-- your content here -->
-          <div class="content">
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-md-8">
-                  <div class="card">
-                    <div class="card-header card-header-warning">
-                      <h4 class="card-title">Subasta de Fruta <%= data[0].id_subastaF%></h4>
-                    </div>
-                    <div class="card-body">
-                      <h3 class="card-title mb-4 mt-3">Proponer nueva oferta</h3>
-                      <div class="card-text">
-                        <form action="/api_usuarios/modificarMiPerfil/" method="POST">
-                          
-                          <ul class="timeline timeline-simple mr-5">
-                            <% for(var ofertaProductor of OfertasProductores) { %>
-                              <% if (ofertaProductor.fk_id_subastaf == data[0].id_subastaF){ %>
-                                <li class="timeline-inverted">
-                                  <div class="timeline-badge success">
-                                    <i class="material-icons">card_travel</i>
-                                  </div>
-                                  <div class="timeline-panel">
-                                    <div class="timeline-heading">
-                                      <span class="badge badge-pill badge-success">OFERTA DE PRODUCTOR</span>
-                                    </div>
-                                    <div class="timeline-body">
-                                      <p>ID Oferta: <%= ofertaProductor.id_ofertaP %></p>
-                                      <p>Cantidad propuesta: <%= ofertaProductor.cantidad %></p>
-                                      <p>Precio por kilo: <%= ofertaProductor.precio_por_kilo %></p>
-                                      <hr>
-                                      <a href="../api_ofertas/aceptarOferta/"><button type="button" class="btn btn-success btn-sm pull-right">Aceptar oferta</button></a>
-                                      <a href="../api_ofertas/rechazarOferta/"><button type="button" class="btn btn-danger btn-sm pull-right">Rechazar oferta</button></a>
-                                    </div>
-                                    <h6>
-                                      <i class="ti-time"></i> Fecha de creación con moment
-                                    </h6>
-                                  </div>
-                                </li>
-                                
-                              <% } else { %> Si tiene 0 filas entonces mostrar
-                                <li class="timeline-inverted">
-                                  <div class="timeline-badge danger">
-                                    <i class="material-icons">card_travel</i>
-                                  </div>
-                                  <div class="timeline-panel">
-                                    <div class="timeline-heading">
-                                      <span class="badge badge-pill badge-danger">NINGUNA</span>
-                                    </div>
-                                    <div class="timeline-body">
-                                      <p>Actualmente no tienes ninguna oferta de frutas, regresa en algunos días.</p>
-                                    </div>
-                                  </div>
-                                </li>
-                              <% } %>
-                            <% } %>
-                          </ul>
-
-                        </form>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="card">
+                      <div class="card-header card-header-tabs card-header-warning">
+                        <h4 class="card-title">Crear nueva subasta de Productor</h4>
+                      </div>
+                      <div class="card-body">
+                        <h3 class="card-title mb-4 mt-3">Ingresa los nuevos datos del usuario</h3>
+                        <div class="card-text">
+                          <form action="/api_usuarios/modificarUsuario/<%= data[0].id_usuario%>" method="POST">
+                            <div class="row">
+                              <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group my-label required">
+                                  <label>Nombre</label>
+                                  <input class="form-control input-sm" id="nombre" type="text" name="nombre" placeholder="Nombre" maxLength="25" required value="<%= data[0].nombre%>"></div>
+                              </div>
+                              <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group my-label required">
+                                  <label>Apellido</label>
+                                  <input class="form-control input-sm" id="apellido" type="text" name="apellido" placeholder="Apellido" maxLength="25" required value="<%= data[0].apellido%>"></div>
+                              </div>
+                            </div>
+                            <label>Correo electrónico *</label>
+                            <input class="form-control mb-4" id="inputEmail" type="email" name="correo" placeholder="Correo electrónico" maxLength="30" required value="<%= data[0].correo%>">
+                            <div class="row">
+                              <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group my-label required">
+                                  <label>Contraseña</label>
+                                  <input class="form-control mb-4" id="inputPassword" type="password" name="password" placeholder="Contraseña" maxLength="40" required value="<%= data[0].password%>"></div>
+                              </div>
+                              <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group"><input type="checkbox" onclick="showPassword()">Mostrar contraseña</div>
+                              </div>
+                            </div>
+                            <label>Número de documento *</label>
+                            <input class="form-control mb-4" id="inputNumDocumento" type="number" name="num_documento" placeholder="Número de documento" maxLength="20" required value="<%= data[0].num_documento%>">
+                            <label>Fecha de nacimiento *</label>
+                            <input class="form-control mb-4" id="inputFechaNacimiento" type="date" name="fecha_nacimiento" placeholder="Fecha de nacimiento" required value="<%= data[0].fecha_nacimiento%>">
+                            <label>Teléfono *</label>
+                            <input class="form-control mb-4" id="inputTelefono" type="number" name="telefono" placeholder="Teléfono" maxLength="15" required value="<%= data[0].telefono%>">
+                            <div class="row mb-4">
+                              <div class="col-xs-4 col-sm-4 col-md-4">
+                                <div class="form-group my-label required">
+                                  <label>Género</label>
+                                  <select class="selectpicker form-control" data-size="2" name="genero" data-style="select-with-transition btn" title="Selecciona una opción">
+                                    <% if(data[0].genero == 1){ %>
+                                      <option name="femenino" selected value="1">Femenino</option>
+                                    <% } else { %>
+                                      <option name="femenino" value="1">Femenino</option>
+                                    <% } %>
+                                    <% if(data[0].genero == 2){ %>
+                                      <option name="masculino" selected value="2">Masculino</option>
+                                    <% } else { %>
+                                      <option name="masculino" value="2">Masculino</option>
+                                    <% } %>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-xs-4 col-sm-4 col-md-4">
+                                <div class="form-group my-label required">
+                                  <label>Tipo de usuario</label>
+                                  <select class="selectpicker form-control" data-size="6" name="fk_id_tipo" data-style="select-with-transition btn" title="Selecciona una opción">
+                                    <% if(data[0].fk_id_tipo == 1){ %>
+                                      <option name="administrador" selected value="1">Administrador</option>
+                                    <% } else { %>
+                                      <option name="administrador" value="1">Administrador</option>
+                                    <% } %>
+                                    <% if(data[0].fk_id_tipo == 2){ %>
+                                      <option name="transportista" selected value="2">Transportista</option>
+                                    <% } else { %>
+                                      <option name="transportista" value="2">Transportista</option>
+                                    <% } %>
+                                    <% if(data[0].fk_id_tipo == 3){ %>
+                                      <option name="clienteExterno" selected value="3">Cliente externo</option>
+                                    <% } else { %>
+                                      <option name="clienteExterno" value="3">Cliente externo</option>
+                                    <% } %>
+                                    <% if(data[0].fk_id_tipo == 4){ %>
+                                      <option name="clienteInterno" selected value="4">Cliente interno</option>
+                                    <% } else { %>
+                                      <option name="clienteInterno" value="4">Cliente interno</option>
+                                    <% } %>
+                                    <% if(data[0].fk_id_tipo == 5){ %>
+                                      <option name="productor" selected value="5">Productor</option>
+                                    <% } else { %>
+                                      <option name="productor" value="5">Productor</option>
+                                    <% } %>
+                                    <% if(data[0].fk_id_tipo == 6){ %>
+                                      <option name="consultor" selected value="6">Consultor</option>
+                                    <% } else { %>
+                                      <option name="consultor" value="6">Consultor</option>
+                                    <% } %>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-xs-4 col-sm-4 col-md-4">
+                                <div class="form-group my-label required">
+                                  <label>Estado de cuenta</label>
+                                  <select class="selectpicker form-control" data-size="2" name="fk_id_estado" data-style="select-with-transition btn" title="Selecciona una opción">
+                                    <% if(data[0].fk_id_estado == 1){ %>
+                                      <option name="activada" selected value="1">Activada</option>
+                                    <% } else { %>
+                                      <option name="activada" value="1">Activada</option>
+                                    <% } %>
+                                    <% if(data[0].fk_id_estado == 2){ %>
+                                      <option name="desactivada" selected value="2">Desactivada</option>
+                                    <% } else { %>
+                                      <option name="desactivada" value="2">Desactivada</option>
+                                    <% } %>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <button class="btn btn-primary mb-2 pull-right" type="submit">Guardar cambios</button>
+                          </form>
                         </div>
+                      </div>
                     </div>
-                  </div>
                 </div>
-                <div class="col-md-4">
-                  <div class="card card-profile">
-                    <div class="card-body">
-                      <h4 class="card-title mt-4 mb-4">Subasta de Fruta <%= data[0].id_subastaF%></h4>
-                      <span class="mt-4"><strong>Fecha de creación:</strong></span> <span id="fecha_creacion"><%= data[0].fecha_creacion %></span></br>
-                      <span><strong>Fecha de última actualización:</strong></span> <span id="fecha_actualizacion"><%= data[0].fecha_actualizacion %></span></br>
-                      <span class="mb-4"><strong>Fecha de termino:</strong></span> <span id="fecha_termino"><%= data[0].fecha_termino %></span></br></br>
-                      <span class="mb-4"><strong>Estado de la subasta:</strong> <span class="badge badge-pill badge-success"><%= data[0].fk_texto_estado %></span></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
+        </div>
+    </div>
 
 <%- include('partials/footer.ejs') %>
 
 <script>
-  window.addEventListener("load", pageFullyLoaded, false);
-  
-  function pageFullyLoaded(e) {
-    var dateFormat = 'YYYY-DD-MM HH:mm:ss';
-    var fechacreacion_utctime = moment.utc('<%= data[0].fecha_creacion %>');
-    var fechacreacion_localdate = fechacreacion_utctime.local();
-    var fechacreacion_localdate2 = fechacreacion_localdate.locale('es')
-    
-    var modificardivfechacreacion = document.getElementById('fecha_creacion');
-    modificardivfechacreacion.innerHTML =  moment(fechacreacion_localdate2, "YYYY-MM-DD hh:mm:ss").fromNow();
-
-    var dateFormat = 'YYYY-DD-MM HH:mm:ss';
-    var fechaactualizacion_utctime = moment.utc('<%= data[0].fecha_actualizacion %>');
-    var fechaactualizacion_localdate = fechaactualizacion_utctime.local();
-    var fechaactualizacion_localdate2 = fechaactualizacion_localdate.locale('es')
-    
-    var modificardivfechaactualizacion = document.getElementById('fecha_actualizacion');
-    modificardivfechaactualizacion.innerHTML =  moment(fechaactualizacion_localdate2, "YYYY-MM-DD hh:mm:ss").fromNow();
-
-    var dateFormat = 'YYYY-DD-MM HH:mm:ss';
-    var fechatermino_utctime = moment.utc('<%= data[0].fecha_termino %>');
-    var fechatermino_localdate = fechatermino_utctime.local();
-    var fechatermino_localdate2 = fechatermino_localdate.locale('es')
-    
-    var modificardivfechatermino = document.getElementById('fecha_termino');
-    modificardivfechatermino.innerHTML =  moment(fechatermino_localdate2, "YYYY-MM-DD hh:mm:ss").fromNow();
+  function showPassword() {
+    var x = document.getElementById("inputPassword");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
   }
 </script>
 

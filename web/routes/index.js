@@ -62,12 +62,12 @@ router.post('/auth', async (req, res) => {
 
 				} else {
 					console.log("[!] Intento de conexión fallido usando " + req.body.correo);
-					res.render('login', {title: 'Ingresar - Maipo Grande', alertError: 1});
+					res.render('login', {title: 'Ingresar - Maipo Grande', alertError: 1 });
 				}
 
 			} else {
 				console.log("[!] Intento de conexión fallido usando " + req.body.correo);
-				res.render('login', {title: 'Ingresar - Maipo Grande', alertError: 1});
+				res.render('login', {title: 'Ingresar - Maipo Grande', alertError: 1 });
 			}
 	}
 });
@@ -80,7 +80,7 @@ router.get('/panel', function(req, res) {
 				
 			}
 		];
-		res.render('panel', { title: 'Panel de Administración - Maipo Grande', data:contadoresData  });
+		res.render('panel', { title: 'Panel de Administración - Maipo Grande', data:contadoresData, navActive: 'Dashboard' });
 	} else {
 		res.redirect('/');
 	}
@@ -129,7 +129,7 @@ router.get('/modificarUsuario/:id_usuario', async function(req, res, next) {
 				  }
 			];
 			// Mostramos la vista
-			res.render('modificarUsuario', { title: 'Modificar usuario - Maipo Grande', data:usuarioData });
+			res.render('modificarUsuario', { title: 'Modificar usuario - Maipo Grande', data:usuarioData, navActive: 'Usuarios' });
 		} else {
 			res.send('Error al obtener datos de la base de datos');
 		}
@@ -179,7 +179,7 @@ router.get('/miperfil', async function(req, res, next) {
 			];
 
 			// Mostramos la vista
-			res.render('miperfil', { title: 'Mi perfil - Maipo Grande', data:usuarioData });
+			res.render('miperfil', { title: 'Mi perfil - Maipo Grande', data:usuarioData, navActive: 'Usuarios' });
 		} else {
 			res.send('Error al obtener datos de la base de datos');
 		}
@@ -231,7 +231,7 @@ router.get('/perfil/:id_usuario', async function(req, res, next) {
 			];
 
 			// Mostramos la vista
-			res.render('perfil', { title: 'Viendo perfil - Maipo Grande', data:usuarioData });
+			res.render('perfil', { title: 'Viendo perfil - Maipo Grande', data:usuarioData, navActive: 'Usuarios' });
 		} else {
 			res.send('Error al obtener datos de la base de datos');
 		}
@@ -244,7 +244,7 @@ router.get('/perfil/:id_usuario', async function(req, res, next) {
 router.get('/usuarios', function(req, res) {
     if (req.session.isLoggedIn) {
 		functions.ListarUsuarios();
-        res.render('usuarios', { title: 'Usuarios - Maipo Grande' });
+        res.render('usuarios', { title: 'Usuarios - Maipo Grande', navActive: 'Usuarios' });
     } else {
         res.redirect('/');
     }
@@ -259,7 +259,7 @@ router.get('/contratos', function(req, res) {
 
 		var fecha_hoy = functions.obtenerFechaActual();
 
-        res.render('contratos', { title: 'Contratos - Maipo Grande', fecha_hoy: fecha_hoy });
+        res.render('contratos', { title: 'Contratos - Maipo Grande', fecha_hoy: fecha_hoy, navActive: 'Contratos' });
     } else {
         res.redirect('/');
     }
@@ -298,7 +298,7 @@ router.get('/modificarContrato/:id_contrato', async function(req, res, next) {
 
 			// Mostramos la vista
 			console.log(contratoData);
-			res.render('modificarContrato', { title: 'Modificar contrato - Maipo Grande', data:contratoData });
+			res.render('modificarContrato', { title: 'Modificar contrato - Maipo Grande', data:contratoData, navActive: 'Contratos' });
 		} else {
 			res.send('Error al obtener datos de la base de datos');
 		}
@@ -337,7 +337,7 @@ router.get('/contrato/:id_contrato', async function(req, res, next) {
 			];
 
 			// Mostramos la vista
-			res.render('contrato', { title: 'Viendo contrato - Maipo Grande', data:contratoData });
+			res.render('contrato', { title: 'Viendo contrato - Maipo Grande', data:contratoData, navActive: 'Contratos' });
 		} else {
 			res.send('Error al obtener datos de la base de datos');
 		}
@@ -373,7 +373,7 @@ router.get('/documentoContrato/:id_contrato', async function(req, res, next) {
 				res.send('Este contrato ya tiene un documento asignado');
 			}
 			// Mostramos la vista
-			res.render('documentoContrato', { title: 'Subir documento - Maipo Grande', data:contratoData });
+			res.render('documentoContrato', { title: 'Subir documento - Maipo Grande', data:contratoData, navActive: 'Contratos' });
 		} else {
 			res.send('Error al obtener datos de la base de datos');
 		}
@@ -387,7 +387,7 @@ router.get('/documentoContrato/:id_contrato', async function(req, res, next) {
 router.get('/frutas', function(req, res) {
     if (req.session.isLoggedIn) {
 		functions.ListarFrutas();
-        res.render('Frutas', { title: 'Frutas - Maipo Grande' });
+        res.render('Frutas', { title: 'Frutas - Maipo Grande', navActive: 'Frutas' });
     } else {
         res.redirect('/');
     }
@@ -398,7 +398,7 @@ router.get('/frutas', function(req, res) {
 // CRUD SUBASTAS
 router.get('/subastas', function(req, res) {
     if (req.session.isLoggedIn) {
-        res.render('Subastas', { title: 'Subastas - Maipo Grande' });
+        res.render('Subastas', { title: 'Subastas - Maipo Grande', navActive: 'Subastas' });
     } else {
         res.redirect('/');
     }
@@ -410,7 +410,7 @@ router.get('/subastas_frutas', function(req, res) {
     if (req.session.isLoggedIn) {
 		functions.ListarSubastasFrutas();
 		functions.ListarOfertasProductores();
-        res.render('Subastas_Frutas', { title: 'Subastas Frutas - Maipo Grande' });
+        res.render('Subastas_Frutas', { title: 'Subastas Frutas - Maipo Grande', navActive: 'Subastas' });
     } else {
         res.redirect('/');
     }
@@ -451,7 +451,7 @@ router.get('/subasta_fruta/:id_subastaF', async function(req, res, next) {
 			// Mostramos la vista
 			functions.ListarSubastasFrutas();
 			functions.ListarPedidoDetalles();
-			res.render('subasta_Fruta', { title: 'Viendo Subasta - Maipo Grande', data:subastaData });
+			res.render('subasta_Fruta', { title: 'Viendo Subasta - Maipo Grande', data:subastaData, navActive: 'Subastas' });
 		} else {
 			res.send('Error al obtener datos de la base de datos');
 		}
@@ -466,7 +466,7 @@ router.get('/subastas_transportes', function(req, res) {
     if (req.session.isLoggedIn) {
 		functions.ListarSubastasTransportes();
 		functions.ListarOfertasTransportes();
-        res.render('Subastas_Transportes', { title: 'Subastas Transportes - Maipo Grande' });
+        res.render('Subastas_Transportes', { title: 'Subastas Transportes - Maipo Grande', navActive: 'Subastas' });
     } else {
         res.redirect('/');
     }
@@ -502,7 +502,7 @@ router.get('/subasta_transporte/:id_subastaT', async function(req, res, next) {
 			];
 
 			// Mostramos la vista
-			res.render('subasta_Transporte', { title: 'Viendo Subasta - Maipo Grande', data:subastaData });
+			res.render('subasta_Transporte', { title: 'Viendo Subasta - Maipo Grande', data:subastaData, navActive: 'Subastas' });
 		} else {
 			res.send('Error al obtener datos de la base de datos');
 		}
@@ -538,7 +538,7 @@ router.get('/mispedidos', async function(req, res) {
 			];
 
 			// Mostramos la vista
-			res.render('mispedidos', { title: 'Mis pedidos - Maipo Grande', data:pedidosData });
+			res.render('mispedidos', { title: 'Mis pedidos - Maipo Grande', data:pedidosData, navActive: 'MisPedidos' });
 		} else {
 			res.send('Error al obtener datos de la base de datos');
 		}
@@ -555,7 +555,7 @@ router.get('/pedido_detalles/:id_pedido', function(req, res) {
     }];
     if (req.session.isLoggedIn) {
         functions.ListarPedidoDetalles();
-        res.render('pedido_detalles', { title: 'Pedido Detalles - Maipo Grande', data: pedidoIdData });
+        res.render('pedido_detalles', { title: 'Pedido Detalles - Maipo Grande', data: pedidoIdData, navActive: 'MisPedidos' });
     } else {
         res.redirect('/');
     }
@@ -567,7 +567,7 @@ router.get('/pedido_detalles/:id_pedido', function(req, res) {
 router.get('/pedidos', function(req, res) {
     if (req.session.isLoggedIn) {
         functions.ListarPedidos();
-        res.render('pedidos', { title: 'Pedidos - Maipo Grande' });
+        res.render('pedidos', { title: 'Pedidos - Maipo Grande', navActive: 'Pedidos' });
     } else {
         res.redirect('/');
     }
@@ -578,7 +578,7 @@ router.get('/pedidos', function(req, res) {
 // CRUD ORDENES
 router.get('/ordenes', function(req, res) {
     if (req.session.isLoggedIn) {
-        res.render('Ordenes', { title: 'Ordenes - Maipo Grande' });
+        res.render('Ordenes', { title: 'Ordenes - Maipo Grande', navActive: 'Ordenes' });
     } else {
         res.redirect('/');
     }
@@ -589,7 +589,7 @@ router.get('/ordenes', function(req, res) {
 router.get('/ordenes_bodegas', function(req, res) {
     if (req.session.isLoggedIn) {
 		functions.ListarOrdenesBodegas();
-        res.render('Ordenes_Bodegas', { title: 'Ordenes Bodegas - Maipo Grande' });
+        res.render('Ordenes_Bodegas', { title: 'Ordenes Bodegas - Maipo Grande', navActive: 'Ordenes' });
     } else {
         res.redirect('/');
     }
@@ -600,7 +600,7 @@ router.get('/ordenes_bodegas', function(req, res) {
 router.get('/ordenes_transportes', function(req, res) {
     if (req.session.isLoggedIn) {
 		functions.ListarOrdenesTransportes();
-        res.render('Ordenes_Transportes', { title: 'Ordenes Transportes - Maipo Grande' });
+        res.render('Ordenes_Transportes', { title: 'Ordenes Transportes - Maipo Grande', navActive: 'Ordenes' });
     } else {
         res.redirect('/');
     }
@@ -634,7 +634,7 @@ router.get('/misofertas', async function(req, res) {
 			];
 
 			// Mostramos la vista
-			res.render('misofertas', { title: 'Mis ofertas - Maipo Grande', data:pedidosData });
+			res.render('misofertas', { title: 'Mis ofertas - Maipo Grande', data:pedidosData, navActive: 'MisOfertas' });
 		} else {
 			res.send('Error al obtener datos de la base de datos');
 		}
@@ -672,7 +672,7 @@ router.get('/crearOfertaProductor/:id_subastaF', async function(req, res, next) 
 			];
 
 			// Mostramos la vista
-			res.render('crearSubastaFruta', { title: 'Crear nueva oferta - Maipo Grande', data:subastaData });
+			res.render('crearSubastaFruta', { title: 'Crear nueva oferta - Maipo Grande', data:subastaData, navActive: 'MisOfertas' });
 		} else {
 			res.send('Error al obtener datos de la base de datos');
 		}
@@ -688,7 +688,7 @@ router.get('/crearOfertaProductor/:id_subastaF', async function(req, res, next) 
 router.get('/ventas', function(req, res) {
     if (req.session.isLoggedIn) {
 		functions.ListarVentas();
-        res.render('Ventas', { title: 'Ventas - Maipo Grande' });
+        res.render('Ventas', { title: 'Ventas - Maipo Grande', navActive: 'Ventas' });
     } else {
         res.redirect('/');
     }
@@ -701,7 +701,7 @@ router.get('/ventas', function(req, res) {
 router.get('/seguros', function(req, res) {
     if (req.session.isLoggedIn) {
 		functions.ListarSeguros();
-        res.render('seguros', { title: 'Seguros - Maipo Grande' });
+        res.render('seguros', { title: 'Seguros - Maipo Grande', navActive: 'Seguros' });
     } else {
         res.redirect('/');
     }
@@ -709,9 +709,32 @@ router.get('/seguros', function(req, res) {
 });
 
 
+// CRUD PRODUCTOS
+router.get('/productos', function(req, res) {
+    if (req.session.isLoggedIn) {
+        res.render('productos', { title: 'Productos - Maipo Grande', navActive: 'Productos' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
+
+
+// CRUD REPORTES
+router.get('/reportes', function(req, res) {
+    if (req.session.isLoggedIn) {
+        res.render('reportes', { title: 'Reportes - Maipo Grande', navActive: 'Reportes' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
+
+
+// OTROS
 router.get('/plantilla', function(req, res) {
     if (req.session.isLoggedIn) {
-        res.render('plantilla', { title: 'Plantilla - Maipo Grande' });
+        res.render('plantilla', { title: 'Plantilla - Maipo Grande', navActive: 'Dashboard' });
     } else {
         res.redirect('/');
     }
@@ -721,7 +744,7 @@ router.get('/plantilla', function(req, res) {
 
 router.get('/plantilla_con_tabla', function(req, res) {
     if (req.session.isLoggedIn) {
-        res.render('plantilla_con_tabla', { title: 'Plantilla - Maipo Grande' });
+        res.render('plantilla_con_tabla', { title: 'Plantilla - Maipo Grande', navActive: 'Dashboard' });
     } else {
         res.redirect('/');
     }
