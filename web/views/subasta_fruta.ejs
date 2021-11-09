@@ -77,33 +77,32 @@
                   <div class="card card-profile">
                     <div class="card-body">
                       <h4 class="card-title mt-4 mb-4">Frutas necesarias</h4>
-                      <table class="table table-hover">
+                      <table class="table table-hover mb-4">
                         <thead class="text-warning">
                             <th>Fruta</th>
                             <th>Calidad</th>
                             <th>Cantidad (en KG)</th>
                         </thead>
                         <tbody>
-
-                                    <tr>
-                                        <td>
-                                            nombre
-                                        </td>
-                                        <td>
-                                            calidad
-                                        </td>
-                                        <td>
-                                            cantidad
-                                        </td>
-                                    </tr>
-
+                          <% for(var detalle of Detalles){ %>
+                            <% if( data[0].fk_id_pedido == detalle.fk_id_pedido ){ %>
+                              <tr>
+                                  <td>
+                                    <%= detalle.nombre %>
+                                  </td>
+                                  <td>
+                                    <%= detalle.calidad %>
+                                  </td>
+                                  <td>
+                                    <%= detalle.cantidad %>
+                                  </td>
+                              </tr>
+                            <% } %>
+                          <% } %>
                         </tbody>
                     </table>
-                      <span class="mt-4"><strong>Fruta:</strong></span><span><%= data[0].fruta_fk_nombre %></span></br>
-                      <span class="mt-4"><strong>Calidad:</strong></span><span><%= data[0].fruta_calidad_fk_nombre %></span></br>
-                      <span class="mt-4"><strong>Cantidad (en KG):</strong></span><span><%= data[0].pedido_detalle_fk_cantidad %></span></br>
-                      <h4 class="card-title mt-4 mb-4">Opciones de la subasta</h4>
-                      <a href="/crearOfertaProductor/<%= data[0].id_subastaF %>"><button class="btn btn-warning mb-2" type="submit">Crear una nueva oferta</button></a>
+                    <h4 class="card-title mt-4 mb-4">Opciones de la subasta</h4>
+                    <a href="/crearOfertaProductor/<%= data[0].id_subastaF %>"><button class="btn btn-warning mb-2" type="submit">Crear una nueva oferta</button></a>
                     </div>
                   </div>
                 </div>

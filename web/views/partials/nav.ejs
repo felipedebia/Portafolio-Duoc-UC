@@ -34,7 +34,7 @@
                       </a>
                   </li>
                   <% if(session.tipo_usuario == 1){ %>
-                    <!--Menú Administrador-->
+                    <!-- Menú Administrador -->
                     <li class="nav-item ">
                         <a class="nav-link" href="../usuarios">
                             <i class="material-icons">person</i>
@@ -78,6 +78,12 @@
                         </a>
                     </li>
                     <li class="nav-item ">
+                        <a class="nav-link" href="../misofertas">
+                            <i class="material-icons">loyalty</i>
+                            <p>Mis ofertas (Productor)</p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
                         <a class="nav-link" href="../productos">
                             <i class="material-icons">inventory_2</i>
                             <p>Productos (Productor)</p>
@@ -95,9 +101,21 @@
                             <p>Reportes (Consultor)</p>
                         </a>
                     </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="../mispedidos">
+                            <i class="material-icons">loyalty</i>
+                            <p>Mis Pedidos (Cliente E. e I.)</p>
+                        </a>
+                    </li>
                   <% } %>
                   <% if(session.tipo_usuario == 5){ %>
-                    <!--Menú Productor-->
+                    <!-- Menú Productor -->
+                    <li class="nav-item ">
+                        <a class="nav-link" href="../misofertas">
+                            <i class="material-icons">local_shipping</i>
+                            <p>Mis ofertas</p>
+                        </a>
+                    </li>
                     <li class="nav-item ">
                         <a class="nav-link" href="../productos">
                             <i class="material-icons">inventory_2</i>
@@ -117,11 +135,11 @@
                         </a>
                     </li>
                   <% } %>
-                  <% if(session.tipo_usuario == 3){ %>
-                    <!--Menú Cliente Externo-->
+                  <% if(session.tipo_usuario == 3 || session.tipo_usuario == 4){ %>
+                    <!-- Menú Cliente Externo e Interno -->
                     <li class="nav-item ">
                         <a class="nav-link" href="../mispedidos">
-                            <i class="material-icons">library_books</i>
+                            <i class="material-icons">loyalty</i>
                             <p>Mis Pedidos</p>
                         </a>
                     </li>
@@ -132,32 +150,23 @@
                         </a>
                     </li>
                   <% } %>
-                  <% if(session.tipo_usuario == 4){ %>
-                    <!--Menú Cliente Interno-->
-                      <li class="nav-item ">
-                          <a class="nav-link" href="../mispedidos">
-                              <i class="material-icons">library_books</i>
-                              <p>Mis Pedidos</p>
-                          </a>
-                      </li>
-                      <li class="nav-item ">
-                          <a class="nav-link" href="../miscompras">
-                              <i class="material-icons">shopping_bag</i>
-                              <p>Mis Compras</p>
-                          </a>
-                      </li>
-                  <% } %>
                   <% if(session.tipo_usuario == 2){ %>
-                    <!--Menú Transportista-->
-                      <li class="nav-item ">
+                    <!-- Menú Transportista -->
+                    <li class="nav-item ">
+                        <a class="nav-link" href="../misofertas">
+                            <i class="material-icons">loyalty</i>
+                            <p>Mis ofertas</p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
                           <a class="nav-link" href="../subastas_transportes">
                               <i class="material-icons">local_shipping</i>
                               <p>Subastas</p>
                           </a>
-                      </li>
+                    </li>
                   <% } %>
                   <% if(session.tipo_usuario == 6){ %>
-                    <!--Menú Consultor-->
+                    <!-- Menú Consultor -->
                       <li class="nav-item ">
                           <a class="nav-link" href="../reportes">
                               <i class="material-icons">equalizer</i>

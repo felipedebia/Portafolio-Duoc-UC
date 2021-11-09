@@ -71,13 +71,14 @@ Iniciar node en la carpeta web
 - http://localhost:3000/usuarios
 - http://localhost:3000/contratos *
 - http://localhost:3000/ordenes *
-- http://localhost:3000/pedidos *
 - http://localhost:3000/subastas *
 - http://localhost:3000/frutas *
+- http://localhost:3000/pedidos *
 - http://localhost:3000/seguros *
 
 ### Menú Productor
 
+- http://localhost:3000/misofertas *
 - http://localhost:3000/productos *
 - http://localhost:3000/subastas_productor *
 - http://localhost:3000/ventas *
@@ -87,6 +88,7 @@ Iniciar node en la carpeta web
 - http://localhost:3000/miscompras *
 
 ### Menú Transportista
+- http://localhost:3000/misofertas *
 - http://localhost:3000/subastas_transporte *
 
 ### Menú Consultor

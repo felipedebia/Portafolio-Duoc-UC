@@ -425,7 +425,7 @@ router.get('/subasta_fruta/:id_subastaF', async function(req, res, next) {
 
 		// Hacemos una consulta trayendo todos los datos del usuario
 		binds = {"id_subastaF": id_subastaF};
-		sql = "SELECT subasta_fruta.fecha_creacion, subasta_fruta.fecha_actualizacion, subasta_fruta.fecha_termino, subasta_fruta.fk_id_pedido, subasta_fruta.fk_id_estado, estado_subastaF.descripcion, pedido.fk_id_tipo, tipo_pedido.nombre, pedido.fk_id_usuario, usuario.nombre, usuario.apellido, pedido_detalle.cantidad, fruta.nombre, fruta_calidad.nombre FROM subasta_fruta JOIN estado_subastaF ON subasta_fruta.fk_id_estado = estado_subastaF.id_estado JOIN pedido ON subasta_fruta.fk_id_pedido = pedido.id_pedido JOIN tipo_pedido ON pedido.fk_id_tipo = tipo_pedido.id_tipo JOIN usuario ON pedido.fk_id_usuario = usuario.id_usuario JOIN pedido_detalle ON pedido.id_pedido = pedido_detalle.fk_id_pedido JOIN fruta ON pedido_detalle.fk_id_fruta = fruta.id_fruta JOIN fruta_calidad ON pedido_detalle.fk_id_calidad = fruta_calidad.id_calidad WHERE subasta_fruta.id_subastaF = :id_subastaF";
+		sql = "SELECT subasta_fruta.fecha_creacion, subasta_fruta.fecha_actualizacion, subasta_fruta.fecha_termino, subasta_fruta.fk_id_pedido, subasta_fruta.fk_id_estado, estado_subastaF.descripcion, pedido.fk_id_tipo, tipo_pedido.nombre, pedido.fk_id_usuario, usuario.nombre, usuario.apellido FROM subasta_fruta JOIN estado_subastaF ON subasta_fruta.fk_id_estado = estado_subastaF.id_estado JOIN pedido ON subasta_fruta.fk_id_pedido = pedido.id_pedido JOIN tipo_pedido ON pedido.fk_id_tipo = tipo_pedido.id_tipo JOIN usuario ON pedido.fk_id_usuario = usuario.id_usuario JOIN pedido_detalle ON pedido.id_pedido = pedido_detalle.fk_id_pedido WHERE subasta_fruta.id_subastaF = :id_subastaF";
 		// JOIN pedido_detalle ON pedido.id_pedido = pedido_detalle.id_pdetalle
 		result = await BD.Open(sql, binds, false);
 
@@ -445,15 +445,12 @@ router.get('/subasta_fruta/:id_subastaF', async function(req, res, next) {
 					pedido_fk_id_tipo: result.rows[0][6],
 					pedido_fk_texto_tipo: result.rows[0][7],
 					pedido_fk_id_usuario: result.rows[0][8],
-					pedido_fk_texto_usuario: result.rows[0][9],
-					pedido_detalle_fk_cantidad: result.rows[0][11],
-					fruta_fk_nombre: result.rows[0][12],
-					fruta_calidad_fk_nombre: result.rows[0][13]
+					pedido_fk_texto_usuario: result.rows[0][9]
 				  }
 			];
-			console.log(subastaData)
 			// Mostramos la vista
 			functions.ListarSubastasFrutas();
+			functions.ListarPedidoDetalles();
 			res.render('subasta_Fruta', { title: 'Viendo Subasta - Maipo Grande', data:subastaData });
 		} else {
 			res.send('Error al obtener datos de la base de datos');
@@ -612,6 +609,41 @@ router.get('/ordenes_transportes', function(req, res) {
 
 
 // CRUD OFERTAS
+
+router.get('/misofertas', async function(req, res) {
+	if (req.session.isLoggedIn) {
+
+		// Hacemos una consulta trayendo todos los pedidos del usuario
+		binds = {"id_usuario": req.session.id_usuario};
+		sql = "SELECT id_pedido, direccion_despacho, fecha_creacion, fk_id_tipo, fk_id_ciudad, fk_id_estado FROM pedido WHERE fk_id_usuario = :id_usuario";
+		result = await BD.Open(sql, binds, false);
+
+		// Si los datos estan correctos
+		if (result.rows.length > 0) {
+			// Asignamos los valores de la consulta a las variables
+			var pedidosData = [
+				{
+					id_pedido: result.rows[0][0],
+					direccion_despacho: result.rows[0][1],
+					fecha_creacion: moment(result.rows[0][2]).format('YYYY-MM-DD'),
+					fk_id_tipo: result.rows[0][3],
+					fk_id_ciudad: result.rows[0][4],
+					fk_id_usuario: req.session.id_usuario,
+					fk_id_estado: result.rows[0][6]
+				  }
+			];
+
+			// Mostramos la vista
+			res.render('misofertas', { title: 'Mis ofertas - Maipo Grande', data:pedidosData });
+		} else {
+			res.send('Error al obtener datos de la base de datos');
+		}
+	} else {
+		res.redirect('/');
+	}
+	res.end();
+})
+
 
 router.get('/crearOfertaProductor/:id_subastaF', async function(req, res, next) {
 	if (req.session.isLoggedIn) {
