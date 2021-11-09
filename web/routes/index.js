@@ -672,7 +672,7 @@ router.get('/crearOfertaProductor/:id_subastaF', async function(req, res, next) 
 			];
 
 			// Mostramos la vista
-			res.render('crearSubastaFruta', { title: 'Crear nueva oferta - Maipo Grande', data:subastaData, navActive: 'MisOfertas' });
+			res.render('crearOfertaProductor', { title: 'Crear nueva oferta - Maipo Grande', data:subastaData, navActive: 'MisOfertas' });
 		} else {
 			res.send('Error al obtener datos de la base de datos');
 		}

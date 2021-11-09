@@ -20,14 +20,14 @@ Iniciar node en la carpeta web
 
 ## Flujo: 
 
-- Hacer pedido, vista donde admin apruebe o rechaze pedidos
+- Cliente hace pedido y luego completa detalle_pedido
 - Administrador hace subasta de frutas
 - Productores subes sus ofertas de productos
 - Sistema elije mejor oferta en base a precio calidad
 - Administrador hace subasta de transporte
 - Transportistas suben sus ofertas de transporte
 - Administrador elije mejor oferta de transporte
-- Administrador completa datos de detalle_venta --- NO DEBERIA SER ESTO DESPUES DE HACER PEDIDO?
+- Administrador completa datos de detalle_venta
 - Si administrador acepta negociación con cliente externo, se cambia estado de venta, se crea orden transporte, orden de bodega y se notifica a productores que deben enviar sus productos. Si se rechaza la negociacón se cancela la venta.
 - El sistema debe reconocer cuando llegan productos a bodega, se debe marcar como recepcionado en bodega, en bodega se pone "Revisión de producto"
 - Luego de la revisión, se genera informe (reporte_bodega) y el estado cambia a "Producto revisado" 
@@ -49,20 +49,17 @@ Iniciar node en la carpeta web
 - Implementar subida de archivos a Pago como en Contrato
 - Cambiar secuencias SQL a procedimientos
 - Hacer templates de correos y agregarlos (ya tenemos el paquete configurado y funcionando)
-- Arreglar if de botón confirmar pedido en pedido_detalle
+- Arreglar if de botón confirmar pedido en pedido_detalle, no debe aparecer si aun no se ingresan frutas
 - Arreglar error de si no existen pedidos, pagina se cae
 - Ocultar botón "Generar venta" si ya esta generada en pedidos (venta y pedido tienen misma id si estan generados)
-- La página debe tener activo su sección en el navbar
 - Hacer join a tabla pedido y pedido_detalle, luego a fruta y calidad del listar de subasta_fruta y subasta_transporte
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Comprobación de rango para entrar a las páginas
 
-## Rutas principales
-- http://localhost:3000/
+## Otros
 - http://localhost:3000/plantilla
 - http://localhost:3000/plantilla_con_tabla
-- http://localhost:3000/miperfil
 
 * PENDIENTE
 
@@ -71,7 +68,7 @@ Iniciar node en la carpeta web
 - http://localhost:3000/contratos *
 - http://localhost:3000/ordenes *
 - http://localhost:3000/subastas *
-- http://localhost:3000/frutas *
+- http://localhost:3000/frutas
 - http://localhost:3000/pedidos *
 - http://localhost:3000/seguros *
 
@@ -319,3 +316,7 @@ Iniciar node en la carpeta web
 | GET  | http://localhost:3000/modificarOfertaTransporte/:id_ofertaT  |  |
 | POST | http://localhost:3000/api_ofertas/anularOfertaTransporte/:id_ofertaT  | |
 | GET  | http://localhost:3000/oferta_transporte/:id_ofertaT  |  |
+
+## CRUD Reporte
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
