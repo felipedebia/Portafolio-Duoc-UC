@@ -1,7 +1,7 @@
 // Importaciones
 const express = require('express');
 const router = express.Router();
-const BD = require('../bin/configbd');
+const settings = require('../bin/settings');
 
 
 // Listar Paises
@@ -9,7 +9,7 @@ router.get('/listarPaises', async(req, res) => {
 
     binds = {};
     sql = "SELECT cod_pais, nombre FROM pais";
-    result = await BD.Open(sql, binds, true);
+    result = await settings.OpenConnection(sql, binds, true);
 
     Paises = [];
 
@@ -30,7 +30,7 @@ router.get('/listarCiudades', async(req, res) => {
 
     binds = {};
     sql = "SELECT id_ciudad, nombre, pais_cod_pais FROM ciudad";
-    result = await BD.Open(sql, binds, true);
+    result = await settings.OpenConnection(sql, binds, true);
 
     Ciudades = [];
 
@@ -52,7 +52,7 @@ router.get('/listarCalidadesFrutas', async(req, res) => {
 
     binds = {};
     sql = "SELECT id_calidad, nombre FROM fruta_calidad";
-    result = await BD.Open(sql, binds, true);
+    result = await settings.OpenConnection(sql, binds, true);
   
     Calidades = [];
   

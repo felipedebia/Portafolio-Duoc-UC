@@ -1,7 +1,7 @@
 // Importaciones
 const express = require('express');
 const router = express.Router();
-const BD = require('../bin/configbd');
+const settings = require('../bin/settings');
 var moment = require('moment');
 
 const multer = require('multer');
@@ -27,7 +27,7 @@ router.get('/listarContratos', async (req, res) => {
   
   binds = {};
   sql = "SELECT id_contrato, url_documento, fecha_inicio, fecha_vencimiento, fk_id_tipo, tipo_contrato.nombre, fk_id_estado, estado_contrato.descripcion, rel_contrato_usuario.fk_id_usuario FROM contrato JOIN rel_contrato_usuario ON contrato.id_contrato = rel_contrato_usuario.fk_id_contrato JOIN tipo_contrato ON contrato.fk_id_tipo = tipo_contrato.id_tipo JOIN estado_contrato ON contrato.fk_id_estado = estado_contrato.id_estado";
-  result = await BD.Open(sql, binds, true);
+  result = await settings.OpenConnection(sql, binds, true);
 
   Contratos = [];
 
@@ -56,7 +56,7 @@ router.post('/crearContrato', async (req, res) => {
   var fk_id_estado = 1;
 
   sql = "INSERT INTO contrato(fecha_inicio, fecha_vencimiento, fk_id_estado, fk_id_tipo) VALUES (to_DATE(:fecha_inicio,'YYYY/MM/DD'),to_DATE(:fecha_vencimiento,'YYYY/MM/DD'),:fk_id_estado,:fk_id_tipo)";
-  await BD.Open(sql, [fecha_inicio, fecha_vencimiento, fk_id_estado, fk_id_tipo], true);
+  await settings.OpenConnection(sql, [fecha_inicio, fecha_vencimiento, fk_id_estado, fk_id_tipo], true);
 
   // Si tuvo conexión a la DB
   if(res.status(200)) {
@@ -64,7 +64,7 @@ router.post('/crearContrato', async (req, res) => {
 
     //Con esto tomamos el ultimo registro en la tabla contrato para crear tabla rel y redirigir al documentoContrato y pueda agregar el documento
     sql2 = "SELECT id_contrato FROM (SELECT * FROM contrato ORDER BY id_contrato DESC ) WHERE rownum = 1";
-    result2 = await BD.Open(sql2, [], true);
+    result2 = await settings.OpenConnection(sql2, [], true);
 
     var idContratoSql = result2.rows[0];
 
@@ -73,7 +73,7 @@ router.post('/crearContrato', async (req, res) => {
       var value_id_usuario = req.session.id_usuario;
 
       sql3 = "INSERT INTO rel_contrato_usuario(fk_id_contrato, fk_id_usuario) VALUES (:idContratoSql, :id_usuario)";
-      await BD.Open(sql3, [value_id_contrato, value_id_usuario], true);
+      await settings.OpenConnection(sql3, [value_id_contrato, value_id_usuario], true);
 
       res.redirect('/documentoContrato/' + idContratoSql);
     }
@@ -99,7 +99,7 @@ router.post('/subirDocumento/:id_contrato', uploadFile.single('url_documento'), 
   var url_documento = req.file.filename;
 
 	sql = "UPDATE contrato SET url_documento= :url_documento WHERE id_contrato = :id_contrato_bind";
-  await BD.Open(sql, [url_documento, id_contrato_bind], true);
+  await settings.OpenConnection(sql, [url_documento, id_contrato_bind], true);
 
   if(res.status(200)) {
     console.log("[!] Documento de contrato " + id_contrato_bind + " agregado con éxito");
@@ -117,7 +117,7 @@ router.post("/modificarContrato/:id_contrato", async (req, res) => {
   var { fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado } = req.body;
 
   sql = "UPDATE contrato SET fecha_inicio= to_DATE(:fecha_inicio,'YYYY/MM/DD'), fecha_vencimiento= to_DATE(:fecha_vencimiento,'YYYY/MM/DD'), fk_id_tipo= :fk_id_tipo, fk_id_estado= :fk_id_estado WHERE id_usuario= :id_usuario";
-  await BD.Open(sql, [fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado], true);
+  await settings.OpenConnection(sql, [fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado], true);
 
   // Si tuvo conexión a la DB
   if(res.status(200)) {

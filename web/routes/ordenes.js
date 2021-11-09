@@ -1,7 +1,7 @@
 // Importaciones
 const express = require('express');
 const router = express.Router();
-const BD = require('../bin/configbd');
+const settings = require('../bin/settings');
 var moment = require('moment');
 
 // CRUD ORDEN BODEGA
@@ -11,7 +11,7 @@ router.get('/listarOrdenesBodegas', async (req, res) => {
   
   binds = {};
   sql = "SELECT id_ordenB, fecha_ingreso, fecha_retiro, fk_id_estado, fk_id_venta FROM orden_bodega";
-  result = await BD.Open(sql, binds, true);
+  result = await settings.OpenConnection(sql, binds, true);
 
   OrdenesBodegas = [];
 
@@ -34,7 +34,7 @@ router.get('/listarOrdenesBodegas', async (req, res) => {
 router.get("/anularOrdenBodega/:id_ordenb", async (req, res) => {
   var { id_ordenB_bind } = req.params.id_ordenB;
   sql = "UPDATE orden_bodega SET fk_id_estado=2 WHERE id_ordenb = :id_ordenB_bind";
-  await BD.Open(sql, [id_ordenB_bind], true);
+  await settings.OpenConnection(sql, [id_ordenB_bind], true);
 
   if(res.status(200)) {
     console.log("[!] Orden de Bodega " + id_ordenB_bind + " anulada con éxito");
@@ -53,7 +53,7 @@ router.get('/listarOrdenesTransportes', async (req, res) => {
   
   binds = {};
   sql = "SELECT id_ordenT, fecha_llegada, fecha_retiro, url_documento, fk_id_estado, fk_id_venta FROM orden_transporte";
-  result = await BD.Open(sql, binds, true);
+  result = await settings.OpenConnection(sql, binds, true);
 
   OrdenesTransportes = [];
 
@@ -77,7 +77,7 @@ router.get('/listarOrdenesTransportes', async (req, res) => {
 router.get("/anularOrdenTransporte/:id_ordenT", async (req, res) => {
   var id_ordenT_bind = req.params.id_ordenT;
   sql = "UPDATE orden_transporte SET fk_id_estado=2 WHERE id_ordenT = :id_ordenT_bind";
-  await BD.Open(sql, [id_ordenT_bind], true);
+  await settings.OpenConnection(sql, [id_ordenT_bind], true);
 
   if(res.status(200)) {
     console.log("[!] Orden de Transporte " + id_ordenT_bind + " anulada con éxito");

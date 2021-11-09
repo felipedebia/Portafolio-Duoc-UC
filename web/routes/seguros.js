@@ -1,7 +1,7 @@
 // Importaciones
 const express = require('express');
 const router = express.Router();
-const BD = require('../bin/configbd');
+const settings = require('../bin/settings');
 var moment = require('moment');
 var functions = require('./functions');
 
@@ -28,7 +28,7 @@ router.get('/listarSeguros', async (req, res) => {
   
   binds = {};
   sql = "SELECT id_seguro, nombre_empresa, url_documento, fecha_inicio, fecha_termino FROM seguro";
-  result = await BD.Open(sql, binds, true);
+  result = await settings.OpenConnection(sql, binds, true);
 
   Seguros = [];
 
@@ -53,7 +53,7 @@ router.post('/crearFruta', async (req, res) => {
   var fecha_creacion = functions.obtenerFechaActual();
 
   sql = "INSERT INTO fruta(nombre, fecha_creacion, necesita_refrigeracion) VALUES (:nombre, to_DATE(:fecha_creacion,'YYYY/MM/DD'), :necesita_refrigeracion)";
-  await BD.Open(sql, [nombre, fecha_creacion, necesita_refrigeracion], true);
+  await settings.OpenConnection(sql, [nombre, fecha_creacion, necesita_refrigeracion], true);
 
   // Si tuvo conexión a la DB
   if(res.status(200)) {
@@ -74,7 +74,7 @@ router.post("/modificarFruta/:id_fruta", async (req, res) => {
   var { nombre, necesita_refrigeracion} = req.body;
 
   sql = "UPDATE fruta SET nombre= :nombre, necesita_refrigeracion= :necesita_refrigeracion WHERE id_fruta= :id_fruta";
-  await BD.Open(sql, [nombre, necesita_refrigeracion, id_fruta], true);
+  await settings.OpenConnection(sql, [nombre, necesita_refrigeracion, id_fruta], true);
 
   // Si tuvo conexión a la DB
   if(res.status(200)) {
@@ -92,7 +92,7 @@ router.get("/eliminarFruta/:id_fruta", async (req, res) => {
   var id_fruta_bind = req.params.id_fruta;
   
   sql = "DELETE FROM fruta WHERE id_fruta = :id_fruta_bind";
-  await BD.Open(sql, [id_fruta_bind], true);
+  await settings.OpenConnection(sql, [id_fruta_bind], true);
 
   if(res.status(200)) {
     console.log("[!] Fruta " + id_fruta_bind + " eliminada con éxito");

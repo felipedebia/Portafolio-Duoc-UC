@@ -1,7 +1,7 @@
 // Importaciones
 const express = require('express');
 const router = express.Router();
-const BD = require('../bin/configbd');
+const settings = require('../bin/settings');
 var moment = require('moment');
 var functions = require('./functions');
 
@@ -12,7 +12,7 @@ router.get('/listarVentas', async (req, res) => {
   
   binds = {};
   sql = "SELECT venta.id_venta, venta.fecha_creacion, venta.fecha_actualizacion, venta.fk_id_pedido, venta.fk_id_seguro, venta.fk_id_tipo, tipo_venta.nombre,venta.fk_id_estado, estado_venta.descripcion FROM venta JOIN pedido ON venta.fk_id_pedido = pedido.id_pedido JOIN seguro on venta.fk_id_seguro = seguro.id_seguro JOIN tipo_venta ON venta.fk_id_tipo = tipo_venta.id_tipo JOIN estado_venta ON venta.fk_id_estado = estado_venta.id_estado";
-  result = await BD.Open(sql, binds, true);
+  result = await settings.OpenConnection(sql, binds, true);
 
   Ventas = [];
 
@@ -45,7 +45,7 @@ router.post('/crearVenta/:id_venta', async (req, res) => {
   var fk_id_estado = 1;
 
   sql = "INSERT INTO venta(id_venta, fecha_creacion, fecha_actualizacion, fk_id_pedido, fk_id_seguro, fk_id_tipo, fk_id_estado) VALUES (:id_venta_bind, to_DATE(:fecha_creacion,'YYYY/MM/DD'), to_DATE(:fecha_actualizacion,'YYYY/MM/DD'), :fk_id_pedido, :fk_id_seguro, :fk_id_tipo, :fk_id_estado)";
-  await BD.Open(sql, [id_venta_bind, fecha_creacion, fecha_actualizacion, fk_id_pedido, fk_id_seguro, fk_id_tipo, fk_id_estado], true);
+  await settings.OpenConnection(sql, [id_venta_bind, fecha_creacion, fecha_actualizacion, fk_id_pedido, fk_id_seguro, fk_id_tipo, fk_id_estado], true);
 
   // Si tuvo conexión a la DB
   if(res.status(200)) {
@@ -62,7 +62,7 @@ router.post('/crearVenta/:id_venta', async (req, res) => {
 router.get("/anularVenta/:id_venta", async (req, res) => {
   var id_venta_bind = req.params.id_venta;
   sql = "UPDATE venta SET fk_id_estado=2 WHERE id_venta = :id_venta_bind";
-  await BD.Open(sql, [id_venta_bind], true);
+  await settings.OpenConnection(sql, [id_venta_bind], true);
 
   if(res.status(200)) {
     console.log("[!] Venta " + id_venta_bind + " anulada con éxito");

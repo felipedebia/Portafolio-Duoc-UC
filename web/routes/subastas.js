@@ -1,7 +1,7 @@
 // Importaciones
 const express = require('express');
 const router = express.Router();
-const BD = require('../bin/configbd');
+const settings = require('../bin/settings');
 var moment = require('moment');
 var functions = require('./functions');
 
@@ -12,7 +12,7 @@ router.get('/listarSubastasFrutas', async (req, res) => {
   
   binds = {};
   sql = "SELECT id_subastaF, fecha_creacion, fecha_actualizacion, fecha_termino, fk_id_pedido, fk_id_estado, estado_subastaF.descripcion FROM subasta_fruta JOIN estado_subastaF ON subasta_fruta.fk_id_estado = estado_subastaF.id_estado";
-  result = await BD.Open(sql, binds, true);
+  result = await settings.OpenConnection(sql, binds, true);
 
   SubastasFrutas = [];
 
@@ -55,7 +55,7 @@ router.get('/crearSubastaFruta/:id_subastaF', async (req, res) => {
   console.log(fecha_termino)
   console.log("fin")
   sql = "INSERT INTO subasta_fruta(id_subastaF, fecha_creacion, fecha_actualizacion, fecha_termino, fk_id_pedido, fk_id_estado) VALUES (:id_subastaF, to_DATE(:fecha_creacion,'YYYY/MM/DD'), to_DATE(:fecha_actualizacion,'YYYY/MM/DD'), to_DATE(:fecha_termino,'YYYY/MM/DD'), :fk_id_pedido, :fk_id_estado)";
-  await BD.Open(sql, [id_subastaF, fecha_creacion, fecha_actualizacion, fecha_termino_actual, fk_id_pedido, fk_id_estado], true);
+  await settings.OpenConnection(sql, [id_subastaF, fecha_creacion, fecha_actualizacion, fecha_termino_actual, fk_id_pedido, fk_id_estado], true);
 
   // Si tuvo conexión a la DB
   if(res.status(200)) {
@@ -73,7 +73,7 @@ router.get('/crearSubastaFruta/:id_subastaF', async (req, res) => {
 router.get("/anularSubastaFruta/:id_subastaF", async (req, res) => {
   var { id_subastaF_bind } = req.params.id_subastaF;
   sql = "UPDATE subasta_fruta SET fk_id_estado=2 WHERE id_subastaF = :id_subastaF_bind";
-  await BD.Open(sql, [id_subastaF_bind], true);
+  await settings.OpenConnection(sql, [id_subastaF_bind], true);
 
   if(res.status(200)) {
     console.log("[!] Subasta de Frutas " + id_subastaF_bind + " anulada con éxito");
@@ -92,7 +92,7 @@ router.get('/listarSubastasTransportes', async (req, res) => {
   
   binds = {};
   sql = "SELECT id_subastaT, fecha_creacion, fecha_actualizacion, fecha_termino, cantidad, direccion_despacho, fk_id_pedido, fk_id_estado, estado_subastaT.descripcion FROM subasta_transporte JOIN estado_subastaT ON subasta_transporte.fk_id_estado = estado_subastaT.id_estado";
-  result = await BD.Open(sql, binds, true);
+  result = await settings.OpenConnection(sql, binds, true);
 
   SubastasTransportes = [];
 
@@ -119,7 +119,7 @@ router.get('/listarSubastasTransportes', async (req, res) => {
 router.get("/anularSubastaTransport/:id_subastaT", async (req, res) => {
   var id_subastaT_bind = req.params.id_subastaT;
   sql = "UPDATE subasta_transporte SET fk_id_estado=2 WHERE id_subastaT = :id_subastaT_bind";
-  await BD.Open(sql, [id_subastaT_bind], true);
+  await settings.OpenConnection(sql, [id_subastaT_bind], true);
 
   if(res.status(200)) {
     console.log("[!] Subasta de Transportes " + id_subastaT_bind + " anulada con éxito");

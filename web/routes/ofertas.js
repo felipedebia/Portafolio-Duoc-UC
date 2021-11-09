@@ -1,7 +1,7 @@
 // Importaciones
 const express = require('express');
 const router = express.Router();
-const BD = require('../bin/configbd');
+const settings = require('../bin/settings');
 var moment = require('moment');
 
 // CRUD OFERTA PRODUCTOR
@@ -11,7 +11,7 @@ router.get('/listarOfertasProductores', async (req, res) => {
   
   binds = {};
   sql = "SELECT id_ofertaP, cantidad, fecha_creacion, precio_por_kilo, fk_id_estado, fk_id_producto, fk_id_usuario, fk_id_pdetalle, fk_id_subastaF FROM oferta_productor";
-  result = await BD.Open(sql, binds, true);
+  result = await settings.OpenConnection(sql, binds, true);
 
   OfertasProductores = [];
 
@@ -38,7 +38,7 @@ router.get('/listarOfertasProductores', async (req, res) => {
 router.get("/anularOfertaProductor/:id_ofertaP", async (req, res) => {
   var { id_ofertaP_bind } = req.params;
   sql = "UPDATE oferta_productor SET fk_id_estado=2 WHERE id_ofertaP = :id_ofertaP_bind";
-  await BD.Open(sql, [id_ofertaP_bind], true);
+  await settings.OpenConnection(sql, [id_ofertaP_bind], true);
 
   if(res.status(200)) {
     console.log("[!] Oferta de Productor " + req.params.id_ofertaP + " anulada con éxito");
@@ -57,7 +57,7 @@ router.get('/listarOfertasTransportes', async (req, res) => {
   
   binds = {};
   sql = "SELECT id_ofertaT, cantidad, fecha_creacion, tiene_refrigeracion, precio_final, peso_total, fk_id_usuario, fk_id_subastaT, fk_id_estado FROM oferta_transporte";
-  result = await BD.Open(sql, binds, true);
+  result = await settings.OpenConnection(sql, binds, true);
 
   OfertasTransportes = [];
 
@@ -84,7 +84,7 @@ router.get('/listarOfertasTransportes', async (req, res) => {
 router.get("/anularOfertaTransporte/:id_ofertaT", async (req, res) => {
   var id_ofertaT_bind = req.params.id_ofertaT;
   sql = "UPDATE oferta_transporte SET fk_id_estado=2 WHERE id_ofertaT = :id_ofertaT_bind";
-  await BD.Open(sql, [id_ofertaT_bind], true);
+  await settings.OpenConnection(sql, [id_ofertaT_bind], true);
 
   if(res.status(200)) {
     console.log("[!] Oferta de Transporte " + req.params.id_ofertaT + " anulada con éxito");

@@ -44,11 +44,11 @@ Iniciar node en la carpeta web
 
 ## Funciones pendientes:
 
-- Gráficos
-- Contadores de Usuarios, Frutas, Ventas y Subastas
+- Gráficos de página Reportes
+- Contadores de Usuarios, Frutas, Ventas y Subastas para la página dashboard
 - Implementar subida de archivos a Pago como en Contrato
 - Cambiar secuencias SQL a procedimientos
-- Hacer templates de correos y agregarlos (ya tenemos el paquete configurado y funcionando)
+- Hacer templates de correos y agregarlos (paquete configurado y funcionando)
 - Arreglar if de botón confirmar pedido en pedido_detalle, no debe aparecer si aun no se ingresan frutas
 - Arreglar error de si no existen pedidos, pagina se cae
 - Ocultar botón "Generar venta" si ya esta generada en pedidos (venta y pedido tienen misma id si estan generados)

@@ -1,7 +1,7 @@
 // Importaciones
 const express = require('express');
 const router = express.Router();
-const BD = require('../bin/configbd');
+const settings = require('../bin/settings');
 var moment = require('moment');
 var functions = require('./functions');
 
@@ -28,7 +28,7 @@ router.post('/auth', async (req, res) => {
 		binds = { "correo_bind": req.body.correo};
 		sql = 'SELECT usuario.id_usuario, usuario.num_documento, usuario.nombre, usuario.apellido, usuario.correo, usuario.password, usuario.fk_id_tipo, tipo_usuario.nombre, usuario.fk_id_estado FROM usuario JOIN tipo_usuario ON usuario.fk_id_tipo = tipo_usuario.id_tipo WHERE usuario.correo = :correo_bind';
 
-        result = await BD.Open(sql, binds, false);
+        result = await settings.OpenConnection(sql, binds, false);
 
 		  	// Si encuentra los datos
 			if (result.rows.length > 0) {
@@ -108,7 +108,7 @@ router.get('/modificarUsuario/:id_usuario', async function(req, res, next) {
 
 		binds = {"id_usuario": id_usuario};
 		sql = "SELECT num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password, fk_id_estado, fk_id_tipo FROM usuario WHERE id_usuario = :id_usuario";
-		result = await BD.Open(sql, binds, false);
+		result = await settings.OpenConnection(sql, binds, false);
 
 		// Si los datos estan correctos
 		if (result.rows.length > 0) {
@@ -146,7 +146,7 @@ router.get('/miperfil', async function(req, res, next) {
 		// Hacemos una consulta trayendo todos los datos del usuario
 		binds = {"id_usuario": req.session.id_usuario};
 		sql = "SELECT num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password, fk_id_tipo FROM usuario WHERE id_usuario = :id_usuario";
-		result = await BD.Open(sql, binds, false);
+		result = await settings.OpenConnection(sql, binds, false);
 
 		// Si los datos estan correctos
 		if (result.rows.length > 0) {
@@ -197,7 +197,7 @@ router.get('/perfil/:id_usuario', async function(req, res, next) {
 		// Hacemos una consulta trayendo todos los datos del usuario
 		binds = {"id_usuario": id_usuario};
 		sql = "SELECT num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, fk_id_estado, fk_id_tipo FROM usuario WHERE id_usuario = :id_usuario";
-		result = await BD.Open(sql, binds, false);
+		result = await settings.OpenConnection(sql, binds, false);
 
 		// Si los datos estan correctos
 		if (result.rows.length > 0) {
@@ -280,7 +280,7 @@ router.get('/modificarContrato/:id_contrato', async function(req, res, next) {
 		// Hacemos una consulta trayendo todos los datos del contrato
 		binds = {"id_contrato": id_contrato};
 		sql = "SELECT url_documento, fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado FROM contrato WHERE id_contrato = :id_contrato";
-		result = await BD.Open(sql, binds, false);
+		result = await settings.OpenConnection(sql, binds, false);
 
 		// Si los datos estan correctos
 		if (result.rows.length > 0) {
@@ -316,7 +316,7 @@ router.get('/contrato/:id_contrato', async function(req, res, next) {
 		// Hacemos una consulta trayendo todos los datos del contrato
 		binds = {"id_contrato": id_contrato};
 		sql = "SELECT contrato.url_documento, contrato.fecha_inicio, contrato.fecha_vencimiento, contrato.fk_id_tipo, contrato.fk_id_estado, rel_contrato_usuario.fk_id_usuario, usuario.nombre, usuario.apellido FROM contrato JOIN rel_contrato_usuario ON contrato.id_contrato = rel_contrato_usuario.fk_id_contrato JOIN usuario ON rel_contrato_usuario.fk_id_usuario = usuario.id_usuario WHERE contrato.id_contrato = :id_contrato";
-		result = await BD.Open(sql, binds, false);
+		result = await settings.OpenConnection(sql, binds, false);
 
 		// Si los datos estan correctos
 		if (result.rows.length > 0) {
@@ -356,7 +356,7 @@ router.get('/documentoContrato/:id_contrato', async function(req, res, next) {
 		// Hacemos una consulta trayendo todos los datos del contrato
 		binds = {"id_contrato": id_contrato};
 		sql = "SELECT fecha_vencimiento, url_documento FROM contrato WHERE id_contrato = :id_contrato";
-		result = await BD.Open(sql, binds, false);
+		result = await settings.OpenConnection(sql, binds, false);
 
 		// Si los datos estan correctos
 		if (result.rows.length > 0) {
@@ -427,7 +427,7 @@ router.get('/subasta_fruta/:id_subastaF', async function(req, res, next) {
 		binds = {"id_subastaF": id_subastaF};
 		sql = "SELECT subasta_fruta.fecha_creacion, subasta_fruta.fecha_actualizacion, subasta_fruta.fecha_termino, subasta_fruta.fk_id_pedido, subasta_fruta.fk_id_estado, estado_subastaF.descripcion, pedido.fk_id_tipo, tipo_pedido.nombre, pedido.fk_id_usuario, usuario.nombre, usuario.apellido FROM subasta_fruta JOIN estado_subastaF ON subasta_fruta.fk_id_estado = estado_subastaF.id_estado JOIN pedido ON subasta_fruta.fk_id_pedido = pedido.id_pedido JOIN tipo_pedido ON pedido.fk_id_tipo = tipo_pedido.id_tipo JOIN usuario ON pedido.fk_id_usuario = usuario.id_usuario JOIN pedido_detalle ON pedido.id_pedido = pedido_detalle.fk_id_pedido WHERE subasta_fruta.id_subastaF = :id_subastaF";
 		// JOIN pedido_detalle ON pedido.id_pedido = pedido_detalle.id_pdetalle
-		result = await BD.Open(sql, binds, false);
+		result = await settings.OpenConnection(sql, binds, false);
 
 		// Si los datos estan correctos
 		if (result.rows.length > 0) {
@@ -482,7 +482,7 @@ router.get('/subasta_transporte/:id_subastaT', async function(req, res, next) {
 		// Hacemos una consulta trayendo todos los datos del usuario
 		binds = {"id_subastaT": id_subastaT};
 		sql = "SELECT fecha_creacion, fecha_actualizacion, fecha_termino, cantidad, direccion_despacho, fk_id_pedido, fk_id_estado FROM subasta_transporte WHERE subasta_transporte.id_subastaT = :id_subastaT";
-		result = await BD.Open(sql, binds, false);
+		result = await settings.OpenConnection(sql, binds, false);
 
 		// Si los datos estan correctos
 		if (result.rows.length > 0) {
@@ -520,7 +520,7 @@ router.get('/mispedidos', async function(req, res) {
 		// Hacemos una consulta trayendo todos los pedidos del usuario
 		binds = {"id_usuario": req.session.id_usuario};
 		sql = "SELECT id_pedido, direccion_despacho, fecha_creacion, fk_id_tipo, fk_id_ciudad, fk_id_estado FROM pedido WHERE fk_id_usuario = :id_usuario";
-		result = await BD.Open(sql, binds, false);
+		result = await settings.OpenConnection(sql, binds, false);
 
 		// Si los datos estan correctos
 		if (result.rows.length > 0) {
@@ -616,7 +616,7 @@ router.get('/misofertas', async function(req, res) {
 		// Hacemos una consulta trayendo todos los pedidos del usuario
 		binds = {"id_usuario": req.session.id_usuario};
 		sql = "SELECT id_pedido, direccion_despacho, fecha_creacion, fk_id_tipo, fk_id_ciudad, fk_id_estado FROM pedido WHERE fk_id_usuario = :id_usuario";
-		result = await BD.Open(sql, binds, false);
+		result = await settings.OpenConnection(sql, binds, false);
 
 		// Si los datos estan correctos
 		if (result.rows.length > 0) {
@@ -653,7 +653,7 @@ router.get('/crearOfertaProductor/:id_subastaF', async function(req, res, next) 
 		// Hacemos una consulta trayendo todos los datos del usuario
 		binds = {"id_subastaF": id_subastaF};
 		sql = "SELECT fecha_creacion, fecha_actualizacion, fecha_termino, fk_id_pedido, fk_id_estado, estado_subastaF.descripcion FROM subasta_fruta JOIN estado_subastaF ON subasta_fruta.fk_id_estado = estado_subastaF.id_estado WHERE subasta_fruta.id_subastaF = :id_subastaF";
-		result = await BD.Open(sql, binds, false);
+		result = await settings.OpenConnection(sql, binds, false);
 
 		// Si los datos estan correctos
 		if (result.rows.length > 0) {
