@@ -425,7 +425,7 @@ router.get('/subasta_fruta/:id_subastaF', async function(req, res, next) {
 
 		// Hacemos una consulta trayendo todos los datos del usuario
 		binds = {"id_subastaF": id_subastaF};
-		sql = "SELECT subasta_fruta.fecha_creacion, subasta_fruta.fecha_actualizacion, subasta_fruta.fecha_termino, subasta_fruta.fk_id_pedido, subasta_fruta.fk_id_estado, estado_subastaF.descripcion, pedido.fk_id_tipo, pedido.fk_id_usuario, pedido.fk_id_estado FROM subasta_fruta JOIN estado_subastaF ON subasta_fruta.fk_id_estado = estado_subastaF.id_estado JOIN pedido ON subasta_fruta.fk_id_pedido = pedido.id_pedido WHERE subasta_fruta.id_subastaF = :id_subastaF";
+		sql = "SELECT subasta_fruta.fecha_creacion, subasta_fruta.fecha_actualizacion, subasta_fruta.fecha_termino, subasta_fruta.fk_id_pedido, subasta_fruta.fk_id_estado, estado_subastaF.descripcion, pedido.fk_id_tipo, tipo_pedido.nombre, pedido.fk_id_usuario, usuario.nombre, usuario.apellido, pedido_detalle.cantidad, fruta.nombre, fruta_calidad.nombre FROM subasta_fruta JOIN estado_subastaF ON subasta_fruta.fk_id_estado = estado_subastaF.id_estado JOIN pedido ON subasta_fruta.fk_id_pedido = pedido.id_pedido JOIN tipo_pedido ON pedido.fk_id_tipo = tipo_pedido.id_tipo JOIN usuario ON pedido.fk_id_usuario = usuario.id_usuario JOIN pedido_detalle ON pedido.id_pedido = pedido_detalle.fk_id_pedido JOIN fruta ON pedido_detalle.fk_id_fruta = fruta.id_fruta JOIN fruta_calidad ON pedido_detalle.fk_id_calidad = fruta_calidad.id_calidad WHERE subasta_fruta.id_subastaF = :id_subastaF";
 		// JOIN pedido_detalle ON pedido.id_pedido = pedido_detalle.id_pdetalle
 		result = await BD.Open(sql, binds, false);
 
@@ -443,8 +443,12 @@ router.get('/subasta_fruta/:id_subastaF', async function(req, res, next) {
 					fk_id_estado: result.rows[0][4],
 					fk_texto_estado: result.rows[0][5],
 					pedido_fk_id_tipo: result.rows[0][6],
-					pedido_fk_id_usuario: result.rows[0][7],
-					pedido_fk_id_estado: result.rows[0][8]
+					pedido_fk_texto_tipo: result.rows[0][7],
+					pedido_fk_id_usuario: result.rows[0][8],
+					pedido_fk_texto_usuario: result.rows[0][9],
+					pedido_detalle_fk_cantidad: result.rows[0][11],
+					fruta_fk_nombre: result.rows[0][12],
+					fruta_calidad_fk_nombre: result.rows[0][13]
 				  }
 			];
 			console.log(subastaData)

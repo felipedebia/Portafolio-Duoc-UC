@@ -75,7 +75,7 @@ router.post('/crearPedido', async(req, res) => {
   if (res.status(200)) {
       console.log("[!] Pedido creado con éxito");
 
-      //Con esto tomamos el ultimo registro en la tabla pedido para redirigir al detalle pedido y pueda agregar frutas
+      //Con esto tomamos el ultimo registro en la tabla pedido para redirigir al pedido detalle
       sql2 = "SELECT id_pedido FROM (SELECT * FROM pedido ORDER BY id_pedido DESC ) WHERE rownum = 1";
       result = await BD.Open(sql2, [], true);
 
@@ -97,16 +97,16 @@ router.post('/crearPedidoDetalle', async(req, res) => {
 
   var fecha_creacion = functions.obtenerFechaActual();
 
-  sql = "INSERT INTO pedido_detalle(CANTIDAD, FECHA_CREACION, FECHA_ACTUALIZACION, FK_ID_CALIDAD, FK_ID_FRUTA, FK_ID_PEDIDO) VALUES (:cantidad,to_DATE(:fecha_creacion,'YYYY/MM/DD'),to_DATE(:fecha_creacion,'YYYY/MM/DD'),:fk_id_calidad,:fk_id_fruta,:fk_id_pedido)";
+  sql = "INSERT INTO pedido_detalle(cantidad, fecha_creacion, fecha_actualizacion, fk_id_calidad, fk_id_fruta, fk_id_pedido) VALUES (:cantidad, to_DATE(:fecha_creacion,'YYYY/MM/DD'), to_DATE(:fecha_creacion,'YYYY/MM/DD'), :fk_id_calidad, :fk_id_fruta, :fk_id_pedido)";
   await BD.Open(sql, [cantidad, fecha_creacion, fecha_creacion, fk_id_calidad, fk_id_fruta, fk_id_pedido], true);
 
   // Si tuvo conexión a la DB
   if (res.status(200)) {
-      console.log("[!] Pedido creado con éxito");
+      console.log("[!] Pedido detalle creado con éxito");
       functions.ListarPedidoDetalles();
       res.redirect('/pedido_detalles/' + fk_id_pedido);
   } else {
-      console.log("[!] Ocurrió un error al intentar registrar el pedido ");
+      console.log("[!] Ocurrió un error al intentar registrar el pedido detalle ");
       res.redirect('/mispedidos');
   }
 })

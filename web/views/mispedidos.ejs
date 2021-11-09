@@ -60,7 +60,7 @@
                                                                             <ul>
                                                                             <% for(var detalle of Detalles){ %>
                                                                                 <%if(detalle.id_pedido == pedido.id_pedido){%>
-                                                                                    <li><strong>Fruta:</strong> <%= detalle.nombre %> - <strong>Calidad:</strong> <%= detalle.calidad %> - <strong>Cantidad:</strong> <%= detalle.cantidad %></li>
+                                                                                    <li><strong>Fruta:</strong> <%= detalle.nombre %> - <strong>Calidad:</strong> <%= detalle.calidad %> - <strong>Cantidad (en KG):</strong> <%= detalle.cantidad %></li>
                                                                                 <% } %>
                                                                             <% } %>
                                                                             </ul>

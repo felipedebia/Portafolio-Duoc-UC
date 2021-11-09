@@ -22,7 +22,7 @@
                                   </div>
                                   <div class="timeline-panel">
                                     <div class="timeline-heading">
-                                      <span class="badge badge-pill badge-success">OFERTA DE PRODUCTOR</span>
+                                      <span class="badge badge-success">OFERTA DE PRODUCTOR</span>
                                     </div>
                                     <div class="timeline-body">
                                       <p>ID Oferta: <%= ofertaProductor.id_ofertaP %></p>
@@ -45,7 +45,7 @@
                                   </div>
                                   <div class="timeline-panel">
                                     <div class="timeline-heading">
-                                      <span class="badge badge-pill badge-danger">NINGUNA</span>
+                                      <span class="badge badge-danger">NINGUNA</span>
                                     </div>
                                     <div class="timeline-body">
                                       <p>Actualmente no tienes ninguna oferta de frutas, regresa en algunos días.</p>
@@ -68,15 +68,40 @@
                       <span class="mt-4"><strong>Fecha de creación:</strong></span> <span id="fecha_creacion"><%= data[0].fecha_creacion %></span></br>
                       <span><strong>Fecha de última actualización:</strong></span> <span id="fecha_actualizacion"><%= data[0].fecha_actualizacion %></span></br>
                       <span class="mb-4"><strong>Fecha de termino:</strong></span> <span id="fecha_termino"><%= data[0].fecha_termino %></span></br></br>
-                      <span class="mb-4"><strong>Estado de la subasta:</strong></span> <span class="badge badge-pill badge-success"><%= data[0].fk_texto_estado %></span></span></br></br>
-                      <h4 class="card-title mt-4 mb-4">Se necesita</h4>
-                      <span class="mt-4"><strong>Fruta:</strong></span> <span> </span></br>
-                      <span class="mt-4"><strong>Calidad:</strong></span> <span> </span></br>
-                      <span class="mt-4"><strong>Cantidad:</strong></span> <span> </span></br>
+                      <span class="mb-4"><strong>Estado de la subasta:</strong></span> <span class="badge badge-success"><%= data[0].fk_texto_estado %></span></span></br></br>
                       <h4 class="card-title mt-4 mb-4">Información del pedido</h4>
-                      <span class="mt-4"><strong>Tipo de pedido:</strong></span> <span><%= data[0].pedido_id_tipo %></span></br>
-                      <span class="mt-4"><strong>Estado de pedido:</strong></span> <span><%= data[0].pedido_id_estado %></span></br>
-                      <span class="mt-4"><strong>Solicitado por:</strong></span> <span><%= data[0].pedido_id_usuario %></span></br>
+                      <span class="mt-4"><strong>Tipo de pedido:</strong></span> <span class="badge badge-info"><%= data[0].pedido_fk_texto_tipo %></span></br>
+                      <span class="mt-4"><strong>Solicitado por:</strong></span> <a href="/perfil/<%= data[0].pedido_fk_id_usuario %>"><span><%= data[0].pedido_fk_texto_usuario %></span></a></br>
+                    </div>
+                  </div>
+                  <div class="card card-profile">
+                    <div class="card-body">
+                      <h4 class="card-title mt-4 mb-4">Frutas necesarias</h4>
+                      <table class="table table-hover">
+                        <thead class="text-warning">
+                            <th>Fruta</th>
+                            <th>Calidad</th>
+                            <th>Cantidad (en KG)</th>
+                        </thead>
+                        <tbody>
+
+                                    <tr>
+                                        <td>
+                                            nombre
+                                        </td>
+                                        <td>
+                                            calidad
+                                        </td>
+                                        <td>
+                                            cantidad
+                                        </td>
+                                    </tr>
+
+                        </tbody>
+                    </table>
+                      <span class="mt-4"><strong>Fruta:</strong></span><span><%= data[0].fruta_fk_nombre %></span></br>
+                      <span class="mt-4"><strong>Calidad:</strong></span><span><%= data[0].fruta_calidad_fk_nombre %></span></br>
+                      <span class="mt-4"><strong>Cantidad (en KG):</strong></span><span><%= data[0].pedido_detalle_fk_cantidad %></span></br>
                       <h4 class="card-title mt-4 mb-4">Opciones de la subasta</h4>
                       <a href="/crearOfertaProductor/<%= data[0].id_subastaF %>"><button class="btn btn-warning mb-2" type="submit">Crear una nueva oferta</button></a>
                     </div>
