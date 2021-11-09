@@ -53,8 +53,7 @@
                                                             
                                                         </td>
                                                         <td>
-                                                            <a href="/subasta_fruta/<%= subastaFruta.id_subastaF %>"><button type="button" class="btn btn-warning btn-sm">Ver</button></a>
-                                                            <a href="/modificarSubastaFruta/<%= subastaFruta.id_subastaF %>"><button type="button" class="btn btn-warning btn-sm">Modificar</button></a>
+                                                            <a href="/subasta_fruta/<%= subastaFruta.id_subastaF %>"><button type="button" class="btn btn-warning btn-sm">Ver subasta</button></a>
                                                             <a href="../api_subastas/anularSubastaFruta/<%= subastaFruta.id_subastaF %>"><button type="button" class="btn btn-warning btn-sm">Anular</button></a>
                                                         </td>
                                                     </tr>
@@ -74,24 +73,23 @@
                                                 <th class="disabled-sorting">Opciones</th>
                                             </thead>
                                             <tbody>
-                                                <% for(var subastaFruta of SubastasFrutas) { %>
+                                                <% for(var ofertaProductor of OfertasProductores) { %>
                                                     <tr>
                                                         <th scope="row">
-                                                            <%= subastaFruta.id_subastaF %>
+                                                            <%= ofertaProductor.id_ofertaP %>
                                                         </th>
                                                         <td>
-                                                            <%= subastaFruta.fecha_termino %>
+                                                            <%= ofertaProductor.fk_id_subastaf %>
                                                         </td>
                                                         <td>
-                                                            <%= subastaFruta.fk_texto_estado %>
+                                                            <%= ofertaProductor.fecha_creacion %>
                                                         </td>
                                                         <td>
-                                                            <%= subastaFruta.fk_texto_estado %>
+                                                            <%= ofertaProductor.fk_id_estado %>
                                                         </td>
                                                         <td>
-                                                            <a href="/subasta_fruta/<%= subastaFruta.id_subastaF %>"><button type="button" class="btn btn-warning btn-sm">Ver</button></a>
-                                                            <a href="/modificarSubastaFruta/<%= subastaFruta.id_subastaF %>"><button type="button" class="btn btn-warning btn-sm">Modificar</button></a>
-                                                            <a href="../api_subastas/anularSubastaFruta/<%= subastaFruta.id_subastaF %>"><button type="button" class="btn btn-warning btn-sm">Anular</button></a>
+                                                            <a href="/oferta_productor/<%= ofertaProductor.id_ofertaP %>"><button type="button" class="btn btn-warning btn-sm">Ver oferta</button></a>
+                                                            <a href="../api_subastas/anularSubastaFruta/<%= ofertaProductor.id_ofertaP %>"><button type="button" class="btn btn-warning btn-sm">Anular</button></a>
                                                         </td>
                                                     </tr>
                                                 <% } %>

@@ -97,12 +97,23 @@
                                     <%= detalle.cantidad %>
                                   </td>
                               </tr>
+                            <% } else { %>
+                            afsfsafas
                             <% } %>
                           <% } %>
                         </tbody>
-                    </table>
-                    <h4 class="card-title mt-4 mb-4">Opciones de la subasta</h4>
-                    <a href="/crearOfertaProductor/<%= data[0].id_subastaF %>"><button class="btn btn-warning mb-2" type="submit">Crear una nueva oferta</button></a>
+                      </table>
+                      <h4 class="card-title mt-4 mb-4">Opciones de la subasta</h4>
+                      <a href="/crearOfertaProductor/<%= data[0].id_subastaF %>"><button class="btn btn-warning mb-2" type="submit">Crear una nueva oferta</button></a>
+                      <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Extender plazo
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                          <a class="dropdown-item" href="#">2 semanas</a>
+                          <a class="dropdown-item" href="#">1 mes</a>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
