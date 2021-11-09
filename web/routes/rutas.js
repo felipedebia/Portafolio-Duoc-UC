@@ -15,7 +15,7 @@ const simpleCryp = new SimpleCrypto(secretKey)
 
 router.get('/', function(req, res, next) {
 	if (req.session.isLoggedIn) {
-		res.redirect('panel');
+		res.redirect('dashboard');
 	} else {
 		res.render('login', { title: 'Ingresar - Maipo Grande', alertError: false});
 	}
@@ -54,7 +54,7 @@ router.post('/auth', async (req, res) => {
 						req.session.tipo_usuario = result.rows[0][6];
 						req.session.tipo_usuario_texto = result.rows[0][7];
 						req.session.estado_usuario = result.rows[0][8];
-						res.redirect('/panel');
+						res.redirect('/dashboard');
 						console.log("[!] Usuario " + req.body.correo + " conectado con éxito");
 					}
 					
@@ -72,7 +72,7 @@ router.post('/auth', async (req, res) => {
 	}
 });
 
-router.get('/panel', function(req, res) {
+router.get('/dashboard', function(req, res) {
 	if (req.session.isLoggedIn) {
 
 		var contadoresData = [
@@ -80,7 +80,7 @@ router.get('/panel', function(req, res) {
 				
 			}
 		];
-		res.render('panel', { title: 'Panel de Administración - Maipo Grande', data:contadoresData, navActive: 'Dashboard' });
+		res.render('dashboard', { title: 'Panel de Administración - Maipo Grande', data:contadoresData, navActive: 'Dashboard' });
 	} else {
 		res.redirect('/');
 	}
@@ -712,6 +712,7 @@ router.get('/seguros', function(req, res) {
 // CRUD PRODUCTOS
 router.get('/productos', function(req, res) {
     if (req.session.isLoggedIn) {
+		functions.ListarProductos();
         res.render('productos', { title: 'Productos - Maipo Grande', navActive: 'Productos' });
     } else {
         res.redirect('/');

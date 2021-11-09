@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var favicon = require('serve-favicon')
 
 // Rutas
-var indexRouter = require('./routes/index');
+var rutasRouter = require('./routes/rutas');
 var extrasRouter = require('./routes/extras');
 var contratosRouter = require('./routes/contratos');
 var frutasRouter = require('./routes/frutas');
@@ -59,7 +59,7 @@ app.use('/js', express.static(__dirname + '/node_modules/popper.js/dist'));
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 
 
-app.use('/', indexRouter);
+app.use('/', rutasRouter);
 app.use('/api_extras', extrasRouter);
 app.use('/api_contratos', contratosRouter);
 app.use('/api_frutas', frutasRouter);
