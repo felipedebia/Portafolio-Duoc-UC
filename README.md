@@ -34,7 +34,7 @@ Iniciar node en la carpeta web
 - Esperar que llegue el transportista, cuando llegue cambiar estado a "Producto entregado a transportista"
 - Cuando el paquete llegue al cliente final, el estado cambia "Arribado a ciudad", luego se lleva al cliente final y cuando esta entregada cambia estado a "Producto entregado". Si el cliente lo rechaza se crea un informe de problema, si no se marca como "Producto entregado satisfactoriamente".
 
-## Pendiente:
+## Páginas pendientes:
 
 - AGREGAR NUEVA OFERTA_PRODUCTOR (haciendo mario)
 - AGREGAR NUEVA ORDEN_BODEGA Y ORDEN_TRANSPORTE
@@ -52,8 +52,8 @@ Iniciar node en la carpeta web
 - Arreglar if de botón confirmar pedido en pedido_detalle, no debe aparecer si aun no se ingresan frutas
 - Arreglar error de si no existen pedidos, pagina se cae
 - Ocultar botón "Generar venta" si ya esta generada en pedidos (venta y pedido tienen misma id si estan generados)
-- Cliente interno no tiene contrato, filtrar usuarios en contratos
 - Agregar estado a seguro
+- Agregar validación para primera vez que ingresa un usuario, obligar a cambiar contraseña
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Comprobación de rango para entrar a las páginas

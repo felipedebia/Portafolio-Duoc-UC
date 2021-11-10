@@ -49,7 +49,7 @@ router.get('/listarSeguros', async (req, res) => {
 
 // Agregar
 router.post('/crearSeguro', async (req, res) => {
-  var { nombre_empresa, fecha_inicio, fecha_termino,id_seguro } = req.body;
+  var { nombre_empresa, fecha_inicio, fecha_termino } = req.body;
 
   sql = "INSERT INTO seguro(nombre_empresa, fecha_inicio, fecha_termino) VALUES (:nombre_empresa, to_DATE(:fecha_inicio,'YYYY/MM/DD'),to_DATE(:fecha_termino,'YYYY/MM/DD'))";
   await settings.OpenConnection(sql, [nombre_empresa, fecha_inicio, fecha_termino], true);
@@ -70,6 +70,31 @@ router.post('/crearSeguro', async (req, res) => {
     console.log("[!] Ocurrió un error al intentar crear el seguro ");
     res.redirect('/seguros');
   }
+})
+
+
+router.post('/subirDocumento/:id_seguro', uploadFile.single('url_documento'), async (req, res, next) => {
+	const file = req.file
+	if (!file) {
+	  const error = new Error('Debes seleccionar un archivo')
+	  error.httpStatusCode = 400
+	  return next(error)
+	}
+
+	// Hacemos un update agregando el nombre del archivo al campo url_documento
+	var id_seguro_bind = req.params.id_seguro;
+  var url_documento = req.file.filename;
+
+	sql = "UPDATE seguro SET url_documento= :url_documento WHERE id_seguro = :id_seguro_bind";
+  await settings.OpenConnection(sql, [url_documento, id_seguro_bind], true);
+
+  if(res.status(200)) {
+    console.log("[!] Documento de Seguro " + id_seguro_bind + " agregado con éxito");
+    res.redirect('/seguros');
+	} else {
+		console.log("[!] Ocurrió un error al intentar agregar un documento al seguro " + id_seguro_bind);
+    res.redirect('/seguros');
+	}
 })
 
 

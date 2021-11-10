@@ -89,7 +89,6 @@
                                                             <label>Tipo de Contrato</label>
                                                             <select class="selectpicker form-control" data-size="6" name="fk_id_tipo" data-style="select-with-transition btn" title="Selecciona una opción">
                                                                 <option name="productor" value="1">Productor</option>
-                                                                <option name="clienteInterno" value="2">Cliente Interno</option>
                                                                 <option name="clienteExterno" value="3">Cliente Externo</option>
                                                                 <option name="transportista" value="4">Transportista</option>
                                                             </select>
@@ -100,13 +99,15 @@
                                                             <label>Asignar al usuario</label>
                                                             <select class="selectpicker form-control" data-size="<% Usuarios.length %>" name="fk_id_usuario" data-style="select-with-transition btn" title="Selecciona una opción">
                                                                 <% for(var usuario of Usuarios) { %>
-                                                                <option name="<%= usuario.nombre %> <%= usuario.apellido %>" value="<%= usuario.id_usuario %>"><%= usuario.nombre %> <%= usuario.apellido %></option>
+                                                                    <% if (usuario.fk_id_tipo == 2 || usuario.fk_id_tipo == 3 || usuario.fk_id_tipo == 5 ) { %>
+                                                                        <option name="<%= usuario.nombre %> <%= usuario.apellido %>" value="<%= usuario.id_usuario %>"><%= usuario.fk_texto_tipo %> <%= usuario.nombre %> <%= usuario.apellido %></option>
+                                                                    <% } %>
                                                                 <% } %>
                                                             </select>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button class="btn btn-warning mb-2 mt-2 pull-right" type="submit">Crear nuevo contrato</button>
+                                                <button class="btn btn-warning mb-2 mt-2 pull-right" type="submit" data-toggle="notify" data-placement="top" data-align="right" data-type="default" data-icon="notifications">Crear nuevo contrato</button>
                                             </form>
                                         </div>
                                     </div>
@@ -166,6 +167,38 @@
       });
       var table = $('#datatable').DataTable();
     });
+</script>
+
+
+<script>
+    Notify = (function () {
+        var e = $('[data-toggle="notify"]');
+        e.length &&
+            e.on("click", function (e) {
+                e.preventDefault(),
+                    (function (e, a, t, n, i, o) {
+                        $.notify(
+                            { icon: t, title: " Bootstrap Notify", message: "Turning standard Bootstrap alerts into awesome notifications", url: "" },
+                            {
+                                element: "body",
+                                type: n,
+                                allow_dismiss: !0,
+                                placement: { from: e, align: a },
+                                offset: { x: 15, y: 15 },
+                                spacing: 10,
+                                z_index: 1080,
+                                delay: 2500,
+                                timer: 25e3,
+                                url_target: "_blank",
+                                mouse_over: !1,
+                                animate: { enter: i, exit: o },
+                                template:
+                                    '<div data-notify="container" class="alert alert-dismissible alert-{0} alert-notify" role="alert"><span class="alert-icon material-icons" data-notify="icon">notifications</span> <div class="alert-text"</div> <span class="alert-title" data-notify="title">{1}</span> <span class="message-notify" data-notify="message">{2}</span></div><button type="button" class="close" data-notify="dismiss" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>',
+                            }
+                        );
+                    })($(this).attr("data-placement"), $(this).attr("data-align"), $(this).attr("data-icon"), $(this).attr("data-type"), $(this).attr("data-animation-in"), $(this).attr("data-animation-out"));
+            });
+    })();
 </script>
 
 </body>
