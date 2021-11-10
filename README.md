@@ -38,7 +38,7 @@ Iniciar node en la carpeta web
 
 - AGREGAR NUEVA OFERTA_PRODUCTOR (haciendo mario)
 - AGREGAR NUEVA ORDEN_BODEGA Y ORDEN_TRANSPORTE
-- CREAR (DEBE SER COMO CONTRATO) Y MODIFICAR SEGURO (haciendo chris)
+- CREAR (DEBE SER COMO CONTRATO), MODIFICAR Y ELIMINAR SEGURO (haciendo chris)
 - CRUD PRODUCTO (haciendo david)
 - TERMINAR PAGINA MISOFERTAS
 
@@ -53,6 +53,7 @@ Iniciar node en la carpeta web
 - Arreglar error de si no existen pedidos, pagina se cae
 - Ocultar botón "Generar venta" si ya esta generada en pedidos (venta y pedido tienen misma id si estan generados)
 - Cliente interno no tiene contrato, filtrar usuarios en contratos
+- Agregar estado a seguro
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Comprobación de rango para entrar a las páginas
@@ -81,7 +82,6 @@ Iniciar node en la carpeta web
 
 ### Menú Cliente Externo e Interno *
 - http://localhost:3000/mispedidos *
-- http://localhost:3000/miscompras * que es esto?
 
 ### Menú Transportista
 - http://localhost:3000/misofertas *
@@ -219,6 +219,7 @@ Iniciar node en la carpeta web
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/seguros  |  |
 | GET  | http://localhost:3000/api_seguros/listarSeguros  | JSON |
+| POST | http://localhost:3000/api_seguros/crearSeguro  | JSON |
 | GET  | http://localhost:3000/modificarSeguro/:id_seguro  |  |
 | POST | http://localhost:3000/api_seguros/eliminarSeguro/:id_seguro  | |
 

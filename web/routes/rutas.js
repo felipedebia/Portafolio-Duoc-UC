@@ -11,7 +11,7 @@ const secretKey = "1X42JJKLjkuid"
 const simpleCryp = new SimpleCrypto(secretKey)
 
 
-// Rutas de usuarios
+// CRUD PRINCIPAL
 
 router.get('/', function(req, res, next) {
 	if (req.session.isLoggedIn) {
@@ -80,6 +80,7 @@ router.get('/dashboard', function(req, res) {
 				
 			}
 		];
+		//settings.enviarCorreo('fabyold@gmail.com', 'Correo de prueba', 'OLA2');
 		res.render('dashboard', { title: 'Panel de Administración - Maipo Grande', data:contadoresData, navActive: 'Dashboard' });
 	} else {
 		res.redirect('/');
@@ -255,10 +256,10 @@ router.get('/usuarios', function(req, res) {
 // CRUD CONTRATOS
 router.get('/contratos', function(req, res) {
     if (req.session.isLoggedIn) {
-		functions.ListarContratos();
 
 		var fecha_hoy = functions.obtenerFechaActual();
 
+		functions.ListarContratos();
         res.render('contratos', { title: 'Contratos - Maipo Grande', fecha_hoy: fecha_hoy, navActive: 'Contratos' });
     } else {
         res.redirect('/');
@@ -707,6 +708,43 @@ router.get('/seguros', function(req, res) {
     }
     res.end();
 });
+
+
+router.get('/documentoSeguro/:id_seguro', async function(req, res, next) {
+	if (req.session.isLoggedIn) {
+
+		const { id_seguro } = req.params;
+
+		// Hacemos una consulta trayendo todos los datos del contrato
+		binds = {"id_seguro": id_seguro};
+		sql = "SELECT fecha_vencimiento, url_documento FROM seguro WHERE id_contrato = :id_seguro";
+		result = await settings.OpenConnection(sql, binds, false);
+
+		// Si los datos estan correctos
+		if (result.rows.length > 0) {
+			// Si url_contrato es NULL se podrá subir archivo
+			if (result.rows[0][1] === null) {
+				// Asignamos los valores de la consulta a las variables
+				var seguroData = [
+					{
+						id_seguro: id_seguro,
+						fecha_vencimiento: moment(result.rows[0][0]).format('YYYY-MM-DD'),
+					}
+				];
+			} else {
+				res.send('Este seguro ya tiene un documento asignado');
+			}
+			// Mostramos la vista
+			res.render('documentoSeguro', { title: 'Subir documento - Maipo Grande', data:seguroData, navActive: 'Seguros' });
+		} else {
+			res.send('Error al obtener datos de la base de datos');
+		}
+	} else {
+		res.redirect('/');
+	}
+	res.end();
+})
+
 
 
 // CRUD PRODUCTOS

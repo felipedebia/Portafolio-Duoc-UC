@@ -43,27 +43,33 @@ router.get('/listarSeguros', async (req, res) => {
 
       Seguros.push(seguroSchema);
   })
-  res.json({title: 'Seguros', 'mydata': Seguros});
+  res.json({ title: 'Seguros', 'mydata': Seguros });
 });
 
 
 // Agregar
-router.post('/crearFruta', async (req, res) => {
-  var { nombre, necesita_refrigeracion } = req.body;
-  var fecha_creacion = functions.obtenerFechaActual();
+router.post('/crearSeguro', async (req, res) => {
+  var { nombre_empresa, fecha_inicio, fecha_termino,id_seguro } = req.body;
 
-  sql = "INSERT INTO fruta(nombre, fecha_creacion, necesita_refrigeracion) VALUES (:nombre, to_DATE(:fecha_creacion,'YYYY/MM/DD'), :necesita_refrigeracion)";
-  await settings.OpenConnection(sql, [nombre, fecha_creacion, necesita_refrigeracion], true);
+  sql = "INSERT INTO seguro(nombre_empresa, fecha_inicio, fecha_termino) VALUES (:nombre_empresa, to_DATE(:fecha_inicio,'YYYY/MM/DD'),to_DATE(:fecha_termino,'YYYY/MM/DD'))";
+  await settings.OpenConnection(sql, [nombre_empresa, fecha_inicio, fecha_termino], true);
 
   // Si tuvo conexión a la DB
-  if(res.status(200)) {
-    console.log("[!] Fruta creada con éxito");
-    res.redirect('/frutas');
-    //res.refresh();
-	} else {
-		console.log("[!] Ocurrió un error al intentar crear la fruta");
-    res.redirect('/frutas');
-	}
+  if (res.status(200)) {
+    console.log("[!] Seguro creado con éxito");
+
+    //Con esto tomamos el ultimo registro en la tabla seguro para crear tabla rel y redirigir al documentoSeguro y pueda agregar el documento
+    sql2 = "SELECT id_seguro FROM (SELECT * FROM seguro ORDER BY id_seguro DESC ) WHERE rownum = 1";
+    result2 = await settings.OpenConnection(sql2, [], true);
+
+    var idSeguroSql = result2.rows[0];
+
+    res.redirect('/documentoSeguro/' + idSeguroSql);
+
+  } else {
+    console.log("[!] Ocurrió un error al intentar crear el seguro ");
+    res.redirect('/seguros');
+  }
 })
 
 

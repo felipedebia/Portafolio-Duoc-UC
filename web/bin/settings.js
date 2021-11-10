@@ -37,10 +37,49 @@ const access_token  = 'ya29.a0ARrdaM8LYTkZ5mXC7Ll7c8RjkNwA0HJLlNreDBYRqxshaSTcyx
 const client_id     = '784728793947-u496rgrjf062e7nlfe649pj70u6q7bid.apps.googleusercontent.com';
 const client_secret = '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';
 
-const email_to = 'fabyold@gmail.com';
-
 let transporter = nodemailer
 
+.createTransport({
+    service: 'Gmail',
+    auth: {
+        type: 'OAuth2',
+        clientId: client_id,
+        clientSecret: client_secret
+    }
+});
 
+transporter.on('token', token => {
+    console.log('A new access token was generated');
+    console.log('User: %s', token.user);
+    console.log('Access Token: %s', token.accessToken);
+    console.log('Expires: %s', new Date(token.expires));
+});
+
+// setup e-mail data with unicode symbols
+
+function enviarCorreo(para, tema, html) {
+    let mailOptions = {
+        from    : user_name, // sender address
+        to      : para, // list of receivers
+        subject : tema, // Subject line
+        html    : html, // html body
+    
+        auth : {
+            user         : user_name,
+            refreshToken : refresh_token,
+            accessToken  : access_token,
+            expires      : 1494388182480
+        }
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Correo enviado con exito: ' + info.response);
+    });
+
+  }
 
 exports.OpenConnection = OpenConnection;
+exports.enviarCorreo = enviarCorreo;

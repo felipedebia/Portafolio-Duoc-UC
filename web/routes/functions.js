@@ -1,5 +1,6 @@
 // Importaciones
 const request = require('request');
+const settings = require('../bin/settings');
 
 // FUNCIONES
 

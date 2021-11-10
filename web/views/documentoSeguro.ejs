@@ -1,0 +1,49 @@
+<%- include('partials/nav.ejs') %>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-warning">
+                            <h4 class="card-title">Seguro <%= data[0].id_seguro%></h4>
+                            <p class="card-category">Selecciona el documento a subir</p>
+                        </div>
+                        <div class="card-body">
+                            <form action="../api_seguros/subirDocumento/<%= data[0].id_seguro%>" enctype="multipart/form-data" method="POST"> 
+                                <div class="drag-image mt-4">
+                                    <div class="icon"><i class="material-icons" style="font-size: 50px">cloud_upload</i></div>
+                                    <input type="file" id="url_documento" name="url_documento" onchange="return fileValidation()"/>
+                                    <span>Formatos permitidos: DOC, DOCX, PDF, TXT</span>
+                                </div>
+                                <div class="col text-center">
+                                    <button class="btn btn-warning mb-2 mt-4 medium-size-btn" type="submit">Subir documento</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<%- include('partials/footer.ejs') %>
+
+<script>
+    function fileValidation() {
+        var fileInput = 
+            document.getElementById('url_documento');
+          
+        var filePath = fileInput.value;
+      
+        // Allowing file type
+        var allowedExtensions = /(\.doc|\.docx|\.pdf|\.txt)$/i;
+          
+        if (!allowedExtensions.exec(filePath)) {
+            alert('Archivo con formato no permitido');
+            fileInput.value = '';
+            return false;
+        } 
+    }
+</script>
+
+</body>
+</html> 
