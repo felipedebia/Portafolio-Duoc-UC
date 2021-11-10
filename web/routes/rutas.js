@@ -96,6 +96,17 @@ router.get('/logout', function(req, res, next) {
 
 // CRUD USUARIOS
 
+router.get('/usuarios', function(req, res) {
+    if (req.session.isLoggedIn) {
+		var estado_respuesta = req.query.estado;
+		functions.ListarUsuarios();
+        res.render('usuarios', { title: 'Usuarios - Maipo Grande', navActive: 'Usuarios', respuesta: estado_respuesta });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
+
 // Modificar
 router.get('/modificarUsuario', async function(req, res, next) {
 	res.send('Debes ingresar un ID para modificar un usuario');
@@ -242,16 +253,6 @@ router.get('/perfil/:id_usuario', async function(req, res, next) {
 	res.end();
 })
 
-router.get('/usuarios', function(req, res) {
-    if (req.session.isLoggedIn) {
-		functions.ListarUsuarios();
-        res.render('usuarios', { title: 'Usuarios - Maipo Grande', navActive: 'Usuarios' });
-    } else {
-        res.redirect('/');
-    }
-    res.end();
-});
-
 
 // CRUD CONTRATOS
 router.get('/contratos', function(req, res) {
@@ -260,7 +261,7 @@ router.get('/contratos', function(req, res) {
 		var fecha_hoy = functions.obtenerFechaActual();
 
 		functions.ListarContratos();
-        res.render('contratos', { title: 'Contratos - Maipo Grande', fecha_hoy: fecha_hoy, navActive: 'Contratos' });
+        res.render('contratos', { title: 'Contratos - Maipo Grande', fecha_hoy: fecha_hoy, navActive: 'Contratos'});
     } else {
         res.redirect('/');
     }

@@ -54,6 +54,7 @@ Iniciar node en la carpeta web
 - Ocultar botón "Generar venta" si ya esta generada en pedidos (venta y pedido tienen misma id si estan generados)
 - Agregar estado a seguro
 - Agregar validación para primera vez que ingresa un usuario, obligar a cambiar contraseña
+- Hacer comprobación de si ya existe un usuario con un correo, si existe mandar error y no dejar registrar
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Comprobación de rango para entrar a las páginas
