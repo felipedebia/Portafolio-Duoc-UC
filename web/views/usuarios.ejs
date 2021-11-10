@@ -17,7 +17,7 @@
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="#crearUsuario" data-toggle="tab">
-                                                <i class="material-icons">add</i> Crear nuevo usuario <div class='notifications top-right'></div>
+                                                <i class="material-icons">add</i> Crear nuevo usuario
                                                 <div class="ripple-container"></div>
                                             </a>
                                         </li>
@@ -160,7 +160,32 @@
             icon: '<i class="material-icons">history_edu</i>',
             message: "Se ha enviado un correo electrónico al nuevo usuario"
             },{
-            type: 'dark',
+            type: 'success',
+            animate: {
+                enter: 'animated fadeInUp',
+                exit: 'animated fadeOutLeft'
+            },
+            placement: {
+                from: "top",
+                align: "right"
+            },
+            offset: 20,
+            spacing: 10,
+            z_index: 1031,
+            });
+        });
+    </script>
+<% } %>
+
+<% if(respuesta == 'error') { %>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.notify({
+            title: '<strong>Oh no, un error!</strong>',
+            icon: '<i class="material-icons">history_edu</i>',
+            message: "Ocurrió un error y no se pudo crear el usuario"
+            },{
+            type: 'danger',
             animate: {
                 enter: 'animated fadeInUp',
                 exit: 'animated fadeOutLeft'
