@@ -39,7 +39,7 @@ router.post('/crearProducto', async (req, res) => {
   var fecha_actualizacion = functions.obtenerFechaActual();
 
   sql = "INSERT INTO producto(cantidad,fecha_actualizacion,fk_id_fruta,fk_id_calidad,fk_id_usuario) values (:cantidad,to_date(:fecha_actualizacion,'YYYY-MM-DD'),:fk_fruta,:fk_calidad,:fk_usuario)";
-  await BD.Open(sql, [cantidad, fecha_actualizacion, fk_fruta, fk_calidad,fk_usuario], true);
+  await settings.OpenConnection(sql, [cantidad, fecha_actualizacion, fk_fruta, fk_calidad,fk_usuario], true);
 
   // Si tuvo conexión a la DB
   if(res.status(200)) {
@@ -60,7 +60,7 @@ router.post("/modificarProducto/:id_producto", async (req, res) => {
   var fecha_actualizacion = functions.obtenerFechaActual();
   
   sql = "UPDATE producto SET cantidad=:cantidad,fecha_actualizacion=to_date(:fecha_actualizacion,'YYYY-MM-DD'), fk_id_fruta= :fk_id_fruta,fk_id_calidad=:fk_id_calidad,fk_id_usuario=:fk_id_usuario  WHERE id_producto=:id_producto";
-  await BD.Open(sql, [cantidad, fecha_actualizacion,fk_id_fruta,fk_id_calidad,fk_id_usuario, id_producto], true);
+  await settings.OpenConnection(sql, [cantidad, fecha_actualizacion,fk_id_fruta,fk_id_calidad,fk_id_usuario, id_producto], true);
 
   // Si tuvo conexión a la DB
   if(res.status(200)) {
@@ -78,7 +78,7 @@ router.post("/modificarProducto/:id_producto", async (req, res) => {
 router.get("/eliminarProducto/:id_producto", async (req, res) => {
   var id_producto_bind = req.params.id_producto;
   sql = "DELETE FROM producto WHERE id_producto = :id_producto_bind";
-  await BD.Open(sql, [id_producto_bind], true);
+  await settings.OpenConnection(sql, [id_producto_bind], true);
 
   if(res.status(200)) {
     console.log("[!] Producto " + id_producto_bind + " eliminado con éxito");

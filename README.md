@@ -51,9 +51,8 @@ Iniciar node en la carpeta web
 - Implementar subida de archivos a Pago como en Contrato
 - Cambiar secuencias SQL a procedimientos
 - Hacer templates de correos y agregarlos (paquete configurado y funcionando)
-- Arreglar if de botón confirmar pedido en pedido_detalle, no debe aparecer si aun no se ingresan frutas
 - Arreglar error de si no existen pedidos, pagina pedidos se cae
-- Arreglar error de si no tienes pedidos, pagina mispedidos se cae (haciendo chris)
+- Arreglar error de si no tienes pedidos, pagina mispedidos se cae
 - Agregar validación para primera vez que ingresa un usuario, obligar a cambiar contraseña (haciendo david)
 - Hacer comprobación de si ya existe un usuario con un correo, si existe mandar error y no dejar registrar
 
