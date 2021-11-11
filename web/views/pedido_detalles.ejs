@@ -61,6 +61,10 @@
 
                                     <% for(var pedido_detalle of PedidoDetalles){ %>
                                         <% if( pedido_detalle.id_pedido == data[0].id_Pedido ){ %>
+                                            <% 
+                                                var pedidoD_contador = 0;
+                                                pedidoD_contador++;
+                                            %>
                                             <tr>
                                                 <td>
                                                     <%= pedido_detalle.id_pedidoD %>
@@ -83,7 +87,7 @@
 
                                 </tbody>
                             </table>
-                            <% if( pedido_detalle.length > 0 ){ %>
+                            <% if( pedidoD_contador > 0 ){ %>
                                 <div class="col text-center">
                                     <a href="../api_pedidos/confirmarPedido/<%= data[0].id_Pedido %>"><button type="button" class="btn btn-success mb-2 mt-4 medium-size-btn">Confirmar pedido</button></a>
                                 </div>

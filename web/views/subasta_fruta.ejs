@@ -16,6 +16,10 @@
                           <ul class="timeline timeline-simple mr-5">
                             <% for(var ofertaProductor of OfertasProductores) { %>
                               <% if (ofertaProductor.fk_id_subastaf == data[0].id_subastaF){ %>
+                                <% 
+                                  var ofertaProductor_contador = 0;
+                                  ofertaProductor_contador++;
+                                %>
                                 <li class="timeline-inverted">
                                   <div class="timeline-badge success">
                                     <i class="material-icons">card_travel</i>
@@ -38,7 +42,7 @@
                                   </div>
                                 </li>
                               <% } %>
-                              <% if( ofertaProductor.length > 0 ){ %>
+                              <% if( ofertaProductor_contador > 0 ){ %>
                                 <li class="timeline-inverted">
                                   <div class="timeline-badge danger">
                                     <i class="material-icons">card_travel</i>
