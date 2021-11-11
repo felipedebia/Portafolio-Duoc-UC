@@ -7,7 +7,7 @@ var functions = require('./functions');
 
 // CRUD VENTAS
 
-// Leer - Todos las ventas
+// Listar todas las ventas
 router.get('/listarVentas', async (req, res) => {
   
   binds = {};
@@ -32,6 +32,33 @@ router.get('/listarVentas', async (req, res) => {
       Ventas.push(ventaSchema);
   })
   res.json({title: 'Ventas', 'mydata': Ventas});
+});
+
+
+//Listar detalles de todos las ventas
+router.get('/listarVentaDetalles', async(req, res) => {
+
+  binds = {};
+  sql = "select id_ventaD, costo_fruta, costo_transporte, costo_impuestos, comision_servicio, comision_empresa, precio_final, fk_id_venta from venta_detalle";
+  result = await settings.OpenConnection(sql, binds, true);
+
+  VentaDetalles = [];
+
+  result.rows.map(detalle => {
+      let detalleSchema = {
+          "id_ventaD": detalle[0],
+          "costo_fruta": detalle[1],
+          "costo_transporte": detalle[2],
+          "costo_impuestos": detalle[3],
+          "comision_servicio": detalle[4],
+          "comision_empresa": detalle[5],
+          "precio_final": detalle[6],
+          "fk_id_venta": detalle[7]
+      }
+
+      VentaDetalles.push(detalleSchema);
+  })
+  res.json({ title: 'VentaDetalles', 'mydata': VentaDetalles });
 });
 
 

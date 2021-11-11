@@ -7,7 +7,7 @@ var functions = require('./functions');
 
 // CRUD PEDIDOS
 
-// Leer - Todos los pedidos
+// Listar todos los pedidos
 router.get('/listarPedidos', async (req, res) => {
   
   binds = {};
@@ -34,27 +34,27 @@ router.get('/listarPedidos', async (req, res) => {
 });
 
 
-//Listar detalles de un pedido especifico
+//Listar detalles de todos los pedidos
 router.get('/listarPedidoDetalles', async(req, res) => {
 
   binds = {};
-  sql = "select pedido_detalle.id_pdetalle, pedido_detalle.cantidad, fruta.nombre, fruta_calidad.nombre, pedido_detalle.fk_id_pedido from pedido_detalle join fruta on pedido_detalle.fk_id_fruta = fruta.id_fruta join fruta_calidad on pedido_detalle.fk_id_calidad = fruta_calidad.id_calidad";
+  sql = "select pedido_detalle.id_pedidoD, pedido_detalle.cantidad, fruta.nombre, fruta_calidad.nombre, pedido_detalle.fk_id_pedido from pedido_detalle join fruta on pedido_detalle.fk_id_fruta = fruta.id_fruta join fruta_calidad on pedido_detalle.fk_id_calidad = fruta_calidad.id_calidad";
   result = await settings.OpenConnection(sql, binds, true);
 
-  Detalles = [];
+  PedidoDetalles = [];
 
   result.rows.map(detalle => {
       let detalleSchema = {
-          "id_pdetalle": detalle[0],
+          "id_pedidoD": detalle[0],
           "cantidad": detalle[1],
           "nombre": detalle[2],
           "calidad": detalle[3],
           "id_pedido": detalle[4]
       }
 
-      Detalles.push(detalleSchema);
+      PedidoDetalles.push(detalleSchema);
   })
-  res.json({ title: 'Detalles', 'mydata': Detalles });
+  res.json({ title: 'PedidoDetalles', 'mydata': PedidoDetalles });
 });
 
 

@@ -32,6 +32,38 @@
                                             </thead>
                                             <tbody>
                                                 <% for(var venta of Ventas) { %>
+                                                    <div class="modal fade" id="modalVenta<%= venta.id_venta %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">ID Venta #
+                                                                        <%= venta.id_venta %>
+                                                                    </h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <span><strong>Fecha de creación:</strong> </span></br>
+                                                                    <span><strong>Fecha del pedido:</strong> </span></br>
+                                                                    <span><strong>Estado del pedido:</strong> </span>
+                                                                    <div class="mt-4">
+                                                                        <span><strong>Detalles de la venta:</strong></span></br>
+                                                                        <ul>
+                                                                            <% for(var venta_detalle of VentaDetalles){ %>
+                                                                                <%if(venta_detalle.id_pedido == venta.id_venta){%>
+                                                                                    <li><strong>Fruta:</strong> <%= venta_detalle.nombre %></li>
+                                                                                <% } %>
+                                                                            <% } %>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <tr>
                                                         <th scope="row">
                                                             <%= venta.id_venta %>
@@ -46,7 +78,7 @@
                                                             <%= venta.fk_texto_estado %>
                                                         </td>
                                                         <td>
-                                                            <a href="/venta/<%= venta.id_venta %>"><button type="button" class="btn btn-warning btn-sm">Ver detalle venta</button></a>
+                                                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalVenta<%= venta.id_venta %>">Ver detalles</button>
                                                             <a href="/modificarVenta/<%= venta.id_venta %>"><button type="button" class="btn btn-warning btn-sm">Modificar</button></a>
                                                             <a href="../api_ventas/anularVenta/<%= venta.id_venta %>"><button type="button" class="btn btn-warning btn-sm">Anular</button></a>
                                                         </td>

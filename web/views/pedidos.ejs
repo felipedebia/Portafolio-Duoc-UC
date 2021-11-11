@@ -34,7 +34,7 @@
                                             <tbody>
                                                 <% for(var pedido of Pedidos) { %>
                                                     <div class="modal fade" id="modalPedido<%= pedido.id_pedido %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title" id="exampleModalLabel">ID Pedido #
@@ -51,24 +51,40 @@
                                                                     <div class="mt-4">
                                                                         <span><strong>Detalles del pedido:</strong></span></br>
                                                                         <ul>
-                                                                        <% for(var detalle of Detalles){ %>
-                                                                            <%if(detalle.id_pedido == pedido.id_pedido){%>
-                                                                                <li><strong>Fruta:</strong> <%= detalle.nombre %> - <strong>Calidad:</strong> <%= detalle.calidad %> - <strong>Cantidad:</strong> <%= detalle.cantidad %></li>
+                                                                        <% for(var pedido_detalle of PedidoDetalles){ %>
+                                                                            <%if(pedido_detalle.id_pedido == pedido.id_pedido){%>
+                                                                                <li><strong>Fruta:</strong> <%= pedido_detalle.nombre %> - <strong>Calidad:</strong> <%= pedido_detalle.calidad %> - <strong>Cantidad:</strong> <%= pedido_detalle.cantidad %></li>
                                                                             <% } %>
                                                                         <% } %>
                                                                         </ul>
                                                                     </div>
-                                                                    
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal fade" id="modalPedidoSubastas<%= pedido.id_pedido %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">ID Pedido #
+                                                                        <%= pedido.id_pedido %>
+                                                                    </h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
                                                                     <div class="callout callout-warning">
                                                                         <h4>Proceso de Subasta de Fruta disponible</h4>
                                                                         Selecciona el botón "Iniciar Subasta de Fruta" para comenzar
                                                                     </div>
-
                                                                     <div class="callout callout-warning">
                                                                         <h4>Proceso de Subasta de Transporte disponible</h4>
                                                                         Selecciona el botón "Iniciar Subasta de Transporte" para comenzar
                                                                     </div>
-
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <a href="../api_subastas/crearSubastaFruta/<%= pedido.id_pedido %>"><button class="btn btn-primary" type="submit">Iniciar Subasta de Fruta</button></a>
@@ -92,10 +108,11 @@
                                                             <%= pedido.fk_texto_estado %>
                                                         </td>
                                                         <td>
-                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPedido<%= pedido.id_pedido %>">Ver</button>
+                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPedido<%= pedido.id_pedido %>">Ver detalles</button>
                                                             <% for(var venta of Ventas) { %>
-                                                                <%if(venta.fk_id_pedido == pedido.id_pedido){%>
-                                                                <% }else{ %>
+                                                                <% if(venta.fk_id_pedido == pedido.id_pedido){ %>
+                                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPedidoSubastas<%= pedido.id_pedido %>">Iniciar subastas</button>
+                                                                <% } else { %>
                                                                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalGenerarVenta">Generar venta</button>
                                                                 <% } %>
                                                             <% } %>

@@ -54,6 +54,7 @@ Iniciar node en la carpeta web
 - Arreglar error de si no existen pedidos, pagina pedidos se cae
 - Arreglar error de si no tienes pedidos, pagina mispedidos se cae
 - Agregar validación para primera vez que ingresa un usuario, obligar a cambiar contraseña (haciendo david)
+- Agregar peso maximo a la subida de documentos (contrato, seguro y pago)
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Comprobación de rango para entrar a las páginas
@@ -228,28 +229,27 @@ Iniciar node en la carpeta web
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/seguros  |  |
 | GET  | http://localhost:3000/api_seguros/listarSeguros  | JSON |
-| POST | http://localhost:3000/api_seguros/crearSeguro  | JSON |
+| POST | http://localhost:3000/api_seguros/crearSeguro  | |
 | POST | http://localhost:3000/api_seguros/anularSeguro/:id_seguro  | |
 
 ## CRUD Pedido
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/pedidos  |  |
+| GET  | http://localhost:3000/api_pedidos/listarPedidos  | JSON |
 | GET  | http://localhost:3000/api_pedidos/anularPedido/:id_pedido  | |
 
 ## CRUD Mis Pedidos
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/mispedidos  |  |
-| GET  | http://localhost:3000/api_pedidos/listarPedidos  | JSON |
-| GET  | http://localhost:3000/modificarPedido/:id_pedido  |  |
-| GET  | http://localhost:3000/api_pedidos/anularPedido/:id_pedido  | |
+| GET  | http://localhost:3000/api_pedidos/anularMiPedido/:id_pedido  | |
 
 ## CRUD Pedido_Detalle
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/api_pedidos/listarPedidoDetalles  | JSON |
-| GET  | http://localhost:3000/pedido_detalles/:id_pedido  | |
+| POST | http://localhost:3000/api_pedidos/crearPedidoDetalles  | |
 | GET  | http://localhost:3000/api_pedidos/eliminarPedidoDetalles/:id_pedido  | |
 
 ## CRUD Venta
@@ -261,6 +261,13 @@ Iniciar node en la carpeta web
 | GET  | http://localhost:3000/modificarVenta/:id_venta  |  |
 | GET  | http://localhost:3000/api_ventas/anularVenta/:id_venta  | |
 | GET  | http://localhost:3000/venta/:id_venta  |  |
+
+## CRUD Detalle_Venta
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/api_ventas/listarVentaDetalles  | JSON |
+| POST | http://localhost:3000/api_ventas/crearVentaDetalles  | |
+| GET  | http://localhost:3000/api_ventas/eliminarVentaDetalles/:id_venta  | |
 
 ## CRUD Informe
 | Tipo | URL | Retorna |
