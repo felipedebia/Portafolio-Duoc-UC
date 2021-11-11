@@ -54,6 +54,7 @@ router.post('/crearUsuario', async (req, res) => {
   validator = await settings.OpenConnection(consulta, [correo], true);
 
   if (validator.rows[0] == correo) {
+    // FALTA: detallar error especifico de que correo ya existe
     var string = "error";
     res.redirect('/usuarios/?estado=' + string);
   } else {
