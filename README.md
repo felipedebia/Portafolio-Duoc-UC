@@ -39,9 +39,10 @@ Iniciar node en la carpeta web
 - AGREGAR NUEVA OFERTA_PRODUCTOR (haciendo mario)
 - AGREGAR NUEVA ORDEN_BODEGA Y ORDEN_TRANSPORTE, LUEGO ORDEN_BODEGA Y REPORTE_BODEGA
 - LISTADO OFERTAS_TRANSPORTES en MisOfertas
-- CREAR DETALLE VENTA
-- PAGO
-- DE VENTA SE TIENE QUE GENERAR UN INFORME
+- CREAR DETALLE VENTA (haciendo chris)
+- PAGO (haciendo debia)
+- VENTA TIENE QUE GENERAR UN INFORME
+- FRUTA_RESTANTE
 
 
 ## Funciones pendientes:
@@ -51,10 +52,12 @@ Iniciar node en la carpeta web
 - Implementar subida de archivos a Pago como en Contrato
 - Cambiar secuencias SQL a procedimientos
 - Hacer templates de correos y agregarlos (paquete configurado y funcionando)
+- Algunas páginas se caen si no se usa el perfil principal mari.barreraa@duocuc.cl
 - Arreglar error de si no existen pedidos, pagina pedidos se cae
 - Arreglar error de si no tienes pedidos, pagina mispedidos se cae
 - Agregar validación para primera vez que ingresa un usuario, obligar a cambiar contraseña (haciendo david)
 - Agregar peso maximo a la subida de documentos (contrato, seguro y pago)
+- generar venta solo tipo externo
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Comprobación de rango para entrar a las páginas

@@ -66,10 +66,12 @@ router.get('/listarVentaDetalles', async(req, res) => {
 router.post('/crearVenta/:id_venta', async (req, res) => {
   var id_venta_bind = req.params.id_venta;
   var fk_id_pedido = req.params.id_venta;
-  var { fk_id_seguro, fk_id_tipo } = req.body;
+  var { fk_id_seguro } = req.body;
   var fecha_creacion = functions.obtenerFechaActual();
   var fecha_actualizacion = functions.obtenerFechaActual();
   var fk_id_estado = 1;
+  // Venta externa
+  var fk_id_tipo = 2;
 
   sql = "INSERT INTO venta(id_venta, fecha_creacion, fecha_actualizacion, fk_id_pedido, fk_id_seguro, fk_id_tipo, fk_id_estado) VALUES (:id_venta_bind, to_DATE(:fecha_creacion,'YYYY/MM/DD'), to_DATE(:fecha_actualizacion,'YYYY/MM/DD'), :fk_id_pedido, :fk_id_seguro, :fk_id_tipo, :fk_id_estado)";
   await settings.OpenConnection(sql, [id_venta_bind, fecha_creacion, fecha_actualizacion, fk_id_pedido, fk_id_seguro, fk_id_tipo, fk_id_estado], true);
