@@ -129,17 +129,17 @@ router.get("/confirmarPedido/:id_pedido", async(req, res) => {
 
 
 //Eliminar Pedido Detalle
-router.get("/eliminarPedidoDetalles/:id_detalle_pedido", async(req, res) => {
-  var id_pedido_bind = req.params.id_detalle_pedido;
-  sql = "DELETE FROM pedido_detalle WHERE id_pdetalle = :id_detalle_pedido";
+router.get("/eliminarPedidoDetalles/:id_pedido_detalle", async(req, res) => {
+  var id_pedido_bind = req.params.id_pedido_detalle;
+  sql = "DELETE FROM pedido_detalle WHERE id_pdetalle = :id_pedido_detalle";
   var consulta = await settings.OpenConnection(sql, [id_pedido_bind], true);
 
   if (consulta) {
-      console.log("[!] Detalle pedido " + req.params.id_detalle_pedido + " eliminado con éxito");
+      console.log("[!] Detalle pedido " + id_pedido_bind + " eliminado con éxito");
       functions.ListarDetallePedido();
       res.redirect(req.get('referer'));
   } else {
-      console.log("[!] Ocurrió un error al intentar eliminar el detalle pedido " + req.params.id_pedido);
+      console.log("[!] Ocurrió un error al intentar eliminar el detalle pedido " + id_pedido_bind);
   }
 })
 

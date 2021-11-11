@@ -44,15 +44,19 @@
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <span><strong>Fecha de creación:</strong> </span></br>
-                                                                    <span><strong>Fecha del pedido:</strong> </span></br>
-                                                                    <span><strong>Estado del pedido:</strong> </span>
+                                                                    <span><strong>Fecha de creación:</strong> <%= venta.fecha_creacion %></span></br>
+                                                                    <span><strong>Fecha de última actualización:</strong> <%= venta.fecha_actualizacion %></span></br>
                                                                     <div class="mt-4">
                                                                         <span><strong>Detalles de la venta:</strong></span></br>
                                                                         <ul>
                                                                             <% for(var venta_detalle of VentaDetalles){ %>
-                                                                                <%if(venta_detalle.id_pedido == venta.id_venta){%>
-                                                                                    <li><strong>Fruta:</strong> <%= venta_detalle.nombre %></li>
+                                                                                <%if(venta_detalle.fk_id_venta == venta.id_venta){%>
+                                                                                    <li><strong>Costos de frutas:</strong> <%= venta_detalle.costo_fruta %></li>
+                                                                                    <li><strong>Costos de transportes:</strong> <%= venta_detalle.costo_transporte %></li>
+                                                                                    <li><strong>Costos de impuestos:</strong> <%= venta_detalle.costo_impuestos %></li>
+                                                                                    <li><strong>Comisión de servicio:</strong> <%= venta_detalle.comision_servicio %></li>
+                                                                                    <li><strong>Comisión de empresa:</strong> <%= venta_detalle.comision_empresa %></li>
+                                                                                    <li><strong>PRECIO FINAL:</strong> <%= venta_detalle.precio_final %></li>
                                                                                 <% } %>
                                                                             <% } %>
                                                                         </ul>

@@ -10,7 +10,7 @@ var moment = require('moment');
 router.get('/listarOfertasProductores', async (req, res) => {
   
   binds = {};
-  sql = "SELECT id_ofertaP, cantidad, fecha_creacion, precio_por_kilo, fk_id_estado, fk_id_producto, fk_id_usuario, fk_id_pdetalle, fk_id_subastaF FROM oferta_productor";
+  sql = "SELECT id_ofertaP, cantidad, fecha_creacion, precio_por_kilo, fk_id_estado, fk_id_producto, fk_id_usuario, fk_id_pedidoD, fk_id_subastaF FROM oferta_productor";
   result = await settings.OpenConnection(sql, binds, true);
 
   OfertasProductores = [];
@@ -24,7 +24,7 @@ router.get('/listarOfertasProductores', async (req, res) => {
           "fk_id_estado": oferta[4],
           "fk_id_producto": oferta[5],
           "fk_id_usuario": oferta[6],
-          "fk_id_pdetalle": oferta[7],
+          "fk_id_pedidoD": oferta[7],
           "fk_id_subastaF": oferta[8]
       }
 

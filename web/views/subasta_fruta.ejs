@@ -37,8 +37,8 @@
                                     </h6>
                                   </div>
                                 </li>
-                                
-                              <% } else { %> Si tiene 0 filas entonces mostrar
+                              <% } %>
+                              <% if( ofertaProductor.length > 0 ){ %>
                                 <li class="timeline-inverted">
                                   <div class="timeline-badge danger">
                                     <i class="material-icons">card_travel</i>
@@ -52,7 +52,7 @@
                                     </div>
                                   </div>
                                 </li>
-                              <% } %>
+                                <% } %>
                             <% } %>
                           </ul>
 
@@ -84,17 +84,17 @@
                             <th>Cantidad (en KG)</th>
                         </thead>
                         <tbody>
-                          <% for(var detalle of Detalles){ %>
-                            <% if( data[0].fk_id_pedido == detalle.fk_id_pedido ){ %>
+                          <% for(var pedido_detalle of PedidoDetalles){ %>
+                            <% if( data[0].fk_id_pedido == pedido_detalle.fk_id_pedido ){ %>
                               <tr>
                                   <td>
-                                    <%= detalle.nombre %>
+                                    <%= pedido_detalle.nombre %>
                                   </td>
                                   <td>
-                                    <%= detalle.calidad %>
+                                    <%= pedido_detalle.calidad %>
                                   </td>
                                   <td>
-                                    <%= detalle.cantidad %>
+                                    <%= pedido_detalle.cantidad %>
                                   </td>
                               </tr>
                             <% } else { %>

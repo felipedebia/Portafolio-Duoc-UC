@@ -429,7 +429,7 @@ router.get('/subasta_fruta/:id_subastaF', async function(req, res, next) {
 		// Hacemos una consulta trayendo todos los datos del usuario
 		binds = {"id_subastaF": id_subastaF};
 		sql = "SELECT subasta_fruta.fecha_creacion, subasta_fruta.fecha_actualizacion, subasta_fruta.fecha_termino, subasta_fruta.fk_id_pedido, subasta_fruta.fk_id_estado, estado_subastaF.descripcion, pedido.fk_id_tipo, tipo_pedido.nombre, pedido.fk_id_usuario, usuario.nombre, usuario.apellido FROM subasta_fruta JOIN estado_subastaF ON subasta_fruta.fk_id_estado = estado_subastaF.id_estado JOIN pedido ON subasta_fruta.fk_id_pedido = pedido.id_pedido JOIN tipo_pedido ON pedido.fk_id_tipo = tipo_pedido.id_tipo JOIN usuario ON pedido.fk_id_usuario = usuario.id_usuario JOIN pedido_detalle ON pedido.id_pedido = pedido_detalle.fk_id_pedido WHERE subasta_fruta.id_subastaF = :id_subastaF";
-		// JOIN pedido_detalle ON pedido.id_pedido = pedido_detalle.id_pdetalle
+		// JOIN pedido_detalle ON pedido.id_pedido = pedido_detalle.id_pedidoD
 		result = await settings.OpenConnection(sql, binds, false);
 
 		// Si los datos estan correctos

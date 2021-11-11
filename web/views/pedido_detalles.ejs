@@ -59,23 +59,23 @@
                                 </thead>
                                 <tbody>
 
-                                    <% for(var detalle of Detalles){ %>
-                                        <% if( detalle.id_pedido == data[0].id_Pedido ){ %>
+                                    <% for(var pedido_detalle of PedidoDetalles){ %>
+                                        <% if( pedido_detalle.id_pedido == data[0].id_Pedido ){ %>
                                             <tr>
                                                 <td>
-                                                    <%= detalle.id_pdetalle %>
+                                                    <%= pedido_detalle.id_pedidoD %>
                                                 </td>
                                                 <td>
-                                                    <%= detalle.nombre %>
+                                                    <%= pedido_detalle.nombre %>
                                                 </td>
                                                 <td>
-                                                    <%= detalle.calidad %>
+                                                    <%= pedido_detalle.calidad %>
                                                 </td>
                                                 <td>
-                                                    <%= detalle.cantidad %>
+                                                    <%= pedido_detalle.cantidad %>
                                                 </td>
                                                 <td>
-                                                    <a href="../api_pedidos/eliminarPedidoDetalles/<%= detalle.id_pdetalle %>"><button type="button" class="btn btn-danger btn-sm">Eliminar</button></a>
+                                                    <a href="../api_pedidos/eliminarPedidoDetalles/<%= pedido_detalle.id_pedidoD %>"><button type="button" class="btn btn-danger btn-sm">Eliminar</button></a>
                                                 </td>
                                             </tr>
                                         <% } %>
@@ -83,7 +83,7 @@
 
                                 </tbody>
                             </table>
-                            <% if( Detalles.length > 0 ){ %>
+                            <% if( pedido_detalle.length > 0 ){ %>
                                 <div class="col text-center">
                                     <a href="../api_pedidos/confirmarPedido/<%= data[0].id_Pedido %>"><button type="button" class="btn btn-success mb-2 mt-4 medium-size-btn">Confirmar pedido</button></a>
                                 </div>

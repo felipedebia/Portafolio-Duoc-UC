@@ -55,6 +55,7 @@ Iniciar node en la carpeta web
 - Arreglar error de si no tienes pedidos, pagina mispedidos se cae
 - Agregar validación para primera vez que ingresa un usuario, obligar a cambiar contraseña (haciendo david)
 - Agregar peso maximo a la subida de documentos (contrato, seguro y pago)
+- Pedido_detalles botón confirmar pedido aparece cuando no hay datos
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Comprobación de rango para entrar a las páginas
