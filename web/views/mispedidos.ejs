@@ -73,6 +73,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">
+                                                                        <a href="/pedido_detalles/<%= pedido.id_pedido %>"><button class="btn btn-primary" type="submit">Modificar detalles del pedido</button></a>
                                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                                                     </div>
                                                                 </div>
@@ -92,7 +93,7 @@
                                                                 <%= pedido.fk_texto_estado %>
                                                             </td>
                                                             <td>
-                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPedido<%= pedido.id_pedido %>">Ver</button>
+                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPedido<%= pedido.id_pedido %>">Ver detalles</button>
                                                                 <a href="/pedido_detalles/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Modificar</button></a>
                                                                 <a href="../api_pedidos/anularMiPedido/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Anular</button></a>
                                                             </td>

@@ -58,9 +58,9 @@
                                                                         <div class="mt-4">
                                                                             <span><strong>Detalles del pedido:</strong></span></br>
                                                                             <ul>
-                                                                            <% for(var detalle of Detalles){ %>
-                                                                                <%if(detalle.id_pedido == pedido.id_pedido){%>
-                                                                                    <li><strong>Fruta:</strong> <%= detalle.nombre %> - <strong>Calidad:</strong> <%= detalle.calidad %> - <strong>Cantidad (en KG):</strong> <%= detalle.cantidad %></li>
+                                                                            <% for(var pedido_detalle of PedidoDetalles){ %>
+                                                                                <%if(pedido_detalle.id_pedido == pedido.id_pedido){%>
+                                                                                    <li><strong>Fruta:</strong> <%= pedido_detalle.nombre %> - <strong>Calidad:</strong> <%= pedido_detalle.calidad %> - <strong>Cantidad (en KG):</strong> <%= pedido_detalle.cantidad %></li>
                                                                                 <% } %>
                                                                             <% } %>
                                                                             </ul>

@@ -21,11 +21,11 @@ router.get('/listarProductos', async (req, res) => {
           "id_producto": producto[0],
           "cantidad": producto[1],
           "fecha_actualizacion": moment(producto[2]).format('DD-MM-YYYY'),
-          "nombreFruta": producto[3],
-          "Calidad": producto[4],
+          "fk_nombre_fruta": producto[3],
+          "calidad": producto[4],
           "usuario": producto[5],
           "idFruta":producto[6],
-          "idUsuario":producto[7]
+          "fk_id_usuario":producto[7]
       }
 
       Productos.push(productoSchema);

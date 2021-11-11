@@ -32,9 +32,10 @@
                                 <div class="card-body table-responsive">
                                     <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                         <thead class="text-info">
-                                            <th scope="col">Producto N°</th>
-                                            <th scope="col">Cantidad</th>                                            
-                                            <th scope="col">Fruta</th>                                        
+                                            <th scope="col">N°</th>
+                                            <th scope="col">Fruta</th>
+                                            <th scope="col">Calidad</th>
+                                            <th scope="col">Cantidad</th>                                   
                                             <th class="disabled-sorting">Opciones</th>
                                         </thead>
                                         <!--Inicio de tbody-->
@@ -46,18 +47,18 @@
                                                       <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="exampleModalLabel">
-                                                                Viendo producto <%= producto.nombreFruta %>
+                                                                Viendo producto <%= producto.fk_nombre_fruta %>
                                                             </h5>
                                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                           </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                          <span><strong>Nombre:</strong> <%= producto.nombreFruta %></span></br></br>
+                                                          <span><strong>Fruta:</strong> <%= producto.fk_nombre_fruta %></span></br></br>
+                                                          <span><strong>Calidad:</strong> <%= producto.calidad %></span></br></br>
                                                           <span><strong>Cantidad (en KG):</strong> <%= producto.cantidad %></span></br></br>
-                                                          <span><strong>Fecha de actualizacion:</strong> <%= producto.fecha_actualizacion %></span></br></br>
-                                                          <span><strong>Calidad:</strong> <%= producto.Calidad %></span></br></br>
-                                                          <span><strong>Productor:</strong> <%= producto.usuario %></span>
+                                                          <span><strong>Productor:</strong> <%= producto.usuario %></span></br></br>
+                                                          <span><strong>Fecha de actualizacion:</strong> <%= producto.fecha_actualizacion %></span>
                                                         </div>
                                                         <div class="modal-footer">
                                                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -79,15 +80,10 @@
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                             </div>
-                                                            
                                                             <div class="modal-body">
-                                                                <!--DIV del nombre-->
-                                                                
                                                                 <div class="form-group mt-4 my-label required">
                                                                     <label>Ingresar fruta</label>
-                                                                
                                                                     <select class="form-control" data-size="<% Frutas.length %>" name="fk_id_fruta" data-style="select-with-transition btn" title="Selecciona una opción">
-                                                                        
                                                                         <% for(var fruta of Frutas) { %>
                                                                                 <% if(producto.idFruta==fruta.id_fruta) { %>
                                                                                    
@@ -97,17 +93,11 @@
                                                                                 <% } %>
                                                                              <% } %>
                                                                     </select>
-                                                                
                                                                 </div>
-                                                                
-                                                                <!--Div de la cantidad-->
                                                                 <div class="form-group mt-4 my-label required">
                                                                     <label>Cantidad (en KG):</label>
                                                                     <input class="form-control mb-4" id="inputCantidad" type="number" name="cantidad" maxLength="6" required value="<%= producto.cantidad %>">
                                                                 </div>
-                                                                <!--Div de la fecha-->
-                                                                
-                                                                <!--Div de calidad-->
                                                                 <div class="form-group my-label required">
                                                                     <label>Calidad</label>
                                                                     <select class="form-control" data-size="2" name="fk_id_calidad" data-style="select-with-transition btn" title="Selecciona una opción" required>
@@ -138,19 +128,15 @@
                                                                         <% } %>
                                                                     </select>
                                                                 </div>
-                                                                <!--Fin div calidad-->
-                                                                <!--Inicio div usuario-->
                                                                 <div class="form-group my-label required">
                                                                     <label>Usuario: <%=producto.usuario%></label>
-                                                                    
                                                                         <% for(var usuario of Usuarios) { %>
-                                                                            <% if(producto.idUsuario==usuario.id_usuario) { %>
+                                                                            <% if(producto.fk_id_usuario==usuario.id_usuario) { %>
                                                                                  
                                                                                 <input hidden name="fk_id_usuario" value="<%= usuario.id_usuario %>" >
                                                                                  
                                                                             <% } %>
                                                                         <% } %>
-                                                                    
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
@@ -168,16 +154,19 @@
                                                         <%= producto.id_producto %>
                                                     </th>
                                                     <td>
-                                                        <%= producto.cantidad %>
+                                                        <%= producto.fk_nombre_fruta %>
+                                                    </td>
+                                                    <td>
+                                                        <%= producto.calidad %>
                                                     </td>                                                    
                                                     <td>
-                                                        <%= producto.nombreFruta %>
+                                                        <%= producto.cantidad %>
                                                     </td>                                                   
                                                     
                                                     <td>
-                                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalVerProducto<%= producto.id_producto %>">Ver</button>
+                                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalVerProducto<%= producto.id_producto %>">Ver producto</button>
                                                         <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalModificarProducto<%= producto.id_producto %>">Modificar</button>
-                                                        <a href="../api_productos/eliminarProducto/<%= producto.id_producto%>"><button type="button" class="btn btn-warning btn-sm">Anular</button></a>
+                                                        <a href="../api_productos/eliminarProducto/<%= producto.id_producto%>"><button type="button" class="btn btn-warning btn-sm">Eliminar</button></a>
                                                     </td>
                                                 </tr>
                                                 <!--Terminar tabla-->

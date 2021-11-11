@@ -239,18 +239,18 @@ Iniciar node en la carpeta web
 | GET  | http://localhost:3000/api_pedidos/listarPedidos  | JSON |
 | GET  | http://localhost:3000/api_pedidos/anularPedido/:id_pedido  | |
 
-## CRUD Mis Pedidos
-| Tipo | URL | Retorna |
-| ------------- | ------------- | ------------- |
-| GET  | http://localhost:3000/mispedidos  |  |
-| GET  | http://localhost:3000/api_pedidos/anularMiPedido/:id_pedido  | |
-
 ## CRUD Pedido_Detalle
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/api_pedidos/listarPedidoDetalles  | JSON |
 | POST | http://localhost:3000/api_pedidos/crearPedidoDetalles  | |
 | GET  | http://localhost:3000/api_pedidos/eliminarPedidoDetalles/:id_pedido  | |
+
+## CRUD Mis Pedidos
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/mispedidos  |  |
+| GET  | http://localhost:3000/api_pedidos/anularMiPedido/:id_pedido  | |
 
 ## CRUD Venta
 | Tipo | URL | Retorna |
@@ -262,7 +262,7 @@ Iniciar node en la carpeta web
 | GET  | http://localhost:3000/api_ventas/anularVenta/:id_venta  | |
 | GET  | http://localhost:3000/venta/:id_venta  |  |
 
-## CRUD Detalle_Venta
+## CRUD Venta_Detalle
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/api_ventas/listarVentaDetalles  | JSON |
