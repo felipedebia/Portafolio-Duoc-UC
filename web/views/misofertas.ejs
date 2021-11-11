@@ -27,46 +27,39 @@
                         </div>
                         <div class="card-body">
                             <div class="tab-content">
-                                <div class="tab-pane active" id="listadoPedidos">
+                                <div class="tab-pane active" id="listadoOfertasProductores">
                                     <div class="card-body table-responsive">
                                         <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                             <thead class="text-info">
                                                 <th scope="col">N°</th>
-                                                <th scope="col">Direccion</th>
-                                                <th scope="col">Fecha pedido</th>
+                                                <th scope="col">Producto</th>
+                                                <th scope="col">Cantidad</th>
                                                 <th scope="col">Estado</th>
                                                 <th scope="col">Opciones</th>
                                             </thead>
                                             <tbody>
-                                                <% for(var pedido of Pedidos) { %>
-                                                    <% if (pedido.fk_id_usuario == session.id_usuario && pedido.fk_id_estado != 6){ %>
-                                                        <div class="modal fade" id="modalPedido<%= pedido.id_pedido %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <% for(var oferta_productor of OfertasProductores) { %>
+                                                    <% if (oferta_productor.fk_id_usuario == session.id_usuario){ %>
+                                                        <div class="modal fade" id="modalOfertaProductor<%= oferta_productor.id_ofertaP %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">ID Pedido #
-                                                                            <%= pedido.id_pedido %>
+                                                                        <h5 class="modal-title" id="exampleModalLabel">ID Oferta #
+                                                                            <%= oferta_productor.id_ofertaP %>
                                                                         </h5>
                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <span><strong>Direccion de despacho:</strong> <%= pedido.direccion_despacho %></span></br>
-                                                                        <span><strong>Fecha del pedido:</strong> <%= pedido.fecha_creacion %></span></br>
-                                                                        <span><strong>Estado del pedido:</strong> <%= pedido.fk_texto_estado %></span>
-                                                                        <div class="mt-4">
-                                                                            <span><strong>Detalles del pedido:</strong></span></br>
-                                                                            <ul>
-                                                                            <% for(var pedido_detalle of PedidoDetalles){ %>
-                                                                                <%if(pedido_detalle.id_pedido == pedido.id_pedido){%>
-                                                                                    <li><strong>Fruta:</strong> <%= pedido_detalle.nombre %> - <strong>Calidad:</strong> <%= pedido_detalle.calidad %> - <strong>Cantidad (en KG):</strong> <%= pedido_detalle.cantidad %></li>
-                                                                                <% } %>
-                                                                            <% } %>
-                                                                            </ul>
-                                                                        </div>
+                                                                        <span><strong>Fecha de creación:</strong> <%= oferta_productor.fecha_creacion %></span></br>
+                                                                        <span><strong>Producto:</strong> <%= oferta_productor.fk_id_producto %></span></br>
+                                                                        <span><strong>Cantidad:</strong> <%= oferta_productor.cantidad %></span></br>
+                                                                        <span><strong>Estado de la oferta:</strong> <%= oferta_productor.fk_texto_estado %></span>
+                                                                        <span><strong>Asociada a la subasta:</strong> <%= oferta_productor.fk_id_subastaf %></span>
                                                                     </div>
                                                                     <div class="modal-footer">
+                                                                        <a href="/subasta_fruta/<%= oferta_productor.fk_id_subastaf %>"><button class="btn btn-primary" type="button">Ver subasta</button></a>
                                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                                                     </div>
                                                                 </div>
@@ -74,21 +67,20 @@
                                                         </div>
                                                         <tr>
                                                             <th scope="row">
-                                                                <%= pedido.id_pedido %>
+                                                                <%= oferta_productor.id_ofertaP %>
                                                             </th>
                                                             <td>
-                                                                <%= pedido.direccion_despacho %>
+                                                                <%= oferta_productor.fk_id_producto %>
                                                             </td>
                                                             <td>
-                                                                <%= pedido.fecha_creacion %>
+                                                                <%= oferta_productor.cantidad %>
                                                             </td>
                                                             <td>
-                                                                <%= pedido.fk_texto_estado %>
+                                                                <%= oferta_productor.fk_id_estado %>
                                                             </td>
                                                             <td>
-                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPedido<%= pedido.id_pedido %>">Ver</button>
-                                                                <a href="/pedido_detalles/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Modificar</button></a>
-                                                                <a href="../api_pedidos/anularMiPedido/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Anular</button></a>
+                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalOfertaProductor<%= oferta_productor.id_ofertaP %>">Ver oferta</button>
+                                                                <a href="../api_pedidos/anularMiPedido/<%= oferta_productor.id_ofertaP %>"><button type="button" class="btn btn-info btn-sm">Anular</button></a>
                                                             </td>
                                                         </tr>
                                                     <% } %>
@@ -97,72 +89,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="crearPedido">
-                                    <div class="card-body">
-                                        <h3 class="card-title mb-4">Ingresa los datos de un nuevo Pedido</h3>
-                                        <div class="card-text">
-                                            <form action="../api_pedidos/crearPedido" method="POST" class="formValidation" novalidate>
-                                                <div class="row">
-                                                    <div class="col-xs-6 col-sm-6 col-md-6">
-                                                        <div class="form-group my-label required">
-                                                            <label>País de destino</label>
-                                                            <select class="form-control" name="pais" data-style="select-with-transition btn" title="Selecciona una opción">
-                                                                <%
-                                                                    Paises.sort((a,b) => {
-                                                                        const nombreA = a.nombre.toLowerCase();
-                                                                        const nombreB = b.nombre.toLowerCase();
-                                                                        if(nombreA < nombreB){
-                                                                            return -1;
-                                                                        }
-                                                                        if(nombreA > nombreB){
-                                                                            return 1;
-                                                                        }
-                                                                        return 0;
-                                                                    });
-                                                                    %>
-                                                                <% for(var pais of Paises){ %>
-                                                                    <option name="<%=pais.nombre%>" value="<%=pais.nombre%>"><%=pais.nombre%></option>
-                                                                <% } %>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-6 col-sm-6 col-md-6">
-                                                        <div class="form-group my-label required">
-                                                            <label>Ciudad de destino</label>
-                                                            <select class="form-control" name="fk_id_ciudad" data-style="select-with-transition btn" title="Selecciona una opción">
-                                                                <%
-                                                                    Ciudades.sort((a,b) => {
-                                                                        const nombreA = a.nombre.toLowerCase();
-                                                                        const nombreB = b.nombre.toLowerCase();
-                                                                        if(nombreA < nombreB){
-                                                                            return -1;
-                                                                        }
-                                                                        if(nombreA > nombreB){
-                                                                            return 1;
-                                                                        }
-                                                                        return 0;
-                                                                    });
-                                                                    %>
-                                                                <% for(var ciudad of Ciudades){ %>
-                                                                    <option name="fk_id_ciudad" value="<%=ciudad.id_ciudad%>"><%=ciudad.nombre%></option>
-                                                                <% } %>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
-                                                        <div class="form-group my-label required">
-                                                            <label>Dirección de despacho</label>
-                                                            <input class="form-control mb-4" id="inputDireccion" type="text" name="direccion_despacho" required>
-                                                            <div class="invalid-feedback">Ingresa la Dirección de Despacho</div>
-                                                        </div>
-                                                    </div>
-                                                    <input id="fk_id_usuario" name="fk_id_usuario" type="hidden" value="<%= session.id_usuario %>">
-                                                </div>
-                                                <button class="btn btn-info mb-2 pull-right" type="submit">Crear nuevo pedido</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>

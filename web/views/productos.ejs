@@ -58,7 +58,7 @@
                                                           <span><strong>Calidad:</strong> <%= producto.calidad %></span></br></br>
                                                           <span><strong>Cantidad (en KG):</strong> <%= producto.cantidad %></span></br></br>
                                                           <span><strong>Productor:</strong> <%= producto.usuario %></span></br></br>
-                                                          <span><strong>Fecha de actualizacion:</strong> <%= producto.fecha_actualizacion %></span>
+                                                          <span><strong>Fecha de última actualización:</strong> <%= producto.fecha_actualizacion %></span>
                                                         </div>
                                                         <div class="modal-footer">
                                                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -96,7 +96,7 @@
                                                                 </div>
                                                                 <div class="form-group mt-4 my-label required">
                                                                     <label>Cantidad (en KG):</label>
-                                                                    <input class="form-control mb-4" id="inputCantidad" type="number" name="cantidad" maxLength="6" required value="<%= producto.cantidad %>">
+                                                                    <input class="form-control" id="inputCantidad" type="number" name="cantidad" maxLength="6" required value="<%= producto.cantidad %>">
                                                                 </div>
                                                                 <div class="form-group my-label required">
                                                                     <label>Calidad</label>
@@ -127,16 +127,6 @@
                                                                             <option name="Quinta calidad" value="5">Quinta calidad</option>
                                                                         <% } %>
                                                                     </select>
-                                                                </div>
-                                                                <div class="form-group my-label required">
-                                                                    <label>Usuario: <%=producto.usuario%></label>
-                                                                        <% for(var usuario of Usuarios) { %>
-                                                                            <% if(producto.fk_id_usuario==usuario.id_usuario) { %>
-                                                                                 
-                                                                                <input hidden name="fk_id_usuario" value="<%= usuario.id_usuario %>" >
-                                                                                 
-                                                                            <% } %>
-                                                                        <% } %>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">

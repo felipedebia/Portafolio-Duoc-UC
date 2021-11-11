@@ -6,7 +6,7 @@ var moment = require('moment');
 
 // CRUD OFERTA PRODUCTOR
 
-// Leer - Todos las ofertas Productor
+// Listar todas las ofertas Productor
 router.get('/listarOfertasProductores', async (req, res) => {
   
   binds = {};

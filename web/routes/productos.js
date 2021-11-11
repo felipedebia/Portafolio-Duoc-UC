@@ -56,11 +56,11 @@ router.post('/crearProducto', async (req, res) => {
 router.post("/modificarProducto/:id_producto", async (req, res) => {
   
   var id_producto = req.params.id_producto;
-  var { cantidad,fk_id_fruta,fk_id_calidad,fk_id_usuario} = req.body;
+  var { cantidad, fk_id_fruta, fk_id_calidad} = req.body;
   var fecha_actualizacion = functions.obtenerFechaActual();
   
-  sql = "UPDATE producto SET cantidad=:cantidad,fecha_actualizacion=to_date(:fecha_actualizacion,'YYYY-MM-DD'), fk_id_fruta= :fk_id_fruta,fk_id_calidad=:fk_id_calidad,fk_id_usuario=:fk_id_usuario  WHERE id_producto=:id_producto";
-  await settings.OpenConnection(sql, [cantidad, fecha_actualizacion,fk_id_fruta,fk_id_calidad,fk_id_usuario, id_producto], true);
+  sql = "UPDATE producto SET cantidad=:cantidad, fecha_actualizacion=to_date(:fecha_actualizacion,'YYYY-MM-DD'), fk_id_fruta= :fk_id_fruta, fk_id_calidad=:fk_id_calidad WHERE id_producto=:id_producto";
+  await settings.OpenConnection(sql, [cantidad, fecha_actualizacion,fk_id_fruta,fk_id_calidad, id_producto], true);
 
   // Si tuvo conexión a la DB
   if(res.status(200)) {
