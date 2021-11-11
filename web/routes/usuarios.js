@@ -39,40 +39,49 @@ router.get('/listarUsuarios', async (req, res) => {
 
       Usuarios.push(userSchema);
   })
-  res.json({title: 'Usuarios', 'mydata': Usuarios});
+  res.json({ title: 'Usuarios', 'mydata': Usuarios });
 });
 
 
 // Agregar
-// Falta hacer filtro de que no se repita el correo
 router.post('/crearUsuario', async (req, res) => {
   var { num_documento, fk_id_tipo, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password_bind } = req.body;
   // Definimos la cuenta activada
   var fk_id_estado = 1;
 
-  // Encriptamos la contraseña del usuario
-  var passwordEncrypted = simpleCryp.encrypt(password_bind)
+  // Consulta para ver si existe el correo
+  consulta = "SELECT correo from usuario where correo = :correo";
+  validator = await settings.OpenConnection(consulta, [correo], true);
 
-  sql = "INSERT INTO usuario(num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password, fk_id_estado, fk_id_tipo) VALUES (:num_documento,:nombre,:apellido,to_DATE(:fecha_nacimiento,'YYYY/MM/DD'),:genero,:correo,:telefono,:passwordEncrypted,:fk_id_estado,:fk_id_tipo)";
-  await settings.OpenConnection(sql, [num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, passwordEncrypted, fk_id_estado, fk_id_tipo], true);
-
-  // Si tuvo conexión a la DB
-  if(res.status(200)) {
-    console.log("[!] Usuario " + correo + " creado con éxito");
-    var string = "valido";
-    res.redirect('/usuarios/?estado=' + string);
-	} else {
-		console.log("[!] Ocurrió un error al intentar registrar el usuario " + correo);
+  if (validator.rows[0] == correo) {
     var string = "error";
     res.redirect('/usuarios/?estado=' + string);
-	}
+  } else {
+    // Encriptamos la contraseña del usuario
+    var passwordEncrypted = simpleCryp.encrypt(password_bind)
+
+    // Creamos el nuevo usuario
+    sql = "INSERT INTO usuario(num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password, fk_id_estado, fk_id_tipo) VALUES (:num_documento,:nombre,:apellido,to_DATE(:fecha_nacimiento,'YYYY/MM/DD'),:genero,:correo,:telefono,:passwordEncrypted,:fk_id_estado,:fk_id_tipo)";
+    await settings.OpenConnection(sql, [num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, passwordEncrypted, fk_id_estado, fk_id_tipo], true);
+
+    // Si tuvo conexión a la DB
+    if (res.status(200)) {
+      console.log("[!] Usuario " + correo + " creado con éxito");
+      var string = "valido";
+      res.redirect('/usuarios/?estado=' + string);
+    } else {
+      console.log("[!] Ocurrió un error al intentar registrar el usuario " + correo);
+      var string = "error";
+      res.redirect('/usuarios/?estado=' + string);
+    }
+  }
 })
 
 
 // Modificar
 router.post("/modificarUsuario/:id_usuario", async (req, res) => {
   var id_usuario = req.params.id_usuario;
-  var { correo, nombre, apellido, num_documento, fk_id_tipo, fecha_nacimiento, genero, fk_id_estado, telefono, password} = req.body;
+  var { correo, nombre, apellido, num_documento, fk_id_tipo, fecha_nacimiento, genero, fk_id_estado, telefono, password } = req.body;
 
   // Encriptamos la contraseña del usuario
   var passwordEncrypted = simpleCryp.encrypt(password)
@@ -81,7 +90,7 @@ router.post("/modificarUsuario/:id_usuario", async (req, res) => {
   await settings.OpenConnection(sql, [correo, nombre, apellido, num_documento, fk_id_tipo, fecha_nacimiento, genero, fk_id_estado, telefono, passwordEncrypted, id_usuario], true);
 
   // Si tuvo conexión a la DB
-  if(res.status(200)) {
+  if (res.status(200)) {
     console.log("[!] Usuario " + req.body.correo + " modificado con éxito");
     var string = "valido";
     res.redirect('/usuarios/?estado=' + string);
@@ -98,7 +107,7 @@ router.post("/modificarUsuario/:id_usuario", async (req, res) => {
 // Agregar restriccion, solo modificar el perfil del usuario conectado
 router.post("/modificarMiPerfil/:id_usuario", async (req, res) => {
   var id_usuario = req.params.id_usuario;
-  var { correo, nombre, apellido, num_documento, fecha_nacimiento, genero, telefono, password} = req.body;
+  var { correo, nombre, apellido, num_documento, fecha_nacimiento, genero, telefono, password } = req.body;
 
   // Encriptamos la contraseña del usuario
   var passwordEncrypted = simpleCryp.encrypt(password)
@@ -107,7 +116,7 @@ router.post("/modificarMiPerfil/:id_usuario", async (req, res) => {
   await settings.OpenConnection(sql, [correo, nombre, apellido, num_documento, fecha_nacimiento, genero, telefono, passwordEncrypted, id_usuario], true);
 
   // Si tuvo conexión a la DB
-  if(res.status(200)) {
+  if (res.status(200)) {
     console.log("[!] Usuario " + req.body.correo + " modificado con éxito");
     res.redirect('/usuarios');
   } else {

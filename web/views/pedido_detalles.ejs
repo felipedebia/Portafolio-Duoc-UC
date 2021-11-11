@@ -75,7 +75,7 @@
                                                     <%= detalle.cantidad %>
                                                 </td>
                                                 <td>
-                                                    <button type="button" onclick="window.location.href='../api_pedidos/eliminarPedidoDetalles/<%= detalle.id_pdetalle %>'" class="btn btn-danger btn-sm">Eliminar</button>
+                                                    <a href="../api_pedidos/eliminarPedidoDetalles/<%= detalle.id_pdetalle %>"><button type="button" class="btn btn-danger btn-sm">Eliminar</button></a>
                                                 </td>
                                             </tr>
                                         <% } %>
@@ -85,7 +85,7 @@
                             </table>
                             <% if( Detalles.length > 0 ){ %>
                                 <div class="col text-center">
-                                    <a href="../api_pedidos/confirmarPedido/<%= data[0].id_Pedido %>"><button type="button" class="btn btn-success mb-2 mt-4 medium-size-btn">Confirmar pedido</button></a>
+                                    <button type="button" class="btn btn-success mb-2 mt-4 medium-size-btn">Confirmar pedido</button></a>
                                 </div>
                             <% } %>
                         </div>

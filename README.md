@@ -54,7 +54,6 @@ Iniciar node en la carpeta web
 - Arreglar error de si no existen pedidos, pagina pedidos se cae
 - Arreglar error de si no tienes pedidos, pagina mispedidos se cae
 - Agregar validación para primera vez que ingresa un usuario, obligar a cambiar contraseña (haciendo david)
-- Hacer comprobación de si ya existe un usuario con un correo, si existe mandar error y no dejar registrar
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Comprobación de rango para entrar a las páginas
