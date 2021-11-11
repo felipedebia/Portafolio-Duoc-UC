@@ -38,7 +38,7 @@ Iniciar node en la carpeta web
 
 - AGREGAR NUEVA OFERTA_PRODUCTOR (haciendo mario)
 - AGREGAR NUEVA ORDEN_BODEGA Y ORDEN_TRANSPORTE
-- CREAR (DEBE SER COMO CONTRATO), MODIFICAR Y ELIMINAR SEGURO (haciendo chris)
+- ANULAR SEGURO (haciendo chris)
 - CRUD PRODUCTO (haciendo david)
 - TERMINAR PAGINA MISOFERTAS
 
@@ -146,6 +146,10 @@ Iniciar node en la carpeta web
 - 1 Abierta
 - 2 Cerrada
 
+## Estado seguro
+- 1 Enviado
+- 2 Cancelado
+
 ## Estado oferta
 - 1 Sin revisar
 - 2 Aceptada
@@ -221,8 +225,7 @@ Iniciar node en la carpeta web
 | GET  | http://localhost:3000/seguros  |  |
 | GET  | http://localhost:3000/api_seguros/listarSeguros  | JSON |
 | POST | http://localhost:3000/api_seguros/crearSeguro  | JSON |
-| GET  | http://localhost:3000/modificarSeguro/:id_seguro  |  |
-| POST | http://localhost:3000/api_seguros/eliminarSeguro/:id_seguro  | |
+| POST | http://localhost:3000/api_seguros/anularSeguro/:id_seguro  | |
 
 ## CRUD Pedido
 | Tipo | URL | Retorna |

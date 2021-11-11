@@ -97,41 +97,20 @@ router.post('/subirDocumento/:id_seguro', uploadFile.single('url_documento'), as
 	}
 })
 
+// Anular
+router.get("/anularSeguro/:id_seguro", async(req, res) => {
+  var id_seguro_bind = req.params.id_seguro;
 
-// Modificar
-router.post("/modificarFruta/:id_fruta", async (req, res) => {
-  
-  var id_fruta = req.params.id_fruta;
-  var { nombre, necesita_refrigeracion} = req.body;
+  sql = "UPDATE seguro SET fk_id_estado=2 WHERE id_seguro = :id_seguro_bind";
+  await settings.OpenConnection(sql, [id_seguro_bind], true);
 
-  sql = "UPDATE fruta SET nombre= :nombre, necesita_refrigeracion= :necesita_refrigeracion WHERE id_fruta= :id_fruta";
-  await settings.OpenConnection(sql, [nombre, necesita_refrigeracion, id_fruta], true);
-
-  // Si tuvo conexión a la DB
   if(res.status(200)) {
-    console.log("[!] Fruta " + id_fruta + " modificado con éxito");
-    res.redirect('/frutas');
+      console.log("[!] Seguro " + id_seguro_bind + " anulado con éxito");
+      res.redirect('/seguros');
   } else {
-    console.log("[!] Ocurrió un error al intentar modificar la fruta " + id_fruta);
-    res.redirect('/frutas');
+      console.log("[!] Ocurrió un error al intentar anular el seguro " + id_seguro_bind);
+      res.redirect('/seguros');
   }
-
-})
-
-// Eliminar
-router.get("/eliminarFruta/:id_fruta", async (req, res) => {
-  var id_fruta_bind = req.params.id_fruta;
-  
-  sql = "DELETE FROM fruta WHERE id_fruta = :id_fruta_bind";
-  await settings.OpenConnection(sql, [id_fruta_bind], true);
-
-  if(res.status(200)) {
-    console.log("[!] Fruta " + id_fruta_bind + " eliminada con éxito");
-    res.redirect('/frutas');
-	} else {
-		console.log("[!] Ocurrió un error al intentar eliminar la fruta " + id_fruta_bind);
-    res.redirect('/frutas');
-	}
 })
 
 module.exports = router;
