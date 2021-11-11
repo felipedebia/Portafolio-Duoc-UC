@@ -29,7 +29,7 @@
                             <div class="tab-content">
                                 <div class="tab-pane active" id="listadoOfertasProductores">
                                     <div class="card-body table-responsive">
-                                        <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                                        <table id="datatable_OfertasProductores" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                             <thead class="text-info">
                                                 <th scope="col">N°</th>
                                                 <th scope="col">Producto</th>
@@ -101,7 +101,7 @@
 
 <script>
     $(document).ready(function() {
-      $('#datatables').DataTable({
+      $('#datatable_OfertasProductores').DataTable({
         dom: 'Bfrtip',
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
@@ -115,7 +115,7 @@
             info: "Viendo página _PAGE_ de _PAGES_",
             zeroRecords: "No hay información que mostrar",
             infoEmpty: "Sin información",
-            searchPlaceholder: "Buscar contrato",
+            searchPlaceholder: "Buscar pedido",
             "paginate": {
                 "first": "Primero",
                 "last": "Último",
@@ -143,7 +143,50 @@
             }
         }
       });
-      var table = $('#datatable').DataTable();
+      $('#datatable_OfertasTransporte').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        "pagingType": "full_numbers",
+        "pageLength": 15,
+        "bLengthChange": false,
+        responsive: true,
+        language: {
+            search: "_INPUT_",
+            info: "Viendo página _PAGE_ de _PAGES_",
+            zeroRecords: "No hay información que mostrar",
+            infoEmpty: "Sin información",
+            searchPlaceholder: "Buscar pedido",
+            "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            },
+            "buttons": {
+                "copy": "Copiar",
+                "colvis": "Visibilidad",
+                "collection": "Colección",
+                "colvisRestore": "Restaurar visibilidad",
+                "copySuccess": {
+                    "1": "Copiada 1 fila al portapapeles",
+                    "_": "Copiadas %d fila al portapapeles"
+                },
+                "copyTitle": "Copiar al portapapeles",
+                "csv": "CSV",
+                "excel": "Excel",
+                "pageLength": {
+                    "-1": "Mostrar todas las filas",
+                    "_": "Mostrar %d filas"
+                },
+                "pdf": "PDF",
+                "print": "Imprimir"
+            }
+        }
+      });
+      var tabla_OfertasProductores = $('#datatable_OfertasProductores').DataTable();
+      var tabla_OfertasTransporte = $('#datatable_OfertasTransporte').DataTable();
     });
 </script>
 
