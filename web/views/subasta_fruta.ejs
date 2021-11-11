@@ -11,15 +11,12 @@
                     <div class="card-body">
                       <h3 class="card-title mb-4 mt-3">Ofertas de la subasta de fruta</h3>
                       <div class="card-text">
-                        <form action="/api_usuarios/modificarMiPerfil/" method="POST">
                           
                           <ul class="timeline timeline-simple mr-5">
                             <% for(var ofertaProductor of OfertasProductores) { %>
+                              <% var ofertaProductor_contador = 0; %>
                               <% if (ofertaProductor.fk_id_subastaf == data[0].id_subastaF){ %>
-                                <% 
-                                  var ofertaProductor_contador = 0;
-                                  ofertaProductor_contador++;
-                                %>
+                                <% ofertaProductor_contador++; %>
                                 <li class="timeline-inverted">
                                   <div class="timeline-badge success">
                                     <i class="material-icons">card_travel</i>
@@ -33,16 +30,16 @@
                                       <p>Cantidad propuesta: <%= ofertaProductor.cantidad %></p>
                                       <p>Precio por kilo: <%= ofertaProductor.precio_por_kilo %></p>
                                       <hr>
-                                      <a href="../api_ofertas/aceptarOferta/"><button type="button" class="btn btn-success btn-sm pull-right">Aceptar oferta</button></a>
+                                      <a href="../api_ofertas/aceptarOferta/"><button type="button" class="btn btn-success btn-sm pull-right mr-2">Aceptar oferta</button></a>
                                       <a href="../api_ofertas/rechazarOferta/"><button type="button" class="btn btn-danger btn-sm pull-right">Rechazar oferta</button></a>
                                     </div>
                                     <h6>
-                                      <i class="ti-time"></i> Fecha de creación con moment
+                                      <i class="ti-time"></i> <%= ofertaProductor.fecha_creacion %>
                                     </h6>
                                   </div>
                                 </li>
                               <% } %>
-                              <% if( ofertaProductor_contador > 0 ){ %>
+                              <% if( ofertaProductor_contador == 0 ){ %>
                                 <li class="timeline-inverted">
                                   <div class="timeline-badge danger">
                                     <i class="material-icons">card_travel</i>
@@ -52,15 +49,13 @@
                                       <span class="badge badge-danger">NINGUNA</span>
                                     </div>
                                     <div class="timeline-body">
-                                      <p>Actualmente no tienes ninguna oferta de frutas, regresa en algunos días.</p>
+                                      <p>Actualmente no tienes ninguna oferta de frutas, se te notificará cuando esté disponible una nueva oferta.</p>
                                     </div>
                                   </div>
                                 </li>
                                 <% } %>
                             <% } %>
                           </ul>
-
-                        </form>
                         </div>
                     </div>
                   </div>
@@ -101,8 +96,6 @@
                                     <%= pedido_detalle.cantidad %>
                                   </td>
                               </tr>
-                            <% } else { %>
-                            afsfsafas
                             <% } %>
                           <% } %>
                         </tbody>
