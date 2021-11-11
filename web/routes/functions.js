@@ -193,6 +193,21 @@ async function ListarVentas() {
 var listarVentas = ListarVentas();
 
 
+// Función API ListarVentaDetalles
+async function ListarVentaDetalles() {
+	return new Promise(function(resolve, reject) {
+		request('http://localhost:3000/api_ventas/listarVentaDetalles', function (error, response, body) {
+			if (error) return reject(error);
+				importedJSON = JSON.parse(body);
+				console.log('\x1b[37m','[!] ListarVentaDetalles cargado');
+				return resolve(importedJSON);
+		});
+	});
+};
+
+var listarVentaDetalles = ListarVentaDetalles();
+
+
 // Función API ListarPaises
 async function ListarPaises() {
     return new Promise(function(resolve, reject) {
@@ -290,6 +305,7 @@ module.exports ={
 	'ListarOfertasProductores': ListarOfertasProductores,
 	'ListarOfertasTransportes': ListarOfertasTransportes,
 	'ListarVentas': ListarVentas,
+	'ListarVentaDetalles': ListarVentaDetalles,
     'ListarPaises': ListarPaises,
     'ListarCiudades': ListarCiudades,
 	'ListarCalidadesFrutas': ListarCalidadesFrutas,
