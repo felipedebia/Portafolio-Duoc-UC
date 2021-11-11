@@ -202,6 +202,31 @@
     </script>
 <% } %>
 
+<% if(respuesta == 'errorNOID') { %>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.notify({
+            title: '<strong>Oh no, un error!</strong>',
+            icon: '<i class="material-icons">history_edu</i>',
+            message: "Debes ingresar un ID para modificar un usuario"
+            },{
+            type: 'danger',
+            animate: {
+                enter: 'animated fadeInUp',
+                exit: 'animated fadeOutLeft'
+            },
+            placement: {
+                from: "top",
+                align: "right"
+            },
+            offset: 20,
+            spacing: 10,
+            z_index: 1031,
+            });
+        });
+    </script>
+<% } %>
+
 <script>
     $(document).ready(function() {
       $('#datatables').DataTable({

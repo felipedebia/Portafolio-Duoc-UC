@@ -61,7 +61,6 @@ router.post('/crearUsuario', async (req, res) => {
     console.log("[!] Usuario " + correo + " creado con éxito");
     var string = "valido";
     res.redirect('/usuarios/?estado=' + string);
-    //res.refresh();
 	} else {
 		console.log("[!] Ocurrió un error al intentar registrar el usuario " + correo);
     var string = "error";
@@ -84,10 +83,12 @@ router.post("/modificarUsuario/:id_usuario", async (req, res) => {
   // Si tuvo conexión a la DB
   if(res.status(200)) {
     console.log("[!] Usuario " + req.body.correo + " modificado con éxito");
-    res.redirect('/usuarios');
+    var string = "valido";
+    res.redirect('/usuarios/?estado=' + string);
   } else {
     console.log("[!] Ocurrió un error al intentar modificar el usuario " + req.body.correo);
-    res.redirect('/usuarios');
+    var string = "error";
+    res.redirect('/usuarios/?estado=' + string);
   }
 
 })

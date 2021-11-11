@@ -109,7 +109,8 @@ router.get('/usuarios', function(req, res) {
 
 // Modificar
 router.get('/modificarUsuario', async function(req, res, next) {
-	res.send('Debes ingresar un ID para modificar un usuario');
+	var string = "errorNOID";
+    res.redirect('/usuarios/?estado=' + string);
 })
 
 router.get('/modificarUsuario/:id_usuario', async function(req, res, next) {
@@ -718,7 +719,7 @@ router.get('/documentoSeguro/:id_seguro', async function(req, res, next) {
 
 		// Hacemos una consulta trayendo todos los datos del contrato
 		binds = {"id_seguro": id_seguro};
-		sql = "SELECT fecha_vencimiento, url_documento FROM seguro WHERE id_contrato = :id_seguro";
+		sql = "SELECT fecha_termino, url_documento FROM seguro WHERE id_seguro = :id_seguro";
 		result = await settings.OpenConnection(sql, binds, false);
 
 		// Si los datos estan correctos
@@ -729,7 +730,7 @@ router.get('/documentoSeguro/:id_seguro', async function(req, res, next) {
 				var seguroData = [
 					{
 						id_seguro: id_seguro,
-						fecha_vencimiento: moment(result.rows[0][0]).format('YYYY-MM-DD'),
+						fecha_termino: moment(result.rows[0][0]).format('YYYY-MM-DD'),
 					}
 				];
 			} else {
