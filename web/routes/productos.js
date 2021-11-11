@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const settings = require('../bin/settings');
 var moment = require('moment');
+var functions = require('./functions');
 
 // CRUD PRODUCTOS
 
@@ -10,7 +11,7 @@ var moment = require('moment');
 router.get('/listarProductos', async (req, res) => {
   
   binds = {};
-  sql = "SELECT id_producto, cantidad, fecha_actualizacion, f.nombre as nombreFruta, fr.nombre as Calidad, u.nombre as usuario FROM producto p LEFT JOIN fruta f ON p.fk_id_fruta = f.id_fruta INNER JOIN fruta_calidad fr ON p.fk_id_calidad=fr.id_calidad LEFT JOIN usuario u ON p.fk_id_usuario=u.id_usuario";
+  sql = "SELECT id_producto, cantidad, fecha_actualizacion, f.nombre as nombreFruta, fr.nombre as Calidad, CONCAT(CONCAT(u.nombre,' '), u.apellido) as usuario,p.fk_id_fruta as idFruta, p.fk_id_usuario as idUsuario FROM producto p LEFT JOIN fruta f ON p.fk_id_fruta = f.id_fruta INNER JOIN fruta_calidad fr ON p.fk_id_calidad=fr.id_calidad LEFT JOIN usuario u ON p.fk_id_usuario=u.id_usuario";
   result = await settings.OpenConnection(sql, binds, true);
 
   Productos = [];
@@ -22,7 +23,9 @@ router.get('/listarProductos', async (req, res) => {
           "fecha_actualizacion": moment(producto[2]).format('DD-MM-YYYY'),
           "nombreFruta": producto[3],
           "Calidad": producto[4],
-          "usuario": producto[5]
+          "usuario": producto[5],
+          "idFruta":producto[6],
+          "idUsuario":producto[7]
       }
 
       Productos.push(productoSchema);
@@ -32,12 +35,11 @@ router.get('/listarProductos', async (req, res) => {
 
 // Agregar Producto
 router.post('/crearProducto', async (req, res) => {
-  var { cantidad,fecha_actualizacion,fk_fruta,fk_calidad,fk_usuario } = req.body;
-  // Definimos el contrato activado
-  
+  var { cantidad,fk_fruta,fk_calidad,fk_usuario } = req.body;
+  var fecha_actualizacion = functions.obtenerFechaActual();
 
   sql = "INSERT INTO producto(cantidad,fecha_actualizacion,fk_id_fruta,fk_id_calidad,fk_id_usuario) values (:cantidad,to_date(:fecha_actualizacion,'YYYY-MM-DD'),:fk_fruta,:fk_calidad,:fk_usuario)";
-  await settings.OpenConnection(sql, [cantidad, fecha_actualizacion, fk_fruta, fk_calidad,fk_usuario], true);
+  await BD.Open(sql, [cantidad, fecha_actualizacion, fk_fruta, fk_calidad,fk_usuario], true);
 
   // Si tuvo conexión a la DB
   if(res.status(200)) {
@@ -54,14 +56,15 @@ router.post('/crearProducto', async (req, res) => {
 router.post("/modificarProducto/:id_producto", async (req, res) => {
   
   var id_producto = req.params.id_producto;
-  var { cantidad, fecha_actualizacion,fk_id_fruta,fk_id_calidad,fk_id_usuario} = req.body;
-
+  var { cantidad,fk_id_fruta,fk_id_calidad,fk_id_usuario} = req.body;
+  var fecha_actualizacion = functions.obtenerFechaActual();
+  
   sql = "UPDATE producto SET cantidad=:cantidad,fecha_actualizacion=to_date(:fecha_actualizacion,'YYYY-MM-DD'), fk_id_fruta= :fk_id_fruta,fk_id_calidad=:fk_id_calidad,fk_id_usuario=:fk_id_usuario  WHERE id_producto=:id_producto";
-  await settings.OpenConnection(sql, [cantidad, fecha_actualizacion,fk_id_fruta,fk_id_calidad,fk_id_usuario, id_fruta], true);
+  await BD.Open(sql, [cantidad, fecha_actualizacion,fk_id_fruta,fk_id_calidad,fk_id_usuario, id_producto], true);
 
   // Si tuvo conexión a la DB
   if(res.status(200)) {
-    console.log("[!] Producto " + id_Producto + " modificado con éxito");
+    console.log("[!] Producto " + id_producto + " modificado con éxito");
     res.redirect('/productos');
   } else {
     console.log("[!] Ocurrió un error al intentar modificar el producto " + id_producto);
@@ -75,7 +78,7 @@ router.post("/modificarProducto/:id_producto", async (req, res) => {
 router.get("/eliminarProducto/:id_producto", async (req, res) => {
   var id_producto_bind = req.params.id_producto;
   sql = "DELETE FROM producto WHERE id_producto = :id_producto_bind";
-  await settings.OpenConnection(sql, [id_producto_bind], true);
+  await BD.Open(sql, [id_producto_bind], true);
 
   if(res.status(200)) {
     console.log("[!] Producto " + id_producto_bind + " eliminado con éxito");

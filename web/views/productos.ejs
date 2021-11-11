@@ -1,0 +1,252 @@
+<%- include('partials/nav.ejs') %>
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-tabs card-header-warning">
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <span class="nav-tabs-title">Productos:</span>
+                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#listadoPrductos" data-toggle="tab">
+                                            <i class="material-icons">format_list_bulleted</i> Listado de Productos
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#agregarProducto" data-toggle="tab">
+                                            <i class="material-icons">format_list_bulleted</i> Agregar producto
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="listadoPrductos">
+                                <div class="card-body table-responsive">
+                                    <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                                        <thead class="text-info">
+                                            <th scope="col">Producto N°</th>
+                                            <th scope="col">Cantidad</th>                                            
+                                            <th scope="col">Fruta</th>                                        
+                                            <th class="disabled-sorting">Opciones</th>
+                                        </thead>
+                                        <!--Inicio de tbody-->
+                                        <tbody>
+                                            <% for(var producto of Productos) { %>
+                                                <!--Iniciar vista-->
+                                                <div class="modal fade" id="modalVerProducto<%= producto.id_producto %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                      <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">
+                                                                Viendo producto <%= producto.nombreFruta %>
+                                                            </h5>
+                                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                          </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                          <span><strong>Nombre:</strong> <%= producto.nombreFruta %></span></br></br>
+                                                          <span><strong>Cantidad (en KG):</strong> <%= producto.cantidad %></span></br></br>
+                                                          <span><strong>Fecha de actualizacion:</strong> <%= producto.fecha_actualizacion %></span></br></br>
+                                                          <span><strong>Calidad:</strong> <%= producto.Calidad %></span></br></br>
+                                                          <span><strong>Productor:</strong> <%= producto.usuario %></span>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                </div>
+                                                <!--Terminar vista-->
+                                                <!--Iniciar modificar-->
+                                                <div class="modal fade" id="modalModificarProducto<%= producto.id_producto %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                      <div class="modal-content">
+                                                        <form action="/api_productos/modificarProducto/<%= producto.id_producto %>" method="POST">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">
+                                                                    Viendo producto <%= producto.id_producto%>
+                                                                </h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                            </div>
+                                                            
+                                                            <div class="modal-body">
+                                                                <!--DIV del nombre-->
+                                                                
+                                                                <div class="form-group mt-4 my-label required">
+                                                                    <label>Ingresar fruta</label>
+                                                                
+                                                                    <select class="form-control" data-size="<% Frutas.length %>" name="fk_id_fruta" data-style="select-with-transition btn" title="Selecciona una opción">
+                                                                        
+                                                                        <% for(var fruta of Frutas) { %>
+                                                                                <% if(producto.idFruta==fruta.id_fruta) { %>
+                                                                                   
+                                                                                   <option name="<%= fruta.nombre %> " selected value="<%= fruta.id_fruta %>"><%= fruta.nombre %> </option>
+                                                                                <%}else{ %>
+                                                                                    <option name="<%= fruta.nombre %> " value="<%= fruta.id_fruta %>"><%= fruta.nombre %> </option>
+                                                                                <% } %>
+                                                                             <% } %>
+                                                                    </select>
+                                                                
+                                                                </div>
+                                                                
+                                                                <!--Div de la cantidad-->
+                                                                <div class="form-group mt-4 my-label required">
+                                                                    <label>Cantidad (en KG):</label>
+                                                                    <input class="form-control mb-4" id="inputCantidad" type="number" name="cantidad" maxLength="6" required value="<%= producto.cantidad %>">
+                                                                </div>
+                                                                <!--Div de la fecha-->
+                                                                
+                                                                <!--Div de calidad-->
+                                                                <div class="form-group my-label required">
+                                                                    <label>Calidad</label>
+                                                                    <select class="form-control" data-size="2" name="fk_id_calidad" data-style="select-with-transition btn" title="Selecciona una opción" required>
+                                                                        <% if(producto.fk_id_calidad == 1){ %>
+                                                                            <option name="Primera calidad" selected value="1">Primera calidad</option>
+                                                                        <% } else { %>
+                                                                            <option name="Primera calidad" value="1">Primera calidad</option>
+                                                                        <% } %>
+                                                                        <% if(producto.fk_id_calidad == 2){ %>
+                                                                            <option name="Segunda calidad" selected value="2">Segunda calidad</option>
+                                                                        <% } else { %>
+                                                                            <option name="Segunda calidad" value="2">Segunda calidad</option>
+                                                                        <% } %>
+                                                                        <% if(producto.fk_id_calidad == 3){ %>
+                                                                            <option name="Tercera calidad" selected value="3">Tercera calidad</option>
+                                                                        <% } else { %>
+                                                                            <option name="Tercera calidad" value="3">Tercera calidad</option>
+                                                                        <% } %>
+                                                                        <% if(producto.fk_id_calidad == 4){ %>
+                                                                            <option name="Cuarta calidad" selected value="4">Cuarta calidad</option>
+                                                                        <% } else { %>
+                                                                            <option name="Cuarta calidad" value="4">Cuarta calidad</option>
+                                                                        <% } %>
+                                                                        <% if(producto.fk_id_calidad == 5){ %>
+                                                                            <option name="Quinta calidad" selected value="5">Quinta calidad</option>
+                                                                        <% } else { %>
+                                                                            <option name="Quinta calidad" value="5">Quinta calidad</option>
+                                                                        <% } %>
+                                                                    </select>
+                                                                </div>
+                                                                <!--Fin div calidad-->
+                                                                <!--Inicio div usuario-->
+                                                                <div class="form-group my-label required">
+                                                                    <label>Usuario: <%=producto.usuario%></label>
+                                                                    
+                                                                        <% for(var usuario of Usuarios) { %>
+                                                                            <% if(producto.idUsuario==usuario.id_usuario) { %>
+                                                                                 
+                                                                                <input hidden name="fk_id_usuario" value="<%= usuario.id_usuario %>" >
+                                                                                 
+                                                                            <% } %>
+                                                                        <% } %>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button class="btn btn-primary" type="submit">Guardar cambios</button>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                            </div>
+                                                        </form>
+                                                      </div>
+                                                    </div>
+                                                </div>
+                                                <!--Terminar modificar-->
+                                                <!--Iniciar Tabla-->
+                                                <tr>
+                                                    <th scope="row">
+                                                        <%= producto.id_producto %>
+                                                    </th>
+                                                    <td>
+                                                        <%= producto.cantidad %>
+                                                    </td>                                                    
+                                                    <td>
+                                                        <%= producto.nombreFruta %>
+                                                    </td>                                                   
+                                                    
+                                                    <td>
+                                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalVerProducto<%= producto.id_producto %>">Ver</button>
+                                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalModificarProducto<%= producto.id_producto %>">Modificar</button>
+                                                        <a href="../api_productos/eliminarProducto/<%= producto.id_producto%>"><button type="button" class="btn btn-warning btn-sm">Anular</button></a>
+                                                    </td>
+                                                </tr>
+                                                <!--Terminar tabla-->
+                                            <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!--Ingresar Producto-->
+                            <div class="tab-pane" id="agregarProducto">
+                                <div class="card-body">
+                                    <h3 class="card-title mb-4">Ingresa los datos del nuevo producto</h3>
+                                    <div class="card-text">
+                                        <form action="../api_productos/crearProducto" method="POST" class="formValidation" novalidate>
+                                            
+                                            <div class="row mb-4">
+                                                
+                                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                                    <div class="form-group my-label required">
+                                                        <label>Ingresar fruta</label>
+                                                        <select class="selectpicker form-control" data-size="<% Frutas.length %>" name="fk_fruta" data-style="select-with-transition btn" title="Selecciona una opción">
+                                                            <% for(var fruta of Frutas) { %>
+                                                            <option name="<%= fruta.nombre %> " value="<%= fruta.id_fruta %>"><%= fruta.nombre %> </option>
+                                                            <% } %>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                                    <div class="form-group my-label required">
+                                                        <label>Tipo de Calidad</label>
+                                                        <select class="selectpicker form-control" data-size="5" name="fk_calidad" data-style="select-with-transition btn" title="Selecciona una opción" required>  
+                                                            <option name="Primera calidad" value="1">Primera calidad</option>                                                                                                                       
+                                                            <option name="Segunda calidad" value="2">Segunda calidad</option>                                            
+                                                            <option name="Tercera calidad" value="3">Tercera calidad</option>
+                                                            <option name="Cuarta calidad" value="4">Cuarta calidad</option>
+                                                            <option name="Quinta calidad" value="5">Quinta calidad</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-4">
+                                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                                    <div class="form-group my-label required">
+                                                        <label>Asignar al usuario</label>
+                                                        <select class="selectpicker form-control" data-size="<% Usuarios.length %>" name="fk_usuario" data-style="select-with-transition btn" title="Selecciona una opción">
+                                                            <% for(var usuario of Usuarios) { %>
+                                                            <option name="<%= usuario.nombre %> <%= usuario.apellido %>" value="<%= usuario.id_usuario %>"><%= usuario.nombre %> <%= usuario.apellido %></option>
+                                                            <% } %>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                                    <div class="form-group my-label required">
+                                                       <label>Cantidad (en KG)</label>
+                                                       <input class="form-control mb-4" min="0" id="inputCantidad" type="number" name="cantidad" maxLength="6" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-warning mb-2 mt-2 pull-right" type="submit">Crear nuevo producto</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer.ejs') %>

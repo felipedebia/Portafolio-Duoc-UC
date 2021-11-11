@@ -38,8 +38,6 @@ Iniciar node en la carpeta web
 
 - AGREGAR NUEVA OFERTA_PRODUCTOR (haciendo mario)
 - AGREGAR NUEVA ORDEN_BODEGA Y ORDEN_TRANSPORTE, LUEGO ORDEN_BODEGA Y REPORTE_BODEGA
-- ANULAR SEGURO (haciendo chris)
-- CRUD PRODUCTO (haciendo david)
 - TERMINAR PAGINA MISOFERTAS
 - CREAR DETALLE VENTA
 - PAGO
@@ -54,10 +52,9 @@ Iniciar node en la carpeta web
 - Cambiar secuencias SQL a procedimientos
 - Hacer templates de correos y agregarlos (paquete configurado y funcionando)
 - Arreglar if de botón confirmar pedido en pedido_detalle, no debe aparecer si aun no se ingresan frutas
-- Arreglar error de si no existen pedidos, pagina se cae
-- Ocultar botón "Generar venta" si ya esta generada en pedidos (venta y pedido tienen misma id si estan generados)
-- Agregar estado a seguro
-- Agregar validación para primera vez que ingresa un usuario, obligar a cambiar contraseña
+- Arreglar error de si no existen pedidos, pagina pedidos se cae
+- Arreglar error de si no tienes pedidos, pagina mispedidos se cae (haciendo chris)
+- Agregar validación para primera vez que ingresa un usuario, obligar a cambiar contraseña (haciendo david)
 - Hacer comprobación de si ya existe un usuario con un correo, si existe mandar error y no dejar registrar
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
@@ -138,9 +135,14 @@ Iniciar node en la carpeta web
 - 1 Femenino
 - 2 Masculino
 
-## Estado usuario - venta - orden
+## Estado venta - orden
 - 1 Activado
 - 2 Desactivado
+
+## Estado usuario
+- 1 Activado
+- 2 Desactivado
+- 3 Contraseña pendiente
 
 ## Estado contrato
 - 1 Vigente
