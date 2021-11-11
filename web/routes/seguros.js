@@ -50,9 +50,10 @@ router.get('/listarSeguros', async (req, res) => {
 // Agregar
 router.post('/crearSeguro', async (req, res) => {
   var { nombre_empresa, fecha_inicio, fecha_termino } = req.body;
+  var fk_id_estado = '1';
 
-  sql = "INSERT INTO seguro(nombre_empresa, fecha_inicio, fecha_termino) VALUES (:nombre_empresa, to_DATE(:fecha_inicio,'YYYY/MM/DD'),to_DATE(:fecha_termino,'YYYY/MM/DD'))";
-  await settings.OpenConnection(sql, [nombre_empresa, fecha_inicio, fecha_termino], true);
+  sql = "INSERT INTO seguro(nombre_empresa, fecha_inicio, fecha_termino, fk_id_estado) VALUES (:nombre_empresa, to_DATE(:fecha_inicio,'YYYY/MM/DD'),to_DATE(:fecha_termino,'YYYY/MM/DD', :fk_id_estado))";
+  await settings.OpenConnection(sql, [nombre_empresa, fecha_inicio, fecha_termino, fk_id_estado], true);
 
   // Si tuvo conexión a la DB
   if (res.status(200)) {
