@@ -45,11 +45,6 @@ Iniciar node en la carpeta web
 - DIVIDIR VENTAS A MISVENTAS PARA PRODUCTOR, QUE SEA VEA LOS SUYOS
 - REPORTES
 
-## Pendiente post sabado 13/11
-- Tabla informe: Agregar fecha_actualizacion
-- Tabla producto: Cambiar fecha_actualizacion por fecha_creacion, Agregar tabla estado_producto
-
-
 ## Funciones pendientes:
 
 - Cambiar todos los sql a try catch como en informes/id_venta
@@ -62,6 +57,8 @@ Iniciar node en la carpeta web
 - Arreglar error de si no existen pedidos, pagina pedidos se cae
 - Arreglar error de si no tienes pedidos, pagina mispedidos se cae
 - Agregar peso maximo a la subida de documentos (contrato, seguro y pago)
+- ModificarProducto : Agregar estado
+- ListarProducto: Agregar estado
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Comprobación de rango para entrar a las páginas
@@ -143,7 +140,7 @@ Iniciar node en la carpeta web
 - 1 Femenino
 - 2 Masculino
 
-## Estado venta - orden
+## Estado venta - orden - producto
 - 1 Activado
 - 2 Desactivado
 

@@ -11,7 +11,7 @@ var functions = require('./functions');
 router.get('/listarProductos', async (req, res) => {
   
   binds = {};
-  sql = "SELECT id_producto, cantidad, fecha_actualizacion, f.nombre as nombreFruta, fr.nombre as Calidad, CONCAT(CONCAT(u.nombre,' '), u.apellido) as usuario,p.fk_id_fruta as idFruta, p.fk_id_usuario as idUsuario FROM producto p LEFT JOIN fruta f ON p.fk_id_fruta = f.id_fruta INNER JOIN fruta_calidad fr ON p.fk_id_calidad=fr.id_calidad LEFT JOIN usuario u ON p.fk_id_usuario=u.id_usuario";
+  sql = "SELECT id_producto, cantidad, fecha_creacion, f.nombre as nombreFruta, fr.nombre as Calidad, CONCAT(CONCAT(u.nombre,' '), u.apellido) as usuario,p.fk_id_fruta as idFruta, p.fk_id_usuario as idUsuario FROM producto p LEFT JOIN fruta f ON p.fk_id_fruta = f.id_fruta INNER JOIN fruta_calidad fr ON p.fk_id_calidad=fr.id_calidad LEFT JOIN usuario u ON p.fk_id_usuario=u.id_usuario";
   result = await settings.OpenConnection(sql, binds, true);
 
   Productos = [];
@@ -20,7 +20,7 @@ router.get('/listarProductos', async (req, res) => {
       let productoSchema = {
           "id_producto": producto[0],
           "cantidad": producto[1],
-          "fecha_actualizacion": moment(producto[2]).format('DD-MM-YYYY'),
+          "fecha_creacion": moment(producto[2]).format('DD-MM-YYYY'),
           "fk_nombre_fruta": producto[3],
           "calidad": producto[4],
           "usuario": producto[5],
@@ -36,10 +36,11 @@ router.get('/listarProductos', async (req, res) => {
 // Agregar Producto
 router.post('/crearProducto', async (req, res) => {
   var { cantidad,fk_fruta,fk_calidad,fk_usuario } = req.body;
-  var fecha_actualizacion = functions.obtenerFechaActual();
+  var fecha_creacion = functions.obtenerFechaActual();
+  var fk_id_estado = 1;
 
-  sql = "INSERT INTO producto(cantidad,fecha_actualizacion,fk_id_fruta,fk_id_calidad,fk_id_usuario) values (:cantidad,to_date(:fecha_actualizacion,'YYYY-MM-DD'),:fk_fruta,:fk_calidad,:fk_usuario)";
-  await settings.OpenConnection(sql, [cantidad, fecha_actualizacion, fk_fruta, fk_calidad,fk_usuario], true);
+  sql = "INSERT INTO producto(cantidad,fecha_creacion,fk_id_fruta,fk_id_calidad,fk_id_usuario, fk_id_estado) values (:cantidad, to_date(:fecha_creacion,'YYYY-MM-DD'), :fk_fruta, :fk_calidad, :fk_usuario, :fk_id_estado)";
+  await settings.OpenConnection(sql, [cantidad, fecha_creacion, fk_fruta, fk_calidad,fk_usuario, fk_id_estado], true);
 
   // Si tuvo conexión a la DB
   if(res.status(200)) {
@@ -57,10 +58,10 @@ router.post("/modificarProducto/:id_producto", async (req, res) => {
   
   var id_producto = req.params.id_producto;
   var { cantidad, fk_id_fruta, fk_id_calidad} = req.body;
-  var fecha_actualizacion = functions.obtenerFechaActual();
+  var fecha_creacion = functions.obtenerFechaActual();
   
-  sql = "UPDATE producto SET cantidad=:cantidad, fecha_actualizacion=to_date(:fecha_actualizacion,'YYYY-MM-DD'), fk_id_fruta= :fk_id_fruta, fk_id_calidad=:fk_id_calidad WHERE id_producto=:id_producto";
-  await settings.OpenConnection(sql, [cantidad, fecha_actualizacion,fk_id_fruta,fk_id_calidad, id_producto], true);
+  sql = "UPDATE producto SET cantidad=:cantidad, fecha_creacion=to_date(:fecha_creacion,'YYYY-MM-DD'), fk_id_fruta= :fk_id_fruta, fk_id_calidad=:fk_id_calidad WHERE id_producto=:id_producto";
+  await settings.OpenConnection(sql, [cantidad, fecha_creacion,fk_id_fruta,fk_id_calidad, id_producto], true);
 
   // Si tuvo conexión a la DB
   if(res.status(200)) {

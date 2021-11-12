@@ -11,7 +11,7 @@ var functions = require('./functions');
 router.get('/listarInformes', async (req, res) => {
   
     binds = {};
-    sql = "SELECT id_informe, fecha_creacion, descripcion, fk_id_venta FROM informe";
+    sql = "SELECT id_informe, fecha_creacion, fecha_actualizacion, descripcion, fk_id_venta FROM informe";
     result = await settings.OpenConnection(sql, binds, true);
   
     Informes = [];
@@ -20,8 +20,9 @@ router.get('/listarInformes', async (req, res) => {
         let ofertaSchema = {
             "id_informe": oferta[0],
             "fecha_creacion": moment(oferta[2]).format('DD-MM-YYYY'),
-            "descripcion": oferta[3],
-            "fk_id_venta": oferta[4]
+            "fecha_actualizacion": moment(oferta[3]).format('DD-MM-YYYY'),
+            "descripcion": oferta[4],
+            "fk_id_venta": oferta[5]
         }
   
         Informes.push(ofertaSchema);
@@ -35,12 +36,13 @@ router.post('/crearInforme/:id_venta', async (req, res) => {
     var fk_id_venta = req.params.id_venta;
     var { descripcion } = req.body;
     var fecha_creacion = functions.obtenerFechaActual();
+    var fecha_actualizacion = functions.obtenerFechaActual();
     console.log(fk_id_venta)
     console.log(descripcion)
     console.log(fecha_creacion)
   
-    sql = "INSERT INTO venta(fecha_creacion, descripcion, fk_id_venta) VALUES (to_DATE(:fecha_creacion,'YYYY/MM/DD'), :descripcion, :fk_id_venta)";
-    await settings.OpenConnection(sql, [fecha_creacion, descripcion, fk_id_venta], true);
+    sql = "INSERT INTO venta(fecha_creacion, fecha_actualizacion, descripcion, fk_id_venta) VALUES (to_DATE(:fecha_creacion,'YYYY/MM/DD'),to_DATE(:fecha_actualizacion,'YYYY/MM/DD'), :descripcion, :fk_id_venta)";
+    await settings.OpenConnection(sql, [fecha_creacion, fecha_actualizacion, descripcion, fk_id_venta], true);
   
     // Si tuvo conexión a la DB
     if(res.status(200)) {
