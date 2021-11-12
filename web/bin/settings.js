@@ -1,15 +1,3 @@
-var DEBUG = (function() {
-    var timestamp = function() {};
-    timestamp.toString = function() {
-        return "[" + (new Date).toLocaleTimeString() + "]";    
-    };
-
-    return {
-        log: console.log.bind(console, '%s', timestamp)
-    }
-})();
-
-
 // Oracle
 const oracledb = require('oracledb');
 
@@ -38,7 +26,6 @@ async function OpenConnection(sql, binds) {
 }
 
 // Correos
-
 const nodemailer = require("nodemailer");
 
 const user_name     = 'portafolioduocuc.2021@gmail.com';

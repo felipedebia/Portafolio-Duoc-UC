@@ -28,6 +28,7 @@ var session = require('express-session');
 
 // Iniciamos aplicación
 var app = express();
+// Favicon
 app.use(favicon(path.join(__dirname, 'public', 'images/favicon.ico')))
 
 // Se indica el directorio donde se almacenarán las plantillas 
@@ -78,7 +79,7 @@ app.use('/api_informes', informesRouter);
 app.use('/api_frutasrestantes', frutasRestantesRouter);
 app.use('/api_reportes', reportesRouter);
 
-// catch 404 and forward to error handler
+// Para mostrar errores
 app.use(function(req, res, next) {
   next(createError(404));
 });
