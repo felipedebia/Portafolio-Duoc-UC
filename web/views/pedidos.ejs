@@ -49,7 +49,7 @@
                                                                     <span><strong>Fecha del pedido:</strong> <%= pedido.fecha_creacion %></span></br>
                                                                     <span><strong>Estado del pedido:</strong> <%= pedido.fk_texto_estado %></span>
                                                                     <div class="mt-4">
-                                                                        <span><strong>Detalles del pedido:</strong></span></br>
+                                                                        <h4><strong>Detalles del pedido</strong></h4>
                                                                         <ul>
                                                                         <% for(var pedido_detalle of PedidoDetalles){ %>
                                                                             <%if(pedido_detalle.id_pedido == pedido.id_pedido){%>

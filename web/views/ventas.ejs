@@ -33,7 +33,7 @@
                                             </thead>
                                             <tbody>
                                                 <% for(var venta of Ventas) { %>
-                                                    <div class="modal fade" id="modalVenta<%= venta.id_venta %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="modalVentaDetalle<%= venta.id_venta %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -48,7 +48,7 @@
                                                                     <span><strong>Fecha de creación:</strong> <%= venta.fecha_creacion %></span></br>
                                                                     <span><strong>Fecha de última actualización:</strong> <%= venta.fecha_actualizacion %></span></br>
                                                                     <div class="mt-4">
-                                                                        <span><strong>Detalles de la venta:</strong></span></br>
+                                                                        <h4><strong>Detalles de la venta</strong></h4>
                                                                         <ul>
                                                                             <% for(var venta_detalle of VentaDetalles){ %>
                                                                                 <%if(venta_detalle.fk_id_venta == venta.id_venta){%>
@@ -69,6 +69,59 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="modal fade" id="modalGenerarDetalle<%= venta.id_venta %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <form action="/api_ventas/crearVentaDetalle/<%= venta.id_venta %>" method="POST">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">ID Venta #
+                                                                            <%= venta.id_venta %>
+                                                                        </h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <span><strong>Fecha de creación:</strong> <%= venta.fecha_creacion %></span></br>
+                                                                        <span><strong>Fecha de última actualización:</strong> <%= venta.fecha_actualizacion %></span></br>
+                                                                        <div class="mt-4">
+                                                                            <h4><strong>Detalles de la venta</strong></h4></br>
+                                                                            <span><strong>Costo de frutas:</strong> Mario Ataca </span></br>
+                                                                            <span><strong>Costo de transportes:</strong> Mario Ataca </span></br></br>
+                                                                        </div>
+                                                                        
+                                                                        <div class="row">
+                                                                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                                                                <div class="form-group my-label required">
+                                                                                    <label>Costos de impuesto</label>
+                                                                                    <input class="form-control mb-4" id="costo_impuestos" type="number" name="costo_impuestos" maxLength="25" required>
+                                                                                    <div class="invalid-feedback">Ingresa Costo Impuesto</div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                                                                <div class="form-group my-label required">
+                                                                                    <label>Comisión de servicio</label>
+                                                                                    <input class="form-control mb-4" id="comision_servicio" type="number" name="comision_servicio" maxLength="25" required>
+                                                                                    <div class="invalid-feedback">Ingresa Comisión Servicio</div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                                                                <div class="form-group my-label required">
+                                                                                    <label>Comisión de empresa</label>
+                                                                                    <input class="form-control mb-4" id="comision_empresa" type="number" name="comision_empresa" maxLength="25" required>
+                                                                                    <div class="invalid-feedback">Ingresa Comisión Empresa</div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button class="btn btn-primary" type="submit">Guardar detalles</button>
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <tr>
                                                         <th scope="row">
                                                             <%= venta.id_venta %>
@@ -83,9 +136,15 @@
                                                             <%= venta.fk_texto_estado %>
                                                         </td>
                                                         <td>
-                                                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalVenta<%= venta.id_venta %>">Ver detalles</button>
+                                                            <% for(var venta_detalle of VentaDetalles) { %>
+                                                                <% if(venta_detalle.fk_id_venta ==  venta.id_venta){ %>
+                                                                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalVentaDetalle<%= venta.id_venta %>">Ver detalles</button>
+                                                                <% }else{ %>
+                                                                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalGenerarDetalle<%= venta.id_venta %>">Generar detalles</button>
+                                                                <% } %>
+                                                            <% } %>
                                                             <a href="/informes/<%= venta.id_venta %>"><button type="button" class="btn btn-warning btn-sm">Ver informes</button></a>
-                                                            <a href="/modificarVenta/<%= venta.id_venta %>"><button type="button" class="btn btn-warning btn-sm">Modificar</button></a>
+                                                            <!-- <a href="/modificarVenta/<%= venta.id_venta %>"><button type="button" class="btn btn-warning btn-sm">Modificar</button></a> -->
                                                             <a href="../api_ventas/anularVenta/<%= venta.id_venta %>"><button type="button" class="btn btn-warning btn-sm">Anular</button></a>
                                                         </td>
                                                     </tr>

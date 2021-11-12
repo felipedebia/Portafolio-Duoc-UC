@@ -87,6 +87,29 @@ router.post('/crearVenta/:id_venta', async (req, res) => {
 })
 
 
+// Agregar Venta Detalle
+router.post('/crearVentaDetalle/:id_venta', async (req, res) => {
+  var fk_id_venta_bind = req.params.id_venta;
+  // COSTO_FRUTA Y COSTO_TRANSPORTE VIENEN DE OFERTAS DE SUBASTAS
+  let costo_fruta=1000;
+  let costo_transporte = 2000;
+  var { costo_impuestos,comision_servicio,comision_empresa } = req.body;
+  var precio_final = (costo_impuestos + comision_servicio +comision_empresa+costo_fruta+costo_transporte);
+
+  sql = "INSERT INTO venta_detalle(costo_fruta, costo_transporte,costo_impuestos,comision_servicio,comision_empresa,precio_final,fk_id_venta) VALUES (:costo_fruta,:costo_transporte,:costo_impuestos,:comision_servicio,:comision_empresa,:precio_final,:fk_id_venta_bind)";
+  await settings.OpenConnection(sql, [costo_fruta, costo_transporte,costo_impuestos,comision_servicio,comision_empresa,precio_final,fk_id_venta_bind], true);
+
+  // Si tuvo conexión a la DB
+  if(res.status(200)) {
+    console.log("[!] Venta Detalle " + fk_id_venta_bind + " creada con éxito");
+    res.redirect('/ventas');
+	} else {
+		console.log("[!] Ocurrió un error al intentar crear la venta detalle " + fk_id_venta_bind);
+    res.redirect('/ventas');
+	}
+})
+
+
 // Anular
 router.get("/anularVenta/:id_venta", async (req, res) => {
   var id_venta_bind = req.params.id_venta;
