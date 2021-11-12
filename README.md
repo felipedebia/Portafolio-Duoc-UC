@@ -47,6 +47,7 @@ Iniciar node en la carpeta web
 
 ## Funciones pendientes:
 
+- Cambiar todos los sql a try catch como en informes/id_venta
 - Gráficos de página Reportes
 - Contadores de Usuarios, Frutas, Ventas y Subastas para la página dashboard
 - Implementar subida de archivos a Pago como en Contrato

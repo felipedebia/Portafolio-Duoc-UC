@@ -1,0 +1,224 @@
+<%- include('partials/nav.ejs') %>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-tabs card-header-info">
+                            <div class="nav-tabs-navigation">
+                                <div class="nav-tabs-wrapper">
+                                    <span class="nav-tabs-title">Informes:</span>
+                                    <ul class="nav nav-tabs" data-tabs="tabs">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" href="#listadoInformes" data-toggle="tab">
+                                                <i class="material-icons">format_list_bulleted</i> Listado de Informes de <%= data[0].fk_id_venta %>
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#crearInforme" data-toggle="tab">
+                                                <i class="material-icons">add</i> Agregar nuevo informe
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="listadoInformes">
+                                    <div class="card-body table-responsive">
+                                        <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                                            <thead class="text-info">
+                                                <th scope="col">N°</th>
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Fecha de creación</th>
+                                                <th class="disabled-sorting">Opciones</th>
+                                            </thead>
+                                            <tbody>
+                                                <% for(var fruta of Frutas) { %>
+
+                                                    <div class="modal fade" id="modalVerFruta<%= fruta.id_fruta %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                          <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">
+                                                                    Viendo fruta <%= fruta.nombre %>
+                                                                </h5>
+                                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                              </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                              <span><strong>Nombre:</strong> <%= fruta.nombre %></span></br></br>
+                                                              <span><strong>Fecha de creación:</strong> <%= fruta.fecha_creacion %></span></br></br>
+                                                              <span><strong>¿Necesita refrigeración?:</strong> <%= fruta.necesita_refrigeracion %></span>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="modal fade" id="modalModificarFruta<%= fruta.id_fruta %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                          <div class="modal-content">
+                                                            <form action="/api_frutas/modificarFruta/<%= fruta.id_fruta%>" method="POST">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">
+                                                                        Viendo fruta <%= fruta.nombre %>
+                                                                    </h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="form-group mt-4 my-label required">
+                                                                        <label>Nombre</label>
+                                                                        <input class="form-control mb-4" id="inputNombre" type="text" name="nombre" maxLength="30" required value="<%= fruta.nombre %>">
+                                                                    </div>
+                                                                    <div class="form-group my-label required">
+                                                                        <label>¿Necesita refrigeración?</label>
+                                                                        <select class="form-control" data-size="2" name="necesita_refrigeracion" data-style="select-with-transition btn" title="Selecciona una opción" required>
+                                                                            <% if(fruta.necesita_refrigeracion == 1){ %>
+                                                                                <option name="si" selected value="1">Si</option>
+                                                                            <% } else { %>
+                                                                                <option name="si" value="1">Si</option>
+                                                                            <% } %>
+                                                                            <% if(fruta.necesita_refrigeracion == 2){ %>
+                                                                                <option name="no" selected value="2">No</option>
+                                                                            <% } else { %>
+                                                                                <option name="no" value="2">No</option>
+                                                                            <% } %>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button class="btn btn-primary" type="submit">Guardar cambios</button>
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                </div>
+                                                            </form>
+                                                          </div>
+                                                        </div>
+                                                    </div>
+                                                    <tr>
+                                                        <th scope="row">
+                                                            <%= fruta.id_fruta %>
+                                                        </th>
+                                                        <td>
+                                                            <%= fruta.nombre %>
+                                                        </td>
+                                                        <td>
+                                                            <%= fruta.fecha_creacion %>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalVerFruta<%= fruta.id_fruta %>">Ver</button>
+                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalModificarFruta<%= fruta.id_fruta %>">Modificar</button>
+                                                            <a href="../api_frutas/eliminarFruta/<%= fruta.id_fruta %>"><button type="button" class="btn btn-info btn-sm">Eliminar</button></a>
+                                                        </td>
+                                                    </tr>
+                                                <% } %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="crearInforme">
+                                    <div class="card-body">
+                                        <h3 class="card-title mb-4">Ingresa los datos del nuevo informe</h3>
+                                        <div class="card-text">
+                                            <form action="../api_frutas/crearFruta" method="POST" class="formValidation" novalidate> 
+                                                <div class="form-group my-label required">
+                                                    <label>Nombre</label>
+                                                    <input class="form-control mb-4" id="inputNombre" type="text" name="nombre" required data-toggle="datepicker">
+                                                    <div class="invalid-feedback">Ingresa Nombre</div>
+                                                </div>
+                                                <div class="form-group my-label required">
+                                                    <label>¿Necesita refrigeración?</label>
+                                                    <select class="selectpicker form-control" data-size="6" name="necesita_refrigeracion" data-style="select-with-transition btn" title="Selecciona una opción" required>
+                                                        <option name="si" value="1">Si</option>
+                                                        <option name="no" value="2">No</option>
+                                                    </select>
+                                                </div>
+                                                <button class="btn btn-info mb-2 pull-right mt-4" type="submit">Crear nueva fruta</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<%- include('partials/footer.ejs') %>
+
+<script>
+    $(document).ready(function() {
+      $('#datatables').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        "pagingType": "full_numbers",
+        "pageLength": 15,
+        "bLengthChange": false,
+        responsive: true,
+        language: {
+            search: "_INPUT_",
+            info: "Viendo página _PAGE_ de _PAGES_",
+            zeroRecords: "No hay información que mostrar",
+            infoEmpty: "Sin información",
+            searchPlaceholder: "Buscar informe",
+            "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            },
+            "buttons": {
+                "copy": "Copiar",
+                "colvis": "Visibilidad",
+                "collection": "Colección",
+                "colvisRestore": "Restaurar visibilidad",
+                "copySuccess": {
+                    "1": "Copiada 1 fila al portapapeles",
+                    "_": "Copiadas %d fila al portapapeles"
+                },
+                "copyTitle": "Copiar al portapapeles",
+                "csv": "CSV",
+                "excel": "Excel",
+                "pageLength": {
+                    "-1": "Mostrar todas las filas",
+                    "_": "Mostrar %d filas"
+                },
+                "pdf": "PDF",
+                "print": "Imprimir"
+            }
+        }
+      });
+      var table = $('#datatable').DataTable();
+    });
+</script>
+
+<script> (function () {
+    'use strict';
+    window.addEventListener('load', function () {
+        var forms = document.getElementsByClassName('formValidation');
+        var validation = Array.prototype.filter.call(forms, function (form) {
+            form.addEventListener('submit', function (event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+  })();
+</script>
+
+</body>
+</html>
