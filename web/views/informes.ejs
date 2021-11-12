@@ -1,4 +1,5 @@
 <%- include('partials/nav.ejs') %>
+<script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -39,7 +40,7 @@
                                                 <% for(var informe of Informes) { %>
 
                                                     <div class="modal fade" id="modalVerInforme<%= informe.id_informe %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
+                                                        <div class="modal-dialog modal-lg" role="document">
                                                           <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">
@@ -53,7 +54,7 @@
                                                               <span><strong>Informe de venta:</strong> <%= fk_id_venta %></span></br></br>
                                                               <span><strong>Fecha de creación:</strong> <%= informe.fecha_creacion %></span></br></br>
                                                               <span><strong>Fecha de última actualización:</strong> <%= informe.fecha_actualizacion %></span></br></br>
-                                                              <span><strong>Descripción:</strong> <%= informe.descripcion %></span>
+                                                              <span><strong>Contenido del informe:</strong></br></br> <%= informe.descripcion %></span>
                                                             </div>
                                                             <div class="modal-footer">
                                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -62,7 +63,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="modal fade" id="modalModificarInforme<%= informe.id_informe %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
+                                                        <div class="modal-dialog modal-lg" role="document">
                                                           <div class="modal-content">
                                                             <form action="/api_informes/modificarInforme/<%= informe.id_informe%>" method="POST">
                                                                 <div class="modal-header">
@@ -74,9 +75,20 @@
                                                                 </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <div class="form-group mt-4 my-label required">
-                                                                        <label>Descripción</label>
-                                                                        <textarea class="form-control" id="TextAreaDescripcion" name="descripcion" rows="5" required value="<%= informe.descripcion %>"></textarea>
+                                                                    <div class="form-group my-label required">
+                                                                        <label>Contenido del informe</label></br></br>
+                                                                        <textarea name="descripcion" id="editorModificar">
+                                                                            <%= informe.descripcion %>
+                                                                        </textarea>
+                                                                          <script>
+                                                                            ClassicEditor
+                                                                            .create(document.querySelector('#editorModificar'), {
+                                                                                removePlugins: ['CKFinderUploadAdapter', 'CKFinder', 'EasyImage', 'Image', 'ImageCaption', 'ImageStyle', 'ImageToolbar', 'ImageUpload', 'MediaEmbed'],
+                                                                            })
+                                                                            .catch( error => {
+                                                                                console.error( error );
+                                                                            } );
+                                                                        </script>
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
@@ -110,10 +122,21 @@
                                         <div class="card-text">
                                             <form action="../api_informes/crearInforme/<%= fk_id_venta %>" method="POST" class="formValidation" novalidate> 
                                                 <div class="form-group my-label required">
-                                                    <label>Descripción</label>
-                                                    <textarea class="form-control" id="TextAreaDescripcion" name="descripcion" rows="5" required></textarea>
-                                                    <div class="invalid-feedback">Ingresa Descripción</div>
+                                                    <label>Contenido del informe</label></br></br>
+                                                    <textarea name="descripcion" id="editor">
+                                                        Escribe una descripción.
+                                                    </textarea>
+                                                      <script>
+                                                        ClassicEditor
+                                                        .create(document.querySelector('#editor'), {
+                                                            removePlugins: ['CKFinderUploadAdapter', 'CKFinder', 'EasyImage', 'Image', 'ImageCaption', 'ImageStyle', 'ImageToolbar', 'ImageUpload', 'MediaEmbed'],
+                                                        })
+                                                        .catch( error => {
+                                                            console.error( error );
+                                                        } );
+                                                    </script>
                                                 </div>
+                                                
                                                 <button class="btn btn-info mb-2 pull-right mt-4" type="submit">Crear nuevo informe</button>
                                             </form>
                                         </div>

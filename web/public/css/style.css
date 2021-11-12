@@ -263,3 +263,7 @@
     font-weight: 300;
     margin: 10px 0 15px 0
 }
+
+.ck.ck-editor__main>.ck-editor__editable {
+  height: 210px;
+}
