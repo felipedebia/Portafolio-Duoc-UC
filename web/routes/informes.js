@@ -55,4 +55,26 @@ router.post('/crearInforme/:id_venta', async (req, res) => {
 })
 
 
+// Modificar informe
+router.post("/modificarInforme/:id_informe", async (req, res) => {
+  
+    var id_informe = req.params.id_informe;
+    var { descripcion } = req.body;
+    var fecha_actualizacion = functions.obtenerFechaActual();
+    
+    sql = "UPDATE informe SET descripcion=:descripcion, fecha_actualizacion=to_date(:fecha_actualizacion,'YYYY-MM-DD') WHERE id_informe=:id_informe";
+    await settings.OpenConnection(sql, [descripcion, fecha_actualizacion, id_informe], true);
+  
+    // Si tuvo conexión a la DB
+    if(res.status(200)) {
+      console.log("[!] Informe de venta " + id_producto + " modificado con éxito");
+      res.redirect('/ventas');
+    } else {
+      console.log("[!] Ocurrió un error al intentar modificar el informe de venta " + id_producto);
+      res.redirect('/ventas');
+    }
+  
+  })
+
+
 module.exports = router;
