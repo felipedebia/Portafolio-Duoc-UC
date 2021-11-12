@@ -58,6 +58,7 @@ Iniciar node en la carpeta web
 - Agregar peso maximo a la subida de documentos (contrato, seguro y pago)
 - ModificarProducto : Agregar estado
 - ListarProducto: Agregar estado
+- Agregar limite carasteres (2000) a descripción en informes
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Comprobación de rango para entrar a las páginas

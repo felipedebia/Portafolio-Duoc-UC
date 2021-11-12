@@ -74,7 +74,23 @@ router.post("/modificarInforme/:id_informe", async (req, res) => {
       res.redirect('/ventas');
     }
   
-  })
+})
 
+
+  // Eliminar informe
+router.get("/eliminarInforme/:id_informe", async (req, res) => {
+    var id_informe = req.params.id_informe;
+    
+    sql = "DELETE FROM informe WHERE id_informe = :id_informe";
+    await settings.OpenConnection(sql, [id_informe], true);
+  
+    if(res.status(200)) {
+      console.log("[!] Informe " + id_informe + " eliminado con éxito");
+      res.redirect('/ventas');
+      } else {
+          console.log("[!] Ocurrió un error al intentar eliminar el informe " + id_informe);
+      res.redirect('/ventas');
+      }
+  })
 
 module.exports = router;

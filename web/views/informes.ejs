@@ -109,6 +109,7 @@
                                                         <td>
                                                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalVerInforme<%= informe.id_informe %>">Ver informe</button>
                                                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalModificarInforme<%= informe.id_informe %>">Modificar</button>
+                                                            <a href="../api_informes/eliminarInforme/<%= informe.id_informe %>"><button type="button" class="btn btn-info btn-sm">Eliminar</button></a>
                                                         </td>
                                                     </tr>
                                                 <% } %>
