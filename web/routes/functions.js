@@ -289,7 +289,49 @@ async function ListarProductos() {
 		});
 	});
 };
+var listarProductos = ListarProductos();
 
+
+//Funcion API ListarInformes
+async function ListarInformes() {
+	return new Promise(function(resolve, reject) {
+		request('http://localhost:3000/api_informes/listarInformes', function (error, response, body) {
+			if (error) return reject(error);
+				importedJSON = JSON.parse(body);
+				console.log('\x1b[37m','[!] ListarInformes cargado');
+				return resolve(importedJSON);
+		});
+	});
+};
+var listarInformes = ListarInformes();
+
+
+//Funcion API ListarFrutasRestantes
+async function ListarFrutasRestantes() {
+	return new Promise(function(resolve, reject) {
+		request('http://localhost:3000/api_frutasrestantes/listarFrutasRestantes', function (error, response, body) {
+			if (error) return reject(error);
+				importedJSON = JSON.parse(body);
+				console.log('\x1b[37m','[!] ListarFrutasRestantes cargado');
+				return resolve(importedJSON);
+		});
+	});
+};
+var listarFrutasRestantes = ListarFrutasRestantes();
+
+
+//Funcion API ListarReportesBodegas
+async function ListarReportesBodegas() {
+	return new Promise(function(resolve, reject) {
+		request('http://localhost:3000/api_reportes/listarReportesBodegas', function (error, response, body) {
+			if (error) return reject(error);
+				importedJSON = JSON.parse(body);
+				console.log('\x1b[37m','[!] ListarReportesBodegas cargado');
+				return resolve(importedJSON);
+		});
+	});
+};
+var listarReportesBodegas = ListarReportesBodegas();
 
 module.exports ={
 	'obtenerFechaActual': obtenerFechaActual,
@@ -311,5 +353,8 @@ module.exports ={
 	'ListarCalidadesFrutas': ListarCalidadesFrutas,
     'ListarPedidoDetalles': ListarPedidoDetalles,
 	'ListarSeguros': ListarSeguros,
-	'ListarProductos': ListarProductos
+	'ListarProductos': ListarProductos,
+	'ListarInformes': ListarInformes,
+	'ListarFrutasRestantes': ListarFrutasRestantes,
+	'ListarReportesBodegas': ListarReportesBodegas
 }

@@ -173,7 +173,11 @@ Iniciar node en la carpeta web
 - 5 Finalizado
 - 6 Anulado
 
-## Necesita - fruta - oferta_Transporte
+## Estado Reporte (char)
+- 1 no se
+- 2 no se
+
+## Necesita - fruta - oferta_Transporte (char)
 - 1 Si
 - 2 No
 
@@ -338,6 +342,18 @@ Iniciar node en la carpeta web
 | POST | http://localhost:3000/api_ofertas/anularOfertaTransporte/:id_ofertaT  | |
 | GET  | http://localhost:3000/oferta_transporte/:id_ofertaT  |  |
 
-## CRUD Reporte
+## CRUD Informe
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/api_informes/listarInformes  | JSON |
+| GET  | http://localhost:3000/api_informes/generarInforme/:id_venta  | |
+
+## CRUD Fruta_Restante
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/api_frutasrestantes/listarFrutasRestantes  | JSON |
+
+## CRUD Reporte_Bodega
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/api_reportes/listarReportesBodegas  | JSON |

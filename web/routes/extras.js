@@ -4,7 +4,7 @@ const router = express.Router();
 const settings = require('../bin/settings');
 
 
-// Listar Paises
+// Listar todos los paises
 router.get('/listarPaises', async(req, res) => {
 
     binds = {};
@@ -25,7 +25,7 @@ router.get('/listarPaises', async(req, res) => {
 });
 
 
-// Listar Ciudades
+// Listar todas las ciudades
 router.get('/listarCiudades', async(req, res) => {
 
     binds = {};
@@ -47,7 +47,7 @@ router.get('/listarCiudades', async(req, res) => {
 });
 
 
-//Leer calidad de la fruta
+// Listar todas las calidades de frutas
 router.get('/listarCalidadesFrutas', async(req, res) => {
 
     binds = {};

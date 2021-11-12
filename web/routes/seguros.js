@@ -23,7 +23,7 @@ var uploadFile = multer({ storage: storage })
 
 // CRUD SEGUROS
 
-// Leer - Todos los seguros
+// Listar todos los seguros
 router.get('/listarSeguros', async (req, res) => {
   
   binds = {};
@@ -47,7 +47,7 @@ router.get('/listarSeguros', async (req, res) => {
 });
 
 
-// Agregar
+// Agregar seguro
 router.post('/crearSeguro', async (req, res) => {
   var { nombre_empresa, fecha_inicio, fecha_termino } = req.body;
   var fk_id_estado = '1';

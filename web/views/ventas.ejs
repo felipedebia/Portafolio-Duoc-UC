@@ -68,6 +68,49 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="modal fade" id="modalInforme<%= venta.id_venta %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Informes de Venta #
+                                                                        <%= venta.id_venta %>
+                                                                    </h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <table class="table table-hover mb-4">
+                                                                        <thead class="text-warning">
+                                                                            <th>N°</th>
+                                                                            <th>Fecha de creación</th>
+                                                                            <th>Descripción</th>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                          <% for(var pedido_detalle of PedidoDetalles){ %>
+                                                                            <% if( data[0].fk_id_pedido == pedido_detalle.fk_id_pedido ){ %>
+                                                                              <tr>
+                                                                                  <td>
+                                                                                    <%= pedido_detalle.nombre %>
+                                                                                  </td>
+                                                                                  <td>
+                                                                                    <%= pedido_detalle.calidad %>
+                                                                                  </td>
+                                                                                  <td>
+                                                                                    <%= pedido_detalle.cantidad %>
+                                                                                  </td>
+                                                                              </tr>
+                                                                            <% } %>
+                                                                          <% } %>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <tr>
                                                         <th scope="row">
                                                             <%= venta.id_venta %>

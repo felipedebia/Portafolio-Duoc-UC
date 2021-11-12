@@ -11,7 +11,7 @@ const simpleCryp = new SimpleCrypto(secretKey)
 
 // CRUD USUARIOS
 
-// Leer - Todos los usuarios
+// Listar todos los usuarios
 router.get('/listarUsuarios', async (req, res) => {
   binds = {};
 
@@ -43,7 +43,7 @@ router.get('/listarUsuarios', async (req, res) => {
 });
 
 
-// Agregar
+// Agregar usuario
 router.post('/crearUsuario', async (req, res) => {
   var { num_documento, fk_id_tipo, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password_bind } = req.body;
   // Definimos la cuenta activada

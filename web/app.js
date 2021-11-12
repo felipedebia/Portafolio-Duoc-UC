@@ -18,6 +18,9 @@ var subastasRouter = require('./routes/subastas');
 var usuariosRouter = require('./routes/usuarios');
 var ventasRouter = require('./routes/ventas');
 var segurosRouter = require('./routes/seguros');
+var informesRouter = require('./routes/informes');
+var frutasRestantesRouter = require('./routes/frutasRestantes');
+var reportesRouter = require('./routes/Reportes');
 
 // Login
 var bodyParser = require('body-parser');
@@ -71,6 +74,9 @@ app.use('/api_subastas', subastasRouter);
 app.use('/api_usuarios', usuariosRouter);
 app.use('/api_ventas', ventasRouter);
 app.use('/api_seguros', segurosRouter);
+app.use('/api_informes', informesRouter);
+app.use('/api_frutasrestantes', frutasRestantesRouter);
+app.use('/api_reportes', reportesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

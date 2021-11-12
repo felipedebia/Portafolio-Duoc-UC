@@ -35,7 +35,7 @@ router.get('/listarVentas', async (req, res) => {
 });
 
 
-//Listar detalles de todos las ventas
+// Listar detalles de todos las ventas
 router.get('/listarVentaDetalles', async(req, res) => {
 
   binds = {};
@@ -62,7 +62,7 @@ router.get('/listarVentaDetalles', async(req, res) => {
 });
 
 
-// Agregar
+// Agregar venta
 router.post('/crearVenta/:id_venta', async (req, res) => {
   var id_venta_bind = req.params.id_venta;
   var fk_id_pedido = req.params.id_venta;

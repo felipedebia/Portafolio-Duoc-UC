@@ -7,7 +7,7 @@ var functions = require('./functions');
 
 // CRUD PRODUCTOS
 
-// Leer - Todos los productos
+// Listar todos los productos
 router.get('/listarProductos', async (req, res) => {
   
   binds = {};
@@ -52,7 +52,7 @@ router.post('/crearProducto', async (req, res) => {
 	}
 })
 
-//MODIFICAR
+// Modificar producto
 router.post("/modificarProducto/:id_producto", async (req, res) => {
   
   var id_producto = req.params.id_producto;
@@ -74,7 +74,7 @@ router.post("/modificarProducto/:id_producto", async (req, res) => {
 })
 
 
-// Eliminar
+// Eliminar producto
 router.get("/eliminarProducto/:id_producto", async (req, res) => {
   var id_producto_bind = req.params.id_producto;
   sql = "DELETE FROM producto WHERE id_producto = :id_producto_bind";

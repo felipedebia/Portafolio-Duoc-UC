@@ -7,7 +7,7 @@ var functions = require('./functions');
 
 // CRUD SUBASTA TRANSPORTES
 
-// Leer - Todos las subastas Frutas
+// Listar todas las subastas Frutas
 router.get('/listarSubastasFrutas', async (req, res) => {
   
   binds = {};
@@ -87,7 +87,7 @@ router.get("/anularSubastaFruta/:id_subastaF", async (req, res) => {
 
 // CRUD SUBASTA TRANSPORTES
 
-// Leer - Todos las subastas Transportes
+// Listar todas las subastas Transportes
 router.get('/listarSubastasTransportes', async (req, res) => {
   
   binds = {};

@@ -8,7 +8,7 @@ var functions = require('./functions');
 
 // CRUD FRUTAS
 
-// Leer - Todos las frutas
+// Listar todas las frutas
 router.get('/listarFrutas', async (req, res) => {
   
   binds = {};
