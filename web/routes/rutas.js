@@ -786,6 +786,7 @@ router.get('/productos', function(req, res) {
 // CRUD REPORTES
 router.get('/reportes', function(req, res) {
     if (req.session.isLoggedIn) {
+		functions.ListarReportesBodegas();
         res.render('reportes', { title: 'Reportes - Maipo Grande', navActive: 'Reportes' });
     } else {
         res.redirect('/');
@@ -797,36 +798,9 @@ router.get('/reportes', function(req, res) {
 // CRUD INFORMES
 router.get('/informes/:id_venta', async function(req, res) {
 	if (req.session.isLoggedIn) {
-		try {
-
-			const { value_id_venta } = req.params;
-			// Hacemos una consulta trayendo todos los datos del informe
-			binds = {"id_venta": value_id_venta};
-			sql = "SELECT id_informe, fecha_creacion, descripcion FROM informe WHERE fk_id_venta = :id_venta";
-			result = await settings.OpenConnection(sql, binds, false);
-
-			// Si llegan datos los guardamos
-			if (result.rows.length > 0) {
-
-				var informeData = [
-					{
-						id_informe: result.rows[0][0],
-						fecha_creacion: moment(result.rows[0][1]).format('YYYY-MM-DD'),
-						descripcion: result.rows[0][2],
-						fk_id_venta: value_id_venta
-					}
-				];
-
-			}
-
-			// Mostramos la vista
-			res.render('informes', { title: 'Informes - Maipo Grande', data:informeData, navActive: 'Dashboard' });
-
-		} catch (error) {
-			res.status(400);
-			res.json({ "error": error });
-			console.log(error);
-		}
+		const { id_venta } = req.params;
+		functions.ListarInformes();
+		res.render('informes', { title: 'Informes - Maipo Grande', fk_id_venta: id_venta, navActive: 'Ventas' });
 	} else {
 		res.redirect('/');
 	}

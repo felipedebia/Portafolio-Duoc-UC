@@ -43,6 +43,11 @@ Iniciar node en la carpeta web
 - VENTA TIENE QUE GENERAR UN INFORME (haciendo mario)
 - FRUTA_RESTANTE
 - DIVIDIR VENTAS A MISVENTAS PARA PRODUCTOR, QUE SEA VEA LOS SUYOS
+- REPORTES
+
+## Pendiente post sabado 13/11
+- Tabla informe: Agregar fecha_actualizacion
+- Tabla producto: Cambiar fecha_actualizacion por fecha_creacion, Agregar tabla estado_producto
 
 
 ## Funciones pendientes:

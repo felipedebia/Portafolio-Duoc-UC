@@ -7,22 +7,11 @@ configOracle = {
     connectString: "localhost:1521/xe"
 }
 
-async function OpenConnection(sql, binds) {
-    try {
-        cnn = await oracledb.getConnection(configOracle);
-        result = await cnn.execute(sql, binds);
-    } catch (err) {
-        console.error(err);
-    } finally {
-        if (cnn) {
-            try {
-                return result;
-                await cnn.close();
-            } catch (err) {
-                console.error(err);
-            }
-        }
-    }
+async function OpenConnection(sql, binds, autoCommit) {
+    let cnn = await oracledb.getConnection(configOracle);
+    let result = await cnn.execute(sql, binds, { autoCommit });
+    cnn.release();
+    return result;
 }
 
 // Correos

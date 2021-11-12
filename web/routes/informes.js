@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const settings = require('../bin/settings');
 var moment = require('moment');
+var functions = require('./functions');
 
 // CRUD INFORME
 
@@ -34,6 +35,9 @@ router.post('/crearInforme/:id_venta', async (req, res) => {
     var fk_id_venta = req.params.id_venta;
     var { descripcion } = req.body;
     var fecha_creacion = functions.obtenerFechaActual();
+    console.log(fk_id_venta)
+    console.log(descripcion)
+    console.log(fecha_creacion)
   
     sql = "INSERT INTO venta(fecha_creacion, descripcion, fk_id_venta) VALUES (to_DATE(:fecha_creacion,'YYYY/MM/DD'), :descripcion, :fk_id_venta)";
     await settings.OpenConnection(sql, [fecha_creacion, descripcion, fk_id_venta], true);
