@@ -128,4 +128,29 @@ router.post("/modificarMiPerfil/:id_usuario", async (req, res) => {
 })
 
 
+//Modificar Contraseña
+router.post("/nuevaContrasena/:id_usuario", async (req, res) => {
+  var value_id_usuario = req.params.id_usuario;
+  var { nuevaContrasena } = req.body;
+
+  // Encriptamos la contraseña del usuario
+  var passwordEncrypted = simpleCryp.encrypt(nuevaContrasena)
+  // Pasamos la cuenta del usuario a 1 = activado
+  var fk_id_estado=1;
+
+  sql = "UPDATE usuario SET fk_id_estado=:fk_id_estado, password=:passwordEncrypted WHERE id_usuario=:value_id_usuario";
+  await settings.OpenConnection(sql, [fk_id_estado,passwordEncrypted,value_id_usuario], true);
+
+  // Si tuvo conexión a la DB
+  if (res.status(200)) {
+    console.log("[!] Contraseña del usuario " + value_id_usuario + " cambiada con éxito");
+    req.session.isLoggedIn = false;
+	  res.redirect('/');
+  } else {
+    console.log("[!] Ocurrió un error al intentar modificar la contraseña del usuario " + value_id_usuario);
+    res.redirect('/');
+  }
+})
+
+
 module.exports = router;

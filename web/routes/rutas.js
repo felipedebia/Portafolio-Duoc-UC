@@ -54,7 +54,13 @@ router.post('/auth', async (req, res) => {
 						req.session.tipo_usuario = result.rows[0][6];
 						req.session.tipo_usuario_texto = result.rows[0][7];
 						req.session.estado_usuario = result.rows[0][8];
-						res.redirect('/dashboard');
+
+						// Si estado_usuario es 3, se redirecciona a crear contraseña
+						if(req.session.estado_usuario==3) {
+							res.redirect('/cambiocontrasena');
+						} else {
+							res.redirect('/dashboard');
+						}
 						console.log("[!] Usuario " + req.body.correo + " conectado con éxito");
 					}
 					
@@ -101,6 +107,16 @@ router.get('/usuarios', function(req, res) {
 		var estado_respuesta = req.query.estado;
 		functions.ListarUsuarios();
         res.render('usuarios', { title: 'Usuarios - Maipo Grande', navActive: 'Usuarios', respuesta: estado_respuesta });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
+
+//CRUD cambioContraseña
+router.get('/cambiocontrasena', function(req, res) {
+    if (req.session.isLoggedIn) {
+        res.render('cambiocontrasena', { title: 'Cambio de contraseña - Maipo Grande' });
     } else {
         res.redirect('/');
     }
