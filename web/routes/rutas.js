@@ -772,6 +772,17 @@ router.get('/reportes', function(req, res) {
 });
 
 
+// CRUD INFORMES
+router.get('/informes/:id_venta', function(req, res) {
+    if (req.session.isLoggedIn) {
+        res.render('informes', { title: 'Informes - Maipo Grande', navActive: 'Informes' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
+
+
 // OTROS
 router.get('/plantilla', function(req, res) {
     if (req.session.isLoggedIn) {

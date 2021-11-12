@@ -41,7 +41,7 @@ Iniciar node en la carpeta web
 - LISTADO OFERTAS_TRANSPORTES en MisOfertas (haciendo mario)
 - CREAR DETALLE VENTA (haciendo chris)
 - MisCompras y Pago (haciendo debia)
-- VENTA TIENE QUE GENERAR UN INFORME
+- VENTA TIENE QUE GENERAR UN INFORME (haciendo mario)
 - FRUTA_RESTANTE
 - DIVIDIR VENTAS A MISVENTAS PARA PRODUCTOR, QUE SEA VEA LOS SUYOS
 
@@ -347,6 +347,7 @@ Iniciar node en la carpeta web
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/api_informes/listarInformes  | JSON |
 | GET  | http://localhost:3000/crearInforme/:id_venta  | |
+| GET  | http://localhost:3000/informes/:id_venta  | |
 
 ## CRUD Fruta_Restante
 | Tipo | URL | Retorna |

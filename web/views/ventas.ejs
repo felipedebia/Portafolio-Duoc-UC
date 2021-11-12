@@ -69,27 +69,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="modal fade" id="modalInforme<%= venta.id_venta %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Informes de Venta #
-                                                                        <%= venta.id_venta %>
-                                                                    </h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    xd
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <a href="/crearInforme/<%= venta.id_venta %>"><button class="btn btn-primary" type="button">Crear nuevo informe</button></a>
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                     <tr>
                                                         <th scope="row">
                                                             <%= venta.id_venta %>
@@ -105,7 +84,7 @@
                                                         </td>
                                                         <td>
                                                             <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalVenta<%= venta.id_venta %>">Ver detalles</button>
-                                                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalInforme<%= venta.id_venta %>">Ver informes</button>
+                                                            <a href="/informes/<%= venta.id_venta %>"><button type="button" class="btn btn-warning btn-sm">Ver informes</button></a>
                                                             <a href="/modificarVenta/<%= venta.id_venta %>"><button type="button" class="btn btn-warning btn-sm">Modificar</button></a>
                                                             <a href="../api_ventas/anularVenta/<%= venta.id_venta %>"><button type="button" class="btn btn-warning btn-sm">Anular</button></a>
                                                         </td>

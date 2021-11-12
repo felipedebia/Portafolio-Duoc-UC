@@ -30,7 +30,7 @@ router.get('/listarInformes', async (req, res) => {
 
 
 // Generar informe
-router.post('/generarInforme/:id_venta', async (req, res) => {
+router.post('/crearInforme/:id_venta', async (req, res) => {
     var fk_id_venta = req.params.id_venta;
     var { descripcion } = req.body;
     var fecha_creacion = functions.obtenerFechaActual();
