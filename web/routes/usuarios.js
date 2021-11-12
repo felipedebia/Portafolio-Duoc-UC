@@ -128,7 +128,7 @@ router.post("/modificarMiPerfil/:id_usuario", async (req, res) => {
 })
 
 
-//Modificar Contraseña
+// Nueva contraseña del usuario cuando ingresa por primera vez
 router.post("/nuevaContrasena/:id_usuario", async (req, res) => {
   var value_id_usuario = req.params.id_usuario;
   var { nuevaContrasena } = req.body;

@@ -57,7 +57,7 @@ router.post('/auth', async (req, res) => {
 
 						// Si estado_usuario es 3, se redirecciona a crear contraseña
 						if(req.session.estado_usuario==3) {
-							res.redirect('/cambiocontrasena');
+							res.redirect('/cambioContrasena');
 						} else {
 							res.redirect('/dashboard');
 						}
@@ -113,10 +113,16 @@ router.get('/usuarios', function(req, res) {
     res.end();
 });
 
-//CRUD cambioContraseña
-router.get('/cambiocontrasena', function(req, res) {
+// Cambio de contraseña cuando usuario ingresa por primera vez
+router.get('/cambioContrasena', function(req, res) {
     if (req.session.isLoggedIn) {
-        res.render('cambiocontrasena', { title: 'Cambio de contraseña - Maipo Grande' });
+		// si estado_usuario es 3
+		if(req.session.estado_usuario==3) {
+			res.render('cambioContrasena', { title: 'Cambio de contraseña - Maipo Grande' });
+		} else {
+			res.redirect('/');
+		}
+        
     } else {
         res.redirect('/');
     }
