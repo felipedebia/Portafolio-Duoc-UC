@@ -19,10 +19,10 @@ router.get('/listarInformes', async (req, res) => {
     result.rows.map(oferta => {
         let ofertaSchema = {
             "id_informe": oferta[0],
-            "fecha_creacion": moment(oferta[2]).format('DD-MM-YYYY'),
-            "fecha_actualizacion": moment(oferta[3]).format('DD-MM-YYYY'),
-            "descripcion": oferta[4],
-            "fk_id_venta": oferta[5]
+            "fecha_creacion": moment(oferta[1]).format('DD-MM-YYYY'),
+            "fecha_actualizacion": moment(oferta[2]).format('DD-MM-YYYY'),
+            "descripcion": oferta[3],
+            "fk_id_venta": oferta[4]
         }
   
         Informes.push(ofertaSchema);
