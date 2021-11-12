@@ -40,9 +40,10 @@ Iniciar node en la carpeta web
 - AGREGAR NUEVA ORDEN_BODEGA Y ORDEN_TRANSPORTE, LUEGO ORDEN_BODEGA Y REPORTE_BODEGA
 - LISTADO OFERTAS_TRANSPORTES en MisOfertas (haciendo mario)
 - CREAR DETALLE VENTA (haciendo chris)
-- PAGO (haciendo debia)
+- MisCompras y Pago (haciendo debia)
 - VENTA TIENE QUE GENERAR UN INFORME
 - FRUTA_RESTANTE
+- DIVIDIR VENTAS A MISVENTAS PARA PRODUCTOR, QUE SEA VEA LOS SUYOS
 
 
 ## Funciones pendientes:
@@ -70,6 +71,7 @@ Iniciar node en la carpeta web
 ### Menú Administrador
 - http://localhost:3000/usuarios
 - http://localhost:3000/contratos *
+- http://localhost:3000/ventas *
 - http://localhost:3000/ordenes *
 - http://localhost:3000/subastas *
 - http://localhost:3000/frutas
@@ -81,9 +83,10 @@ Iniciar node en la carpeta web
 - http://localhost:3000/misofertas *
 - http://localhost:3000/productos *
 - http://localhost:3000/subastas_productor *
-- http://localhost:3000/ventas *
+- http://localhost:3000/misventas *
 
 ### Menú Cliente Externo e Interno *
+- http://localhost:3000/miscompras *
 - http://localhost:3000/mispedidos *
 
 ### Menú Transportista
