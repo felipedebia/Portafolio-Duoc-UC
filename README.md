@@ -346,7 +346,7 @@ Iniciar node en la carpeta web
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/api_informes/listarInformes  | JSON |
-| GET  | http://localhost:3000/api_informes/generarInforme/:id_venta  | |
+| GET  | http://localhost:3000/crearInforme/:id_venta  | |
 
 ## CRUD Fruta_Restante
 | Tipo | URL | Retorna |
