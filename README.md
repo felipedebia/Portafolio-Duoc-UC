@@ -66,6 +66,7 @@ Iniciar node en la carpeta web
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Sanitizar todas las entradas de texto
 - PARA EL FINAL: Comprobación de rango para entrar a las páginas
+- CUANDO ESTE PAGINA ARRIBA: Cambiar dirección de logos en templates de correos
 
 ## Otros
 - http://localhost:3000/plantilla

@@ -47,19 +47,19 @@ transporter.on('token', token => {
 
 // setup e-mail data with unicode symbols
 
-function enviarCorreo(para, tema, template) {
+function enviarCorreo(para, tema, templateName) {
     
-    ejs.renderFile(__dirname + "/" + template + ".ejs", { correo: 'Stranger', password: 'asdkasd' }, function (err, data) {
+    ejs.renderFile(process.cwd() + templateDir + templateName + ".ejs", { correo: 'Stranger', password: 'asdkasd' }, function (err, data) {
         if (err) {
             console.log(err);
         } else {
 
             let mailOptions = {
 
-                from    : user_name, // sender address
-                to      : para, // list of receivers
-                subject : tema, // Subject line
-                html    : data, // html body
+                from    : user_name,
+                to      : para,
+                subject : tema,
+                html    : data,
         
                 auth : {
                     user         : user_name,
@@ -74,7 +74,7 @@ function enviarCorreo(para, tema, template) {
                 if (err) {
                     console.log(err);
                 } else {
-                    console.log('Correo enviado con éxito: ' + info.response);
+                    console.log('Correo electrónico enviado con éxito: ' + info.response);
                 }
             });
         }
