@@ -21,6 +21,7 @@ var segurosRouter = require('./routes/seguros');
 var informesRouter = require('./routes/informes');
 var frutasRestantesRouter = require('./routes/frutasRestantes');
 var reportesRouter = require('./routes/Reportes');
+var misComprasRouter = require('./routes/miscompras');
 
 // Login
 var bodyParser = require('body-parser');
@@ -78,6 +79,7 @@ app.use('/api_seguros', segurosRouter);
 app.use('/api_informes', informesRouter);
 app.use('/api_frutasrestantes', frutasRestantesRouter);
 app.use('/api_reportes', reportesRouter);
+app.use('/api_miscompras', misComprasRouter);
 
 // Para mostrar errores
 app.use(function(req, res, next) {

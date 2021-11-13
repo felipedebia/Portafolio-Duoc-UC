@@ -333,6 +333,22 @@ async function ListarReportesBodegas() {
 };
 var listarReportesBodegas = ListarReportesBodegas();
 
+
+// Función API ListaMisCompras
+async function ListarMisCompras() {
+    return new Promise(function(resolve, reject) {
+        request('http://localhost:3000/api_miscompras/listarMisCompras', function(error, response, body) {
+            if (error) return reject(error);
+            importedJSON = JSON.parse(body);
+            console.log('\x1b[37m', '[!] ListarMisCompras cargado');
+            return resolve(importedJSON);
+        });
+    });
+};
+
+var listarMisCompras = ListarMisCompras();
+
+
 module.exports ={
 	'obtenerFechaActual': obtenerFechaActual,
 	'agregarMesAFecha': agregarMesAFecha,
@@ -356,5 +372,6 @@ module.exports ={
 	'ListarProductos': ListarProductos,
 	'ListarInformes': ListarInformes,
 	'ListarFrutasRestantes': ListarFrutasRestantes,
-	'ListarReportesBodegas': ListarReportesBodegas
+	'ListarReportesBodegas': ListarReportesBodegas,
+	'ListarMisCompras': ListarMisCompras
 }

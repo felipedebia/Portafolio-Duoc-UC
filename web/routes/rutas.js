@@ -768,6 +768,18 @@ router.get('/reportes', function(req, res) {
 });
 
 
+// CRUD Mis Compras
+router.get('/miscompras', function(req, res) {
+    if (req.session.isLoggedIn) {
+        functions.ListarMisCompras();
+        res.render('miscompras', { title: 'Mis compras - Maipo Grande', navActive: 'MisCompras' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
+
+
 // CRUD INFORMES
 router.get('/informes/:id_venta', async function(req, res) {
 	if (req.session.isLoggedIn) {
