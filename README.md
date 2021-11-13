@@ -45,7 +45,7 @@ Iniciar node en la carpeta web
 
 ## Funciones pendientes:
 
-- Cambiar todos los sql a try catch como en informes/id_venta
+- Cambiar todos los sql a try catch
 - Gráficos de página Reportes
 - Contadores de Usuarios, Frutas, Ventas y Subastas para la página dashboard
 - Implementar subida de archivos a Pago como en Contrato
@@ -57,7 +57,7 @@ Iniciar node en la carpeta web
 - Agregar peso maximo a la subida de documentos (contrato, seguro y pago)
 - ModificarProducto : Agregar estado a la vista y api
 - ListarProducto: Agregar estado a la vista y api
-- Agregar limite carasteres (2000) a descripción en informes
+- Agregar limite carasteres (2000) a descripción en informes (vista)
 - Agregar PDF boton cuando se ve un informe
 - ¿Tiene refrigeración?: 1 en misofertas_transporte, ver oferta
 - Anular oferta en misofertas no funca
