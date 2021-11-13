@@ -65,6 +65,7 @@ Iniciar node en la carpeta web
 - POST SABADO: en pagina Pedidos, agregar listado de pedidos finalizados
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
+- PARA EL FINAL: Sanitizar todas las entradas de texto
 - PARA EL FINAL: Comprobación de rango para entrar a las páginas
 
 ## Otros
