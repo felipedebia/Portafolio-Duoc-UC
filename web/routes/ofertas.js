@@ -70,7 +70,7 @@ router.get('/listarOfertasTransportes', async (req, res) => {
       let ofertaSchema = {
           "id_ofertaT": oferta[0],
           "cantidad": oferta[1],
-          "fecha_creacion": oferta[2],
+          "fecha_creacion": moment(oferta[2]).format('DD-MM-YYYY'),
           "tiene_refrigeracion": oferta[3],
           "precio_final": oferta[4],
           "peso_total": oferta[5],

@@ -47,12 +47,14 @@
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <span><strong>Fecha de creación:</strong> <%= oferta_transporte.fecha_creacion %></span></br></br>
-                                                                        <span><strong>Precio por kilo:</strong> <%= oferta_transporte.precio_por_kilo %> </span></br></br>
+                                                                        <span><strong>¿Tiene refrigeración?:</strong> <%= oferta_transporte.tiene_refrigeracion %> </span></br></br>
                                                                         <span><strong>Cantidad:</strong> <%= oferta_transporte.cantidad %></span></br></br>
+                                                                        <span><strong>Peso total:</strong> <%= oferta_transporte.peso_total %> </span></br></br>
+                                                                        <span><strong>Precio final:</strong> <%= oferta_transporte.precio_final %> </span></br></br>
                                                                         <span><strong>Estado de la oferta:</strong> <%= oferta_transporte.fk_texto_estado %></span>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <a href="/subasta_fruta/<%= oferta_transporte.fk_id_subastaT %>"><button class="btn btn-primary" type="button">Ver subasta</button></a>
+                                                                        <a href="/subasta_transporte/<%= oferta_transporte.fk_id_subastaT %>"><button class="btn btn-primary" type="button">Ver subasta</button></a>
                                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                                                     </div>
                                                                 </div>
