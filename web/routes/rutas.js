@@ -540,38 +540,14 @@ router.get('/subasta_transporte/:id_subastaT', async function(req, res, next) {
 
 // CRUD MISPEDIDOS
 router.get('/mispedidos', async function(req, res) {
-	if (req.session.isLoggedIn) {
-
-		// Hacemos una consulta trayendo todos los pedidos del usuario
-		binds = {"id_usuario": req.session.id_usuario};
-		sql = "SELECT id_pedido, direccion_despacho, fecha_creacion, fk_id_tipo, fk_id_ciudad, fk_id_estado FROM pedido WHERE fk_id_usuario = :id_usuario";
-		result = await settings.OpenConnection(sql, binds, false);
-
-		// Si los datos estan correctos
-		if (result.rows.length > 0) {
-			// Asignamos los valores de la consulta a las variables
-			var pedidosData = [
-				{
-					id_pedido: result.rows[0][0],
-					direccion_despacho: result.rows[0][1],
-					fecha_creacion: moment(result.rows[0][2]).format('YYYY-MM-DD'),
-					fk_id_tipo: result.rows[0][3],
-					fk_id_ciudad: result.rows[0][4],
-					fk_id_usuario: req.session.id_usuario,
-					fk_id_estado: result.rows[0][6]
-				  }
-			];
-
-			// Mostramos la vista
-			res.render('mispedidos', { title: 'Mis pedidos - Maipo Grande', data:pedidosData, navActive: 'MisPedidos' });
-		} else {
-			res.send('Error al obtener datos de la base de datos');
-		}
-	} else {
-		res.redirect('/');
-	}
-	res.end();
-})
+    if (req.session.isLoggedIn) {
+        functions.ListarPedidos();
+        res.render('misPedidos', { title: 'Mis pedidos - Maipo Grande', navActive: 'MisPedidos' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
 
 
 router.get('/pedido_detalles/:id_pedido', function(req, res) {
@@ -636,38 +612,15 @@ router.get('/ordenes_transportes', function(req, res) {
 // CRUD OFERTAS
 
 router.get('/misofertas', async function(req, res) {
-	if (req.session.isLoggedIn) {
-
-		// Hacemos una consulta trayendo todos los pedidos del usuario
-		binds = {"id_usuario": req.session.id_usuario};
-		sql = "SELECT id_pedido, direccion_despacho, fecha_creacion, fk_id_tipo, fk_id_ciudad, fk_id_estado FROM pedido WHERE fk_id_usuario = :id_usuario";
-		result = await settings.OpenConnection(sql, binds, false);
-
-		// Si los datos estan correctos
-		if (result.rows.length > 0) {
-			// Asignamos los valores de la consulta a las variables
-			var pedidosData = [
-				{
-					id_pedido: result.rows[0][0],
-					direccion_despacho: result.rows[0][1],
-					fecha_creacion: moment(result.rows[0][2]).format('YYYY-MM-DD'),
-					fk_id_tipo: result.rows[0][3],
-					fk_id_ciudad: result.rows[0][4],
-					fk_id_usuario: req.session.id_usuario,
-					fk_id_estado: result.rows[0][6]
-				  }
-			];
-
-			// Mostramos la vista
-			res.render('misofertas', { title: 'Mis ofertas - Maipo Grande', data:pedidosData, navActive: 'MisOfertas' });
-		} else {
-			res.send('Error al obtener datos de la base de datos');
-		}
-	} else {
-		res.redirect('/');
-	}
-	res.end();
-})
+    if (req.session.isLoggedIn) {
+		functions.ListarOfertasProductores();
+		functions.ListarOfertasTransportes();
+        res.render('misOfertas', { title: 'Mis ofertas - Maipo Grande', navActive: 'MisOfertas' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
 
 
 router.get('/crearOfertaProductor/:id_subastaF', async function(req, res, next) {
@@ -720,6 +673,16 @@ router.get('/ventas', function(req, res) {
     res.end();
 });
 
+
+router.get('/misVentas', function(req, res) {
+    if (req.session.isLoggedIn) {
+		functions.ListarVentas();
+        res.render('misVentas', { title: 'Mis ventas - Maipo Grande', navActive: 'MisVentas' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
 
 
 // CRUD SEGUROS

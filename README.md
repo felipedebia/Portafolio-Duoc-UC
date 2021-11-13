@@ -282,11 +282,10 @@ Iniciar node en la carpeta web
 ## CRUD Informe
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
-| GET  | http://localhost:3000/informes  |  |
+| GET  | http://localhost:3000/informes/:id_venta  |  |
 | GET  | http://localhost:3000/api_informes/listarInformes  | JSON |
-| GET  | http://localhost:3000/modificarInforme/:id_informe  |  |
-| POST | http://localhost:3000/api_informes/anularInforme/:id_informe  | |
-| GET  | http://localhost:3000/informe/:id_venta  |  |
+| POST | http://localhost:3000/api_informes/modificarInforme/:id_informe  | 
+| GET  | http://localhost:3000/api_informes/eliminarInforme/:id_informe  | |
 
 ## CRUD Subasta Frutas
 | Tipo | URL | Retorna |
