@@ -38,7 +38,8 @@ Iniciar node en la carpeta web
 
 - AGREGAR NUEVA OFERTA_PRODUCTOR (haciendo mario)
 - AGREGAR NUEVA ORDEN_BODEGA Y ORDEN_TRANSPORTE, LUEGO ORDEN_BODEGA Y REPORTE_BODEGA
-- LISTADO OFERTAS_TRANSPORTES en MisOfertas y poner los joins (haciendo mario)
+- LISTADO OFERTAS_TRANSPORTES en MisOfertas (haciendo mario)
+- ARREGLAR ANULAR DE MISOFERTAS
 - MisCompras y Pago (haciendo debia)
 - FRUTA_RESTANTE
 - DIVIDIR VENTAS A MISVENTAS PARA PRODUCTOR, QUE SEA VEA LOS SUYOS
@@ -59,6 +60,7 @@ Iniciar node en la carpeta web
 - ModificarProducto : Agregar estado
 - ListarProducto: Agregar estado
 - Agregar limite carasteres (2000) a descripción en informes
+- Agregar PDF boton cuando se ve un informe
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Comprobación de rango para entrar a las páginas
@@ -81,7 +83,7 @@ Iniciar node en la carpeta web
 
 ### Menú Productor
 
-- http://localhost:3000/misofertas *
+- http://localhost:3000/misofertas_productor *
 - http://localhost:3000/productos *
 - http://localhost:3000/subastas_productor *
 - http://localhost:3000/misventas *
@@ -91,7 +93,7 @@ Iniciar node en la carpeta web
 - http://localhost:3000/mispedidos *
 
 ### Menú Transportista
-- http://localhost:3000/misofertas *
+- http://localhost:3000/misofertas_transportes *
 - http://localhost:3000/subastas_transporte *
 
 ### Menú Consultor

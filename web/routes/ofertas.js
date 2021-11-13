@@ -61,7 +61,7 @@ router.get("/anularOfertaProductor/:id_ofertaP", async (req, res) => {
 router.get('/listarOfertasTransportes', async (req, res) => {
   
   binds = {};
-  sql = "SELECT id_ofertaT, cantidad, fecha_creacion, tiene_refrigeracion, precio_final, peso_total, fk_id_usuario, fk_id_subastaT, fk_id_estado FROM oferta_transporte";
+  sql = "SELECT id_ofertaT, cantidad, fecha_creacion, tiene_refrigeracion, precio_final, peso_total, fk_id_usuario, fk_id_subastaT, fk_id_estado, estado_subastaT.descripcion FROM oferta_transporte JOIN estado_subastaT ON oferta_transporte.fk_id_estado = estado_subastaT.id_estado";
   result = await settings.OpenConnection(sql, binds, true);
 
   OfertasTransportes = [];
@@ -76,7 +76,8 @@ router.get('/listarOfertasTransportes', async (req, res) => {
           "peso_total": oferta[5],
           "fk_id_usuario": oferta[6],
           "fk_id_subastaT": oferta[7],
-          "fk_id_estado": oferta[8]
+          "fk_id_estado": oferta[8],
+          "fk_texto_estado": oferta[9]
       }
 
       OfertasTransportes.push(ofertaSchema);

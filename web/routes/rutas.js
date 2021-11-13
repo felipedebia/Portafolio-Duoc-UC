@@ -611,11 +611,21 @@ router.get('/ordenes_transportes', function(req, res) {
 
 // CRUD OFERTAS
 
-router.get('/misofertas', async function(req, res) {
+router.get('/misofertas_productor', async function(req, res) {
     if (req.session.isLoggedIn) {
 		functions.ListarOfertasProductores();
+        res.render('misOfertas_productor', { title: 'Mis ofertas Productor - Maipo Grande', navActive: 'MisOfertas_Productor' });
+    } else {
+        res.redirect('/');
+    }
+    res.end();
+});
+
+
+router.get('/misofertas_transporte', async function(req, res) {
+    if (req.session.isLoggedIn) {
 		functions.ListarOfertasTransportes();
-        res.render('misOfertas', { title: 'Mis ofertas - Maipo Grande', navActive: 'MisOfertas' });
+        res.render('misOfertas_transporte', { title: 'Mis ofertas Transporte - Maipo Grande', navActive: 'MisOfertas_Transporte' });
     } else {
         res.redirect('/');
     }

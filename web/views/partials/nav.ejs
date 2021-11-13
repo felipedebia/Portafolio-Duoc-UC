@@ -83,10 +83,16 @@
                             <p>Seguros</p>
                         </a>
                     </li>
-                    <li class="nav-item <% if (navActive == 'MisOfertas'){ %>active<% } %>">
-                        <a class="nav-link" href="../misofertas">
+                    <li class="nav-item <% if (navActive == 'MisOfertas_Productor'){ %>active<% } %>">
+                        <a class="nav-link" href="../misofertas_productor">
                             <i class="material-icons">loyalty</i>
                             <p>Mis ofertas (Productor)</p>
+                        </a>
+                    </li>
+                    <li class="nav-item <% if (navActive == 'MisOfertas_Transporte'){ %>active<% } %>">
+                        <a class="nav-link" href="../misofertas_transporte">
+                            <i class="material-icons">loyalty</i>
+                            <p>Mis ofertas (Transportista)</p>
                         </a>
                     </li>
                     <li class="nav-item <% if (navActive == 'Productos'){ %>active<% } %>">
@@ -116,9 +122,9 @@
                   <% } %>
                   <% if(session.tipo_usuario == 5){ %>
                     <!-- Menú Productor -->
-                    <li class="nav-item <% if (navActive == 'MisOfertas'){ %>active<% } %>">
-                        <a class="nav-link" href="../misofertas">
-                            <i class="material-icons">local_shipping</i>
+                    <li class="nav-item <% if (navActive == 'MisOfertas_Productor'){ %>active<% } %>">
+                        <a class="nav-link" href="../misofertas_productor">
+                            <i class="material-icons">loyalty</i>
                             <p>Mis ofertas</p>
                         </a>
                     </li>
@@ -152,8 +158,8 @@
                   <% } %>
                   <% if(session.tipo_usuario == 2){ %>
                     <!-- Menú Transportista -->
-                    <li class="nav-item <% if (navActive == 'MisOfertas'){ %>active<% } %>">
-                        <a class="nav-link" href="../misofertas">
+                    <li class="nav-item <% if (navActive == 'MisOfertas_Transporte'){ %>active<% } %>">
+                        <a class="nav-link" href="../misofertas_transporte">
                             <i class="material-icons">loyalty</i>
                             <p>Mis ofertas</p>
                         </a>

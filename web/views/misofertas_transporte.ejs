@@ -10,12 +10,6 @@
                                     <span class="nav-tabs-title">Mis ofertas:</span>
                                     <ul class="nav nav-tabs" data-tabs="tabs">
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="#listadoOfertasProductores" data-toggle="tab">
-                                                <i class="material-icons">format_list_bulleted</i> Listado de Ofertas Productores
-                                                <div class="ripple-container"></div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
                                             <a class="nav-link" href="#listadoOfertasTransportes" data-toggle="tab">
                                                 <i class="material-icons">format_list_bulleted</i> Listado de Ofertas Transportes
                                                 <div class="ripple-container"></div>
@@ -27,38 +21,38 @@
                         </div>
                         <div class="card-body">
                             <div class="tab-content">
-                                <div class="tab-pane active" id="listadoOfertasProductores">
+                                <div class="tab-pane active" id="listadoOfertasTransportes">
                                     <div class="card-body table-responsive">
                                         <table id="datatable_OfertasProductores" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                             <thead class="text-info">
                                                 <th scope="col">N°</th>
-                                                <th scope="col">Producto</th>
+                                                <th scope="col">Fecha de creación</th>
                                                 <th scope="col">Cantidad</th>
                                                 <th scope="col">Estado</th>
                                                 <th scope="col">Opciones</th>
                                             </thead>
                                             <tbody>
-                                                <% for(var oferta_productor of OfertasProductores) { %>
-                                                    <% if (oferta_productor.fk_id_usuario == session.id_usuario){ %>
-                                                        <div class="modal fade" id="modalOfertaProductor<%= oferta_productor.id_ofertaP %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <% for(var oferta_transporte of OfertasTransportes) { %>
+                                                    <% if (oferta_transporte.fk_id_usuario == session.id_usuario){ %>
+                                                        <div class="modal fade" id="modalOfertaTransporte<%= oferta_transporte.id_ofertaT %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title" id="exampleModalLabel">ID Oferta #
-                                                                            <%= oferta_productor.id_ofertaP %>
+                                                                            <%= oferta_transporte.id_ofertaT %>
                                                                         </h5>
                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <span><strong>Fecha de creación:</strong> <%= oferta_productor.fecha_creacion %></span></br></br>
-                                                                        <span><strong>Producto:</strong> <%= oferta_productor.fruta_fk_nombre %> - <strong>Calidad:</strong> <%= oferta_productor.frutacalidad_fk_nombre %> - <strong>Cantidad (en KG):</strong> <%= oferta_productor.producto_fk_cantidad %></span></br></br>
-                                                                        <span><strong>Cantidad:</strong> <%= oferta_productor.cantidad %></span></br></br>
-                                                                        <span><strong>Estado de la oferta:</strong> <%= oferta_productor.fk_texto_estado %></span>
+                                                                        <span><strong>Fecha de creación:</strong> <%= oferta_transporte.fecha_creacion %></span></br></br>
+                                                                        <span><strong>Precio por kilo:</strong> <%= oferta_transporte.precio_por_kilo %> </span></br></br>
+                                                                        <span><strong>Cantidad:</strong> <%= oferta_transporte.cantidad %></span></br></br>
+                                                                        <span><strong>Estado de la oferta:</strong> <%= oferta_transporte.fk_texto_estado %></span>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <a href="/subasta_fruta/<%= oferta_productor.fk_id_subastaF %>"><button class="btn btn-primary" type="button">Ver subasta</button></a>
+                                                                        <a href="/subasta_fruta/<%= oferta_transporte.fk_id_subastaT %>"><button class="btn btn-primary" type="button">Ver subasta</button></a>
                                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                                                     </div>
                                                                 </div>
@@ -66,20 +60,20 @@
                                                         </div>
                                                         <tr>
                                                             <th scope="row">
-                                                                <%= oferta_productor.id_ofertaP %>
+                                                                <%= oferta_transporte.id_ofertaT %>
                                                             </th>
                                                             <td>
-                                                                <%= oferta_productor.fruta_fk_nombre %> - <%= oferta_productor.frutacalidad_fk_nombre %>
+                                                                <%= oferta_transporte.fecha_creacion %>
                                                             </td>
                                                             <td>
-                                                                <%= oferta_productor.cantidad %>
+                                                                <%= oferta_transporte.cantidad %>
                                                             </td>
                                                             <td>
-                                                                <%= oferta_productor.fk_texto_estado %>
+                                                                <%= oferta_transporte.fk_texto_estado %>
                                                             </td>
                                                             <td>
-                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalOfertaProductor<%= oferta_productor.id_ofertaP %>">Ver oferta</button>
-                                                                <a href="../api_ofertas/anularOfertaProductor/<%= oferta_productor.id_ofertaP %>"><button type="button" class="btn btn-info btn-sm">Anular</button></a>
+                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalOfertaTransporte<%= oferta_transporte.id_ofertaT %>">Ver oferta</button>
+                                                                <a href="../api_ofertas/anularOfertaTransporte/<%= oferta_transporte.id_ofertaT %>"><button type="button" class="btn btn-info btn-sm">Anular</button></a>
                                                             </td>
                                                         </tr>
                                                     <% } %>
@@ -100,48 +94,6 @@
 
 <script>
     $(document).ready(function() {
-      $('#datatable_OfertasProductores').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ],
-        "pagingType": "full_numbers",
-        "pageLength": 15,
-        "bLengthChange": false,
-        responsive: true,
-        language: {
-            search: "_INPUT_",
-            info: "Viendo página _PAGE_ de _PAGES_",
-            zeroRecords: "No hay información que mostrar",
-            infoEmpty: "Sin información",
-            searchPlaceholder: "Buscar oferta",
-            "paginate": {
-                "first": "Primero",
-                "last": "Último",
-                "next": "Siguiente",
-                "previous": "Anterior"
-            },
-            "buttons": {
-                "copy": "Copiar",
-                "colvis": "Visibilidad",
-                "collection": "Colección",
-                "colvisRestore": "Restaurar visibilidad",
-                "copySuccess": {
-                    "1": "Copiada 1 fila al portapapeles",
-                    "_": "Copiadas %d fila al portapapeles"
-                },
-                "copyTitle": "Copiar al portapapeles",
-                "csv": "CSV",
-                "excel": "Excel",
-                "pageLength": {
-                    "-1": "Mostrar todas las filas",
-                    "_": "Mostrar %d filas"
-                },
-                "pdf": "PDF",
-                "print": "Imprimir"
-            }
-        }
-      });
       $('#datatable_OfertasTransporte').DataTable({
         dom: 'Bfrtip',
         buttons: [
@@ -184,7 +136,6 @@
             }
         }
       });
-      var tabla_OfertasProductores = $('#datatable_OfertasProductores').DataTable();
       var tabla_OfertasTransporte = $('#datatable_OfertasTransporte').DataTable();
     });
 </script>
