@@ -45,7 +45,7 @@ router.get('/listarUsuarios', async (req, res) => {
 
 // Agregar usuario
 router.post('/crearUsuario', async (req, res) => {
-  var { num_documento, fk_id_tipo, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password_bind } = req.body;
+  var { num_documento, fk_id_tipo, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password } = req.body;
   // Definimos la cuenta activada
   var fk_id_estado = 1;
 
@@ -59,7 +59,7 @@ router.post('/crearUsuario', async (req, res) => {
     res.redirect('/usuarios/?estado=' + string);
   } else {
     // Encriptamos la contraseña del usuario
-    var passwordEncrypted = simpleCryp.encrypt(password_bind)
+    var passwordEncrypted = simpleCryp.encrypt(password)
 
     // Creamos el nuevo usuario
     sql = "INSERT INTO usuario(num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password, fk_id_estado, fk_id_tipo) VALUES (:num_documento,:nombre,:apellido,to_DATE(:fecha_nacimiento,'YYYY/MM/DD'),:genero,:correo,:telefono,:passwordEncrypted,:fk_id_estado,:fk_id_tipo)";

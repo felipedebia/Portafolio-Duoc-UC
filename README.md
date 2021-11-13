@@ -38,8 +38,6 @@ Iniciar node en la carpeta web
 
 - AGREGAR NUEVA OFERTA_PRODUCTOR (haciendo mario)
 - AGREGAR NUEVA ORDEN_BODEGA Y ORDEN_TRANSPORTE, LUEGO ORDEN_BODEGA Y REPORTE_BODEGA
-- LISTADO OFERTAS_TRANSPORTES en MisOfertas (haciendo mario)
-- ARREGLAR ANULAR DE MISOFERTAS
 - MisCompras y Pago (haciendo debia)
 - FRUTA_RESTANTE
 - DIVIDIR VENTAS A MISVENTAS PARA PRODUCTOR, QUE SEA VEA LOS SUYOS
@@ -61,8 +59,9 @@ Iniciar node en la carpeta web
 - ListarProducto: Agregar estado
 - Agregar limite carasteres (2000) a descripción en informes
 - Agregar PDF boton cuando se ve un informe
-- Registrar nuevo usuario, la pass encriptada no la reconoce al iniciar sesión, cuando cambia la contraseña por primera vez si funca la nueva
 - ¿Tiene refrigeración?: 1 en misofertas_transporte, ver oferta
+- Anular oferta en misofertas no funca
+- Añadir filtro a Productos, para que el productor solo vea sus productos
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Comprobación de rango para entrar a las páginas
