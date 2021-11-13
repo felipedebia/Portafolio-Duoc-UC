@@ -46,8 +46,8 @@ router.get('/listarUsuarios', async (req, res) => {
 // Agregar usuario
 router.post('/crearUsuario', async (req, res) => {
   var { num_documento, fk_id_tipo, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password } = req.body;
-  // Definimos la cuenta activada
-  var fk_id_estado = 1;
+  // Definimos la cuenta pendiente de cambiar contraseña
+  var fk_id_estado = 3;
 
   // Consulta para ver si existe el correo
   consulta = "SELECT correo from usuario where correo = :correo";
