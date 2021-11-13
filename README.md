@@ -55,13 +55,12 @@ Iniciar node en la carpeta web
 - Arreglar error de si no existen pedidos, pagina pedidos se cae
 - Arreglar error de si no tienes pedidos, pagina mispedidos se cae
 - Agregar peso maximo a la subida de documentos (contrato, seguro y pago)
-- ModificarProducto : Agregar estado
-- ListarProducto: Agregar estado
+- ModificarProducto : Agregar estado a la vista y api
+- ListarProducto: Agregar estado a la vista y api
 - Agregar limite carasteres (2000) a descripción en informes
 - Agregar PDF boton cuando se ve un informe
 - ¿Tiene refrigeración?: 1 en misofertas_transporte, ver oferta
 - Anular oferta en misofertas no funca
-- Añadir filtro a Productos, para que el productor solo vea sus productos
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Comprobación de rango para entrar a las páginas
