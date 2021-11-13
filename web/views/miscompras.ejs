@@ -82,46 +82,46 @@
                                                     </div>
                                                     <div class="modal fade" id="modalGenerarDetalle<%= miCompra.id_venta %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">ID Venta #
-                                                                        <%= miCompra.id_venta %>
-                                                                    </h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="mt-4">
-                                                                        <h4><strong>Total a pagar (clp): $<%=miCompra.precio_final%></strong></h4>
+                                                            <form action="../api_miscompras/crearpago" enctype="multipart/form-data" method="POST"></form>
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">ID Venta #
+                                                                            <%= miCompra.id_venta %>
+                                                                        </h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
                                                                     </div>
-                                                                    <div class="row">
-                                                                        <div class="col-xs-12 col-sm-12 col-md-12">
-                                                                            <div class="form-group my-label required">
-                                                                                <label>Paga a través de Flow!</label>
-                                                                                <a href="https://www.flow.cl/btn.php?token=s5us8ug" target="_blank">
-                                                                                    <div style="width: 200px;background: orange; border-radius: 10px; padding: 10px 20px; text-decoration: none; color:white;text-align: center;">
-                                                                                        PAGAR
-                                                                                    </div>
-                                                                                </a>
+                                                                    <div class="modal-body">
+                                                                        <div class="mt-4">
+                                                                            <h4><strong>Total a pagar (clp): $<%=miCompra.precio_final%></strong></h4>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                                                                <div class="form-group my-label required">
+                                                                                    <label>Paga a través de Flow!</label>
+                                                                                    <a href="https://www.flow.cl/btn.php?token=s5us8ug" target="_blank">
+                                                                                        <div style="width: 200px;background: orange; border-radius: 10px; padding: 10px 20px; text-decoration: none; color:white;text-align: center;">
+                                                                                            PAGAR
+                                                                                        </div>
+                                                                                    </a>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <form action="../api_miscompras/crearpago" enctype="multipart/form-data" method="POST">
-                                                                    <div class="col-xs-12 col-sm-12 col-md-12">
-                                                                        <span>Subir comprobante, Formatos permitidos: DOC, DOCX, PDF</span>
+                                                                    <div class="col-xs-12 col-sm-12 col-md-12 mb-4">
+                                                                        <span>Subir comprobante, formatos permitidos: DOC, DOCX, PDF</span>
                                                                         <input type="file" id="url_documento" name="url_documento" />
                                                                     </div>
                                                                     <input id="fk_id_venta" name="fk_id_venta" type="hidden" value="<%= miCompra.id_venta %>">
                                                                     <input id="monto" name="monto" type="hidden" value="<%= miCompra.precio_final %>">
                                                                     <input id="descripcion" name="descripcion" type="hidden" value="<%= session.id_usuario %>">
-                                                                    <button class="btn btn-warning mb-2 mt-2 pull-right" type="submit" data-toggle="notify" data-placement="top" data-align="right" data-type="default" data-icon="notifications">Enviar comprobante</button>
-                                                                </form>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                    <div class="modal-footer">
+                                                                        <button class="btn btn-primary" type="submit">Enviar comprobante</button>
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                     <tr>

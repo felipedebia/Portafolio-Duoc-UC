@@ -76,28 +76,28 @@ Iniciar node en la carpeta web
 
 ### Menú Administrador
 - http://localhost:3000/usuarios
-- http://localhost:3000/contratos *
-- http://localhost:3000/ventas *
+- http://localhost:3000/contratos
+- http://localhost:3000/ventas
 - http://localhost:3000/ordenes *
 - http://localhost:3000/subastas *
 - http://localhost:3000/frutas
-- http://localhost:3000/pedidos *
-- http://localhost:3000/seguros *
+- http://localhost:3000/pedidos
+- http://localhost:3000/seguros
 
 ### Menú Productor
 
-- http://localhost:3000/misofertas_productor *
-- http://localhost:3000/productos *
+- http://localhost:3000/misofertas_productor
+- http://localhost:3000/productos
 - http://localhost:3000/subastas_productor *
 - http://localhost:3000/misventas *
 
-### Menú Cliente Externo e Interno *
-- http://localhost:3000/miscompras *
-- http://localhost:3000/mispedidos *
+### Menú Cliente Externo e Interno
+- http://localhost:3000/miscompras
+- http://localhost:3000/mispedidos
 
 ### Menú Transportista
-- http://localhost:3000/misofertas_transportes *
-- http://localhost:3000/subastas_transporte *
+- http://localhost:3000/misofertas_transportes
+- http://localhost:3000/subastas_transporte
 
 ### Menú Consultor
 - http://localhost:3000/reportes *
@@ -363,6 +363,11 @@ Iniciar node en la carpeta web
 | GET  | http://localhost:3000/api_informes/listarInformes  | JSON |
 | GET  | http://localhost:3000/crearInforme/:id_venta  | |
 | GET  | http://localhost:3000/informes/:id_venta  | |
+
+## CRUD Mis_Compras
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/api_miscompras/listarMisCompras  | JSON |
 
 ## CRUD Fruta_Restante
 | Tipo | URL | Retorna |
