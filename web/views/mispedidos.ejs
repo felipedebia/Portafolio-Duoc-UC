@@ -94,8 +94,12 @@
                                                             </td>
                                                             <td>
                                                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPedido<%= pedido.id_pedido %>">Ver detalles</button>
-                                                                <a href="/pedido_detalles/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Modificar</button></a>
-                                                                <a href="../api_pedidos/anularMiPedido/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Anular</button></a>
+                                                                <% if(pedido.fk_id_estado == 2){ %>
+                                                                    <a href="/pedido_detalles/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Modificar</button></a>
+                                                                <% } %>
+                                                                <% if(pedido.fk_id_estado == 1 || pedido.fk_id_estado == 2){ %>
+                                                                    <a href="../api_pedidos/anularMiPedido/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Anular</button></a>
+                                                                <% } %>
                                                             </td>
                                                         </tr>
                                                     <% } %>

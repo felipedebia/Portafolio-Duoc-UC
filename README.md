@@ -63,7 +63,6 @@ Iniciar node en la carpeta web
 - Anular oferta en misofertas no funca
 - POST SABADO: Cambiar estado_pedido, id 1 a 2 y viceversa, ya que Recepcionado debe ser el 1 y En preparación el 2
 - POST SABADO: en pagina Pedidos, agregar listado de pedidos finalizados
-- POST SABADO: En mispedidos: verdetalles, agregar botón dentro del modal para modificardetallepedidos
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Comprobación de rango para entrar a las páginas
