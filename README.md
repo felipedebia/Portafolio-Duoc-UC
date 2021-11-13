@@ -165,6 +165,7 @@ Iniciar node en la carpeta web
 - 1 Sin revisar
 - 2 Aceptada
 - 3 Rechazada
+- 4 Anulada
 
 ## Estado Pedido
 - 1 En preparación

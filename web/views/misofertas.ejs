@@ -52,14 +52,13 @@
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <span><strong>Fecha de creación:</strong> <%= oferta_productor.fecha_creacion %></span></br>
-                                                                        <span><strong>Producto:</strong> <%= oferta_productor.fk_id_producto %></span></br>
-                                                                        <span><strong>Cantidad:</strong> <%= oferta_productor.cantidad %></span></br>
-                                                                        <span><strong>Estado de la oferta:</strong> <%= oferta_productor.fk_id_estado %></span></br>
-                                                                        <span><strong>Asociada a la subasta:</strong> <%= oferta_productor.fk_id_subastaF %></span>
+                                                                        <span><strong>Fecha de creación:</strong> <%= oferta_productor.fecha_creacion %></span></br></br>
+                                                                        <span><strong>Producto:</strong> <%= oferta_productor.fruta_fk_nombre %> - <strong>Calidad:</strong> <%= oferta_productor.frutacalidad_fk_nombre %> - <strong>Cantidad (en KG):</strong> <%= oferta_productor.producto_fk_cantidad %></span></br></br>
+                                                                        <span><strong>Cantidad:</strong> <%= oferta_productor.cantidad %></span></br></br>
+                                                                        <span><strong>Estado de la oferta:</strong> <%= oferta_productor.fk_texto_estado %></span>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <a href="/subasta_fruta/<%= oferta_productor.fk_id_subastaf %>"><button class="btn btn-primary" type="button">Ver subasta</button></a>
+                                                                        <a href="/subasta_fruta/<%= oferta_productor.fk_id_subastaF %>"><button class="btn btn-primary" type="button">Ver subasta</button></a>
                                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                                                     </div>
                                                                 </div>
@@ -70,17 +69,17 @@
                                                                 <%= oferta_productor.id_ofertaP %>
                                                             </th>
                                                             <td>
-                                                                <%= oferta_productor.fk_id_producto %>
+                                                                <%= oferta_productor.fruta_fk_nombre %> - <%= oferta_productor.frutacalidad_fk_nombre %>
                                                             </td>
                                                             <td>
                                                                 <%= oferta_productor.cantidad %>
                                                             </td>
                                                             <td>
-                                                                <%= oferta_productor.fk_id_estado %>
+                                                                <%= oferta_productor.fk_texto_estado %>
                                                             </td>
                                                             <td>
                                                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalOfertaProductor<%= oferta_productor.id_ofertaP %>">Ver oferta</button>
-                                                                <a href="../api_pedidos/anularMiPedido/<%= oferta_productor.id_ofertaP %>"><button type="button" class="btn btn-info btn-sm">Anular</button></a>
+                                                                <a href="../api_ofertas/anularOfertaProductor/<%= oferta_productor.id_ofertaP %>"><button type="button" class="btn btn-info btn-sm">Anular</button></a>
                                                             </td>
                                                         </tr>
                                                     <% } %>
