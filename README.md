@@ -61,6 +61,9 @@ Iniciar node en la carpeta web
 - Agregar PDF boton cuando se ve un informe
 - ¿Tiene refrigeración?: 1 en misofertas_transporte, ver oferta
 - Anular oferta en misofertas no funca
+- POST SABADO: Cambiar estado_pedido, id 1 a 2 y viceversa, ya que Recepcionado debe ser el 1 y En preparación el 2
+- POST SABADO: en pagina Pedidos, agregar listado de pedidos finalizados
+- POST SABADO: En mispedidos: verdetalles, agregar botón dentro del modal para modificardetallepedidos
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Comprobación de rango para entrar a las páginas
@@ -153,15 +156,24 @@ Iniciar node en la carpeta web
 
 ## Estado contrato
 - 1 Vigente
-- 2 Anulado
+- 2 Expirado
+- 3 Anulado
 
 ## Estado subasta
 - 1 Abierta
 - 2 Cerrada
 
 ## Estado seguro
-- 1 Enviado
-- 2 Cancelado
+- 1 Vigente
+- 2 Expirado
+- 3 Anulado
+
+## Estado venta
+- 1 En preparación
+- 2 Pendiente de pago
+- 3 Rechazada por el cliente
+- 4 Pagada
+- 5 Anulada
 
 ## Estado oferta
 - 1 Sin revisar
@@ -171,7 +183,7 @@ Iniciar node en la carpeta web
 
 ## Estado Pedido
 - 1 En preparación
-- 2 Enviado
+- 2 Recepcionado
 - 3 En revisión
 - 4 En subasta
 - 5 Finalizado

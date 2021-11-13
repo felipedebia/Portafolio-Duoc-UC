@@ -45,7 +45,7 @@
                                             </thead>
                                             <tbody>
                                                 <% for(var pedido of Pedidos) { %>
-                                                    <% if (pedido.fk_id_usuario == session.id_usuario && pedido.fk_id_estado != 6){ %>
+                                                    <% if (pedido.fk_id_usuario == session.id_usuario && pedido.fk_id_estado != 5){ %>
                                                         <div class="modal fade" id="modalPedido<%= pedido.id_pedido %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog" role="document">
                                                                 <div class="modal-content">
