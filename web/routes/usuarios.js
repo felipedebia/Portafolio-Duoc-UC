@@ -81,6 +81,7 @@ router.post('/crearUsuario', async (req, res) => {
         console.log("[!] Usuario " + correo + " creado con éxito");
         var string = "valido";
         res.redirect('/usuarios/?estado=' + string);
+        settings.enviarCorreo('Usuario registrado con éxito - Maipo Grande', 'usuario_registro');
       } else {
         console.log("[!] Ocurrió un error al intentar registrar el usuario " + correo);
         var string = "error";
