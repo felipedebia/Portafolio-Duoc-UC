@@ -61,7 +61,7 @@ Iniciar node en la carpeta web
 - Agregar PDF boton cuando se ve un informe
 - ¿Tiene refrigeración?: 1 en misofertas_transporte, ver oferta
 - Anular oferta en misofertas no funca
-- POST SABADO: en pagina Pedidos, agregar listado de pedidos finalizados
+- En pagina Pedidos, listado de pedidos no filtra bien pedidos estado 6 anulado
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Sanitizar todas las entradas de texto
