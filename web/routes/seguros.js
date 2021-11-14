@@ -25,93 +25,131 @@ var uploadFile = multer({ storage: storage })
 
 // Listar todos los seguros
 router.get('/listarSeguros', async (req, res) => {
+  try {
   
-  binds = {};
-  sql = "SELECT id_seguro, nombre_empresa, url_documento, fecha_inicio, fecha_termino FROM seguro";
-  result = await settings.OpenConnection(sql, binds, true);
+    binds = {};
+    sql = "SELECT id_seguro, nombre_empresa, url_documento, fecha_inicio, fecha_termino FROM seguro";
+    result = await settings.OpenConnection(sql, binds, true);
 
-  Seguros = [];
+    Seguros = [];
 
-  result.rows.map(seguro => {
-      let seguroSchema = {
-          "id_seguro": seguro[0],
-          "nombre_empresa": seguro[1],
-          "url_documento": seguro[2],
-          "fecha_inicio": moment(seguro[3]).format('DD-MM-YYYY'),
-          "fecha_termino": moment(seguro[4]).format('DD-MM-YYYY')
-      }
+    result.rows.map(seguro => {
+        let seguroSchema = {
+            "id_seguro": seguro[0],
+            "nombre_empresa": seguro[1],
+            "url_documento": seguro[2],
+            "fecha_inicio": moment(seguro[3]).format('DD-MM-YYYY'),
+            "fecha_termino": moment(seguro[4]).format('DD-MM-YYYY')
+        }
 
-      Seguros.push(seguroSchema);
-  })
-  res.json({ title: 'Seguros', 'mydata': Seguros });
+        Seguros.push(seguroSchema);
+    })
+    res.json({ title: 'Seguros', 'mydata': Seguros });
+
+  } catch (error) {
+    res.status(400);
+    res.json({ "error": error });
+    console.log(error);
+  }
+
 });
 
 
 // Agregar seguro
 router.post('/crearSeguro', async (req, res) => {
-  var { nombre_empresa, fecha_inicio, fecha_termino } = req.body;
-  var fk_id_estado = '1';
+  try {
 
-  sql = "INSERT INTO seguro(nombre_empresa, fecha_inicio, fecha_termino, fk_id_estado) VALUES (:nombre_empresa, to_DATE(:fecha_inicio,'YYYY/MM/DD'),to_DATE(:fecha_termino,'YYYY/MM/DD'), :fk_id_estado)";
-  await settings.OpenConnection(sql, [nombre_empresa, fecha_inicio, fecha_termino, fk_id_estado], true);
+    var { nombre_empresa, fecha_inicio, fecha_termino } = req.body;
+    var fk_id_estado = '1';
 
-  // Si tuvo conexión a la DB
-  if (res.status(200)) {
-    console.log("[!] Seguro creado con éxito");
+    sql = "INSERT INTO seguro(nombre_empresa, fecha_inicio, fecha_termino, fk_id_estado) VALUES (:nombre_empresa, to_DATE(:fecha_inicio,'YYYY/MM/DD'),to_DATE(:fecha_termino,'YYYY/MM/DD'), :fk_id_estado)";
+    await settings.OpenConnection(sql, [nombre_empresa, fecha_inicio, fecha_termino, fk_id_estado], true);
 
-    //Con esto tomamos el ultimo registro en la tabla seguro para crear tabla rel y redirigir al documentoSeguro y pueda agregar el documento
-    sql2 = "SELECT id_seguro FROM (SELECT * FROM seguro ORDER BY id_seguro DESC ) WHERE rownum = 1";
-    result2 = await settings.OpenConnection(sql2, [], true);
+    // Si tuvo conexión a la DB
+    if (res.status(200)) {
+      console.log("[!] Seguro creado con éxito");
 
-    var idSeguroSql = result2.rows[0];
+      //Con esto tomamos el ultimo registro en la tabla seguro para crear tabla rel y redirigir al documentoSeguro y pueda agregar el documento
+      sql2 = "SELECT id_seguro FROM (SELECT * FROM seguro ORDER BY id_seguro DESC ) WHERE rownum = 1";
+      result2 = await settings.OpenConnection(sql2, [], true);
 
-    res.redirect('/documentoSeguro/' + idSeguroSql);
+      var idSeguroSql = result2.rows[0];
 
-  } else {
-    console.log("[!] Ocurrió un error al intentar crear el seguro ");
-    res.redirect('/seguros');
+      res.redirect('/documentoSeguro/' + idSeguroSql);
+
+    } else {
+      console.log("[!] Ocurrió un error al intentar crear el seguro ");
+      res.redirect('/seguros');
+    }
+
+  } catch (error) {
+    res.status(400);
+    res.send("Ocurrió un error al obtener los datos de la base de datos")
+    console.log(error);
   }
-})
+
+});
 
 
+// Subir documento
 router.post('/subirDocumento/:id_seguro', uploadFile.single('url_documento'), async (req, res, next) => {
-	const file = req.file
-	if (!file) {
-	  const error = new Error('Debes seleccionar un archivo')
-	  error.httpStatusCode = 400
-	  return next(error)
-	}
+  try {
 
-	// Hacemos un update agregando el nombre del archivo al campo url_documento
-	var id_seguro_bind = req.params.id_seguro;
-  var url_documento = req.file.filename;
+    const file = req.file
+    if (!file) {
+      const error = new Error('Debes seleccionar un archivo')
+      error.httpStatusCode = 400
+      return next(error)
+    }
 
-	sql = "UPDATE seguro SET url_documento= :url_documento WHERE id_seguro = :id_seguro_bind";
-  await settings.OpenConnection(sql, [url_documento, id_seguro_bind], true);
+    // Hacemos un update agregando el nombre del archivo al campo url_documento
+    var id_seguro_bind = req.params.id_seguro;
+    var url_documento = req.file.filename;
 
-  if(res.status(200)) {
-    console.log("[!] Documento de Seguro " + id_seguro_bind + " agregado con éxito");
-    res.redirect('/seguros');
-	} else {
-		console.log("[!] Ocurrió un error al intentar agregar un documento al seguro " + id_seguro_bind);
-    res.redirect('/seguros');
-	}
-})
+    sql = "UPDATE seguro SET url_documento= :url_documento WHERE id_seguro = :id_seguro_bind";
+    await settings.OpenConnection(sql, [url_documento, id_seguro_bind], true);
 
-// Anular
-router.get("/anularSeguro/:id_seguro", async(req, res) => {
-  var id_seguro_bind = req.params.id_seguro;
-
-  sql = "UPDATE seguro SET fk_id_estado=2 WHERE id_seguro = :id_seguro_bind";
-  await settings.OpenConnection(sql, [id_seguro_bind], true);
-
-  if(res.status(200)) {
-      console.log("[!] Seguro " + id_seguro_bind + " anulado con éxito");
+    if(res.status(200)) {
+      console.log("[!] Documento de Seguro " + id_seguro_bind + " agregado con éxito");
       res.redirect('/seguros');
-  } else {
-      console.log("[!] Ocurrió un error al intentar anular el seguro " + id_seguro_bind);
+    } else {
+      console.log("[!] Ocurrió un error al intentar agregar un documento al seguro " + id_seguro_bind);
       res.redirect('/seguros');
+    }
+
+  } catch (error) {
+    res.status(400);
+    res.send("Ocurrió un error al obtener los datos de la base de datos")
+    console.log(error);
   }
-})
+
+});
+
+
+// Anular seguro
+router.get("/anularSeguro/:id_seguro", async(req, res) => {
+  try {
+
+    var id_seguro_bind = req.params.id_seguro;
+
+    sql = "UPDATE seguro SET fk_id_estado=2 WHERE id_seguro = :id_seguro_bind";
+    await settings.OpenConnection(sql, [id_seguro_bind], true);
+
+    if(res.status(200)) {
+        console.log("[!] Seguro " + id_seguro_bind + " anulado con éxito");
+        res.redirect('/seguros');
+    } else {
+        console.log("[!] Ocurrió un error al intentar anular el seguro " + id_seguro_bind);
+        res.redirect('/seguros');
+    }
+
+  } catch (error) {
+    res.status(400);
+    res.send("Ocurrió un error al obtener los datos de la base de datos")
+    console.log(error);
+  }
+
+});
+
 
 module.exports = router;

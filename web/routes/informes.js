@@ -9,6 +9,7 @@ var functions = require('./functions');
 
 // Listar todos los Informes
 router.get('/listarInformes', async (req, res) => {
+  try {
   
     binds = {};
     sql = "SELECT id_informe, fecha_creacion, fecha_actualizacion, descripcion, fk_id_venta FROM informe";
@@ -28,11 +29,20 @@ router.get('/listarInformes', async (req, res) => {
         Informes.push(ofertaSchema);
     })
     res.json({title: 'Informes', 'mydata': Informes});
+
+  } catch (error) {
+    res.status(400);
+    res.json({ "error": error });
+    console.log(error);
+  }
+
 });
 
 
 // Generar informe
 router.post('/crearInforme/:id_venta', async (req, res) => {
+  try {
+
     var fk_id_venta = req.params.id_venta;
     var { descripcion } = req.body;
     var fecha_creacion = functions.obtenerFechaActual();
@@ -48,15 +58,23 @@ router.post('/crearInforme/:id_venta', async (req, res) => {
     if(res.status(200)) {
       console.log("[!] Informe de venta creada con éxito");
       res.redirect('/ventas');
-      } else {
-          console.log("[!] Ocurrió un error al intentar crear el informe de venta");
+    } else {
+      console.log("[!] Ocurrió un error al intentar crear el informe de venta");
       res.redirect('/ventas');
-      }
-})
+    }
+
+  } catch (error) {
+    res.status(400);
+    res.send("Ocurrió un error al obtener los datos de la base de datos")
+    console.log(error);
+  }
+
+});
 
 
 // Modificar informe
 router.post("/modificarInforme/:id_informe", async (req, res) => {
+  try {
   
     var id_informe = req.params.id_informe;
     var { descripcion } = req.body;
@@ -73,12 +91,20 @@ router.post("/modificarInforme/:id_informe", async (req, res) => {
       console.log("[!] Ocurrió un error al intentar modificar el informe de venta " + id_informe);
       res.redirect('/ventas');
     }
+
+  } catch (error) {
+    res.status(400);
+    res.send("Ocurrió un error al obtener los datos de la base de datos")
+    console.log(error);
+  }
   
-})
+});
 
 
   // Eliminar informe
 router.get("/eliminarInforme/:id_informe", async (req, res) => {
+  try {
+
     var id_informe = req.params.id_informe;
     
     sql = "DELETE FROM informe WHERE id_informe = :id_informe";
@@ -87,10 +113,18 @@ router.get("/eliminarInforme/:id_informe", async (req, res) => {
     if(res.status(200)) {
       console.log("[!] Informe " + id_informe + " eliminado con éxito");
       res.redirect('/ventas');
-      } else {
-          console.log("[!] Ocurrió un error al intentar eliminar el informe " + id_informe);
+    } else {
+      console.log("[!] Ocurrió un error al intentar eliminar el informe " + id_informe);
       res.redirect('/ventas');
-      }
-  })
+    }
+
+  } catch (error) {
+    res.status(400);
+    res.send("Ocurrió un error al obtener los datos de la base de datos")
+    console.log(error);
+  }
+  
+});
+
 
 module.exports = router;

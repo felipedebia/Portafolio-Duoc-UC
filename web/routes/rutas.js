@@ -86,7 +86,7 @@ router.get('/dashboard', function(req, res) {
 				
 			}
 		];
-		settings.enviarCorreo('fabyold@gmail.com', 'Correo de prueba', 'usuario_registro');
+		//settings.enviarCorreo('fabyold@gmail.com', 'Correo de prueba', 'usuario_registro');
 		res.render('dashboard', { title: 'Panel de Administración - Maipo Grande', data:contadoresData, navActive: 'Dashboard' });
 	} else {
 		res.redirect('/');
