@@ -97,6 +97,9 @@
                                                                 <% if(pedido.fk_id_estado == 2){ %>
                                                                     <a href="/pedido_detalles/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Modificar</button></a>
                                                                 <% } %>
+                                                                <% if(pedido.fk_id_estado == 1){ %>
+                                                                    <a href="/pedido_detalles/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Enviar Pedido</button></a>
+                                                                <% } %>
                                                                 <% if(pedido.fk_id_estado == 1 || pedido.fk_id_estado == 2){ %>
                                                                     <a href="../api_pedidos/anularMiPedido/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Anular</button></a>
                                                                 <% } %>
