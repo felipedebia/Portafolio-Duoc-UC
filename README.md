@@ -45,12 +45,12 @@ Iniciar node en la carpeta web
 
 ## Funciones pendientes:
 
-- Cambiar todos los sql a try catch
+- Cambiar a try catch archivo rutas.js
 - Gráficos de página Reportes
 - Contadores de Usuarios, Frutas, Ventas y Subastas para la página dashboard
 - Implementar subida de archivos a Pago como en Contrato
 - Cambiar secuencias SQL a procedimientos
-- Hacer templates de correos y agregarlos (paquete configurado y funcionando)
+- Terminar templates de correos
 - Algunas páginas se caen si no se usa el perfil principal mari.barreraa@duocuc.cl
 - Arreglar error de si no existen pedidos, pagina pedidos se cae
 - Arreglar error de si no tienes pedidos, pagina mispedidos se cae
