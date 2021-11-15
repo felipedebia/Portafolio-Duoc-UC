@@ -50,7 +50,7 @@ Iniciar node en la carpeta web
 - Contadores de Usuarios, Frutas, Ventas y Subastas para la página dashboard
 - Implementar subida de archivos a Pago como en Contrato
 - Cambiar secuencias SQL a procedimientos
-- Terminar templates de correos
+- Terminar templates de correos (listos 2 de usuario, 4 de subastas, faltan 2 de oferta y 2 de orden)
 - Algunas páginas se caen si no se usa el perfil principal mari.barreraa@duocuc.cl
 - Arreglar error de si no existen pedidos, pagina pedidos se cae
 - Arreglar error de si no tienes pedidos, pagina mispedidos se cae

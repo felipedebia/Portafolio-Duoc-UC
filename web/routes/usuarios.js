@@ -183,6 +183,7 @@ router.post("/nuevaContrasena/:id_usuario", async (req, res) => {
       console.log("[!] Contraseña del usuario " + value_id_usuario + " cambiada con éxito");
       req.session.isLoggedIn = false;
       res.redirect('/');
+      //settings.enviarCorreo('Tu contraseña ha sido cambiada - Maipo Grande', 'usuario_contrasenacambiada');
     } else {
       console.log("[!] Ocurrió un error al intentar modificar la contraseña del usuario " + value_id_usuario);
       res.redirect('/');
