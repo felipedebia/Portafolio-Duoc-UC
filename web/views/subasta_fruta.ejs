@@ -15,7 +15,7 @@
                           <ul class="timeline timeline-simple mr-5">
                             <% for(var ofertaProductor of OfertasProductores) { %>
                               <% var ofertaProductor_contador = 0; %>
-                              <% if (ofertaProductor.fk_id_subastaf == data[0].id_subastaF){ %>
+                              <% if (ofertaProductor.fk_id_subastaF == data[0].id_subastaF){ %>
                                 <% ofertaProductor_contador++; %>
                                 <li class="timeline-inverted">
                                   <div class="timeline-badge success">
@@ -27,12 +27,12 @@
                                     </div>
                                     <div class="timeline-body">
                                       <p>ID Oferta: <%= ofertaProductor.id_ofertaP %></p>
-                                      <p>Producto: <%= ofertaProductor.fk_id_producto %></p>
+                                      <p>Producto: <%= ofertaProductor.fruta_fk_nombre + " " + ofertaProductor.frutacalidad_fk_nombre + " " + ofertaProductor.producto_fk_cantidad %></p>
                                       <p>Cantidad propuesta: <%= ofertaProductor.cantidad %></p>
                                       <p>Precio por kilo: <%= ofertaProductor.precio_por_kilo %></p>
                                       <hr>
-                                      <a href="../api_ofertas/aceptarOferta/"><button type="button" class="btn btn-success btn-sm pull-right mr-2">Aceptar oferta</button></a>
-                                      <a href="../api_ofertas/rechazarOferta/"><button type="button" class="btn btn-danger btn-sm pull-right">Rechazar oferta</button></a>
+                                      <a href="../api_ofertas/aceptarOferta/<%= ofertaProductor.id_ofertaP %>"><button type="button" class="btn btn-success btn-sm pull-right mr-2">Aceptar oferta</button></a>
+                                      <a href="../api_ofertas/rechazarOferta/<%= ofertaProductor.id_ofertaP %>"><button type="button" class="btn btn-danger btn-sm pull-right">Rechazar oferta</button></a>
                                     </div>
                                     <h6>
                                       <i class="ti-time"></i> <%= ofertaProductor.fecha_creacion %>
@@ -85,13 +85,13 @@
                         </thead>
                         <tbody>
                           <% for(var pedido_detalle of PedidoDetalles){ %>
-                            <% if( data[0].fk_id_pedido == pedido_detalle.fk_id_pedido ){ %>
+                            <% if( pedido_detalle.id_pedidoD == data[0].fk_id_pedido ){ %>
                               <tr>
                                   <td>
-                                    <%= pedido_detalle.nombre %>
+                                    <%= pedido_detalle.fruta_fk_nombre %>
                                   </td>
                                   <td>
-                                    <%= pedido_detalle.calidad %>
+                                    <%= pedido_detalle.frutacalidad_fk_nombre %>
                                   </td>
                                   <td>
                                     <%= pedido_detalle.cantidad %>

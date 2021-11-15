@@ -56,8 +56,8 @@ router.get('/listarPedidoDetalles', async(req, res) => {
             let detalleSchema = {
                 "id_pedidoD": detalle[0],
                 "cantidad": detalle[1],
-                "nombre": detalle[2],
-                "calidad": detalle[3],
+                "fruta_fk_nombre": detalle[2],
+                "frutacalidad_fk_nombre": detalle[3],
                 "id_pedido": detalle[4]
             }
 
