@@ -267,3 +267,30 @@
 .ck.ck-editor__main>.ck-editor__editable {
   height: 210px;
 }
+
+
+#select-item{
+  padding: 6px 0 6px 20px;
+  -webkit-appearance:none;
+  width:100%;
+  border: 1px solid #c4c4c4;
+  border-radius: 0.2rem;
+  background-color: #f7f7f5;
+}
+.cus-select-group{
+  width:100%;
+  position:relative;
+}
+.cus-select-group:not(*:root):after{
+  content:"";
+  display:block;
+  width:0;
+  height:0;
+  border-color:#000 transparent transparent transparent;
+  border-width:6px 3px 6px 3px;
+  border-style:solid;
+  position:absolute;
+  right:6px;
+  top:50%;
+  margin-top:-2.5px;
+}

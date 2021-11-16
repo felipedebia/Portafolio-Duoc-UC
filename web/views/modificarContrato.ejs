@@ -33,45 +33,49 @@
                               <div class="col-xs-6 col-sm-6 col-md-6">
                                   <div class="form-group my-label required">
                                       <label>Tipo de Contrato</label>
-                                      <select class="selectpicker form-control" data-size="4" name="fk_id_tipo" data-style="select-with-transition btn" title="Selecciona una opción">
-                                        <% if(data[0].fk_id_tipo == 1){ %>
-                                          <option name="productor" selected value="1">Productor</option>
-                                        <% } else { %>
-                                          <option name="productor" value="1">Productor</option>
-                                        <% } %>
-                                        <% if(data[0].fk_id_tipo == 2){ %>
-                                          <option name="clienteInterno" selected value="2">Cliente Interno</option>
-                                        <% } else { %>
-                                          <option name="clienteInterno" value="2">Cliente Interno</option>
-                                        <% } %>
-                                        <% if(data[0].fk_id_tipo == 3){ %>
-                                          <option name="clienteExterno" selected value="3">Cliente Externo</option>
-                                        <% } else { %>
-                                          <option name="clienteExterno" value="3">Cliente Externo</option>
-                                        <% } %>
-                                        <% if(data[0].fk_id_tipo == 4){ %>
-                                          <option name="transportista" selected value="4">Transportista</option>
-                                        <% } else { %>
-                                          <option name="transportista" value="4">Transportista</option>
-                                        <% } %>
-                                      </select>
+                                      <div class="cus-select-group">
+                                        <select id="select-item" name="fk_id_tipo" required>
+                                          <% if(data[0].fk_id_tipo == 1){ %>
+                                            <option name="productor" selected value="1">Productor</option>
+                                          <% } else { %>
+                                            <option name="productor" value="1">Productor</option>
+                                          <% } %>
+                                          <% if(data[0].fk_id_tipo == 2){ %>
+                                            <option name="clienteInterno" selected value="2">Cliente Interno</option>
+                                          <% } else { %>
+                                            <option name="clienteInterno" value="2">Cliente Interno</option>
+                                          <% } %>
+                                          <% if(data[0].fk_id_tipo == 3){ %>
+                                            <option name="clienteExterno" selected value="3">Cliente Externo</option>
+                                          <% } else { %>
+                                            <option name="clienteExterno" value="3">Cliente Externo</option>
+                                          <% } %>
+                                          <% if(data[0].fk_id_tipo == 4){ %>
+                                            <option name="transportista" selected value="4">Transportista</option>
+                                          <% } else { %>
+                                            <option name="transportista" value="4">Transportista</option>
+                                          <% } %>
+                                        </select>
+                                      </div>
                                   </div>
                               </div>
                               <div class="col-xs-6 col-sm-6 col-md-6">
                                   <div class="form-group my-label required">
                                       <label>Estado del contrato</label>
-                                      <select class="selectpicker form-control" data-size="2" name="fk_id_estado" data-style="select-with-transition btn" title="Selecciona una opción">
-                                        <% if(data[0].fk_id_tipo == 1){ %>
-                                          <option name="vigente" selected value="1">Vigente</option>
-                                        <% } else { %>
-                                          <option name="vigente" value="1">Vigente</option>
-                                        <% } %>
-                                        <% if(data[0].fk_id_tipo == 2){ %>
-                                          <option name="anulado" selected value="2">Anulado</option>
-                                        <% } else { %>
-                                          <option name="anulado" value="2">Anulado</option>
-                                        <% } %>
-                                      </select>
+                                      <div class="cus-select-group">
+                                        <select id="select-item" name="fk_id_estado" required>
+                                          <% if(data[0].fk_id_tipo == 1){ %>
+                                            <option name="vigente" selected value="1">Vigente</option>
+                                          <% } else { %>
+                                            <option name="vigente" value="1">Vigente</option>
+                                          <% } %>
+                                          <% if(data[0].fk_id_tipo == 2){ %>
+                                            <option name="anulado" selected value="2">Anulado</option>
+                                          <% } else { %>
+                                            <option name="anulado" value="2">Anulado</option>
+                                          <% } %>
+                                        </select>
+                                      </div>
                                   </div>
                               </div>
                             </div>

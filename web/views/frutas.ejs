@@ -81,18 +81,20 @@
                                                                     </div>
                                                                     <div class="form-group my-label required">
                                                                         <label>¿Necesita refrigeración?</label>
-                                                                        <select class="selectpicker form-control" data-size="2" name="necesita_refrigeracion" data-style="select-with-transition btn" title="Selecciona una opción" required>
-                                                                            <% if(fruta.necesita_refrigeracion == 1){ %>
-                                                                                <option name="si" selected value="1">Si</option>
-                                                                            <% } else { %>
-                                                                                <option name="si" value="1">Si</option>
-                                                                            <% } %>
-                                                                            <% if(fruta.necesita_refrigeracion == 2){ %>
-                                                                                <option name="no" selected value="2">No</option>
-                                                                            <% } else { %>
-                                                                                <option name="no" value="2">No</option>
-                                                                            <% } %>
-                                                                        </select>
+                                                                        <div class="cus-select-group">
+                                                                            <select id="select-item" name="necesita_refrigeracion" required>
+                                                                                <% if(fruta.necesita_refrigeracion == 1){ %>
+                                                                                    <option name="si" selected value="1">Si</option>
+                                                                                <% } else { %>
+                                                                                    <option name="si" value="1">Si</option>
+                                                                                <% } %>
+                                                                                <% if(fruta.necesita_refrigeracion == 2){ %>
+                                                                                    <option name="no" selected value="2">No</option>
+                                                                                <% } else { %>
+                                                                                    <option name="no" value="2">No</option>
+                                                                                <% } %>
+                                                                            </select>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
@@ -136,10 +138,13 @@
                                                 </div>
                                                 <div class="form-group my-label required">
                                                     <label>¿Necesita refrigeración?</label>
-                                                    <select class="selectpicker form-control" data-size="6" name="necesita_refrigeracion" data-style="select-with-transition btn" title="Selecciona una opción" required>
-                                                        <option name="si" value="1">Si</option>
-                                                        <option name="no" value="2">No</option>
-                                                    </select>
+                                                    <div class="cus-select-group">
+                                                        <select id="select-item" name="necesita_refrigeracion" required>
+                                                            <option selected="true" disabled="disabled">Selecciona una opción</option>
+                                                            <option name="si" value="1">Si</option>
+                                                            <option name="no" value="2">No</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                                 <button class="btn btn-info mb-2 pull-right mt-4" type="submit">Crear nueva fruta</button>
                                             </form>
