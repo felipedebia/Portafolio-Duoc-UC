@@ -91,7 +91,7 @@ router.post('/crearPedido', async(req, res) => {
         if (res.status(200)) {
             console.log("[!] Pedido creado con éxito");
 
-            //Con esto tomamos el ultimo registro en la tabla pedido para redirigir al pedido detalle
+            // Tomamos el ultimo registro en la tabla pedido para redirigir al pedido detalle
             sql2 = "SELECT id_pedido FROM (SELECT * FROM pedido ORDER BY id_pedido DESC ) WHERE rownum = 1";
             result = await settings.OpenConnection(sql2, [], true);
 

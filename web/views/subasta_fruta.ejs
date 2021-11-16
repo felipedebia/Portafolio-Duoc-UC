@@ -31,8 +31,14 @@
                               <p>Cantidad propuesta: <%= ofertaProductor.cantidad %></p>
                               <p>Precio por kilo: <%= ofertaProductor.precio_por_kilo %></p>
                               <hr>
-                              <a href="../api_ofertas/aceptarOferta/<%= ofertaProductor.id_ofertaP %>"><button type="button" class="btn btn-success btn-sm pull-right">Aceptar oferta</button></a>
-                              <a href="../api_ofertas/rechazarOferta/<%= ofertaProductor.id_ofertaP %>"><button type="button" class="btn btn-danger btn-sm pull-right mr-3">Rechazar oferta</button></a>
+                              <% if(ofertaProductor.fk_id_estado == 1){ %>
+                                <a href="../api_ofertas/rechazarOfertaProductor/<%= ofertaProductor.id_ofertaP %>"><button type="button" class="btn btn-danger btn-sm pull-right">Rechazar oferta</button></a>
+                                <a href="../api_ofertas/aceptarOfertaProductor/<%= ofertaProductor.id_ofertaP %>"><button type="button" class="btn btn-success btn-sm pull-right mr-3">Aceptar oferta</button></a>
+                              <% } else if(ofertaProductor.fk_id_estado == 2) { %>
+                                Oferta aceptada
+                              <% } else if(ofertaProductor.fk_id_estado == 3) { %>
+                                Oferta rechazada
+                              <% } %>
                             </div>
                             <h6>
                               <i class="ti-time"></i> <%= ofertaProductor.fecha_creacion %>
