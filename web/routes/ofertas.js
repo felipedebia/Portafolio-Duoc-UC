@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const settings = require('../bin/settings');
 var moment = require('moment');
+var functions = require('./functions');
 
 // CRUD OFERTA PRODUCTOR
 
@@ -48,15 +49,13 @@ router.get('/listarOfertasProductores', async (req, res) => {
 
 
 // Crear Oferta Productor
-router.get('/crearOfertaProductor/:id_subastaF', async (req, res) => {
+router.post('/crearOfertaProductor/:id_subastaF', async (req, res) => {
   try {
 
     var fk_id_subastaF = req.params.id_subastaF;
     var fk_id_pedidoD = req.params.id_subastaF;
-    var fk_id_producto = req.params.fk_id_producto;
+    var { cantidad, precio_por_kilo, fk_id_producto } = req.body;
     var fk_id_usuario = req.session.id_usuario;
-    var cantidad = req.params.cantidad;
-    var precio_por_kilo = req.params.precio_por_kilo;
     var fk_id_estado = 1;
 
     // Definimos las fechas
@@ -68,10 +67,10 @@ router.get('/crearOfertaProductor/:id_subastaF', async (req, res) => {
     // Si tuvo conexión a la DB
     if(res.status(200)) {
       console.log("[!] Oferta de Productor creada con éxito");
-      res.redirect('/pedidos');
+      res.redirect('/subasta_fruta/' + fk_id_subastaF);
     } else {
       console.log("[!] Ocurrió un error al intentar crear la oferta de productor ");
-      res.redirect('/pedidos');
+      res.redirect('/subasta_fruta/' + fk_id_subastaF);
     }
 
   } catch (error) {

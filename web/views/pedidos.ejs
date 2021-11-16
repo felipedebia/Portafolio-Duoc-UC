@@ -94,6 +94,52 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="modal fade" id="modalGenerarVenta<%= pedido.id_pedido %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <form action="../api_ventas/crearVenta/<%= pedido.id_pedido %>" method="POST">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                                            Generar venta
+                                                                        </h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="form-group my-label required">
+                                                                            <label>Asociar a Seguro</label>
+                                                                            <div class="cus-select-group">
+                                                                                <select id="select-item" name="fk_id_seguro" required>
+                                                                                    <option selected="true" disabled="disabled">Selecciona una opción</option>
+                                                                                    <%
+                                                                                        Seguros.sort((a,b) => {
+                                                                                            const nombreA = a.nombre_empresa.toLowerCase();
+                                                                                            const nombreB = b.nombre_empresa.toLowerCase();
+                                                                                            if(nombreA < nombreB){
+                                                                                                return -1;
+                                                                                            }
+                                                                                            if(nombreA > nombreB){
+                                                                                                return 1;
+                                                                                            }
+                                                                                            return 0;
+                                                                                        });
+                                                                                    %>
+                                                                                    <% for(var seguro of Seguros){ %>
+                                                                                        <option name="fk_id_seguro" value="<%=seguro.id_seguro%>"><%=seguro.nombre_empresa%></option>
+                                                                                    <% } %>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button class="btn btn-info" type="submit">Generar venta</button>
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <tr>
                                                         <th scope="row">
                                                             <%= pedido.id_pedido %>
@@ -114,7 +160,7 @@
                                                                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPedidoSubastas<%= pedido.id_pedido %>">Iniciar subasta</button>
                                                                 <% } else { %>
                                                                     <% if(pedido.fk_id_estado < 5){ %>
-                                                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalGenerarVenta">Generar venta</button>
+                                                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalGenerarVenta<%= pedido.id_pedido %>">Generar venta</button>
                                                                     <% } %>
                                                                 <% } %>
                                                             <% } %>
@@ -135,56 +181,6 @@
             </div>
         </div>
     </div>
-
-    
-    <div class="modal fade" id="modalGenerarVenta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form action="../api_ventas/crearVenta/<%= pedido.id_pedido %>" method="POST">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">
-                            Generar venta
-                        </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group my-label required">
-                            <label>Asociar a Seguro</label>
-                            <div class="cus-select-group">
-                                <select id="select-item" name="fk_id_seguro" required>
-                                    <option selected="true" disabled="disabled">Selecciona una opción</option>
-                                    <%
-                                        Seguros.sort((a,b) => {
-                                            const nombreA = a.nombre_empresa.toLowerCase();
-                                            const nombreB = b.nombre_empresa.toLowerCase();
-                                            if(nombreA < nombreB){
-                                                return -1;
-                                            }
-                                            if(nombreA > nombreB){
-                                                return 1;
-                                            }
-                                            return 0;
-                                        });
-                                    %>
-                                    <% for(var seguro of Seguros){ %>
-                                        <option name="fk_id_seguro" value="<%=seguro.id_seguro%>"><%=seguro.nombre_empresa%></option>
-                                    <% } %>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-info" type="submit">Generar venta</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
 
 <%- include('partials/footer.ejs') %>
 
