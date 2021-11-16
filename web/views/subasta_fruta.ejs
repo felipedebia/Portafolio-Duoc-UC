@@ -140,7 +140,9 @@
                           <select id="select-item" name="fk_id_producto" required>
                               <option selected="true" disabled="disabled">Selecciona una opción</option>
                               <% for(var producto of Productos){ %>
-                                <option name="fk_id_producto" value="<%=producto.id_producto%>"><%=producto.fk_nombre_fruta%> <%=producto.calidad%> <%=producto.cantidad%></option>
+                                <% if (producto.fk_id_usuario == session.id_usuario){ %>
+                                  <option name="fk_id_producto" value="<%=producto.id_producto%>"><%=producto.fk_nombre_fruta%> <%=producto.calidad%> <%=producto.cantidad%></option>
+                                <% } %>
                               <% } %>
                           </select>
                         </div>
@@ -152,8 +154,8 @@
                     </div>
                     <div class="form-group my-label required">
                       <label>Precio por kilo</label>
-                      <input class="form-control mb-4" id="inputCantidad" type="number" name="cantidad" required>
-                      <div class="invalid-feedback">Ingresa cantidad</div>
+                      <input class="form-control mb-4" id="inputCantidad" type="number" name="precio_por_kilo" required>
+                      <div class="invalid-feedback">Ingresa precio por kilo</div>
                     </div>
                 </div>
                 <div class="modal-footer">

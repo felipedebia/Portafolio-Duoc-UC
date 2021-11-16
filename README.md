@@ -51,16 +51,19 @@ Iniciar node en la carpeta web
 - Implementar subida de archivos a Pago como en Contrato
 - Cambiar secuencias SQL a procedimientos
 - Terminar templates de correos (listos 2 de usuario, 4 de subastas, faltan 2 de oferta y 2 de orden)
+
 - Algunas páginas se caen si no se usa el perfil principal mari.barreraa@duocuc.cl
 - Arreglar error de si no existen pedidos, pagina pedidos se cae
 - Arreglar error de si no tienes pedidos, pagina mispedidos se cae
+
 - Agregar peso maximo a la subida de documentos (contrato, seguro y pago)
 - ModificarProducto : Agregar estado a la vista y api
 - ListarProducto: Agregar estado a la vista y api
 - Agregar limite carasteres (2000) a descripción en informes (vista)
 - Agregar PDF boton cuando se ve un informe
 - Anular oferta en misofertas no funca
-- En pagina Pedidos, listado de pedidos no filtra bien pedidos estado 6 anulado
+- En pagina Pedidos, listado de pedidos no filtra bien pedidos estado 7 anulado
+- Arreglar estado texto erroneo de oferta_Transporte
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Sanitizar todas las entradas de texto
@@ -184,9 +187,10 @@ Iniciar node en la carpeta web
 - 1 En preparación
 - 2 Recepcionado
 - 3 En revisión
-- 4 En subasta
-- 5 Finalizado
-- 6 Anulado
+- 4 En subasta de Fruta
+- 5 En subasta de Transporte
+- 6 Finalizado
+- 7 Anulado
 
 ## Estado Reporte (char)
 - 1 no se

@@ -70,7 +70,6 @@ router.get('/crearSubastaFruta/:id_subastaF', async (req, res) => {
     if(res.status(200)) {
       console.log("[!] Subasta creada con éxito");
       res.redirect('/pedidos');
-      //res.refresh();
     } else {
       console.log("[!] Ocurrió un error al intentar crear la subasta ");
       res.redirect('/pedidos');

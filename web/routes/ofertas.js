@@ -46,6 +46,43 @@ router.get('/listarOfertasProductores', async (req, res) => {
 });
 
 
+
+// Crear Oferta Productor
+router.get('/crearOfertaProductor/:id_subastaF', async (req, res) => {
+  try {
+
+    var fk_id_subastaF = req.params.id_subastaF;
+    var fk_id_pedidoD = req.params.id_subastaF;
+    var fk_id_producto = req.params.fk_id_producto;
+    var fk_id_usuario = req.session.id_usuario;
+    var cantidad = req.params.cantidad;
+    var precio_por_kilo = req.params.precio_por_kilo;
+    var fk_id_estado = 1;
+
+    // Definimos las fechas
+    var fecha_creacion = functions.obtenerFechaActual();
+
+    sql = "INSERT INTO oferta_productor(cantidad, fecha_creacion, precio_por_kilo, fk_id_estado, fk_id_producto, fk_id_usuario, fk_id_pedidoD, fk_id_subastaF) VALUES (:cantidad, to_DATE(:fecha_creacion,'YYYY/MM/DD'), :precio_por_kilo, :fk_id_estado, :fk_id_producto, :fk_id_usuario, :fk_id_pedidoD, :fk_id_subastaF)";
+    await settings.OpenConnection(sql, [cantidad, fecha_creacion, precio_por_kilo, fk_id_estado, fk_id_producto, fk_id_usuario, fk_id_pedidoD, fk_id_subastaF], true);
+
+    // Si tuvo conexión a la DB
+    if(res.status(200)) {
+      console.log("[!] Oferta de Productor creada con éxito");
+      res.redirect('/pedidos');
+    } else {
+      console.log("[!] Ocurrió un error al intentar crear la oferta de productor ");
+      res.redirect('/pedidos');
+    }
+
+  } catch (error) {
+    res.status(400);
+    res.send("Ocurrió un error al obtener los datos de la base de datos")
+    console.log(error);
+  }
+
+});
+
+
 // Anular Oferta Productor
 router.get("/anularOfertaProductor/:id_ofertaP", async (req, res) => {
   try {
@@ -109,6 +146,7 @@ router.get('/listarOfertasTransportes', async (req, res) => {
   }
 
 });
+
 
 
 // Anular oferta Transportes

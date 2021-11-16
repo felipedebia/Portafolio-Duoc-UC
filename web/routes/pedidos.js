@@ -78,7 +78,7 @@ router.get('/listarPedidoDetalles', async(req, res) => {
 router.post('/crearPedido', async(req, res) => {
     try {
 
-        var { direccion_despacho, fk_id_ciudad} = req.body;
+        var { direccion_despacho, fk_id_ciudad } = req.body;
         var fk_id_usuario = req.session.id_usuario;
         var fk_id_tipo = 1; // Ver si esta bien ya que hay pedido externo y local
         var fk_id_estado = 1;
@@ -201,7 +201,7 @@ router.get("/anularPedido/:id_pedido", async(req, res) => {
 
         var id_pedido_bind = req.params.id_pedido;
 
-        sql = "UPDATE pedido SET fk_id_estado=6 WHERE id_pedido = :id_pedido_bind";
+        sql = "UPDATE pedido SET fk_id_estado=7 WHERE id_pedido = :id_pedido_bind";
         await settings.OpenConnection(sql, [id_pedido_bind], true);
 
         if(res.status(200)) {
@@ -227,7 +227,7 @@ router.get("/anularMiPedido/:id_pedido", async(req, res) => {
         
         var id_pedido_bind = req.params.id_pedido;
 
-        sql = "UPDATE pedido SET fk_id_estado=6 WHERE id_pedido = :id_pedido_bind";
+        sql = "UPDATE pedido SET fk_id_estado=7 WHERE id_pedido = :id_pedido_bind";
         await settings.OpenConnection(sql, [id_pedido_bind], true);
 
         if(res.status(200)) {
