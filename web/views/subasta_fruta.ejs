@@ -136,11 +136,14 @@
                 <div class="modal-body">
                     <div class="form-group my-label required">
                         <label>Producto</label>
-                        <select class="form-control" data-size="2" name="fk_id_producto" data-style="select-with-transition btn" title="Selecciona una opción" required>
-                            <% for(var producto of Productos){ %>
+                        <div class="cus-select-group">
+                          <select id="select-item" name="fk_id_producto" required>
+                              <option selected="true" disabled="disabled">Selecciona una opción</option>
+                              <% for(var producto of Productos){ %>
                                 <option name="fk_id_producto" value="<%=producto.id_producto%>"><%=producto.fk_nombre_fruta%> <%=producto.calidad%> <%=producto.cantidad%></option>
-                            <% } %>
-                        </select>
+                              <% } %>
+                          </select>
+                        </div>
                     </div>
                     <div class="form-group my-label required mt-4">
                         <label>Cantidad propuesta</label>

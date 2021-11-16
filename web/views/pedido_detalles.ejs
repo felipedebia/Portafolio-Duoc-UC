@@ -12,33 +12,39 @@
                             <form action="../api_pedidos/crearPedidoDetalle" method="POST" class="formValidation" novalidate>
                                 <div class="row">
                                     <div class="col-xs-4 col-sm-4 col-md-4">
-                                        <label>Elige una fruta *</label>
-                                        <select class="form-control" name="fk_id_fruta" data-style="select-with-transition btn" title="Selecciona una opción">
-                                        <%
-                                            Frutas.sort((a,b) => {
-                                                const nombreA = a.nombre.toLowerCase();
-                                                const nombreB = b.nombre.toLowerCase();
-                                                if(nombreA < nombreB){
-                                                    return -1;
-                                                }
-                                                if(nombreA > nombreB){
-                                                    return 1;
-                                                }
-                                                return 0;
-                                            });
-                                            %>
-                                            <% for(var fruta of Frutas){ %>
-                                                <option name="fk_id_fruta" value="<%=fruta.id_fruta%>"><%=fruta.nombre%></option>
-                                            <% } %>
-                                        </select>
+                                        <label>Elige la fruta *</label>
+                                        <div class="cus-select-group">
+                                            <select id="select-item" name="fk_id_fruta" required>
+                                                <option selected="true" disabled="disabled">Selecciona una opción</option>
+                                                <%
+                                                    Frutas.sort((a,b) => {
+                                                        const nombreA = a.nombre.toLowerCase();
+                                                        const nombreB = b.nombre.toLowerCase();
+                                                        if(nombreA < nombreB){
+                                                            return -1;
+                                                        }
+                                                        if(nombreA > nombreB){
+                                                            return 1;
+                                                        }
+                                                        return 0;
+                                                    });
+                                                %>
+                                                <% for(var fruta of Frutas){ %>
+                                                    <option name="fk_id_fruta" value="<%=fruta.id_fruta%>"><%=fruta.nombre%></option>
+                                                <% } %>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="col-xs-4 col-sm-4 col-md-4">
                                         <label>Elige la calidad buscada *</label>
-                                        <select class="form-control" name="fk_id_calidad" data-style="select-with-transition btn" title="Selecciona una opción">
+                                        <div class="cus-select-group">
+                                            <select id="select-item" name="fk_id_calidad" required>
+                                                <option selected="true" disabled="disabled">Selecciona una opción</option>
                                                 <% for(var calidad of Calidades){ %>
                                                     <option name="fk_id_calidad" value="<%=calidad.id_calidad%>"><%=calidad.nombre%></option>
                                                 <% } %>
                                             </select>
+                                        </div>
                                     </div>
                                     <div class="col-xs-4 col-sm-4 col-md-4">
                                         <label>Digite la cantidad de KG buscados *</label>

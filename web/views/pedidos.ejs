@@ -128,71 +128,6 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="crearPedido">
-                                    <div class="card-body">
-                                        <h3 class="card-title mb-4">Ingresa los datos de un nuevo Pedido</h3>
-                                        <div class="card-text">
-                                            <form action="../api_pedidos/crearPedido" method="POST" class="formValidation" novalidate>
-                                                <div class="row">
-                                                    <div class="col-xs-6 col-sm-6 col-md-6">
-                                                        <div class="form-group my-label required">
-                                                            <label>Pais de destino</label>
-                                                            <select class="form-control" name="pais" data-style="select-with-transition btn" title="Selecciona una opción">
-                                                                <%
-                                                                    Paises.sort((a,b) => {
-                                                                        const nombreA = a.nombre.toLowerCase();
-                                                                        const nombreB = b.nombre.toLowerCase();
-                                                                        if(nombreA < nombreB){
-                                                                            return -1;
-                                                                        }
-                                                                        if(nombreA > nombreB){
-                                                                            return 1;
-                                                                        }
-                                                                        return 0;
-                                                                    });
-                                                                    %>
-                                                                <% for(var pais of Paises){ %>
-                                                                    <option name="<%=pais.nombre%>" value="<%=pais.nombre%>"><%=pais.nombre%></option>
-                                                                <% } %>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-6 col-sm-6 col-md-6">
-                                                        <div class="form-group my-label required">
-                                                            <label>Ciudad de destino</label>
-                                                            <select class="form-control" name="fk_id_ciudad" data-style="select-with-transition btn" title="Selecciona una opción">
-                                                                <%
-                                                                    Ciudades.sort((a,b) => {
-                                                                        const nombreA = a.nombre.toLowerCase();
-                                                                        const nombreB = b.nombre.toLowerCase();
-                                                                        if(nombreA < nombreB){
-                                                                            return -1;
-                                                                        }
-                                                                        if(nombreA > nombreB){
-                                                                            return 1;
-                                                                        }
-                                                                        return 0;
-                                                                    });
-                                                                    %>
-                                                                <% for(var ciudad of Ciudades){ %>
-                                                                    <option name="fk_id_ciudad" value="<%=ciudad.id_ciudad%>"><%=ciudad.nombre%></option>
-                                                                <% } %>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
-                                                        <div class="form-group my-label required">
-                                                            <label>Dirección de despacho</label>
-                                                            <input class="form-control mb-4" id="inputDireccion" type="text" name="direccion_despacho" required>
-                                                            <div class="invalid-feedback">Ingresa la direccion de despacho</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-info mb-2 pull-right" type="submit">Crear nuevo pedido</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -217,24 +152,27 @@
                     <div class="modal-body">
                         <div class="form-group my-label required">
                             <label>Asociar a Seguro</label>
-                            <select class="form-control" data-size="2" name="fk_id_seguro" data-style="select-with-transition btn" title="Selecciona una opción" required>
-                                <%
-                                    Seguros.sort((a,b) => {
-                                        const nombreA = a.nombre_empresa.toLowerCase();
-                                        const nombreB = b.nombre_empresa.toLowerCase();
-                                        if(nombreA < nombreB){
-                                            return -1;
-                                        }
-                                        if(nombreA > nombreB){
-                                            return 1;
-                                        }
-                                        return 0;
-                                    });
+                            <div class="cus-select-group">
+                                <select id="select-item" name="fk_id_seguro" required>
+                                    <option selected="true" disabled="disabled">Selecciona una opción</option>
+                                    <%
+                                        Seguros.sort((a,b) => {
+                                            const nombreA = a.nombre_empresa.toLowerCase();
+                                            const nombreB = b.nombre_empresa.toLowerCase();
+                                            if(nombreA < nombreB){
+                                                return -1;
+                                            }
+                                            if(nombreA > nombreB){
+                                                return 1;
+                                            }
+                                            return 0;
+                                        });
                                     %>
-                                <% for(var seguro of Seguros){ %>
-                                    <option name="fk_id_seguro" value="<%=seguro.id_seguro%>"><%=seguro.nombre_empresa%></option>
-                                <% } %>
-                            </select>
+                                    <% for(var seguro of Seguros){ %>
+                                        <option name="fk_id_seguro" value="<%=seguro.id_seguro%>"><%=seguro.nombre_empresa%></option>
+                                    <% } %>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
