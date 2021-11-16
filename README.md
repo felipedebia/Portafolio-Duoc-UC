@@ -186,11 +186,12 @@ Iniciar node en la carpeta web
 ## Estado Pedido
 - 1 En preparación
 - 2 Recepcionado
-- 3 En revisión
-- 4 En subasta de Fruta
+- 3 En subasta de Fruta
+- 4 En revisión
 - 5 En subasta de Transporte
-- 6 Finalizado
-- 7 Anulado
+- 6 En revisión final
+- 7 Finalizado
+- 8 Anulado
 
 ## Estado Reporte (char)
 - 1 no se

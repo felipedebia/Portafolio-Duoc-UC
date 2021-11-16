@@ -201,7 +201,7 @@ router.get("/anularPedido/:id_pedido", async(req, res) => {
 
         var id_pedido_bind = req.params.id_pedido;
 
-        sql = "UPDATE pedido SET fk_id_estado=7 WHERE id_pedido = :id_pedido_bind";
+        sql = "UPDATE pedido SET fk_id_estado=8 WHERE id_pedido = :id_pedido_bind";
         await settings.OpenConnection(sql, [id_pedido_bind], true);
 
         if(res.status(200)) {
@@ -227,7 +227,7 @@ router.get("/anularMiPedido/:id_pedido", async(req, res) => {
         
         var id_pedido_bind = req.params.id_pedido;
 
-        sql = "UPDATE pedido SET fk_id_estado=7 WHERE id_pedido = :id_pedido_bind";
+        sql = "UPDATE pedido SET fk_id_estado=8 WHERE id_pedido = :id_pedido_bind";
         await settings.OpenConnection(sql, [id_pedido_bind], true);
 
         if(res.status(200)) {

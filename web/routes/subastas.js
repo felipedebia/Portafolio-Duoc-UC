@@ -69,10 +69,15 @@ router.get('/crearSubastaFruta/:id_subastaF', async (req, res) => {
     // Si tuvo conexión a la DB
     if(res.status(200)) {
       console.log("[!] Subasta creada con éxito");
-      res.redirect('/pedidos');
+
+      // Actualizamos pedido a estado 3 = en subasta de fruta
+      sql2 = "UPDATE pedido SET fk_id_estado=3 WHERE id_pedido = :fk_id_pedido";
+      var consulta = await settings.OpenConnection(sql2, [fk_id_pedido], true);
+
+      res.redirect('/subasta_fruta/' + id_subastaF);
     } else {
       console.log("[!] Ocurrió un error al intentar crear la subasta ");
-      res.redirect('/pedidos');
+      res.redirect('/subasta_fruta/' + id_subastaF);
     }
 
   } catch (error) {
