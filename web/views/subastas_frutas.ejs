@@ -79,16 +79,17 @@
                                                             <%= ofertaProductor.id_ofertaP %>
                                                         </th>
                                                         <td>
-                                                            <%= ofertaProductor.fk_id_subastaf %>
+                                                            <%= ofertaProductor.fk_id_subastaF %>
                                                         </td>
                                                         <td>
                                                             <%= ofertaProductor.fecha_creacion %>
                                                         </td>
                                                         <td>
-                                                            <%= ofertaProductor.fk_id_estado %>
+                                                            <%= ofertaProductor.fk_texto_estado %>
                                                         </td>
                                                         <td>
                                                             <a href="/oferta_productor/<%= ofertaProductor.id_ofertaP %>"><button type="button" class="btn btn-warning btn-sm">Ver oferta</button></a>
+                                                            <a href="/subasta_fruta/<%= ofertaProductor.fk_id_subastaF %>"><button type="button" class="btn btn-warning btn-sm">Ver subasta</button></a>
                                                             <a href="../api_ofertas/anularOfertaProductor/<%= ofertaProductor.id_ofertaP %>"><button type="button" class="btn btn-warning btn-sm">Anular</button></a>
                                                         </td>
                                                     </tr>

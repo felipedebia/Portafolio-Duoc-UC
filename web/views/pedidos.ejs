@@ -135,8 +135,8 @@
                                             <form action="../api_pedidos/crearPedido" method="POST" class="formValidation" novalidate>
                                                 <div class="row">
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Pais de destino *</label>
+                                                        <div class="form-group my-label required">
+                                                            <label>Pais de destino</label>
                                                             <select class="form-control" name="pais" data-style="select-with-transition btn" title="Selecciona una opción">
                                                                 <%
                                                                     Paises.sort((a,b) => {
@@ -158,8 +158,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Ciudad de destino *</label>
+                                                        <div class="form-group my-label required">
+                                                            <label>Ciudad de destino</label>
                                                             <select class="form-control" name="fk_id_ciudad" data-style="select-with-transition btn" title="Selecciona una opción">
                                                                 <%
                                                                     Ciudades.sort((a,b) => {
@@ -181,8 +181,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
-                                                        <div class="form-group">
-                                                            <label>Dirección de despacho *</label>
+                                                        <div class="form-group my-label required">
+                                                            <label>Dirección de despacho</label>
                                                             <input class="form-control mb-4" id="inputDireccion" type="text" name="direccion_despacho" required>
                                                             <div class="invalid-feedback">Ingresa la direccion de despacho</div>
                                                         </div>
@@ -215,7 +215,7 @@
                     </button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group mt-4 my-label required">
+                        <div class="form-group my-label required">
                             <label>Asociar a Seguro</label>
                             <select class="form-control" data-size="2" name="fk_id_seguro" data-style="select-with-transition btn" title="Selecciona una opción" required>
                                 <%
