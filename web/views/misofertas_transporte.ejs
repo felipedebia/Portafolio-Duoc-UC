@@ -47,7 +47,7 @@
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <span><strong>Fecha de creación:</strong> <%= oferta_transporte.fecha_creacion %></span></br></br>
-                                                                        <span><strong>¿Tiene refrigeración?:</strong> <%= oferta_transporte.tiene_refrigeracion %> </span></br></br>
+                                                                        <span><strong>¿Tiene refrigeración?</strong> <% if(oferta_transporte.tiene_refrigeracion == 1){ %> Si <% } else { %> No <% } %> </span></br></br>
                                                                         <span><strong>Cantidad:</strong> <%= oferta_transporte.cantidad %></span></br></br>
                                                                         <span><strong>Peso total:</strong> <%= oferta_transporte.peso_total %> </span></br></br>
                                                                         <span><strong>Precio final:</strong> <%= oferta_transporte.precio_final %> </span></br></br>

@@ -59,7 +59,6 @@ Iniciar node en la carpeta web
 - ListarProducto: Agregar estado a la vista y api
 - Agregar limite carasteres (2000) a descripción en informes (vista)
 - Agregar PDF boton cuando se ve un informe
-- ¿Tiene refrigeración?: 1 en misofertas_transporte, ver oferta
 - Anular oferta en misofertas no funca
 - En pagina Pedidos, listado de pedidos no filtra bien pedidos estado 6 anulado
 

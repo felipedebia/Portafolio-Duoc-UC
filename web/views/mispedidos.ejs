@@ -58,15 +58,15 @@
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <span><strong>Direccion de despacho:</strong> <%= pedido.direccion_despacho %></span></br>
                                                                         <span><strong>Fecha del pedido:</strong> <%= pedido.fecha_creacion %></span></br>
+                                                                        <span><strong>Direccion de despacho:</strong> <%= pedido.direccion_despacho %></span></br>
                                                                         <span><strong>Estado del pedido:</strong> <%= pedido.fk_texto_estado %></span>
                                                                         <div class="mt-4">
                                                                             <span><strong>Detalles del pedido:</strong></span></br>
                                                                             <ul>
                                                                             <% for(var pedido_detalle of PedidoDetalles){ %>
                                                                                 <%if(pedido_detalle.id_pedido == pedido.id_pedido){%>
-                                                                                    <li><strong>Fruta:</strong> <%= pedido_detalle.nombre %> - <strong>Calidad:</strong> <%= pedido_detalle.calidad %> - <strong>Cantidad (en KG):</strong> <%= pedido_detalle.cantidad %></li>
+                                                                                    <li><strong>Fruta:</strong> <%= pedido_detalle.fruta_fk_nombre %> - <strong>Calidad:</strong> <%= pedido_detalle.frutacalidad_fk_nombre %> - <strong>Cantidad (en KG):</strong> <%= pedido_detalle.cantidad %></li>
                                                                                 <% } %>
                                                                             <% } %>
                                                                             </ul>
@@ -124,7 +124,7 @@
                                             <tbody>
                                                 <% for(var pedido of Pedidos) { %>
                                                     <% if (pedido.fk_id_usuario == session.id_usuario && pedido.fk_id_estado == 5 || pedido.fk_id_estado == 6){ %>
-                                                        <div class="modal fade" id="modalPedido<%= pedido.id_pedido %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal fade" id="modalPedidoFinalizado<%= pedido.id_pedido %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
@@ -136,15 +136,15 @@
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <span><strong>Direccion de despacho:</strong> <%= pedido.direccion_despacho %></span></br>
                                                                         <span><strong>Fecha del pedido:</strong> <%= pedido.fecha_creacion %></span></br>
+                                                                        <span><strong>Direccion de despacho:</strong> <%= pedido.direccion_despacho %></span></br>
                                                                         <span><strong>Estado del pedido:</strong> <%= pedido.fk_texto_estado %></span>
                                                                         <div class="mt-4">
                                                                             <span><strong>Detalles del pedido:</strong></span></br>
                                                                             <ul>
                                                                             <% for(var pedido_detalle of PedidoDetalles){ %>
                                                                                 <%if(pedido_detalle.id_pedido == pedido.id_pedido){%>
-                                                                                    <li><strong>Fruta:</strong> <%= pedido_detalle.nombre %> - <strong>Calidad:</strong> <%= pedido_detalle.calidad %> - <strong>Cantidad (en KG):</strong> <%= pedido_detalle.cantidad %></li>
+                                                                                    <li><strong>Fruta:</strong> <%= pedido_detalle.fruta_fk_nombre %> - <strong>Calidad:</strong> <%= pedido_detalle.frutacalidad_fk_nombre %> - <strong>Cantidad (en KG):</strong> <%= pedido_detalle.cantidad %></li>
                                                                                 <% } %>
                                                                             <% } %>
                                                                             </ul>
@@ -170,7 +170,7 @@
                                                                 <%= pedido.fk_texto_estado %>
                                                             </td>
                                                             <td>
-                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPedido<%= pedido.id_pedido %>">Ver detalles</button>
+                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPedidoFinalizado<%= pedido.id_pedido %>">Ver detalles</button>
                                                             </td>
                                                         </tr>
                                                     <% } %>
