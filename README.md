@@ -41,6 +41,7 @@ Iniciar node en la carpeta web
 - Pago (haciendo debia)
 - FRUTA_RESTANTE
 - DIVIDIR VENTAS A MISVENTAS PARA PRODUCTOR, QUE SEA VEA LOS SUYOS (haciendo mario)
+- Quizás separar subastas para que productor vea solo las subastas pero no la parte de todas las ofertas
 - REPORTES
 
 ## Funciones pendientes:
@@ -63,7 +64,6 @@ Iniciar node en la carpeta web
 - Agregar PDF boton cuando se ve un informe
 - En pagina Pedidos, listado de pedidos no filtra bien pedidos estado 7 anulado
 - Venta no crea venta_detalle
-- Quizás separar subastas para que productor vea solo las subastas pero no la parte de todas las ofertas
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Sanitizar todas las entradas de texto

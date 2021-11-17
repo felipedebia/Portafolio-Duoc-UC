@@ -31,7 +31,7 @@
                               <p>Cantidad propuesta: <%= ofertaProductor.cantidad %></p>
                               <p>Precio por kilo: <%= ofertaProductor.precio_por_kilo %></p>
                               <hr>
-                              <% if(ofertaProductor.fk_id_estado == 1){ %>
+                              <% if(ofertaProductor.fk_id_estado == 1 && data[0].fk_id_estado == 1){ %>
                                 <a href="../api_ofertas/rechazarOfertaProductor/<%= ofertaProductor.id_ofertaP %>"><button type="button" class="btn btn-danger btn-sm pull-right">Rechazar oferta</button></a>
                                 <a href="../api_ofertas/aceptarOfertaProductor/<%= ofertaProductor.id_ofertaP %>"><button type="button" class="btn btn-success btn-sm pull-right mr-3">Aceptar oferta</button></a>
                               <% } else if(ofertaProductor.fk_id_estado == 2) { %>
