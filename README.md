@@ -57,6 +57,7 @@ Iniciar node en la carpeta web
 - Arreglar error de si no existen pedidos, pagina pedidos se cae
 - Arreglar error de si no tienes pedidos, pagina mispedidos se cae
 
+- Fruta: cambiar eliminar a desactivar (para que no se hagan nuevos productos con esa fruta)
 - Agregar peso maximo a la subida de documentos (contrato, seguro y pago)
 - Seguro, agregar estado a la lista y al ver y a la api
 - ModificarProducto : Agregar estado a la vista y api
