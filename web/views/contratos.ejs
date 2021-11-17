@@ -54,7 +54,10 @@
                                                         </td>
                                                         <td>
                                                             <a href="/contrato/<%= contrato.id_contrato %>"><button type="button" class="btn btn-warning btn-sm">Ver contrato</button></a>
-                                                            <a href="/modificarContrato/<%= contrato.id_contrato %>"><button type="button" class="btn btn-warning btn-sm">Modificar</button></a>
+                                                            <% if (contrato.fk_id_estado == 1) { %>
+                                                                <a href="/modificarContrato/<%= contrato.id_contrato %>"><button type="button" class="btn btn-warning btn-sm">Modificar</button></a>
+                                                            <% } %>
+                                                            
                                                         </td>
                                                     </tr>
                                                 <% } %>

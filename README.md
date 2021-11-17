@@ -58,6 +58,7 @@ Iniciar node en la carpeta web
 - Arreglar error de si no tienes pedidos, pagina mispedidos se cae
 
 - Agregar peso maximo a la subida de documentos (contrato, seguro y pago)
+- Seguro, agregar estado a la lista y al ver y a la api
 - ModificarProducto : Agregar estado a la vista y api
 - ListarProducto: Agregar estado a la vista y api
 - Agregar limite carasteres (2000) a descripción en informes (vista)

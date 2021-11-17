@@ -45,10 +45,13 @@
                                         <div class="form-group">
                                             <label>Estado del Contrato</label>
                                             <% if(data[0].fk_id_estado == 1){ %>
-                                                <input class="form-control mb-4" readonly id="inputTipo" type="text" name="fk_id_estado" maxLength="50" required value="Activado">
+                                                <input class="form-control mb-4" readonly id="inputEstado" type="text" name="fk_id_estado" maxLength="50" required value="Vigente">
                                             <% } %>
                                             <% if(data[0].fk_id_estado == 2){ %>
-                                                <input class="form-control mb-4" readonly id="inputTipo" type="text" name="fk_id_estado" maxLength="50" required value="Desactivado">
+                                                <input class="form-control mb-4" readonly id="inputEstado" type="text" name="fk_id_estado" maxLength="50" required value="Expirado">
+                                            <% } %>
+                                            <% if(data[0].fk_id_estado == 3){ %>
+                                                <input class="form-control mb-4" readonly id="inputEstado" type="text" name="fk_id_estado" maxLength="50" required value="Anulado">
                                             <% } %>
                                         </div>
                                     </div>

@@ -132,7 +132,7 @@ router.get("/anularSeguro/:id_seguro", async(req, res) => {
 
     var id_seguro_bind = req.params.id_seguro;
 
-    sql = "UPDATE seguro SET fk_id_estado=2 WHERE id_seguro = :id_seguro_bind";
+    sql = "UPDATE seguro SET fk_id_estado=3 WHERE id_seguro = :id_seguro_bind";
     await settings.OpenConnection(sql, [id_seguro_bind], true);
 
     if(res.status(200)) {
