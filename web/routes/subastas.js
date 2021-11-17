@@ -93,7 +93,7 @@ router.get('/crearSubastaFruta/:id_subastaF', async (req, res) => {
 router.get("/anularSubastaFruta/:id_subastaF", async (req, res) => {
   try {
 
-    var { id_subastaF_bind } = req.params.id_subastaF;
+    var id_subastaF_bind = req.params.id_subastaF;
 
     sql = "UPDATE subasta_fruta SET fk_id_estado=2 WHERE id_subastaF = :id_subastaF_bind";
     await settings.OpenConnection(sql, [id_subastaF_bind], true);
@@ -154,7 +154,7 @@ router.get('/listarSubastasTransportes', async (req, res) => {
 
 
 // Anular Transportes
-router.get("/anularSubastaTransport/:id_subastaT", async (req, res) => {
+router.get("/anularSubastaTransporte/:id_subastaT", async (req, res) => {
   try {
 
     var id_subastaT_bind = req.params.id_subastaT;

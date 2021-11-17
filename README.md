@@ -61,9 +61,9 @@ Iniciar node en la carpeta web
 - ListarProducto: Agregar estado a la vista y api
 - Agregar limite carasteres (2000) a descripción en informes (vista)
 - Agregar PDF boton cuando se ve un informe
-- Anular oferta en misofertas no funca
 - En pagina Pedidos, listado de pedidos no filtra bien pedidos estado 7 anulado
-- Arreglar estado texto erroneo de oferta_Transporte
+- Venta no crea venta_detalle
+- Quizás separar subastas para que productor vea solo las subastas pero no la parte de todas las ofertas
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Sanitizar todas las entradas de texto

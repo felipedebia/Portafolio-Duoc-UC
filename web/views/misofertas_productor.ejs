@@ -74,7 +74,9 @@
                                                             </td>
                                                             <td>
                                                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalOfertaProductor<%= oferta_productor.id_ofertaP %>">Ver oferta</button>
-                                                                <a href="../api_ofertas/anularOfertaProductor/<%= oferta_productor.id_ofertaP %>"><button type="button" class="btn btn-info btn-sm">Anular</button></a>
+                                                                <% if (oferta_productor.fk_id_estado == 1) { %>
+                                                                    <a href="../api_ofertas/anularOfertaProductor/<%= oferta_productor.id_ofertaP %>"><button type="button" class="btn btn-info btn-sm">Anular</button></a>
+                                                                <% } %>
                                                             </td>
                                                         </tr>
                                                     <% } %>

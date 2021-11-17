@@ -35,9 +35,9 @@
                                 <a href="../api_ofertas/rechazarOfertaProductor/<%= ofertaProductor.id_ofertaP %>"><button type="button" class="btn btn-danger btn-sm pull-right">Rechazar oferta</button></a>
                                 <a href="../api_ofertas/aceptarOfertaProductor/<%= ofertaProductor.id_ofertaP %>"><button type="button" class="btn btn-success btn-sm pull-right mr-3">Aceptar oferta</button></a>
                               <% } else if(ofertaProductor.fk_id_estado == 2) { %>
-                                Oferta aceptada
+                                <span class="btn btn-success btn-sm pull-right mr-3">Oferta aceptada</span>
                               <% } else if(ofertaProductor.fk_id_estado == 3) { %>
-                                Oferta rechazada
+                                <span class="btn btn-danger btn-sm pull-right mr-3">Oferta rechazada</span>
                               <% } %>
                             </div>
                             <h6>
@@ -74,7 +74,7 @@
               <span class="mt-4"><strong>Fecha de creación:</strong></span> <span id="fecha_creacion"><%= data[0].fecha_creacion %></span></br>
               <span><strong>Fecha de última actualización:</strong></span> <span id="fecha_actualizacion"><%= data[0].fecha_actualizacion %></span></br>
               <span class="mb-4"><strong>Fecha de termino:</strong></span> <span id="fecha_termino"><%= data[0].fecha_termino %></span></br></br>
-              <span class="mb-4"><strong>Estado de la subasta:</strong></span> <span class="badge badge-success"><%= data[0].fk_texto_estado %></span></span></br></br>
+              <span class="mb-4"><strong>Estado de la subasta:</strong></span> <% if (data[0].fk_id_estado == 1) { %><span class="badge badge-success"><%= data[0].fk_texto_estado %></span><% } else { %><span class="badge badge-danger"><%= data[0].fk_texto_estado %></span><% } %></br></br>
               <h4 class="card-title mt-4 mb-4">Información del pedido</h4>
               <span class="mt-4"><strong>Tipo de pedido:</strong></span> <span class="badge badge-info"><%= data[0].pedido_fk_texto_tipo %></span></br>
               <span class="mt-4"><strong>Solicitado por:</strong></span> <a href="/perfil/<%= data[0].pedido_fk_id_usuario %>"><span><%= data[0].pedido_fk_texto_usuario %></span></a></br>
@@ -108,17 +108,20 @@
                   <% } %>
                 </tbody>
               </table>
-              <h4 class="card-title mt-4 mb-4">Opciones de la subasta</h4>
-              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalCrearOferta">Crear una nueva oferta</button>
-              <div class="btn-group" role="group">
-                <button id="btnGroupDrop1" type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Extender plazo
-                </button>
-                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                  <a class="dropdown-item" href="#">2 semanas</a>
-                  <a class="dropdown-item" href="#">1 mes</a>
+              <% if (data[0].fk_id_estado == 1) { %>
+              
+                <h4 class="card-title mt-4 mb-4">Opciones de la subasta</h4>
+                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalCrearOferta">Crear una nueva oferta</button>
+                <div class="btn-group" role="group">
+                  <button id="btnGroupDrop1" type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Extender plazo
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <a class="dropdown-item" href="#">2 semanas</a>
+                    <a class="dropdown-item" href="#">1 mes</a>
+                  </div>
                 </div>
-              </div>
+              <% } %>
             </div>
           </div>
         </div>

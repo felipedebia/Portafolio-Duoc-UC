@@ -167,10 +167,10 @@ router.get("/anularOfertaProductor/:id_ofertaP", async (req, res) => {
 
     if(res.status(200)) {
       console.log("[!] Oferta de Productor " + id_ofertaP_bind + " anulada con éxito");
-      res.redirect('/misOfertas');
+      res.redirect('/misOfertas_Productor');
     } else {
       console.log("[!] Ocurrió un error al intentar anular la oferta de Productor " + id_ofertaP_bind);
-      res.redirect('/misOfertas');
+      res.redirect('/misOfertas_Productor');
     }
 
   } catch (error) {
@@ -189,7 +189,7 @@ router.get('/listarOfertasTransportes', async (req, res) => {
   try {
   
     binds = {};
-    sql = "SELECT id_ofertaT, cantidad, fecha_creacion, tiene_refrigeracion, precio_final, peso_total, fk_id_usuario, fk_id_subastaT, fk_id_estado, estado_subastaT.descripcion FROM oferta_transporte JOIN estado_subastaT ON oferta_transporte.fk_id_estado = estado_subastaT.id_estado";
+    sql = "SELECT id_ofertaT, cantidad, fecha_creacion, tiene_refrigeracion, precio_final, peso_total, fk_id_usuario, fk_id_subastaT, fk_id_estado, estado_ofertaT.descripcion FROM oferta_transporte JOIN estado_ofertaT ON oferta_transporte.fk_id_estado = estado_ofertaT.id_estado";
     result = await settings.OpenConnection(sql, binds, true);
 
     OfertasTransportes = [];
@@ -233,10 +233,10 @@ router.get("/anularOfertaTransporte/:id_ofertaT", async (req, res) => {
 
     if(res.status(200)) {
       console.log("[!] Oferta de Transporte " + id_ofertaT_bind + " anulada con éxito");
-      res.redirect('/misOfertas');
+      res.redirect('/misOfertas_Transporte');
     } else {
       console.log("[!] Ocurrió un error al intentar anular la oferta de Transporte " + id_ofertaT_bind);
-      res.redirect('/misOfertas');
+      res.redirect('/misOfertas_Transporte');
     }
 
   } catch (error) {
