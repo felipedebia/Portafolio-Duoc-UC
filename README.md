@@ -36,10 +36,10 @@ Iniciar node en la carpeta web
 
 ## Páginas pendientes:
 
-- AGREGAR NUEVA OFERTA_PRODUCTOR
+- AGREGAR NUEVA OFERTA_PRODUCTOR Y TRANSPORTE (haciendo mario)
 - AGREGAR NUEVA ORDEN_BODEGA Y ORDEN_TRANSPORTE, LUEGO ORDEN_BODEGA Y REPORTE_BODEGA
 - Pago (haciendo debia)
-- FRUTA_RESTANTE
+- FRUTA_RESTANTE (haciendo chris)
 - DIVIDIR VENTAS A MISVENTAS PARA PRODUCTOR, QUE SEA VEA LOS SUYOS (haciendo mario)
 - Quizás separar subastas para que productor vea solo las subastas pero no la parte de todas las ofertas
 - REPORTES
@@ -66,7 +66,6 @@ Iniciar node en la carpeta web
 - Agregar PDF boton cuando se ve un informe
 - En pagina Pedidos, listado de pedidos no filtra bien pedidos estado 7 anulado
 - Venta no crea venta_detalle
-- Subasta Fruta, aceptar o rechazar oferta va en subasta transporte, subasta fruta solo admin debe cerrar subasta y el sistema elige con un if la mejor oferta
 - Agregar filtro de que no puedan agregar frutas distintas a una subasta
 - Perfil y modificar perfil solo debe ver ser visto por su propio usuario y administrador
 

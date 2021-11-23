@@ -26,6 +26,7 @@
                             </div>
                             <div class="timeline-body">
                               <p>ID Oferta: <%= ofertaTransporte.id_ofertaT %></p>
+                              <p>¿Tiene refrigeración?: <% if(ofertaTransporte.necesita_refrigeracion == 1){ %> Si <% } else { %> No <% } %></p>
                               <p>Cantidad: <%= ofertaTransporte.cantidad %></p>
                               <p>Peso total: <%= ofertaTransporte.peso_total %></p>
                               <p>Precio final: <%= ofertaTransporte.precio_final %></p>
@@ -56,7 +57,7 @@
                             <span class="badge badge-danger">NINGUNA</span>
                           </div>
                           <div class="timeline-body">
-                            <p>Actualmente no tienes ninguna oferta de frutas, se te notificará cuando esté disponible una nueva oferta.</p>
+                            <p>Actualmente no tienes ninguna oferta de transportes, se te notificará cuando esté disponible una nueva oferta.</p>
                           </div>
                         </div>
                       </li>
@@ -81,32 +82,9 @@
           </div>
           <div class="card card-profile">
             <div class="card-body">
-              <h4 class="card-title mt-4 mb-4">Frutas necesarias</h4>
-              <table class="table table-hover mb-4">
-                <thead class="text-warning">
-                    <th>Fruta</th>
-                    <th>Calidad</th>
-                    <th>Cantidad (en KG)</th>
-                    <th>Estado</th>
-                </thead>
-                <tbody>
-                  <% for(var pedido_detalle of PedidoDetalles){ %>
-                    <% if( pedido_detalle.id_pedidoD == data[0].fk_id_pedido ){ %>
-                      <tr>
-                          <td>
-                            <%= pedido_detalle.fruta_fk_nombre %>
-                          </td>
-                          <td>
-                            <%= pedido_detalle.frutacalidad_fk_nombre %>
-                          </td>
-                          <td>
-                            <%= pedido_detalle.cantidad %>
-                          </td>
-                      </tr>
-                    <% } %>
-                  <% } %>
-                </tbody>
-              </table>
+              <h4 class="card-title mt-4 mb-4">Información del despacho</h4>
+              <span class="mb-4"><strong>Dirección de despacho:</strong></span> <%= data[0].direccion_despacho %> </br></br>
+              <span class="mb-4"><strong>Cantidad:</strong></span> <%= data[0].cantidad %> </br></br>
               <% if (data[0].fk_id_estado == 1) { %>
               
                 <h4 class="card-title mt-4 mb-4">Opciones de la subasta</h4>
@@ -135,28 +113,30 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group my-label required">
-                        <label>Producto</label>
+                        <label>¿Tiene refrigeración?</label>
                         <div class="cus-select-group">
-                          <select id="select-item" name="fk_id_producto" required>
-                              <option selected="true" disabled="disabled">Selecciona una opción</option>
-                              <% for(var producto of Productos){ %>
-                                <% if (producto.fk_id_usuario == session.id_usuario){ %>
-                                  <option name="fk_id_producto" value="<%=producto.id_producto%>"><%=producto.fk_nombre_fruta%> <%=producto.calidad%> <%=producto.cantidad%></option>
-                                <% } %>
-                              <% } %>
-                          </select>
+                            <select id="select-item" name="tiene_refrigeracion" required>
+                                <option selected="true" disabled="disabled">Selecciona una opción</option>
+                                <option name="si" value="1">Si</option>
+                                <option name="no" value="2">No</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group my-label required mt-4">
-                        <label>Cantidad propuesta</label>
+                        <label>Cantidad</label>
                         <input class="form-control mb-4" id="inputCantidad" type="number" name="cantidad" required>
                         <div class="invalid-feedback">Ingresa cantidad</div>
                     </div>
                     <div class="form-group my-label required">
-                      <label>Precio por kilo</label>
-                      <input class="form-control mb-4" id="inputPrecio_por_kilo" type="number" name="precio_por_kilo" required>
-                      <div class="invalid-feedback">Ingresa precio por kilo</div>
+                      <label>Peso total</label>
+                      <input class="form-control mb-4" id="inputPeso_Total" type="number" name="peso_total" required>
+                      <div class="invalid-feedback">Ingresa peso total</div>
                     </div>
+                    <div class="form-group my-label required">
+                        <label>Precio final</label>
+                        <input class="form-control mb-4" id="inputPrecio_Final" type="number" name="precio_final" required>
+                        <div class="invalid-feedback">Ingresa precio final</div>
+                      </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-info" type="submit">Crear oferta de transporte</button>

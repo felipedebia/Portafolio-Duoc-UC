@@ -147,6 +147,40 @@ router.get('/listarOfertasTransportes', async (req, res) => {
 });
 
 
+
+// Crear Oferta Transporte
+router.post('/crearOfertaTransporte/:id_subastaT', async (req, res) => {
+  try {
+
+    var fk_id_subastaT = req.params.id_subastaT;
+    var { cantidad, tiene_refrigeracion, peso_total, precio_final } = req.body;
+    var fk_id_usuario = req.session.id_usuario;
+    var fk_id_estado = 1;
+
+    // Definimos las fechas
+    var fecha_creacion = functions.obtenerFechaActual();
+
+    sql = "INSERT INTO oferta_transporte(cantidad, fecha_creacion, tiene_refrigeracion, precio_final, peso_total, fk_id_usuario, fk_id_subastaT, fk_id_estado) VALUES (:cantidad, to_DATE(:fecha_creacion,'YYYY/MM/DD'), :tiene_refrigeracion, :precio_final, :peso_total, :fk_id_usuario, :fk_id_subastaT, :fk_id_estado)";
+    await settings.OpenConnection(sql, [cantidad, fecha_creacion, tiene_refrigeracion, precio_final, peso_total, fk_id_usuario, fk_id_subastaT, fk_id_estado], true);
+
+    // Si tuvo conexión a la DB
+    if(res.status(200)) {
+      console.log("[!] Oferta de Transporte creada con éxito");
+      res.redirect('/subasta_transporte/' + fk_id_subastaT);
+    } else {
+      console.log("[!] Ocurrió un error al intentar crear la oferta de transporte ");
+      res.redirect('/subasta_transporte/' + fk_id_subastaT);
+    }
+
+  } catch (error) {
+    res.status(400);
+    res.send("Ocurrió un error al obtener los datos de la base de datos")
+    console.log(error);
+  }
+
+});
+
+
 // Aceptar oferta Transporte
 router.get("/aceptarOfertaTransporte/:id_ofertaT", async (req, res) => {
   try {
@@ -158,7 +192,7 @@ router.get("/aceptarOfertaTransporte/:id_ofertaT", async (req, res) => {
 
     // Si tuvo conexión a la DB
     if(res.status(200)) {
-      console.log("[!] Oferta " + value_id_ofertaT + " aceptada con éxito");
+      console.log("[!] Oferta de transporte " + value_id_ofertaT + " aceptada con éxito");
 
       // Capturamos el id_subastaF para retornar a la página
       sql2 = "SELECT fk_id_subastaT FROM oferta_transporte WHERE id_ofertaT = :value_id_ofertaT";
@@ -195,7 +229,7 @@ router.get("/rechazarOfertaTransporte/:id_ofertaT", async (req, res) => {
 
     // Si tuvo conexión a la DB
     if(res.status(200)) {
-      console.log("[!] Oferta " + value_id_ofertaT + " rechazada con éxito");
+      console.log("[!] Oferta de transporte " + value_id_ofertaT + " rechazada con éxito");
 
       // Capturamos el id_subastaF para retornar a la página
       sql2 = "SELECT fk_id_subastaT FROM oferta_transporte WHERE id_ofertaT = :value_id_ofertaT";
