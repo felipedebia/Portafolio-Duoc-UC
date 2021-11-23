@@ -1,5 +1,4 @@
 <%- include('partials/nav.ejs') %>
-<!-- your content here -->
   <div class="content">
     <div class="container-fluid">
       <div class="row">
@@ -31,14 +30,6 @@
                               <p>Cantidad propuesta: <%= ofertaProductor.cantidad %></p>
                               <p>Precio por kilo: <%= ofertaProductor.precio_por_kilo %></p>
                               <hr>
-                              <% if(ofertaProductor.fk_id_estado == 1 && data[0].fk_id_estado == 1){ %>
-                                <a href="../api_ofertas/rechazarOfertaProductor/<%= ofertaProductor.id_ofertaP %>"><button type="button" class="btn btn-danger btn-sm pull-right">Rechazar oferta</button></a>
-                                <a href="../api_ofertas/aceptarOfertaProductor/<%= ofertaProductor.id_ofertaP %>"><button type="button" class="btn btn-success btn-sm pull-right mr-3">Aceptar oferta</button></a>
-                              <% } else if(ofertaProductor.fk_id_estado == 2) { %>
-                                <span class="btn btn-success btn-sm pull-right mr-3">Oferta aceptada</span>
-                              <% } else if(ofertaProductor.fk_id_estado == 3) { %>
-                                <span class="btn btn-danger btn-sm pull-right mr-3">Oferta rechazada</span>
-                              <% } %>
                             </div>
                             <h6>
                               <i class="ti-time"></i> <%= ofertaProductor.fecha_creacion %>
@@ -88,7 +79,6 @@
                     <th>Fruta</th>
                     <th>Calidad</th>
                     <th>Cantidad (en KG)</th>
-                    <th>Estado</th>
                 </thead>
                 <tbody>
                   <% for(var pedido_detalle of PedidoDetalles){ %>
@@ -112,15 +102,7 @@
               
                 <h4 class="card-title mt-4 mb-4">Opciones de la subasta</h4>
                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalCrearOferta">Crear una nueva oferta</button>
-                <div class="btn-group" role="group">
-                  <button id="btnGroupDrop1" type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Extender plazo
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                    <a class="dropdown-item" href="#">2 semanas</a>
-                    <a class="dropdown-item" href="#">1 mes</a>
-                  </div>
-                </div>
+                <a href="../api_subastas/finalizarSubastaFruta/<%= data[0].id_subastaF %>"><button type="button" class="btn btn-warning btn-sm">Finalizar Subasta</button></a>
               <% } %>
             </div>
           </div>
@@ -190,7 +172,6 @@
     
     var modificardivfechacreacion = document.getElementById('fecha_creacion');
     modificardivfechacreacion.innerHTML =  moment(fechacreacion_localdate2, "YYYY-MM-DD hh:mm:ss").fromNow();
-
     var dateFormat = 'YYYY-DD-MM HH:mm:ss';
     var fechaactualizacion_utctime = moment.utc('<%= data[0].fecha_actualizacion %>');
     var fechaactualizacion_localdate = fechaactualizacion_utctime.local();
@@ -198,7 +179,6 @@
     
     var modificardivfechaactualizacion = document.getElementById('fecha_actualizacion');
     modificardivfechaactualizacion.innerHTML =  moment(fechaactualizacion_localdate2, "YYYY-MM-DD hh:mm:ss").fromNow();
-
     var dateFormat = 'YYYY-DD-MM HH:mm:ss';
     var fechatermino_utctime = moment.utc('<%= data[0].fecha_termino %>');
     var fechatermino_localdate = fechatermino_utctime.local();

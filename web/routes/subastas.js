@@ -30,7 +30,7 @@ router.get('/listarSubastasFrutas', async (req, res) => {
 
         SubastasFrutas.push(subastaSchema);
     })
-    res.json({title: 'SubastasFrutas', 'mydata': SubastasFrutas});
+    res.json({ title: 'SubastasFrutas', 'mydata': SubastasFrutas });
 
   } catch (error) {
     res.status(400);
@@ -58,7 +58,7 @@ router.get('/crearSubastaFruta/:id_subastaF', async (req, res) => {
 
     // Agregamos 1 mes más de plazo para terminar la subasta, falta terminar
     var fecha_termino_actual = functions.obtenerFechaActual();
-    var fecha_termino = functions.agregarMesAFecha(new Date(fecha_termino_actual),1)
+    var fecha_termino = functions.agregarMesAFecha(new Date(fecha_termino_actual), 1)
 
     console.log(fecha_termino_actual)
     console.log(fecha_termino)
@@ -67,7 +67,7 @@ router.get('/crearSubastaFruta/:id_subastaF', async (req, res) => {
     await settings.OpenConnection(sql, [id_subastaF, fecha_creacion, fecha_actualizacion, fecha_termino_actual, fk_id_pedido, fk_id_estado], true);
 
     // Si tuvo conexión a la DB
-    if(res.status(200)) {
+    if (res.status(200)) {
       console.log("[!] Subasta creada con éxito");
 
       // Actualizamos pedido a estado 3 = en subasta de fruta
@@ -89,8 +89,8 @@ router.get('/crearSubastaFruta/:id_subastaF', async (req, res) => {
 });
 
 
-// Anular Frutas
-router.get("/anularSubastaFruta/:id_subastaF", async (req, res) => {
+// Finalizar Subasta Fruta
+router.get("/finalizarSubastaFruta/:id_subastaF", async (req, res) => {
   try {
 
     var id_subastaF_bind = req.params.id_subastaF;
@@ -98,7 +98,48 @@ router.get("/anularSubastaFruta/:id_subastaF", async (req, res) => {
     sql = "UPDATE subasta_fruta SET fk_id_estado=2 WHERE id_subastaF = :id_subastaF_bind";
     await settings.OpenConnection(sql, [id_subastaF_bind], true);
 
-    if(res.status(200)) {
+    if (res.status(200)) {
+      console.log("[!] Subasta de Frutas " + id_subastaF_bind + "Finalizada con éxito");
+      // Variable funcion eleccion
+      binds = { "id_subastaF_bind": req.params.id_subastaF };
+      sql3 = 'SELECT ID_OFERTAP, CANTIDAD, FECHA_CREACION, PRECIO_POR_KILO, FK_ID_ESTADO, FK_ID_PRODUCTO, FK_ID_USUARIO, FK_ID_PEDIDOD, FK_ID_SUBASTAF FROM oferta_productor JOIN WHERE oferta_productor.FK_ID_SUBASTAF = :id_subastaF_bind';
+      corre = await settings.OpenConnection(sql3, binds, false);
+
+      // recorre la variable corre
+      //for
+
+      //se crea subasta transporte
+      sql2 = "INSERT INTO subasta_transporte(ID_SUBASTAT, fecha_creacion, fecha_actualizacion, fecha_termino, CANTIDAD, DIRECCION_DESPACHO, fk_id_pedido, fk_id_estado) VALUES (:ID_SUBASTAT, to_DATE(:fecha_creacion,'YYYY/MM/DD'), to_DATE(:fecha_actualizacion,'YYYY/MM/DD'), to_DATE(:fecha_termino,'YYYY/MM/DD'), :CANTIDAD, :DIRECCION_DESPACHO, :fk_id_pedido, :fk_id_estado)";
+      resultado = await settings.OpenConnection(sql2, [id_subastaF_bind], true);
+      //Lo lleva al detalle de la subasta mostrando pedido con el estado de la subasta finalizado
+      if (resultado) {
+        res.redirect('/subastaf_finalizado/' + id_subastaF_bind);
+      }
+
+    } else {
+      console.log("[!] Ocurrió un error al intentar finalizar la subasta de Frutas " + id_subastaF_bind);
+      res.redirect('/subastas_frutas');
+    }
+
+  } catch (error) {
+    res.status(400);
+    res.send("Ocurrió un error al obtener los datos de la base de datos")
+    console.log(error);
+  }
+
+});
+
+
+// Anular Frutas
+router.get("/anularSubastaFruta/:id_subastaF", async (req, res) => {
+  try {
+
+    var id_subastaF_bind = req.params.id_subastaF;
+
+    sql = "UPDATE subasta_fruta SET fk_id_estado=3 WHERE id_subastaF = :id_subastaF_bind";
+    await settings.OpenConnection(sql, [id_subastaF_bind], true);
+
+    if (res.status(200)) {
       console.log("[!] Subasta de Frutas " + id_subastaF_bind + " anulada con éxito");
       res.redirect('/subastas_frutas');
     } else {
@@ -142,7 +183,7 @@ router.get('/listarSubastasTransportes', async (req, res) => {
 
         SubastasTransportes.push(subastaSchema);
     })
-    res.json({title: 'SubastasTransportes', 'mydata': SubastasTransportes});
+    res.json({ title: 'SubastasTransportes', 'mydata': SubastasTransportes });
 
   } catch (error) {
     res.status(400);
@@ -162,7 +203,7 @@ router.get("/anularSubastaTransporte/:id_subastaT", async (req, res) => {
     sql = "UPDATE subasta_transporte SET fk_id_estado=2 WHERE id_subastaT = :id_subastaT_bind";
     await settings.OpenConnection(sql, [id_subastaT_bind], true);
 
-    if(res.status(200)) {
+    if (res.status(200)) {
       console.log("[!] Subasta de Transportes " + id_subastaT_bind + " anulada con éxito");
       res.redirect('/subastas_transportes');
     } else {
