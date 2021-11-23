@@ -476,7 +476,7 @@ router.get('/subasta_fruta/:id_subastaF', async function(req, res, next) {
 			functions.ListarSubastasFrutas();
 			functions.ListarOfertasProductores();
 			functions.ListarPedidoDetalles();
-			res.render('subasta_Fruta', { title: 'Viendo Subasta - Maipo Grande', data:subastaData, navActive: 'Subastas' });
+			res.render('subasta_Fruta', { title: 'Viendo Subasta Fruta - Maipo Grande', data:subastaData, navActive: 'Subastas' });
 		} else {
 			res.send('Error al obtener datos de la base de datos');
 		}
@@ -530,7 +530,7 @@ router.get('/subasta_transporte/:id_subastaT', async function(req, res, next) {
 			functions.ListarSubastasTransportes();
 			functions.ListarOfertasTransportes();
 			functions.ListarPedidoDetalles();
-			res.render('subasta_Transporte', { title: 'Viendo Subasta - Maipo Grande', data:subastaData, navActive: 'Subastas' });
+			res.render('subasta_Transporte', { title: 'Viendo Subasta Transporte - Maipo Grande', data:subastaData, navActive: 'Subastas' });
 		} else {
 			res.send('Error al obtener datos de la base de datos');
 		}

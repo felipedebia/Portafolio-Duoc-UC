@@ -82,80 +82,6 @@ router.post('/crearOfertaProductor/:id_subastaF', async (req, res) => {
 });
 
 
-// Aceptar oferta Productor
-router.get("/aceptarOfertaProductor/:id_ofertaP", async (req, res) => {
-  try {
-  
-    var value_id_ofertaP = req.params.id_ofertaP;
-
-    sql = "UPDATE oferta_productor SET fk_id_estado= 2 WHERE id_ofertaP= :value_id_ofertaP";
-    await settings.OpenConnection(sql, [value_id_ofertaP], true);
-
-    // Si tuvo conexión a la DB
-    if(res.status(200)) {
-      console.log("[!] Oferta " + value_id_ofertaP + " aceptada con éxito");
-
-      // Capturamos el id_subastaF para retornar a la página
-      sql2 = "SELECT fk_id_subastaf FROM oferta_productor WHERE id_ofertaP = :value_id_ofertaP";
-      result = await settings.OpenConnection(sql2, [value_id_ofertaP], true);
-
-      var value_id_subastaF = result.rows[0];
-
-      if (value_id_subastaF) {
-        res.redirect('/subasta_fruta/' + value_id_subastaF);
-      }
-
-    } else {
-      console.log("[!] Ocurrió un error al intentar aceptar la oferta " + value_id_ofertaP);
-      res.redirect('/subastas_frutas');
-    }
-
-  } catch (error) {
-    res.status(400);
-    res.send("Ocurrió un error al obtener los datos de la base de datos")
-    console.log(error);
-  }
-
-})
-
-
-// Rechazar oferta Productor
-router.get("/rechazarOfertaProductor/:id_ofertaP", async (req, res) => {
-  try {
-  
-    var value_id_ofertaP = req.params.id_ofertaP;
-
-    sql = "UPDATE oferta_productor SET fk_id_estado= 3 WHERE id_ofertaP= :value_id_ofertaP";
-    await settings.OpenConnection(sql, [value_id_ofertaP], true);
-
-    // Si tuvo conexión a la DB
-    if(res.status(200)) {
-      console.log("[!] Oferta " + value_id_ofertaP + " rechazada con éxito");
-
-      // Capturamos el id_subastaF para retornar a la página
-      sql2 = "SELECT fk_id_subastaf FROM oferta_productor WHERE id_ofertaP = :value_id_ofertaP";
-      result = await settings.OpenConnection(sql2, [value_id_ofertaP], true);
-
-      var value_id_subastaF = result.rows[0];
-
-      if (value_id_subastaF) {
-        res.redirect('/subasta_fruta/' + value_id_subastaF);
-      }
-
-    } else {
-      console.log("[!] Ocurrió un error al intentar rechazar la oferta " + value_id_ofertaP);
-      res.redirect('/subastas_frutas');
-    }
-
-  } catch (error) {
-    res.status(400);
-    res.send("Ocurrió un error al obtener los datos de la base de datos")
-    console.log(error);
-  }
-
-})
-
-
 // Anular Oferta Productor
 router.get("/anularOfertaProductor/:id_ofertaP", async (req, res) => {
   try {
@@ -220,6 +146,79 @@ router.get('/listarOfertasTransportes', async (req, res) => {
 
 });
 
+
+// Aceptar oferta Transporte
+router.get("/aceptarOfertaTransporte/:id_ofertaT", async (req, res) => {
+  try {
+  
+    var value_id_ofertaT = req.params.id_ofertaT;
+
+    sql = "UPDATE oferta_transporte SET fk_id_estado= 2 WHERE id_ofertaT= :value_id_ofertaT";
+    await settings.OpenConnection(sql, [value_id_ofertaT], true);
+
+    // Si tuvo conexión a la DB
+    if(res.status(200)) {
+      console.log("[!] Oferta " + value_id_ofertaT + " aceptada con éxito");
+
+      // Capturamos el id_subastaF para retornar a la página
+      sql2 = "SELECT fk_id_subastaT FROM oferta_transporte WHERE id_ofertaT = :value_id_ofertaT";
+      result = await settings.OpenConnection(sql2, [value_id_ofertaT], true);
+
+      var value_id_subastaT = result.rows[0];
+
+      if (value_id_subastaT) {
+        res.redirect('/subasta_transporte/' + value_id_subastaT);
+      }
+
+    } else {
+      console.log("[!] Ocurrió un error al intentar aceptar la oferta " + value_id_ofertaT);
+      res.redirect('/subastas_transportes');
+    }
+
+  } catch (error) {
+    res.status(400);
+    res.send("Ocurrió un error al obtener los datos de la base de datos")
+    console.log(error);
+  }
+
+})
+
+
+// Rechazar oferta Transporte
+router.get("/rechazarOfertaTransporte/:id_ofertaT", async (req, res) => {
+  try {
+  
+    var value_id_ofertaT = req.params.id_ofertaT;
+
+    sql = "UPDATE oferta_transporte SET fk_id_estado= 3 WHERE id_ofertaT= :value_id_ofertaT";
+    await settings.OpenConnection(sql, [value_id_ofertaT], true);
+
+    // Si tuvo conexión a la DB
+    if(res.status(200)) {
+      console.log("[!] Oferta " + value_id_ofertaT + " rechazada con éxito");
+
+      // Capturamos el id_subastaF para retornar a la página
+      sql2 = "SELECT fk_id_subastaT FROM oferta_transporte WHERE id_ofertaT = :value_id_ofertaT";
+      result = await settings.OpenConnection(sql2, [value_id_ofertaP], true);
+
+      var value_id_subastaT = result.rows[0];
+
+      if (value_id_subastaT) {
+        res.redirect('/subasta_transporte/' + value_id_subastaT);
+      }
+
+    } else {
+      console.log("[!] Ocurrió un error al intentar rechazar la oferta " + value_id_ofertaT);
+      res.redirect('/subastas_transportes');
+    }
+
+  } catch (error) {
+    res.status(400);
+    res.send("Ocurrió un error al obtener los datos de la base de datos")
+    console.log(error);
+  }
+
+})
 
 
 // Anular oferta Transportes

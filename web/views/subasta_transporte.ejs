@@ -5,48 +5,48 @@
         <div class="col-md-8">
           <div class="card">
             <div class="card-header card-header-warning">
-              <h4 class="card-title">Subasta de Fruta <%= data[0].id_subastaF%></h4>
+              <h4 class="card-title">Subasta de Transporte <%= data[0].id_subastaF%></h4>
             </div>
             <div class="card-body">
-              <h3 class="card-title mb-4 mt-3">Ofertas de la subasta de fruta</h3>
+              <h3 class="card-title mb-4 mt-3">Ofertas de la subasta de transporte</h3>
               <div class="card-text">
 
                   <ul class="timeline timeline-simple mr-5">
-                    <% for(var ofertaProductor of OfertasProductores) { %>
-                      <% var ofertaProductor_contador = 0; %>
-                      <% if (ofertaProductor.fk_id_subastaF == data[0].id_subastaF && ofertaProductor.fk_id_estado != 4){ %>
-                        <% ofertaProductor_contador++; %>
+                    <% for(var ofertaTransporte of OfertasTransportes) { %>
+                      <% var ofertaTransporte_contador = 0; %>
+                      <% if (ofertaTransporte.fk_id_subastaT == data[0].id_subastaT && ofertaTransporte.fk_id_estado != 4){ %>
+                        <% ofertaTransporte_contador++; %>
                         <li class="timeline-inverted">
                           <div class="timeline-badge success">
                             <i class="material-icons">card_travel</i>
                           </div>
                           <div class="timeline-panel">
                             <div class="timeline-heading">
-                              <span class="badge badge-success">OFERTA DE PRODUCTOR</span>
+                              <span class="badge badge-success">OFERTA DE TRANSPORTISTA</span>
                             </div>
                             <div class="timeline-body">
-                              <p>ID Oferta: <%= ofertaProductor.id_ofertaP %></p>
-                              <p>Producto: <%= ofertaProductor.fruta_fk_nombre + " " + ofertaProductor.frutacalidad_fk_nombre + " " + ofertaProductor.producto_fk_cantidad %></p>
-                              <p>Cantidad propuesta: <%= ofertaProductor.cantidad %></p>
-                              <p>Precio por kilo: <%= ofertaProductor.precio_por_kilo %></p>
+                              <p>ID Oferta: <%= ofertaTransporte.id_ofertaT %></p>
+                              <p>Cantidad: <%= ofertaTransporte.cantidad %></p>
+                              <p>Peso total: <%= ofertaTransporte.peso_total %></p>
+                              <p>Precio final: <%= ofertaTransporte.precio_final %></p>
                               <hr>
-                              <% if(ofertaProductor.fk_id_estado == 1 && data[0].fk_id_estado == 1){ %>
-                                <a href="../api_ofertas/rechazarOfertaProductor/<%= ofertaProductor.id_ofertaP %>"><button type="button" class="btn btn-danger btn-sm pull-right">Rechazar oferta</button></a>
-                                <a href="../api_ofertas/aceptarOfertaProductor/<%= ofertaProductor.id_ofertaP %>"><button type="button" class="btn btn-success btn-sm pull-right mr-3">Aceptar oferta</button></a>
-                              <% } else if(ofertaProductor.fk_id_estado == 2) { %>
+                              <% if(ofertaTransporte.fk_id_estado == 1 && data[0].fk_id_estado == 1){ %>
+                                <a href="../api_ofertas/rechazarOfertaTransporte/<%= ofertaTransporte.id_ofertaT %>"><button type="button" class="btn btn-danger btn-sm pull-right">Rechazar oferta</button></a>
+                                <a href="../api_ofertas/aceptarOfertaTransporte/<%= ofertaTransporte.id_ofertaT %>"><button type="button" class="btn btn-success btn-sm pull-right mr-3">Aceptar oferta</button></a>
+                              <% } else if(ofertaTransporte.fk_id_estado == 2) { %>
                                 <span class="btn btn-success btn-sm pull-right mr-3">Oferta aceptada</span>
-                              <% } else if(ofertaProductor.fk_id_estado == 3) { %>
+                              <% } else if(ofertaTransporte.fk_id_estado == 3) { %>
                                 <span class="btn btn-danger btn-sm pull-right mr-3">Oferta rechazada</span>
                               <% } %>
                             </div>
                             <h6>
-                              <i class="ti-time"></i> <%= ofertaProductor.fecha_creacion %>
+                              <i class="ti-time"></i> <%= ofertaTransporte.fecha_creacion %>
                             </h6>
                           </div>
                         </li>
                       <% } %>
                     <% } %>
-                    <% if( ofertaProductor_contador == 0 ){ %>
+                    <% if( ofertaTransporte_contador == 0 ){ %>
                       <li class="timeline-inverted">
                         <div class="timeline-badge danger">
                           <i class="material-icons">card_travel</i>
@@ -69,7 +69,7 @@
         <div class="col-md-4">
           <div class="card card-profile">
             <div class="card-body">
-              <h4 class="card-title mt-4 mb-4">Subasta de Fruta <%= data[0].id_subastaF%></h4>
+              <h4 class="card-title mt-4 mb-4">Subasta de Transporte <%= data[0].id_subastaT%></h4>
               <span class="mt-4"><strong>Fecha de creación:</strong></span> <span id="fecha_creacion"><%= data[0].fecha_creacion %></span></br>
               <span><strong>Fecha de última actualización:</strong></span> <span id="fecha_actualizacion"><%= data[0].fecha_actualizacion %></span></br>
               <span class="mb-4"><strong>Fecha de termino:</strong></span> <span id="fecha_termino"><%= data[0].fecha_termino %></span></br></br>
@@ -111,15 +111,7 @@
               
                 <h4 class="card-title mt-4 mb-4">Opciones de la subasta</h4>
                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalCrearOferta">Crear una nueva oferta</button>
-                <div class="btn-group" role="group">
-                  <button id="btnGroupDrop1" type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Extender plazo
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                    <a class="dropdown-item" href="#">2 semanas</a>
-                    <a class="dropdown-item" href="#">1 mes</a>
-                  </div>
-                </div>
+                <a href="../api_subastas/finalizarSubastaTransporte/<%= data[0].id_subastaT %>"><button type="button" class="btn btn-warning">Finalizar Subasta</button></a>
               <% } %>
             </div>
           </div>
@@ -132,10 +124,10 @@
   <div class="modal fade" id="modalCrearOferta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action="../api_ofertas/crearOfertaProductor/<%= data[0].id_subastaF%>" method="POST">
+            <form action="../api_ofertas/crearOfertaTransporte/<%= data[0].id_subastaT%>" method="POST">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        Crear oferta de Productor
+                        Crear oferta de Transporte
                     </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -167,7 +159,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-info" type="submit">Crear oferta de productor</button>
+                    <button class="btn btn-info" type="submit">Crear oferta de transporte</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 </div>
             </form>

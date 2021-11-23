@@ -171,9 +171,9 @@ router.get('/listarSubastasTransportes', async (req, res) => {
     result.rows.map(subasta => {
         let subastaSchema = {
             "id_subastaT": subasta[0],
-            "fecha_creacion": subasta[1],
-            "fecha_actualizacion": subasta[2],
-            "fecha_termino": subasta[3],
+            "fecha_creacion": moment(subasta[1]).format('DD-MM-YYYY'),
+            "fecha_actualizacion": moment(subasta[2]).format('DD-MM-YYYY'),
+            "fecha_termino": moment(subasta[3]).format('DD-MM-YYYY'),
             "cantidad": subasta[4],
             "direccion_despacho": subasta[5],
             "fk_id_pedido": subasta[6],
