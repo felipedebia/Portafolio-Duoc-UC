@@ -36,7 +36,7 @@ Iniciar node en la carpeta web
 
 ## Páginas pendientes:
 
-- AGREGAR NUEVA OFERTA_PRODUCTOR Y TRANSPORTE (haciendo mario)
+- PROBAR SI FUNCIONAN BIEN OFERTA_PRODUCTOR Y TRANSPORTE (haciendo mario)
 - AGREGAR NUEVA ORDEN_BODEGA Y ORDEN_TRANSPORTE, LUEGO ORDEN_BODEGA Y REPORTE_BODEGA
 - Pago (haciendo debia)
 - FRUTA_RESTANTE (haciendo chris)
