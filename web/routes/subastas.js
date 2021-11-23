@@ -100,19 +100,38 @@ router.get("/finalizarSubastaFruta/:id_subastaF", async (req, res) => {
 
     if (res.status(200)) {
       console.log("[!] Subasta de Frutas " + id_subastaF_bind + "Finalizada con éxito");
-      // Variable funcion eleccion
-      binds = { "id_subastaF_bind": req.params.id_subastaF };
-      sql3 = 'SELECT ID_OFERTAP, CANTIDAD, FECHA_CREACION, PRECIO_POR_KILO, FK_ID_ESTADO, FK_ID_PRODUCTO, FK_ID_USUARIO, FK_ID_PEDIDOD, FK_ID_SUBASTAF FROM oferta_productor JOIN WHERE oferta_productor.FK_ID_SUBASTAF = :id_subastaF_bind';
-      corre = await settings.OpenConnection(sql3, binds, false);
 
-      // recorre la variable corre
-      //for
+      // Seleccionamos todas las ofertas de productor que tengan fk_id_subastaF igual a la subasta Fruta a finalizar
+      binds = { "id_subastaF_bind": req.params.id_subastaF };
+      sql2 = 'SELECT id_ofertaP, cantidad, fecha_creacion, precio_por_kilo, fk_id_estado, fk_id_producto, fk_id_usuario, fk_id_pedidoD, fk_id_subastaf, pedido_detalle.cantidad FROM oferta_productor JOIN pedido_detalle ON oferta_productor.fk_id_pedidoD = pedido_detalle.id_pedidoD WHERE oferta_productor.fk_id_subastaf = :id_subastaF_bind';
+      resultado2 = await settings.OpenConnection(sql2, binds, false);
+
+      console.log(resultado2)
+      
+      // 
+      var canTotal = 0;
+      var elegido = NULL;
+
+      console.log(resultado2.cantidad)
+
+      // Recorremos todas las ofertas 
+      var resultado2_length = resultado2.length;
+      for (var i = 0; i < resultado2_length; i++) {
+        if (resultado2[i][9] <= canTotal) {
+          elegido = i;
+          break;
+        }
+      }
+
+      // Recogemos la variable y posición guardada.
+      //elegido
 
       //se crea subasta transporte
-      sql2 = "INSERT INTO subasta_transporte(ID_SUBASTAT, fecha_creacion, fecha_actualizacion, fecha_termino, CANTIDAD, DIRECCION_DESPACHO, fk_id_pedido, fk_id_estado) VALUES (:ID_SUBASTAT, to_DATE(:fecha_creacion,'YYYY/MM/DD'), to_DATE(:fecha_actualizacion,'YYYY/MM/DD'), to_DATE(:fecha_termino,'YYYY/MM/DD'), :CANTIDAD, :DIRECCION_DESPACHO, :fk_id_pedido, :fk_id_estado)";
-      resultado = await settings.OpenConnection(sql2, [id_subastaF_bind], true);
+      sql3 = "INSERT INTO subasta_transporte(ID_SUBASTAT, fecha_creacion, fecha_actualizacion, fecha_termino, CANTIDAD, DIRECCION_DESPACHO, fk_id_pedido, fk_id_estado) VALUES (:ID_SUBASTAT, to_DATE(:fecha_creacion,'YYYY/MM/DD'), to_DATE(:fecha_actualizacion,'YYYY/MM/DD'), to_DATE(:fecha_termino,'YYYY/MM/DD'), :CANTIDAD, :DIRECCION_DESPACHO, :fk_id_pedido, :fk_id_estado)";
+      resultado3 = await settings.OpenConnection(sql3, [id_subastaF_bind], true);
+      
       //Lo lleva al detalle de la subasta mostrando pedido con el estado de la subasta finalizado
-      if (resultado) {
+      if (resultado3) {
         res.redirect('/subastaf_finalizado/' + id_subastaF_bind);
       }
 

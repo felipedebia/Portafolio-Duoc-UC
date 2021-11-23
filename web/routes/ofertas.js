@@ -36,7 +36,7 @@ router.get('/listarOfertasProductores', async (req, res) => {
 
         OfertasProductores.push(ofertaSchema);
     })
-    res.json({title: 'OfertasProductores', 'mydata': OfertasProductores});
+    res.json({ title: 'OfertasProductores', 'mydata': OfertasProductores });
 
   } catch (error) {
     res.status(400);
@@ -65,7 +65,7 @@ router.post('/crearOfertaProductor/:id_subastaF', async (req, res) => {
     await settings.OpenConnection(sql, [cantidad, fecha_creacion, precio_por_kilo, fk_id_estado, fk_id_producto, fk_id_usuario, fk_id_pedidoD, fk_id_subastaF], true);
 
     // Si tuvo conexión a la DB
-    if(res.status(200)) {
+    if (res.status(200)) {
       console.log("[!] Oferta de Productor creada con éxito");
       res.redirect('/subasta_fruta/' + fk_id_subastaF);
     } else {
@@ -91,7 +91,7 @@ router.get("/anularOfertaProductor/:id_ofertaP", async (req, res) => {
     sql = "UPDATE oferta_productor SET fk_id_estado=4 WHERE id_ofertaP = :id_ofertaP_bind";
     await settings.OpenConnection(sql, [id_ofertaP_bind], true);
 
-    if(res.status(200)) {
+    if (res.status(200)) {
       console.log("[!] Oferta de Productor " + id_ofertaP_bind + " anulada con éxito");
       res.redirect('/misOfertas_Productor');
     } else {
@@ -164,7 +164,7 @@ router.post('/crearOfertaTransporte/:id_subastaT', async (req, res) => {
     await settings.OpenConnection(sql, [cantidad, fecha_creacion, tiene_refrigeracion, precio_final, peso_total, fk_id_usuario, fk_id_subastaT, fk_id_estado], true);
 
     // Si tuvo conexión a la DB
-    if(res.status(200)) {
+    if (res.status(200)) {
       console.log("[!] Oferta de Transporte creada con éxito");
       res.redirect('/subasta_transporte/' + fk_id_subastaT);
     } else {
@@ -191,7 +191,7 @@ router.get("/aceptarOfertaTransporte/:id_ofertaT", async (req, res) => {
     await settings.OpenConnection(sql, [value_id_ofertaT], true);
 
     // Si tuvo conexión a la DB
-    if(res.status(200)) {
+    if (res.status(200)) {
       console.log("[!] Oferta de transporte " + value_id_ofertaT + " aceptada con éxito");
 
       // Capturamos el id_subastaF para retornar a la página
@@ -228,7 +228,7 @@ router.get("/rechazarOfertaTransporte/:id_ofertaT", async (req, res) => {
     await settings.OpenConnection(sql, [value_id_ofertaT], true);
 
     // Si tuvo conexión a la DB
-    if(res.status(200)) {
+    if (res.status(200)) {
       console.log("[!] Oferta de transporte " + value_id_ofertaT + " rechazada con éxito");
 
       // Capturamos el id_subastaF para retornar a la página
@@ -264,7 +264,7 @@ router.get("/anularOfertaTransporte/:id_ofertaT", async (req, res) => {
     sql = "UPDATE oferta_transporte SET fk_id_estado=4 WHERE id_ofertaT = :id_ofertaT_bind";
     await settings.OpenConnection(sql, [id_ofertaT_bind], true);
 
-    if(res.status(200)) {
+    if (res.status(200)) {
       console.log("[!] Oferta de Transporte " + id_ofertaT_bind + " anulada con éxito");
       res.redirect('/misOfertas_Transporte');
     } else {
