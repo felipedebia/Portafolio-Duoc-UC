@@ -4,6 +4,7 @@ const router = express.Router();
 const settings = require('../bin/settings');
 var moment = require('moment');
 var functions = require('./functions');
+var functions_reportes = require('./functions_reportes');
 
 // Contraseña
 var SimpleCrypto = require("simple-crypto-js").default
@@ -89,6 +90,10 @@ router.get('/dashboard', function(req, res) {
 
 		switch (req.session.tipo_usuario) {
 			case 1:
+				functions_reportes.TotalFrutas();
+				functions_reportes.TotalUsuarios();
+				functions_reportes.TotalSubastas();
+				functions_reportes.TotalVentas();
 				res.render('dashboard', { title: 'Panel de Administración - Maipo Grande', data:contadoresData, navActive: 'Dashboard' });
 			  	break;
 			case 2:
@@ -104,7 +109,7 @@ router.get('/dashboard', function(req, res) {
 				res.render('dashboard_productor', { title: 'Panel de Administración - Maipo Grande', data:contadoresData, navActive: 'Dashboard' });
 			  break;
 			case 6:
-				res.render('dashboard_consultor', { title: 'Panel de Administración - Maipo Grande', data:contadoresData, navActive: 'Dashboard' });
+				res.render('reportes', { title: 'Reportes - Maipo Grande', data:contadoresData, navActive: 'Dashboard' });
 			  	break;
 		}
 
@@ -784,7 +789,30 @@ router.get('/productos', function(req, res) {
 // CRUD REPORTES
 router.get('/reportes', function(req, res) {
     if (req.session.isLoggedIn) {
-		functions.ListarReportesBodegas();
+		functions_reportes.VentasTotal();
+		functions_reportes.RepSubastaF();
+		functions_reportes.SubastaFTotalActivos();
+		functions_reportes.SubastaFTotalInactivos();
+		functions_reportes.TotalSubastasFPD();
+		functions_reportes.TotalSubastasFPM();
+		functions_reportes.TotalSubastasFPA();
+		functions_reportes.SubastaTTotal();
+		functions_reportes.SubastaTActivo();
+		functions_reportes.SubastaTInactivo();
+		functions_reportes.TotalSubastasTPD();
+		functions_reportes.TotalSubastasTPM();
+		functions_reportes.TotalSubastasTPA();
+		functions_reportes.TotalProductos();
+		functions_reportes.TotalProductosA();
+		functions_reportes.TotalProductosI();
+		functions_reportes.TotalProductosPC();
+		functions_reportes.TotalProductosSC();
+		functions_reportes.TotalProductosTC();
+		functions_reportes.TotalProductosCC();
+		functions_reportes.TotalProductosQC();
+		functions_reportes.TotalProductosPD();
+		functions_reportes.TotalProductosPM();
+		functions_reportes.TotalProductosPA();
         res.render('reportes', { title: 'Reportes - Maipo Grande', navActive: 'Reportes' });
     } else {
         res.redirect('/');

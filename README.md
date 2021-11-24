@@ -40,13 +40,11 @@ Iniciar node en la carpeta web
 - PAGO
 - FINALIZAR SUBASTA FRUTA Y CREAR SUBASTA TRANSPORTE
 - TERMINAR COSTOS DE FRUTA Y TRANSPORTE EN VENTA_DETALLE
-- Quizás separar subastas para que productor vea solo las subastas pero no la parte de todas las ofertas
 - REPORTES
 - Pendiente subasta_productor
 
 ## Funciones pendientes:
 
-- Agregar join de ambas ofertas a venta para crear venta_detalle
 - Cambiar a try catch archivo rutas.js
 - Gráficos de página Reportes
 - Contadores de Usuarios, Frutas, Ventas y Subastas para la página dashboard
