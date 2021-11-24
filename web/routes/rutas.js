@@ -86,7 +86,28 @@ router.get('/dashboard', function(req, res) {
 				
 			}
 		];
-		res.render('dashboard', { title: 'Panel de Administración - Maipo Grande', data:contadoresData, navActive: 'Dashboard' });
+
+		switch (req.session.tipo_usuario) {
+			case 1:
+				res.render('dashboard', { title: 'Panel de Administración - Maipo Grande', data:contadoresData, navActive: 'Dashboard' });
+			  	break;
+			case 2:
+				res.render('dashboard_transportista', { title: 'Panel de Administración - Maipo Grande', data:contadoresData, navActive: 'Dashboard' });
+			  	break;
+			case 3:
+				res.render('dashboard_cliente', { title: 'Panel de Administración - Maipo Grande', data:contadoresData, navActive: 'Dashboard' });
+			  	break;
+			case 4:
+				res.render('dashboard_cliente', { title: 'Panel de Administración - Maipo Grande', data:contadoresData, navActive: 'Dashboard' });
+			  	break;
+			case 5:
+				res.render('dashboard_productor', { title: 'Panel de Administración - Maipo Grande', data:contadoresData, navActive: 'Dashboard' });
+			  break;
+			case 6:
+				res.render('dashboard_consultor', { title: 'Panel de Administración - Maipo Grande', data:contadoresData, navActive: 'Dashboard' });
+			  	break;
+		}
+
 	} else {
 		res.redirect('/');
 	}

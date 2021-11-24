@@ -36,12 +36,13 @@ Iniciar node en la carpeta web
 
 ## Páginas pendientes:
 
-- AGREGAR NUEVA ORDEN_BODEGA Y ORDEN_TRANSPORTE, LUEGO ORDEN_BODEGA Y REPORTE_BODEGA
+- AGREGAR NUEVA ORDEN_TRANSPORTE, LUEGO ORDEN_BODEGA Y REPORTE_BODEGA
 - PAGO
 - FINALIZAR SUBASTA FRUTA Y CREAR SUBASTA TRANSPORTE
 - TERMINAR COSTOS DE FRUTA Y TRANSPORTE EN VENTA_DETALLE
 - Quizás separar subastas para que productor vea solo las subastas pero no la parte de todas las ofertas
 - REPORTES
+- Pendiente subasta_productor
 
 ## Funciones pendientes:
 
