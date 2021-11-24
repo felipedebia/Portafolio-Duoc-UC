@@ -34,7 +34,6 @@ async function ListarUsuarios() {
 		request('http://localhost:3000/api_usuarios/listarUsuarios', function (error, response, body) {
 			if (error) console.log("error");
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarUsuarios cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -49,7 +48,6 @@ async function ListarContratos() {
 		request('http://localhost:3000/api_contratos/listarContratos', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarContratos cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -64,7 +62,6 @@ async function ListarSubastasFrutas() {
 		request('http://localhost:3000/api_subastas/listarSubastasFrutas', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarSubastasFrutas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -79,7 +76,6 @@ async function ListarSubastasTransportes() {
 		request('http://localhost:3000/api_subastas/listarSubastasTransportes', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarSubastasTransportes cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -94,7 +90,6 @@ async function ListarOrdenesBodegas() {
 		request('http://localhost:3000/api_ordenes/listarOrdenesBodegas', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarOrdenesBodegas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -109,7 +104,6 @@ async function ListarOrdenesTransportes() {
 		request('http://localhost:3000/api_ordenes/listarOrdenesTransportes', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarOrdenesTransportes cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -124,7 +118,6 @@ async function ListarFrutas() {
 		request('http://localhost:3000/api_frutas/listarFrutas', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarFrutas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -139,7 +132,6 @@ async function ListarPedidos() {
 		request('http://localhost:3000/api_pedidos/listarPedidos', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarPedidos cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -154,7 +146,6 @@ async function ListarOfertasProductores() {
 		request('http://localhost:3000/api_ofertas/listarOfertasProductores', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarOfertasProductores cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -169,7 +160,6 @@ async function ListarOfertasTransportes() {
 		request('http://localhost:3000/api_ofertas/listarOfertasTransportes', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarOfertasTransportes cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -184,7 +174,6 @@ async function ListarVentas() {
 		request('http://localhost:3000/api_ventas/listarVentas', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarVentas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -199,7 +188,6 @@ async function ListarVentaDetalles() {
 		request('http://localhost:3000/api_ventas/listarVentaDetalles', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarVentaDetalles cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -214,7 +202,6 @@ async function ListarPaises() {
         request('http://localhost:3000/api_extras/listarPaises', function(error, response, body) {
             if (error) return reject(error);
             	importedJSON = JSON.parse(body);
-            	console.log('\x1b[37m', '[!] ListarPaises cargado');
             	return resolve(importedJSON);
         });
     });
@@ -228,7 +215,6 @@ async function ListarCiudades() {
         request('http://localhost:3000/api_extras/listarCiudades', function(error, response, body) {
             if (error) return reject(error);
             	importedJSON = JSON.parse(body);
-            	console.log('\x1b[37m', '[!] ListarCiudades cargado');
             	return resolve(importedJSON);
         });
     });
@@ -242,7 +228,6 @@ async function ListarCalidadesFrutas() {
         request('http://localhost:3000/api_extras/listarCalidadesFrutas', function(error, response, body) {
             if (error) return reject(error);
             	importedJSON = JSON.parse(body);
-            	console.log('\x1b[37m', '[!] ListarCalidadesFrutas cargado');
             	return resolve(importedJSON);
         });
     });
@@ -256,7 +241,6 @@ async function ListarPedidoDetalles() {
         request('http://localhost:3000/api_pedidos/listarPedidoDetalles', function(error, response, body) {
             if (error) return reject(error);
             	importedJSON = JSON.parse(body);
-            	console.log('\x1b[37m', '[!] ListarPedidoDetalles cargado');
             	return resolve(importedJSON);
         });
     });
@@ -270,7 +254,6 @@ async function ListarSeguros() {
         request('http://localhost:3000/api_seguros/listarSeguros', function(error, response, body) {
             if (error) return reject(error);
             	importedJSON = JSON.parse(body);
-            	console.log('\x1b[37m', '[!] ListarSeguros cargado');
             	return resolve(importedJSON);
         });
     });
@@ -284,7 +267,6 @@ async function ListarProductos() {
 		request('http://localhost:3000/api_productos/listarProductos', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarProductos cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -298,7 +280,6 @@ async function ListarInformes() {
 		request('http://localhost:3000/api_informes/listarInformes', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarInformes cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -312,7 +293,6 @@ async function ListarFrutasRestantes() {
 		request('http://localhost:3000/api_frutasrestantes/listarFrutasRestantes', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarFrutasRestantes cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -326,7 +306,6 @@ async function ListarReportesBodegas() {
 		request('http://localhost:3000/api_reportes/listarReportesBodegas', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarReportesBodegas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -340,7 +319,6 @@ async function ListarMisCompras() {
         request('http://localhost:3000/api_miscompras/listarMisCompras', function(error, response, body) {
             if (error) return reject(error);
             importedJSON = JSON.parse(body);
-            console.log('\x1b[37m', '[!] ListarMisCompras cargado');
             return resolve(importedJSON);
         });
     });

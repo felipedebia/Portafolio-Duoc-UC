@@ -11,7 +11,6 @@ async function TotalFrutas() {
 		request('http://localhost:3000/api_reportes/totalFrutas', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarFrutas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -25,7 +24,6 @@ async function TotalUsuarios() {
 		request('http://localhost:3000/api_reportes/totalUsuarios', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarUsuario cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -39,7 +37,6 @@ async function TotalSubastas() {
 		request('http://localhost:3000/api_reportes/totalSubastas', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -53,7 +50,6 @@ async function TotalVentas() {
 		request('http://localhost:3000/api_reportes/totalVentas', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -67,7 +63,6 @@ async function VentasTotal() {
 		request('http://localhost:3000/api_reportes/ventasTotal', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -82,7 +77,6 @@ async function RepSubastaF() {
 		request('http://localhost:3000/api_reportes/repSubastaF', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -96,7 +90,6 @@ async function SubastaFTotalActivos() {
 		request('http://localhost:3000/api_reportes/subastaFTotalActivos', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -110,7 +103,6 @@ async function SubastaFTotalInactivos() {
 		request('http://localhost:3000/api_reportes/subastaFTotalInactivos', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -123,7 +115,6 @@ async function TotalSubastasFPD() {
 		request('http://localhost:3000/api_reportes/totalSubastasFPD', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -136,7 +127,6 @@ async function TotalSubastasFPM() {
 		request('http://localhost:3000/api_reportes/totalSubastasFPM', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -149,7 +139,6 @@ async function TotalSubastasFPA() {
 		request('http://localhost:3000/api_reportes/totalSubastasFPA', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -162,7 +151,6 @@ async function SubastaTTotal() {
 		request('http://localhost:3000/api_reportes/subastaTTotal', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -175,7 +163,6 @@ async function SubastaTActivo() {
 		request('http://localhost:3000/api_reportes/subastaTActivo', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -188,7 +175,6 @@ async function SubastaTInactivo() {
 		request('http://localhost:3000/api_reportes/subastaTInactivo', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -201,7 +187,6 @@ async function TotalSubastasTPD() {
 		request('http://localhost:3000/api_reportes/totalSubastasTPD', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -214,7 +199,6 @@ async function TotalSubastasTPM() {
 		request('http://localhost:3000/api_reportes/totalSubastasTPM', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -227,7 +211,6 @@ async function TotalSubastasTPA() {
 		request('http://localhost:3000/api_reportes/totalSubastasTPA', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -241,7 +224,6 @@ async function TotalProductos() {
 		request('http://localhost:3000/api_reportes/totalProductos', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -255,7 +237,6 @@ async function TotalProductosA() {
 		request('http://localhost:3000/api_reportes/totalProductosA', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -268,7 +249,6 @@ async function TotalProductosI() {
 		request('http://localhost:3000/api_reportes/totalProductosI', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -282,7 +262,6 @@ async function TotalProductosPC() {
 		request('http://localhost:3000/api_reportes/totalProductosPC', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -296,7 +275,6 @@ async function TotalProductosSC() {
 		request('http://localhost:3000/api_reportes/totalProductosSC', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -309,7 +287,6 @@ async function TotalProductosTC() {
 		request('http://localhost:3000/api_reportes/totalProductosTC', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -322,7 +299,6 @@ async function TotalProductosCC() {
 		request('http://localhost:3000/api_reportes/totalProductosCC', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -336,7 +312,6 @@ async function TotalProductosQC() {
 		request('http://localhost:3000/api_reportes/totalProductosQC', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -349,7 +324,6 @@ async function TotalProductosPD() {
 		request('http://localhost:3000/api_reportes/totalProductosPD', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -362,7 +336,6 @@ async function TotalProductosPM() {
 		request('http://localhost:3000/api_reportes/totalProductosPM', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});
@@ -375,7 +348,6 @@ async function TotalProductosPA() {
 		request('http://localhost:3000/api_reportes/totalProductosPA', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
-				console.log('\x1b[37m','[!] ListarTotalSubastas cargado');
 				return resolve(importedJSON);
 		});
 	});

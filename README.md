@@ -41,7 +41,6 @@ Iniciar node en la carpeta web
 - FINALIZAR SUBASTA FRUTA Y CREAR SUBASTA TRANSPORTE
 - TERMINAR COSTOS DE FRUTA Y TRANSPORTE EN VENTA_DETALLE
 - REPORTES
-- Pendiente subasta_productor
 
 ## Funciones pendientes:
 
@@ -90,7 +89,7 @@ Iniciar node en la carpeta web
 
 - http://localhost:3000/misofertas_productor
 - http://localhost:3000/productos
-- http://localhost:3000/subastas_productor *
+- http://localhost:3000/subastas_frutas 
 - http://localhost:3000/misventas
 
 ### Menú Cliente Externo e Interno
@@ -99,7 +98,7 @@ Iniciar node en la carpeta web
 
 ### Menú Transportista
 - http://localhost:3000/misofertas_transportes
-- http://localhost:3000/subastas_transporte
+- http://localhost:3000/subastas_transportes
 
 ### Menú Consultor
 - http://localhost:3000/reportes *
