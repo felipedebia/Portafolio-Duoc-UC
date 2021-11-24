@@ -78,14 +78,12 @@ Iniciar node en la carpeta web
 - http://localhost:3000/plantilla
 - http://localhost:3000/plantilla_con_tabla
 
-* PENDIENTE
-
 ### Menú Administrador
 - http://localhost:3000/usuarios
 - http://localhost:3000/contratos
 - http://localhost:3000/ventas
 - http://localhost:3000/ordenes *
-- http://localhost:3000/subastas *
+- http://localhost:3000/subastas
 - http://localhost:3000/frutas
 - http://localhost:3000/pedidos
 - http://localhost:3000/seguros
@@ -95,7 +93,7 @@ Iniciar node en la carpeta web
 - http://localhost:3000/misofertas_productor
 - http://localhost:3000/productos
 - http://localhost:3000/subastas_productor *
-- http://localhost:3000/misventas *
+- http://localhost:3000/misventas
 
 ### Menú Cliente Externo e Interno
 - http://localhost:3000/miscompras
