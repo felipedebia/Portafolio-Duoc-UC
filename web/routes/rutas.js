@@ -94,7 +94,6 @@ router.get('/dashboard', function(req, res) {
 				functions_reportes.TotalUsuarios();
 				functions_reportes.TotalSubastas();
 				functions_reportes.TotalVentas();
-				functions.ListarVentas();
 				res.render('dashboard', { title: 'Panel de Administración - Maipo Grande', data:contadoresData, navActive: 'Dashboard' });
 			  	break;
 			case 2:

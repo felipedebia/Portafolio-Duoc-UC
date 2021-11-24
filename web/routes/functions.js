@@ -303,7 +303,7 @@ var listarFrutasRestantes = ListarFrutasRestantes();
 //Funcion API ListarReportesBodegas
 async function ListarReportesBodegas() {
 	return new Promise(function(resolve, reject) {
-		request('http://localhost:3000/api_reportes/listarReportesBodegas', function (error, response, body) {
+		request('http://localhost:3000/api_ordenes/listarReportesBodegas', function (error, response, body) {
 			if (error) return reject(error);
 				importedJSON = JSON.parse(body);
 				return resolve(importedJSON);
