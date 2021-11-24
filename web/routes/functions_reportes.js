@@ -5,6 +5,20 @@ const settings = require('../bin/settings');
 // FUNCIONES
 
 
+//Funcion API TotalSeguros
+async function TotalSeguros() {
+	return new Promise(function(resolve, reject) {
+		request('http://localhost:3000/api_reportes/totalSeguros', function (error, response, body) {
+			if (error) return reject(error);
+				importedJSON = JSON.parse(body);
+				return resolve(importedJSON);
+		});
+	});
+};
+
+var totalSeguros = TotalSeguros();
+
+
 //Funcion API TotalFruta de reportes
 async function TotalFrutas() {
 	return new Promise(function(resolve, reject) {
@@ -357,6 +371,7 @@ var totalProductosPA = TotalProductosPA();
 
 
 module.exports ={
+	'TotalSeguros':TotalSeguros,
 	'TotalFrutas':TotalFrutas,
 	'TotalUsuarios':TotalUsuarios,
 	'TotalSubastas':TotalSubastas,

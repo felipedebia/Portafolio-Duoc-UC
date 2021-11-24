@@ -6,6 +6,34 @@ var moment = require('moment');
 
 // CRUD REPORTE BODEGA
 
+
+//TOTAL SEGUROS
+router.get('/totalSeguros', async (req, res) => {
+  try {
+  
+    binds = {};
+    sql = "select count(id_seguro) from seguro";
+    result = await settings.OpenConnection(sql, binds, true);
+
+    TotalSeguros = [];
+
+    result.rows.map(seguro => {
+        let seguroSchema = {
+            "totalSeguros": seguro[0],
+        }
+
+        TotalSeguros.push(seguroSchema);
+    })
+    res.json({title: 'TotalSeguros', 'mydata': TotalSeguros});
+
+  } catch (error) {
+    res.status(400);
+    res.json({ "error": error });
+    console.log(error);
+  }
+
+});
+
 //TOTAL FRUTAS
 router.get('/totalFrutas', async (req, res) => {
     try {
@@ -19,7 +47,6 @@ router.get('/totalFrutas', async (req, res) => {
       result.rows.map(fruta => {
           let frutaSchema = {
               "totalFrutas": fruta[0],
-              
           }
   
           TotalFrutas.push(frutaSchema);
@@ -48,7 +75,6 @@ router.get('/totalUsuarios', async (req, res) => {
       result.rows.map(usuario => {
           let usuarioSchema = {
               "totalUsuario": usuario[0],
-              
           }
   
           TotalUsuario.push(usuarioSchema);
@@ -106,7 +132,6 @@ router.get('/totalVentas', async (req, res) => {
       result.rows.map(ventas => {
           let ventasSchema = {
               "precioTotal":ventas[0]
-              
           }
   
           TotalVentas.push(ventasSchema);
@@ -170,7 +195,6 @@ router.get('/repSubastaF', async (req, res) => {
       result.rows.map(subasta => {
           let subastaSchema = {
               "total":subasta[0],
-                          
           }
   
           RepSubastaF.push(subastaSchema);
@@ -199,8 +223,7 @@ router.get('/subastaFTotalActivos', async (req, res) => {
   
       result.rows.map(subasta => {
           let subastaSchema = {
-              "totalActivos":subasta[0],
-                          
+              "totalActivos":subasta[0],  
           }
   
           SubastaFTotalActivos.push(subastaSchema);
@@ -230,7 +253,6 @@ router.get('/subastaFTotalInactivos', async (req, res) => {
       result.rows.map(subasta => {
           let subastaSchema = {
               "totalInactivos":subasta[0],
-                          
           }
   
           SubastaFTotalInactivos.push(subastaSchema);
@@ -260,8 +282,7 @@ router.get('/totalSubastasFPD', async (req, res) => {
   
       result.rows.map(subasta => {
           let subastaSchema = {
-              "totalSubastaDia":subasta[0]
-                          
+              "totalSubastaDia":subasta[0]     
           }
   
           TotalSubastasFPD.push(subastaSchema);

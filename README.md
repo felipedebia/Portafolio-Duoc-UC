@@ -13,7 +13,7 @@ Ejecutamos estos comandos en la carpeta raíz del proyecto
 Ejecutamos este comando en la carpeta web
 - npm install
 
-Configurar web/bin/configdb.js con sus datos de Oracle
+Configurar web/bin/settings.js con sus datos de Oracle
 
 Iniciar node en la carpeta web
 - nodemon start
