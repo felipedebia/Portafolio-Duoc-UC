@@ -210,17 +210,6 @@
                                             <div class="form-group my-label required mt-4">
                                                 <label>Cantidad (en KG)</label>
                                                 <input class="form-control" min="0" id="inputCantidad" type="number" name="cantidad" maxLength="6" required>
-                                             </div>
-                                             <div class="form-group my-label required">
-                                                <label>Asignar al usuario (quizás no se tenga que mostrar esto ya que se debe crear con el id del productor conectado)</label>
-                                                <div class="cus-select-group">
-                                                    <select id="select-item" name="fk_usuario" required>
-                                                        <option selected="true" disabled="disabled">Selecciona una opción</option>
-                                                        <% for(var usuario of Usuarios) { %>
-                                                            <option name="<%= usuario.nombre %> <%= usuario.apellido %>" value="<%= usuario.id_usuario %>"><%= usuario.nombre %> <%= usuario.apellido %></option>
-                                                        <% } %>
-                                                    </select>
-                                                </div>
                                             </div>
                                             <button class="btn btn-warning mb-2 mt-2 pull-right" type="submit">Crear nuevo producto</button>
                                         </form>

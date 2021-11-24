@@ -46,12 +46,13 @@ router.get('/listarProductos', async (req, res) => {
 router.post('/crearProducto', async (req, res) => {
   try {
 
-    var { cantidad,fk_fruta,fk_calidad,fk_usuario } = req.body;
+    var { cantidad, fk_fruta, fk_calidad } = req.body;
     var fecha_creacion = functions.obtenerFechaActual();
     var fk_id_estado = 1;
+    var fk_usuario = req.session.id_usuario;
 
     sql = "INSERT INTO producto(cantidad,fecha_creacion,fk_id_fruta,fk_id_calidad,fk_id_usuario, fk_id_estado) values (:cantidad, to_date(:fecha_creacion,'YYYY-MM-DD'), :fk_fruta, :fk_calidad, :fk_usuario, :fk_id_estado)";
-    await settings.OpenConnection(sql, [cantidad, fecha_creacion, fk_fruta, fk_calidad,fk_usuario, fk_id_estado], true);
+    await settings.OpenConnection(sql, [cantidad, fecha_creacion, fk_fruta, fk_calidad, fk_usuario, fk_id_estado], true);
 
     // Si tuvo conexión a la DB
     if(res.status(200)) {
