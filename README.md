@@ -36,11 +36,10 @@ Iniciar node en la carpeta web
 
 ## Páginas pendientes:
 
-- PROBAR SI FUNCIONAN BIEN OFERTA_PRODUCTOR Y TRANSPORTE (haciendo mario)
 - AGREGAR NUEVA ORDEN_BODEGA Y ORDEN_TRANSPORTE, LUEGO ORDEN_BODEGA Y REPORTE_BODEGA
-- Pago
-- FRUTA_RESTANTE (haciendo chris)
-- DIVIDIR VENTAS A MISVENTAS PARA PRODUCTOR, QUE SEA VEA LOS SUYOS (haciendo mario)
+- PAGO
+- FINALIZAR SUBASTA FRUTA Y CREAR SUBASTA TRANSPORTE
+- TERMINAR COSTOS DE FRUTA Y TRANSPORTE EN VENTA_DETALLE
 - Quizás separar subastas para que productor vea solo las subastas pero no la parte de todas las ofertas
 - REPORTES
 
@@ -180,11 +179,12 @@ Iniciar node en la carpeta web
 - 3 Anulado
 
 ## Estado venta
-- 1 En preparación
-- 2 Pendiente de pago
-- 3 Rechazada por el cliente
-- 4 Pagada
-- 5 Anulada
+- 1 En espera
+- 2 En preparación
+- 3 Pendiente de pago
+- 4 Rechazada por el cliente
+- 5 Pagada
+- 6 Anulada
 
 ## Estado oferta
 - 1 Sin revisar

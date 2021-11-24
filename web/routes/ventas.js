@@ -12,7 +12,7 @@ router.get('/listarVentas', async (req, res) => {
   try {
   
     binds = {};
-    sql = "SELECT venta.id_venta, venta.fecha_creacion, venta.fecha_actualizacion, venta.fk_id_pedido, venta.fk_id_seguro, venta.fk_id_tipo, tipo_venta.nombre,venta.fk_id_estado, estado_venta.descripcion FROM venta JOIN pedido ON venta.fk_id_pedido = pedido.id_pedido JOIN seguro on venta.fk_id_seguro = seguro.id_seguro JOIN tipo_venta ON venta.fk_id_tipo = tipo_venta.id_tipo JOIN estado_venta ON venta.fk_id_estado = estado_venta.id_estado";
+    sql = "SELECT venta.id_venta, venta.fecha_creacion, venta.fecha_actualizacion, venta.fk_id_pedido, venta.fk_id_seguro, venta.fk_id_tipo, tipo_venta.nombre, venta.fk_id_estado, estado_venta.descripcion FROM venta JOIN pedido ON venta.fk_id_pedido = pedido.id_pedido JOIN seguro on venta.fk_id_seguro = seguro.id_seguro JOIN tipo_venta ON venta.fk_id_tipo = tipo_venta.id_tipo JOIN estado_venta ON venta.fk_id_estado = estado_venta.id_estado";
     result = await settings.OpenConnection(sql, binds, true);
 
     Ventas = [];
@@ -118,10 +118,7 @@ router.post('/crearVentaDetalle/:id_venta', async (req, res) => {
   try {
 
     var fk_id_venta_bind = req.params.id_venta;
-    // COSTO_FRUTA Y COSTO_TRANSPORTE VIENEN DE OFERTAS DE SUBASTAS
-    let costo_fruta=1000;
-    let costo_transporte = 2000;
-    var { costo_impuestos,comision_servicio,comision_empresa } = req.body;
+    var { costo_impuestos,comision_servicio,comision_empresa, costo_fruta, costo_transporte } = req.body;
     var precio_final = (costo_impuestos + comision_servicio +comision_empresa+costo_fruta+costo_transporte);
 
     sql = "INSERT INTO venta_detalle(costo_fruta, costo_transporte,costo_impuestos,comision_servicio,comision_empresa,precio_final,fk_id_venta) VALUES (:costo_fruta,:costo_transporte,:costo_impuestos,:comision_servicio,:comision_empresa,:precio_final,:fk_id_venta_bind)";
@@ -151,7 +148,7 @@ router.get("/anularVenta/:id_venta", async (req, res) => {
 
     var id_venta_bind = req.params.id_venta;
 
-    sql = "UPDATE venta SET fk_id_estado=2 WHERE id_venta = :id_venta_bind";
+    sql = "UPDATE venta SET fk_id_estado=6 WHERE id_venta = :id_venta_bind";
     await settings.OpenConnection(sql, [id_venta_bind], true);
 
     if(res.status(200)) {

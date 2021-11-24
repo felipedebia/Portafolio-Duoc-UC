@@ -788,8 +788,17 @@ router.get('/miscompras', function(req, res) {
 router.get('/informes/:id_venta', async function(req, res) {
 	if (req.session.isLoggedIn) {
 		const { id_venta } = req.params;
-		functions.ListarInformes();
-		res.render('informes', { title: 'Informes - Maipo Grande', fk_id_venta: id_venta, navActive: 'Ventas' });
+
+		// Si es productor, se envia a la vista de productor
+		if (req.session.tipo_usuario == 5) {
+			functions.ListarInformes();
+			res.render('informes_productor', { title: 'Informes - Maipo Grande', fk_id_venta: id_venta, navActive: 'Ventas' });
+		} else {
+			functions.ListarInformes();
+			res.render('informes', { title: 'Informes - Maipo Grande', fk_id_venta: id_venta, navActive: 'Ventas' });
+		}
+		
+		
 	} else {
 		res.redirect('/');
 	}
