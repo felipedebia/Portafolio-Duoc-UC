@@ -28,7 +28,7 @@ router.get('/listarSeguros', async (req, res) => {
   try {
   
     binds = {};
-    sql = "SELECT id_seguro, nombre_empresa, url_documento, fecha_inicio, fecha_termino FROM seguro";
+    sql = "SELECT id_seguro, nombre_empresa, url_documento, fecha_inicio, fecha_termino, fk_id_estado, estado_seguro.descripcion FROM seguro JOIN estado_seguro ON seguro.fk_id_estado = estado_seguro.id_estado";
     result = await settings.OpenConnection(sql, binds, true);
 
     Seguros = [];
@@ -39,7 +39,9 @@ router.get('/listarSeguros', async (req, res) => {
             "nombre_empresa": seguro[1],
             "url_documento": seguro[2],
             "fecha_inicio": moment(seguro[3]).format('DD-MM-YYYY'),
-            "fecha_termino": moment(seguro[4]).format('DD-MM-YYYY')
+            "fecha_termino": moment(seguro[4]).format('DD-MM-YYYY'),
+            "fk_id_estado": seguro[5],
+            "fk_texto_estado": seguro[6],
         }
 
         Seguros.push(seguroSchema);

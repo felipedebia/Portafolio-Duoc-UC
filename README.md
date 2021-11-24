@@ -45,8 +45,6 @@ Iniciar node en la carpeta web
 ## Funciones pendientes:
 
 - Cambiar a try catch archivo rutas.js
-- Gráficos de página Reportes
-- Contadores de Usuarios, Frutas, Ventas y Subastas para la página dashboard
 - Implementar subida de archivos a Pago como en Contrato
 - Cambiar secuencias SQL a procedimientos (haciendo debia)
 - Terminar templates de correos (listos 2 de usuario, 4 de subastas, faltan 2 de oferta y 2 de orden)
@@ -57,9 +55,7 @@ Iniciar node en la carpeta web
 
 - PARA PRESENTACIÓN: NO ELIMINAR UNA FRUTA QUE ESTAMOS USANDO O SE MUERE XD
 - Agregar peso maximo a la subida de documentos (contrato, seguro y pago)
-- Seguro, agregar estado a la lista y al ver y a la api
-- ModificarProducto : Agregar estado a la vista y api
-- ListarProducto: Agregar estado a la vista y api
+
 - Agregar limite carasteres (2000) a descripción en informes (vista)
 - Agregar PDF boton cuando se ve un informe
 - Agregar filtro de que no puedan agregar frutas distintas a una subasta

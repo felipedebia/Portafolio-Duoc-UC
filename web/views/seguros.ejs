@@ -34,6 +34,7 @@
                                                 <th scope="col">Seguro N°</th>
                                                 <th scope="col">Nombre de la empresa</th>
                                                 <th scope="col">Fecha de termino</th>
+                                                <th scope="col">Estado del seguro</th>
                                                 <th class="disabled-sorting">Opciones</th>
                                             </thead>
                                             <tbody>
@@ -53,7 +54,7 @@
                                                               <span><strong>Nombre de la empresa:</strong> <%= seguro.nombre_empresa %></span></br></br>
                                                               <span><strong>Fecha de inicio:</strong> <%= seguro.fecha_inicio %></span></br></br>
                                                               <span><strong>Fecha de termino:</strong> <%= seguro.fecha_termino %></span></br></br>
-                                                              
+                                                              <span><strong>Estado del seguro:</strong> <%= seguro.fk_texto_estado %></span>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <a href="/subidas/seguros/<%= seguro.url_documento %>" target="_blank"><button class="btn btn-primary" type="button">Ver documento PDF</button></a>
@@ -71,6 +72,9 @@
                                                         </td>
                                                         <td>
                                                             <%= seguro.fecha_termino %>
+                                                        </td>
+                                                        <td>
+                                                            <%= seguro.fk_texto_estado %>
                                                         </td>
                                                         <td>
                                                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalVerSeguro<%= seguro.id_seguro %>">Ver seguro</button>

@@ -123,7 +123,7 @@
                                             </thead>
                                             <tbody>
                                                 <% for(var pedido of Pedidos) { %>
-                                                    <% if (pedido.fk_id_usuario == session.id_usuario && pedido.fk_id_estado == > 6){ %>
+                                                    <% if (pedido.fk_id_usuario == session.id_usuario && pedido.fk_id_estado > 6){ %>
                                                         <div class="modal fade" id="modalPedidoFinalizado<%= pedido.id_pedido %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog" role="document">
                                                                 <div class="modal-content">
@@ -237,7 +237,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 mt-4">
                                                         <div class="form-group my-label required">
                                                             <label>Dirección de despacho</label>
                                                             <input class="form-control mb-4" id="inputDireccion" type="text" name="direccion_despacho" required>

@@ -56,9 +56,9 @@
                                                             </div>
                                                             <div class="modal-body">
                                                             <span><strong>Fruta:</strong> <%= producto.fk_nombre_fruta %></span></br></br>
-                                                            <span><strong>Calidad:</strong> <%= producto.calidad %></span></br></br>
+                                                            <span><strong>Calidad:</strong> <%= producto.fk_nombre_calidad %></span></br></br>
                                                             <span><strong>Cantidad (en KG):</strong> <%= producto.cantidad %></span></br></br>
-                                                            <span><strong>Productor:</strong> <%= producto.usuario %></span></br></br>
+                                                            <span><strong>Productor:</strong> <%= producto.fk_nombre_usuario %></span></br></br>
                                                             <span><strong>Fecha de creación:</strong> <%= producto.fecha_creacion %></span>
                                                             </div>
                                                             <div class="modal-footer">
@@ -87,7 +87,7 @@
                                                                         <div class="cus-select-group">
                                                                             <select id="select-item" name="fk_id_fruta" required>
                                                                                 <% for(var fruta of Frutas) { %>
-                                                                                    <% if(producto.idFruta==fruta.id_fruta) { %>
+                                                                                    <% if(producto.fk_id_fruta==fruta.id_fruta) { %>
                                                                                         <option name="<%= fruta.nombre %> " selected value="<%= fruta.id_fruta %>"><%= fruta.nombre %> </option>
                                                                                     <%} else { %>
                                                                                         <option name="<%= fruta.nombre %> " value="<%= fruta.id_fruta %>"><%= fruta.nombre %> </option>
@@ -154,7 +154,7 @@
                                                             <%= producto.fk_nombre_fruta %>
                                                         </td>
                                                         <td>
-                                                            <%= producto.calidad %>
+                                                            <%= producto.fk_nombre_calidad %>
                                                         </td>                                                    
                                                         <td>
                                                             <%= producto.cantidad %>

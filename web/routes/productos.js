@@ -12,7 +12,7 @@ router.get('/listarProductos', async (req, res) => {
   try {
   
     binds = {};
-    sql = "SELECT p.id_producto, p.cantidad, p.fecha_creacion, f.nombre as nombreFruta, fr.nombre as Calidad, CONCAT(CONCAT(u.nombre,' '), u.apellido) as usuario,p.fk_id_fruta as idFruta, p.fk_id_usuario as idUsuario FROM producto p LEFT JOIN fruta f ON p.fk_id_fruta = f.id_fruta INNER JOIN fruta_calidad fr ON p.fk_id_calidad=fr.id_calidad LEFT JOIN usuario u ON p.fk_id_usuario=u.id_usuario";
+    sql = "SELECT p.id_producto, p.cantidad, p.fecha_creacion, p.fk_id_fruta, f.nombre, p.fk_id_calidad, fr.nombre, p.fk_id_usuario, CONCAT(CONCAT(u.nombre,' '), u.apellido), p.fk_id_estado, ep.descripcion FROM producto p JOIN fruta f ON p.fk_id_fruta = f.id_fruta JOIN fruta_calidad fr ON p.fk_id_calidad=fr.id_calidad JOIN usuario u ON p.fk_id_usuario=u.id_usuario JOIN estado_producto ep ON p.fk_id_estado=ep.id_estado";
     result = await settings.OpenConnection(sql, binds, true);
 
     Productos = [];
@@ -22,11 +22,15 @@ router.get('/listarProductos', async (req, res) => {
             "id_producto": producto[0],
             "cantidad": producto[1],
             "fecha_creacion": moment(producto[2]).format('DD-MM-YYYY'),
-            "fk_nombre_fruta": producto[3],
-            "calidad": producto[4],
-            "usuario": producto[5],
-            "idFruta":producto[6],
-            "fk_id_usuario":producto[7]
+            "fk_id_fruta":producto[3],
+            "fk_nombre_fruta": producto[4],
+            "fk_id_calidad": producto[5],
+            "fk_nombre_calidad": producto[6],
+            "fk_id_usuario":producto[7],
+            "fk_nombre_usuario": producto[8],
+            "fk_id_estado": producto[9],
+            "fk_texto_estado": producto[10]
+            
         }
 
         Productos.push(productoSchema);
