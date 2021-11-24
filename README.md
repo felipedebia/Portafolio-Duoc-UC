@@ -38,7 +38,7 @@ Iniciar node en la carpeta web
 
 - PROBAR SI FUNCIONAN BIEN OFERTA_PRODUCTOR Y TRANSPORTE (haciendo mario)
 - AGREGAR NUEVA ORDEN_BODEGA Y ORDEN_TRANSPORTE, LUEGO ORDEN_BODEGA Y REPORTE_BODEGA
-- Pago (haciendo debia)
+- Pago
 - FRUTA_RESTANTE (haciendo chris)
 - DIVIDIR VENTAS A MISVENTAS PARA PRODUCTOR, QUE SEA VEA LOS SUYOS (haciendo mario)
 - Quizás separar subastas para que productor vea solo las subastas pero no la parte de todas las ofertas
@@ -46,11 +46,12 @@ Iniciar node en la carpeta web
 
 ## Funciones pendientes:
 
+- Agregar join de ambas ofertas a venta para crear venta_detalle
 - Cambiar a try catch archivo rutas.js
 - Gráficos de página Reportes
 - Contadores de Usuarios, Frutas, Ventas y Subastas para la página dashboard
 - Implementar subida de archivos a Pago como en Contrato
-- Cambiar secuencias SQL a procedimientos
+- Cambiar secuencias SQL a procedimientos (haciendo debia)
 - Terminar templates de correos (listos 2 de usuario, 4 de subastas, faltan 2 de oferta y 2 de orden)
 
 - Algunas páginas se caen si no se usa el perfil principal mari.barreraa@duocuc.cl
@@ -64,10 +65,9 @@ Iniciar node en la carpeta web
 - ListarProducto: Agregar estado a la vista y api
 - Agregar limite carasteres (2000) a descripción en informes (vista)
 - Agregar PDF boton cuando se ve un informe
-- En pagina Pedidos, listado de pedidos no filtra bien pedidos estado 7 anulado
-- Venta no crea venta_detalle
 - Agregar filtro de que no puedan agregar frutas distintas a una subasta
-- Perfil y modificar perfil solo debe ver ser visto por su propio usuario y administrador
+- Perfil solo debe ver ser visto por su propio usuario y administrador (haciendo chris)
+- Productor no puede ofertar un producto si no tiene más de la cantidad que tiene
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Sanitizar todas las entradas de texto

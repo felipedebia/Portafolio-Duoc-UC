@@ -97,8 +97,6 @@ router.get('/test/:id_subastaF', async (req, res) => {
     binds = { "id_subastaF_bind": req.params.id_subastaF };
     sql2 = 'SELECT op.id_ofertaP, op.cantidad, op.fecha_creacion, op.precio_por_kilo, op.fk_id_estado, op.fk_id_producto, op.fk_id_usuario, op.fk_id_pedidoD, op.fk_id_subastaf, pd.cantidad, pd.fk_id_fruta as pd_id_fruta, pd.fk_id_calidad as pd_id_calidad, p.fk_id_fruta, p.fk_id_calidad FROM oferta_productor op JOIN pedido_detalle pd ON op.fk_id_pedidoD = pd.id_pedidoD JOIN producto p ON op.fk_id_producto = p.id_producto WHERE op.fk_id_subastaf = :id_subastaF_bind';
     resultado2 = await settings.OpenConnection(sql2, binds, false);
-
-    console.log(resultado2)
     
     // Definimos variables necesarias
     var elegido = 0; // Sin elegir
@@ -106,24 +104,22 @@ router.get('/test/:id_subastaF', async (req, res) => {
 
     // Recorremos todas las ofertas 
     for (var i = 0; i < resultado2_largo; i++) {
+      var value_idOferta = resultado2.rows[i][0];
       var value_cantidadOferta = resultado2.rows[i][1];
       var value_cantidadPedido = resultado2.rows[i][9];
       var value_pd_id_fruta =  resultado2.rows[i][10];
       var value_pd_id_calidad = resultado2.rows[i][11];
       var value_op_id_fruta =  resultado2.rows[i][12];
       var value_op_id_calidad = resultado2.rows[i][13];
-      console.log("comienza")
-      console.log(resultado2.rows[i][2])
 
-
-      console.log("p " + value_cantidadPedido)
-      console.log("o " + value_cantidadOferta)
       if (value_pd_id_fruta == value_op_id_fruta && value_pd_id_calidad == value_op_id_calidad ) {
-        console.log("entra if 1")
-        if (value_cantidadOferta <= value_cantidadPedido) {
-          console.log("entra if 2")
-          elegido = i;
-          //break;
+        if (value_cantidadOferta >= value_cantidadPedido) {
+          var cantidad_restante = value_cantidadOferta - value_cantidadPedido;
+          elegido = value_idOferta;
+          // Si sobra fruta restante entonces
+          if (cantidad_restante > 0) {
+          // Se debe crear una fruta restante
+          }
         }
       }
       
@@ -132,7 +128,7 @@ router.get('/test/:id_subastaF', async (req, res) => {
     // Actualizamos la oferta escogida finalmente usando la variable elegido y el id de la oferta dentro
     console.log("variable ganadora")
     console.log(elegido)
-
+    // Tambien se tiene que desconectar la cantidad del producto
 
   } catch (error) {
     res.status(400);
