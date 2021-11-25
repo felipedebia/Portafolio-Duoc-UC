@@ -249,52 +249,59 @@ router.get('/miperfil', async function(req, res, next) {
 	res.end();
 })
 
-router.get('/perfil/:id_usuario', async function(req, res, next) {
+router.get('/perfil/:id_usuario', async function (req, res, next) {
+	// Preguntando si estas coenctado
 	if (req.session.isLoggedIn) {
 
-		const { id_usuario } = req.params;
+		if (req.session.tipo_usuario == 1) {
 
-		// Hacemos una consulta trayendo todos los datos del usuario
-		binds = {"id_usuario": id_usuario};
-		sql = "SELECT num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, fk_id_estado, fk_id_tipo FROM usuario WHERE id_usuario = :id_usuario";
-		result = await settings.OpenConnection(sql, binds, false);
+			const { id_usuario } = req.params;
 
-		// Si los datos estan correctos
-		if (result.rows.length > 0) {
-			// Convertimos el id de tipo_usuario a texto
-			var tiposUsuarios = {
-				1 : "Administrador",
-				2 : "Transportista",
-				3 : "Cliente Externo",
-				4 : "Cliente Interno",
-				5 : "Productor",
-				6 : "Consultor"
-			};
+			// Hacemos una consulta trayendo todos los datos del usuario
+			binds = { "id_usuario": id_usuario };
+			sql = "SELECT num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, fk_id_estado, fk_id_tipo FROM usuario WHERE id_usuario = :id_usuario";
+			result = await settings.OpenConnection(sql, binds, false);
 
-			var tipoUsuarioTexto = tiposUsuarios[result.rows[0][8]];
-			
-			// Asignamos los valores de la consulta a las variables
-			var usuarioData = [
-				{
-					num_documento: result.rows[0][0],
-					nombre: result.rows[0][1],
-					apellido: result.rows[0][2],
-					fecha_nacimiento: moment(result.rows[0][3]).format('YYYY-MM-DD'),
-					genero: result.rows[0][4],
-					correo: result.rows[0][5],
-					telefono: result.rows[0][6],
-					fk_id_estado: result.rows[0][7],
-					fk_id_tipo: result.rows[0][8],
-					tipo_usuario_texto: tipoUsuarioTexto,
-					id_usuario: id_usuario
-				  }
-			];
+			// Si los datos estan correctos
+			if (result.rows.length > 0) {
+				// Convertimos el id de tipo_usuario a texto
+				var tiposUsuarios = {
+					1: "Administrador",
+					2: "Transportista",
+					3: "Cliente Externo",
+					4: "Cliente Interno",
+					5: "Productor",
+					6: "Consultor"
+				};
 
-			// Mostramos la vista
-			res.render('perfil', { title: 'Viendo perfil - Maipo Grande', data:usuarioData, navActive: 'Usuarios' });
-		} else {
-			res.send('Error al obtener datos de la base de datos');
+				var tipoUsuarioTexto = tiposUsuarios[result.rows[0][8]];
+
+				// Asignamos los valores de la consulta a las variables
+				var usuarioData = [
+					{
+						num_documento: result.rows[0][0],
+						nombre: result.rows[0][1],
+						apellido: result.rows[0][2],
+						fecha_nacimiento: moment(result.rows[0][3]).format('YYYY-MM-DD'),
+						genero: result.rows[0][4],
+						correo: result.rows[0][5],
+						telefono: result.rows[0][6],
+						fk_id_estado: result.rows[0][7],
+						fk_id_tipo: result.rows[0][8],
+						tipo_usuario_texto: tipoUsuarioTexto,
+						id_usuario: id_usuario
+					}
+				];
+
+				// Mostramos la vista
+				res.render('perfil', { title: 'Viendo perfil - Maipo Grande', data: usuarioData, navActive: 'Usuarios' });
+			} else {
+				res.send('Error al obtener datos de la base de datos');
+			}
+		}else{
+			res.redirect('/');
 		}
+
 	} else {
 		res.redirect('/');
 	}

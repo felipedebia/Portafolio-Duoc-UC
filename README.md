@@ -58,9 +58,9 @@ Iniciar node en la carpeta web
 
 - Agregar limite carasteres (2000) a descripción en informes (vista)
 - Agregar PDF boton cuando se ve un informe
-- Agregar filtro de que no puedan agregar frutas distintas a una subasta
+- Agregar filtro de que no puedan agregar frutas distintas a una subasta (haciendo david)
 - Perfil solo debe ver ser visto por su propio usuario y administrador (haciendo chris)
-- Productor no puede ofertar un producto si no tiene más de la cantidad que tiene
+- Productor no puede ofertar un producto si no tiene más de la cantidad que tiene (haciendo chris)
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Sanitizar todas las entradas de texto
