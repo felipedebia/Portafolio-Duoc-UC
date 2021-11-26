@@ -47,7 +47,7 @@ router.get('/listarPedidoDetalles', async(req, res) => {
     try {
 
         binds = {};
-        sql = "select pedido_detalle.id_pedidoD, pedido_detalle.cantidad, fruta.nombre, fruta_calidad.nombre, pedido_detalle.fk_id_pedido from pedido_detalle join fruta on pedido_detalle.fk_id_fruta = fruta.id_fruta join fruta_calidad on pedido_detalle.fk_id_calidad = fruta_calidad.id_calidad";
+        sql = "select pedido_detalle.id_pedidoD, pedido_detalle.cantidad, pedido_detalle.fk_id_fruta, fruta.nombre, fruta_calidad.nombre, pedido_detalle.fk_id_pedido from pedido_detalle join fruta on pedido_detalle.fk_id_fruta = fruta.id_fruta join fruta_calidad on pedido_detalle.fk_id_calidad = fruta_calidad.id_calidad";
         result = await settings.OpenConnection(sql, binds, true);
 
         PedidoDetalles = [];
@@ -56,9 +56,10 @@ router.get('/listarPedidoDetalles', async(req, res) => {
             let detalleSchema = {
                 "id_pedidoD": detalle[0],
                 "cantidad": detalle[1],
-                "fruta_fk_nombre": detalle[2],
-                "frutacalidad_fk_nombre": detalle[3],
-                "id_pedido": detalle[4]
+                "fk_id_fruta": detalle[2],
+                "fruta_fk_nombre": detalle[3],
+                "frutacalidad_fk_nombre": detalle[4],
+                "id_pedido": detalle[5]
             }
 
             PedidoDetalles.push(detalleSchema);

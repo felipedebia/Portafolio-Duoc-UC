@@ -14,15 +14,15 @@
                   <ul class="timeline timeline-simple mr-5">
                     <% for(var ofertaProductor of OfertasProductores) { %>
                       <% var ofertaProductor_contador = 0; %>
-                      <% if (ofertaProductor.fk_id_subastaF == data[0].id_subastaF && ofertaProductor.fk_id_estado != 4){ %>
-                        <% ofertaProductor_contador++; %>
+                      <% if (ofertaProductor.fk_id_subastaF == data[0].id_subastaF && ofertaProductor.fk_id_estado == 1){ %>
+                        <% ofertaProductor_contador = ofertaProductor_contador + 1; %>
                         <li class="timeline-inverted">
                           <div class="timeline-badge success">
                             <i class="material-icons">card_travel</i>
                           </div>
                           <div class="timeline-panel">
                             <div class="timeline-heading">
-                              <span class="badge badge-success">OFERTA DE PRODUCTOR</span>
+                              <span class="badge badge-success">OFERTA DE PRODUCTOR <%= ofertaProductor_contador %></span>
                             </div>
                             <div class="timeline-body">
                               <p>ID Oferta: <%= ofertaProductor.id_ofertaP %></p>
@@ -133,7 +133,7 @@
                               <% for(var producto of Productos){ %>
                                 <% if (producto.fk_id_usuario == session.id_usuario){ %>
                                   <% for(var pedido_detalle of PedidoDetalles){ %>
-                                    <% if (producto.fk_nombre_fruta == pedido_detalle.frutacalidad_fk_nombre && producto.cantidad > pedido_detalle.cantidad){ %>
+                                    <% if (producto.fk_id_fruta == pedido_detalle.fk_id_fruta && producto.cantidad >= pedido_detalle.cantidad){ %>
                                       <option name="fk_id_producto" value="<%=producto.id_producto%>"><%=producto.fk_nombre_fruta%> <%=producto.calidad%> <%=producto.cantidad%></option>
                                     <% } %>
                                   <% } %>

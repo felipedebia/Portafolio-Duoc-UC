@@ -89,46 +89,24 @@ router.get('/crearSubastaFruta/:id_subastaF', async (req, res) => {
 });
 
 
-// test
-router.get('/test/:id_subastaF', async (req, res) => {
+// Finalizar Subasta Fruta
+router.get("/finalizarSubastaFruta/:id_subastaF", async (req, res) => {
   try {
 
-    // Seleccionamos todas las ofertas de productor que tengan fk_id_subastaF igual a la subasta Fruta a finalizar
-    binds = { "id_subastaF_bind": req.params.id_subastaF };
-    sql2 = 'SELECT op.id_ofertaP, op.cantidad, op.fecha_creacion, op.precio_por_kilo, op.fk_id_estado, op.fk_id_producto, op.fk_id_usuario, op.fk_id_pedidoD, op.fk_id_subastaf, pd.cantidad, pd.fk_id_fruta as pd_id_fruta, pd.fk_id_calidad as pd_id_calidad, p.fk_id_fruta, p.fk_id_calidad FROM oferta_productor op JOIN pedido_detalle pd ON op.fk_id_pedidoD = pd.id_pedidoD JOIN producto p ON op.fk_id_producto = p.id_producto WHERE op.fk_id_subastaf = :id_subastaF_bind';
-    resultado2 = await settings.OpenConnection(sql2, binds, false);
-    
-    // Definimos variables necesarias
-    var elegido = 0; // Sin elegir
-    var resultado2_largo = resultado2.rows.length;
+    var id_subastaF_bind = req.params.id_subastaF;
 
-    // Recorremos todas las ofertas 
-    for (var i = 0; i < resultado2_largo; i++) {
-      var value_idOferta = resultado2.rows[i][0];
-      var value_cantidadOferta = resultado2.rows[i][1];
-      var value_cantidadPedido = resultado2.rows[i][9];
-      var value_pd_id_fruta =  resultado2.rows[i][10];
-      var value_pd_id_calidad = resultado2.rows[i][11];
-      var value_op_id_fruta =  resultado2.rows[i][12];
-      var value_op_id_calidad = resultado2.rows[i][13];
+    sql1 = "UPDATE subasta_fruta SET fk_id_estado=2 WHERE id_subastaF = :id_subastaF_bind";
+    resultado1 = await settings.OpenConnection(sql1, [id_subastaF_bind], true);
 
-      if (value_pd_id_fruta == value_op_id_fruta && value_pd_id_calidad == value_op_id_calidad ) {
-        if (value_cantidadOferta >= value_cantidadPedido) {
-          var cantidad_restante = value_cantidadOferta - value_cantidadPedido;
-          elegido = value_idOferta;
-          // Si sobra fruta restante entonces
-          if (cantidad_restante > 0) {
-          // Se debe crear una fruta restante
-          }
-        }
-      }
-      
+    if (resultado1) {
+      console.log("[!] Subasta de Frutas " + id_subastaF_bind + " finalizada con éxito");
+
+      res.redirect('/api_subastas/finalizarSubastaFruta2/' + id_subastaF_bind);
+
+    } else {
+      console.log("[!] Ocurrió un error al intentar finalizar la subasta de Frutas " + id_subastaF_bind);
+      res.redirect('/subastas_frutas');
     }
-
-    // Actualizamos la oferta escogida finalmente usando la variable elegido y el id de la oferta dentro
-    console.log("variable ganadora")
-    console.log(elegido)
-    // Tambien se tiene que desconectar la cantidad del producto
 
   } catch (error) {
     res.status(400);
@@ -139,32 +117,71 @@ router.get('/test/:id_subastaF', async (req, res) => {
 });
 
 
-// Finalizar Subasta Fruta
-router.get("/finalizarSubastaFruta/:id_subastaF", async (req, res) => {
+// Finalizar Subasta Fruta Paso 2
+router.get('/finalizarSubastaFruta2/:id_subastaF', async (req, res) => {
   try {
 
-    var id_subastaF_bind = req.params.id_subastaF;
+    // Seleccionamos todas las ofertas de productor que tengan fk_id_subastaF igual a la subasta Fruta a finalizar y que sea fk_id_estado = 1
+    binds = { "id_subastaF_bind": req.params.id_subastaF };
+    sql2 = 'SELECT op.id_ofertaP, op.cantidad, op.fecha_creacion, op.precio_por_kilo, op.fk_id_estado, op.fk_id_producto, op.fk_id_usuario, op.fk_id_pedidoD, op.fk_id_subastaf, pd.cantidad, pd.fk_id_fruta as pd_id_fruta, pd.fk_id_calidad as pd_id_calidad, p.fk_id_fruta, p.fk_id_calidad FROM oferta_productor op JOIN pedido_detalle pd ON op.fk_id_pedidoD = pd.id_pedidoD JOIN producto p ON op.fk_id_producto = p.id_producto WHERE op.fk_id_subastaf = :id_subastaF_bind';
+    resultado2 = await settings.OpenConnection(sql2, binds, false);
+    
+    // Definimos variables necesarias
+    var id_elegido = 0; // Sin elegir
+    var resultado2_largo = resultado2.rows.length;
 
-    sql = "UPDATE subasta_fruta SET fk_id_estado=2 WHERE id_subastaF = :id_subastaF_bind";
-    await settings.OpenConnection(sql, [id_subastaF_bind], true);
+    // Recorremos todas las ofertas 
+    for (var i = 0; i < resultado2_largo; i++) {
+      var value_idOferta = resultado2.rows[i][0];
+      var value_cantidadOferta = resultado2.rows[i][1];
+      var value_fk_id_producto = resultado2.rows[i][5];
+      var value_cantidadPedido = resultado2.rows[i][9];
+      var value_pd_id_fruta =  resultado2.rows[i][10];
+      var value_pd_id_calidad = resultado2.rows[i][11];
+      var value_op_id_fruta =  resultado2.rows[i][12];
+      var value_op_id_calidad = resultado2.rows[i][13];
 
-    if (res.status(200)) {
-      console.log("[!] Subasta de Frutas " + id_subastaF_bind + "Finalizada con éxito");
-
-      DAASDDAS
-
-      //se crea subasta transporte
-      sql3 = "INSERT INTO subasta_transporte(ID_SUBASTAT, fecha_creacion, fecha_actualizacion, fecha_termino, CANTIDAD, DIRECCION_DESPACHO, fk_id_pedido, fk_id_estado) VALUES (:ID_SUBASTAT, to_DATE(:fecha_creacion,'YYYY/MM/DD'), to_DATE(:fecha_actualizacion,'YYYY/MM/DD'), to_DATE(:fecha_termino,'YYYY/MM/DD'), :CANTIDAD, :DIRECCION_DESPACHO, :fk_id_pedido, :fk_id_estado)";
-      resultado3 = await settings.OpenConnection(sql3, [id_subastaF_bind], true);
+      if (value_pd_id_fruta == value_op_id_fruta && value_pd_id_calidad == value_op_id_calidad ) {
+        if (value_cantidadOferta >= value_cantidadPedido) {
+          var cantidad_restante = value_cantidadOferta - value_cantidadPedido;
+          id_elegido = value_idOferta;
+        }
+      }
       
-      //Lo lleva al detalle de la subasta mostrando pedido con el estado de la subasta finalizado
-      if (resultado3) {
-        res.redirect('/subastaf_finalizado/' + id_subastaF_bind);
+    }
+
+    // Actualizamos la oferta escogida finalmente usando la variable elegido
+    sql3 = "UPDATE oferta_productor SET fk_id_estado=3 WHERE id_ofertaP = :id_elegido";
+    resultado3 = await settings.OpenConnection(sql3, [id_elegido], true);
+    console.log("Oferta de Productor actualizado con éxito");
+
+    if (resultado3) {
+
+      // Si cantidad_restante es mayor a 0 descontamos la cantidad de producto
+      if (cantidad_restante > 0) {
+        sql4 = "UPDATE producto SET cantidad=:cantidad_restante WHERE id_ofertaP = :value_fk_id_producto";
+        resultado4 = await settings.OpenConnection(sql4, [cantidad_restante, value_fk_id_producto], true);
+        
+        if (resultado4) { 
+          console.log("Producto actualizado con éxito");
+
+          // Rechazamos todas las ofertas de esta subasta ya que se acepto una
+
+        }
+
       }
 
-    } else {
-      console.log("[!] Ocurrió un error al intentar finalizar la subasta de Frutas " + id_subastaF_bind);
-      res.redirect('/subastas_frutas');
+      // Se crea subasta transporte
+      sql5 = "INSERT INTO subasta_transporte(ID_SUBASTAT, fecha_creacion, fecha_actualizacion, fecha_termino, CANTIDAD, DIRECCION_DESPACHO, fk_id_pedido, fk_id_estado) VALUES (:ID_SUBASTAT, to_DATE(:fecha_creacion,'YYYY/MM/DD'), to_DATE(:fecha_actualizacion,'YYYY/MM/DD'), to_DATE(:fecha_termino,'YYYY/MM/DD'), :CANTIDAD, :DIRECCION_DESPACHO, :fk_id_pedido, :fk_id_estado)";
+      resultado5 = await settings.OpenConnection(sql5, [id_subastaF_bind], true);
+      
+      // Lo lleva al detalle de la subasta mostrando pedido con el estado de la subasta finalizado
+      if (resultado5) {
+        res.redirect('/subastaf_finalizado/' + id_subastaF_bind);
+        console.log("Redireccionado con éxito a subastaf_finalizado " + id_subastaF_bind);
+      }
+
+
     }
 
   } catch (error) {
