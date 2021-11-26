@@ -14,7 +14,7 @@
                   <ul class="timeline timeline-simple mr-5">
                     <% for(var ofertaProductor of OfertasProductores) { %>
                       <% var ofertaProductor_contador = 0; %>
-                      <% if (ofertaProductor.fk_id_subastaF == data[0].id_subastaF && ofertaProductor.fk_id_estado == 1){ %>
+                      <% if (ofertaProductor.fk_id_subastaF == data[0].id_subastaF && ofertaProductor.fk_id_estado <= 2){ %>
                         <% ofertaProductor_contador = ofertaProductor_contador + 1; %>
                         <li class="timeline-inverted">
                           <div class="timeline-badge success">
@@ -30,6 +30,9 @@
                               <p>Cantidad propuesta: <%= ofertaProductor.cantidad %></p>
                               <p>Precio por kilo: <%= ofertaProductor.precio_por_kilo %></p>
                               <hr>
+                              <% if(ofertaProductor.fk_id_estado == 2){ %>
+                                <span class="btn btn-success btn-sm pull-right mr-3">Oferta aceptada</span>
+                              <% } %>
                             </div>
                             <h6>
                               <i class="ti-time"></i> <%= ofertaProductor.fecha_creacion %>

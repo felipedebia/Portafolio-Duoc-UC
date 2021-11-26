@@ -14,7 +14,7 @@
                   <ul class="timeline timeline-simple mr-5">
                     <% for(var ofertaTransporte of OfertasTransportes) { %>
                       <% var ofertaTransporte_contador = 0; %>
-                      <% if (ofertaTransporte.fk_id_subastaT == data[0].id_subastaT && ofertaTransporte.fk_id_estado == 1){ %>
+                      <% if (ofertaTransporte.fk_id_subastaT == data[0].id_subastaT && ofertaTransporte.fk_id_estado <= 2){ %>
                         <% ofertaTransporte_contador++; %>
                         <li class="timeline-inverted">
                           <div class="timeline-badge success">

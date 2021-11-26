@@ -151,7 +151,7 @@ router.get('/finalizarSubastaFruta2/:id_subastaF', async (req, res) => {
     }
 
     // Actualizamos la oferta escogida finalmente usando la variable elegido
-    sql3 = "UPDATE oferta_productor SET fk_id_estado=3 WHERE id_ofertaP = :id_elegido";
+    sql3 = "UPDATE oferta_productor SET fk_id_estado=2 WHERE id_ofertaP = :id_elegido";
     resultado3 = await settings.OpenConnection(sql3, [id_elegido], true);
     console.log("Oferta de Productor actualizado con éxito");
 
@@ -163,13 +163,12 @@ router.get('/finalizarSubastaFruta2/:id_subastaF', async (req, res) => {
         resultado4 = await settings.OpenConnection(sql4, [cantidad_restante, value_fk_id_producto], true);
         
         if (resultado4) { 
-          console.log("Producto actualizado con éxito");
-
-          // Rechazamos todas las ofertas de esta subasta ya que se acepto una
-
+          console.log("Producto actualizado con éxito debido a fruta restante");
         }
 
       }
+
+      // Rechazamos todas las ofertas de esta subasta ya que se acepto una
 
       // Enviamos a la vista para crear una nueva subasta de transporte
       res.redirect('/crearSubastaTransporte/' + req.params.id_subastaF);
@@ -228,6 +227,9 @@ router.get("/anularSubastaFruta/:id_subastaF", async (req, res) => {
 
     if (res.status(200)) {
       console.log("[!] Subasta de Frutas " + id_subastaF_bind + " anulada con éxito");
+
+      // Se tienen que rechazar todas las ofertas de la subasta
+
       res.redirect('/subastas_frutas');
     } else {
       console.log("[!] Ocurrió un error al intentar anular la subasta de Frutas " + id_subastaF_bind);
@@ -292,6 +294,9 @@ router.get("/anularSubastaTransporte/:id_subastaT", async (req, res) => {
 
     if (res.status(200)) {
       console.log("[!] Subasta de Transportes " + id_subastaT_bind + " anulada con éxito");
+
+      // Se tienen que rechazar todas las ofertas de la subasta
+
       res.redirect('/subastas_transportes');
     } else {
       console.log("[!] Ocurrió un error al intentar anular la subasta de Transporte " + id_subastaT_bind);
