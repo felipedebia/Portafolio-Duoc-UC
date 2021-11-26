@@ -38,9 +38,10 @@ Iniciar node en la carpeta web
 
 - CREAR ORDEN_TRANSPORTE, LUEGO CREAR ORDEN_BODEGA Y CREAR REPORTE_BODEGA
 - PAGO
-- FINALIZAR SUBASTA TRANSPORTE
 - TERMINAR COSTOS DE FRUTA Y TRANSPORTE EN VENTA_DETALLE
 - REPORTES
+- Linea 205 routes ofertas
+- Linea 171, 231 y 298 routes subastas
 
 ## Funciones pendientes:
 

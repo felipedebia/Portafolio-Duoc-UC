@@ -74,22 +74,19 @@
               <span class="mt-4"><strong>Fecha de creación:</strong></span> <span id="fecha_creacion"><%= data[0].fecha_creacion %></span></br>
               <span><strong>Fecha de última actualización:</strong></span> <span id="fecha_actualizacion"><%= data[0].fecha_actualizacion %></span></br>
               <span class="mb-4"><strong>Fecha de termino:</strong></span> <span id="fecha_termino"><%= data[0].fecha_termino %></span></br></br>
-              <span class="mb-4"><strong>Estado de la subasta:</strong></span> <% if (data[0].fk_id_estado == 1) { %><span class="badge badge-success"><%= data[0].fk_texto_estado %></span><% } else { %><span class="badge badge-danger"><%= data[0].fk_texto_estado %></span><% } %></br></br>
-              <h4 class="card-title mt-4 mb-4">Información del pedido</h4>
-              <span class="mt-4"><strong>Tipo de pedido:</strong></span> <span class="badge badge-info"><%= data[0].pedido_fk_texto_tipo %></span></br>
-              <span class="mt-4"><strong>Solicitado por:</strong></span> <a href="/perfil/<%= data[0].pedido_fk_id_usuario %>"><span><%= data[0].pedido_fk_texto_usuario %></span></a></br>
+              <span class="mb-4"><strong>Estado de la subasta:</strong></span> <% if (data[0].fk_id_estado == 1) { %><span class="badge badge-success"><%= data[0].fk_texto_estado %></span><% } else { %><span class="badge badge-danger"><%= data[0].fk_texto_estado %></span><% } %>
             </div>
           </div>
           <div class="card card-profile">
             <div class="card-body">
               <h4 class="card-title mt-4 mb-4">Información del despacho</h4>
-              <span class="mb-4"><strong>Dirección de despacho:</strong></span> <%= data[0].direccion_despacho %> </br></br>
-              <span class="mb-4"><strong>Cantidad:</strong></span> <%= data[0].cantidad %> </br></br>
+              <span class="mb-4"><strong>Dirección de despacho:</strong></span> <%= data[0].direccion_despacho %> </br>
+              <span class="mb-4"><strong>Cantidad:</strong></span> <%= data[0].cantidad %>
               <% if (data[0].fk_id_estado == 1) { %>
               
                 <h4 class="card-title mt-4 mb-4">Opciones de la subasta</h4>
                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalCrearOferta">Crear una nueva oferta</button>
-                <a href="../api_subastas/finalizarSubastaTransporte/<%= data[0].id_subastaT %>"><button type="button" class="btn btn-warning">Finalizar Subasta</button></a>
+                <a href="../api_subastas/anularSubastaTransporte/<%= data[0].id_subastaT %>"><button type="button" class="btn btn-warning">Anular Subasta</button></a>
               <% } %>
             </div>
           </div>

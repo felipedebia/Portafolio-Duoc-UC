@@ -201,6 +201,9 @@ router.get("/aceptarOfertaTransporte/:id_ofertaT", async (req, res) => {
       var value_id_subastaT = result.rows[0];
 
       if (value_id_subastaT) {
+
+        // Al aceptar una oferta, hay que actualizar estado pedido y/o venta para continuar con el flujo
+
         res.redirect('/subasta_transporte/' + value_id_subastaT);
       }
 

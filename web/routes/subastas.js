@@ -216,7 +216,7 @@ router.post('/crearSubastaTransporte/:id_subastaF', async (req, res) => {
 });
 
 
-// Anular Frutas
+// Anular Subasta Fruta
 router.get("/anularSubastaFruta/:id_subastaF", async (req, res) => {
   try {
 
