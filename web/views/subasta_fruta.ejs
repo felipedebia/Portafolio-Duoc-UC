@@ -132,7 +132,11 @@
                               <option selected="true" disabled="disabled">Selecciona una opción</option>
                               <% for(var producto of Productos){ %>
                                 <% if (producto.fk_id_usuario == session.id_usuario){ %>
-                                  <option name="fk_id_producto" value="<%=producto.id_producto%>"><%=producto.fk_nombre_fruta%> <%=producto.calidad%> <%=producto.cantidad%></option>
+                                  <% for(var pedido_detalle of PedidoDetalles){ %>
+                                    <% if (producto.fk_nombre_fruta == pedido_detalle.frutacalidad_fk_nombre && producto.cantidad > pedido_detalle.cantidad){ %>
+                                      <option name="fk_id_producto" value="<%=producto.id_producto%>"><%=producto.fk_nombre_fruta%> <%=producto.calidad%> <%=producto.cantidad%></option>
+                                    <% } %>
+                                  <% } %>
                                 <% } %>
                               <% } %>
                           </select>
