@@ -159,7 +159,7 @@ router.get('/finalizarSubastaFruta2/:id_subastaF', async (req, res) => {
 
       // Si cantidad_restante es mayor a 0 descontamos la cantidad de producto
       if (cantidad_restante > 0) {
-        sql4 = "UPDATE producto SET cantidad=:cantidad_restante WHERE id_ofertaP = :value_fk_id_producto";
+        sql4 = "UPDATE producto SET cantidad=:cantidad_restante WHERE id_producto = :value_fk_id_producto";
         resultado4 = await settings.OpenConnection(sql4, [cantidad_restante, value_fk_id_producto], true);
         
         if (resultado4) { 
@@ -171,17 +171,39 @@ router.get('/finalizarSubastaFruta2/:id_subastaF', async (req, res) => {
 
       }
 
-      // Se crea subasta transporte
-      sql5 = "INSERT INTO subasta_transporte(ID_SUBASTAT, fecha_creacion, fecha_actualizacion, fecha_termino, CANTIDAD, DIRECCION_DESPACHO, fk_id_pedido, fk_id_estado) VALUES (:ID_SUBASTAT, to_DATE(:fecha_creacion,'YYYY/MM/DD'), to_DATE(:fecha_actualizacion,'YYYY/MM/DD'), to_DATE(:fecha_termino,'YYYY/MM/DD'), :CANTIDAD, :DIRECCION_DESPACHO, :fk_id_pedido, :fk_id_estado)";
-      resultado5 = await settings.OpenConnection(sql5, [id_subastaF_bind], true);
-      
-      // Lo lleva al detalle de la subasta mostrando pedido con el estado de la subasta finalizado
-      if (resultado5) {
-        res.redirect('/subastaf_finalizado/' + id_subastaF_bind);
-        console.log("Redireccionado con éxito a subastaf_finalizado " + id_subastaF_bind);
-      }
+      // Enviamos a la vista para crear una nueva subasta de transporte
+      res.redirect('/crearSubastaTransporte/' + id_subastaF_bind);
+
+    }
+
+  } catch (error) {
+    res.status(400);
+    res.send("Ocurrió un error al obtener los datos de la base de datos")
+    console.log(error);
+  }
+
+});
 
 
+// Crear Subasta Transporte
+router.post('/crearSubastaTransporte/:id_subastaF', async (req, res) => {
+  try {
+
+    var fecha_creacion = functions.obtenerFechaActual();
+    var fecha_actualizacion = functions.obtenerFechaActual();
+    var fecha_termino = functions.obtenerFechaActual();
+    var fk_id_estado = 1;
+  
+    sql = "INSERT INTO subasta_transporte(id_subastaT, fecha_creacion, fecha_actualizacion, fecha_termino, cantidad, direccion_despacho, fk_id_pedido, fk_id_estado) VALUES (:id_subastaT, to_DATE(:fecha_creacion,'YYYY/MM/DD'), to_DATE(:fecha_actualizacion,'YYYY/MM/DD'), to_DATE(:fecha_termino,'YYYY/MM/DD'), :cantidad, :direccion_despacho, :req.params.id_subastaF, :fk_id_estado)";
+    resultado = await settings.OpenConnection(sql, [req.params.id_subastaF, fecha_creacion, fecha_actualizacion, fecha_termino, cantidad, direccion_despacho, req.params.id_subastaF, fk_id_estado], true);
+  
+    // Si tuvo conexión a la DB
+    if (resultado) {
+      res.redirect('/subasta_transporte/' + req.params.id_subastaF);
+      console.log("Redireccionado con éxito a subasta_transporte " + req.params.id_subastaF);
+    } else {
+      console.log("[!] Ocurrió un error al intentar crear la subasta de transporte");
+      res.redirect('/subastas_frutas');
     }
 
   } catch (error) {

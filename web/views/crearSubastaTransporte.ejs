@@ -1,0 +1,41 @@
+<%- include('partials/nav.ejs') %>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="card">
+                      <div class="card-header card-header-tabs card-header-warning">
+                        <h4 class="card-title">Crear subasta de Transporte</h4>
+                      </div>
+                      <div class="card-body">
+                        <h3 class="card-title mb-4 mt-3">Ingresa los datos de la subasta</h3>
+                        <div class="card-text">
+                          <form action="/api_subastas/crearSubastaTransporte/<%= data[0].id_subastaT%>" method="POST">
+                            <div class="row">
+                              <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group my-label required">
+                                  <label>Cantidad</label>
+                                  <input class="form-control mb-4" id="inputCantidad" type="number" name="cantidad" required>
+                                </div>
+                              </div>
+                              <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group my-label required">
+                                  <label>Dirección de despacho</label>
+                                  <input class="form-control mb-4" id="inputDireccionDespacho" type="text" name="direccion_despacho" required>
+                                </div>
+                              </div>
+                            </div>
+                            <button class="btn btn-primary mb-2 pull-right" type="submit">Crear nueva subasta</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<%- include('partials/footer.ejs') %>
+
+</body>
+</html>
