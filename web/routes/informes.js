@@ -45,7 +45,7 @@ router.post('/crearInforme/:id_venta', async (req, res) => {
 
     var fk_id_venta = req.params.id_venta;
     var { descripcion } = req.body;
-    var fecha_creacion, fecha_actualizacion = functions.obtenerFechaActual();
+    var fecha_creacion = functions.obtenerFechaActual();
     var fecha_actualizacion = functions.obtenerFechaActual();
   
     sql = "INSERT INTO informe(fecha_creacion, fecha_actualizacion, descripcion, fk_id_venta) VALUES (to_DATE(:fecha_creacion,'YYYY/MM/DD'),to_DATE(:fecha_actualizacion,'YYYY/MM/DD'), :descripcion, :fk_id_venta)";

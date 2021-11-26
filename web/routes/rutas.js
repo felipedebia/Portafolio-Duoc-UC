@@ -577,8 +577,10 @@ router.get('/subasta_transporte/:id_subastaT', async function(req, res, next) {
 
 router.get('/crearSubastaTransporte/:id_subastaT', function(req, res) {
     if (req.session.isLoggedIn) {
-		const { id_subastaT } = req.params;
-        res.render('Subastas_Transportes', { title: 'Crear nueva subasta de transporte - Maipo Grande', data: id_subastaT, navActive: 'Subastas' });
+		var subastaIdData = [{
+			id_subastaT: req.params.id_subastaT
+		}];
+        res.render('crearSubastaTransporte', { title: 'Crear nueva subasta de transporte - Maipo Grande', data: subastaIdData, navActive: 'Subastas' });
     } else {
         res.redirect('/');
     }
