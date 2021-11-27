@@ -121,13 +121,21 @@ router.post('/crearVentaDetalle/:id_venta', async (req, res) => {
     var { costo_impuestos,comision_servicio,comision_empresa, costo_fruta, costo_transporte } = req.body;
     var precio_final = (costo_impuestos + comision_servicio +comision_empresa+costo_fruta+costo_transporte);
 
-    sql = "INSERT INTO venta_detalle(costo_fruta, costo_transporte,costo_impuestos,comision_servicio,comision_empresa,precio_final,fk_id_venta) VALUES (:costo_fruta,:costo_transporte,:costo_impuestos,:comision_servicio,:comision_empresa,:precio_final,:fk_id_venta_bind)";
-    await settings.OpenConnection(sql, [costo_fruta, costo_transporte,costo_impuestos,comision_servicio,comision_empresa,precio_final,fk_id_venta_bind], true);
+    sql1 = "INSERT INTO venta_detalle(costo_fruta, costo_transporte,costo_impuestos,comision_servicio,comision_empresa,precio_final,fk_id_venta) VALUES (:costo_fruta,:costo_transporte,:costo_impuestos,:comision_servicio,:comision_empresa,:precio_final,:fk_id_venta_bind)";
+    resultado1 = await settings.OpenConnection(sql1, [costo_fruta, costo_transporte,costo_impuestos,comision_servicio,comision_empresa,precio_final,fk_id_venta_bind], true);
 
     // Si tuvo conexión a la DB
-    if(res.status(200)) {
+    if(resultado1) {
       console.log("[!] Venta Detalle " + fk_id_venta_bind + " creada con éxito");
-      res.redirect('/ventas');
+
+      // Actualizamos venta a estado 2 = En preparación
+      sql2 = "UPDATE venta SET fk_id_estado=2 WHERE id_venta = :fk_id_venta_bind";
+      resultado2 = await settings.OpenConnection(sql2, [fk_id_venta_bind], true);
+      
+      if(resultado1) { 
+        res.redirect('/ventas');
+      }
+      
     } else {
       console.log("[!] Ocurrió un error al intentar crear la venta detalle " + fk_id_venta_bind);
       res.redirect('/ventas');
