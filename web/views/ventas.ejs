@@ -37,9 +37,7 @@
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">ID Venta #
-                                                                        <%= venta.id_venta %>
-                                                                    </h5>
+                                                                    <h5 class="modal-title" id="exampleModalLabel">ID Venta #<%= venta.id_venta %></h5>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
@@ -74,9 +72,7 @@
                                                             <div class="modal-content">
                                                                 <form action="/api_ventas/crearVentaDetalle/<%= venta.id_venta %>" method="POST">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">ID Venta #
-                                                                            <%= venta.id_venta %>
-                                                                        </h5>
+                                                                        <h5 class="modal-title" id="exampleModalLabel">ID Venta #<%= venta.id_venta %></h5>
                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
@@ -127,6 +123,36 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="modal fade" id="modalCrearOrdenTransporte<%= venta.id_venta %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <form action="/api_ordenes/crearOrdenTransporte/<%= venta.id_venta %>" method="POST">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Creando Orden de Transporte para Venta #<%= venta.id_venta %></h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                            <div class="form-group mt-4 my-label required">
+                                                                                <label>Fecha de ingreso</label>
+                                                                                <input class="form-control mb-4" id="fecha_ingreso" type="date" name="fecha_ingreso" required>
+                                                                                <div class="invalid-feedback">Ingresa Fecha de Ingreso</div>
+                                                                            </div>
+                                                                            <div class="form-group my-label required">
+                                                                                <label>Fecha de retiro</label>
+                                                                                <input class="form-control mb-4" id="fecha_retiro" type="date" name="fecha_retiro" required>
+                                                                                <div class="invalid-feedback">Ingresa Fecha de Retiro</div>
+                                                                            </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button class="btn btn-primary" type="submit">Guardar detalles</button>
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <tr>
                                                         <th scope="row">
                                                             <%= venta.id_venta %>
@@ -146,11 +172,11 @@
                                                                 <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalGenerarDetalle<%= venta.id_venta %>">Generar detalles</button>
                                                                 <a href="../api_ventas/anularVenta/<%= venta.id_venta %>"><button type="button" class="btn btn-warning btn-sm">Anular</button></a>
                                                             <% } %>
-                                                            <% if (venta.fk_id_estado == 2) { %>
+                                                            <% if (venta.fk_id_estado >= 2) { %>
                                                                     <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalVentaDetalle<%= venta.id_venta %>">Ver detalles</button>
                                                             <% } %>
                                                             <% if (venta.fk_id_estado == 3) { %>
-                                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalGenerarDetalle<%= venta.id_venta %>">Crear orden de bodega</button>
+                                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalCrearOrdenTransporte<%= venta.id_venta %>">Crear orden de bodega</button>
                                                             <% } %>
                                                         </td>
                                                     </tr>
