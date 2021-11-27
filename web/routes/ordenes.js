@@ -112,11 +112,14 @@ router.get("/anularOrdenBodega/:id_ordenB", async (req, res) => {
   try {
 
     var id_ordenB_bind = req.params.id_ordenB;
-    sql = "UPDATE orden_bodega SET fk_id_estado=2 WHERE id_ordenb = :id_ordenB_bind";
-    await settings.OpenConnection(sql, [id_ordenB_bind], true);
+    sql1 = "UPDATE orden_bodega SET fk_id_estado=2 WHERE id_ordenb = :id_ordenB_bind";
+    resultado1 = await settings.OpenConnection(sql1, [id_ordenB_bind], true);
 
-    if(res.status(200)) {
+    if(resultado1) {
       console.log("[!] Orden de Bodega " + id_ordenB_bind + " anulada con éxito");
+
+    // Si se anula una orden de transporte, hay que volver atras un estado en venta
+
       res.redirect('/Ordenes_Bodegas');
     } else {
       console.log("[!] Ocurrió un error al intentar anular la orden de Bodega " + id_ordenB_bind);
@@ -208,11 +211,14 @@ router.get("/anularOrdenTransporte/:id_ordenT", async (req, res) => {
   try {
 
     var id_ordenT_bind = req.params.id_ordenT;
-    sql = "UPDATE orden_transporte SET fk_id_estado=2 WHERE id_ordenT = :id_ordenT_bind";
-    await settings.OpenConnection(sql, [id_ordenT_bind], true);
+    sql1 = "UPDATE orden_transporte SET fk_id_estado=2 WHERE id_ordenT = :id_ordenT_bind";
+    resultado1 = await settings.OpenConnection(sql1, [id_ordenT_bind], true);
 
-    if(res.status(200)) {
+    if(resultado1) {
       console.log("[!] Orden de Transporte " + id_ordenT_bind + " anulada con éxito");
+
+      // Si se anula una orden de transporte, hay que volver atras un estado en venta
+
       res.redirect('/ordenes_transportes');
     } else {
       console.log("[!] Ocurrió un error al intentar anular la orden de Transporte " + id_ordenT_bind);

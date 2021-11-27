@@ -75,6 +75,7 @@
                                                         <td>
                                                             <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalVerOrdenBodega<%= ordenBodega.id_ordenb %>">Ver orden</button>
                                                             <% if (ordenBodega.fk_id_estado == 1) { %>
+                                                                <a href="/reportes_bodega/<%= ordenBodega.id_ordenB %>"><button type="button" class="btn btn-success btn-sm">Ver reportes</button></a>
                                                                 <a href="/modificarOrdenBodega/<%= ordenBodega.id_ordenB %>"><button type="button" class="btn btn-success btn-sm">Modificar</button></a>
                                                                 <a href="../api_ordenes/anularOrdenBodega/<%= ordenBodega.id_ordenB %>"><button type="button" class="btn btn-success btn-sm">Anular</button></a>
                                                             <% } %>
