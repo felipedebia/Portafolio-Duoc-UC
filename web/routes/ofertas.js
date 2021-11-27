@@ -187,24 +187,37 @@ router.get("/aceptarOfertaTransporte/:id_ofertaT", async (req, res) => {
   
     var value_id_ofertaT = req.params.id_ofertaT;
 
-    sql = "UPDATE oferta_transporte SET fk_id_estado= 2 WHERE id_ofertaT= :value_id_ofertaT";
-    await settings.OpenConnection(sql, [value_id_ofertaT], true);
+    sql1 = "UPDATE oferta_transporte SET fk_id_estado= 2 WHERE id_ofertaT= :value_id_ofertaT";
+    resultado1 = await settings.OpenConnection(sql1, [value_id_ofertaT], true);
 
     // Si tuvo conexión a la DB
-    if (res.status(200)) {
+    if (resultado1) {
       console.log("[!] Oferta de transporte " + value_id_ofertaT + " aceptada con éxito");
 
       // Capturamos el id_subastaF para retornar a la página
       sql2 = "SELECT fk_id_subastaT FROM oferta_transporte WHERE id_ofertaT = :value_id_ofertaT";
-      result = await settings.OpenConnection(sql2, [value_id_ofertaT], true);
+      resultado2 = await settings.OpenConnection(sql2, [value_id_ofertaT], true);
 
-      var value_id_subastaT = result.rows[0];
+      var value_id_subastaT = resultado2.rows[0];
 
       if (value_id_subastaT) {
 
-        // Al aceptar una oferta, hay que actualizar estado pedido y/o venta para continuar con el flujo
+        // Al aceptar una oferta, actualizamos pedido a estado 6 = En revisión final
+        sql3 = "UPDATE pedido SET fk_id_estado=6 WHERE id_pedido = :value_id_subastaT";
+        resultado3 = await settings.OpenConnection(sql3, [value_id_subastaT], true);
 
-        res.redirect('/subasta_transporte/' + value_id_subastaT);
+        if (resultado3) {
+          // Actualizamos subasta transporte a cerrado
+          sql4 = "UPDATE subasta_transporte SET fk_id_estado=2 WHERE id_subastat = :value_id_subastaT";
+          resultado4 = await settings.OpenConnection(sql3, [value_id_subastaT], true);
+
+          if (resultado4) {
+            // Redireccionamos a subasta_transporte
+            res.redirect('/subasta_transporte/' + value_id_subastaT);
+          }
+        }
+
+        
       }
 
     } else {
@@ -236,7 +249,7 @@ router.get("/rechazarOfertaTransporte/:id_ofertaT", async (req, res) => {
 
       // Capturamos el id_subastaF para retornar a la página
       sql2 = "SELECT fk_id_subastaT FROM oferta_transporte WHERE id_ofertaT = :value_id_ofertaT";
-      result = await settings.OpenConnection(sql2, [value_id_ofertaP], true);
+      result = await settings.OpenConnection(sql2, [value_id_ofertaT], true);
 
       var value_id_subastaT = result.rows[0];
 

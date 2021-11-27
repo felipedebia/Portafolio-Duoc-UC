@@ -81,7 +81,8 @@ router.post('/crearPedido', async(req, res) => {
 
         var { direccion_despacho, fk_id_ciudad } = req.body;
         var fk_id_usuario = req.session.id_usuario;
-        var fk_id_tipo = 1; // Ver si esta bien ya que hay pedido externo y local
+        var fk_id_tipo = 1;
+        // Asignamos estado 1 = En preparación
         var fk_id_estado = 1;
         var fecha_creacion = functions.obtenerFechaActual();
 
@@ -149,7 +150,7 @@ router.get("/confirmarPedido/:id_pedido", async(req, res) => {
     try {
 
         var id_pedido_bind = req.params.id_pedido;
-
+        // Actualizamos pedido a estado 2 = Recepcionado
         sql = "UPDATE pedido SET fk_id_estado=2 WHERE id_pedido = :id_pedido_bind";
         var consulta = await settings.OpenConnection(sql, [id_pedido_bind], true);
 

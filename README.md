@@ -40,8 +40,8 @@ Iniciar node en la carpeta web
 - PAGO
 - TERMINAR COSTOS DE FRUTA Y TRANSPORTE EN VENTA_DETALLE
 - REPORTES
-- Linea 205 routes ofertas
-- Linea 171, 231 y 298 routes subastas
+- Linea 168, 236 y 303 routes subastas
+- Linea 123 falta where fk_id_estado 1 routes subastas
 
 ## Funciones pendientes:
 
