@@ -36,8 +36,8 @@ Iniciar node en la carpeta web
 
 ## Páginas pendientes:
 
-- CREAR ORDEN_TRANSPORTE, CREAR REPORTE_BODEGA
-- PAGO
+- CREAR REPORTE_BODEGA
+- NO CREA PAGO
 - TERMINAR COSTOS DE FRUTA Y TRANSPORTE EN VENTA_DETALLE
 - REPORTES
 - Linea 168, 236 y 303 routes subastas

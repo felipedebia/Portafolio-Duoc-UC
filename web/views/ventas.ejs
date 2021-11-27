@@ -96,21 +96,21 @@
                                                                                 <div class="form-group my-label required">
                                                                                     <label>Costos de impuesto</label>
                                                                                     <input class="form-control mb-4" id="costo_impuestos" type="number" name="costo_impuestos" maxLength="25" required>
-                                                                                    <div class="invalid-feedback">Ingresa Costo Impuesto</div>
+                                                                                    <div class="invalid-feedback">Ingresa Costos de Impuesto</div>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-xs-6 col-sm-6 col-md-6">
                                                                                 <div class="form-group my-label required">
                                                                                     <label>Comisión de servicio</label>
                                                                                     <input class="form-control mb-4" id="comision_servicio" type="number" name="comision_servicio" maxLength="25" required>
-                                                                                    <div class="invalid-feedback">Ingresa Comisión Servicio</div>
+                                                                                    <div class="invalid-feedback">Ingresa Comisión de Servicio</div>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-xs-6 col-sm-6 col-md-6">
                                                                                 <div class="form-group my-label required">
                                                                                     <label>Comisión de empresa</label>
                                                                                     <input class="form-control mb-4" id="comision_empresa" type="number" name="comision_empresa" maxLength="25" required>
-                                                                                    <div class="invalid-feedback">Ingresa Comisión Empresa</div>
+                                                                                    <div class="invalid-feedback">Ingresa Comisión de Empresa</div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -137,12 +137,42 @@
                                                                             <div class="form-group mt-4 my-label required">
                                                                                 <label>Fecha de ingreso</label>
                                                                                 <input class="form-control mb-4" id="fecha_ingreso" type="date" name="fecha_ingreso" required>
-                                                                                <div class="invalid-feedback">Ingresa Fecha de Ingreso</div>
+                                                                                <div class="invalid-feedback">Ingresa fecha de ingreso</div>
                                                                             </div>
                                                                             <div class="form-group my-label required">
                                                                                 <label>Fecha de retiro</label>
                                                                                 <input class="form-control mb-4" id="fecha_retiro" type="date" name="fecha_retiro" required>
-                                                                                <div class="invalid-feedback">Ingresa Fecha de Retiro</div>
+                                                                                <div class="invalid-feedback">Ingresa fecha de retiro</div>
+                                                                            </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button class="btn btn-primary" type="submit">Crear orden</button>
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal fade" id="modalCrearOrdenTransporte<%= venta.id_venta %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <form action="/api_ordenes/crearOrdenTransporte/<%= venta.id_venta %>" method="POST">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Creando Orden de Transporte para Venta #<%= venta.id_venta %></h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                            <div class="form-group mt-4 my-label required">
+                                                                                <label>Fecha de llegada</label>
+                                                                                <input class="form-control mb-4" id="fecha_llegada" type="date" name="fecha_llegada" required>
+                                                                                <div class="invalid-feedback">Ingresa fecha de llegada</div>
+                                                                            </div>
+                                                                            <div class="form-group my-label required">
+                                                                                <label>Fecha de retiro</label>
+                                                                                <input class="form-control mb-4" id="fecha_retiro" type="date" name="fecha_retiro" required>
+                                                                                <div class="invalid-feedback">Ingresa fecha de retiro</div>
                                                                             </div>
                                                                     </div>
                                                                     <div class="modal-footer">
@@ -177,6 +207,9 @@
                                                             <% } %>
                                                             <% if (venta.fk_id_estado == 3) { %>
                                                                 <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalCrearOrdenBodega<%= venta.id_venta %>">Crear orden de bodega</button>
+                                                            <% } %>
+                                                            <% if (venta.fk_id_estado == 4) { %>
+                                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalCrearOrdenTransporte<%= venta.id_venta %>">Crear orden de transporte</button>
                                                             <% } %>
                                                         </td>
                                                     </tr>
