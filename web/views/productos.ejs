@@ -96,10 +96,6 @@
                                                                             </select>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="form-group mt-4 my-label required">
-                                                                        <label>Cantidad (en KG):</label>
-                                                                        <input class="form-control" id="inputCantidad" type="number" name="cantidad" maxLength="6" required value="<%= producto.cantidad %>">
-                                                                    </div>
                                                                     <div class="form-group my-label required">
                                                                         <label>Calidad</label>
                                                                         <div class="cus-select-group">
@@ -131,9 +127,10 @@
                                                                                 <% } %>
                                                                             </select>
                                                                         </div>
-                                                                        <select class="form-control" data-size="2" name="fk_id_calidad" data-style="select-with-transition btn" title="Selecciona una opción" required>
-                                                                            
-                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group mt-4 my-label required">
+                                                                        <label>Cantidad (en KG):</label>
+                                                                        <input class="form-control" id="inputCantidad" type="number" name="cantidad" maxLength="6" required value="<%= producto.cantidad %>">
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">

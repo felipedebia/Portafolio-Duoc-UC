@@ -74,7 +74,7 @@
               <span class="mt-4"><strong>Fecha de creación:</strong></span> <span id="fecha_creacion"><%= data[0].fecha_creacion %></span></br>
               <span><strong>Fecha de última actualización:</strong></span> <span id="fecha_actualizacion"><%= data[0].fecha_actualizacion %></span></br>
               <span class="mb-4"><strong>Fecha de termino:</strong></span> <span id="fecha_termino"><%= data[0].fecha_termino %></span></br></br>
-              <span class="mb-4"><strong>Estado de la subasta:</strong></span> <% if (data[0].fk_id_estado == 1) { %><span class="badge badge-success"><%= data[0].fk_texto_estado %></span><% } else { %><span class="badge badge-danger"><%= data[0].fk_texto_estado %></span><% } %>
+              <span class="mb-4"><strong>Estado de la subasta:</strong></span> <% if (data[0].fk_id_estado == 1) { %><span class="badge badge-success"><%= data[0].fk_texto_estado.toUpperCase() %></span><% } else { %><span class="badge badge-danger"><%= data[0].fk_texto_estado.toUpperCase() %></span><% } %>
             </div>
           </div>
           <div class="card card-profile">

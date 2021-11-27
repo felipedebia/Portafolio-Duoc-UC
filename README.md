@@ -60,6 +60,7 @@ Iniciar node en la carpeta web
 
 - Agregar limite carasteres (2000) a descripción en informes (vista)
 - Agregar PDF boton cuando se ve un informe
+- Arreglar contador de ofertas en subastas, el if de ninguno o si hay ofertas no funciona bien
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Sanitizar todas las entradas de texto
