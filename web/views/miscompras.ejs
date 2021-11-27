@@ -94,7 +94,7 @@
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <div class="mt-4">
-                                                                            <h4><strong>Total a pagar (clp): $<%=miCompra.precio_final%></strong></h4>
+                                                                            <h4><strong>Total a pagar (CLP): $<%=miCompra.precio_final%></strong></h4>
                                                                         </div>
                                                                         <div class="row">
                                                                             <div class="col-xs-12 col-sm-12 col-md-12">
@@ -132,12 +132,16 @@
                                                             <%= miCompra.fecha_actualizacion %>
                                                         </td>
                                                         <td>
-                                                            <%= miCompra.descripcion %>
+                                                            <%= miCompra.fk_texto_estado %>
                                                         </td>
                                                         <td>
-                                                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalVentaDetalle<%= miCompra.id_venta %>">Ver detalles</button>
-                                                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalGenerarDetalle<%= miCompra.id_venta %>">Pagar</button>
-                                                            <a href="../api_ventas/anularVenta/<%= miCompra.id_venta %>"><button type="button" class="btn btn-warning btn-sm">Anular</button></a>
+                                                            <% if (miCompra.fk_id_estado == 1) { %>
+                                                                <a href="../api_ventas/anularVenta/<%= miCompra.id_venta %>"><button type="button" class="btn btn-warning btn-sm">Anular</button></a>
+                                                            <% } %>
+                                                            <% if (miCompra.fk_id_estado == 2) { %>
+                                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalVentaDetalle<%= miCompra.id_venta %>">Ver detalles</button>
+                                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalGenerarDetalle<%= miCompra.id_venta %>">Pagar</button>
+                                                            <% } %>
                                                         </td>
                                                     </tr>
                                                     <% } %>

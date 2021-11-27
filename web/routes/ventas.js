@@ -128,7 +128,7 @@ router.post('/crearVentaDetalle/:id_venta', async (req, res) => {
     if(resultado1) {
       console.log("[!] Venta Detalle " + fk_id_venta_bind + " creada con éxito");
 
-      // Actualizamos venta a estado 2 = En preparación
+      // Actualizamos venta a estado 2 = Pendiente de pago
       sql2 = "UPDATE venta SET fk_id_estado=2 WHERE id_venta = :fk_id_venta_bind";
       resultado2 = await settings.OpenConnection(sql2, [fk_id_venta_bind], true);
       
@@ -156,7 +156,7 @@ router.get("/anularVenta/:id_venta", async (req, res) => {
 
     var id_venta_bind = req.params.id_venta;
 
-    sql = "UPDATE venta SET fk_id_estado=6 WHERE id_venta = :id_venta_bind";
+    sql = "UPDATE venta SET fk_id_estado=7 WHERE id_venta = :id_venta_bind";
     await settings.OpenConnection(sql, [id_venta_bind], true);
 
     if(res.status(200)) {

@@ -141,7 +141,7 @@ Iniciar node en la carpeta web
 - 1 Femenino
 - 2 Masculino
 
-## Estado venta - orden - producto
+## Estado orden - producto
 - 1 Activado
 - 2 Desactivado
 
@@ -171,11 +171,12 @@ Iniciar node en la carpeta web
 
 ## Estado venta
 - 1 En espera
-- 2 En preparación
-- 3 Pendiente de pago
-- 4 Rechazada por el cliente
-- 5 Pagada
-- 6 Anulada
+- 2 Pendiente de pago
+- 3 Pagada
+- 4 En bodega
+- 5 En transporte
+- 6 Entregada
+- 7 Anulada
 
 ## Estado oferta
 - 1 Sin revisar

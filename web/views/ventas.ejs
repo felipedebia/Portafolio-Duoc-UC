@@ -141,15 +141,16 @@
                                                             <%= venta.fk_texto_estado %>
                                                         </td>
                                                         <td>
-                                                            <% for(var venta_detalle of VentaDetalles) { %>
-                                                                <% if(venta_detalle.fk_id_venta ==  venta.id_venta){ %>
-                                                                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalVentaDetalle<%= venta.id_venta %>">Ver detalles</button>
-                                                                <% } %>
-                                                            <% } %>
                                                             <a href="/informes/<%= venta.id_venta %>"><button type="button" class="btn btn-warning btn-sm">Ver informes</button></a>
                                                             <% if (venta.fk_id_estado == 1) { %>
                                                                 <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalGenerarDetalle<%= venta.id_venta %>">Generar detalles</button>
                                                                 <a href="../api_ventas/anularVenta/<%= venta.id_venta %>"><button type="button" class="btn btn-warning btn-sm">Anular</button></a>
+                                                            <% } %>
+                                                            <% if (venta.fk_id_estado == 2) { %>
+                                                                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalVentaDetalle<%= venta.id_venta %>">Ver detalles</button>
+                                                            <% } %>
+                                                            <% if (venta.fk_id_estado == 3) { %>
+                                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalGenerarDetalle<%= venta.id_venta %>">Crear orden de bodega</button>
                                                             <% } %>
                                                         </td>
                                                     </tr>

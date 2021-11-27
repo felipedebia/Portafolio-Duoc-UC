@@ -25,7 +25,7 @@ router.get('/listarMisCompras', async(req, res) => {
     try {
 
         binds = {};
-        sql = "select venta.id_venta, venta.fecha_creacion, venta.fecha_actualizacion, pedido.fk_id_usuario, pedido.direccion_despacho, seguro.nombre_empresa, estado_venta.descripcion, venta_detalle.precio_final from venta join pedido on venta.fk_id_pedido = pedido.id_pedido join seguro on venta.fk_id_seguro = seguro.id_seguro join estado_venta on venta.fk_id_estado = estado_venta.id_estado join venta_detalle on venta.id_venta = venta_detalle.fk_id_venta";
+        sql = "select venta.id_venta, venta.fecha_creacion, venta.fecha_actualizacion, pedido.fk_id_usuario, pedido.direccion_despacho, seguro.nombre_empresa, venta_detalle.precio_final, venta.fk_id_estado, estado_venta.descripcion from venta join pedido on venta.fk_id_pedido = pedido.id_pedido join seguro on venta.fk_id_seguro = seguro.id_seguro join estado_venta on venta.fk_id_estado = estado_venta.id_estado join venta_detalle on venta.id_venta = venta_detalle.fk_id_venta";
         result = await settings.OpenConnection(sql, binds, true);
 
         MisCompras = [];
@@ -35,11 +35,12 @@ router.get('/listarMisCompras', async(req, res) => {
                 "id_venta": venta[0],
                 "fecha_creacion": moment(venta[1]).format('DD-MM-YYYY'),
                 "fecha_actualizacion": moment(venta[2]).format('DD-MM-YYYY'),
-                "fk_id_usuario": venta[3],
-                "direccion_despacho": venta[4],
-                "nombre_empresa": venta[5],
-                "descripcion": venta[6],
-                "precio_final": venta[7]
+                "pedido_fk_id_usuario": venta[3],
+                "pedido_fk_direccion_despacho": venta[4],
+                "seguro_fk_nombre_empresa": venta[5],
+                "ventad_fk_precio_final": venta[6],
+                "fk_id_estado": venta[7],
+                "fk_texto_estado": venta[8]
             }
 
             MisCompras.push(misComprasSchema);
