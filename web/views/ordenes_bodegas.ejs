@@ -50,7 +50,7 @@
                                                             <%= ordenBodega.fecha_retiro %>
                                                         </td>
                                                         <td>
-                                                            <%= ordenBodega.fk_id_estado %>
+                                                            <%= ordenBodega.fk_texto_estado %>
                                                         </td>
                                                         <td>
                                                             <a href="/orden_bodega/<%= ordenBodega.id_ordenB %>"><button type="button" class="btn btn-success btn-sm">Ver orden</button></a>
@@ -82,7 +82,7 @@
                                                             <%= reporteBodega.fecha_creacion %>
                                                         </td>
                                                         <td>
-                                                            <%= reporteBodega.fk_id_estado %>
+                                                            <%= reporteBodega.fk_texto_estado %>
                                                         </td>
                                                         <td>
                                                             <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalVerReporteBodega<%= reporteBodega.id_reporteb %>">Ver reporte</button>

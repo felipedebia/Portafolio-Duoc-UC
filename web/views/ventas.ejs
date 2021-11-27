@@ -123,12 +123,12 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="modal fade" id="modalCrearOrdenTransporte<%= venta.id_venta %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="modalCrearOrdenBodega<%= venta.id_venta %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
-                                                                <form action="/api_ordenes/crearOrdenTransporte/<%= venta.id_venta %>" method="POST">
+                                                                <form action="/api_ordenes/crearOrdenBodega/<%= venta.id_venta %>" method="POST">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">Creando Orden de Transporte para Venta #<%= venta.id_venta %></h5>
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Creando Orden de Bodega para Venta #<%= venta.id_venta %></h5>
                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
@@ -146,7 +146,7 @@
                                                                             </div>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button class="btn btn-primary" type="submit">Guardar detalles</button>
+                                                                        <button class="btn btn-primary" type="submit">Crear orden</button>
                                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                                                     </div>
                                                                 </form>
@@ -176,7 +176,7 @@
                                                                     <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalVentaDetalle<%= venta.id_venta %>">Ver detalles</button>
                                                             <% } %>
                                                             <% if (venta.fk_id_estado == 3) { %>
-                                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalCrearOrdenTransporte<%= venta.id_venta %>">Crear orden de bodega</button>
+                                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalCrearOrdenBodega<%= venta.id_venta %>">Crear orden de bodega</button>
                                                             <% } %>
                                                         </td>
                                                     </tr>

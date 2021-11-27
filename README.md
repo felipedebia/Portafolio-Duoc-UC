@@ -36,7 +36,7 @@ Iniciar node en la carpeta web
 
 ## Páginas pendientes:
 
-- CREAR ORDEN_TRANSPORTE, LUEGO CREAR ORDEN_BODEGA Y CREAR REPORTE_BODEGA
+- CREAR ORDEN_TRANSPORTE, CREAR REPORTE_BODEGA
 - PAGO
 - TERMINAR COSTOS DE FRUTA Y TRANSPORTE EN VENTA_DETALLE
 - REPORTES
@@ -59,7 +59,6 @@ Iniciar node en la carpeta web
 - Agregar peso maximo a la subida de documentos (contrato, seguro y pago)
 
 - Agregar limite carasteres (2000) a descripción en informes (vista)
-- Agregar PDF boton cuando se ve un informe
 - Arreglar contador de ofertas en subastas, el if de ninguno o si hay ofertas no funciona bien
 
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
@@ -332,6 +331,7 @@ Iniciar node en la carpeta web
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/ordenes_bodegas  |  |
 | GET  | http://localhost:3000/api_ordenes/listarOrdenesBodegas  | JSON |
+| GET  | http://localhost:3000/api_ordenes/listarReportesBodegas  | JSON |
 | GET  | http://localhost:3000/modificarOrdenBodega/:id_ordenB  |  |
 | POST | http://localhost:3000/api_ordenes/anularOrdenBodega/:id_ordenB  | |
 | GET  | http://localhost:3000/orden_bodega/:id_ordenB  |  |
@@ -379,8 +379,3 @@ Iniciar node en la carpeta web
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/api_frutasrestantes/listarFrutasRestantes  | JSON |
-
-## CRUD Reporte_Bodega
-| Tipo | URL | Retorna |
-| ------------- | ------------- | ------------- |
-| GET  | http://localhost:3000/api_reportes/listarReportesBodegas  | JSON |
