@@ -43,7 +43,7 @@ Iniciar node en la carpeta web
 - REPORTES
 - Linea 168, 236 y 303 routes subastas
 - Linea 123 falta where fk_id_estado 1 routes subastas
-- Linea 121 y 220 ordenes
+- Linea 121 y 220 ordenes: updates a venta
 
 ## Funciones pendientes:
 

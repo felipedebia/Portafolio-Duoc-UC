@@ -39,22 +39,22 @@
                                             <tbody>
                                                 <% for(var informe of Informes) { %>
 
-                                                    <div class="modal fade" id="modalVerInforme<%= informe.id_informe %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="modalVerReporteBodega<%= informe.id_reporteb %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg" role="document">
                                                           <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">
-                                                                    Viendo reporte de bodega <%= informe.id_informe %>
+                                                                    Viendo reporte de bodega <%= informe.id_reporteb %>
                                                                 </h5>
                                                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                               </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                              <span><strong>Informe de venta:</strong> <%= fk_id_venta %></span></br></br>
+                                                              <span><strong>Reporte de orden:</strong> <%= fk_id_venta %></span></br></br>
                                                               <span><strong>Fecha de creación:</strong> <%= informe.fecha_creacion %></span></br></br>
-                                                              <span><strong>Fecha de última actualización:</strong> <%= informe.fecha_actualizacion %></span></br></br>
-                                                              <span><strong>Contenido del informe:</strong></br></br> <%= informe.descripcion %></span>
+                                                              <span><strong>Estado del reporte:</strong> <%= informe.estado_reporte %></span></br></br>
+                                                              <span><strong>Contenido del reporte:</strong></br></br> <%= informe.descripcion %></span>
                                                             </div>
                                                             <div class="modal-footer">
                                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -62,7 +62,7 @@
                                                           </div>
                                                         </div>
                                                     </div>
-                                                    <div class="modal fade" id="modalModificarInforme<%= informe.id_informe %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="modalModificarReporteBodega<%= informe.id_informe %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg" role="document">
                                                           <div class="modal-content">
                                                             <form action="/api_informes/modificarInforme/<%= informe.id_informe%>" method="POST">
@@ -107,9 +107,9 @@
                                                             <%= informe.fecha_creacion %>
                                                         </td>
                                                         <td>
-                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalVerInforme<%= informe.id_informe %>">Ver informe</button>
-                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalModificarInforme<%= informe.id_informe %>">Modificar</button>
-                                                            <a href="../api_informes/eliminarInforme/<%= informe.id_informe %>"><button type="button" class="btn btn-info btn-sm">Eliminar</button></a>
+                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalVerReporteBodega<%= informe.id_reporteb %>">Ver informe</button>
+                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalModificarReporteBodega<%= informe.id_reporteb %>">Modificar</button>
+                                                            <a href="../api_informes/eliminarInforme/<%= informe.id_reporteb %>"><button type="button" class="btn btn-info btn-sm">Eliminar</button></a>
                                                         </td>
                                                     </tr>
                                                 <% } %>
@@ -119,11 +119,11 @@
                                 </div>
                                 <div class="tab-pane" id="crearReporteBodega">
                                     <div class="card-body">
-                                        <h3 class="card-title mb-4">Ingresa los datos del nuevo informe</h3>
+                                        <h3 class="card-title mb-4">Ingresa los datos del nuevo reporte</h3>
                                         <div class="card-text">
                                             <form action="../api_informes/crearInforme/<%= fk_id_venta %>" method="POST" class="formValidation" novalidate> 
                                                 <div class="form-group my-label required">
-                                                    <label>Contenido del informe</label></br></br>
+                                                    <label>Contenido del reporte</label></br></br>
                                                     <textarea name="descripcion" id="editor">
                                                         Escribe una descripción.
                                                     </textarea>
@@ -138,7 +138,7 @@
                                                     </script>
                                                 </div>
                                                 
-                                                <button class="btn btn-info mb-2 pull-right mt-4" type="submit">Crear nuevo informe</button>
+                                                <button class="btn btn-info mb-2 pull-right mt-4" type="submit">Crear nuevo reporte</button>
                                             </form>
                                         </div>
                                     </div>
