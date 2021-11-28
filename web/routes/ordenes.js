@@ -107,6 +107,37 @@ router.post('/crearOrdenBodega/:id_venta', async (req, res) => {
 });
 
 
+// Agregar Reporte Bodega
+router.post('/crearReporteBodega', async (req, res) => {
+  try {
+
+    var { cantidad, fk_fruta, fk_calidad } = req.body;
+    var fecha_creacion = functions.obtenerFechaActual();
+    var fk_id_estado = 1;
+    var fk_usuario = req.session.id_usuario;
+
+    sql = "INSERT INTO producto(cantidad,fecha_creacion,fk_id_fruta,fk_id_calidad,fk_id_usuario, fk_id_estado) values (:cantidad, to_date(:fecha_creacion,'YYYY-MM-DD'), :fk_fruta, :fk_calidad, :fk_usuario, :fk_id_estado)";
+    await settings.OpenConnection(sql, [cantidad, fecha_creacion, fk_fruta, fk_calidad, fk_usuario, fk_id_estado], true);
+
+    // Si tuvo conexión a la DB
+    if(res.status(200)) {
+      console.log("[!] Producto creado con éxito");
+      res.redirect('/productos');
+      //res.refresh();
+    } else {
+      console.log("[!] Ocurrió un error al intentar crear el producto");
+      res.redirect('/productos');
+    }
+
+  } catch (error) {
+    res.status(400);
+    res.send("Ocurrió un error al obtener los datos de la base de datos")
+    console.log(error);
+  }
+
+});
+
+
 // Anular orden Bodega
 router.get("/anularOrdenBodega/:id_ordenB", async (req, res) => {
   try {
