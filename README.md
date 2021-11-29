@@ -143,7 +143,7 @@ Iniciar node en la carpeta web
 - 1 Femenino
 - 2 Masculino
 
-## Estado orden - producto
+## Estado orden - producto - reporteBodega
 - 1 Activado
 - 2 Desactivado
 

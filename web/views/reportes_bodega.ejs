@@ -12,13 +12,13 @@
                                     <ul class="nav nav-tabs" data-tabs="tabs">
                                         <li class="nav-item">
                                             <a class="nav-link active" href="#listadoReportesBodega" data-toggle="tab">
-                                                <i class="material-icons">format_list_bulleted</i> Listado de Reportes de Bodega de Orden <%= fk_id_venta %>
+                                                <i class="material-icons">format_list_bulleted</i> Listado de Reportes de Orden <%= fk_id_ordenB %>
                                                 <div class="ripple-container"></div>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="#crearReporteBodega" data-toggle="tab">
-                                                <i class="material-icons">add</i> Agregar nuevo reporte a Orden <%= fk_id_venta %>
+                                                <i class="material-icons">add</i> Agregar nuevo reporte a Orden <%= fk_id_ordenB %>
                                                 <div class="ripple-container"></div>
                                             </a>
                                         </li>
@@ -32,29 +32,29 @@
                                     <div class="card-body table-responsive">
                                         <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                             <thead class="text-info">
-                                                <th scope="col">Informe N°</th>
+                                                <th scope="col">Reporte N°</th>
                                                 <th scope="col">Fecha de creación</th>
                                                 <th class="disabled-sorting">Opciones</th>
                                             </thead>
                                             <tbody>
-                                                <% for(var informe of Informes) { %>
+                                                <% for(var reporte of ReportesBodegas) { %>
 
-                                                    <div class="modal fade" id="modalVerReporteBodega<%= informe.id_reporteb %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="modalVerReporteBodega<%= reporte.id_reporteb %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg" role="document">
                                                           <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">
-                                                                    Viendo reporte de bodega <%= informe.id_reporteb %>
+                                                                    Viendo reporte de bodega <%= reporte.id_reporteb %>
                                                                 </h5>
                                                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                               </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                              <span><strong>Reporte de orden:</strong> <%= fk_id_venta %></span></br></br>
-                                                              <span><strong>Fecha de creación:</strong> <%= informe.fecha_creacion %></span></br></br>
-                                                              <span><strong>Estado del reporte:</strong> <%= informe.estado_reporte %></span></br></br>
-                                                              <span><strong>Contenido del reporte:</strong></br></br> <%= informe.descripcion %></span>
+                                                              <span><strong>Reporte de orden:</strong> <%= fk_id_ordenB %></span></br></br>
+                                                              <span><strong>Fecha de creación:</strong> <%= reporte.fecha_creacion %></span></br></br>
+                                                              <span><strong>Estado del reporte:</strong> <%= reporte.estado_reporte %></span></br></br>
+                                                              <span><strong>Contenido del reporte:</strong></br></br> <%= reporte.descripcion %></span>
                                                             </div>
                                                             <div class="modal-footer">
                                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -62,13 +62,13 @@
                                                           </div>
                                                         </div>
                                                     </div>
-                                                    <div class="modal fade" id="modalModificarReporteBodega<%= informe.id_informe %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="modalModificarReporteBodega<%= reporte.id_reporteb %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg" role="document">
                                                           <div class="modal-content">
-                                                            <form action="/api_informes/modificarInforme/<%= informe.id_informe%>" method="POST">
+                                                            <form action="/api_ordenes/modificarReporteBodega/<%= reporte.id_reporteb%>" method="POST">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title" id="exampleModalLabel">
-                                                                        Modificando informe <%= informe.id_informe %>
+                                                                        Modificando reporte <%= reporte.id_reporteb %>
                                                                     </h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
@@ -78,7 +78,7 @@
                                                                     <div class="form-group my-label required">
                                                                         <label>Contenido del informe</label></br></br>
                                                                         <textarea name="descripcion" id="editorModificar">
-                                                                            <%= informe.descripcion %>
+                                                                            <%= reporte.descripcion %>
                                                                         </textarea>
                                                                           <script>
                                                                             ClassicEditor
@@ -101,15 +101,15 @@
                                                     </div>
                                                     <tr>
                                                         <th scope="row">
-                                                            <%= informe.id_informe %>
+                                                            <%= reporte.id_informe %>
                                                         </th>
                                                         <td>
-                                                            <%= informe.fecha_creacion %>
+                                                            <%= reporte.fecha_creacion %>
                                                         </td>
                                                         <td>
-                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalVerReporteBodega<%= informe.id_reporteb %>">Ver informe</button>
-                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalModificarReporteBodega<%= informe.id_reporteb %>">Modificar</button>
-                                                            <a href="../api_informes/eliminarInforme/<%= informe.id_reporteb %>"><button type="button" class="btn btn-info btn-sm">Eliminar</button></a>
+                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalVerReporteBodega<%= reporte.id_reporteb %>">Ver reporte</button>
+                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalModificarReporteBodega<%= reporte.id_reporteb %>">Modificar</button>
+                                                            <a href="../api_informes/eliminarInforme/<%= reporte.id_reporteb %>"><button type="button" class="btn btn-info btn-sm">Eliminar</button></a>
                                                         </td>
                                                     </tr>
                                                 <% } %>
@@ -121,7 +121,7 @@
                                     <div class="card-body">
                                         <h3 class="card-title mb-4">Ingresa los datos del nuevo reporte</h3>
                                         <div class="card-text">
-                                            <form action="../api_ordenes/crearReporteBodega/<%= fk_id_venta %>" method="POST" class="formValidation" novalidate> 
+                                            <form action="../api_ordenes/crearReporteBodega/<%= fk_id_ordenB %>" method="POST" class="formValidation" novalidate> 
                                                 <div class="form-group my-label required">
                                                     <label>Contenido del reporte</label></br></br>
                                                     <textarea name="descripcion" id="editor">

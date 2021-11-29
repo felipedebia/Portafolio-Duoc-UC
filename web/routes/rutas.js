@@ -648,6 +648,21 @@ router.get('/ordenes_bodegas', function(req, res) {
 });
 
 
+router.get('/reportes_bodega/:id_ordenB', async function(req, res) {
+	if (req.session.isLoggedIn) {
+		const { id_ordenB } = req.params;
+
+		functions.ListarReportesBodegas();
+		res.render('reportes_bodega', { title: 'Reportes de Ordenes - Maipo Grande', fk_id_ordenB: id_ordenB, navActive: 'Ordenes' });
+		
+		
+	} else {
+		res.redirect('/');
+	}
+	res.end();
+})
+
+
 router.get('/ordenes_transportes', function(req, res) {
     if (req.session.isLoggedIn) {
 		functions.ListarOrdenesTransportes();
