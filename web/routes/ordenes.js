@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const settings = require('../bin/settings');
 var moment = require('moment');
+var functions = require('./functions');
 
 // CRUD ORDEN BODEGA
 
@@ -108,25 +109,25 @@ router.post('/crearOrdenBodega/:id_venta', async (req, res) => {
 
 
 // Agregar Reporte Bodega
-router.post('/crearReporteBodega', async (req, res) => {
+router.post('/crearReporteBodega/:id_ordenB', async (req, res) => {
   try {
 
-    var { cantidad, fk_fruta, fk_calidad } = req.body;
+    var { descripcion } = req.body;
     var fecha_creacion = functions.obtenerFechaActual();
-    var fk_id_estado = 1;
-    var fk_usuario = req.session.id_usuario;
+    var estado_reporte = 1;
+    var fk_id_ordenB = req.params.id_ordenB;
 
-    sql = "INSERT INTO producto(cantidad,fecha_creacion,fk_id_fruta,fk_id_calidad,fk_id_usuario, fk_id_estado) values (:cantidad, to_date(:fecha_creacion,'YYYY-MM-DD'), :fk_fruta, :fk_calidad, :fk_usuario, :fk_id_estado)";
-    await settings.OpenConnection(sql, [cantidad, fecha_creacion, fk_fruta, fk_calidad, fk_usuario, fk_id_estado], true);
+    sql = "INSERT INTO reporte_bodega(fecha_creacion, estado_reporte, descripcion, fk_id_ordenb) values (to_date(:fecha_creacion,'YYYY-MM-DD'), :estado_reporte, :descripcion, fk_id_ordenB)";
+    await settings.OpenConnection(sql, [fecha_creacion, estado_reporte, descripcion, fk_id_ordenB], true);
 
     // Si tuvo conexión a la DB
     if(res.status(200)) {
-      console.log("[!] Producto creado con éxito");
-      res.redirect('/productos');
+      console.log("[!] Reporte de bodega creada con éxito");
+      res.redirect('/Ordenes_Bodegas');
       //res.refresh();
     } else {
-      console.log("[!] Ocurrió un error al intentar crear el producto");
-      res.redirect('/productos');
+      console.log("[!] Ocurrió un error al intentar crear el reporte de bodega");
+      res.redirect('/Ordenes_Bodegas');
     }
 
   } catch (error) {
