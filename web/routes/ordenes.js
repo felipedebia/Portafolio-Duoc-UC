@@ -54,9 +54,9 @@ router.get('/listarReportesBodegas', async (req, res) => {
           let ordenSchema = {
               "id_reporteB": orden[0],
               "fecha_creacion": moment(orden[1]).format('DD-MM-YYYY'),
-              "estado_reporte": orden[3],
-              "descripcion": orden[4],
-              "fk_id_ordenB": orden[5]
+              "estado_reporte": orden[2],
+              "descripcion": orden[3],
+              "fk_id_ordenB": orden[4]
           }
   
           ReportesBodegas.push(ordenSchema);
@@ -108,26 +108,55 @@ router.post('/crearOrdenBodega/:id_venta', async (req, res) => {
 });
 
 
+// Modificar Orden Bodega
+router.post("/modificarOrdenBodega/:id_ordenb", async (req, res) => {
+  try {
+  
+    var id_informe = req.params.id_informe;
+    var { descripcion } = req.body;
+    var fecha_actualizacion = functions.obtenerFechaActual();
+    
+    sql = "UPDATE informe SET descripcion=:descripcion, fecha_actualizacion=to_date(:fecha_actualizacion,'YYYY-MM-DD') WHERE id_informe=:id_informe";
+    await settings.OpenConnection(sql, [descripcion, fecha_actualizacion, id_informe], true);
+  
+    // Si tuvo conexión a la DB
+    if(res.status(200)) {
+      console.log("[!] Informe de venta " + id_informe + " modificado con éxito");
+      res.redirect('/ventas');
+    } else {
+      console.log("[!] Ocurrió un error al intentar modificar el informe de venta " + id_informe);
+      res.redirect('/ventas');
+    }
+
+  } catch (error) {
+    res.status(400);
+    res.send("Ocurrió un error al obtener los datos de la base de datos")
+    console.log(error);
+  }
+  
+});
+
+
 // Agregar Reporte Bodega
-router.post('/crearReporteBodega/:id_ordenB', async (req, res) => {
+router.post('/crearReporteBodega/:id_ordenb', async (req, res) => {
   try {
 
     var { descripcion } = req.body;
     var fecha_creacion = functions.obtenerFechaActual();
     var estado_reporte = 1;
-    var fk_id_ordenB = req.params.id_ordenB;
+    var fk_id_ordenb = req.params.id_ordenb;
 
-    sql = "INSERT INTO reporte_bodega(fecha_creacion, estado_reporte, descripcion, fk_id_ordenb) values (to_date(:fecha_creacion,'YYYY-MM-DD'), :estado_reporte, :descripcion, fk_id_ordenB)";
-    await settings.OpenConnection(sql, [fecha_creacion, estado_reporte, descripcion, fk_id_ordenB], true);
+    sql = "INSERT INTO reporte_bodega(fecha_creacion, estado_reporte, descripcion, fk_id_ordenb) values (to_date(:fecha_creacion,'YYYY-MM-DD'), :estado_reporte, :descripcion, :fk_id_ordenb)";
+    await settings.OpenConnection(sql, [fecha_creacion, estado_reporte, descripcion, fk_id_ordenb], true);
 
     // Si tuvo conexión a la DB
     if(res.status(200)) {
       console.log("[!] Reporte de bodega creada con éxito");
-      res.redirect('/Ordenes_Bodegas');
+      res.redirect('/reportes_bodega/' + fk_id_ordenb);
       //res.refresh();
     } else {
       console.log("[!] Ocurrió un error al intentar crear el reporte de bodega");
-      res.redirect('/Ordenes_Bodegas');
+      res.redirect('/reportes_bodega');
     }
 
   } catch (error) {
@@ -139,23 +168,23 @@ router.post('/crearReporteBodega/:id_ordenB', async (req, res) => {
 });
 
 
-// Anular orden Bodega
-router.get("/anularOrdenBodega/:id_ordenB", async (req, res) => {
+// Modificar Reporte Bodega
+router.post("/modificarReporteBodega/:id_reporteb", async (req, res) => {
   try {
-
-    var id_ordenB_bind = req.params.id_ordenB;
-    sql1 = "UPDATE orden_bodega SET fk_id_estado=2 WHERE id_ordenb = :id_ordenB_bind";
-    resultado1 = await settings.OpenConnection(sql1, [id_ordenB_bind], true);
-
-    if(resultado1) {
-      console.log("[!] Orden de Bodega " + id_ordenB_bind + " anulada con éxito");
-
-    // Si se anula una orden de transporte, hay que volver atras un estado en venta
-
-      res.redirect('/Ordenes_Bodegas');
+  
+    var id_reporteb = req.params.id_reporteb;
+    var { descripcion } = req.body;
+    
+    sql = "UPDATE reporte_bodega SET descripcion=:descripcion WHERE id_reporteb=:id_reporteb";
+    await settings.OpenConnection(sql, [descripcion, id_reporteb], true);
+  
+    // Si tuvo conexión a la DB
+    if(res.status(200)) {
+      console.log("[!] Reporte de bodega " + id_reporteb + " modificado con éxito");
+      res.redirect('/ordenes_bodegas');
     } else {
-      console.log("[!] Ocurrió un error al intentar anular la orden de Bodega " + id_ordenB_bind);
-      res.redirect('/Ordenes_Bodegas');
+      console.log("[!] Ocurrió un error al intentar modificar el reporte de bodega " + id_reporteb);
+      res.redirect('/ordenes_bodegas');
     }
 
   } catch (error) {
@@ -163,7 +192,33 @@ router.get("/anularOrdenBodega/:id_ordenB", async (req, res) => {
     res.send("Ocurrió un error al obtener los datos de la base de datos")
     console.log(error);
   }
+  
+});
 
+
+  // Eliminar Reporte Bodega
+router.get("/eliminarReporteBodega/:id_reporteb", async (req, res) => {
+  try {
+
+    var id_reporteb = req.params.id_reporteb;
+    
+    sql = "DELETE FROM reporte_bodega WHERE id_reporteb = :id_reporteb";
+    await settings.OpenConnection(sql, [id_reporteb], true);
+  
+    if(res.status(200)) {
+      console.log("[!] Reporte de Bodega " + id_reporteb + " eliminado con éxito");
+      res.redirect('/ordenes_bodegas');
+    } else {
+      console.log("[!] Ocurrió un error al intentar eliminar el informe " + id_reporteb);
+      res.redirect('/ordenes_bodegas');
+    }
+
+  } catch (error) {
+    res.status(400);
+    res.send("Ocurrió un error al obtener los datos de la base de datos")
+    console.log(error);
+  }
+  
 });
 
 

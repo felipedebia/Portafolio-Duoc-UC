@@ -354,7 +354,6 @@ router.get('/modificarContrato/:id_contrato', async function(req, res, next) {
 			];
 
 			// Mostramos la vista
-			console.log(contratoData);
 			res.render('modificarContrato', { title: 'Modificar contrato - Maipo Grande', data:contratoData, navActive: 'Contratos' });
 		} else {
 			res.send('Error al obtener datos de la base de datos');

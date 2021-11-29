@@ -36,8 +36,8 @@ Iniciar node en la carpeta web
 
 ## Páginas pendientes:
 
-- PROBAR CREAR, TERMINAR MODIFICAR Y ANULAR REPORTE_BODEGA
-- Ordenes bodega y transporte: Modificar
+- Ordenes bodega: Modificar
+- Ordenes transporte: Modificar
 - ARREGLAR PAGO PORQUE NO CREA
 - TERMINAR COSTOS DE FRUTA Y TRANSPORTE EN VENTA_DETALLE
 - REPORTES

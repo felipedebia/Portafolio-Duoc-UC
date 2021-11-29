@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12">
                     <div class="card">
-                        <div class="card-header card-header-tabs card-header-info">
+                        <div class="card-header card-header-tabs card-header-success">
                             <div class="nav-tabs-navigation">
                                 <div class="nav-tabs-wrapper">
                                     <span class="nav-tabs-title">Reportes de Bodega:</span>
@@ -39,7 +39,7 @@
                                             <tbody>
                                                 <% for(var reporte of ReportesBodegas) { %>
 
-                                                    <div class="modal fade" id="modalVerReporteBodega<%= reporte.id_reporteb %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="modalVerReporteBodega<%= reporte.id_reporteB %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg" role="document">
                                                           <div class="modal-content">
                                                             <div class="modal-header">
@@ -53,7 +53,7 @@
                                                             <div class="modal-body">
                                                               <span><strong>Reporte de orden:</strong> <%= fk_id_ordenB %></span></br></br>
                                                               <span><strong>Fecha de creación:</strong> <%= reporte.fecha_creacion %></span></br></br>
-                                                              <span><strong>Estado del reporte:</strong> <%= reporte.estado_reporte %></span></br></br>
+                                                              <span><strong>Estado del reporte:</strong> <% if(reporte.estado_reporte == 1){ %> Si <% } else { %> No <% } %></span></br></br>
                                                               <span><strong>Contenido del reporte:</strong></br></br> <%= reporte.descripcion %></span>
                                                             </div>
                                                             <div class="modal-footer">
@@ -62,13 +62,13 @@
                                                           </div>
                                                         </div>
                                                     </div>
-                                                    <div class="modal fade" id="modalModificarReporteBodega<%= reporte.id_reporteb %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="modalModificarReporteBodega<%= reporte.id_reporteB %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg" role="document">
                                                           <div class="modal-content">
-                                                            <form action="/api_ordenes/modificarReporteBodega/<%= reporte.id_reporteb%>" method="POST">
+                                                            <form action="/api_ordenes/modificarReporteBodega/<%= reporte.id_reporteB%>" method="POST">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title" id="exampleModalLabel">
-                                                                        Modificando reporte <%= reporte.id_reporteb %>
+                                                                        Modificando reporte <%= reporte.id_reporteB %>
                                                                     </h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
@@ -101,15 +101,15 @@
                                                     </div>
                                                     <tr>
                                                         <th scope="row">
-                                                            <%= reporte.id_informe %>
+                                                            <%= reporte.id_reporteB %>
                                                         </th>
                                                         <td>
                                                             <%= reporte.fecha_creacion %>
                                                         </td>
                                                         <td>
-                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalVerReporteBodega<%= reporte.id_reporteb %>">Ver reporte</button>
-                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalModificarReporteBodega<%= reporte.id_reporteb %>">Modificar</button>
-                                                            <a href="../api_informes/eliminarInforme/<%= reporte.id_reporteb %>"><button type="button" class="btn btn-info btn-sm">Eliminar</button></a>
+                                                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalVerReporteBodega<%= reporte.id_reporteB %>">Ver reporte</button>
+                                                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalModificarReporteBodega<%= reporte.id_reporteB %>">Modificar</button>
+                                                            <a href="../api_ordenes/eliminarReporteBodega/<%= reporte.id_reporteB %>"><button type="button" class="btn btn-success btn-sm">Eliminar</button></a>
                                                         </td>
                                                     </tr>
                                                 <% } %>
@@ -138,7 +138,7 @@
                                                     </script>
                                                 </div>
                                                 
-                                                <button class="btn btn-info mb-2 pull-right mt-4" type="submit">Crear nuevo reporte</button>
+                                                <button class="btn btn-success mb-2 pull-right mt-4" type="submit">Crear nuevo reporte</button>
                                             </form>
                                         </div>
                                     </div>
