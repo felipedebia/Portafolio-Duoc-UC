@@ -21,7 +21,9 @@ router.get('/listarOrdenesBodegas', async (req, res) => {
         let ordenSchema = {
             "id_ordenB": orden[0],
             "fecha_ingreso": moment(orden[1]).format('DD-MM-YYYY'),
+            "fecha_ingreso_eng": moment(orden[1]).format('YYYY-MM-DD'),
             "fecha_retiro": moment(orden[2]).format('DD-MM-YYYY'),
+            "fecha_retiro_eng": moment(orden[2]).format('YYYY-MM-DD'),
             "fk_id_estado": orden[3],
             "fk_texto_estado": orden[4],
             "fk_id_venta": orden[5],
@@ -112,20 +114,19 @@ router.post('/crearOrdenBodega/:id_venta', async (req, res) => {
 router.post("/modificarOrdenBodega/:id_ordenb", async (req, res) => {
   try {
   
-    var id_informe = req.params.id_informe;
-    var { descripcion } = req.body;
-    var fecha_actualizacion = functions.obtenerFechaActual();
+    var value_id_ordenb = req.params.id_ordenb;
+    var { fecha_ingreso, fecha_retiro, fk_id_estado } = req.body;
     
-    sql = "UPDATE informe SET descripcion=:descripcion, fecha_actualizacion=to_date(:fecha_actualizacion,'YYYY-MM-DD') WHERE id_informe=:id_informe";
-    await settings.OpenConnection(sql, [descripcion, fecha_actualizacion, id_informe], true);
+    sql = "UPDATE orden_bodega SET fecha_ingreso=to_date(:fecha_ingreso,'YYYY-MM-DD'), fecha_retiro=to_date(:fecha_retiro,'YYYY-MM-DD'), fk_id_estado=:fk_id_estado WHERE id_ordenb=:value_id_ordenb";
+    await settings.OpenConnection(sql, [fecha_ingreso, fecha_retiro, fk_id_estado, value_id_ordenb], true);
   
     // Si tuvo conexión a la DB
     if(res.status(200)) {
-      console.log("[!] Informe de venta " + id_informe + " modificado con éxito");
-      res.redirect('/ventas');
+      console.log("[!] Orden de Bodega " + value_id_ordenb + " modificado con éxito");
+      res.redirect('/ordenes_bodegas');
     } else {
-      console.log("[!] Ocurrió un error al intentar modificar el informe de venta " + id_informe);
-      res.redirect('/ventas');
+      console.log("[!] Ocurrió un error al intentar modificar la orden de bodega " + value_id_ordenb);
+      res.redirect('/ordenes_bodegas');
     }
 
   } catch (error) {
@@ -238,7 +239,9 @@ router.get('/listarOrdenesTransportes', async (req, res) => {
         let ordenSchema = {
             "id_ordenT": orden[0],
             "fecha_llegada": moment(orden[1]).format('DD-MM-YYYY'),
+            "fecha_llegada_eng": moment(orden[1]).format('YYYY-MM-DD'),
             "fecha_retiro": moment(orden[2]).format('DD-MM-YYYY'),
+            "fecha_retiro_eng": moment(orden[2]).format('YYYY-MM-DD'),
             "fk_id_estado": orden[3],
             "fk_texto_estado": orden[4],
             "fk_id_venta": orden[5]
@@ -290,6 +293,34 @@ router.post('/crearOrdenTransporte/:id_venta', async (req, res) => {
     console.log(error);
   }
 
+});
+
+
+// Modificar Orden Transporte
+router.post("/modificarOrdenTransporte/:id_ordenT", async (req, res) => {
+  try {
+  
+    var value_id_ordenT = req.params.id_ordenT;
+    var { fecha_llegada, fecha_retiro, fk_id_estado } = req.body;
+    
+    sql = "UPDATE orden_transporte SET fecha_llegada=to_date(:fecha_llegada,'YYYY-MM-DD'), fecha_retiro=to_date(:fecha_retiro,'YYYY-MM-DD'), fk_id_estado=:fk_id_estado WHERE id_ordent=:value_id_ordenT";
+    await settings.OpenConnection(sql, [fecha_llegada, fecha_retiro, fk_id_estado, value_id_ordenT], true);
+  
+    // Si tuvo conexión a la DB
+    if(res.status(200)) {
+      console.log("[!] Orden de Transporte " + value_id_ordenT + " modificado con éxito");
+      res.redirect('/ordenes_transportes');
+    } else {
+      console.log("[!] Ocurrió un error al intentar modificar la orden de transporte " + value_id_ordenT);
+      res.redirect('/ordenes_transportes');
+    }
+
+  } catch (error) {
+    res.status(400);
+    res.send("Ocurrió un error al obtener los datos de la base de datos")
+    console.log(error);
+  }
+  
 });
 
 

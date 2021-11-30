@@ -53,6 +53,55 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="modal fade" id="modalModificarOrdenTransporte<%= ordenTransporte.id_ordenT %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                          <div class="modal-content">
+                                                            <form action="/api_ordenes/modificarOrdenTransporte/<%= ordenTransporte.id_ordenT%>" method="POST">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">
+                                                                        Modificando Orden de Transporte <%= ordenTransporte.id_ordenT %>
+                                                                    </h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="form-group mt-4 my-label required">
+                                                                        <label>Fecha de llegada</label>
+                                                                        <input class="form-control mb-4" id="fecha_llegada" type="date" name="fecha_llegada" required value="<%= ordenTransporte.fecha_llegada_eng%>">
+                                                                        <div class="invalid-feedback">Ingresa fecha de llegada</div>
+                                                                    </div>
+                                                                    <div class="form-group my-label required">
+                                                                        <label>Fecha de retiro</label>
+                                                                        <input class="form-control mb-4" id="fecha_retiro" type="date" name="fecha_retiro" required value="<%= ordenTransporte.fecha_retiro_eng%>">
+                                                                        <div class="invalid-feedback">Ingresa fecha de retiro</div>
+                                                                    </div>
+                                                                    <div class="form-group my-label required">
+                                                                        <label>Estado de la orden</label>
+                                                                        <div class="cus-select-group">
+                                                                            <select id="select-item" name="fk_id_estado" required>
+                                                                                <% if(ordenTransporte.fk_id_estado == 1){ %>
+                                                                                    <option name="si" selected value="1">Si</option>
+                                                                                <% } else { %>
+                                                                                    <option name="si" value="1">Si</option>
+                                                                                <% } %>
+                                                                                <% if(ordenTransporte.fk_id_estado == 2){ %>
+                                                                                    <option name="no" selected value="2">No</option>
+                                                                                <% } else { %>
+                                                                                    <option name="no" value="2">No</option>
+                                                                                <% } %>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button class="btn btn-primary" type="submit">Guardar cambios</button>
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                </div>
+                                                            </form>
+                                                          </div>
+                                                        </div>
+                                                    </div>
                                                     <tr>
                                                         <th scope="row">
                                                             <%= ordenTransporte.id_ordenT %>
@@ -67,12 +116,10 @@
                                                             <%= ordenTransporte.fk_texto_estado %>
                                                         </td>
                                                         <td>
-                                                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalVerOrdenTransporte<%= ordenTransporte.id_ordent %>">Ver orden</button>
+                                                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalVerOrdenTransporte<%= ordenTransporte.id_ordenT %>">Ver orden</button>
                                                             <% if (ordenTransporte.fk_id_estado == 1) { %>
-                                                                <a href="/modificarOrdenTransporte/<%= ordenTransporte.id_ordenT %>"><button type="button" class="btn btn-success btn-sm">Modificar</button></a>
-                                                                <a href="../api_ordenes/anularOrdenTransporte/<%= ordenTransporte.id_ordenT %>"><button type="button" class="btn btn-success btn-sm">Anular</button></a>
+                                                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalModificarOrdenTransporte<%= ordenTransporte.id_ordenT %>">Modificar</button>
                                                             <% } %>
-                                                            
                                                         </td>
                                                     </tr>
                                                 <% } %>

@@ -56,7 +56,7 @@
                                                     <div class="modal fade" id="modalModificarOrdenBodega<%= ordenBodega.id_ordenB %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                           <div class="modal-content">
-                                                            <form action="/api_ordenes/modificarOrdenBodega/<%= ordenBodega.id_ordenb%>" method="POST">
+                                                            <form action="/api_ordenes/modificarOrdenBodega/<%= ordenBodega.id_ordenB%>" method="POST">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title" id="exampleModalLabel">
                                                                         Modificando Orden de Bodega <%= ordenBodega.id_ordenB %>
@@ -68,24 +68,24 @@
                                                                 <div class="modal-body">
                                                                     <div class="form-group mt-4 my-label required">
                                                                         <label>Fecha de ingreso</label>
-                                                                        <input class="form-control mb-4" id="fecha_ingreso" type="date" name="fecha_ingreso" required value="<%= ordenBodega.fecha_ingreso%>">
+                                                                        <input class="form-control mb-4" id="fecha_ingreso" type="date" name="fecha_ingreso" required value="<%= ordenBodega.fecha_ingreso_eng%>">
                                                                         <div class="invalid-feedback">Ingresa fecha de ingreso</div>
                                                                     </div>
                                                                     <div class="form-group my-label required">
                                                                         <label>Fecha de retiro</label>
-                                                                        <input class="form-control mb-4" id="fecha_retiro" type="date" name="fecha_retiro" required value="<%= ordenBodega.fecha_retiro%>">
+                                                                        <input class="form-control mb-4" id="fecha_retiro" type="date" name="fecha_retiro" required value="<%= ordenBodega.fecha_retiro_eng%>">
                                                                         <div class="invalid-feedback">Ingresa fecha de retiro</div>
                                                                     </div>
                                                                     <div class="form-group my-label required">
                                                                         <label>Estado de la orden</label>
                                                                         <div class="cus-select-group">
-                                                                            <select id="select-item" name="estado_orden" required>
-                                                                                <% if(ordenBodega.estado_orden == 1){ %>
+                                                                            <select id="select-item" name="fk_id_estado" required>
+                                                                                <% if(ordenBodega.fk_id_estado == 1){ %>
                                                                                     <option name="si" selected value="1">Si</option>
                                                                                 <% } else { %>
                                                                                     <option name="si" value="1">Si</option>
                                                                                 <% } %>
-                                                                                <% if(ordenBodega.estado_orden == 2){ %>
+                                                                                <% if(ordenBodega.fk_id_estado == 2){ %>
                                                                                     <option name="no" selected value="2">No</option>
                                                                                 <% } else { %>
                                                                                     <option name="no" value="2">No</option>
