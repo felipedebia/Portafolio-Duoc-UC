@@ -82,11 +82,13 @@ router.post('/crearPedido', async(req, res) => {
         var { direccion_despacho, fk_id_ciudad } = req.body;
         var fk_id_usuario = req.session.id_usuario;
         var fk_id_tipo = 1;
+
         // Asignamos estado 1 = En preparación
         var fk_id_estado = 1;
+
         var fecha_creacion = functions.obtenerFechaActual();
 
-        sql = "INSERT INTO pedido(direccion_despacho, fecha_creacion, fk_id_tipo, fk_id_ciudad, fk_id_usuario, fk_id_estado) VALUES (:direccion_despacho,to_DATE(:fecha_creacion,'YYYY/MM/DD'),:fk_id_tipo,:fk_id_ciudad,:fk_id_usuario,:fk_id_estado)";
+        sql = "CALL PA_PEDIDO_CREAR(:direccion_despacho, :fecha_creacion, :fk_id_tipo, :fk_id_ciudad, :fk_id_usuario, :fk_id_estado)";
         await settings.OpenConnection(sql, [direccion_despacho, fecha_creacion, fk_id_tipo, fk_id_ciudad, fk_id_usuario, fk_id_estado], true);
 
         // Si tuvo conexión a la DB
@@ -123,7 +125,7 @@ router.post('/crearPedidoDetalle', async(req, res) => {
         var { fk_id_fruta, fk_id_calidad, fk_id_pedido, cantidad } = req.body;
         var fecha_creacion = functions.obtenerFechaActual();
 
-        sql = "INSERT INTO pedido_detalle(cantidad, fecha_creacion, fecha_actualizacion, fk_id_calidad, fk_id_fruta, fk_id_pedido) VALUES (:cantidad, to_DATE(:fecha_creacion,'YYYY/MM/DD'), to_DATE(:fecha_creacion,'YYYY/MM/DD'), :fk_id_calidad, :fk_id_fruta, :fk_id_pedido)";
+        sql = "CALL PA_PEDIDO_DETALLE_CREAR(:cantidad, :fecha_creacion, :fecha_actualizacion, :fk_id_calidad, :fk_id_fruta, :fk_id_pedido)";
         await settings.OpenConnection(sql, [cantidad, fecha_creacion, fecha_creacion, fk_id_calidad, fk_id_fruta, fk_id_pedido], true);
 
         // Si tuvo conexión a la DB
@@ -151,7 +153,7 @@ router.get("/confirmarPedido/:id_pedido", async(req, res) => {
 
         var id_pedido_bind = req.params.id_pedido;
         // Actualizamos pedido a estado 2 = Recepcionado
-        sql = "UPDATE pedido SET fk_id_estado=2 WHERE id_pedido = :id_pedido_bind";
+        sql = "CALL PA_PEDIDO_CONFIRMAR(:id_pedido_bind)";
         var consulta = await settings.OpenConnection(sql, [id_pedido_bind], true);
 
         if (consulta) {
@@ -177,7 +179,7 @@ router.get("/eliminarPedidoDetalles/:id_pedidoD", async(req, res) => {
 
         var id_pedido_bind = req.params.id_pedidoD;
 
-        sql = "DELETE FROM pedido_detalle WHERE id_pedidoD = :id_pedidoD";
+        sql = "CALL PA_PEDIDO_DETALLE_DELETE(:id_pedido_bind)";
         var consulta = await settings.OpenConnection(sql, [id_pedido_bind], true);
 
         if (consulta) {
@@ -203,7 +205,7 @@ router.get("/anularPedido/:id_pedido", async(req, res) => {
 
         var id_pedido_bind = req.params.id_pedido;
 
-        sql = "UPDATE pedido SET fk_id_estado=8 WHERE id_pedido = :id_pedido_bind";
+        sql = "CALL PA_PEDIDO_ANULAR(:id_pedido_bind)";
         await settings.OpenConnection(sql, [id_pedido_bind], true);
 
         if(res.status(200)) {
@@ -229,7 +231,7 @@ router.get("/anularMiPedido/:id_pedido", async(req, res) => {
         
         var id_pedido_bind = req.params.id_pedido;
 
-        sql = "UPDATE pedido SET fk_id_estado=8 WHERE id_pedido = :id_pedido_bind";
+        sql = "CALL PA_PEDIDO_ANULAR(:id_pedido_bind)";
         await settings.OpenConnection(sql, [id_pedido_bind], true);
 
         if(res.status(200)) {

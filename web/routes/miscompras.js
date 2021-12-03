@@ -71,9 +71,10 @@ router.post('/crearpago', uploadFile.single('url_documento'), async(req, res, ne
         var url_comprobante = req.file.filename;
         var { monto, fk_id_venta, descripcion } = req.body;
         var fecha_pago = functions.obtenerFechaActual();
+        var fk_id_tipo = 3;
         
-        sql = "INSERT INTO PAGO(monto, fecha_pago, url_comprobante, descripcion, fk_id_tipo) VALUES (:monto,to_DATE(:fecha_pago,'YYYY/MM/DD'),:url_comprobante,:descripcion,3)";
-        result = await settings.OpenConnection(sql, [monto, fecha_pago, url_comprobante, descripcion], true);
+        sql = "CALL PA_PAGO_CREAR(:monto,:fecha_pago,:url_comprobante, :descripcion, :fk_id_tipo)";
+        result = await settings.OpenConnection(sql, [monto, fecha_pago, url_comprobante, descripcion, fk_id_tipo], true);
 
         // Con esto tomamos el ultimo registro en la tabla pagos para crear tabla rel y redirigir al documentopago y pueda agregar el pago
         sql3 = "SELECT id_pago FROM (SELECT * FROM pago ORDER BY id_pago DESC ) WHERE rownum = 1";
