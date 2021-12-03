@@ -242,7 +242,7 @@ Iniciar node en la carpeta web
 | GET  | http://localhost:3000/productos  |  |
 | GET  | http://localhost:3000/api_productos/listarProductos  | JSON |
 | GET  | http://localhost:3000/modificarProducto/:id_producto  |  |
-| POST | http://localhost:3000/api_productos/eliminarProducto/:id_producto  | |
+| POST | http://localhost:3000/api_productos/anularProducto/:id_producto  | |
 | GET  | http://localhost:3000/producto/:id_producto  |  |
 
 ## CRUD Pago

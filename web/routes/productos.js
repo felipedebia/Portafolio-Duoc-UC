@@ -55,7 +55,7 @@ router.post('/crearProducto', async (req, res) => {
     var fk_id_estado = 1;
     var fk_usuario = req.session.id_usuario;
 
-    sql = "INSERT INTO producto(cantidad,fecha_creacion,fk_id_fruta,fk_id_calidad,fk_id_usuario, fk_id_estado) values (:cantidad, to_date(:fecha_creacion,'YYYY-MM-DD'), :fk_fruta, :fk_calidad, :fk_usuario, :fk_id_estado)";
+    sql = "CALL PA_CREAR_PRODUCTO(:cantidad, :fecha_creacion, :fk_fruta, :fk_calidad, :fk_usuario, :fk_id_estado))";
     await settings.OpenConnection(sql, [cantidad, fecha_creacion, fk_fruta, fk_calidad, fk_usuario, fk_id_estado], true);
 
     // Si tuvo conexión a la DB
@@ -84,8 +84,8 @@ router.post("/modificarProducto/:id_producto", async (req, res) => {
     var id_producto = req.params.id_producto;
     var { cantidad, fk_id_fruta, fk_id_calidad} = req.body;
     
-    sql = "UPDATE producto SET cantidad=:cantidad, fk_id_fruta= :fk_id_fruta, fk_id_calidad=:fk_id_calidad WHERE id_producto=:id_producto";
-    await settings.OpenConnection(sql, [cantidad,fk_id_fruta,fk_id_calidad, id_producto], true);
+    sql = "CALL PA_UPDATE_PRODUCTO(:id_producto, :cantidad, :fk_id_fruta, :fk_id_calidad)";
+    await settings.OpenConnection(sql, [id_producto, cantidad, fk_id_fruta, fk_id_calidad], true);
 
     // Si tuvo conexión a la DB
     if(res.status(200)) {
@@ -105,20 +105,21 @@ router.post("/modificarProducto/:id_producto", async (req, res) => {
 });
 
 
-// Eliminar producto
-router.get("/eliminarProducto/:id_producto", async (req, res) => {
+// Anular producto
+router.get("/anularProducto/:id_producto", async (req, res) => {
   try {
 
     var id_producto_bind = req.params.id_producto;
+    var fk_id_estado = 2;
 
-    sql = "DELETE FROM producto WHERE id_producto = :id_producto_bind";
-    await settings.OpenConnection(sql, [id_producto_bind], true);
+    sql = "CALL PA_UPDATE_ESTADO_PRODUCTO(:id_producto_bind, :fk_id_estado)";
+    await settings.OpenConnection(sql, [id_producto_bind, fk_id_estado], true);
 
     if(res.status(200)) {
-      console.log("[!] Producto " + id_producto_bind + " eliminado con éxito");
+      console.log("[!] Producto " + id_producto_bind + " anulado con éxito");
       res.redirect('/productos');
     } else {
-      console.log("[!] Ocurrió un error al intentar eliminar el producto " + id_producto_bind);
+      console.log("[!] Ocurrió un error al intentar anular el producto " + id_producto_bind);
       res.redirect('/productos');
     }
 
