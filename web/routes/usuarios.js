@@ -56,9 +56,6 @@ router.post('/crearUsuario', async (req, res) => {
   try {
 
     var { num_documento, fk_id_tipo, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password } = req.body;
-    
-    // Definimos la cuenta pendiente de cambiar contraseña
-    var fk_id_estado = 3;
 
     // Consulta para ver si existe el correo
     consulta = "SELECT correo from usuario where correo = :correo";
@@ -74,7 +71,7 @@ router.post('/crearUsuario', async (req, res) => {
 
       // Creamos el nuevo usuario
       sql = "CALL PA_USUARIO_CREAR(:num_documento, :nombre, :apellido, :fecha_nacimiento, :genero, :correo, :telefono, :password, :fk_id_tipo)";
-      await settings.OpenConnection(sql, [num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, passwordEncrypted, fk_id_estado, fk_id_tipo], true);
+      await settings.OpenConnection(sql, [num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, passwordEncrypted, fk_id_tipo], true);
 
       // Si tuvo conexión a la DB
       if (res.status(200)) {
@@ -114,12 +111,11 @@ router.post("/modificarUsuario/:id_usuario", async (req, res) => {
     // Si tuvo conexión a la DB
     if (res.status(200)) {
       console.log("[!] Usuario " + req.body.correo + " modificado con éxito");
-      var string = "valido";
-      res.redirect('/usuarios/?estado=' + string);
+      res.redirect('/usuarios/');
     } else {
       console.log("[!] Ocurrió un error al intentar modificar el usuario " + req.body.correo);
       var string = "error";
-      res.redirect('/usuarios/?estado=' + string);
+      res.redirect('/usuarios/');
     }
 
   } catch (error) {

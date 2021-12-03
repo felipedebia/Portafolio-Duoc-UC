@@ -132,18 +132,18 @@ router.post('/subirDocumento/:id_contrato', uploadFile.single('url_documento'), 
 router.post("/modificarContrato/:id_contrato", async (req, res) => {
   try {
 
-    var { id_contrato } = req.params.id_contrato;
+    var value_id_contrato = req.params.id_contrato;
     var { fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado } = req.body;
 
-    sql = "CALL PA_UPDATE_PRODUCTO(:id_contrato,:fecha_inicio,:fecha_vencimiento,:fk_id_tipo, :fk_id_estado)";
-    await settings.OpenConnection(sql, [id_contrato, fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado], true);
+    sql = "CALL PA_CONTRATO_UPDATE(:id_contrato, :fecha_inicio, :fecha_vencimiento, :fk_id_tipo, :fk_id_estado)";
+    await settings.OpenConnection(sql, [value_id_contrato, fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado], true);
 
     // Si tuvo conexión a la DB
     if(res.status(200)) {
-      console.log("[!] Contrato " + id_contrato + " modificado con éxito");
+      console.log("[!] Contrato " + value_id_contrato + " modificado con éxito");
       res.redirect('/contratos');
     } else {
-      console.log("[!] Ocurrió un error al intentar modificar el contrato " + id_contrato);
+      console.log("[!] Ocurrió un error al intentar modificar el contrato " + value_id_contrato);
       res.redirect('/contratos');
     }
 
