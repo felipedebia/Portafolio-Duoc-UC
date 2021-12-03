@@ -77,12 +77,12 @@
                                                                 <div class="modal-body">
                                                                     <div class="form-group my-label required">
                                                                         <label>Contenido del informe</label></br></br>
-                                                                        <textarea name="descripcion" id="editorModificar">
+                                                                        <textarea name="descripcion" id="editorModificar<%= informe.id_informe %>">
                                                                             <%= informe.descripcion %>
                                                                         </textarea>
                                                                           <script>
                                                                             ClassicEditor
-                                                                            .create(document.querySelector('#editorModificar'), {
+                                                                            .create(document.querySelector('#editorModificar<%= informe.id_informe %>'), {
                                                                                 removePlugins: ['CKFinderUploadAdapter', 'CKFinder', 'EasyImage', 'Image', 'ImageCaption', 'ImageStyle', 'ImageToolbar', 'ImageUpload', 'MediaEmbed'],
                                                                             })
                                                                             .catch( error => {

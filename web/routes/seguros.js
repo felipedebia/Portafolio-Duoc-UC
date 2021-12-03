@@ -64,7 +64,7 @@ router.post('/crearSeguro', async (req, res) => {
     var { nombre_empresa, fecha_inicio, fecha_termino } = req.body;
     var fk_id_estado = '1';
 
-    sql = "INSERT INTO seguro(nombre_empresa, fecha_inicio, fecha_termino, fk_id_estado) VALUES (:nombre_empresa, to_DATE(:fecha_inicio,'YYYY/MM/DD'),to_DATE(:fecha_termino,'YYYY/MM/DD'), :fk_id_estado)";
+    sql = "CALL PA_SEGURO_CREAR(:nombre_empresa, :fecha_inicio, :fecha_termino, :fk_id_estado)";
     await settings.OpenConnection(sql, [nombre_empresa, fecha_inicio, fecha_termino, fk_id_estado], true);
 
     // Si tuvo conexión a la DB
@@ -108,8 +108,8 @@ router.post('/subirDocumento/:id_seguro', uploadFile.single('url_documento'), as
     var id_seguro_bind = req.params.id_seguro;
     var url_documento = req.file.filename;
 
-    sql = "UPDATE seguro SET url_documento= :url_documento WHERE id_seguro = :id_seguro_bind";
-    await settings.OpenConnection(sql, [url_documento, id_seguro_bind], true);
+    sql = "CALL PA_SEGURO_UPDATE_URLDOCUMENTO(:id_seguro_bind, :url_documento)";
+    await settings.OpenConnection(sql, [id_seguro_bind, url_documento], true);
 
     if(res.status(200)) {
       console.log("[!] Documento de Seguro " + id_seguro_bind + " agregado con éxito");
@@ -134,7 +134,7 @@ router.get("/anularSeguro/:id_seguro", async(req, res) => {
 
     var id_seguro_bind = req.params.id_seguro;
 
-    sql = "UPDATE seguro SET fk_id_estado=3 WHERE id_seguro = :id_seguro_bind";
+    sql = "CALL PA_SEGURO_ANULAR(:id_seguro_bind)";
     await settings.OpenConnection(sql, [id_seguro_bind], true);
 
     if(res.status(200)) {

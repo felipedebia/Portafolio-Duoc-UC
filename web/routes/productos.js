@@ -110,10 +110,9 @@ router.get("/anularProducto/:id_producto", async (req, res) => {
   try {
 
     var id_producto_bind = req.params.id_producto;
-    var fk_id_estado = 2;
 
-    sql = "CALL PA_PRODUCTO_UPDATE_ESTADO(:id_producto_bind, :fk_id_estado)";
-    await settings.OpenConnection(sql, [id_producto_bind, fk_id_estado], true);
+    sql = "CALL PA_PRODUCTO_ANULAR(:id_producto_bind)";
+    await settings.OpenConnection(sql, [id_producto_bind], true);
 
     if(res.status(200)) {
       console.log("[!] Producto " + id_producto_bind + " anulado con éxito");

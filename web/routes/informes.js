@@ -48,7 +48,7 @@ router.post('/crearInforme/:id_venta', async (req, res) => {
     var fecha_creacion = functions.obtenerFechaActual();
     var fecha_actualizacion = functions.obtenerFechaActual();
   
-    sql = "INSERT INTO informe(fecha_creacion, fecha_actualizacion, descripcion, fk_id_venta) VALUES (to_DATE(:fecha_creacion,'YYYY/MM/DD'),to_DATE(:fecha_actualizacion,'YYYY/MM/DD'), :descripcion, :fk_id_venta)";
+    sql = "CALL PA_INFORME_CREAR(:fecha_creacion, :fecha_actualizacion, :descripcion, :fk_id_venta)";
     await settings.OpenConnection(sql, [fecha_creacion, fecha_actualizacion, descripcion, fk_id_venta], true);
   
     // Si tuvo conexión a la DB
@@ -73,19 +73,19 @@ router.post('/crearInforme/:id_venta', async (req, res) => {
 router.post("/modificarInforme/:id_informe", async (req, res) => {
   try {
   
-    var id_informe = req.params.id_informe;
+    var value_id_informe = req.params.id_informe;
     var { descripcion } = req.body;
     var fecha_actualizacion = functions.obtenerFechaActual();
     
-    sql = "UPDATE informe SET descripcion=:descripcion, fecha_actualizacion=to_date(:fecha_actualizacion,'YYYY-MM-DD') WHERE id_informe=:id_informe";
-    await settings.OpenConnection(sql, [descripcion, fecha_actualizacion, id_informe], true);
+    sql = "CALL PA_INFORME_UPDATE(:value_id_informe, :fecha_actualizacion, :descripcion)";
+    await settings.OpenConnection(sql, [value_id_informe, fecha_actualizacion, descripcion], true);
   
     // Si tuvo conexión a la DB
     if(res.status(200)) {
-      console.log("[!] Informe de venta " + id_informe + " modificado con éxito");
+      console.log("[!] Informe de venta " + value_id_informe + " modificado con éxito");
       res.redirect('/ventas');
     } else {
-      console.log("[!] Ocurrió un error al intentar modificar el informe de venta " + id_informe);
+      console.log("[!] Ocurrió un error al intentar modificar el informe de venta " + value_id_informe);
       res.redirect('/ventas');
     }
 
@@ -102,16 +102,16 @@ router.post("/modificarInforme/:id_informe", async (req, res) => {
 router.get("/eliminarInforme/:id_informe", async (req, res) => {
   try {
 
-    var id_informe = req.params.id_informe;
+    var value_id_informe = req.params.id_informe;
     
-    sql = "DELETE FROM informe WHERE id_informe = :id_informe";
-    await settings.OpenConnection(sql, [id_informe], true);
+    sql = "CALL PA_INFORME_DELETE(:value_id_informe)";
+    await settings.OpenConnection(sql, [value_id_informe], true);
   
     if(res.status(200)) {
-      console.log("[!] Informe " + id_informe + " eliminado con éxito");
+      console.log("[!] Informe " + value_id_informe + " eliminado con éxito");
       res.redirect('/ventas');
     } else {
-      console.log("[!] Ocurrió un error al intentar eliminar el informe " + id_informe);
+      console.log("[!] Ocurrió un error al intentar eliminar el informe " + value_id_informe);
       res.redirect('/ventas');
     }
 
