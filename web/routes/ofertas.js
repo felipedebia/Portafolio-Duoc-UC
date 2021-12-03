@@ -61,7 +61,7 @@ router.post('/crearOfertaProductor/:id_subastaF', async (req, res) => {
     // Definimos las fechas
     var fecha_creacion = functions.obtenerFechaActual();
 
-    sql = "INSERT INTO oferta_productor(cantidad, fecha_creacion, precio_por_kilo, fk_id_estado, fk_id_producto, fk_id_usuario, fk_id_pedidoD, fk_id_subastaF) VALUES (:cantidad, to_DATE(:fecha_creacion,'YYYY/MM/DD'), :precio_por_kilo, :fk_id_estado, :fk_id_producto, :fk_id_usuario, :fk_id_pedidoD, :fk_id_subastaF)";
+    sql = "CALL PA_OFERTA_PRODUCTOR_CREAR(:cantidad, :fecha_creacion, :precio_por_kilo, :fk_id_estado, :fk_id_producto, :fk_id_usuario, :fk_id_pedidoD, :fk_id_subastaF)";
     await settings.OpenConnection(sql, [cantidad, fecha_creacion, precio_por_kilo, fk_id_estado, fk_id_producto, fk_id_usuario, fk_id_pedidoD, fk_id_subastaF], true);
 
     // Si tuvo conexión a la DB
@@ -88,7 +88,7 @@ router.get("/anularOfertaProductor/:id_ofertaP", async (req, res) => {
 
     var id_ofertaP_bind = req.params.id_ofertaP;
 
-    sql = "UPDATE oferta_productor SET fk_id_estado=4 WHERE id_ofertaP = :id_ofertaP_bind";
+    sql = "CALL PA_OFERTA_PRODUCTOR_ANULAR(:id_ofertaP_bind)";
     await settings.OpenConnection(sql, [id_ofertaP_bind], true);
 
     if (res.status(200)) {
@@ -160,7 +160,7 @@ router.post('/crearOfertaTransporte/:id_subastaT', async (req, res) => {
     // Definimos las fechas
     var fecha_creacion = functions.obtenerFechaActual();
 
-    sql = "INSERT INTO oferta_transporte(cantidad, fecha_creacion, tiene_refrigeracion, precio_final, peso_total, fk_id_usuario, fk_id_subastaT, fk_id_estado) VALUES (:cantidad, to_DATE(:fecha_creacion,'YYYY/MM/DD'), :tiene_refrigeracion, :precio_final, :peso_total, :fk_id_usuario, :fk_id_subastaT, :fk_id_estado)";
+    sql = "CALL PA_OFERTA_TRANSPORTE_CREAR(:cantidad, :fecha_creacion, :tiene_refrigeracion, :precio_final, :peso_total, :fk_id_usuario, :fk_id_subastaT, :fk_id_estado)";
     await settings.OpenConnection(sql, [cantidad, fecha_creacion, tiene_refrigeracion, precio_final, peso_total, fk_id_usuario, fk_id_subastaT, fk_id_estado], true);
 
     // Si tuvo conexión a la DB
@@ -187,7 +187,7 @@ router.get("/aceptarOfertaTransporte/:id_ofertaT", async (req, res) => {
   
     var value_id_ofertaT = req.params.id_ofertaT;
 
-    sql1 = "UPDATE oferta_transporte SET fk_id_estado= 2 WHERE id_ofertaT= :value_id_ofertaT";
+    sql1 = "CALL PA_OFERTA_TRANSPORTE_ACEPTAR(:value_id_ofertaT)";
     resultado1 = await settings.OpenConnection(sql1, [value_id_ofertaT], true);
 
     // Si tuvo conexión a la DB
@@ -240,11 +240,11 @@ router.get("/rechazarOfertaTransporte/:id_ofertaT", async (req, res) => {
   
     var value_id_ofertaT = req.params.id_ofertaT;
 
-    sql = "UPDATE oferta_transporte SET fk_id_estado= 3 WHERE id_ofertaT= :value_id_ofertaT";
-    await settings.OpenConnection(sql, [value_id_ofertaT], true);
+    sql1 = "CALL PA_OFERTA_TRANSPORTE_RECHAZAR(:value_id_ofertaT)";
+    resultado1 = await settings.OpenConnection(sql1, [value_id_ofertaT], true);
 
     // Si tuvo conexión a la DB
-    if (res.status(200)) {
+    if (resultado1) {
       console.log("[!] Oferta de transporte " + value_id_ofertaT + " rechazada con éxito");
 
       // Capturamos el id_subastaF para retornar a la página
@@ -277,7 +277,7 @@ router.get("/anularOfertaTransporte/:id_ofertaT", async (req, res) => {
 
     var id_ofertaT_bind = req.params.id_ofertaT;
 
-    sql = "UPDATE oferta_transporte SET fk_id_estado=4 WHERE id_ofertaT = :id_ofertaT_bind";
+    sql = "CALL PA_OFERTA_PRODUCTOR_ANULAR(:id_ofertaT_bind)";
     await settings.OpenConnection(sql, [id_ofertaT_bind], true);
 
     if (res.status(200)) {

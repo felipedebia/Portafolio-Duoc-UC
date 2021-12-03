@@ -46,7 +46,6 @@ router.post('/crearFruta', async (req, res) => {
     var { nombre, necesita_refrigeracion } = req.body;
     var fecha_creacion = functions.obtenerFechaActual();
 
-    sql = "INSERT INTO fruta(nombre, fecha_creacion, necesita_refrigeracion) VALUES (:nombre, to_DATE(:fecha_creacion,'YYYY/MM/DD'), :necesita_refrigeracion)";
     sql = "CALL PA_CREAR_FRUTA(:nombre,fecha_creacion,:necesita_refrigeracion)";
     await settings.OpenConnection(sql, [nombre, fecha_creacion, necesita_refrigeracion], true);
 

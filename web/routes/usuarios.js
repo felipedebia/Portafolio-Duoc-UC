@@ -73,7 +73,7 @@ router.post('/crearUsuario', async (req, res) => {
       var passwordEncrypted = simpleCryp.encrypt(password)
 
       // Creamos el nuevo usuario
-      sql = "INSERT INTO usuario(num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password, fk_id_estado, fk_id_tipo) VALUES (:num_documento,:nombre,:apellido,to_DATE(:fecha_nacimiento,'YYYY/MM/DD'),:genero,:correo,:telefono,:passwordEncrypted,:fk_id_estado,:fk_id_tipo)";
+      sql = "CALL PA_USUARIO_CREAR(:num_documento, :nombre, :apellido, :fecha_nacimiento, :genero, :correo, :telefono, :password, :fk_id_tipo)";
       await settings.OpenConnection(sql, [num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, passwordEncrypted, fk_id_estado, fk_id_tipo], true);
 
       // Si tuvo conexión a la DB
@@ -108,8 +108,8 @@ router.post("/modificarUsuario/:id_usuario", async (req, res) => {
     // Encriptamos la contraseña del usuario
     var passwordEncrypted = simpleCryp.encrypt(password)
 
-    sql = "UPDATE usuario SET correo= :correo, nombre= :nombre, apellido= :apellido, num_documento= :num_documento, fk_id_tipo= :fk_id_tipo, fecha_nacimiento= to_DATE(:fecha_nacimiento,'YYYY/MM/DD'), genero= :genero, fk_id_estado= :fk_id_estado, telefono= :telefono, password= :passwordEncrypted WHERE id_usuario= :id_usuario";
-    await settings.OpenConnection(sql, [correo, nombre, apellido, num_documento, fk_id_tipo, fecha_nacimiento, genero, fk_id_estado, telefono, passwordEncrypted, id_usuario], true);
+    sql = "CALL PA_USUARIO_UPDATE(:id_usuario, :num_documento, :nombre, :apellido, :fecha_nacimiento, :genero, :correo, :telefono, :password, :fk_id_estado, :fk_id_tipo)";
+    await settings.OpenConnection(sql, [id_usuario, num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, passwordEncrypted, fk_id_estado, fk_id_tipo], true);
 
     // Si tuvo conexión a la DB
     if (res.status(200)) {
