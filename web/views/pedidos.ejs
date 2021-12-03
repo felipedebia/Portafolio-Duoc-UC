@@ -65,35 +65,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="modal fade" id="modalPedidoSubastas<%= pedido.id_pedido %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-lg" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">ID Pedido #
-                                                                        <%= pedido.id_pedido %>
-                                                                    </h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="callout callout-warning">
-                                                                        <h4>Proceso de Subasta de Fruta disponible</h4>
-                                                                        Selecciona el botón "Iniciar Subasta de Fruta" para comenzar
-                                                                    </div>
-                                                                    <div class="callout callout-warning">
-                                                                        <h4>Proceso de Subasta de Transporte disponible</h4>
-                                                                        Selecciona el botón "Iniciar Subasta de Transporte" para comenzar
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <a href="../api_subastas/crearSubastaFruta/<%= pedido.id_pedido %>"><button class="btn btn-primary" type="button">Iniciar Subasta de Fruta</button></a>
-                                                                    <a href="../api_subastas/crearSubastaTransporte/<%= pedido.id_pedido %>"><button class="btn btn-primary" type="button">Iniciar Subasta de Transporte</button></a>
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                     <div class="modal fade" id="modalGenerarVenta<%= pedido.id_pedido %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
@@ -155,11 +126,14 @@
                                                         </td>
                                                         <td>
                                                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPedido<%= pedido.id_pedido %>">Ver detalles</button>
-                                                            <% if(pedido.fk_id_estado == 2 || pedido.fk_id_estado == 4){ %>
-                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPedidoSubastas<%= pedido.id_pedido %>">Iniciar subasta</button>
+                                                            <% if(pedido.fk_id_estado == 2){ %>
+                                                                <a href="../api_subastas/crearSubastaFruta/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Iniciar subasta</button></a>
                                                             <% } %>
                                                             <% if(pedido.fk_id_estado == 3){ %>
                                                                 <a href="/subasta_fruta/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Ver subasta</button></a>
+                                                            <% } %>
+                                                            <% if(pedido.fk_id_estado == 4){ %>
+                                                                <a href="../api_subastas/crearSubastaTransporte/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Iniciar subasta</button></a>
                                                             <% } %>
                                                             <% if(pedido.fk_id_estado == 5){ %>
                                                                 <a href="/subasta_transporte/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Ver subasta</button></a>

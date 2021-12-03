@@ -55,7 +55,7 @@ router.post('/crearProducto', async (req, res) => {
     var fk_id_estado = 1;
     var fk_usuario = req.session.id_usuario;
 
-    sql = "CALL PA_PRODUCTO_CREAR(:cantidad, :fecha_creacion, :fk_fruta, :fk_calidad, :fk_usuario, :fk_id_estado))";
+    sql = "CALL PA_PRODUCTO_CREAR(:cantidad, :fecha_creacion, :fk_fruta, :fk_calidad, :fk_usuario, :fk_id_estado)";
     await settings.OpenConnection(sql, [cantidad, fecha_creacion, fk_fruta, fk_calidad, fk_usuario, fk_id_estado], true);
 
     // Si tuvo conexión a la DB
