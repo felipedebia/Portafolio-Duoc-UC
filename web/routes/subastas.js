@@ -60,7 +60,8 @@ router.get('/crearSubastaFruta/:id_subastaF', async (req, res) => {
     console.log(fecha_termino_actual)
     console.log(fecha_termino)
     console.log("fin")
-    sql = "INSERT INTO subasta_fruta(id_subastaF, fecha_creacion, fecha_actualizacion, fecha_termino, fk_id_pedido, fk_id_estado) VALUES (:id_subastaF, to_DATE(:fecha_creacion,'YYYY/MM/DD'), to_DATE(:fecha_actualizacion,'YYYY/MM/DD'), to_DATE(:fecha_termino,'YYYY/MM/DD'), :fk_id_pedido, :fk_id_estado)";
+
+    sql = "CALL PA_SUBASTA_FRUTA_CREAR(:id_subastaF, :fecha_creacion, :fecha_actualizacion, :fecha_termino_actual, :fk_id_pedido, :fk_id_estado)";
     await settings.OpenConnection(sql, [id_subastaF, fecha_creacion, fecha_actualizacion, fecha_termino_actual, fk_id_pedido, fk_id_estado], true);
 
     // Si tuvo conexión a la DB
@@ -92,7 +93,7 @@ router.get("/finalizarSubastaFruta/:id_subastaF", async (req, res) => {
 
     var id_subastaF_bind = req.params.id_subastaF;
 
-    sql1 = "UPDATE subasta_fruta SET fk_id_estado=2 WHERE id_subastaF = :id_subastaF_bind";
+    sql1 = "CALL PA_SUBASTA_FRUTA_FINALIZAR(:id_subastaF_bind)";
     resultado1 = await settings.OpenConnection(sql1, [id_subastaF_bind], true);
 
     if (resultado1) {
@@ -181,53 +182,13 @@ router.get('/finalizarSubastaFruta2/:id_subastaF', async (req, res) => {
 });
 
 
-// Crear Subasta Transporte
-router.post('/crearSubastaTransporte/:id_subastaF', async (req, res) => {
-  try {
-
-    var value_subastaF = req.params.id_subastaF;
-    var fecha_creacion = functions.obtenerFechaActual();
-    var fecha_actualizacion = functions.obtenerFechaActual();
-    var fecha_termino = functions.obtenerFechaActual();
-    var fk_id_estado = 1;
-    var { cantidad, direccion_despacho } = req.body;
-  
-    sql1 = "INSERT INTO subasta_transporte(id_subastaT, fecha_creacion, fecha_actualizacion, fecha_termino, cantidad, direccion_despacho, fk_id_pedido, fk_id_estado) VALUES (:id_subastaT, to_DATE(:fecha_creacion,'YYYY/MM/DD'), to_DATE(:fecha_actualizacion,'YYYY/MM/DD'), to_DATE(:fecha_termino,'YYYY/MM/DD'), :cantidad, :direccion_despacho, :value_subastaF, :fk_id_estado)";
-    resultado1 = await settings.OpenConnection(sql1, [req.params.id_subastaF, fecha_creacion, fecha_actualizacion, fecha_termino, cantidad, direccion_despacho, value_subastaF, fk_id_estado], true);
-  
-    // Si tuvo conexión a la DB
-    if (resultado1) {
-
-      // Como creamos la subasta transporte, actualizamos pedido a estado 5 = En subasta de Transporte
-      sql2 = "UPDATE pedido SET fk_id_estado=5 WHERE id_pedido = :value_subastaF";
-      resultado2 = await settings.OpenConnection(sql2, [value_subastaF], true);
-
-      if (resultado2) {
-        res.redirect('/subasta_transporte/' + req.params.id_subastaF);
-        console.log("Redireccionado con éxito a subasta_transporte " + req.params.id_subastaF);
-      }
-      
-    } else {
-      console.log("[!] Ocurrió un error al intentar crear la subasta de transporte");
-      res.redirect('/subastas_frutas');
-    }
-
-  } catch (error) {
-    res.status(400);
-    res.send("Ocurrió un error al obtener los datos de la base de datos")
-    console.log(error);
-  }
-
-});
-
-
 // Anular Subasta Fruta
 router.get("/anularSubastaFruta/:id_subastaF", async (req, res) => {
   try {
 
     var id_subastaF_bind = req.params.id_subastaF;
 
-    sql = "UPDATE subasta_fruta SET fk_id_estado=3 WHERE id_subastaF = :id_subastaF_bind";
+    sql = "CALL PA_SUBASTA_FRUTA_ANULAR(:id_subastaF_bind)";
     await settings.OpenConnection(sql, [id_subastaF_bind], true);
 
     if (res.status(200)) {
@@ -288,13 +249,54 @@ router.get('/listarSubastasTransportes', async (req, res) => {
 });
 
 
+
+// Crear Subasta Transporte
+router.post('/crearSubastaTransporte/:id_subastaF', async (req, res) => {
+  try {
+
+    var value_subastaF = req.params.id_subastaF;
+    var fecha_creacion = functions.obtenerFechaActual();
+    var fecha_actualizacion = functions.obtenerFechaActual();
+    var fecha_termino = functions.obtenerFechaActual();
+    var fk_id_estado = 1;
+    var { cantidad, direccion_despacho } = req.body;
+  
+    sql1 = "CALL PA_SUBASTA_TRANSPORTE_CREAR(:id_subastaT, :fecha_creacion, :fecha_actualizacion, :fecha_termino, :cantidad, :direccion_despacho, :value_subastaF, :fk_id_estado)";
+    resultado1 = await settings.OpenConnection(sql1, [value_subastaF, fecha_creacion, fecha_actualizacion, fecha_termino, cantidad, direccion_despacho, value_subastaF, fk_id_estado], true);
+  
+    // Si tuvo conexión a la DB
+    if (resultado1) {
+
+      // Como creamos la subasta transporte, actualizamos pedido a estado 5 = En subasta de Transporte
+      sql2 = "UPDATE pedido SET fk_id_estado=5 WHERE id_pedido = :value_subastaF";
+      resultado2 = await settings.OpenConnection(sql2, [value_subastaF], true);
+
+      if (resultado2) {
+        res.redirect('/subasta_transporte/' + req.params.id_subastaF);
+        console.log("Redireccionado con éxito a subasta_transporte " + req.params.id_subastaF);
+      }
+      
+    } else {
+      console.log("[!] Ocurrió un error al intentar crear la subasta de transporte");
+      res.redirect('/subastas_frutas');
+    }
+
+  } catch (error) {
+    res.status(400);
+    res.send("Ocurrió un error al obtener los datos de la base de datos")
+    console.log(error);
+  }
+
+});
+
+
 // Anular Transportes
 router.get("/anularSubastaTransporte/:id_subastaT", async (req, res) => {
   try {
 
     var id_subastaT_bind = req.params.id_subastaT;
 
-    sql = "UPDATE subasta_transporte SET fk_id_estado=2 WHERE id_subastaT = :id_subastaT_bind";
+    sql = "CALL PA_SUBASTA_TRANSPORTE_ANULAR(:id_subastaT_bind)";
     await settings.OpenConnection(sql, [id_subastaT_bind], true);
 
     if (res.status(200)) {

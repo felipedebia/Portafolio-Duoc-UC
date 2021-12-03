@@ -73,7 +73,9 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <a href="/pedido_detalles/<%= pedido.id_pedido %>"><button class="btn btn-primary" type="submit">Modificar detalles del pedido</button></a>
+                                                                        <% if(pedido.fk_id_estado == 2){ %>
+                                                                            <a href="/pedido_detalles/<%= pedido.id_pedido %>"><button class="btn btn-primary" type="submit">Modificar detalles del pedido</button></a>
+                                                                        <% } %>
                                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                                                     </div>
                                                                 </div>

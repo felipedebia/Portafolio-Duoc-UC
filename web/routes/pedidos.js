@@ -152,6 +152,7 @@ router.get("/confirmarPedido/:id_pedido", async(req, res) => {
     try {
 
         var id_pedido_bind = req.params.id_pedido;
+        
         // Actualizamos pedido a estado 2 = Recepcionado
         sql = "CALL PA_PEDIDO_CONFIRMAR(:id_pedido_bind)";
         var consulta = await settings.OpenConnection(sql, [id_pedido_bind], true);
@@ -183,11 +184,11 @@ router.get("/eliminarPedidoDetalles/:id_pedidoD", async(req, res) => {
         var consulta = await settings.OpenConnection(sql, [id_pedido_bind], true);
 
         if (consulta) {
-            console.log("[!] Detalle pedido " + id_pedido_bind + " eliminado con éxito");
+            console.log("[!] Pedido detalle " + id_pedido_bind + " eliminado con éxito");
             functions.ListarPedidoDetalles();
             res.redirect(req.get('referer'));
         } else {
-            console.log("[!] Ocurrió un error al intentar eliminar el detalle pedido " + id_pedido_bind);
+            console.log("[!] Ocurrió un error al intentar eliminar el pedido detalle " + id_pedido_bind);
         }
 
     } catch (error) {
