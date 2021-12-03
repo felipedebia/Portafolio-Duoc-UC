@@ -48,7 +48,6 @@ Iniciar node en la carpeta web
 - Cambiar contraseña encriptado al hecho por fabian
 - Cambiar a try catch archivo rutas.js
 - Implementar subida de archivos a Pago como en Contrato
-- Cambiar secuencias SQL a procedimientos (haciendo debia)
 - Terminar templates de correos (listos 2 de usuario, 4 de subastas, faltan 2 de oferta y 2 de orden)
 
 - Algunas páginas se caen si no se usa el perfil principal mari.barreraa@duocuc.cl
