@@ -198,7 +198,7 @@ router.get("/aceptarOfertaTransporte/:id_ofertaT", async (req, res) => {
       sql2 = "SELECT fk_id_subastaT FROM oferta_transporte WHERE id_ofertaT = :value_id_ofertaT";
       resultado2 = await settings.OpenConnection(sql2, [value_id_ofertaT], true);
 
-      var value_id_subastaT = resultado2.rows[0];
+      var value_id_subastaT = resultado2.rows[0].toString();
 
       if (value_id_subastaT) {
 
@@ -277,7 +277,7 @@ router.get("/anularOfertaTransporte/:id_ofertaT", async (req, res) => {
 
     var id_ofertaT_bind = req.params.id_ofertaT;
 
-    sql = "CALL PA_OFERTA_PRODUCTOR_ANULAR(:id_ofertaT_bind)";
+    sql = "CALL PA_OFERTA_TRANSPORTE_ANULAR(:id_ofertaT_bind)";
     await settings.OpenConnection(sql, [id_ofertaT_bind], true);
 
     if (res.status(200)) {
