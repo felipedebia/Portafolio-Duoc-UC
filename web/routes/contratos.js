@@ -58,46 +58,32 @@ router.get('/listarContratos', async (req, res) => {
 });
 
 // Agregar
-router.post('/crearContrato', async (req, res) => {
+router.post('/crearContrato', async(req, res) => {
   try {
 
-    var { fecha_inicio, fecha_vencimiento, fk_id_tipo, id_usuario } = req.body;
-    // Definimos el contrato activado
-    var fk_id_estado = 1;
+      var { fecha_inicio, fecha_vencimiento, fk_id_tipo, id_usuario_firmante } = req.body;
 
-    sql = "INSERT INTO contrato(fecha_inicio, fecha_vencimiento, fk_id_estado, fk_id_tipo) VALUES (to_DATE(:fecha_inicio,'YYYY/MM/DD'),to_DATE(:fecha_vencimiento,'YYYY/MM/DD'),:fk_id_estado,:fk_id_tipo)";
-    await settings.OpenConnection(sql, [fecha_inicio, fecha_vencimiento, fk_id_estado, fk_id_tipo], true);
+      // Definimos el contrato activado
+      var fk_id_estado = 1;
 
-    // Si tuvo conexión a la DB
-    if(res.status(200)) {
-      console.log("[!] Contrato creado con éxito");
+      var id_usuario_creador = req.session.id_usuario;
 
-      //Con esto tomamos el ultimo registro en la tabla contrato para crear tabla rel y redirigir al documentoContrato y pueda agregar el documento
-      sql2 = "SELECT id_contrato FROM (SELECT * FROM contrato ORDER BY id_contrato DESC ) WHERE rownum = 1";
-      result2 = await settings.OpenConnection(sql2, [], true);
+      sql = "CALL PA_CONTRATO_CREAR(:fecha_inicio, :fecha_vencimiento, :fk_id_tipo, :id_usuario_creador, :id_usuario_firmante)";
+      await settings.OpenConnection(sql, [fecha_inicio, fecha_vencimiento, fk_id_estado, fk_id_tipo, id_usuario_creador, id_usuario_firmante], true);
 
-      var idContratoSql = result2.rows[0];
-
-      if (idContratoSql) {
-        var value_id_contrato = idContratoSql.toString();
-        var value_id_usuario = req.session.id_usuario;
-
-        sql3 = "INSERT INTO rel_contrato_usuario(fk_id_contrato, fk_id_usuario) VALUES (:idContratoSql, :id_usuario)";
-        await settings.OpenConnection(sql3, [value_id_contrato, value_id_usuario], true);
-
-        res.redirect('/documentoContrato/' + idContratoSql);
+      // Si tuvo conexión a la DB
+      if (res.status(200)) {
+          console.log("[!] Contrato creado con éxito");
+          res.redirect('/documentoContrato/' + idContratoSql);
+      } else {
+          console.log("[!] Ocurrió un error al intentar crear el contrato ");
+          res.redirect('/contratos');
       }
 
-      //res.refresh();
-    } else {
-      console.log("[!] Ocurrió un error al intentar crear el contrato ");
-      res.redirect('/contratos');
-    }
-
   } catch (error) {
-    res.status(400);
-    res.send("Ocurrió un error al obtener los datos de la base de datos")
-    console.log(error);
+      res.status(400);
+      res.send("Ocurrió un error al obtener los datos de la base de datos")
+      console.log(error);
   }
 
 });
@@ -117,8 +103,8 @@ router.post('/subirDocumento/:id_contrato', uploadFile.single('url_documento'), 
     var id_contrato_bind = req.params.id_contrato;
     var url_documento = req.file.filename;
 
-    sql = "UPDATE contrato SET url_documento= :url_documento WHERE id_contrato = :id_contrato_bind";
-    await settings.OpenConnection(sql, [url_documento, id_contrato_bind], true);
+    sql = "CALL PA_CONTRATO_UPDATE_URLDOCUMENTO(:id_contrato_bind, :url_documento)";
+    await settings.OpenConnection(sql, [id_contrato_bind, url_documento], true);
 
     if(res.status(200)) {
       console.log("[!] Documento de contrato " + id_contrato_bind + " agregado con éxito");
@@ -144,8 +130,8 @@ router.post("/modificarContrato/:id_contrato", async (req, res) => {
     var { id_contrato } = req.params.id_contrato;
     var { fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado } = req.body;
 
-    sql = "UPDATE contrato SET fecha_inicio= to_DATE(:fecha_inicio,'YYYY/MM/DD'), fecha_vencimiento= to_DATE(:fecha_vencimiento,'YYYY/MM/DD'), fk_id_tipo= :fk_id_tipo, fk_id_estado= :fk_id_estado WHERE id_usuario= :id_usuario";
-    await settings.OpenConnection(sql, [fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado], true);
+    sql = "CALL PA_UPDATE_PRODUCTO(:id_contrato,:fecha_inicio,:fecha_vencimiento,:fk_id_tipo, :fk_id_estado)";
+    await settings.OpenConnection(sql, [id_contrato, fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado], true);
 
     // Si tuvo conexión a la DB
     if(res.status(200)) {

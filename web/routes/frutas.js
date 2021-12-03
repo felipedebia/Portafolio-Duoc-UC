@@ -47,6 +47,7 @@ router.post('/crearFruta', async (req, res) => {
     var fecha_creacion = functions.obtenerFechaActual();
 
     sql = "INSERT INTO fruta(nombre, fecha_creacion, necesita_refrigeracion) VALUES (:nombre, to_DATE(:fecha_creacion,'YYYY/MM/DD'), :necesita_refrigeracion)";
+    sql = "CALL PA_CREAR_FRUTA(:nombre,fecha_creacion,:necesita_refrigeracion)";
     await settings.OpenConnection(sql, [nombre, fecha_creacion, necesita_refrigeracion], true);
 
     // Si tuvo conexión a la DB
@@ -73,10 +74,10 @@ router.post("/modificarFruta/:id_fruta", async (req, res) => {
   try {
   
     var id_fruta = req.params.id_fruta;
-    var { nombre, necesita_refrigeracion} = req.body;
+    var { nombre, necesita_refrigeracion } = req.body;
 
-    sql = "UPDATE fruta SET nombre= :nombre, necesita_refrigeracion= :necesita_refrigeracion WHERE id_fruta= :id_fruta";
-    await settings.OpenConnection(sql, [nombre, necesita_refrigeracion, id_fruta], true);
+    sql = "CALL PA_UPDATE_FRUTA(:id_fruta, :nombre, :necesita_refrigeracion)";
+    await settings.OpenConnection(sql, [id_fruta, nombre, necesita_refrigeracion], true);
 
     // Si tuvo conexión a la DB
     if(res.status(200)) {
@@ -101,7 +102,7 @@ router.get("/eliminarFruta/:id_fruta", async (req, res) => {
     
     var id_fruta_bind = req.params.id_fruta;
     
-    sql = "DELETE FROM fruta WHERE id_fruta = :id_fruta_bind";
+    sql = "CALL PA_DELETE_FRUTA(:id_fruta_bind)";
     await settings.OpenConnection(sql, [id_fruta_bind], true);
 
     if(res.status(200)) {

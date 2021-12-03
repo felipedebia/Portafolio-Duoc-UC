@@ -55,7 +55,7 @@ router.post('/crearProducto', async (req, res) => {
     var fk_id_estado = 1;
     var fk_usuario = req.session.id_usuario;
 
-    sql = "CALL PA_CREAR_PRODUCTO(:cantidad, :fecha_creacion, :fk_fruta, :fk_calidad, :fk_usuario, :fk_id_estado))";
+    sql = "CALL PA_PRODUCTO_CREAR(:cantidad, :fecha_creacion, :fk_fruta, :fk_calidad, :fk_usuario, :fk_id_estado))";
     await settings.OpenConnection(sql, [cantidad, fecha_creacion, fk_fruta, fk_calidad, fk_usuario, fk_id_estado], true);
 
     // Si tuvo conexión a la DB
@@ -84,7 +84,7 @@ router.post("/modificarProducto/:id_producto", async (req, res) => {
     var id_producto = req.params.id_producto;
     var { cantidad, fk_id_fruta, fk_id_calidad} = req.body;
     
-    sql = "CALL PA_UPDATE_PRODUCTO(:id_producto, :cantidad, :fk_id_fruta, :fk_id_calidad)";
+    sql = "CALL PA_PRODUCTO_UPDATE(:id_producto, :cantidad, :fk_id_fruta, :fk_id_calidad)";
     await settings.OpenConnection(sql, [id_producto, cantidad, fk_id_fruta, fk_id_calidad], true);
 
     // Si tuvo conexión a la DB
@@ -112,7 +112,7 @@ router.get("/anularProducto/:id_producto", async (req, res) => {
     var id_producto_bind = req.params.id_producto;
     var fk_id_estado = 2;
 
-    sql = "CALL PA_UPDATE_ESTADO_PRODUCTO(:id_producto_bind, :fk_id_estado)";
+    sql = "CALL PA_PRODUCTO_UPDATE_ESTADO(:id_producto_bind, :fk_id_estado)";
     await settings.OpenConnection(sql, [id_producto_bind, fk_id_estado], true);
 
     if(res.status(200)) {
