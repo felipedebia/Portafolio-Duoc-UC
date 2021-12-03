@@ -142,8 +142,8 @@ router.post("/modificarMiPerfil/:id_usuario", async (req, res) => {
     // Encriptamos la contraseña del usuario
     var passwordEncrypted = simpleCryp.encrypt(password)
 
-    sql = "UPDATE usuario SET correo= :correo, nombre= :nombre, apellido= :apellido, num_documento= :num_documento, fecha_nacimiento= to_DATE(:fecha_nacimiento,'YYYY/MM/DD'), genero= :genero, telefono= :telefono, password= :passwordEncrypted WHERE id_usuario= :id_usuario";
-    await settings.OpenConnection(sql, [correo, nombre, apellido, num_documento, fecha_nacimiento, genero, telefono, passwordEncrypted, id_usuario], true);
+    sql = "CALL PA_USUARIO_UPDATE_MIPERFIL(:id_usuario, :num_documento, :nombre, :apellido, :fecha_nacimiento, :genero, :correo, :telefono, :password)";
+    await settings.OpenConnection(sql, [id_usuario, num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, passwordEncrypted], true);
 
     // Si tuvo conexión a la DB
     if (res.status(200)) {
@@ -172,11 +172,9 @@ router.post("/nuevaContrasena/:id_usuario", async (req, res) => {
 
     // Encriptamos la contraseña del usuario
     var passwordEncrypted = simpleCryp.encrypt(nuevaContrasena)
-    // Pasamos la cuenta del usuario a 1 = activado
-    var fk_id_estado=1;
 
-    sql = "UPDATE usuario SET fk_id_estado=:fk_id_estado, password=:passwordEncrypted WHERE id_usuario=:value_id_usuario";
-    await settings.OpenConnection(sql, [fk_id_estado,passwordEncrypted,value_id_usuario], true);
+    sql = "CALL PA_USUARIO_UPDATE_NEWPASSWORD(:id_usuario, :password, :fk_id_estado)";
+    await settings.OpenConnection(sql, [value_id_usuario,passwordEncrypted,fk_id_estado], true);
 
     // Si tuvo conexión a la DB
     if (res.status(200)) {
