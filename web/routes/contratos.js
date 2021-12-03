@@ -63,18 +63,23 @@ router.post('/crearContrato', async(req, res) => {
 
       var { fecha_inicio, fecha_vencimiento, fk_id_tipo, id_usuario_firmante } = req.body;
 
-      // Definimos el contrato activado
-      var fk_id_estado = 1;
-
       var id_usuario_creador = req.session.id_usuario;
 
       sql = "CALL PA_CONTRATO_CREAR(:fecha_inicio, :fecha_vencimiento, :fk_id_tipo, :id_usuario_creador, :id_usuario_firmante)";
-      await settings.OpenConnection(sql, [fecha_inicio, fecha_vencimiento, fk_id_estado, fk_id_tipo, id_usuario_creador, id_usuario_firmante], true);
+      await settings.OpenConnection(sql, [fecha_inicio, fecha_vencimiento, fk_id_tipo, id_usuario_creador, id_usuario_firmante], true);
 
       // Si tuvo conexión a la DB
       if (res.status(200)) {
           console.log("[!] Contrato creado con éxito");
+
+          //Con esto tomamos el ultimo registro en la tabla contrato para crear tabla rel y redirigir al documentoContrato y pueda agregar el documento
+          sql2 = "SELECT id_contrato FROM (SELECT * FROM contrato ORDER BY id_contrato DESC ) WHERE rownum = 1";
+          result2 = await settings.OpenConnection(sql2, [], true);
+
+          var idContratoSql = result2.rows[0];
+
           res.redirect('/documentoContrato/' + idContratoSql);
+
       } else {
           console.log("[!] Ocurrió un error al intentar crear el contrato ");
           res.redirect('/contratos');

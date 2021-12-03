@@ -46,7 +46,7 @@ router.post('/crearFruta', async (req, res) => {
     var { nombre, necesita_refrigeracion } = req.body;
     var fecha_creacion = functions.obtenerFechaActual();
 
-    sql = "CALL PA_CREAR_FRUTA(:nombre,fecha_creacion,:necesita_refrigeracion)";
+    sql = "CALL PA_FRUTA_CREAR(:nombre,:fecha_creacion,:necesita_refrigeracion)";
     await settings.OpenConnection(sql, [nombre, fecha_creacion, necesita_refrigeracion], true);
 
     // Si tuvo conexión a la DB
@@ -75,7 +75,7 @@ router.post("/modificarFruta/:id_fruta", async (req, res) => {
     var id_fruta = req.params.id_fruta;
     var { nombre, necesita_refrigeracion } = req.body;
 
-    sql = "CALL PA_UPDATE_FRUTA(:id_fruta, :nombre, :necesita_refrigeracion)";
+    sql = "CALL PA_FRUTA_UPDATE(:id_fruta, :nombre, :necesita_refrigeracion)";
     await settings.OpenConnection(sql, [id_fruta, nombre, necesita_refrigeracion], true);
 
     // Si tuvo conexión a la DB
@@ -101,7 +101,7 @@ router.get("/eliminarFruta/:id_fruta", async (req, res) => {
     
     var id_fruta_bind = req.params.id_fruta;
     
-    sql = "CALL PA_DELETE_FRUTA(:id_fruta_bind)";
+    sql = "CALL PA_FRUTA_DELETE(:id_fruta_bind)";
     await settings.OpenConnection(sql, [id_fruta_bind], true);
 
     if(res.status(200)) {

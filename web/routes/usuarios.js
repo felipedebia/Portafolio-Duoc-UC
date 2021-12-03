@@ -172,6 +172,8 @@ router.post("/nuevaContrasena/:id_usuario", async (req, res) => {
 
     // Encriptamos la contraseña del usuario
     var passwordEncrypted = simpleCryp.encrypt(nuevaContrasena)
+    // Pasamos la cuenta del usuario a 1 = activado
+    var fk_id_estado=1;
 
     sql = "CALL PA_USUARIO_UPDATE_NEWPASSWORD(:id_usuario, :password, :fk_id_estado)";
     await settings.OpenConnection(sql, [value_id_usuario,passwordEncrypted,fk_id_estado], true);
