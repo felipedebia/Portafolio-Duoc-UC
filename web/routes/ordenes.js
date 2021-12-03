@@ -147,7 +147,7 @@ router.post('/crearReporteBodega/:id_ordenb', async (req, res) => {
     var estado_reporte = 1;
     var fk_id_ordenb = req.params.id_ordenb;
 
-    sql1 = "CALL PA_REPORTE_BODEGA_CREAR(:fecha_creacion, :estado_reporte, :descripcion, :fk_id_ordenb)";
+    sql = "CALL PA_REPORTE_BODEGA_CREAR(:fecha_creacion, :estado_reporte, :descripcion, :fk_id_ordenb)";
     await settings.OpenConnection(sql, [fecha_creacion, estado_reporte, descripcion, fk_id_ordenb], true);
 
     // Si tuvo conexión a la DB
@@ -268,7 +268,7 @@ router.post('/crearOrdenTransporte/:id_venta', async (req, res) => {
     var value_fk_id_venta = req.params.id_venta;
     var fk_id_estado = 1;
 
-    sql1 = "INSERT INTO orden_transporte(fecha_llegada, fecha_retiro, fk_id_estado, fk_id_venta) values (to_date(:fecha_llegada,'YYYY-MM-DD'), to_date(:fecha_retiro,'YYYY-MM-DD'), :fk_id_estado, :value_fk_id_venta)";
+    sql = "CALL PA_ORDEN_TRANSPORTE_CREAR(:fecha_llegada, :fecha_retiro, :fk_id_estado, :fk_id_venta)";
     resultado1 = await settings.OpenConnection(sql1, [fecha_llegada, fecha_retiro, fk_id_estado, value_fk_id_venta], true);
 
     // Si tuvo conexión a la DB
@@ -303,8 +303,8 @@ router.post("/modificarOrdenTransporte/:id_ordenT", async (req, res) => {
     var value_id_ordenT = req.params.id_ordenT;
     var { fecha_llegada, fecha_retiro, fk_id_estado } = req.body;
     
-    sql = "UPDATE orden_transporte SET fecha_llegada=to_date(:fecha_llegada,'YYYY-MM-DD'), fecha_retiro=to_date(:fecha_retiro,'YYYY-MM-DD'), fk_id_estado=:fk_id_estado WHERE id_ordent=:value_id_ordenT";
-    await settings.OpenConnection(sql, [fecha_llegada, fecha_retiro, fk_id_estado, value_id_ordenT], true);
+    sql = "CALL PA_ORDEN_TRANSPORTE_UPDATE(:value_id_ordenT, :fecha_llegada, :fecha_retiro, :fk_id_estado)";
+    await settings.OpenConnection(sql, [value_id_ordenT, fecha_llegada, fecha_retiro, fk_id_estado], true);
   
     // Si tuvo conexión a la DB
     if(res.status(200)) {
