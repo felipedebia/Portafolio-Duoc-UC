@@ -38,7 +38,6 @@ Iniciar node en la carpeta web
 
 - ARREGLAR PAGO PORQUE NO CREA
 - TERMINAR COSTOS DE FRUTA Y TRANSPORTE EN VENTA_DETALLE
-- REPORTES
 - Linea 168, 236 y 303 routes subastas
 - Linea 123 falta where fk_id_estado 1 routes subastas
 - Linea 121 y 220 ordenes: updates a venta

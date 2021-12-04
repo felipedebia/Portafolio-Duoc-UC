@@ -299,3 +299,7 @@
 canvas#Chart_total_subastas {
   max-height: 425px !important;
 }
+
+canvas#Chart_producto_calidad {
+  max-height: 425px !important;
+}
