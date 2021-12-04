@@ -1,4 +1,31 @@
 <%- include('partials/nav.ejs') %>
+
+  <%for(var calidad of TotalProductosPC) {%> 
+    <% var valor_calidad_primeraCalidad = calidad.primeraCalidad; %>
+  <% } %>
+  <%for(var calidad of TotalProductosSC) {%> 
+    <% var valor_calidad_segundaCalidad = calidad.segundaCalidad; %>
+  <% } %>
+  <%for(var calidad of TotalProductosTC) {%> 
+    <% var valor_calidad_terceraCalidad = calidad.terceraCalidad; %>
+  <% } %>
+  <%for(var calidad of TotalProductosCC) {%> 
+    <% var valor_calidad_cuartaCalidad = calidad.cuartaCalidad; %>
+  <% } %>
+  <%for(var calidad of TotalProductosQC) {%>
+    <% var valor_calidad_quintaCalidad = calidad.quintaCalidad; %>
+  <% } %>
+
+  <%for(var productos of TotalProductosA) {%>
+    <% var valor_productos_activos = productos.activos; %>
+  <% } %>
+  <%for(var productos of TotalProductosI) {%>
+    <% var valor_productos_inactivos = productos.Inactivos; %>
+  <% } %>
+  <%for(var productos of TotalProductos) {%>
+    <% var valor_productos_total = productos.totalProducto; %>
+  <% } %>
+
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -284,119 +311,98 @@
                                 <!--aqui comienzan los productos-->
                                 <div class="tab-pane" id="graficosDeProductos">
                                   <div class="card-body">
-                                        <!--Primer div cantidad total-->
-                                        <div class="row">
-                                          <div class="col-md-4">
-                                            <div class="card card-chart">
-                                              <div class="card-body">
-                                                <%for(var productos of TotalProductos) {%>
-                                                  <h4 class="card-title">Total de productos:</h4>
-                                                  <p class="card-category"><%=productos.totalProducto%></p>
-                                                <% } %>
+                                    <!-- div Productos del dia/mes/año-->
+                                    <div class="row">
+                                      <div class="col-md-4">
+                                        <div class="card card-chart">
+                                          <div class="card-body">
+                                            <%for(var productos of TotalProductosPD) {%>
+                                              <h4 class="card-title">Total productos del día:</h4>
+                                              <p class="card-category"><%=productos.totalProductoDia%></p>
+                                            <% } %>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                        <div class="card card-chart">
+                                          <div class="card-body">
+                                            <%for(var productos of TotalProductosPM) {%>
+                                              <h4 class="card-title">Total productos del mes:</h4>
+                                              <p class="card-category"><%=productos.totalProductoMensuales%></p>
+                                            <% } %>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                        <div class="card card-chart">
+                                          <div class="card-body">
+                                            <%for(var productos of TotalProductosPA) {%>
+                                              <h4 class="card-title">Total productos del año:</h4>
+                                              <p class="card-category"><%=productos.totalProductoAño%></p>
+                                            <% } %>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <!--Primer div cantidad total-->
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                        <div class="card card-chart">
+                                          <div class="card-header card-header-icon card-header-warning">
+                                            <div class="card-icon">
+                                              <i class="material-icons">pie_chart</i>
+                                            </div>
+                                            <h4 class="card-title">Productos</h4>
+                                          </div>
+                                          <div class="card-body">
+                                            <div>
+                                              <canvas id="Chart_producto"></canvas>
+                                            </div>
+                                          </div>
+                                          <div class="card-footer">
+                                            <div class="row">
+                                              <div class="col-md-12">
+                                                <h6 class="card-category">Legenda</h6>
+                                              </div>
+                                              <div class="col-md-12">
+                                                <i class="fa fa-circle text-info"></i> Productos activos
+                                                <i class="fa fa-circle text-danger"></i>Productos inactivos
                                               </div>
                                             </div>
                                           </div>
                                         </div>
-                                        <!--Segundo div productos activos e inactivos-->
-                                        <div class="row">
-                                          <div class="col-md-4">
-                                            <div class="card card-chart">
-                                              <div class="card-body">
-                                                <%for(var productos of TotalProductosA) {%>
-                                                  <h4 class="card-title ">Total productos activos:</h4>
-                                                  <p class="card-category"><%=productos.activos%></p>
-                                                <% } %>
-                                              </div>
+                                      </div>
+
+                                      <div class="col-md-6">
+                                        <div class="card card-chart">
+                                          <div class="card-header card-header-icon card-header-warning">
+                                            <div class="card-icon">
+                                              <i class="material-icons">pie_chart</i>
+                                            </div>
+                                            <h4 class="card-title">Total de productos según su calidad</h4>
+                                          </div>
+                                          <div class="card-body">
+                                            <div>
+                                              <canvas id="Chart_producto_calidad"></canvas>
                                             </div>
                                           </div>
-                                          <div class="col-md-4">
-                                            <div class="card card-chart">
-                                              <div class="card-body">
-                                                <%for(var productos of TotalProductosI) {%>
-                                                  <h4 class="card-title ">Total productos inactivos:</h4>
-                                                  <p class="card-category"><%=productos.Inactivos%></p>
-                                                <% } %>
+                                          <div class="card-footer">
+                                            <div class="row">
+                                              <div class="col-md-12">
+                                                <h6 class="card-category">Calidades</h6>
                                               </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <!-- div Productos del dia/mes/año-->
-                                        <div class="row">
-                                          <div class="col-md-4">
-                                            <div class="card card-chart">
-                                              <div class="card-body">
-                                                <%for(var productos of TotalProductosPD) {%>
-                                                  <h4 class="card-title">Total productos del día:</h4>
-                                                  <p class="card-category"><%=productos.totalProductoDia%></p>
-                                                <% } %>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="col-md-4">
-                                            <div class="card card-chart">
-                                              <div class="card-body">
-                                                <%for(var productos of TotalProductosPM) {%>
-                                                  <h4 class="card-title">Total productos del mes:</h4>
-                                                  <p class="card-category"><%=productos.totalProductoMensuales%></p>
-                                                <% } %>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="col-md-4">
-                                            <div class="card card-chart">
-                                              <div class="card-body">
-                                                <%for(var productos of TotalProductosPA) {%>
-                                                  <h4 class="card-title">Total productos del año:</h4>
-                                                  <p class="card-category"><%=productos.totalProductoAño%></p>
-                                                <% } %>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          
-                                        </div>
-                                        <!--div de calidad-->
-                                        <div class="row">
-                                          
-                                          <div class="col-md-5">
-                                            <div class="card card-chart">
-                                              <div class="card-header card-header-icon card-header-danger">
-                                                <div class="card-icon">
-                                                  <i class="material-icons">pie_chart</i>
-                                                </div>
-                                                <h4 class="card-title">Total de productos según su calidad</h4>
-                                              </div>
-                                              <div class="card-body">
-                                                <div>
-                                                  <canvas id="myChart"></canvas>
-                                                </div>
-                                              </div>
-                                              <div class="card-footer">
-                                                <div class="row">
-                                                  <div class="col-md-12">
-                                                    <h6 class="card-category">Calidades</h6>
-                                                  </div>
-                                                  <div class="col-md-12">
-                                                    <%for(var calidad of TotalProductosPC) {%> 
-                                                      <i class="fa fa-circle text-info"></i> Primera : 
-                                                    <% } %>
-                                                    <%for(var calidad of TotalProductosSC) {%> 
-                                                      <i class="fa fa-circle text-danger"></i>Segunda: <%=calidad.segundaCalidad%>
-                                                    <% } %>
-                                                    <%for(var calidad of TotalProductosTC) {%> 
-                                                      <i class="fa fa-circle text-warning"></i>Tercera : 
-                                                    <% } %>
-                                                    <%for(var calidad of TotalProductosCC) {%> 
-                                                      <i class="fa fa-circle text-default"></i>Cuarta : <%=calidad.cuartaCalidad%>
-                                                    <% } %>
-                                                    <%for(var calidad of TotalProductosQC) {%>
-                                                    <i class="fa fa-circle text-primary"></i>Quinta : <%=calidad.quintaCalidad%>
-                                                    <% } %>
-                                                  </div>
-                                                </div>
+                                              <div class="col-md-12">
+                                                <i class="fa fa-circle text-info"></i> Primera
+                                                <i class="fa fa-circle text-danger"></i>Segunda
+                                                <i class="fa fa-circle text-warning"></i>Tercera
+                                                <i class="fa fa-circle text-default"></i>Cuarta
+                                                <i class="fa fa-circle text-primary"></i>Quinta
                                               </div>
                                             </div>
                                           </div>
                                         </div>
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
                             </div>
@@ -409,37 +415,68 @@
 <%- include('partials/footer.ejs') %>
 
 <script>
-  const labels = [
+  const labels_producto = [
+    'Productos activos',
+    'Productos inactivos',
+  ];
+  const data_producto = {
+    labels: labels_producto,
+    datasets: [{
+      label: '',
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+      data: [
+      '<%=valor_productos_activos%>', 
+      '<%=valor_productos_inactivos%>'
+      ],
+    }]
+  };
+  
+  const config_producto = {
+    type: 'bar',
+    data: data_producto,
+    options: {}
+  };
+
+  const Chart_producto = new Chart(
+    document.getElementById('Chart_producto'),
+    config_producto
+  );
+</script>
+
+<script>
+  const labels_producto_calidad = [
     'Primera',
     'Segunda',
     'Tercera',
     'Cuarta',
     'Quinta',
   ];
-  const data = {
-    labels: labels,
+  const data_producto_calidad = {
+    labels: labels_producto_calidad,
     datasets: [{
-      label: 'My First dataset',
+      label: '',
       backgroundColor: 'rgb(255, 99, 132)',
       borderColor: 'rgb(255, 99, 132)',
       data: [
-      '<%=calidad.primeraCalidad%>', 
-      10,
-      '<%=calidad.terceraCalidad%>',
-      2,
-      20],
+      '<%=valor_calidad_primeraCalidad%>', 
+      '<%=valor_calidad_segundaCalidad%>',
+      '<%=valor_calidad_terceraCalidad%>',
+      '<%=valor_calidad_cuartaCalidad%>',
+      '<%=valor_calidad_quintaCalidad%>'
+      ],
     }]
   };
   
-  const config = {
+  const config_producto_calidad = {
     type: 'bar',
-    data: data,
+    data: data_producto_calidad,
     options: {}
   };
 
-  const myChart = new Chart(
-    document.getElementById('myChart'),
-    config
+  const Chart_producto_calidad = new Chart(
+    document.getElementById('Chart_producto_calidad'),
+    config_producto_calidad
   );
 </script>
 
