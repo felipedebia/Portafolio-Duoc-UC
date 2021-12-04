@@ -38,37 +38,49 @@
                                     <div class="card-body">
                                         
                                           <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                               <div class="card card-chart">
-                                                <div class="card-header card-header-rose">
-                                                  <div id="roundedLineChart" class="ct-chart"></div>
-                                                </div>
                                                 <div class="card-body">
                                                   <h4 class="card-title">Total de ventas: <%=ventas.totalDeVentas%></h4>
-                                                  
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                              <div class="card card-chart">
+                                                <div class="card-body">
+                                                  <h4 class="card-title">Costo total: <%=ventas.totalPrecio%></h4>
                                                 </div>
                                               </div>
                                             </div>
                                           </div>
-                                          <h2 class="card-title mb-4"> Total de costos globales </h2>
+                                          <h2 class="card-title mb-4">Costos globales</h2>
                                           <div class="row">
                                             
                                             <div class="col-md-4">
                                               <div class="card card-chart">
                                                 <div class="card-header card-header-warning">
-                                                  <div id="straightLinesChart" class="ct-chart"></div>
+                                                  AQUI
                                                 </div>
                                                 <div class="card-body">
                                                   <h4 class="card-title">Costo total de frutas</h4>
                                                   <p class="card-category"> <%=ventas.totalFruta%></p>
                                                 </div>
+                                                <div class="card-footer">
+                                                  <div class="row">
+                                                    <div class="col-md-12">
+                                                      <h6 class="card-category">Tipo de costo</h6>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                      <i class="fa fa-circle text-info"></i> Costo total fruta
+                                                      <i class="fa fa-circle text-warning"></i> Costo total transporte
+                                                      <i class="fa fa-circle text-danger"></i> Costo total impuesto
+                                                    </div>
+                                                  </div>
+                                                </div>
                                               </div>
                                             </div>
                                             <div class="col-md-4">
                                               <div class="card card-chart">
-                                                <div class="card-header card-header-warning">
-                                                  <div id="straightLinesChart" class="ct-chart"></div>
-                                                </div>
                                                 <div class="card-body">
                                                   <h4 class="card-title">Costo total de transportes</h4>
                                                   <p class="card-category"> <%=ventas.totalTransporte%></p>
@@ -77,9 +89,6 @@
                                             </div>
                                             <div class="col-md-4">
                                               <div class="card card-chart">
-                                                <div class="card-header card-header-warning">
-                                                  <div id="straightLinesChart" class="ct-chart"></div>
-                                                </div>
                                                 <div class="card-body">
                                                   <h4 class="card-title">Costo total de impuestos</h4>
                                                   <p class="card-category"> <%=ventas.totalImpuestos%></p>
@@ -88,53 +97,34 @@
                                             </div>
                                           </div>
                                           <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                               <div class="card">
                                                 <div class="card-header card-header-icon card-header-info">
                                                   <div class="card-icon">
                                                     <i class="material-icons">timeline</i>
                                                   </div>
-                                                  <h4 class="card-title">Comisión servicios:
+                                                  <h4 class="card-title">Gráfico de comisionesComisión servicios:
                                                     <small>  <%=ventas.totalComisionS%></small>
                                                   </h4>
-                                                </div>
-                                                <div class="card-body">
-                                                  <div id="colouredRoundedLineChart" class="ct-chart"></div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                              <div class="card">
-                                                <div class="card-header card-header-icon card-header-info">
-                                                  <div class="card-icon">
-                                                    <i class="material-icons">timeline</i>
-                                                  </div>
                                                   <h4 class="card-title">Comisión empresas:
                                                     <small>  <%=ventas.totalComisionE%></small>
                                                   </h4>
                                                 </div>
                                                 <div class="card-body">
-                                                  <div id="colouredRoundedLineChart" class="ct-chart"></div>
+                                                  <div id="simpleBarChart" class="ct-chart"></div>
+                                                </div>
+                                                <div class="card-footer">
+                                                  <div class="row">
+                                                    <div class="col-md-12">
+                                                      <h6 class="card-category">Tipo de comisión</h6>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                      <i class="fa fa-circle text-info"></i> Comisión servicio
+                                                      <i class="fa fa-circle text-warning"></i> Comisión empresa
+                                                    </div>
+                                                  </div>
                                                 </div>
                                               </div>
-                                            </div>
-                                          </div>
-                              
-                                          <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                  <div class="card-header card-header-icon card-header-rose">
-                                                    <div class="card-icon">
-                                                      <i class="material-icons">insert_chart</i>
-                                                    </div>
-                                                    <h4 class="card-title">Costo Total:
-                                                      <small> <%=ventas.totalPrecio%></small>
-                                                    </h4>
-                                                  </div>
-                                                  <div class="card-body">
-                                                    <div id="multipleBarsChart" class="ct-chart"></div>
-                                                  </div>
-                                                </div>
                                             </div>
                                           </div>
                                     </div>
@@ -149,9 +139,6 @@
                                           <div class="row">
                                             <div class="col-md-4">
                                               <div class="card card-chart">
-                                                <div class="card-header card-header-rose">
-                                                  <div id="roundedLineChart" class="ct-chart"></div>
-                                                </div>
                                                 <div class="card-body">
                                                   <%for(var subastaF of RepSubastaF) {%>
                                                   <h4 class="card-title">Total de subastas Frutas: <%=subastaF.total%></h4>
@@ -166,9 +153,6 @@
                                           <div class="row">
                                             <div class="col-md-4">
                                               <div class="card card-chart">
-                                                <div class="card-header card-header-warning">
-                                                  <div id="straightLinesChart" class="ct-chart"></div>
-                                                </div>
                                                 <div class="card-body">
                                                   <%for(var subastaF of SubastaFTotalActivos) {%>
                                                   <h4 class="card-title">Total casos activos:</h4>
@@ -179,9 +163,6 @@
                                             </div>
                                             <div class="col-md-4">
                                               <div class="card card-chart">
-                                                <div class="card-header card-header-warning">
-                                                  <div id="straightLinesChart" class="ct-chart"></div>
-                                                </div>
                                                 <div class="card-body">
                                                   <%for(var subastaF of SubastaFTotalInactivos) {%>
                                                   <h4 class="card-title">Total casos eliminados</h4>
@@ -195,9 +176,6 @@
                                           <div class="row">
                                             <div class="col-md-4">
                                               <div class="card card-chart">
-                                                <div class="card-header card-header-info">
-                                                  <div id="simpleBarChart" class="ct-chart"></div>
-                                                </div>
                                                 <div class="card-body">
                                                   <%for(var subastas of TotalSubastasFPD) {%>
                                                     <h4 class="card-title ">Total Subastas Transportes del día:</h4>
@@ -208,9 +186,6 @@
                                             </div>
                                             <div class="col-md-4">
                                               <div class="card card-chart">
-                                                <div class="card-header card-header-info">
-                                                  <div id="simpleBarChart" class="ct-chart"></div>
-                                                </div>
                                                 <div class="card-body">
                                                   <%for(var subastas of TotalSubastasFPM) {%>
                                                     <h4 class="card-title ">Total Subastas Transportes del mes:</h4>
@@ -221,9 +196,6 @@
                                             </div>
                                             <div class="col-md-4">
                                               <div class="card card-chart">
-                                                <div class="card-header card-header-info">
-                                                  <div id="simpleBarChart" class="ct-chart"></div>
-                                                </div>
                                                 <div class="card-body">
                                                   <%for(var subastas of TotalSubastasFPA) {%>
                                                     <h4 class="card-title ">Total Subastas Transportes del año:</h4>
@@ -239,9 +211,6 @@
                                           <div class="row">
                                             <div class="col-md-4">
                                               <div class="card card-chart">
-                                                <div class="card-header card-header-rose">
-                                                  <div id="roundedLineChart" class="ct-chart"></div>
-                                                </div>
                                                 <div class="card-body">
                                                   <%for(var subastaT of SubastaTTotal) {%>
                                                     <h4 class="card-title">Total de subastas Transporte: <%=subastaT.total%></h4>
@@ -254,9 +223,6 @@
                                           <div class="row">
                                             <div class="col-md-4">
                                               <div class="card card-chart">
-                                                <div class="card-header card-header-warning">
-                                                  <div id="straightLinesChart" class="ct-chart"></div>
-                                                </div>
                                                 <div class="card-body">
                                                 <%for(var subastaT of SubastaTActivo) {%>
                                                   <h4 class="card-title">Total casos activos:</h4>
@@ -267,9 +233,6 @@
                                             </div>
                                             <div class="col-md-4">
                                               <div class="card card-chart">
-                                                <div class="card-header card-header-warning">
-                                                  <div id="straightLinesChart" class="ct-chart"></div>
-                                                </div>
                                                 <div class="card-body">
                                                   <%for(var subastaT of SubastaTInactivo) {%>
                                                   <h4 class="card-title">Total casos eliminados</h4>
@@ -284,9 +247,6 @@
                                           <div class="row">
                                             <div class="col-md-4">
                                               <div class="card card-chart">
-                                                <div class="card-header card-header-info">
-                                                  <div id="simpleBarChart" class="ct-chart"></div>
-                                                </div>
                                                 <div class="card-body">
                                                   <%for(var subastas of TotalSubastasTPD) {%>
                                                     <h4 class="card-title ">Total Subastas Transportes del día:</h4>
@@ -297,9 +257,6 @@
                                             </div>
                                             <div class="col-md-4">
                                               <div class="card card-chart">
-                                                <div class="card-header card-header-info">
-                                                  <div id="simpleBarChart" class="ct-chart"></div>
-                                                </div>
                                                 <div class="card-body">
                                                   <%for(var subastas of TotalSubastasTPM) {%>
                                                     <h4 class="card-title ">Total Subastas Transportes del mes:</h4>
@@ -310,9 +267,6 @@
                                             </div>
                                             <div class="col-md-4">
                                               <div class="card card-chart">
-                                                <div class="card-header card-header-info">
-                                                  <div id="simpleBarChart" class="ct-chart"></div>
-                                                </div>
                                                 <div class="card-body">
                                                   <%for(var subastas of TotalSubastasTPA) {%>
                                                     <h4 class="card-title ">Total Subastas Transportes del año:</h4>
@@ -334,9 +288,6 @@
                                         <div class="row">
                                           <div class="col-md-4">
                                             <div class="card card-chart">
-                                              <div class="card-header card-header-rose">
-                                                <div id="roundedLineChart" class="ct-chart"></div>
-                                              </div>
                                               <div class="card-body">
                                                 <%for(var productos of TotalProductos) {%>
                                                   <h4 class="card-title">Total de productos:</h4>
@@ -350,9 +301,6 @@
                                         <div class="row">
                                           <div class="col-md-4">
                                             <div class="card card-chart">
-                                              <div class="card-header card-header-info">
-                                                <div id="simpleBarChart" class="ct-chart"></div>
-                                              </div>
                                               <div class="card-body">
                                                 <%for(var productos of TotalProductosA) {%>
                                                   <h4 class="card-title ">Total productos activos:</h4>
@@ -363,9 +311,6 @@
                                           </div>
                                           <div class="col-md-4">
                                             <div class="card card-chart">
-                                              <div class="card-header card-header-info">
-                                                <div id="simpleBarChart" class="ct-chart"></div>
-                                              </div>
                                               <div class="card-body">
                                                 <%for(var productos of TotalProductosI) {%>
                                                   <h4 class="card-title ">Total productos inactivos:</h4>
@@ -379,9 +324,6 @@
                                         <div class="row">
                                           <div class="col-md-4">
                                             <div class="card card-chart">
-                                              <div class="card-header card-header-warning">
-                                                <div id="straightLinesChart" class="ct-chart"></div>
-                                              </div>
                                               <div class="card-body">
                                                 <%for(var productos of TotalProductosPD) {%>
                                                   <h4 class="card-title">Total productos del día:</h4>
@@ -392,9 +334,6 @@
                                           </div>
                                           <div class="col-md-4">
                                             <div class="card card-chart">
-                                              <div class="card-header card-header-warning">
-                                                <div id="straightLinesChart" class="ct-chart"></div>
-                                              </div>
                                               <div class="card-body">
                                                 <%for(var productos of TotalProductosPM) {%>
                                                   <h4 class="card-title">Total productos del mes:</h4>
@@ -405,9 +344,6 @@
                                           </div>
                                           <div class="col-md-4">
                                             <div class="card card-chart">
-                                              <div class="card-header card-header-warning">
-                                                <div id="straightLinesChart" class="ct-chart"></div>
-                                              </div>
                                               <div class="card-body">
                                                 <%for(var productos of TotalProductosPA) {%>
                                                   <h4 class="card-title">Total productos del año:</h4>
@@ -430,7 +366,9 @@
                                                 <h4 class="card-title">Total de productos según su calidad</h4>
                                               </div>
                                               <div class="card-body">
-                                                <div id="chartPreferences" class="ct-chart"></div>
+                                                <div>
+                                                  <canvas id="myChart"></canvas>
+                                                </div>
                                               </div>
                                               <div class="card-footer">
                                                 <div class="row">
@@ -439,16 +377,16 @@
                                                   </div>
                                                   <div class="col-md-12">
                                                     <%for(var calidad of TotalProductosPC) {%> 
-                                                      <i class="fa fa-circle text-info"></i> Primera : <%=calidad.primeraCalidad%> <br>
+                                                      <i class="fa fa-circle text-info"></i> Primera : 
                                                     <% } %>
                                                     <%for(var calidad of TotalProductosSC) {%> 
-                                                      <i class="fa fa-circle text-warning"></i>Segunda: <%=calidad.segundaCalidad%> <br>
+                                                      <i class="fa fa-circle text-danger"></i>Segunda: <%=calidad.segundaCalidad%>
                                                     <% } %>
                                                     <%for(var calidad of TotalProductosTC) {%> 
-                                                      <i class="fa fa-circle text-danger"></i>Tercera : <%=calidad.terceraCalidad%> <br>
+                                                      <i class="fa fa-circle text-warning"></i>Tercera : 
                                                     <% } %>
                                                     <%for(var calidad of TotalProductosCC) {%> 
-                                                      <i class="fa fa-circle text-default"></i>Cuarta : <%=calidad.cuartaCalidad%><br>
+                                                      <i class="fa fa-circle text-default"></i>Cuarta : <%=calidad.cuartaCalidad%>
                                                     <% } %>
                                                     <%for(var calidad of TotalProductosQC) {%>
                                                     <i class="fa fa-circle text-primary"></i>Quinta : <%=calidad.quintaCalidad%>
@@ -459,7 +397,6 @@
                                             </div>
                                           </div>
                                         </div>
-
                                   </div>
                                 </div>
                             </div>
@@ -471,13 +408,39 @@
     </div>
 <%- include('partials/footer.ejs') %>
 
-<script src="../js/demo.js"></script>
-
 <script>
-    $(document).ready(function() {
-      // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
-      demo.initCharts();
-    });
+  const labels = [
+    'Primera',
+    'Segunda',
+    'Tercera',
+    'Cuarta',
+    'Quinta',
+  ];
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: 'My First dataset',
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+      data: [
+      '<%=calidad.primeraCalidad%>', 
+      10,
+      '<%=calidad.terceraCalidad%>',
+      2,
+      20],
+    }]
+  };
+  
+  const config = {
+    type: 'bar',
+    data: data,
+    options: {}
+  };
+
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
 </script>
 
 </body>
