@@ -36,6 +36,7 @@ Iniciar node en la carpeta web
 
 ## Páginas pendientes:
 
+- FRUTA RESTANTE
 - ARREGLAR PAGO PORQUE NO CREA
 - TERMINAR COSTOS DE FRUTA Y TRANSPORTE EN VENTA_DETALLE
 - Linea 168, 236 y 303 routes subastas
