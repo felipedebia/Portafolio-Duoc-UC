@@ -47,7 +47,7 @@ Iniciar node en la carpeta web
 - Cambiar contraseña encriptado al hecho por fabian
 - Cambiar a try catch archivo rutas.js
 - Implementar subida de archivos a Pago como en Contrato
-- Terminar templates de correos (listos 2 de usuario, 4 de subastas, faltan 2 de oferta y 2 de orden)
+- Terminar templates de correos (faltan 2 de oferta)
 
 - Algunas páginas se caen si no se usa el perfil principal mari.barreraa@duocuc.cl
 - Arreglar error de si no existen pedidos, pagina pedidos se cae
@@ -62,7 +62,6 @@ Iniciar node en la carpeta web
 - PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
 - PARA EL FINAL: Sanitizar todas las entradas de texto
 - PARA EL FINAL: Comprobación de rango para entrar a las páginas
-- CUANDO ESTE PAGINA ARRIBA: Cambiar dirección de logos en templates de correos
 
 ## Otros
 - http://localhost:3000/plantilla
