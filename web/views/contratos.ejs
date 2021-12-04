@@ -92,7 +92,7 @@
                                                             <label>Tipo de Contrato</label>
                                                             <div class="cus-select-group">
                                                                 <select id="select-item" name="fk_id_tipo" required>
-                                                                    <option selected="true" disabled="disabled">Selecciona una opción</option>
+                                                                    <option selected="true" value="" disabled="disabled">Selecciona una opción</option>
                                                                     <option name="productor" value="1">Productor</option>
                                                                     <option name="clienteExterno" value="3">Cliente Externo</option>
                                                                     <option name="transportista" value="4">Transportista</option>
@@ -105,7 +105,7 @@
                                                             <label>Asignar al usuario</label>
                                                             <div class="cus-select-group">
                                                                 <select id="select-item" name="id_usuario_firmante" required>
-                                                                    <option selected="true" disabled="disabled">Selecciona una opción</option>
+                                                                    <option selected="true" value="" disabled="disabled">Selecciona una opción</option>
                                                                     <% for(var usuario of Usuarios) { %>
                                                                         <% if (usuario.fk_id_tipo == 2 || usuario.fk_id_tipo == 3 || usuario.fk_id_tipo == 5 ) { %>
                                                                             <option name="<%= usuario.nombre %> <%= usuario.apellido %>" value="<%= usuario.id_usuario %>"><%= usuario.fk_texto_tipo %> <%= usuario.nombre %> <%= usuario.apellido %></option>

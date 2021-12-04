@@ -39,7 +39,7 @@
                                         <label>Elige la calidad buscada *</label>
                                         <div class="cus-select-group">
                                             <select id="select-item" name="fk_id_calidad" required>
-                                                <option selected="true" disabled="disabled">Selecciona una opción</option>
+                                                <option selected="true" value="" disabled="disabled">Selecciona una opción</option>
                                                 <% for(var calidad of Calidades){ %>
                                                     <option name="fk_id_calidad" value="<%=calidad.id_calidad%>"><%=calidad.nombre%></option>
                                                 <% } %>

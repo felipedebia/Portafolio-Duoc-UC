@@ -192,7 +192,7 @@
                                                             <label>País de destino</label>
                                                             <div class="cus-select-group">
                                                                 <select id="select-item" name="pais" required>
-                                                                    <option selected="true" disabled="disabled">Selecciona una opción</option>
+                                                                    <option selected="true" value="" disabled="disabled">Selecciona una opción</option>
                                                                     <%
                                                                     Paises.sort((a,b) => {
                                                                         const nombreA = a.nombre.toLowerCase();
@@ -218,7 +218,7 @@
                                                             <label>Ciudad de destino</label>
                                                             <div class="cus-select-group">
                                                                 <select id="select-item" name="fk_id_ciudad" required>
-                                                                    <option selected="true" disabled="disabled">Selecciona una opción</option>
+                                                                    <option selected="true" value="" disabled="disabled">Selecciona una opción</option>
                                                                     <%
                                                                     Ciudades.sort((a,b) => {
                                                                         const nombreA = a.nombre.toLowerCase();

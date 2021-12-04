@@ -132,7 +132,7 @@
                         <label>Producto</label>
                         <div class="cus-select-group">
                           <select id="select-item" name="fk_id_producto" required>
-                              <option selected="true" disabled="disabled">Selecciona una opción</option>
+                              <option selected="true" value="" disabled="disabled">Selecciona una opción</option>
                               <% for(var producto of Productos){ %>
                                 <% if (producto.fk_id_usuario == session.id_usuario){ %>
                                   <% for(var pedido_detalle of PedidoDetalles){ %>
