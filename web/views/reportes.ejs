@@ -26,6 +26,18 @@
     <% var valor_productos_total = productos.totalProducto; %>
   <% } %>
 
+
+  <%for(var ventas of VentasTotal) {%> 
+    <% 
+      var valor_total_ventas = ventas.totalDeVentas;
+      var valor_total_precio = ventas.totalPrecio;
+      var valor_total_fruta = ventas.totalFruta;
+      var valor_total_transporte = ventas.totalTransporte;
+      var valor_total_impuesto = ventas.totalImpuestos;
+      var valor_total_comision_servicio = ventas.totalComisionS;
+      var valor_total_comision_empresa = ventas.totalComisionE; 
+    %>
+  <% } %>
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -61,101 +73,80 @@
                         <div class="card-body">
                             <div class="tab-content">
                                 <div class="tab-pane active" id="graficosDeVentas">
-                                  <%for(var ventas of VentasTotal) {%> 
                                     <div class="card-body">
-                                        
-                                          <div class="row">
-                                            <div class="col-md-6">
-                                              <div class="card card-chart">
-                                                <div class="card-body">
-                                                  <h4 class="card-title">Total de ventas: <%=ventas.totalDeVentas%></h4>
-                                                </div>
+                                      <div class="row">
+                                        <div class="col-md-6">
+                                          <div class="card card-chart">
+                                            <div class="card-body">
+                                              <h4 class="card-title">Total de ventas: <%=valor_total_ventas%></h4>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <div class="card card-chart">
+                                            <div class="card-body">
+                                              <h4 class="card-title">Costo total: <%=valor_total_precio%></h4>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <h2 class="card-title mb-4">Costos</h2>
+                                      <div class="row">
+                                        <div class="col-md-6">
+                                          <div class="card">
+                                            <div class="card-header card-header-icon card-header-success">
+                                              <div class="card-icon">
+                                                <i class="material-icons">timeline</i>
+                                              </div>
+                                              <h4 class="card-title">Costos totales</h4>
+                                            </div>
+                                            <div class="card-body">
+                                              <div>
+                                                <canvas id="Chart_costos"></canvas>
                                               </div>
                                             </div>
-                                            <div class="col-md-6">
-                                              <div class="card card-chart">
-                                                <div class="card-body">
-                                                  <h4 class="card-title">Costo total: <%=ventas.totalPrecio%></h4>
+                                            <div class="card-footer">
+                                              <div class="row">
+                                                <div class="col-md-12">
+                                                  <h6 class="card-category">Tipo de costo</h6>
+                                                </div>
+                                                <div class="col-md-12">
+                                                  <i class="fa fa-circle text-info"></i> Costo total fruta
+                                                  <i class="fa fa-circle text-danger"></i> Costo total transporte
+                                                  <i class="fa fa-circle text-warning"></i> Costo total impuesto
                                                 </div>
                                               </div>
                                             </div>
                                           </div>
-                                          <h2 class="card-title mb-4">Costos globales</h2>
-                                          <div class="row">
-                                            
-                                            <div class="col-md-4">
-                                              <div class="card card-chart">
-                                                <div class="card-header card-header-warning">
-                                                  AQUI
-                                                </div>
-                                                <div class="card-body">
-                                                  <h4 class="card-title">Costo total de frutas</h4>
-                                                  <p class="card-category"> <%=ventas.totalFruta%></p>
-                                                </div>
-                                                <div class="card-footer">
-                                                  <div class="row">
-                                                    <div class="col-md-12">
-                                                      <h6 class="card-category">Tipo de costo</h6>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                      <i class="fa fa-circle text-info"></i> Costo total fruta
-                                                      <i class="fa fa-circle text-warning"></i> Costo total transporte
-                                                      <i class="fa fa-circle text-danger"></i> Costo total impuesto
-                                                    </div>
-                                                  </div>
-                                                </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <div class="card">
+                                            <div class="card-header card-header-icon card-header-success">
+                                              <div class="card-icon">
+                                                <i class="material-icons">timeline</i>
+                                              </div>
+                                              <h4 class="card-title">Total de comisiones</h4>
+                                            </div>
+                                            <div class="card-body">
+                                              <div>
+                                                <canvas id="Chart_comision"></canvas>
                                               </div>
                                             </div>
-                                            <div class="col-md-4">
-                                              <div class="card card-chart">
-                                                <div class="card-body">
-                                                  <h4 class="card-title">Costo total de transportes</h4>
-                                                  <p class="card-category"> <%=ventas.totalTransporte%></p>
+                                            <div class="card-footer">
+                                              <div class="row">
+                                                <div class="col-md-12">
+                                                  <h6 class="card-category">Tipo de comisión</h6>
                                                 </div>
-                                              </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                              <div class="card card-chart">
-                                                <div class="card-body">
-                                                  <h4 class="card-title">Costo total de impuestos</h4>
-                                                  <p class="card-category"> <%=ventas.totalImpuestos%></p>
+                                                <div class="col-md-12">
+                                                  <i class="fa fa-circle text-info"></i> Comisión servicio
+                                                  <i class="fa fa-circle text-danger"></i> Comisión empresa
                                                 </div>
                                               </div>
                                             </div>
                                           </div>
-                                          <div class="row">
-                                            <div class="col-md-12">
-                                              <div class="card">
-                                                <div class="card-header card-header-icon card-header-info">
-                                                  <div class="card-icon">
-                                                    <i class="material-icons">timeline</i>
-                                                  </div>
-                                                  <h4 class="card-title">Gráfico de comisionesComisión servicios:
-                                                    <small>  <%=ventas.totalComisionS%></small>
-                                                  </h4>
-                                                  <h4 class="card-title">Comisión empresas:
-                                                    <small>  <%=ventas.totalComisionE%></small>
-                                                  </h4>
-                                                </div>
-                                                <div class="card-body">
-                                                  <div id="simpleBarChart" class="ct-chart"></div>
-                                                </div>
-                                                <div class="card-footer">
-                                                  <div class="row">
-                                                    <div class="col-md-12">
-                                                      <h6 class="card-category">Tipo de comisión</h6>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                      <i class="fa fa-circle text-info"></i> Comisión servicio
-                                                      <i class="fa fa-circle text-warning"></i> Comisión empresa
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
+                                        </div>
+                                      </div>
                                     </div>
-                                  <% } %>
                                 </div>
 
                               <!--Aqui comienza el lugar de subastas-->
@@ -182,7 +173,7 @@
                                               <div class="card card-chart">
                                                 <div class="card-body">
                                                   <%for(var subastaF of SubastaFTotalActivos) {%>
-                                                  <h4 class="card-title">Total casos activos:</h4>
+                                                  <h4 class="card-title">Total subastas abiertas:</h4>
                                                   <p class="card-category"><%=subastaF.totalActivos%></p>
                                                   <% } %>
                                                 </div>
@@ -192,7 +183,7 @@
                                               <div class="card card-chart">
                                                 <div class="card-body">
                                                   <%for(var subastaF of SubastaFTotalInactivos) {%>
-                                                  <h4 class="card-title">Total casos eliminados</h4>
+                                                  <h4 class="card-title">Total subastas cerradas</h4>
                                                   <p class="card-category"><%=subastaF.totalInactivos%></p>
                                                   <% } %>
                                                 </div>
@@ -205,7 +196,7 @@
                                               <div class="card card-chart">
                                                 <div class="card-body">
                                                   <%for(var subastas of TotalSubastasFPD) {%>
-                                                    <h4 class="card-title ">Total Subastas Transportes del día:</h4>
+                                                    <h4 class="card-title ">Subastas de frutas creadas hoy</h4>
                                                     <p class="card-category"><%=subastas.totalSubastaDia%></p>
                                                   <% } %>
                                                 </div>
@@ -215,7 +206,7 @@
                                               <div class="card card-chart">
                                                 <div class="card-body">
                                                   <%for(var subastas of TotalSubastasFPM) {%>
-                                                    <h4 class="card-title ">Total Subastas Transportes del mes:</h4>
+                                                    <h4 class="card-title ">Subastas de frutas creadas este mes</h4>
                                                     <p class="card-category"><%=subastas.totalSubastasMensuales%></p>
                                                   <% } %>
                                                 </div>
@@ -225,7 +216,7 @@
                                               <div class="card card-chart">
                                                 <div class="card-body">
                                                   <%for(var subastas of TotalSubastasFPA) {%>
-                                                    <h4 class="card-title ">Total Subastas Transportes del año:</h4>
+                                                    <h4 class="card-title ">Subastas de frutas creadas este año</h4>
                                                     <p class="card-category"><%=subastas.totalSubastaAño%></p>
                                                   <% } %>
                                                 </div>
@@ -252,7 +243,7 @@
                                               <div class="card card-chart">
                                                 <div class="card-body">
                                                 <%for(var subastaT of SubastaTActivo) {%>
-                                                  <h4 class="card-title">Total casos activos:</h4>
+                                                  <h4 class="card-title">Total subastas abiertas:</h4>
                                                   <p class="card-category"><%=subastaT.totalActivos%></p>
                                                 <% } %>
                                                 </div>
@@ -262,7 +253,7 @@
                                               <div class="card card-chart">
                                                 <div class="card-body">
                                                   <%for(var subastaT of SubastaTInactivo) {%>
-                                                  <h4 class="card-title">Total casos eliminados</h4>
+                                                  <h4 class="card-title">Total subastas cerradas</h4>
                                                   <p class="card-category"><%=subastaT.totalInactivos%></p>
                                                   <% } %>
                                                 </div>
@@ -276,7 +267,7 @@
                                               <div class="card card-chart">
                                                 <div class="card-body">
                                                   <%for(var subastas of TotalSubastasTPD) {%>
-                                                    <h4 class="card-title ">Total Subastas Transportes del día:</h4>
+                                                    <h4 class="card-title ">Subastas de transportes creadas hoy</h4>
                                                     <p class="card-category"><%=subastas.totalSubastaDia%></p>
                                                   <% } %>
                                                 </div>
@@ -286,7 +277,7 @@
                                               <div class="card card-chart">
                                                 <div class="card-body">
                                                   <%for(var subastas of TotalSubastasTPM) {%>
-                                                    <h4 class="card-title ">Total Subastas Transportes del mes:</h4>
+                                                    <h4 class="card-title ">Subastas de transportes creadas este mes</h4>
                                                     <p class="card-category"><%=subastas.totalSubastasMensuales%></p>
                                                   <% } %>
                                                 </div>
@@ -296,7 +287,7 @@
                                               <div class="card card-chart">
                                                 <div class="card-body">
                                                   <%for(var subastas of TotalSubastasTPA) {%>
-                                                    <h4 class="card-title ">Total Subastas Transportes del año:</h4>
+                                                    <h4 class="card-title ">Subastas de transporte creadas este año</h4>
                                                     <p class="card-category"><%=subastas.totalSubastaAño%></p>
                                                   <% } %>
                                                 </div>
@@ -317,8 +308,7 @@
                                         <div class="card card-chart">
                                           <div class="card-body">
                                             <%for(var productos of TotalProductosPD) {%>
-                                              <h4 class="card-title">Total productos del día:</h4>
-                                              <p class="card-category"><%=productos.totalProductoDia%></p>
+                                              <h4 class="card-title">Productos creados hoy: <%=productos.totalProductoDia%></h4>
                                             <% } %>
                                           </div>
                                         </div>
@@ -327,8 +317,7 @@
                                         <div class="card card-chart">
                                           <div class="card-body">
                                             <%for(var productos of TotalProductosPM) {%>
-                                              <h4 class="card-title">Total productos del mes:</h4>
-                                              <p class="card-category"><%=productos.totalProductoMensuales%></p>
+                                              <h4 class="card-title">Productos creados este mes: <%=productos.totalProductoMensuales%></h4>
                                             <% } %>
                                           </div>
                                         </div>
@@ -337,8 +326,7 @@
                                         <div class="card card-chart">
                                           <div class="card-body">
                                             <%for(var productos of TotalProductosPA) {%>
-                                              <h4 class="card-title">Total productos del año:</h4>
-                                              <p class="card-category"><%=productos.totalProductoAño%></p>
+                                              <h4 class="card-title">Productos creados este año: <%=productos.totalProductoAño%></h4>
                                             <% } %>
                                           </div>
                                         </div>
@@ -348,7 +336,7 @@
                                     <div class="row">
                                       <div class="col-md-6">
                                         <div class="card card-chart">
-                                          <div class="card-header card-header-icon card-header-warning">
+                                          <div class="card-header card-header-icon card-header-primary">
                                             <div class="card-icon">
                                               <i class="material-icons">pie_chart</i>
                                             </div>
@@ -372,10 +360,9 @@
                                           </div>
                                         </div>
                                       </div>
-
                                       <div class="col-md-6">
                                         <div class="card card-chart">
-                                          <div class="card-header card-header-icon card-header-warning">
+                                          <div class="card-header card-header-icon card-header-success">
                                             <div class="card-icon">
                                               <i class="material-icons">pie_chart</i>
                                             </div>
@@ -389,14 +376,14 @@
                                           <div class="card-footer">
                                             <div class="row">
                                               <div class="col-md-12">
-                                                <h6 class="card-category">Calidades</h6>
+                                                <h6 class="card-category">Legenda</h6>
                                               </div>
                                               <div class="col-md-12">
-                                                <i class="fa fa-circle text-info"></i> Primera
-                                                <i class="fa fa-circle text-danger"></i>Segunda
-                                                <i class="fa fa-circle text-warning"></i>Tercera
-                                                <i class="fa fa-circle text-default"></i>Cuarta
-                                                <i class="fa fa-circle text-primary"></i>Quinta
+                                                <i class="fa fa-circle text-info"></i> Primera calidad
+                                                <i class="fa fa-circle text-danger"></i>Segunda calidad
+                                                <i class="fa fa-circle text-warning"></i>Tercera calidad
+                                                <i class="fa fa-circle text-success"></i>Cuarta calidad
+                                                <i class="fa fa-circle text-primary"></i>Quinta calidad
                                               </div>
                                             </div>
                                           </div>
@@ -415,15 +402,75 @@
 <%- include('partials/footer.ejs') %>
 
 <script>
-  const labels_producto = [
-    'Productos activos',
-    'Productos inactivos',
-  ];
-  const data_producto = {
-    labels: labels_producto,
+  const data_costos = {
+    labels: ['Costo total fruta', 'Costo total transporte', 'Costo total impuesto'],
     datasets: [{
       label: '',
-      backgroundColor: 'rgb(255, 99, 132)',
+      backgroundColor: [
+        'rgb(0, 188, 212)',
+        'rgb(244, 67, 54)',
+        'rgb(255, 152, 0)',
+      ],
+      borderColor: 'rgb(255, 99, 132)',
+      data: [
+      '<%=valor_total_fruta%>', 
+      '<%=valor_total_transporte%>',
+      '<%=valor_total_impuesto%>'
+      ],
+    }]
+  };
+  
+  const config_costos = {
+    type: 'bar',
+    data: data_costos,
+    options: {}
+  };
+
+  const Chart_costos = new Chart(
+    document.getElementById('Chart_costos'),
+    config_costos
+  );
+</script>
+
+<script>
+  const data_comision = {
+    labels: ['Comisión servicio', 'Comisión empresa'],
+    datasets: [{
+      label: '',
+      backgroundColor: [
+        'rgb(0, 188, 212)',
+        'rgb(244, 67, 54)',
+      ],
+      borderColor: 'rgb(255, 99, 132)',
+      data: [
+      '<%=valor_total_comision_servicio%>', 
+      '<%=valor_total_comision_empresa%>'
+      ],
+    }]
+  };
+  
+  const config_comision = {
+    type: 'bar',
+    data: data_comision,
+    options: {}
+  };
+
+  const Chart_comision = new Chart(
+    document.getElementById('Chart_comision'),
+    config_comision
+  );
+</script>
+
+
+<script>
+  const data_producto = {
+    labels: ['Productos activos', 'Productos inactivos'],
+    datasets: [{
+      label: '',
+      backgroundColor: [
+        'rgb(0, 188, 212)',
+        'rgb(244, 67, 54)',
+      ],
       borderColor: 'rgb(255, 99, 132)',
       data: [
       '<%=valor_productos_activos%>', 
@@ -444,19 +491,19 @@
   );
 </script>
 
+
 <script>
-  const labels_producto_calidad = [
-    'Primera',
-    'Segunda',
-    'Tercera',
-    'Cuarta',
-    'Quinta',
-  ];
   const data_producto_calidad = {
-    labels: labels_producto_calidad,
+    labels: ['Primera calidad', 'Segunda calidad', 'Tercera calidad', 'Cuarta calidad', 'Quinta calidad'],
     datasets: [{
       label: '',
-      backgroundColor: 'rgb(255, 99, 132)',
+      backgroundColor: [
+        'rgb(0, 188, 212)',
+        'rgb(244, 67, 54)',
+        'rgb(255, 152, 0)',
+        'rgb(76, 175, 80)',
+        'rgb(156, 39, 176)',
+      ],
       borderColor: 'rgb(255, 99, 132)',
       data: [
       '<%=valor_calidad_primeraCalidad%>', 
