@@ -132,9 +132,6 @@
                                                             <% if(pedido.fk_id_estado == 3){ %>
                                                                 <a href="/subasta_fruta/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Ver subasta</button></a>
                                                             <% } %>
-                                                            <% if(pedido.fk_id_estado == 4){ %>
-                                                                <a href="../api_subastas/crearSubastaTransporte/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Iniciar subasta</button></a>
-                                                            <% } %>
                                                             <% if(pedido.fk_id_estado == 5){ %>
                                                                 <a href="/subasta_transporte/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Ver subasta</button></a>
                                                             <% } %>
