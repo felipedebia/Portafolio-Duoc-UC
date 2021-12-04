@@ -153,7 +153,7 @@ router.get('/ventasTotal', async (req, res) => {
     
       binds = {};
       //sql = "select count(id_ventaD) as totalDeVentas, to_char(sum(costo_fruta),'$999,999') as totalFruta, to_char(sum(costo_transporte),'$999,999') as totalTransporte, to_char(sum(costo_impuestos),'$999,999') as totalImpuestos, to_char(sum(comision_servicio),'$999,999') as totalComisionS, to_char(sum(comision_empresa),'$999,999') as totalComisionE, to_char(sum(precio_final),'$999,999') as totalPrecio from venta_detalle";
-      sql = "select count(id_ventaD) as totalDeVentas, sum(costo_fruta) as totalFruta, sum(costo_transporte) as totalTransporte, sum(costo_impuestos) as totalImpuestos, sum(comision_servicio) as totalComisionS, sum(comision_empresa) as totalComisionE, sum(precio_final) as totalPrecio from venta_detalle";
+      sql = "select count(id_ventaD) as totalDeVentas, sum(costo_fruta) as totalFruta, sum(costo_transporte) as totalTransporte, sum(costo_impuestos) as totalImpuestos, sum(comision_servicio) as totalComisionS, sum(comision_empresa) as totalComisionE, to_char(sum(precio_final),'$999,999') as totalPrecio from venta_detalle";
       result = await settings.OpenConnection(sql, binds, true);
   
       VentasTotal = [];
