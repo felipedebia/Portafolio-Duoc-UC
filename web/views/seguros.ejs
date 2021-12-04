@@ -53,7 +53,7 @@
                                                             <div class="modal-body">
                                                               <span><strong>Nombre de la empresa:</strong> <%= seguro.nombre_empresa %></span></br></br>
                                                               <span><strong>Fecha de inicio:</strong> <%= seguro.fecha_inicio %></span></br></br>
-                                                              <span><strong>Fecha de termino:</strong> <%= seguro.fecha_termino %></span></br></br>
+                                                              <span><strong>Fecha de término:</strong> <%= seguro.fecha_termino %></span></br></br>
                                                               <span><strong>Estado del seguro:</strong> <%= seguro.fk_texto_estado %></span>
                                                             </div>
                                                             <div class="modal-footer">
@@ -78,7 +78,9 @@
                                                         </td>
                                                         <td>
                                                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalVerSeguro<%= seguro.id_seguro %>">Ver seguro</button>
-                                                            <a href="../api_seguros/anularSeguro/<%= seguro.id_seguro %>"><button type="button" class="btn btn-primary btn-sm">Anular</button></a>
+                                                            <% if(seguro.fk_id_estado == 1){ %>
+                                                                <a href="../api_seguros/anularSeguro/<%= seguro.id_seguro %>"><button type="button" class="btn btn-primary btn-sm">Anular</button></a>
+                                                            <% } %>
                                                         </td>
                                                     </tr>
                                                 <% } %>
@@ -94,9 +96,9 @@
                                                 <div class="row">
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                                         <div class="form-group my-label required">
-                                                            <label>Nombre de Empresa</label>
+                                                            <label>Nombre de la empresa</label>
                                                             <input class="form-control mb-4" id="nombre_empresa" type="text" name="nombre_empresa" maxLength="25" required>
-                                                            <div class="invalid-feedback">Ingresa Nombre de la Empresa</div>
+                                                            <div class="invalid-feedback">Ingresa nombre de la empresa</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -105,14 +107,14 @@
                                                         <div class="form-group my-label required">
                                                             <label>Fecha de inicio</label>
                                                             <input class="form-control mb-4" id="inputFechaInicio" type="date" name="fecha_inicio" required>
-                                                            <div class="invalid-feedback">Ingresa Fecha de inicio</div>
+                                                            <div class="invalid-feedback">Ingresa fecha de inicio</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                                         <div class="form-group my-label required">
-                                                            <label>Fecha de termino</label>
+                                                            <label>Fecha de término</label>
                                                             <input class="form-control mb-4" id="inputFechaTermino" type="date" name="fecha_termino" required>
-                                                            <div class="invalid-feedback">Ingresa Fecha de termino</div>
+                                                            <div class="invalid-feedback">Ingresa fecha de término</div>
                                                         </div>
                                                     </div>
                                                 </div>
