@@ -44,7 +44,7 @@
                                                   <div id="roundedLineChart" class="ct-chart"></div>
                                                 </div>
                                                 <div class="card-body">
-                                                  <h4 class="card-title">Numero total de ventas: <%=ventas.totalDeVentas%></h4>
+                                                  <h4 class="card-title">Total de ventas: <%=ventas.totalDeVentas%></h4>
                                                   
                                                 </div>
                                               </div>
@@ -59,7 +59,7 @@
                                                   <div id="straightLinesChart" class="ct-chart"></div>
                                                 </div>
                                                 <div class="card-body">
-                                                  <h4 class="card-title">Total costo de frutas:</h4>
+                                                  <h4 class="card-title">Costo total de frutas</h4>
                                                   <p class="card-category"> <%=ventas.totalFruta%></p>
                                                 </div>
                                               </div>
@@ -70,7 +70,7 @@
                                                   <div id="straightLinesChart" class="ct-chart"></div>
                                                 </div>
                                                 <div class="card-body">
-                                                  <h4 class="card-title">Total costo de transportes:</h4>
+                                                  <h4 class="card-title">Costo total de transportes</h4>
                                                   <p class="card-category"> <%=ventas.totalTransporte%></p>
                                                 </div>
                                               </div>
@@ -81,7 +81,7 @@
                                                   <div id="straightLinesChart" class="ct-chart"></div>
                                                 </div>
                                                 <div class="card-body">
-                                                  <h4 class="card-title">Total costo de impuestos:</h4>
+                                                  <h4 class="card-title">Costo total de impuestos</h4>
                                                   <p class="card-category"> <%=ventas.totalImpuestos%></p>
                                                 </div>
                                               </div>
@@ -94,7 +94,7 @@
                                                   <div class="card-icon">
                                                     <i class="material-icons">timeline</i>
                                                   </div>
-                                                  <h4 class="card-title">Comision servicios:
+                                                  <h4 class="card-title">Comisión servicios:
                                                     <small>  <%=ventas.totalComisionS%></small>
                                                   </h4>
                                                 </div>
@@ -109,7 +109,7 @@
                                                   <div class="card-icon">
                                                     <i class="material-icons">timeline</i>
                                                   </div>
-                                                  <h4 class="card-title">Comision empresas:
+                                                  <h4 class="card-title">Comisión empresas:
                                                     <small>  <%=ventas.totalComisionE%></small>
                                                   </h4>
                                                 </div>
@@ -171,7 +171,7 @@
                                                 </div>
                                                 <div class="card-body">
                                                   <%for(var subastaF of SubastaFTotalActivos) {%>
-                                                  <h4 class="card-title">Total de casos activos:</h4>
+                                                  <h4 class="card-title">Total casos activos:</h4>
                                                   <p class="card-category"><%=subastaF.totalActivos%></p>
                                                   <% } %>
                                                 </div>
@@ -200,7 +200,7 @@
                                                 </div>
                                                 <div class="card-body">
                                                   <%for(var subastas of TotalSubastasFPD) {%>
-                                                    <h4 class="card-title ">Total Subastas Transportes del dia:</h4>
+                                                    <h4 class="card-title ">Total Subastas Transportes del día:</h4>
                                                     <p class="card-category"><%=subastas.totalSubastaDia%></p>
                                                   <% } %>
                                                 </div>
@@ -259,7 +259,7 @@
                                                 </div>
                                                 <div class="card-body">
                                                 <%for(var subastaT of SubastaTActivo) {%>
-                                                  <h4 class="card-title">Total de casos activos:</h4>
+                                                  <h4 class="card-title">Total casos activos:</h4>
                                                   <p class="card-category"><%=subastaT.totalActivos%></p>
                                                 <% } %>
                                                 </div>
@@ -289,7 +289,7 @@
                                                 </div>
                                                 <div class="card-body">
                                                   <%for(var subastas of TotalSubastasTPD) {%>
-                                                    <h4 class="card-title ">Total Subastas Transportes del dia:</h4>
+                                                    <h4 class="card-title ">Total Subastas Transportes del día:</h4>
                                                     <p class="card-category"><%=subastas.totalSubastaDia%></p>
                                                   <% } %>
                                                 </div>
@@ -384,7 +384,7 @@
                                               </div>
                                               <div class="card-body">
                                                 <%for(var productos of TotalProductosPD) {%>
-                                                  <h4 class="card-title">Total productos del dia:</h4>
+                                                  <h4 class="card-title">Total productos del día:</h4>
                                                   <p class="card-category"><%=productos.totalProductoDia%></p>
                                                 <% } %>
                                               </div>
@@ -427,7 +427,7 @@
                                                 <div class="card-icon">
                                                   <i class="material-icons">pie_chart</i>
                                                 </div>
-                                                <h4 class="card-title">Total de productos segun su calidad</h4>
+                                                <h4 class="card-title">Total de productos según su calidad</h4>
                                               </div>
                                               <div class="card-body">
                                                 <div id="chartPreferences" class="ct-chart"></div>
@@ -470,6 +470,8 @@
         </div>
     </div>
 <%- include('partials/footer.ejs') %>
+
+<script src="../js/demo.js"></script>
 
 <script>
     $(document).ready(function() {
