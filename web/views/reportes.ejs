@@ -27,6 +27,26 @@
   <% } %>
 
 
+  <%for(var subastaF of RepSubastaF) {%>
+    <% var valor_subastasf_total = subastaF.total; %>
+  <% } %>
+  <%for(var subastaT of SubastaTTotal) {%>
+    <% var valor_subastast_total = subastaT.total; %>
+  <% } %>
+  <%for(var subastaF of SubastaFTotalActivos) {%>
+    <% var valor_subastasf_abierta = subastaF.totalActivos; %>
+  <% } %>
+  <%for(var subastaF of SubastaFTotalInactivos) {%>
+    <% var valor_subastasf_cerrada = subastaF.totalInactivos; %>
+  <% } %>
+  <%for(var subastaT of SubastaTActivo) {%>
+    <% var valor_subastast_abierta = subastaT.totalActivos; %>
+  <% } %>
+  <%for(var subastaT of SubastaTInactivo) {%>
+    <% var valor_subastast_cerrada = subastaT.totalInactivos; %>
+  <% } %>
+
+
   <%for(var ventas of VentasTotal) {%> 
     <% 
       var valor_total_ventas = ventas.totalDeVentas;
@@ -39,6 +59,7 @@
       var valor_total_comision_empresa = ventas.totalComisionE; 
     %>
   <% } %>
+
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -149,161 +170,126 @@
                                       </div>
                                     </div>
                                 </div>
-
-                              <!--Aqui comienza el lugar de subastas-->
                                 <div class="tab-pane" id="graficosDeSubastas">
                                     <div class="card-body">
-                                      <h2 class="card-title mb-4"> Datos Subastas frutas </h2>
-                                          <!--DIV SUBASTA TOTAL-->
-                                          <div class="row">
-                                            <div class="col-md-4">
-                                              <div class="card card-chart">
-                                                <div class="card-body">
-                                                  <%for(var subastaF of RepSubastaF) {%>
-                                                  <h4 class="card-title">Total de subastas Frutas: <%=subastaF.total%></h4>
-                                                   
-                                                  
-                                                  <% } %>
+                                      <div class="row">
+                                        <div class="col-md-6">
+                                          <div class="card">
+                                            <div class="card-header card-header-icon card-header-primary">
+                                              <div class="card-icon">
+                                                <i class="material-icons">timeline</i>
+                                              </div>
+                                              <h4 class="card-title">Total de subastas</h4>
+                                            </div>
+                                            <div class="card-body">
+                                              <div>
+                                                <canvas id="Chart_total_subastas"></canvas>
+                                              </div>
+                                            </div>
+                                            <div class="card-footer">
+                                              <div class="row">
+                                                <div class="col-md-12">
+                                                  <h6 class="card-category">Tipo de subasta</h6>
+                                                </div>
+                                                <div class="col-md-12">
+                                                  <i class="fa fa-circle text-info"></i> Subastas frutas
+                                                  <i class="fa fa-circle text-danger"></i> Subastas empresas
                                                 </div>
                                               </div>
                                             </div>
                                           </div>
-                                          <!--DIV SUBASTA ACTIVOS E INACTIVOS-->
-                                          <div class="row">
-                                            <div class="col-md-4">
-                                              <div class="card card-chart">
-                                                <div class="card-body">
-                                                  <%for(var subastaF of SubastaFTotalActivos) {%>
-                                                  <h4 class="card-title">Total subastas abiertas:</h4>
-                                                  <p class="card-category"><%=subastaF.totalActivos%></p>
-                                                  <% } %>
-                                                </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <div class="card">
+                                            <div class="card-header card-header-icon card-header-success">
+                                              <div class="card-icon">
+                                                <i class="material-icons">timeline</i>
+                                              </div>
+                                              <h4 class="card-title">Estados de subastas</h4>
+                                            </div>
+                                            <div class="card-body">
+                                              <div>
+                                                <canvas id="Chart_total_subastas_estados"></canvas>
                                               </div>
                                             </div>
-                                            <div class="col-md-4">
-                                              <div class="card card-chart">
-                                                <div class="card-body">
-                                                  <%for(var subastaF of SubastaFTotalInactivos) {%>
-                                                  <h4 class="card-title">Total subastas cerradas</h4>
-                                                  <p class="card-category"><%=subastaF.totalInactivos%></p>
-                                                  <% } %>
+                                            <div class="card-footer">
+                                              <div class="row">
+                                                <div class="col-md-12">
+                                                  <h6 class="card-category">Tipo de subasta</h6>
                                                 </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <!--DIV SUBASTA FRUTA DIA/MES/AÑO-->
-                                          <div class="row">
-                                            <div class="col-md-4">
-                                              <div class="card card-chart">
-                                                <div class="card-body">
-                                                  <%for(var subastas of TotalSubastasFPD) {%>
-                                                    <h4 class="card-title ">Subastas de frutas creadas hoy</h4>
-                                                    <p class="card-category"><%=subastas.totalSubastaDia%></p>
-                                                  <% } %>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                              <div class="card card-chart">
-                                                <div class="card-body">
-                                                  <%for(var subastas of TotalSubastasFPM) {%>
-                                                    <h4 class="card-title ">Subastas de frutas creadas este mes</h4>
-                                                    <p class="card-category"><%=subastas.totalSubastasMensuales%></p>
-                                                  <% } %>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                              <div class="card card-chart">
-                                                <div class="card-body">
-                                                  <%for(var subastas of TotalSubastasFPA) {%>
-                                                    <h4 class="card-title ">Subastas de frutas creadas este año</h4>
-                                                    <p class="card-category"><%=subastas.totalSubastaAño%></p>
-                                                  <% } %>
-                                                </div>
-                                              </div>
-                                            </div>
-
-                                          </div>
-                                          <h2 class="card-title mb-4"> Datos Subastas Transporte </h2>
-                                          <!-- div transporte total-->
-                                          <div class="row">
-                                            <div class="col-md-4">
-                                              <div class="card card-chart">
-                                                <div class="card-body">
-                                                  <%for(var subastaT of SubastaTTotal) {%>
-                                                    <h4 class="card-title">Total de subastas Transporte: <%=subastaT.total%></h4>
-                                                  <% } %>
+                                                <div class="col-md-12">
+                                                  <i class="fa fa-circle text-info"></i> Subastas abiertas
+                                                  <i class="fa fa-circle text-danger"></i> Subastas cerradas
                                                 </div>
                                               </div>
                                             </div>
                                           </div>
-                                          <!--div total activos e inactivos-->
-                                          <div class="row">
-                                            <div class="col-md-4">
-                                              <div class="card card-chart">
-                                                <div class="card-body">
-                                                <%for(var subastaT of SubastaTActivo) {%>
-                                                  <h4 class="card-title">Total subastas abiertas:</h4>
-                                                  <p class="card-category"><%=subastaT.totalActivos%></p>
+                                        </div>
+                                      </div>
+                                        <h2 class="card-title mb-4">Subastas Frutas</h2>
+                                        <div class="row">
+                                          <div class="col-md-4">
+                                            <div class="card card-chart">
+                                              <div class="card-body">
+                                                <%for(var subastas of TotalSubastasFPD) {%>
+                                                  <h4 class="card-title ">Subastas de frutas creadas hoy: <%=subastas.totalSubastaDia%></h4>
                                                 <% } %>
-                                                </div>
                                               </div>
                                             </div>
-                                            <div class="col-md-4">
-                                              <div class="card card-chart">
-                                                <div class="card-body">
-                                                  <%for(var subastaT of SubastaTInactivo) {%>
-                                                  <h4 class="card-title">Total subastas cerradas</h4>
-                                                  <p class="card-category"><%=subastaT.totalInactivos%></p>
-                                                  <% } %>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            
                                           </div>
-                                          <!--Inicio div fechas-->
-                                          <div class="row">
-                                            <div class="col-md-4">
-                                              <div class="card card-chart">
-                                                <div class="card-body">
-                                                  <%for(var subastas of TotalSubastasTPD) {%>
-                                                    <h4 class="card-title ">Subastas de transportes creadas hoy</h4>
-                                                    <p class="card-category"><%=subastas.totalSubastaDia%></p>
-                                                  <% } %>
-                                                </div>
+                                          <div class="col-md-4">
+                                            <div class="card card-chart">
+                                              <div class="card-body">
+                                                <%for(var subastas of TotalSubastasFPM) {%>
+                                                  <h4 class="card-title ">Subastas de frutas creadas este mes: <%=subastas.totalSubastasMensuales%></h4>
+                                                <% } %>
                                               </div>
                                             </div>
-                                            <div class="col-md-4">
-                                              <div class="card card-chart">
-                                                <div class="card-body">
-                                                  <%for(var subastas of TotalSubastasTPM) {%>
-                                                    <h4 class="card-title ">Subastas de transportes creadas este mes</h4>
-                                                    <p class="card-category"><%=subastas.totalSubastasMensuales%></p>
-                                                  <% } %>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                              <div class="card card-chart">
-                                                <div class="card-body">
-                                                  <%for(var subastas of TotalSubastasTPA) {%>
-                                                    <h4 class="card-title ">Subastas de transporte creadas este año</h4>
-                                                    <p class="card-category"><%=subastas.totalSubastaAño%></p>
-                                                  <% } %>
-                                                </div>
-                                              </div>
-                                            </div>
-
                                           </div>
-                                          
-
+                                          <div class="col-md-4">
+                                            <div class="card card-chart">
+                                              <div class="card-body">
+                                                <%for(var subastas of TotalSubastasFPA) {%>
+                                                  <h4 class="card-title ">Subastas de frutas creadas este año: <%=subastas.totalSubastaAño%></h4>
+                                                <% } %>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <h2 class="card-title mb-4">Subastas Transporte</h2>
+                                        <div class="row">
+                                          <div class="col-md-4">
+                                            <div class="card card-chart">
+                                              <div class="card-body">
+                                                <%for(var subastas of TotalSubastasTPD) {%>
+                                                  <h4 class="card-title ">Subastas de transportes creadas hoy: <%=subastas.totalSubastaDia%></h4>
+                                                <% } %>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-md-4">
+                                            <div class="card card-chart">
+                                              <div class="card-body">
+                                                <%for(var subastas of TotalSubastasTPM) {%>
+                                                  <h4 class="card-title ">Subastas de transportes creadas este mes: <%=subastas.totalSubastasMensuales%></h4>
+                                                <% } %>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-md-4">
+                                            <div class="card card-chart">
+                                              <div class="card-body">
+                                                <%for(var subastas of TotalSubastasTPA) {%>
+                                                  <h4 class="card-title ">Subastas de transporte creadas este año: <%=subastas.totalSubastaAño%></h4>
+                                                <% } %>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <!--aqui comienzan los productos-->
                                 <div class="tab-pane" id="graficosDeProductos">
                                   <div class="card-body">
-                                    <!-- div Productos del dia/mes/año-->
                                     <div class="row">
                                       <div class="col-md-4">
                                         <div class="card card-chart">
@@ -333,7 +319,6 @@
                                         </div>
                                       </div>
                                     </div>
-                                    <!--Primer div cantidad total-->
                                     <div class="row">
                                       <div class="col-md-6">
                                         <div class="card card-chart">
@@ -341,7 +326,7 @@
                                             <div class="card-icon">
                                               <i class="material-icons">pie_chart</i>
                                             </div>
-                                            <h4 class="card-title">Productos</h4>
+                                            <h4 class="card-title">Productos según su estado</h4>
                                           </div>
                                           <div class="card-body">
                                             <div>
@@ -367,7 +352,7 @@
                                             <div class="card-icon">
                                               <i class="material-icons">pie_chart</i>
                                             </div>
-                                            <h4 class="card-title">Total de productos según su calidad</h4>
+                                            <h4 class="card-title">Productos según su calidad</h4>
                                           </div>
                                           <div class="card-body">
                                             <div>
@@ -402,6 +387,7 @@
     </div>
 <%- include('partials/footer.ejs') %>
 
+<!-- Inicio gráficos Ventas -->
 <script>
   const data_costos = {
     labels: ['Costo total fruta', 'Costo total transporte', 'Costo total impuesto'],
@@ -461,8 +447,73 @@
     config_comision
   );
 </script>
+<!-- Fin gráficos Ventas -->
 
+<!-- Inicio gráficos Subastas -->
+<script>
+  const data_total_subastas = {
+    labels: ['Subastas Frutas', 'Subastas Transportes'],
+    datasets: [{
+      label: '',
+      backgroundColor: [
+        'rgb(0, 188, 212)',
+        'rgb(244, 67, 54)',
+      ],
+      borderColor: 'rgb(255, 99, 132)',
+      data: [
+      '<%=valor_subastasf_total%>', 
+      '<%=valor_subastast_total%>'
+      ],
+    }]
+  };
+  
+  const config_total_subastas = {
+    type: 'pie',
+    data: data_total_subastas,
+    options: {}
+  };
 
+  const Chart_total_subastas = new Chart(
+    document.getElementById('Chart_total_subastas'),
+    config_total_subastas
+  );
+</script>
+
+<script>
+  const data_total_subastas_estados = {
+    labels: ['Subastas frutas abiertas', 'Subastas frutas cerradas', 'Subastas transportes abiertas', 'Subastas transportes cerradas'],
+    datasets: [{
+      label: '',
+      backgroundColor: [
+        'rgb(0, 188, 212)',
+        'rgb(244, 67, 54)',
+        'rgb(0, 188, 212)',
+        'rgb(244, 67, 54)',
+      ],
+      borderColor: 'rgb(255, 99, 132)',
+      data: [
+      '<%=valor_subastasf_abierta%>', 
+      '<%=valor_subastasf_cerrada%>',
+      '<%=valor_subastast_abierta%>',
+      '<%=valor_subastast_cerrada%>'
+      ],
+    }]
+  };
+  
+  const config_total_subastas_estados = {
+    type: 'bar',
+    data: data_total_subastas_estados,
+    options: {}
+  };
+
+  const Chart_total_subastas_estados = new Chart(
+    document.getElementById('Chart_total_subastas_estados'),
+    config_total_subastas_estados
+  );
+</script>
+<!-- Fin gráficos Subastas -->
+
+<!-- Inicio gráficos Productos -->
 <script>
   const data_producto = {
     labels: ['Productos activos', 'Productos inactivos'],
@@ -491,7 +542,6 @@
     config_producto
   );
 </script>
-
 
 <script>
   const data_producto_calidad = {
@@ -527,6 +577,7 @@
     config_producto_calidad
   );
 </script>
+<!-- Fin gráficos Productos -->
 
 </body>
 </html>
