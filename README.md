@@ -64,10 +64,6 @@ Iniciar node en la carpeta web
 - PARA EL FINAL: Sanitizar todas las entradas de texto
 - PARA EL FINAL: Comprobación de rango para entrar a las páginas
 
-## Otros
-- http://localhost:3000/plantilla
-- http://localhost:3000/plantilla_con_tabla
-
 ### Menú Administrador
 - http://localhost:3000/usuarios
 - http://localhost:3000/contratos
