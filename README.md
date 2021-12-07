@@ -48,8 +48,7 @@ Iniciar node en la carpeta web
 - Cambiar contraseña encriptado al hecho por fabian
 - Cambiar a try catch archivo rutas.js
 - Implementar subida de archivos a Pago como en Contrato
-- Terminar templates de correos (faltan 2 de oferta)
-
+- Terminar templates de correos
 - Algunas páginas se caen si no se usa el perfil principal mari.barreraa@duocuc.cl
 - Arreglar error de si no existen pedidos, pagina pedidos se cae
 - Arreglar error de si no tienes pedidos, pagina mispedidos se cae

@@ -209,7 +209,7 @@ router.get("/aceptarOfertaTransporte/:id_ofertaT", async (req, res) => {
         if (resultado3) {
           // Actualizamos subasta transporte a cerrado
           sql4 = "UPDATE subasta_transporte SET fk_id_estado=2 WHERE id_subastat = :value_id_subastaT";
-          resultado4 = await settings.OpenConnection(sql3, [value_id_subastaT], true);
+          resultado4 = await settings.OpenConnection(sql4, [value_id_subastaT], true);
 
           if (resultado4) {
             // Redireccionamos a subasta_transporte
