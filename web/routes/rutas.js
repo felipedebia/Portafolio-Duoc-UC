@@ -82,34 +82,28 @@ router.post('/auth', async (req, res) => {
 router.get('/dashboard', function(req, res) {
 	if (req.session.isLoggedIn) {
 
-		var contadoresData = [
-			{
-				
-			}
-		];
-
 		switch (req.session.tipo_usuario) {
 			case 1:
 				functions_reportes.TotalFrutas();
 				functions_reportes.TotalUsuarios();
 				functions_reportes.TotalSubastas();
 				functions_reportes.TotalVentas();
-				res.render('dashboard', { title: 'Panel de Administración - Maipo Grande', data:contadoresData, navActive: 'Dashboard' });
+				res.render('dashboard', { title: 'Panel de Administración - Maipo Grande', navActive: 'Dashboard' });
 			  	break;
 			case 2:
-				res.render('dashboard_transportista', { title: 'Panel de Administración - Maipo Grande', data:contadoresData, navActive: 'Dashboard' });
+				res.render('dashboard_transportista', { title: 'Panel de Administración - Maipo Grande', navActive: 'Dashboard' });
 			  	break;
 			case 3:
-				res.render('dashboard_cliente', { title: 'Panel de Administración - Maipo Grande', data:contadoresData, navActive: 'Dashboard' });
+				res.render('dashboard_cliente', { title: 'Panel de Administración - Maipo Grande', navActive: 'Dashboard' });
 			  	break;
 			case 4:
-				res.render('dashboard_cliente', { title: 'Panel de Administración - Maipo Grande', data:contadoresData, navActive: 'Dashboard' });
+				res.render('dashboard_cliente', { title: 'Panel de Administración - Maipo Grande', navActive: 'Dashboard' });
 			  	break;
 			case 5:
-				res.render('dashboard_productor', { title: 'Panel de Administración - Maipo Grande', data:contadoresData, navActive: 'Dashboard' });
+				res.render('dashboard_productor', { title: 'Panel de Administración - Maipo Grande', navActive: 'Dashboard' });
 			  break;
 			case 6:
-				res.render('reportes', { title: 'Reportes - Maipo Grande', data:contadoresData, navActive: 'Dashboard' });
+				res.render('reportes', { title: 'Reportes - Maipo Grande', navActive: 'Dashboard' });
 			  	break;
 		}
 
@@ -588,7 +582,7 @@ router.get('/crearSubastaTransporte/:id_subastaT', function(req, res) {
 
 
 // CRUD MISPEDIDOS
-router.get('/mispedidos', async function(req, res) {
+router.get('/mispedidos', function(req, res) {
     if (req.session.isLoggedIn) {
         functions.ListarPedidos();
         res.render('misPedidos', { title: 'Mis pedidos - Maipo Grande', navActive: 'MisPedidos' });
@@ -647,13 +641,12 @@ router.get('/ordenes_bodegas', function(req, res) {
 });
 
 
-router.get('/reportes_bodega/:id_ordenB', async function(req, res) {
+router.get('/reportes_bodega/:id_ordenB', function(req, res) {
 	if (req.session.isLoggedIn) {
 		const { id_ordenB } = req.params;
 
 		functions.ListarReportesBodegas();
 		res.render('reportes_bodega', { title: 'Reportes de Ordenes - Maipo Grande', fk_id_ordenB: id_ordenB, navActive: 'Ordenes' });
-		
 		
 	} else {
 		res.redirect('/');
@@ -675,7 +668,7 @@ router.get('/ordenes_transportes', function(req, res) {
 
 // CRUD OFERTAS
 
-router.get('/misofertas_productor', async function(req, res) {
+router.get('/misofertas_productor', function(req, res) {
     if (req.session.isLoggedIn) {
 		functions.ListarOfertasProductores();
         res.render('misOfertas_productor', { title: 'Mis ofertas Productor - Maipo Grande', navActive: 'MisOfertas_Productor' });
@@ -686,7 +679,7 @@ router.get('/misofertas_productor', async function(req, res) {
 });
 
 
-router.get('/misofertas_transporte', async function(req, res) {
+router.get('/misofertas_transporte', function(req, res) {
     if (req.session.isLoggedIn) {
 		functions.ListarOfertasTransportes();
         res.render('misOfertas_transporte', { title: 'Mis ofertas Transporte - Maipo Grande', navActive: 'MisOfertas_Transporte' });
@@ -737,10 +730,52 @@ router.get('/crearOfertaProductor/:id_subastaF', async function(req, res, next) 
 
 
 // CRUD VENTAS
-router.get('/ventas', function(req, res) {
+router.get('/ventas', async function(req, res) {
     if (req.session.isLoggedIn) {
-		functions.ListarVentas();
-        res.render('Ventas', { title: 'Ventas - Maipo Grande', navActive: 'Ventas' });
+		
+		// Hacemos una consulta trayendo los costos de transporte
+		binds = { };
+		sql1 = "SELECT v.id_venta, p.id_pedido, sf.id_subastaf, op.id_ofertaP, op.cantidad * precio_por_kilo FROM venta v JOIN pedido p ON p.id_pedido = v.id_venta JOIN subasta_fruta sf ON sf.fk_id_pedido = p.id_pedido JOIN oferta_productor op ON op.fk_id_subastaf = p.id_pedido WHERE op.fk_id_estado = 2";
+		resultado1 = await settings.OpenConnection(sql1, binds, false);
+
+		// Si los datos estan correctos
+		if (resultado1.rows.length > 0) {
+
+			// Asignamos los valores de la consulta a las variables
+			var precio_frutaData = [
+				{
+					id_subastaf: resultado1.rows[0][3],
+					costo_final_fruta: resultado1.rows[0][4]
+				}
+			];
+			console.log(precio_frutaData)
+
+			// Hacemos una consulta trayendo los costos de fruta
+			binds = { };
+			sql2 = "SELECT v.id_venta, p.id_pedido, st.id_subastat, ot.id_ofertaT, ot.precio_final FROM venta v JOIN pedido p ON p.id_pedido = v.id_venta JOIN subasta_transporte st ON st.fk_id_pedido = p.id_pedido JOIN oferta_transporte ot ON ot.fk_id_subastat = st.id_subastat WHERE ot.fk_id_estado = 2";
+			resultado2 = await settings.OpenConnection(sql2, binds, false);
+
+			// Si los datos estan correctos
+			if (resultado2.rows.length > 0) {
+
+				// Asignamos los valores de la consulta a las variables
+				var precio_transporteData = [
+					{
+						id_subastat: resultado2.rows[0][3],
+						costo_final_transporte: resultado2.rows[0][4]
+					}
+				];
+				console.log(precio_transporteData)
+				// Mostramos la vista
+				functions.ListarVentas();
+				res.render('Ventas', { title: 'Ventas - Maipo Grande', dataprecio:precio_frutaData, datatransporte:precio_transporteData, navActive: 'Ventas' });
+
+			}
+			
+		} else {
+			res.send('Error al obtener datos de la base de datos');
+		}
+
     } else {
         res.redirect('/');
     }
@@ -873,7 +908,7 @@ router.get('/miscompras', function(req, res) {
 
 
 // CRUD INFORMES
-router.get('/informes/:id_venta', async function(req, res) {
+router.get('/informes/:id_venta', function(req, res) {
 	if (req.session.isLoggedIn) {
 		const { id_venta } = req.params;
 
