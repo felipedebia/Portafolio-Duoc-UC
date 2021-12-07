@@ -53,16 +53,13 @@ Iniciar node en la carpeta web
 - Algunas páginas se caen si no se usa el perfil principal mari.barreraa@duocuc.cl
 - Arreglar error de si no existen pedidos, pagina pedidos se cae
 - Arreglar error de si no tienes pedidos, pagina mispedidos se cae
-
-- PARA PRESENTACIÓN: NO ELIMINAR UNA FRUTA QUE ESTAMOS USANDO O SE MUERE XD
-- Agregar peso maximo a la subida de documentos (contrato, seguro y pago)
-
-- Agregar limite carasteres (2000) a descripción en informes (vista)
-- Arreglar contador de ofertas en subastas, el if de ninguno o si hay ofertas no funciona bien
-
-- PARA EL FINAL: Agregar validaciones de fechas a los formularios (como en crear contrato)
-- PARA EL FINAL: Sanitizar todas las entradas de texto
 - PARA EL FINAL: Comprobación de rango para entrar a las páginas
+- PARA PRESENTACIÓN: NO ELIMINAR UNA FRUTA QUE ESTAMOS USANDO O SE MUERE XD
+
+## Extras:
+- Agregar peso maximo a la subida de documentos (contrato, seguro y pago)
+- Agregar limite carasteres (2000) a descripción en informes (vista)
+- Sanitizar todas las entradas de texto
 
 ### Menú Administrador
 - http://localhost:3000/usuarios
