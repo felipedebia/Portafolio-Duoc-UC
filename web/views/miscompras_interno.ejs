@@ -15,6 +15,18 @@
                                                 <div class="ripple-container"></div>
                                             </a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#listadofrutarestante" data-toggle="tab">
+                                                <i class="material-icons">format_list_bulleted</i> Listado de fruta restante
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#comprarfrutarestante" data-toggle="tab">
+                                                <i class="material-icons">format_list_bulleted</i> Comprar fruta restante
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -146,6 +158,57 @@
                                                     </tr>
                                                     <% } %>
                                                 <% } %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="listadofrutarestante">
+                                    <div class="card-body table-responsive">
+                                        <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                                            <thead class="text-info">
+                                                <th scope="col">Producto</th>
+                                                <th scope="col">Fecha de creación</th>
+                                                <th scope="col">Cantidad</th>
+                                                <th scope="col">Opciones</th>
+                                            </thead>
+                                            <tbody>
+                                                <% for(var frutaRestante of FrutasRestantes) { %>
+                                                    <div class="modal fade" id="modalVerFrutaRestante<%= frutaRestante.id_frutaR %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">ID Fruta Restante #<%= frutaRestante.id_frutaR %></h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <span><strong>Fecha de creación:</strong> <%= frutaRestante.fecha_creacion %></span></br>
+                                                                    <span><strong>Fecha de última actualización:</strong> <%= frutaRestante.fecha_actualizacion %></span></br>
+                                                                    <span><strong>Cantidad:</strong> <%= frutaRestante.saldo_cantidad %></span></br>
+                                                                    <li><strong>Fruta:</strong> fruta - <strong>Calidad:</strong> calidad - <strong>Cantidad:</strong> cantidad</li>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <tr>
+                                                        <th scope="row">
+                                                            <%= frutaRestante.id_frutaR %>
+                                                        </th>
+                                                        <td>
+                                                            <%= frutaRestante.fecha_actualizacion %>
+                                                        </td>
+                                                        <td>
+                                                            <%= frutaRestante.saldo_cantidad %>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalVerFrutaRestante<%= frutaRestante.id_frutaR %>">Ver detalles</button>
+                                                        </td>
+                                                    </tr>
+                                                    <% } %>
                                             </tbody>
                                         </table>
                                     </div>

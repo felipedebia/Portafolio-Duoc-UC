@@ -33,6 +33,7 @@
                                             </thead>
                                             <tbody>
                                                 <% for(var venta of Ventas) { %>
+                                                    <% if (venta.pedido_fk_id_usuario == session.id_usuario){ %>
                                                     <div class="modal fade" id="modalVentaDetalle<%= venta.id_venta %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
@@ -91,6 +92,7 @@
                                                             <a href="/informes/<%= venta.id_venta %>"><button type="button" class="btn btn-warning btn-sm">Ver informes</button></a>
                                                         </td>
                                                     </tr>
+                                                    <% } %>
                                                 <% } %>
                                             </tbody>
                                         </table>

@@ -858,8 +858,13 @@ router.get('/reportes', function(req, res) {
 // CRUD Mis Compras
 router.get('/miscompras', function(req, res) {
     if (req.session.isLoggedIn) {
-        functions.ListarMisCompras();
-        res.render('miscompras', { title: 'Mis compras - Maipo Grande', navActive: 'MisCompras' });
+		functions.ListarMisCompras();
+		// Si es cliente interno = local
+		if (req.session.tipo_usuario == 4) {
+			res.render('miscompras_interno', { title: 'Mis compras - Maipo Grande', navActive: 'MisCompras' });
+		} else {
+			res.render('miscompras', { title: 'Mis compras - Maipo Grande', navActive: 'MisCompras' });
+		}
     } else {
         res.redirect('/');
     }

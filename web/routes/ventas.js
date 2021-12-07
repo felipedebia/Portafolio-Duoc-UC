@@ -12,7 +12,7 @@ router.get('/listarVentas', async (req, res) => {
   try {
   
     binds = {};
-    sql = "SELECT venta.id_venta, venta.fecha_creacion, venta.fecha_actualizacion, venta.fk_id_pedido, venta.fk_id_seguro, venta.fk_id_tipo, tipo_venta.nombre, venta.fk_id_estado, estado_venta.descripcion FROM venta JOIN pedido ON venta.fk_id_pedido = pedido.id_pedido JOIN seguro on venta.fk_id_seguro = seguro.id_seguro JOIN tipo_venta ON venta.fk_id_tipo = tipo_venta.id_tipo JOIN estado_venta ON venta.fk_id_estado = estado_venta.id_estado";
+    sql = "SELECT venta.id_venta, venta.fecha_creacion, venta.fecha_actualizacion, venta.fk_id_pedido, venta.fk_id_seguro, venta.fk_id_tipo, tipo_venta.nombre, venta.fk_id_estado, estado_venta.descripcion, pedido.fk_id_usuario FROM venta JOIN pedido ON venta.fk_id_pedido = pedido.id_pedido JOIN seguro on venta.fk_id_seguro = seguro.id_seguro JOIN tipo_venta ON venta.fk_id_tipo = tipo_venta.id_tipo JOIN estado_venta ON venta.fk_id_estado = estado_venta.id_estado";
     result = await settings.OpenConnection(sql, binds, true);
 
     Ventas = [];
@@ -27,7 +27,8 @@ router.get('/listarVentas', async (req, res) => {
             "fk_id_tipo": venta[5],
             "fk_texto_tipo": venta[6],
             "fk_id_estado": venta[7],
-            "fk_texto_estado": venta[8]
+            "fk_texto_estado": venta[8],
+            "pedido_fk_id_usuario": venta[9]
         }
 
         Ventas.push(ventaSchema);

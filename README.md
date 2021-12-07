@@ -102,7 +102,7 @@ Iniciar node en la carpeta web
 
 ## Tipo Contrato
 - 1 Productor
-- 2 Cliente interno
+- 2 Cliente Interno
 - 3 Cliente Externo
 - 4 Transportista
 
