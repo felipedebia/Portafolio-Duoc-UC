@@ -119,11 +119,11 @@ router.post('/crearVentaDetalle/:id_venta', async (req, res) => {
   try {
 
     var fk_id_venta_bind = req.params.id_venta;
-    var { costo_impuestos,comision_servicio,comision_empresa, costo_fruta, costo_transporte } = req.body;
-    var precio_final = (costo_impuestos + comision_servicio +comision_empresa+costo_fruta+costo_transporte);
+    var { costo_impuestos, comision_servicio, comision_empresa, costo_fruta, costo_transporte } = req.body;
+    var precio_final = parseInt(costo_impuestos) + parseInt(comision_servicio) + parseInt(comision_empresa) + parseInt(costo_fruta) + parseInt(costo_transporte);
 
     sql1 = "INSERT INTO venta_detalle(costo_fruta, costo_transporte,costo_impuestos,comision_servicio,comision_empresa,precio_final,fk_id_venta) VALUES (:costo_fruta,:costo_transporte,:costo_impuestos,:comision_servicio,:comision_empresa,:precio_final,:fk_id_venta_bind)";
-    resultado1 = await settings.OpenConnection(sql1, [costo_fruta, costo_transporte,costo_impuestos,comision_servicio,comision_empresa,precio_final,fk_id_venta_bind], true);
+    resultado1 = await settings.OpenConnection(sql1, [costo_fruta, costo_transporte, costo_impuestos, comision_servicio, comision_empresa, precio_final, fk_id_venta_bind], true);
 
     // Si tuvo conexión a la DB
     if(resultado1) {
