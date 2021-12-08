@@ -96,8 +96,10 @@
                                                                                             return 0;
                                                                                         });
                                                                                     %>
-                                                                                    <% for(var seguro of Seguros){ %>
-                                                                                        <option name="fk_id_seguro" value="<%=seguro.id_seguro%>"><%=seguro.nombre_empresa%></option>
+                                                                                    <% for(var seguro of Seguros) { %>
+                                                                                        <% if(seguro.fk_id_estado == 1) { %>
+                                                                                            <option name="fk_id_seguro" value="<%=seguro.id_seguro%>"><%=seguro.nombre_empresa%></option>
+                                                                                        <% } %>
                                                                                     <% } %>
                                                                                 </select>
                                                                             </div>
