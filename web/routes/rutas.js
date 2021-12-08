@@ -741,15 +741,7 @@ router.get('/ventas', async function(req, res) {
 		// Si los datos estan correctos
 		if (resultado1.rows.length > 0) {
 
-			// Asignamos los valores de la consulta a las variables
-			var precio_frutaData = [
-				{
-					id_subastaf: resultado1.rows[0][3],
-					costo_final_fruta: resultado1.rows[0][4]
-				}
-			];
-			console.log(precio_frutaData)
-
+			console.log(resultado1.rows);
 			// Hacemos una consulta trayendo los costos de fruta
 			binds = { };
 			sql2 = "SELECT v.id_venta, p.id_pedido, st.id_subastat, ot.id_ofertaT, ot.precio_final FROM venta v JOIN pedido p ON p.id_pedido = v.id_venta JOIN subasta_transporte st ON st.fk_id_pedido = p.id_pedido JOIN oferta_transporte ot ON ot.fk_id_subastat = st.id_subastat WHERE ot.fk_id_estado = 2";
@@ -758,17 +750,10 @@ router.get('/ventas', async function(req, res) {
 			// Si los datos estan correctos
 			if (resultado2.rows.length > 0) {
 
-				// Asignamos los valores de la consulta a las variables
-				var precio_transporteData = [
-					{
-						id_subastat: resultado2.rows[0][3],
-						costo_final_transporte: resultado2.rows[0][4]
-					}
-				];
-				console.log(precio_transporteData)
+				console.log(resultado2.rows);
 				// Mostramos la vista
 				functions.ListarVentas();
-				res.render('Ventas', { title: 'Ventas - Maipo Grande', dataprecio:precio_frutaData, datatransporte:precio_transporteData, navActive: 'Ventas' });
+				res.render('Ventas', { title: 'Ventas - Maipo Grande', dataPrecio:resultado1.rows, dataTransporte:resultado2.rows, navActive: 'Ventas' });
 
 			}
 			

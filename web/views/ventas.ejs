@@ -33,44 +33,10 @@
                                             </thead>
                                             <tbody>
                                                 <% for(var venta of Ventas) { %>
-                                                    <div class="modal fade" id="modalVentaDetalle<%= venta.id_venta %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">ID Venta #<%= venta.id_venta %></h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <span><strong>Fecha de creación:</strong> <%= venta.fecha_creacion %></span></br>
-                                                                    <span><strong>Fecha de última actualización:</strong> <%= venta.fecha_actualizacion %></span></br>
-                                                                    <div class="mt-4">
-                                                                        <h4><strong>Detalles de la venta</strong></h4>
-                                                                        <ul>
-                                                                            <% for(var venta_detalle of VentaDetalles){ %>
-                                                                                <%if(venta_detalle.fk_id_venta == venta.id_venta){%>
-                                                                                    <li><strong>Costos de frutas:</strong> <%= venta_detalle.costo_fruta %></li>
-                                                                                    <li><strong>Costos de transportes:</strong> <%= venta_detalle.costo_transporte %></li>
-                                                                                    <li><strong>Costos de impuestos:</strong> <%= venta_detalle.costo_impuestos %></li>
-                                                                                    <li><strong>Comisión de servicio:</strong> <%= venta_detalle.comision_servicio %></li>
-                                                                                    <li><strong>Comisión de empresa:</strong> <%= venta_detalle.comision_empresa %></li>
-                                                                                    <li><strong>PRECIO FINAL:</strong> <%= venta_detalle.precio_final %></li>
-                                                                                <% } %>
-                                                                            <% } %>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal fade" id="modalGenerarDetalle<%= venta.id_venta %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <form action="/api_ventas/crearVentaDetalle/<%= venta.id_venta %>" method="POST">
+                                                    <% if(venta.fk_id_estado >= 2) { %>
+                                                        <div class="modal fade" id="modalVentaDetalle<%= venta.id_venta %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title" id="exampleModalLabel">ID Venta #<%= venta.id_venta %></h5>
                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -81,46 +47,93 @@
                                                                         <span><strong>Fecha de creación:</strong> <%= venta.fecha_creacion %></span></br>
                                                                         <span><strong>Fecha de última actualización:</strong> <%= venta.fecha_actualizacion %></span></br>
                                                                         <div class="mt-4">
-                                                                            <h4><strong>Detalles de la venta</strong></h4></br>
-                                                                            <% for(var subasta_fruta of SubastasFrutas){ %>
-                                                                                <%if(subasta_fruta.fk_id_pedido == venta.id_venta && venta.fk_id_estado == 2){%>
-                                                                                    <span><strong>Costo de frutas:</strong> <%= subasta_fruta.id_venta %> </span></br>
-                                                                                    <span><strong>Costo de transportes:</strong> <%= subasta_fruta.id_venta %> </span></br></br>
+                                                                            <h4><strong>Detalles de la venta</strong></h4>
+                                                                            <ul>
+                                                                                <% for(var venta_detalle of VentaDetalles){ %>
+                                                                                    <%if(venta_detalle.fk_id_venta == venta.id_venta){%>
+                                                                                        <li><strong>Costos de frutas:</strong> <%= venta_detalle.costo_fruta %></li>
+                                                                                        <li><strong>Costos de transportes:</strong> <%= venta_detalle.costo_transporte %></li>
+                                                                                        <li><strong>Costos de impuestos:</strong> <%= venta_detalle.costo_impuestos %></li>
+                                                                                        <li><strong>Comisión de servicio:</strong> <%= venta_detalle.comision_servicio %></li>
+                                                                                        <li><strong>Comisión de empresa:</strong> <%= venta_detalle.comision_empresa %></li>
+                                                                                        <li><strong>PRECIO FINAL:</strong> <%= venta_detalle.precio_final %></li>
+                                                                                    <% } %>
                                                                                 <% } %>
-                                                                            <% } %>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col-xs-6 col-sm-6 col-md-6">
-                                                                                <div class="form-group my-label required">
-                                                                                    <label>Costos de impuesto</label>
-                                                                                    <input class="form-control mb-4" id="costo_impuestos" type="text" name="costo_impuestos" maxlength="8" required>
-                                                                                    <div class="invalid-feedback">Ingresa Costos de Impuesto</div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-xs-6 col-sm-6 col-md-6">
-                                                                                <div class="form-group my-label required">
-                                                                                    <label>Comisión de servicio</label>
-                                                                                    <input class="form-control mb-4" id="comision_servicio" type="text" name="comision_servicio" maxlength="8" required>
-                                                                                    <div class="invalid-feedback">Ingresa Comisión de Servicio</div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-xs-6 col-sm-6 col-md-6">
-                                                                                <div class="form-group my-label required">
-                                                                                    <label>Comisión de empresa</label>
-                                                                                    <input class="form-control mb-4" id="comision_empresa" type="text" name="comision_empresa" maxlength="8" required>
-                                                                                    <div class="invalid-feedback">Ingresa Comisión de Empresa</div>
-                                                                                </div>
-                                                                            </div>
+                                                                            </ul>
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button class="btn btn-primary" type="submit">Guardar detalles</button>
                                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                                                     </div>
-                                                                </form>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    <% } %>
+                                                    <% if(venta.fk_id_estado == 1) { %>
+                                                        <div class="modal fade" id="modalGenerarDetalle<%= venta.id_venta %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <form action="/api_ventas/crearVentaDetalle/<%= venta.id_venta %>" method="POST">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">ID Venta #<%= venta.id_venta %></h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <span><strong>Fecha de creación:</strong> <%= venta.fecha_creacion %></span></br>
+                                                                            <span><strong>Fecha de última actualización:</strong> <%= venta.fecha_actualizacion %></span></br>
+                                                                            <div class="mt-4">
+                                                                                <h4><strong>Detalles de la venta</strong></h4></br>
+
+                                                                                <div class="row">
+                                                                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                                                                        <div class="form-group">
+                                                                                            <label>Costos de frutas</label>
+                                                                                            <input class="form-control mb-4" id="costo_frutas" type="text" name="costo_frutas" value="<%= dataPrecio[0][4] %>" required disabled>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                                                                        <div class="form-group">
+                                                                                            <label>Costos de transportes</label>
+                                                                                            <input class="form-control mb-4" id="costo_transportes" type="text" name="costo_transportes" value="<%= dataTransporte[0][4] %>" required disabled>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                                                                    <div class="form-group my-label required">
+                                                                                        <label>Costos de impuesto</label>
+                                                                                        <input class="form-control mb-4" id="costo_impuestos" type="text" name="costo_impuestos" maxlength="8" required>
+                                                                                        <div class="invalid-feedback">Ingresa Costos de Impuesto</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                                                                    <div class="form-group my-label required">
+                                                                                        <label>Comisión de servicio</label>
+                                                                                        <input class="form-control mb-4" id="comision_servicio" type="text" name="comision_servicio" maxlength="8" required>
+                                                                                        <div class="invalid-feedback">Ingresa Comisión de Servicio</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                                                                    <div class="form-group my-label required">
+                                                                                        <label>Comisión de empresa</label>
+                                                                                        <input class="form-control mb-4" id="comision_empresa" type="text" name="comision_empresa" maxlength="8" required>
+                                                                                        <div class="invalid-feedback">Ingresa Comisión de Empresa</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button class="btn btn-primary" type="submit">Guardar detalles</button>
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <% } %>
                                                     <div class="modal fade" id="modalCrearOrdenBodega<%= venta.id_venta %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
