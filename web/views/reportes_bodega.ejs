@@ -51,10 +51,23 @@
                                                               </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                              <span><strong>Reporte de orden:</strong> <%= fk_id_ordenB %></span></br></br>
-                                                              <span><strong>Fecha de creación:</strong> <%= reporte.fecha_creacion %></span></br></br>
-                                                              <span><strong>Estado del reporte:</strong> <% if(reporte.estado_reporte == 1){ %> Si <% } else { %> No <% } %></span></br></br>
-                                                              <span><strong>Contenido del reporte:</strong></br></br> <%= reporte.descripcion %></span>
+                                                                <span><strong>Reporte de orden:</strong> <%= fk_id_ordenB %></span></br></br>
+                                                                <span><strong>Fecha de creación:</strong> <%= reporte.fecha_creacion %></span></br></br>
+                                                                <span><strong>Estado del reporte:</strong> <% if(reporte.estado_reporte == 1){ %> Si <% } else { %> No <% } %></span></br></br>
+                                                                <span><strong>Contenido del reporte:</strong></br></br><div id="descripcionDiv<%=reporte.id_reporteB%>"></div></span>
+
+                                                                <% var valor_descripcion = reporte.descripcion; %>
+
+                                                                <script>
+                                                                    window.addEventListener("load", pageFullyLoaded, false);
+    
+                                                                    function pageFullyLoaded(e) {
+                                                                        results = document.getElementById("descripcionDiv<%=reporte.id_reporteB%>")
+                                                                        results.innerHTML = '<%=valor_descripcion%>';
+                                                                        results.innerHTML = results.textContent;
+                                                                    }
+                                                                </script>
+
                                                             </div>
                                                             <div class="modal-footer">
                                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

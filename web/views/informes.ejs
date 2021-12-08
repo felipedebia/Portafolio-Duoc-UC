@@ -54,7 +54,20 @@
                                                               <span><strong>Informe de venta:</strong> <%= fk_id_venta %></span></br></br>
                                                               <span><strong>Fecha de creación:</strong> <%= informe.fecha_creacion %></span></br></br>
                                                               <span><strong>Fecha de última actualización:</strong> <%= informe.fecha_actualizacion %></span></br></br>
-                                                              <span><strong>Contenido del informe:</strong></br></br> <%= informe.descripcion %></span>
+                                                              <span><strong>Contenido del informe:</strong></br></br><div id="descripcionDiv<%=informe.id_informe%>"></div></span>
+
+                                                              <% var valor_descripcion = informe.descripcion; %>
+
+                                                              <script>
+                                                                  window.addEventListener("load", pageFullyLoaded, false);
+  
+                                                                  function pageFullyLoaded(e) {
+                                                                      results = document.getElementById("descripcionDiv<%=informe.id_informe%>")
+                                                                      results.innerHTML = '<%=valor_descripcion%>';
+                                                                      results.innerHTML = results.textContent;
+                                                                  }
+                                                              </script>
+                                                              
                                                             </div>
                                                             <div class="modal-footer">
                                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

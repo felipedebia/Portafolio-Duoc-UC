@@ -131,7 +131,11 @@ Iniciar node en la carpeta web
 - 1 Femenino
 - 2 Masculino
 
-## Estado orden - producto - reporteBodega
+# Estado orden Bodega - Transporte
+- 1 En curso
+- 2 Finalizado
+
+## Estado producto
 - 1 Activado
 - 2 Desactivado
 
@@ -184,7 +188,7 @@ Iniciar node en la carpeta web
 - 7 Finalizado
 - 8 Anulado
 
-## Estado Reporte (char)
+## Estado reporteBodega (char)
 - 1 no se
 - 2 no se
 
