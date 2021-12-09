@@ -49,7 +49,7 @@ router.get('/listarVentaDetalles', async(req, res) => {
   try {
 
     binds = {};
-    sql = "select id_ventaD, costo_fruta, costo_transporte, costo_impuestos, comision_servicio, comision_empresa, precio_final, fk_id_venta from venta_detalle";
+    sql = "select id_ventaD, costo_fruta, costo_transporte, costo_impuestos, comision_servicio, comision_empresa, precio_final, fk_id_venta, to_char(costo_fruta,'$9,999,999'), to_char(costo_transporte,'$9,999,999'), to_char(costo_impuestos,'$9,999,999'), to_char(comision_servicio,'$9,999,999'), to_char(comision_empresa,'$9,999,999'), to_char(precio_final,'$9,999,999') from venta_detalle";
     result = await settings.OpenConnection(sql, binds, true);
 
     VentaDetalles = [];
@@ -63,7 +63,13 @@ router.get('/listarVentaDetalles', async(req, res) => {
             "comision_servicio": detalle[4],
             "comision_empresa": detalle[5],
             "precio_final": detalle[6],
-            "fk_id_venta": detalle[7]
+            "fk_id_venta": detalle[7],
+            "costo_fruta_formato": detalle[8],
+            "costo_transporte_formato": detalle[9],
+            "costo_impuestos_formato": detalle[10],
+            "comision_servicio_formato": detalle[11],
+            "comision_empresa_formato": detalle[12],
+            "precio_final_formato": detalle[13]
         }
 
         VentaDetalles.push(detalleSchema);
