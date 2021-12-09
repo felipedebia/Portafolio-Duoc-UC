@@ -11,21 +11,24 @@ router.get('/listarFrutasRestantes', async (req, res) => {
     try {
   
         binds = {};
-        sql = "SELECT id_frutaR, fecha_creacion, fecha_actualizacion, saldo_cantidad, fk_id_producto FROM fruta_restante";
+        sql = "SELECT fr.id_frutaR, fr.fecha_creacion, fr.fecha_actualizacion, fr.saldo_cantidad, fr.fk_id_producto, f.nombre, fc.nombre, p.cantidad FROM fruta_restante fr JOIN producto p ON p.id_producto = fr.fk_id_producto JOIN fruta_calidad fc ON p.fk_id_calidad = fc.id_calidad JOIN fruta f ON f.id_fruta = p.fk_id_fruta";
         result = await settings.OpenConnection(sql, binds, true);
     
         FrutasRestantes = [];
     
-        result.rows.map(orden => {
-            let ordenSchema = {
-                "id_frutaR": orden[0],
-                "fecha_creacion": moment(orden[1]).format('DD-MM-YYYY'),
-                "fecha_actualizacion": moment(orden[2]).format('DD-MM-YYYY'),
-                "saldo_cantidad": orden[3],
-                "fk_id_producto": orden[4]
+        result.rows.map(fruta => {
+            let frutaSchema = {
+                "id_frutaR": fruta[0],
+                "fecha_creacion": moment(fruta[1]).format('DD-MM-YYYY'),
+                "fecha_actualizacion": moment(fruta[2]).format('DD-MM-YYYY'),
+                "saldo_cantidad": fruta[3],
+                "fk_id_producto": fruta[4],
+                "fruta_fk_nombre": fruta[5],
+                "frutacalidad_fk_nombre": fruta[6],
+                "producto_fk_cantidad": fruta[7]
             }
     
-            FrutasRestantes.push(FrutasRestantes);
+            FrutasRestantes.push(frutaSchema);
         })
         res.json({title: 'FrutasRestantes', 'mydata': FrutasRestantes});
         
