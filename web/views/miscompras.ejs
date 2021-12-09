@@ -108,7 +108,7 @@
                                                                     </div>
                                                                     <div class="col-xs-12 col-sm-12 col-md-12 mb-4">
                                                                         <span>Subir comprobante, formatos permitidos: JPG, JPEG, PNG y PDF</span>
-                                                                        <input type="file" id="url_comprobante" name="url_comprobante" onchange="return fileValidation()"/>
+                                                                        <input type="file" id="url_comprobante" name="url_comprobante" onchange="return fileValidation(this)"/>
                                                                         <input id="monto" name="monto" type="hidden" value="<%= miCompra.ventad_fk_precio_final %>">
                                                                     </div>
                                                                     <div class="modal-footer">
@@ -206,20 +206,30 @@
 </script>
 
 <script>
-    function fileValidation() {
-        var fileInput = 
-            document.getElementById('url_comprobante');
+    function fileValidation(input) {
+
+        var fileInput = document.getElementById('url_comprobante');
           
         var filePath = fileInput.value;
-      
-        // Allowing file type
-        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
-          
-        if (!allowedExtensions.exec(filePath)) {
-            alert('Archivo con formato no permitido');
-            fileInput.value = '';
-            return false;
-        } 
+
+        const fileSize = input.files[0].size / 1024 / 1024; // en MiB
+
+        // Comprobación de tamaño
+        if (fileSize > 2) {
+            alert('Archivo supera el tamaño máximo de 5 MiB');
+        } else {
+
+            // Comprobación de extensión
+            var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
+            
+            if (!allowedExtensions.exec(filePath)) {
+                alert('Archivo con formato no permitido');
+                fileInput.value = '';
+                return false;
+            } 
+
+        }
+
     }
 </script>
 

@@ -56,7 +56,6 @@ Iniciar node en la carpeta web
 - PARA PRESENTACIÓN: NO ELIMINAR UNA FRUTA QUE ESTAMOS USANDO O SE MUERE XD
 
 ## Extras:
-- Agregar peso maximo a la subida de documentos (contrato, seguro y pago)
 - Agregar limite carasteres (2000) a descripción en informes (vista)
 - Sanitizar todas las entradas de texto
 

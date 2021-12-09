@@ -12,7 +12,7 @@
                             <form action="../api_contratos/subirDocumento/<%= data[0].id_contrato%>" enctype="multipart/form-data" method="POST"> 
                                 <div class="drag-image mt-4">
                                     <div class="icon"><i class="material-icons" style="font-size: 50px">cloud_upload</i></div>
-                                    <input type="file" id="url_documento" name="url_documento" onchange="return fileValidation()"/>
+                                    <input type="file" id="url_documento" name="url_documento" onchange="return fileValidation(this)"/>
                                     <span>Formatos permitidos: DOC, DOCX, PDF, TXT</span>
                                 </div>
                                 <div class="col text-center">
@@ -28,20 +28,30 @@
 <%- include('partials/footer.ejs') %>
 
 <script>
-    function fileValidation() {
-        var fileInput = 
-            document.getElementById('url_documento');
+    function fileValidation(input) {
+
+        var fileInput = document.getElementById('url_documento');
           
         var filePath = fileInput.value;
-      
-        // Allowing file type
-        var allowedExtensions = /(\.doc|\.docx|\.pdf|\.txt)$/i;
-          
-        if (!allowedExtensions.exec(filePath)) {
-            alert('Archivo con formato no permitido');
-            fileInput.value = '';
-            return false;
-        } 
+
+        const fileSize = input.files[0].size / 1024 / 1024; // en MiB
+
+        // Comprobación de tamaño
+        if (fileSize > 2) {
+            alert('Archivo supera el tamaño máximo de 5 MiB');
+        } else {
+
+            // Comprobación de extensión
+            var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
+            
+            if (!allowedExtensions.exec(filePath)) {
+                alert('Archivo con formato no permitido');
+                fileInput.value = '';
+                return false;
+            } 
+
+        }
+
     }
 </script>
 
