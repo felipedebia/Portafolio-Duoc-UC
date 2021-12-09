@@ -38,6 +38,7 @@ Iniciar node en la carpeta web
 
 - FALTA PROCEDIMIENTOS VENTAS
 - CREAR FRUTA RESTANTE AL TERMINAR SUBASTA
+- COMPRAR FRUTA RESTANTE
 - DIFERENCIAR COSTOS DE FRUTA Y TRANSPORTE PARA CADA VENTA EN VENTA_DETALLE
 - Linea 168, 236 y 303 routes subastas
 - Linea 123 falta where fk_id_estado 1 routes subastas
@@ -47,7 +48,6 @@ Iniciar node en la carpeta web
 
 - Cambiar contraseña encriptado al hecho por fabian
 - Cambiar a try catch archivo rutas.js
-- Implementar subida de archivos a Pago como en Contrato
 - Terminar templates de correos
 - Algunas páginas se caen si no se usa el perfil principal mari.barreraa@duocuc.cl
 - Arreglar error de si no existen pedidos, pagina pedidos se cae
