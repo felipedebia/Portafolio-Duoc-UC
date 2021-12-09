@@ -124,7 +124,7 @@ router.get('/totalVentas', async (req, res) => {
     try {
     
       binds = {};
-      sql = "select to_char(sum(precio_final),'$999,999') as precioTotal from venta_detalle";
+      sql = "select to_char(sum(precio_final),'$999,999,999') as precioTotal from venta_detalle";
       result = await settings.OpenConnection(sql, binds, true);
   
       TotalVentas = [];
