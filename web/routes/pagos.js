@@ -54,7 +54,7 @@ router.get('/listarPagos', async(req, res) => {
 
 
 // Agregar
-router.post('/crearpago', uploadFile.single('url_documento'), async(req, res, next) => {
+router.post('/crearPago/:id_venta', uploadFile.single('url_comprobante'), async(req, res, next) => {
     try {
         
         const file = req.file
@@ -66,12 +66,17 @@ router.post('/crearpago', uploadFile.single('url_documento'), async(req, res, ne
 
         // Hacemos un insert agregando el nombre del archivo al campo url_documento
         var url_comprobante = req.file.filename;
-        var { monto, fk_id_venta, descripcion } = req.body;
+        var fk_id_venta = req.params.id_venta;
+        var { monto } = req.body;
         var fecha_pago = functions.obtenerFechaActual();
         var fk_id_tipo = 3;
+        var fk_id_usuario = req.session.id_usuario;
         
-        sql = "CALL PA_PAGO_CREAR(:monto, :fecha_pago, :url_comprobante, :descripcion, :fk_id_tipo)";
-        result = await settings.OpenConnection(sql, [monto, fecha_pago, url_comprobante, descripcion, fk_id_tipo], true);
+        sql = "CALL PA_PAGO_CREAR(:monto, :fecha_pago, :url_comprobante, :fk_id_tipo, :fk_id_usuario)";
+        result = await settings.OpenConnection(sql, [monto, fecha_pago, url_comprobante, fk_id_tipo, fk_id_usuario], true);
+
+        
+
 
         // Con esto tomamos el ultimo registro en la tabla pagos para crear tabla rel y redirigir al documentopago y pueda agregar el pago
         sql3 = "SELECT id_pago FROM (SELECT * FROM pago ORDER BY id_pago DESC ) WHERE rownum = 1";
@@ -79,6 +84,7 @@ router.post('/crearpago', uploadFile.single('url_documento'), async(req, res, ne
         var idPago = result2.rows[0];
 
         if (idPago) {
+            // Creamos la tabla relacional entre venta y pago
             var id_pago = idPago.toString();
             sql2 = "INSERT INTO rel_venta_pago(fk_id_venta, fk_id_pago) VALUES (:fk_id_venta, :id_pago)";
             await settings.OpenConnection(sql2, [fk_id_venta, id_pago], true);

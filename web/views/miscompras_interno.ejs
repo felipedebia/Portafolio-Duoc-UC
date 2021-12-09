@@ -93,13 +93,13 @@
                                                     </div>
                                                     <div class="modal fade" id="modalGenerarDetalle<%= miCompra.id_venta %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
-                                                            <form action="../api_miscompras/crearpago" enctype="multipart/form-data" method="POST"></form>
+                                                            <form action="../api_pagos/crearPago/<%= miCompra.id_venta %>" enctype="multipart/form-data" method="POST">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title" id="exampleModalLabel">ID Venta #<%= miCompra.id_venta %></h5>
                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <div class="mt-4">
@@ -119,14 +119,12 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-xs-12 col-sm-12 col-md-12 mb-4">
-                                                                        <span>Subir comprobante, formatos permitidos: DOC, DOCX, PDF</span>
-                                                                        <input type="file" id="url_documento" name="url_documento" />
+                                                                        <span>Subir comprobante, formatos permitidos: JPG, JPEG, PNG y PDF</span>
+                                                                        <input type="file" id="url_comprobante" name="url_comprobante" onchange="return fileValidation()"/>
+                                                                        <input id="monto" name="monto" type="hidden" value="<%= miCompra.ventad_fk_precio_final %>">
                                                                     </div>
-                                                                    <input id="fk_id_venta" name="fk_id_venta" type="hidden" value="<%= miCompra.id_venta %>">
-                                                                    <input id="monto" name="monto" type="hidden" value="<%= miCompra.ventad_fk_precio_final %>">
-                                                                    <input id="descripcion" name="descripcion" type="hidden" value="<%= session.id_usuario %>">
                                                                     <div class="modal-footer">
-                                                                        <button class="btn btn-primary" type="submit">Enviar comprobante</button>
+                                                                        <button class="btn btn-warning" type="submit">Enviar comprobante</button>
                                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                                                     </div>
                                                                 </div>
@@ -268,6 +266,24 @@
         });
         var table = $('#datatable').DataTable();
     });
+</script>
+
+<script>
+    function fileValidation() {
+        var fileInput = 
+            document.getElementById('url_comprobante');
+          
+        var filePath = fileInput.value;
+      
+        // Allowing file type
+        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
+          
+        if (!allowedExtensions.exec(filePath)) {
+            alert('Archivo con formato no permitido');
+            fileInput.value = '';
+            return false;
+        } 
+    }
 </script>
 
 </body>
