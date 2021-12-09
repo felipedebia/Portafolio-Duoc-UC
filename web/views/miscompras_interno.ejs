@@ -16,7 +16,7 @@
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#listadoFrutaRestante" data-toggle="tab">
+                                            <a class="nav-link" href="#listadoMisFrutasRestantes" data-toggle="tab">
                                                 <i class="material-icons">format_list_bulleted</i> Mis frutas restantes
                                                 <div class="ripple-container"></div>
                                             </a>
@@ -35,7 +35,7 @@
                             <div class="tab-content">
                                 <div class="tab-pane active" id="listadoVentas">
                                     <div class="card-body table-responsive">
-                                        <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                                        <table id="datatable_listadoVentas" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                             <thead class="text-info">
                                                 <th scope="col">Venta N°</th>
                                                 <th scope="col">Fecha de actualización</th>
@@ -160,9 +160,9 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="listadoFrutaRestante">
+                                <div class="tab-pane" id="listadoMisFrutasRestantes">
                                     <div class="card-body table-responsive">
-                                        <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                                        <table id="datatable_listadoMisFrutasRestantes" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                             <thead class="text-info">
                                                 <th scope="col">ID</th>
                                                 <th scope="col">Producto</th>
@@ -184,7 +184,7 @@
                                                                 <div class="modal-body">
                                                                     <span><strong>Fecha de creación:</strong> <%= frutaRestante.fecha_creacion %></span></br>
                                                                     <span><strong>Fecha de última actualización:</strong> <%= frutaRestante.fecha_actualizacion %></span></br>
-                                                                    <span><strong>Cantidad:</strong> <%= frutaRestante.saldo_cantidad %></span></br>
+                                                                    <span><strong>Cantidad:</strong> <%= frutaRestante.saldo_cantidad %></span></br></br>
                                                                     <li><strong>Fruta:</strong> <%= frutaRestante.fruta_fk_nombre %> - <strong>Calidad:</strong> <%= frutaRestante.frutacalidad_fk_nombre %> - <strong>Cantidad (en KG):</strong> <%= frutaRestante.producto_fk_cantidad %></li>
                                                                 </div>
                                                                 <div class="modal-footer">
@@ -217,7 +217,7 @@
                                 </div>
                                 <div class="tab-pane" id="comprarFrutaRestante">
                                     <div class="card-body table-responsive">
-                                        <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                                        <table id="datatable_comprarFrutaRestante" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                             <thead class="text-info">
                                                 <th scope="col">ID</th>
                                                 <th scope="col">Producto</th>
@@ -229,24 +229,26 @@
                                                 <% for(var frutaRestante of FrutasRestantes) { %>
                                                     <div class="modal fade" id="modalComprarFrutaRestante<%= frutaRestante.id_frutaR %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">ID Fruta Restante #<%= frutaRestante.id_frutaR %></h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
+                                                            <form action="../api_frutarestante/comprarFrutaRestante/<%= frutaRestante.id_frutaR %>" method="POST"></form>
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">ID Fruta Restante #<%= frutaRestante.id_frutaR %></h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <span><strong>Fecha de creación:</strong> <%= frutaRestante.fecha_creacion %></span></br>
+                                                                        <span><strong>Fecha de última actualización:</strong> <%= frutaRestante.fecha_actualizacion %></span></br>
+                                                                        <span><strong>Cantidad:</strong> <%= frutaRestante.saldo_cantidad %></span></br></br>
+                                                                        <li><strong>Fruta:</strong> <%= frutaRestante.fruta_fk_nombre %> - <strong>Calidad:</strong> <%= frutaRestante.frutacalidad_fk_nombre %> - <strong>Cantidad (en KG):</strong> <%= frutaRestante.producto_fk_cantidad %></li>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button class="btn btn-warning" type="submit">Comprar</button>
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="modal-body">
-                                                                    <span><strong>Fecha de creación:</strong> <%= frutaRestante.fecha_creacion %></span></br>
-                                                                    <span><strong>Fecha de última actualización:</strong> <%= frutaRestante.fecha_actualizacion %></span></br>
-                                                                    <span><strong>Cantidad:</strong> <%= frutaRestante.saldo_cantidad %></span></br>
-                                                                    <li><strong>Fruta:</strong> <%= frutaRestante.fruta_fk_nombre %> - <strong>Calidad:</strong> <%= frutaRestante.frutacalidad_fk_nombre %> - <strong>Cantidad (en KG):</strong> <%= frutaRestante.producto_fk_cantidad %></li>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button class="btn btn-warning" type="submit">Comprar</button>
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                                </div>
-                                                            </div>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                     <tr>
@@ -282,7 +284,7 @@
 
 <script>
     $(document).ready(function() {
-        $('#datatables').DataTable({
+        $('#datatable_listadoVentas').DataTable({
             dom: 'Bfrtip',
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'
