@@ -240,15 +240,6 @@ Iniciar node en la carpeta web
 | POST | http://localhost:3000/api_productos/anularProducto/:id_producto  | |
 | GET  | http://localhost:3000/producto/:id_producto  |  |
 
-## CRUD Pago
-| Tipo | URL | Retorna |
-| ------------- | ------------- | ------------- |
-| GET  | http://localhost:3000/pagos  |  |
-| GET  | http://localhost:3000/api_pagos/listarPagos  | JSON |
-| GET  | http://localhost:3000/modificarPago/:id_pago  |  |
-| POST | http://localhost:3000/api_pagos/eliminarPago/:id_pago  | |
-| GET  | http://localhost:3000/pago/:id_pago  |  |
-
 ## CRUD Seguro
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
@@ -374,3 +365,8 @@ Iniciar node en la carpeta web
 | Tipo | URL | Retorna |
 | ------------- | ------------- | ------------- |
 | GET  | http://localhost:3000/api_frutasrestantes/listarFrutasRestantes  | JSON |
+
+## CRUD Pago
+| Tipo | URL | Retorna |
+| ------------- | ------------- | ------------- |
+| GET  | http://localhost:3000/api_pagos/listarPagos  | JSON |

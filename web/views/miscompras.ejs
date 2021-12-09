@@ -51,25 +51,25 @@
                                                                             <% for(var venta_detalle of VentaDetalles){ %>
                                                                                 <%if(venta_detalle.fk_id_venta == miCompra.id_venta){%>
                                                                                     <li><strong>Costos de frutas:</strong>
-                                                                                        <%= venta_detalle.costo_fruta %>
+                                                                                        <%= venta_detalle.costo_fruta_formato %>
                                                                                     </li>
                                                                                     <li><strong>Costos de transportes:</strong>
-                                                                                        <%= venta_detalle.costo_transporte %>
+                                                                                        <%= venta_detalle.costo_transporte_formato %>
                                                                                     </li>
                                                                                     <li><strong>Costos de impuestos:</strong>
-                                                                                        <%= venta_detalle.costo_impuestos %>
+                                                                                        <%= venta_detalle.costo_impuestos_formato %>
                                                                                     </li>
                                                                                     <li><strong>Comisión de servicio:</strong>
-                                                                                        <%= venta_detalle.comision_servicio %>
+                                                                                        <%= venta_detalle.comision_servicio_formato %>
                                                                                     </li>
                                                                                     <li><strong>Comisión de empresa:</strong>
-                                                                                        <%= venta_detalle.comision_empresa %>
+                                                                                        <%= venta_detalle.comision_empresa_formato %>
                                                                                     </li>
                                                                                     <li><strong>PRECIO FINAL:</strong>
-                                                                                        <%= venta_detalle.precio_final %>
+                                                                                        <%= venta_detalle.precio_final_formato %>
                                                                                     </li>
-                                                                                    <% } %>
-                                                                                        <% } %>
+                                                                                <% } %>
+                                                                            <% } %>
                                                                         </ul>
                                                                     </div>
                                                                 </div>
@@ -81,7 +81,7 @@
                                                     </div>
                                                     <div class="modal fade" id="modalGenerarDetalle<%= miCompra.id_venta %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
-                                                            <form action="../api_miscompras/crearpago" enctype="multipart/form-data" method="POST"></form>
+                                                            <form action="../api_pagos/crearpago" enctype="multipart/form-data" method="POST"></form>
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title" id="exampleModalLabel">ID Venta #<%= miCompra.id_venta %></h5>
@@ -91,7 +91,7 @@
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <div class="mt-4">
-                                                                            <h4><strong>Total a pagar (CLP): $<%=miCompra.precio_final%></strong></h4>
+                                                                            <h4><strong>Total a pagar (CLP): $<%=miCompra.ventad_fk_precio_final_formato%></strong></h4>
                                                                         </div>
                                                                         <div class="row">
                                                                             <div class="col-xs-12 col-sm-12 col-md-12">
@@ -111,8 +111,7 @@
                                                                         <input type="file" id="url_documento" name="url_documento" />
                                                                     </div>
                                                                     <input id="fk_id_venta" name="fk_id_venta" type="hidden" value="<%= miCompra.id_venta %>">
-                                                                    <input id="monto" name="monto" type="hidden" value="<%= miCompra.precio_final %>">
-                                                                    <input id="descripcion" name="descripcion" type="hidden" value="<%= session.id_usuario %>">
+                                                                    <input id="monto" name="monto" type="hidden" value="<%= miCompra.ventad_fk_precio_final %>">
                                                                     <div class="modal-footer">
                                                                         <button class="btn btn-primary" type="submit">Enviar comprobante</button>
                                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
