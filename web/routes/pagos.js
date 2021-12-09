@@ -93,8 +93,10 @@ router.post('/crearPago/:id_venta', uploadFile.single('url_comprobante'), async(
                     console.log("[!] REL_VENTA_PAGO creada con éxito");
 
                     // Actualizamos venta a estado 3 = Pagado
-                    sql4 = "UPDATE venta SET fk_id_estado=3 WHERE id_venta = :fk_id_venta";
-                    resultado4 = await settings.OpenConnection(sql4, [fk_id_venta], true);
+                    var fecha_actualizacion = functions.obtenerFechaActual();
+
+                    sql4 = "UPDATE venta SET fk_id_estado=3, fecha_actualizacion =to_DATE(:fecha_actualizacion,'YYYY/MM/DD') WHERE id_venta = :fk_id_venta";
+                    resultado4 = await settings.OpenConnection(sql4, [fecha_actualizacion, fk_id_venta], true);
                     
                     if(resultado4) { 
                         console.log("[!] Venta actualizada con éxito");
