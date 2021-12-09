@@ -71,13 +71,6 @@ router.post('/crearPago/:id_venta', uploadFile.single('url_comprobante'), async(
         var fecha_pago = functions.obtenerFechaActual();
         var fk_id_tipo = 3;
         var fk_id_usuario = req.session.id_usuario;
-
-        console.log(url_comprobante)
-        console.log(fk_id_tipo)
-        console.log(fk_id_usuario)
-        console.log(fk_id_venta)
-        console.log(fecha_pago)
-        console.log(monto)
         
         sql1 = "CALL PA_PAGO_CREAR(:monto, :fecha_pago, :url_comprobante, :fk_id_tipo, :fk_id_usuario)";
         resultado1 = await settings.OpenConnection(sql1, [monto, fecha_pago, url_comprobante, fk_id_tipo, fk_id_usuario], true);
@@ -99,9 +92,15 @@ router.post('/crearPago/:id_venta', uploadFile.single('url_comprobante'), async(
                 if (resultado3) {
                     console.log("[!] REL_VENTA_PAGO creada con éxito");
 
-                    // Actualizamos venta a 
-
-                    res.redirect('/miscompras');
+                    // Actualizamos venta a estado 3 = Pagado
+                    sql4 = "UPDATE venta SET fk_id_estado=3 WHERE id_venta = :fk_id_venta";
+                    resultado4 = await settings.OpenConnection(sql4, [fk_id_venta], true);
+                    
+                    if(resultado4) { 
+                        console.log("[!] Venta actualizada con éxito");
+                        res.redirect('/miscompras');
+                    }
+                    
                 }
                 
             }
