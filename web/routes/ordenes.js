@@ -94,6 +94,7 @@ router.post('/crearOrdenBodega/:id_venta', async (req, res) => {
       resultado2 = await settings.OpenConnection(sql2, [value_fk_id_venta], true);
 
       if(resultado1) { 
+        console.log("[!] Venta actualizada con éxito");
         res.redirect('/ordenes_bodegas');
       }
     } else {

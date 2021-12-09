@@ -71,24 +71,40 @@ router.post('/crearPago/:id_venta', uploadFile.single('url_comprobante'), async(
         var fecha_pago = functions.obtenerFechaActual();
         var fk_id_tipo = 3;
         var fk_id_usuario = req.session.id_usuario;
+
+        console.log(url_comprobante)
+        console.log(fk_id_tipo)
+        console.log(fk_id_usuario)
+        console.log(fk_id_venta)
+        console.log(fecha_pago)
+        console.log(monto)
         
-        sql = "CALL PA_PAGO_CREAR(:monto, :fecha_pago, :url_comprobante, :fk_id_tipo, :fk_id_usuario)";
-        result = await settings.OpenConnection(sql, [monto, fecha_pago, url_comprobante, fk_id_tipo, fk_id_usuario], true);
+        sql1 = "CALL PA_PAGO_CREAR(:monto, :fecha_pago, :url_comprobante, :fk_id_tipo, :fk_id_usuario)";
+        resultado1 = await settings.OpenConnection(sql1, [monto, fecha_pago, url_comprobante, fk_id_tipo, fk_id_usuario], true);
 
-        
+        if (resultado1) {
+            console.log("[!] Pago creada con éxito");
 
+            // Con esto tomamos el ultimo registro en la tabla pagos para crear tabla rel y redirigir al documentopago y pueda agregar el pago
+            sql2 = "SELECT id_pago FROM (SELECT * FROM pago ORDER BY id_pago DESC ) WHERE rownum = 1";
+            resultado2 = await settings.OpenConnection(sql2, [], true);
+            var value_idPago = resultado2.rows[0];
 
-        // Con esto tomamos el ultimo registro en la tabla pagos para crear tabla rel y redirigir al documentopago y pueda agregar el pago
-        sql3 = "SELECT id_pago FROM (SELECT * FROM pago ORDER BY id_pago DESC ) WHERE rownum = 1";
-        result2 = await settings.OpenConnection(sql3, [], true);
-        var idPago = result2.rows[0];
+            if (value_idPago) {
+                // Creamos la tabla relacional entre venta y pago
+                var id_pago = value_idPago.toString();
+                sql3 = "INSERT INTO rel_venta_pago(fk_id_venta, fk_id_pago) VALUES (:fk_id_venta, :id_pago)";
+                resultado3 = await settings.OpenConnection(sql3, [fk_id_venta, id_pago], true);
 
-        if (idPago) {
-            // Creamos la tabla relacional entre venta y pago
-            var id_pago = idPago.toString();
-            sql2 = "INSERT INTO rel_venta_pago(fk_id_venta, fk_id_pago) VALUES (:fk_id_venta, :id_pago)";
-            await settings.OpenConnection(sql2, [fk_id_venta, id_pago], true);
-            res.redirect('/miscompras');
+                if (resultado3) {
+                    console.log("[!] REL_VENTA_PAGO creada con éxito");
+
+                    // Actualizamos venta a 
+
+                    res.redirect('/miscompras');
+                }
+                
+            }
         }
 
     } catch (error) {
