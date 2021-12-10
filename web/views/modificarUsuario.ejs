@@ -32,7 +32,15 @@
                                   <input class="form-control mb-4" id="inputPassword" type="password" name="password" placeholder="Contraseña" maxLength="40" required value="<%= data[0].password%>"></div>
                               </div>
                               <div class="col-xs-6 col-sm-6 col-md-6">
-                                <div class="form-group"><input type="checkbox" onclick="showPassword()">Mostrar contraseña</div>
+                                <div class="form-check">
+                                  <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" onclick="verPassword()">
+                                    <span class="form-check-sign">
+                                      <span class="check"></span>
+                                    </span>
+                                    Mostrar contraseña
+                                  </label>
+                                </div>
                               </div>
                             </div>
                             <label>Número de documento *</label>
@@ -133,7 +141,7 @@
 <%- include('partials/footer.ejs') %>
 
 <script>
-  function showPassword() {
+  function verPassword() {
     var x = document.getElementById("inputPassword");
     if (x.type === "password") {
       x.type = "text";
