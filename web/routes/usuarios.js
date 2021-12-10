@@ -2,12 +2,10 @@
 const express = require('express');
 const router = express.Router();
 const settings = require('../bin/settings');
-var moment = require('moment');
+const moment = require('moment');
 
 // Contraseña
-var SimpleCrypto = require("simple-crypto-js").default
-const secretKey = "1X42JJKLjkuid"
-const simpleCryp = new SimpleCrypto(secretKey)
+const { encriptar, desencriptar } = require('../helpers.js/encriptacion');
 
 // CRUD USUARIOS
 
@@ -67,7 +65,7 @@ router.post('/crearUsuario', async (req, res) => {
       res.redirect('/usuarios/?estado=' + string);
     } else {
       // Encriptamos la contraseña del usuario
-      var passwordEncrypted = simpleCryp.encrypt(password)
+      var passwordEncrypted = encriptar(password);
 
       // Creamos el nuevo usuario
       sql = "CALL PA_USUARIO_CREAR(:num_documento, :nombre, :apellido, :fecha_nacimiento, :genero, :correo, :telefono, :password, :fk_id_tipo)";
@@ -103,7 +101,7 @@ router.post("/modificarUsuario/:id_usuario", async (req, res) => {
     var { correo, nombre, apellido, num_documento, fk_id_tipo, fecha_nacimiento, genero, fk_id_estado, telefono, password } = req.body;
 
     // Encriptamos la contraseña del usuario
-    var passwordEncrypted = simpleCryp.encrypt(password)
+    var passwordEncrypted = encriptar(password);
 
     sql = "CALL PA_USUARIO_UPDATE(:id_usuario, :num_documento, :nombre, :apellido, :fecha_nacimiento, :genero, :correo, :telefono, :password, :fk_id_estado, :fk_id_tipo)";
     await settings.OpenConnection(sql, [id_usuario, num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, passwordEncrypted, fk_id_estado, fk_id_tipo], true);
@@ -136,7 +134,7 @@ router.post("/modificarMiPerfil/:id_usuario", async (req, res) => {
     var { correo, nombre, apellido, num_documento, fecha_nacimiento, genero, telefono, password } = req.body;
 
     // Encriptamos la contraseña del usuario
-    var passwordEncrypted = simpleCryp.encrypt(password)
+    var passwordEncrypted = encriptar(password);
 
     sql = "CALL PA_USUARIO_UPDATE_MIPERFIL(:id_usuario, :num_documento, :nombre, :apellido, :fecha_nacimiento, :genero, :correo, :telefono, :password)";
     await settings.OpenConnection(sql, [id_usuario, num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, passwordEncrypted], true);
@@ -167,7 +165,7 @@ router.post("/nuevaContrasena/:id_usuario", async (req, res) => {
     var { nuevaContrasena } = req.body;
 
     // Encriptamos la contraseña del usuario
-    var passwordEncrypted = simpleCryp.encrypt(nuevaContrasena)
+    var passwordEncrypted = encriptar(nuevaContrasena);
     // Pasamos la cuenta del usuario a 1 = activado
     var fk_id_estado=1;
 

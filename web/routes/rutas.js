@@ -7,9 +7,7 @@ var functions = require('./functions');
 var functions_reportes = require('./functions_reportes');
 
 // Contraseña
-var SimpleCrypto = require("simple-crypto-js").default
-const secretKey = "1X42JJKLjkuid"
-const simpleCryp = new SimpleCrypto(secretKey)
+const { encriptar, desencriptar } = require('../helpers.js/encriptacion');
 
 
 // CRUD PRINCIPAL
@@ -34,7 +32,7 @@ router.post('/auth', async (req, res) => {
 		  	// Si encuentra los datos
 			if (result.rows.length > 0) {
 
-				var passwordDecrypted = simpleCryp.decrypt(result.rows[0][5])
+				var passwordDecrypted = desencriptar(result.rows[0][5])
 				// Si la contraseña desencriptada es igual a la que viene por post
 				if(req.body.password == passwordDecrypted) {
 
@@ -176,7 +174,7 @@ router.get('/modificarUsuario/:id_usuario', async function(req, res, next) {
 					genero: result.rows[0][4],
 					correo: result.rows[0][5],
 					telefono: result.rows[0][6],
-					password: simpleCryp.decrypt(result.rows[0][7]),
+					password: desencriptar(result.rows[0][7]),
 					fk_id_estado: result.rows[0][8],
 					fk_id_tipo: result.rows[0][9],
 					id_usuario: id_usuario
@@ -227,7 +225,7 @@ router.get('/miperfil', async function(req, res, next) {
 					genero: result.rows[0][4],
 					correo: result.rows[0][5],
 					telefono: result.rows[0][6],
-					password: simpleCryp.decrypt(result.rows[0][7]),
+					password: desencriptar(result.rows[0][7]),
 					tipo_usuario_texto: tipoUsuarioTexto
 				  }
 			];

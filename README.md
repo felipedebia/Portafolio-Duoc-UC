@@ -46,7 +46,6 @@ Iniciar node en la carpeta web
 
 ## Funciones pendientes:
 
-- Cambiar contraseña encriptado al hecho por fabian
 - Cambiar a try catch archivo rutas.js
 - Terminar templates de correos
 - Algunas páginas se caen si no se usa el perfil principal mari.barreraa@duocuc.cl
