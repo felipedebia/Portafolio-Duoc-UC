@@ -15,7 +15,6 @@ const { encriptar, desencriptar } = require('../helpers.js/encriptacion');
 router.get('/', function(req, res, next) {
 	if (req.session.isLoggedIn) {
 		res.redirect('dashboard');
-		settings.enviarCorreo('Usuario registrado con éxito - Maipo Grande', 'usuario_registro');
 	} else {
 		res.render('login', { title: 'Ingresar - Maipo Grande', alertError: false});
 	}

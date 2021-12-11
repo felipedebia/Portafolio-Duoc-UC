@@ -95,7 +95,6 @@ async function enviarCorreo(tema, templateName) {
                 if (err) {
                     console.log(err);
                 } else {
-                    console.log(parametrosSchema)
                     console.log('Correo electrónico enviado con éxito: ' + info.response);
                 }
             });
