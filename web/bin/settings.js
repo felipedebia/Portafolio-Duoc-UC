@@ -59,12 +59,14 @@ async function enviarCorreo(tema, templateName) {
         result = await OpenConnection(sql, [], true);
 
         // Desencriptamos la contraseña para mostrarla en el correo
-        var passwordDecrypted = desencriptar(result.rows[1])
+        var passwordDecrypted = desencriptar(result.rows[0][1])
 
-        var parametrosSchema = {
-            "correo": result.rows[0],
-            "password": passwordDecrypted
-        }
+        var parametrosSchema = [
+            {
+                correo: result.rows[0][0],
+                password: passwordDecrypted
+            }
+        ];
 
     }
     
@@ -93,6 +95,7 @@ async function enviarCorreo(tema, templateName) {
                 if (err) {
                     console.log(err);
                 } else {
+                    console.log(parametrosSchema)
                     console.log('Correo electrónico enviado con éxito: ' + info.response);
                 }
             });
