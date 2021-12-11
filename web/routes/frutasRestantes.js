@@ -41,4 +41,33 @@ router.get('/listarFrutasRestantes', async (req, res) => {
 });
 
 
+// Comprar Fruta Restante
+router.post('/comprarFrutaRestante', async (req, res) => {
+    try {
+  
+      var { nombre, necesita_refrigeracion } = req.body;
+      var fecha_creacion = functions.obtenerFechaActual();
+  
+      sql = "CALL PA_FRUTA_CREAR(:nombre,:fecha_creacion,:necesita_refrigeracion)";
+      await settings.OpenConnection(sql, [nombre, fecha_creacion, necesita_refrigeracion], true);
+  
+      // Si tuvo conexión a la DB
+      if(res.status(200)) {
+        console.log("[!] Fruta restante comprada con éxito");
+        res.redirect('/miscompras');
+        //res.refresh();
+      } else {
+        console.log("[!] Ocurrió un error al intentar comprar la fruta restante");
+        res.redirect('/miscompras');
+      }
+  
+    } catch (error) {
+      res.status(400);
+      res.send("Ocurrió un error al obtener los datos de la base de datos")
+      console.log(error);
+    }
+  
+})
+
+
 module.exports = router;
