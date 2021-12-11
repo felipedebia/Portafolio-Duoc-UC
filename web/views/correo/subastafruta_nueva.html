@@ -41,16 +41,16 @@
                                         </p>
                                         <span style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
                                         <p style="color:#455056; font-size:18px;line-height:20px; margin:0; font-weight: 500;">
-                                            <strong style="display: block; font-size: 13px; margin: 0 0 4px 0; font-weight:normal; color:rgba(0,0,0,.64);">ID de subasta</strong><%= id_subastaF %>
-                                            <strong style="display: block; font-size: 13px; margin: 0 0 4px 0; font-weight:normal; color:rgba(0,0,0,.64);">Tipo de subasta</strong><%= fk_id_tipo %>
-                                            <strong style="display: block; font-size: 13px; margin: 24px 0 4px 0; color:rgba(0,0,0,.64); font-weight:normal;">Fecha de inicio</strong><%= fecha_inicio %>
-                                            <strong style="display: block; font-size: 13px; margin: 24px 0 4px 0; font-weight:normal; color:rgba(0,0,0,.64);">Fecha de termino</strong><%= fecha_termino %>
+                                            <strong style="display: block; font-size: 13px; margin: 0 0 4px 0; font-weight:normal; color:rgba(0,0,0,.64);">ID de subasta</strong><%= data[0].id_subastaF %>
+                                            <strong style="display: block; font-size: 13px; margin: 0 0 4px 0; font-weight:normal; color:rgba(0,0,0,.64);">Tipo de subasta</strong><%= data[0].fk_id_tipo %>
+                                            <strong style="display: block; font-size: 13px; margin: 24px 0 4px 0; color:rgba(0,0,0,.64); font-weight:normal;">Fecha de inicio</strong><%= data[0].fecha_inicio %>
+                                            <strong style="display: block; font-size: 13px; margin: 24px 0 4px 0; font-weight:normal; color:rgba(0,0,0,.64);">Fecha de termino</strong><%= data[0].fecha_termino %>
                                         </p>
                                         <p style="font-size:15px; color:#455056; margin-top: 30px; line-height:24px;">
                                             Recibirás un correo electrónico cuando tu subasta tenga nuevas ofertas. Recuerda estar atento a tu correo!
                                         </p>
 
-                                        <a href="http://localhost:3000/subasta_fruta/<%= id_subastaF %>" style="background:#9124a3;text-decoration:none !important; display:inline-block; font-weight:500; margin-top:20px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-color:#701c7e;border-radius:0.2rem;">Ver subasta</a>
+                                        <a href="http://localhost:3000/subasta_fruta/<%= data[0].id_subastaF %>" style="background:#9124a3;text-decoration:none !important; display:inline-block; font-weight:500; margin-top:20px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-color:#701c7e;border-radius:0.2rem;">Ver subasta</a>
                                     
                                     </td>
                                 </tr>
