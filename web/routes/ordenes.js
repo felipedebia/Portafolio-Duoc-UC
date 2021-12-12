@@ -93,7 +93,7 @@ router.post('/crearOrdenBodega/:id_venta', async (req, res) => {
       sql2 = "UPDATE venta SET fk_id_estado=4 WHERE id_venta = :value_fk_id_venta";
       resultado2 = await settings.OpenConnection(sql2, [value_fk_id_venta], true);
 
-      if(resultado1) { 
+      if(resultado2) { 
         console.log("[!] Venta actualizada con éxito");
         res.redirect('/ordenes_bodegas');
       }
@@ -269,7 +269,7 @@ router.post('/crearOrdenTransporte/:id_venta', async (req, res) => {
     var value_fk_id_venta = req.params.id_venta;
     var fk_id_estado = 1;
 
-    sql = "CALL PA_ORDEN_TRANSPORTE_CREAR(:fecha_llegada, :fecha_retiro, :fk_id_estado, :fk_id_venta)";
+    sql1 = "CALL PA_ORDEN_TRANSPORTE_CREAR(:fecha_llegada, :fecha_retiro, :fk_id_estado, :fk_id_venta)";
     resultado1 = await settings.OpenConnection(sql1, [fecha_llegada, fecha_retiro, fk_id_estado, value_fk_id_venta], true);
 
     // Si tuvo conexión a la DB

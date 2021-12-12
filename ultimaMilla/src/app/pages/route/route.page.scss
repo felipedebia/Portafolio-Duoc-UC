@@ -1,0 +1,147 @@
+ion-content {
+    --ion-background-color: #1776bc;
+}
+
+.gridprincipal {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    height: -webkit-fill-available;
+}
+
+.datos-viaje {
+    margin-top: 0%;
+    align-content: center;
+    text-align: left;
+    font-weight: bold;
+}
+
+.izq {
+    padding-right: 5%;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-color: white;
+    color: rgb(255, 166, 0);
+    align-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.der {
+    padding-left: 5%;
+    color: white;
+    align-items: center;
+    display: flex;
+}
+
+.row {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-color: white;
+}
+
+.tituloLocales {
+    margin-top: 1%;
+    margin-bottom: 2%;
+    color: rgb(255, 255, 255);
+    display: flex;
+    font-weight: bold;
+    font-size: 1.3rem;
+    align-items: center;
+}
+
+.carrusel {
+    overflow: scroll;
+    justify-content: center;
+    height: 100%;
+}
+
+.swiper-slide {
+    height: fit-content;
+    margin-bottom: 1.7vh;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.671);
+    /* Center slide text vertically */
+    align-items: center;
+    font-weight: bold;
+    color: rgba(255, 145, 0, 0.986);
+}
+
+.swiper-slide2 {
+    background: transparent !important;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: space-around;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    font-weight: bold;
+    color: rgba(255, 145, 0, 0.986);
+}
+
+.locales {
+    //display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1vw;
+}
+
+.mapa {
+    //display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.datoslocal {
+    //display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+.direccionlocal {
+    font-size: small;
+}
+
+.botonesLocales {
+    //display: flex;
+    flex-wrap: wrap;
+    align-self: center;
+    justify-content: flex-end;
+}
+
+button {
+    background-color: transparent;
+    padding: 0%
+}
+
+[hidden] {
+    display: none !important;
+}
+
+ion-img {
+    height: 40px;
+    width: 40px;
+    margin: 5px;
+}
+
+ion-grid:active {
+    box-shadow: inset 2px 3px 4px #000;
+    filter: saturate(50%);
+    border-radius: 1rem;
+}
+
+ion-img:active {
+    box-shadow: inset 2px 3px 4px #000;
+    filter: saturate(50%);
+    border-radius: 50%;
+}

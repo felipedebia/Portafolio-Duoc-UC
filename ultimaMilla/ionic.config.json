@@ -1,0 +1,7 @@
+{
+  "name": "UltimaMilla",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

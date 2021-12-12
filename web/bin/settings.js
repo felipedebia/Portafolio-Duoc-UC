@@ -7,11 +7,33 @@ configOracle = {
     connectString: "localhost:1521/xe"
 }
 
+// Abrir conexión desde web
 async function OpenConnection(sql, binds, autoCommit) {
     let cnn = await oracledb.getConnection(configOracle);
     let result = await cnn.execute(sql, binds, { autoCommit });
     cnn.release();
     return result;
+}
+
+// Abrir conexión desde app movil
+async function Open(sql, binds) {
+    try {
+        cnn = await oracledb.getConnection(configOracle);
+
+        result = await cnn.execute(sql, binds);
+    } catch (err) {
+        console.error(err);
+    } finally {
+        if (cnn) {
+            try {
+                await cnn.close();
+                return result;
+
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
 }
 
 // Contraseña
@@ -23,10 +45,10 @@ var fs = require("fs");
 
 const nodemailer = require("nodemailer");
 
-const user_name     = 'portafolioduocuc.2021@gmail.com';
+const user_name = 'portafolioduocuc.2021@gmail.com';
 const refresh_token = '1//047CAvJ7HXcrkCgYIARAAGAQSNwF-L9IrQ85dVffnnk6K9IvQFAmMYZ5-fXrAexH68q7FhsOEeh_aZY-35G7LyDXYx4JN_QNvGLQ';
-const access_token  = 'ya29.a0ARrdaM_VvHp5fuzNI-PdGvFpcPDqLLFlTkz2fxSzTHMqu0htX4PoBRxkb3_fIHikXJjwLD5MTbEdMfA-K3u79GC7EjyBhm_7uZJAwy2NNlxs9mp4iJYOHsgxjX3hqdgY_6y24mY4Zojh-UbCQtyqfRqFPZua';
-const client_id     = '784728793947-our04m9d571mfpck2kcvi3i2t36ft78j.apps.googleusercontent.com';
+const access_token = 'ya29.a0ARrdaM_VvHp5fuzNI-PdGvFpcPDqLLFlTkz2fxSzTHMqu0htX4PoBRxkb3_fIHikXJjwLD5MTbEdMfA-K3u79GC7EjyBhm_7uZJAwy2NNlxs9mp4iJYOHsgxjX3hqdgY_6y24mY4Zojh-UbCQtyqfRqFPZua';
+const client_id = '784728793947-our04m9d571mfpck2kcvi3i2t36ft78j.apps.googleusercontent.com';
 const client_secret = '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';
 const templateDir = '/views/correo/';
 
@@ -70,7 +92,7 @@ async function enviarCorreo(tema, templateName) {
 
     }
     
-    ejs.renderFile(process.cwd() + templateDir + templateName + ".ejs", {data: parametrosSchema}, function (err, data) {
+    ejs.renderFile(process.cwd() + templateDir + templateName + ".ejs", { data: parametrosSchema }, function (err, data) {
         if (err) {
             console.log(err);
         } else {
@@ -91,7 +113,7 @@ async function enviarCorreo(tema, templateName) {
             };
 
             //console.log("html data ======================>", mailOptions.html);
-            transporter.sendMail(mailOptions, function (err, info) {
+            transporter.sendMail(mailOptions, function(err, info) {
                 if (err) {
                     console.log(err);
                 } else {
@@ -104,5 +126,6 @@ async function enviarCorreo(tema, templateName) {
 }
 
 exports.OpenConnection = OpenConnection;
+exports.Open = Open;
 exports.enviarCorreo = enviarCorreo;
 

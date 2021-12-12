@@ -5,15 +5,12 @@ const settings = require('../bin/settings');
 const moment = require('moment');
 
 
-
-
-
 // Listar todas las ventas
 router.get('/listarMisCompras', async(req, res) => {
     try {
 
         binds = {};
-        sql = "select venta.id_venta, venta.fecha_creacion, venta.fecha_actualizacion, pedido.fk_id_usuario, pedido.direccion_despacho, seguro.nombre_empresa, venta_detalle.precio_final, venta.fk_id_estado, estado_venta.descripcion, to_char(venta_detalle.precio_final,'$9,999,999') from venta join pedido on venta.fk_id_pedido = pedido.id_pedido join seguro on venta.fk_id_seguro = seguro.id_seguro join estado_venta on venta.fk_id_estado = estado_venta.id_estado join venta_detalle on venta.id_venta = venta_detalle.fk_id_venta";
+        sql = "select venta.id_venta, venta.fecha_creacion, venta.fecha_actualizacion, pedido.fk_id_usuario, pedido.direccion_despacho, seguro.nombre_empresa, venta_detalle.precio_final, venta.fk_id_estado, estado_venta.descripcion, to_char(venta_detalle.precio_final,'$999,999,999') from venta join pedido on venta.fk_id_pedido = pedido.id_pedido join seguro on venta.fk_id_seguro = seguro.id_seguro join estado_venta on venta.fk_id_estado = estado_venta.id_estado join venta_detalle on venta.id_venta = venta_detalle.fk_id_venta";
         result = await settings.OpenConnection(sql, binds, true);
 
         MisCompras = [];

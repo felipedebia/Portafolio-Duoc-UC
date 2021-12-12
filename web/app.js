@@ -4,6 +4,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var favicon = require('serve-favicon')
+const cors = require('cors');
 
 // Rutas
 var rutasRouter = require('./routes/rutas');
@@ -42,6 +43,9 @@ app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(cors({
+  origin: '*'
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Para las sesiones

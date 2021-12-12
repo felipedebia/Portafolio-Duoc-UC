@@ -1,0 +1,61 @@
+<ion-content>
+
+    <div class="content">
+
+        <ion-card class="card">
+
+            <ion-grid>
+
+                <ion-row class="row1">
+                    <img src="../assets/icon/icons/logo-maipo.png" class="principal">
+                </ion-row>
+
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <ion-row class="label-datos">
+
+                        <!-- <ion-icon class="hojaderuta" name="image"></ion-icon> -->
+                        <img src="../assets/icon/icons/qmtls-09.png" class="hojaderuta">
+
+                        <input type="email" class="label" formControlName="viaje" name="viaje" placeholder="correo" />
+
+
+                    </ion-row>
+
+                    <div *ngFor="let error of errorMessages.viaje" class="error-message">
+                        <ng-container *ngIf="f.viaje?.touched && f.viaje.errors?.required">
+                            <small class="error-message">{{error.message}}</small>
+                        </ng-container>
+                    </div>
+
+                    <ion-row class="label-datos">
+
+                        <!-- <ion-icon class="hojaderuta" name="image"></ion-icon> -->
+                        <img src="../assets/icon/icons/qmtls-14.png" class="hojaderuta">
+                        <input class="label" type="password" formControlName="patente" name="patente" placeholder="clave" oninput="this.value = this.value.toUpperCase()" />
+
+
+                    </ion-row>
+
+                    <div *ngFor="let error of errorMessages.patente" class="error-message">
+                        <ng-container *ngIf="f.patente?.touched && f.patente.errors?.required">
+                            <small class="error-message">{{error.message}}</small>
+                        </ng-container>
+                    </div>
+
+                    <ion-row style="justify-content: center">
+
+                        <!-- <ion-icon class="hojaderuta" name="image" ></ion-icon> -->
+                        <button class="submit" type="submit" [disabled]="f.viaje.errors?.required || f.patente.errors?.required">
+                            <ion-img src="../assets/icon/icons/qmtls_next.png" class="hojaderuta"></ion-img>
+                        </button>
+
+                    </ion-row>
+
+                </form>
+
+            </ion-grid>
+        </ion-card>
+    </div>
+</ion-content>
+
+<app-footer></app-footer>

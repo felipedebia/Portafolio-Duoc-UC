@@ -49,6 +49,65 @@ router.get('/listarUsuarios', async (req, res) => {
 });
 
 
+// Login para movil
+router.post('/login', async(req, res) => {
+
+  try {
+      var queryText = req.body.correo;
+      var password_bind = req.body.password_bind;
+      if (!queryText || !password_bind) {
+          throw "debe enviar un correo y una contraseña";
+      }
+      var passwordEncrypted = encriptar(password_bind);
+      let binds = [queryText, passwordEncrypted];
+
+
+      // Encriptamos la contraseña del usuario
+
+      sql = `SELECT id_usuario, num_documento, nombre, apellido, fecha_nacimiento, genero, telefono, fk_id_estado, fk_id_tipo FROM usuario WHERE correo= :corr and password= :pass and fk_id_estado= 1  `;
+      console.log("antes del open");
+      result = await settings.Open(sql, binds)
+      console.log("llego al open");
+
+      Usuarios = [];
+
+      result.rows.map(user => {
+          let userSchema = {
+              "id_usuario": user[0],
+              "num_documento": user[1],
+              "nombre": user[2],
+              "apellido": user[3],
+              "fecha_nacimiento": user[4],
+              "genero": user[5],
+              "correo": user[6],
+              "telefono": user[7],
+              "fk_id_estado": user[9],
+              "fk_id_tipo": user[10],
+              "token": "askjdkdfksaljdfkljsadklfjsakldfjklsadf"
+          }
+          Usuarios.push(userSchema);
+      })
+
+      if (Usuarios != 0) {
+          res.status(200);
+          res.json({ error: 'false', 'data': Usuarios });
+      } else {
+          throw 'Usuario o contraseña Incorrectos';
+      }
+
+  } catch (error) {
+      res.status(400);
+      res.json({
+          'error': 'true ',
+          "msg": error
+      });
+  }
+
+
+})
+
+
+
 // Agregar usuario
 router.post('/crearUsuario', async (req, res) => {
   try {

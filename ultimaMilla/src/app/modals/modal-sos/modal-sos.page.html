@@ -1,0 +1,14 @@
+<ion-content fullscreen scrollY="false">
+    <div class="page">
+        <div class="v-stack">
+            <h2>SOS</h2>
+            <div class="box link" *ngFor="let i of alertas" (click)="send(i)">
+                <h2 class="title">{{i.descripcion}}</h2>
+            </div>
+
+            <div class="box link" style="width: 25%;" (click)="close()">
+                <h2 class="title">X</h2>
+            </div>
+        </div>
+    </div>
+</ion-content>

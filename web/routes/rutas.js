@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) {
 // POST: Login de usuario
 router.post('/auth', async (req, res) => {
 	if (req.body.correo && req.body.password) {
-		binds = { "correo_bind": req.body.correo};
+		binds = { "correo_bind": req.body.correo };
 		sql = 'SELECT usuario.id_usuario, usuario.num_documento, usuario.nombre, usuario.apellido, usuario.correo, usuario.password, usuario.fk_id_tipo, tipo_usuario.nombre, usuario.fk_id_estado FROM usuario JOIN tipo_usuario ON usuario.fk_id_tipo = tipo_usuario.id_tipo WHERE usuario.correo = :correo_bind';
 
         result = await settings.OpenConnection(sql, binds, false);
@@ -39,7 +39,7 @@ router.post('/auth', async (req, res) => {
 					// Comprobamos que el usuario no tenga la cuenta desactivada
 					if(result.rows[0][8] == '2') {
 						console.log("[!] Intento de conexión fallido usando " + req.body.correo);
-						res.render('login', {title: 'Ingresar - Maipo Grande', alertError: 2});
+						res.render('login', { title: 'Ingresar - Maipo Grande', alertError: 2 });
 					} else {
 						// Asignamos true al isLoggedIn
 						req.session.isLoggedIn = true;
@@ -55,7 +55,7 @@ router.post('/auth', async (req, res) => {
 						req.session.estado_usuario = result.rows[0][8];
 
 						// Si estado_usuario es 3, se redirecciona a crear contraseña
-						if(req.session.estado_usuario==3) {
+						if(req.session.estado_usuario == 3) {
 							res.redirect('/cambioContrasena');
 						} else {
 							res.redirect('/dashboard');
@@ -67,12 +67,12 @@ router.post('/auth', async (req, res) => {
 
 				} else {
 					console.log("[!] Intento de conexión fallido usando " + req.body.correo);
-					res.render('login', {title: 'Ingresar - Maipo Grande', alertError: 1 });
+					res.render('login', { title: 'Ingresar - Maipo Grande', alertError: 1 });
 				}
 
 			} else {
 				console.log("[!] Intento de conexión fallido usando " + req.body.correo);
-				res.render('login', {title: 'Ingresar - Maipo Grande', alertError: 1 });
+				res.render('login', { title: 'Ingresar - Maipo Grande', alertError: 1 });
 			}
 	}
 });
@@ -134,7 +134,7 @@ router.get('/usuarios', function(req, res) {
 router.get('/cambioContrasena', function(req, res) {
     if (req.session.isLoggedIn) {
 		// si estado_usuario es 3
-		if(req.session.estado_usuario==3) {
+		if(req.session.estado_usuario == 3) {
 			res.render('cambioContrasena', { title: 'Cambio de contraseña - Maipo Grande' });
 		} else {
 			res.redirect('/');
