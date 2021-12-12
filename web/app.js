@@ -4,6 +4,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var favicon = require('serve-favicon')
+const cors = require('cors');
 
 // Rutas
 var rutasRouter = require('./routes/rutas');
@@ -42,17 +43,20 @@ app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(cors({
+    origin: '*'
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Para las sesiones
 app.use(session({
-	secret: 'k4012j4h1290dkJAsbv',
-	resave: true,
-	saveUninitialized: true,
-	cookie: {
-		// La sesión expira luego de 2 horas de inactividad
-		expires: 7200000
-	}
+    secret: 'k4012j4h1290dkJAsbv',
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+        // La sesión expira luego de 2 horas de inactividad
+        expires: 7200000
+    }
 }));
 
 // Librerías necesarias
@@ -85,25 +89,25 @@ app.use('/api_pagos', pagosRouter);
 
 // Para mostrar errores
 app.use(function(req, res, next) {
-  next(createError(404));
+    next(createError(404));
 });
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 
 require('express-dynamic-helpers-patch')(app);
 app.dynamicHelpers({
-session: function (req, res) {
-    return req.session;
+    session: function(req, res) {
+        return req.session;
     }
 });
 

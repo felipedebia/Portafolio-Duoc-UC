@@ -1,0 +1,133 @@
+ion-content {
+    --ion-background-color: #1776bc;
+}
+
+.mycontainer {
+    height: 100%;
+    width: 100vw;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.grilla {
+    margin-top: 2vh;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    justify-content: center;
+}
+
+ion-row {
+    justify-content: center;
+}
+
+ion-col {
+    display: flex;
+}
+
+ion-Card {
+    background-color: rgba(255, 255, 255, 0.705);
+    border-radius: 1rem;
+    display: flex;
+    width: -webkit-fill-available;
+    align-content: center;
+    flex-wrap: wrap;
+    padding: 1rem;
+    align-items: center;
+    justify-content: center;
+    margin: 0%;
+}
+
+.tituloAzul {
+    color: #004998;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.tituloAmarillo {
+    color: rgb(255, 166, 0);
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+.datoAzul {
+    color: #004998;
+}
+
+.row1 {
+    margin-bottom: 4vh;
+}
+
+.card1 {
+    justify-content: flex-start;
+    flex-wrap: nowrap
+}
+
+.localIcon {
+    margin-right: 5%;
+}
+
+.tituloAzul {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.row2 {
+    margin-bottom: 2vh;
+}
+
+.llegadaIcon {
+    margin-right: 5%;
+}
+
+.card3 {
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+}
+
+.card4 {
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+}
+
+.botonesDescarga {
+    display: flex;
+    background: transparent;
+    width: -webkit-fill-available;
+}
+
+.row5 {
+    margin-top: 2vh;
+    padding: 5px;
+}
+
+.img-start-stop {
+    height: 70px;
+    width: 70px;
+}
+
+ion-card:active {
+    box-shadow: inset 2px 3px 4px #000;
+    filter: saturate(50%);
+    border-radius: 1rem;
+}
+
+ion-img:active {
+    box-shadow: inset 2px 3px 4px #000;
+    filter: saturate(50%);
+    border-radius: 50%;
+}
+
+ion-img {
+    height: 70px;
+    width: 70px;
+    margin: 5px;
+}
+
+ion-img:active {
+    box-shadow: inset 2px 3px 4px #000;
+    filter: saturate(50%);
+    border-radius: 50%;
+}

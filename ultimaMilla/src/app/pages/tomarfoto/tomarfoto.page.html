@@ -1,0 +1,44 @@
+<app-header> </app-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row class="row1">
+            <swiper [config]="config" slidesPerView=2 class="mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" *ngFor="let foto of fotoService.fotos; index as position" [style.background-image]="foto.webviewPath">
+
+                        <div class="contenedor" [style.background-image]="'url('+foto.webviewPath+')'" width="auto">
+                            <button class="delete" (click)="remove(foto)">
+                                X
+                              </button>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+            </swiper>
+        </ion-row>
+
+        <ion-row class="row2">
+            <ion-col size=6>
+                <button (click)='tomarFoto()' [disabled]="fotosLista==MaxImagenes">
+                    <ion-img src="../assets/icon/icons/qmtls-17.png" class="img-btn no-img icon-bd" height="70" width="70" [ngClass]="{'opacidad': fotosLista==MaxImagenes}"></ion-img>
+                </button>
+
+            </ion-col>
+
+            <ion-col size=6>
+
+                <button (click)='guardarFotos()' [disabled]="fotosLista==0">
+                    <ion-img src="../assets/icon/icons/qmtls-22.png" class="img-btn no-img icon-bd" height="70" width="70" [ngClass]="{'opacidad': fotosLista==0}"></ion-img>
+                </button>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+</ion-content>
+
+
+<app-footer></app-footer>

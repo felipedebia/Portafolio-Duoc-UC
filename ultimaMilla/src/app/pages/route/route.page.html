@@ -1,0 +1,99 @@
+<app-header></app-header>
+<ion-content fullscreen>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <div class="gridprincipal">
+        <ion-row>
+            <ion-grid class="datos-viaje">
+                <ion-row class="row">
+                    <ion-col class="izq ">
+                        <img src="../assets/icon/icons/qmtls-14.png" class="img-btn no-img icon-bd" height="40" width="40">
+                        <ion-col>Patentes</ion-col>
+
+                    </ion-col>
+                    <ion-col class="der">
+                        bkvk90 / asdf12
+                    </ion-col>
+                </ion-row>
+                <ion-row class="row">
+                    <ion-col class="izq">
+                        <img src="../assets/icon/icons/qmtls-11.png" class="img-btn no-img icon-bd" height="40" width="40"> Hoja de Ruta
+                    </ion-col>
+                    <ion-col class="der">
+                        153234
+                    </ion-col>
+                </ion-row>
+                <ion-row class="row">
+                    <ion-col class="izq">
+                        <img src="../assets/icon/icons/qmtls-14.png" class="img-btn no-img icon-bd" height="40" width="40">
+                        <ion-col>Transportista</ion-col>
+                    </ion-col>
+                    <ion-col class="der">
+                        envios rapidos ltda
+                    </ion-col>
+                </ion-row>
+                <ion-row class="row">
+                    <ion-col class="izq">
+                        <img src="../assets/icon/icons/qmtls-11.png" class="img-btn no-img icon-bd" height="40" width="40">
+                        <ion-col>CD</ion-col>
+                    </ion-col>
+                    <ion-col class="der">
+                        Bodega central
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col class="izq">
+                        <img src="../assets/icon/icons/qmtls-14.png" class="img-btn no-img icon-bd" height="40" width="40">
+                        <ion-col>Estado</ion-col>
+                    </ion-col>
+                    <ion-col class="der">
+                        Pendiente
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-row>
+
+        <ion-row class="tituloLocales">
+            <img src="../assets/icon/icons/qmtls-15.png" class="img-btn no-img icon-bd" height="40" width="40">Locales
+        </ion-row>
+
+        <div class="carrusel">
+            <div>
+                <div class="swiper-slide" *ngFor="let local of locales; ">
+
+                    <ion-grid>
+                        <ion-row class="locales">
+
+                            <button (click)="abrirmapa(local.direccion)">
+                                        <ion-img src="../assets/icon/icons/qmtls-25.png" class="img-btn no-img icon-bd" height="40px" width="40px" ></ion-img>
+                                    </button>
+
+
+                            <ion-col class=datoslocal routerLink="/route-detail/{{local.idRp}}">
+                                <div>{{local.local}} </div>
+                                <div class="direccionlocal">{{local.direccion}}</div>
+                            </ion-col>
+
+                            <div class="botonesLocales" routerLink="/route-detail/{{local.idRp}}">
+                                <img [hidden]="(local.rpIdEstadoEntrega==13) || (local.rpIdEstadoEntrega==14)" src="../assets/icon/icons/qmtls-16.png" class="img-btn no-img icon-bd" height="40" width="40">
+                                <img [hidden]="local.rpIdEstadoEntrega!=13 " src="../assets/icon/icons/qmtls-13.png" class="img-btn no-img icon-bd" height="40" width="40">
+                                <img [hidden]="local.rpIdEstadoEntrega!=14 " src="../assets/icon/icons/qmtls-10.png" class="img-btn no-img icon-bd" height="40" width="40">
+                            </div>
+                        </ion-row>
+                    </ion-grid>
+
+
+                </div>
+                <div [hidden]="locales.length>= 2" class="swiper-slide2">
+
+                </div>
+                <div [hidden]="locales.length >= 3" class="swiper-slide2">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>
+<app-footer></app-footer>

@@ -9,185 +9,244 @@ const { encriptar, desencriptar } = require('../helpers.js/encriptacion');
 
 // CRUD USUARIOS
 
-// Listar todos los usuarios
-router.get('/listarUsuarios', async (req, res) => {
-  try {
+// LOGIN
 
-    binds = {};
-    sql = "SELECT usuario.id_usuario, usuario.num_documento, usuario.nombre, usuario.apellido, usuario.fecha_nacimiento, usuario.genero, usuario.correo, usuario.telefono, usuario.password, usuario.fk_id_estado, estado_usuario.descripcion, usuario.fk_id_tipo, tipo_usuario.nombre FROM usuario JOIN tipo_usuario ON usuario.fk_id_tipo = tipo_usuario.id_tipo JOIN estado_usuario ON usuario.fk_id_estado = estado_usuario.id_estado";
-    result = await settings.OpenConnection(sql, binds, true);
+router.post('/login', async(req, res) => {
 
-    Usuarios = [];
+    try {
+        var queryText = req.body.correo;
+        var password_bind = req.body.password_bind;
+        if (!queryText || !password_bind) {
+            throw "debe enviar un correo y una contraseña";
+        }
+        var passwordEncrypted = encriptar(password_bind);
+        let binds = [queryText, passwordEncrypted];
 
-    result.rows.map(user => {
-        let userSchema = {
-          "id_usuario": user[0],
-          "num_documento": user[1],
-          "nombre": user[2],
-          "apellido": user[3],
-          "fecha_nacimiento": moment(user[4]).format('DD-MM-YYYY'),
-          "genero": user[5],
-          "correo": user[6],
-          "telefono": user[7],
-          "password": user[8],
-          "fk_id_estado": user[9],
-          "fk_texto_estado": user[10],
-          "fk_id_tipo": user[11],
-          "fk_texto_tipo": user[12]
+
+        // Encriptamos la contraseña del usuario
+
+        sql = `SELECT id_usuario, num_documento, nombre, apellido, fecha_nacimiento, genero, telefono, fk_id_estado, fk_id_tipo FROM usuario WHERE correo= :corr and password= :pass and fk_id_estado= 1  `;
+        console.log("antes del open");
+        result = await settings.Open(sql, binds)
+        console.log("llego al open");
+
+        Usuarios = [];
+
+        result.rows.map(user => {
+            let userSchema = {
+                "id_usuario": user[0],
+                "num_documento": user[1],
+                "nombre": user[2],
+                "apellido": user[3],
+                "fecha_nacimiento": user[4],
+                "genero": user[5],
+                "correo": user[6],
+                "telefono": user[7],
+                "fk_id_estado": user[9],
+                "fk_id_tipo": user[10],
+                "token": "askjdkdfksaljdfkljsadklfjsakldfjklsadf"
+            }
+            Usuarios.push(userSchema);
+        })
+
+        if (Usuarios != 0) {
+            res.status(200);
+            res.json({ error: 'false', 'data': Usuarios });
+        } else {
+            throw 'Usuario o contraseña Incorrectos';
         }
 
-        Usuarios.push(userSchema);
-    })
-    res.json({ title: 'Usuarios', 'mydata': Usuarios });
+    } catch (error) {
+        res.status(400);
+        res.json({
+            'error': 'true ',
+            "msg": error
+        });
+    }
 
-  } catch (error) {
-    res.status(400);
-    res.json({ "error": error });
-    console.log(error);
-  }
+
+})
+
+
+// Listar todos los usuarios
+router.get('/listarUsuarios', async(req, res) => {
+    try {
+
+        binds = {};
+        sql = "SELECT usuario.id_usuario, usuario.num_documento, usuario.nombre, usuario.apellido, usuario.fecha_nacimiento, usuario.genero, usuario.correo, usuario.telefono, usuario.password, usuario.fk_id_estado, estado_usuario.descripcion, usuario.fk_id_tipo, tipo_usuario.nombre FROM usuario JOIN tipo_usuario ON usuario.fk_id_tipo = tipo_usuario.id_tipo JOIN estado_usuario ON usuario.fk_id_estado = estado_usuario.id_estado";
+        result = await settings.OpenConnection(sql, binds, true);
+
+        Usuarios = [];
+
+        result.rows.map(user => {
+            let userSchema = {
+                "id_usuario": user[0],
+                "num_documento": user[1],
+                "nombre": user[2],
+                "apellido": user[3],
+                "fecha_nacimiento": moment(user[4]).format('DD-MM-YYYY'),
+                "genero": user[5],
+                "correo": user[6],
+                "telefono": user[7],
+                "password": user[8],
+                "fk_id_estado": user[9],
+                "fk_texto_estado": user[10],
+                "fk_id_tipo": user[11],
+                "fk_texto_tipo": user[12]
+            }
+
+            Usuarios.push(userSchema);
+        })
+        res.json({ title: 'Usuarios', 'mydata': Usuarios });
+
+    } catch (error) {
+        res.status(400);
+        res.json({ "error": error });
+        console.log(error);
+    }
 
 });
 
 
 // Agregar usuario
-router.post('/crearUsuario', async (req, res) => {
-  try {
+router.post('/crearUsuario', async(req, res) => {
+    try {
 
-    var { num_documento, fk_id_tipo, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password } = req.body;
+        var { num_documento, fk_id_tipo, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password } = req.body;
 
-    // Consulta para ver si existe el correo
-    consulta = "SELECT correo from usuario where correo = :correo";
-    validator = await settings.OpenConnection(consulta, [correo], true);
+        // Consulta para ver si existe el correo
+        consulta = "SELECT correo from usuario where correo = :correo";
+        validator = await settings.OpenConnection(consulta, [correo], true);
 
-    if (validator.rows[0] == correo) {
-      // FALTA: detallar error especifico de que correo ya existe
-      var string = "error";
-      res.redirect('/usuarios/?estado=' + string);
-    } else {
-      // Encriptamos la contraseña del usuario
-      var passwordEncrypted = encriptar(password);
+        if (validator.rows[0] == correo) {
+            // FALTA: detallar error especifico de que correo ya existe
+            var string = "error";
+            res.redirect('/usuarios/?estado=' + string);
+        } else {
+            // Encriptamos la contraseña del usuario
+            var passwordEncrypted = encriptar(password);
 
-      // Creamos el nuevo usuario
-      sql = "CALL PA_USUARIO_CREAR(:num_documento, :nombre, :apellido, :fecha_nacimiento, :genero, :correo, :telefono, :password, :fk_id_tipo)";
-      await settings.OpenConnection(sql, [num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, passwordEncrypted, fk_id_tipo], true);
+            // Creamos el nuevo usuario
+            sql = "CALL PA_USUARIO_CREAR(:num_documento, :nombre, :apellido, :fecha_nacimiento, :genero, :correo, :telefono, :password, :fk_id_tipo)";
+            await settings.OpenConnection(sql, [num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, passwordEncrypted, fk_id_tipo], true);
 
-      // Si tuvo conexión a la DB
-      if (res.status(200)) {
-        console.log("[!] Usuario " + correo + " creado con éxito");
-        var string = "valido";
-        res.redirect('/usuarios/?estado=' + string);
-        settings.enviarCorreo('Usuario registrado con éxito - Maipo Grande', 'usuario_registro');
-      } else {
-        console.log("[!] Ocurrió un error al intentar registrar el usuario " + correo);
-        var string = "error";
-        res.redirect('/usuarios/?estado=' + string);
-      }
+            // Si tuvo conexión a la DB
+            if (res.status(200)) {
+                console.log("[!] Usuario " + correo + " creado con éxito");
+                var string = "valido";
+                res.redirect('/usuarios/?estado=' + string);
+                settings.enviarCorreo('Usuario registrado con éxito - Maipo Grande', 'usuario_registro');
+            } else {
+                console.log("[!] Ocurrió un error al intentar registrar el usuario " + correo);
+                var string = "error";
+                res.redirect('/usuarios/?estado=' + string);
+            }
+        }
+
+    } catch (error) {
+        res.status(400);
+        res.send("Ocurrió un error al obtener los datos de la base de datos")
+        console.log(error);
     }
-
-  } catch (error) {
-    res.status(400);
-    res.send("Ocurrió un error al obtener los datos de la base de datos")
-    console.log(error);
-  }
 
 });
 
 
 // Modificar
-router.post("/modificarUsuario/:id_usuario", async (req, res) => {
-  try {
+router.post("/modificarUsuario/:id_usuario", async(req, res) => {
+    try {
 
-    var id_usuario = req.params.id_usuario;
-    var { correo, nombre, apellido, num_documento, fk_id_tipo, fecha_nacimiento, genero, fk_id_estado, telefono, password } = req.body;
+        var id_usuario = req.params.id_usuario;
+        var { correo, nombre, apellido, num_documento, fk_id_tipo, fecha_nacimiento, genero, fk_id_estado, telefono, password } = req.body;
 
-    // Encriptamos la contraseña del usuario
-    var passwordEncrypted = encriptar(password);
+        // Encriptamos la contraseña del usuario
+        var passwordEncrypted = encriptar(password);
 
-    sql = "CALL PA_USUARIO_UPDATE(:id_usuario, :num_documento, :nombre, :apellido, :fecha_nacimiento, :genero, :correo, :telefono, :password, :fk_id_estado, :fk_id_tipo)";
-    await settings.OpenConnection(sql, [id_usuario, num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, passwordEncrypted, fk_id_estado, fk_id_tipo], true);
+        sql = "CALL PA_USUARIO_UPDATE(:id_usuario, :num_documento, :nombre, :apellido, :fecha_nacimiento, :genero, :correo, :telefono, :password, :fk_id_estado, :fk_id_tipo)";
+        await settings.OpenConnection(sql, [id_usuario, num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, passwordEncrypted, fk_id_estado, fk_id_tipo], true);
 
-    // Si tuvo conexión a la DB
-    if (res.status(200)) {
-      console.log("[!] Usuario " + req.body.correo + " modificado con éxito");
-      res.redirect('/usuarios/');
-    } else {
-      console.log("[!] Ocurrió un error al intentar modificar el usuario " + req.body.correo);
-      var string = "error";
-      res.redirect('/usuarios/');
+        // Si tuvo conexión a la DB
+        if (res.status(200)) {
+            console.log("[!] Usuario " + req.body.correo + " modificado con éxito");
+            res.redirect('/usuarios/');
+        } else {
+            console.log("[!] Ocurrió un error al intentar modificar el usuario " + req.body.correo);
+            var string = "error";
+            res.redirect('/usuarios/');
+        }
+
+    } catch (error) {
+        res.status(400);
+        res.send("Ocurrió un error al obtener los datos de la base de datos")
+        console.log(error);
     }
-
-  } catch (error) {
-    res.status(400);
-    res.send("Ocurrió un error al obtener los datos de la base de datos")
-    console.log(error);
-  }
 
 });
 
 
 // Modificar
 // Agregar restriccion, solo modificar el perfil del usuario conectado
-router.post("/modificarMiPerfil/:id_usuario", async (req, res) => {
-  try {
+router.post("/modificarMiPerfil/:id_usuario", async(req, res) => {
+    try {
 
-    var id_usuario = req.params.id_usuario;
-    var { correo, nombre, apellido, num_documento, fecha_nacimiento, genero, telefono, password } = req.body;
+        var id_usuario = req.params.id_usuario;
+        var { correo, nombre, apellido, num_documento, fecha_nacimiento, genero, telefono, password } = req.body;
 
-    // Encriptamos la contraseña del usuario
-    var passwordEncrypted = encriptar(password);
+        // Encriptamos la contraseña del usuario
+        var passwordEncrypted = encriptar(password);
 
-    sql = "CALL PA_USUARIO_UPDATE_MIPERFIL(:id_usuario, :num_documento, :nombre, :apellido, :fecha_nacimiento, :genero, :correo, :telefono, :password)";
-    await settings.OpenConnection(sql, [id_usuario, num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, passwordEncrypted], true);
+        sql = "CALL PA_USUARIO_UPDATE_MIPERFIL(:id_usuario, :num_documento, :nombre, :apellido, :fecha_nacimiento, :genero, :correo, :telefono, :password)";
+        await settings.OpenConnection(sql, [id_usuario, num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, passwordEncrypted], true);
 
-    // Si tuvo conexión a la DB
-    if (res.status(200)) {
-      console.log("[!] Usuario " + req.body.correo + " modificado con éxito");
-      res.redirect('/usuarios');
-    } else {
-      console.log("[!] Ocurrió un error al intentar modificar el usuario " + req.body.correo);
-      res.redirect('/usuarios');
+        // Si tuvo conexión a la DB
+        if (res.status(200)) {
+            console.log("[!] Usuario " + req.body.correo + " modificado con éxito");
+            res.redirect('/usuarios');
+        } else {
+            console.log("[!] Ocurrió un error al intentar modificar el usuario " + req.body.correo);
+            res.redirect('/usuarios');
+        }
+
+    } catch (error) {
+        res.status(400);
+        res.send("Ocurrió un error al obtener los datos de la base de datos")
+        console.log(error);
     }
-
-  } catch (error) {
-    res.status(400);
-    res.send("Ocurrió un error al obtener los datos de la base de datos")
-    console.log(error);
-  }
 
 });
 
 
 // Nueva contraseña del usuario cuando ingresa por primera vez
-router.post("/nuevaContrasena/:id_usuario", async (req, res) => {
-  try {
+router.post("/nuevaContrasena/:id_usuario", async(req, res) => {
+    try {
 
-    var value_id_usuario = req.params.id_usuario;
-    var { nuevaContrasena } = req.body;
+        var value_id_usuario = req.params.id_usuario;
+        var { nuevaContrasena } = req.body;
 
-    // Encriptamos la contraseña del usuario
-    var passwordEncrypted = encriptar(nuevaContrasena);
-    // Pasamos la cuenta del usuario a 1 = activado
-    var fk_id_estado=1;
+        // Encriptamos la contraseña del usuario
+        var passwordEncrypted = encriptar(nuevaContrasena);
+        // Pasamos la cuenta del usuario a 1 = activado
+        var fk_id_estado = 1;
 
-    sql = "CALL PA_USUARIO_UPDATE_NEWPASSWORD(:id_usuario, :password, :fk_id_estado)";
-    await settings.OpenConnection(sql, [value_id_usuario,passwordEncrypted,fk_id_estado], true);
+        sql = "CALL PA_USUARIO_UPDATE_NEWPASSWORD(:id_usuario, :password, :fk_id_estado)";
+        await settings.OpenConnection(sql, [value_id_usuario, passwordEncrypted, fk_id_estado], true);
 
-    // Si tuvo conexión a la DB
-    if (res.status(200)) {
-      console.log("[!] Contraseña del usuario " + value_id_usuario + " cambiada con éxito");
-      req.session.isLoggedIn = false;
-      res.redirect('/');
-      settings.enviarCorreo('Tu contraseña ha sido cambiada - Maipo Grande', 'usuario_contrasenacambiada');
-    } else {
-      console.log("[!] Ocurrió un error al intentar modificar la contraseña del usuario " + value_id_usuario);
-      res.redirect('/');
+        // Si tuvo conexión a la DB
+        if (res.status(200)) {
+            console.log("[!] Contraseña del usuario " + value_id_usuario + " cambiada con éxito");
+            req.session.isLoggedIn = false;
+            res.redirect('/');
+            settings.enviarCorreo('Tu contraseña ha sido cambiada - Maipo Grande', 'usuario_contrasenacambiada');
+        } else {
+            console.log("[!] Ocurrió un error al intentar modificar la contraseña del usuario " + value_id_usuario);
+            res.redirect('/');
+        }
+
+    } catch (error) {
+        res.status(400);
+        res.send("Ocurrió un error al obtener los datos de la base de datos")
+        console.log(error);
     }
-
-  } catch (error) {
-    res.status(400);
-    res.send("Ocurrió un error al obtener los datos de la base de datos")
-    console.log(error);
-  }
 
 });
 

@@ -1,0 +1,65 @@
+<app-header></app-header>
+<ion-content fullscreen class="mycontainer">
+
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-grid class="grilla">
+        <ion-row class="row1">
+            <ion-card class="card1">
+                <img src="../assets/icon/icons/qmtls-15.png" class="img-btn no-img icon-bd" height="80" width="80" class="localIcon">
+                <div>
+                    <div class="tituloAzul">Local: VENDEDOR FALSO
+                    </div>
+                    <div class="datoAzul">Direccion: CAlle Falsa 123 springfield</div>
+                </div>
+
+            </ion-card>
+        </ion-row>
+        <ion-row class="row2">
+            <ion-card class="card2">
+                <img src="../assets/icon/icons/qmtls-08.png" class="img-btn no-img icon-bd" height="70" width="70" class="localIcon" class="llegadaIcon">
+                <div>
+                    <div class="tituloAmarillo"> LLegada estimada:
+                    </div>
+                    <label class="datoAzul">'22-11-2021 - 15:00'Hrs</label>
+                </div>
+
+
+            </ion-card>
+        </ion-row>
+
+        <ion-row class="row3">
+            <ion-col size=6>
+                <ion-card class="card3" (click)='iniciarDescarga()' [disabled]="inicioDescarga !=null">
+                    <img src="../assets/icon/icons/qmtls-10.png" class="img-btn no-img icon-bd img-start-stop" height="70" width="70" class="localIcon">
+                    <div class="tituloAmarillo">
+                        Iniciar Viaje
+                    </div>
+                    <label class="datoAzul">
+                            {{fechaInicio | date:'dd-mm-yyyy - hh:mm'}}
+                        </label>
+                </ion-card>
+            </ion-col>
+            <ion-col size="6">
+
+                <ion-card class="card4" (click)='finalizarDescarga()' [disabled]="inicioDescarga ==null || finDescarga !=null">
+                    <img src="../assets/icon/icons/qmtls-10.png" class="img-btn no-img icon-bd img-start-stop" height="70px" width="70px">
+                    <div class="tituloAmarillo">
+                        Fin Viaje
+                    </div>
+                    <label class="datoAzul">
+                            {{fechaInicio | date:'dd-mm-yyyy - hh:mm'}}
+                        </label>
+                </ion-card>
+
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="row5" routerLink="/tomarfoto">
+            <ion-img src="../assets/icon/icons/qmtls-17.png" class="img-btn no-img icon-bd" height="70px" width="70px" routerLink="/tomarfoto"></ion-img>
+        </ion-row>
+
+    </ion-grid>
+</ion-content>
+<app-footer></app-footer>
