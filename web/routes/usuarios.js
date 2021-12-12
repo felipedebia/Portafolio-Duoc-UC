@@ -115,10 +115,10 @@ router.post('/crearUsuario', async (req, res) => {
     var { num_documento, fk_id_tipo, nombre, apellido, fecha_nacimiento, genero, correo, telefono, password } = req.body;
 
     // Consulta para ver si existe el correo
-    consulta = "SELECT correo from usuario where correo = :correo";
-    validator = await settings.OpenConnection(consulta, [correo], true);
+    sql1 = "SELECT correo from usuario where correo = :correo";
+    resultado1 = await settings.OpenConnection(sql1, [correo], true);
 
-    if (validator.rows[0] == correo) {
+    if (resultado1.rows[0] == correo) {
       // FALTA: detallar error especifico de que correo ya existe
       var string = "error";
       res.redirect('/usuarios/?estado=' + string);
@@ -127,11 +127,11 @@ router.post('/crearUsuario', async (req, res) => {
       var passwordEncrypted = encriptar(password);
 
       // Creamos el nuevo usuario
-      sql = "CALL PA_USUARIO_CREAR(:num_documento, :nombre, :apellido, :fecha_nacimiento, :genero, :correo, :telefono, :password, :fk_id_tipo)";
-      await settings.OpenConnection(sql, [num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, passwordEncrypted, fk_id_tipo], true);
+      sql2 = "CALL PA_USUARIO_CREAR(:num_documento, :nombre, :apellido, :fecha_nacimiento, :genero, :correo, :telefono, :password, :fk_id_tipo)";
+      resultado2 = await settings.OpenConnection(sql2, [num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, passwordEncrypted, fk_id_tipo], true);
 
       // Si tuvo conexión a la DB
-      if (res.status(200)) {
+      if (resultado2) {
         console.log("[!] Usuario " + correo + " creado con éxito");
         var string = "valido";
         res.redirect('/usuarios/?estado=' + string);
@@ -163,10 +163,10 @@ router.post("/modificarUsuario/:id_usuario", async (req, res) => {
     var passwordEncrypted = encriptar(password);
 
     sql = "CALL PA_USUARIO_UPDATE(:id_usuario, :num_documento, :nombre, :apellido, :fecha_nacimiento, :genero, :correo, :telefono, :password, :fk_id_estado, :fk_id_tipo)";
-    await settings.OpenConnection(sql, [id_usuario, num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, passwordEncrypted, fk_id_estado, fk_id_tipo], true);
+    resultado = await settings.OpenConnection(sql, [id_usuario, num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, passwordEncrypted, fk_id_estado, fk_id_tipo], true);
 
     // Si tuvo conexión a la DB
-    if (res.status(200)) {
+    if (resultado) {
       console.log("[!] Usuario " + req.body.correo + " modificado con éxito");
       res.redirect('/usuarios/');
     } else {
@@ -196,10 +196,10 @@ router.post("/modificarMiPerfil/:id_usuario", async (req, res) => {
     var passwordEncrypted = encriptar(password);
 
     sql = "CALL PA_USUARIO_UPDATE_MIPERFIL(:id_usuario, :num_documento, :nombre, :apellido, :fecha_nacimiento, :genero, :correo, :telefono, :password)";
-    await settings.OpenConnection(sql, [id_usuario, num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, passwordEncrypted], true);
+    resultado = await settings.OpenConnection(sql, [id_usuario, num_documento, nombre, apellido, fecha_nacimiento, genero, correo, telefono, passwordEncrypted], true);
 
     // Si tuvo conexión a la DB
-    if (res.status(200)) {
+    if (resultado) {
       console.log("[!] Usuario " + req.body.correo + " modificado con éxito");
       res.redirect('/usuarios');
     } else {
@@ -229,10 +229,10 @@ router.post("/nuevaContrasena/:id_usuario", async (req, res) => {
     var fk_id_estado=1;
 
     sql = "CALL PA_USUARIO_UPDATE_NEWPASSWORD(:id_usuario, :password, :fk_id_estado)";
-    await settings.OpenConnection(sql, [value_id_usuario,passwordEncrypted,fk_id_estado], true);
+    resultado = await settings.OpenConnection(sql, [value_id_usuario,passwordEncrypted,fk_id_estado], true);
 
     // Si tuvo conexión a la DB
-    if (res.status(200)) {
+    if (resultado) {
       console.log("[!] Contraseña del usuario " + value_id_usuario + " cambiada con éxito");
       req.session.isLoggedIn = false;
       res.redirect('/');

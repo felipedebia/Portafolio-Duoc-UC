@@ -119,10 +119,10 @@ router.post("/modificarOrdenBodega/:id_ordenb", async (req, res) => {
     var { fecha_ingreso, fecha_retiro, fk_id_estado } = req.body;
     
     sql = "CALL PA_ORDEN_BODEGA_UPDATE(:id_ordenb, :fecha_ingreso, :fecha_retiro, :fk_id_estado)";
-    await settings.OpenConnection(sql, [value_id_ordenb, fecha_ingreso, fecha_retiro, fk_id_estado], true);
+    resultado = await settings.OpenConnection(sql, [value_id_ordenb, fecha_ingreso, fecha_retiro, fk_id_estado], true);
   
     // Si tuvo conexión a la DB
-    if(res.status(200)) {
+    if(resultado) {
       console.log("[!] Orden de Bodega " + value_id_ordenb + " modificado con éxito");
       res.redirect('/ordenes_bodegas');
     } else {
@@ -149,10 +149,10 @@ router.post('/crearReporteBodega/:id_ordenb', async (req, res) => {
     var fk_id_ordenb = req.params.id_ordenb;
 
     sql = "CALL PA_REPORTE_BODEGA_CREAR(:fecha_creacion, :estado_reporte, :descripcion, :fk_id_ordenb)";
-    await settings.OpenConnection(sql, [fecha_creacion, estado_reporte, descripcion, fk_id_ordenb], true);
+    resultado = await settings.OpenConnection(sql, [fecha_creacion, estado_reporte, descripcion, fk_id_ordenb], true);
 
     // Si tuvo conexión a la DB
-    if(res.status(200)) {
+    if(resultado) {
       console.log("[!] Reporte de bodega creada con éxito");
       res.redirect('/reportes_bodega/' + fk_id_ordenb);
       //res.refresh();
@@ -178,10 +178,10 @@ router.post("/modificarReporteBodega/:id_reporteb", async (req, res) => {
     var { descripcion } = req.body;
     
     sql = "CALL PA_REPORTE_BODEGA_UPDATE(:id_reporteb, :descripcion)";
-    await settings.OpenConnection(sql, [id_reporteb, descripcion], true);
+    resultado = await settings.OpenConnection(sql, [id_reporteb, descripcion], true);
   
     // Si tuvo conexión a la DB
-    if(res.status(200)) {
+    if(resultado) {
       console.log("[!] Reporte de bodega " + id_reporteb + " modificado con éxito");
       res.redirect('/ordenes_bodegas');
     } else {
@@ -205,9 +205,9 @@ router.get("/eliminarReporteBodega/:id_reporteb", async (req, res) => {
     var id_reporteb = req.params.id_reporteb;
     
     sql = "CALL PA_REPORTE_BODEGA_DELETE(:id_reporteb)";
-    await settings.OpenConnection(sql, [id_reporteb], true);
+    resultado = await settings.OpenConnection(sql, [id_reporteb], true);
   
-    if(res.status(200)) {
+    if(resultado) {
       console.log("[!] Reporte de Bodega " + id_reporteb + " eliminado con éxito");
       res.redirect('/ordenes_bodegas');
     } else {
@@ -305,10 +305,10 @@ router.post("/modificarOrdenTransporte/:id_ordenT", async (req, res) => {
     var { fecha_llegada, fecha_retiro, fk_id_estado } = req.body;
     
     sql = "CALL PA_ORDEN_TRANSPORTE_UPDATE(:value_id_ordenT, :fecha_llegada, :fecha_retiro, :fk_id_estado)";
-    await settings.OpenConnection(sql, [value_id_ordenT, fecha_llegada, fecha_retiro, fk_id_estado], true);
+    resultado = await settings.OpenConnection(sql, [value_id_ordenT, fecha_llegada, fecha_retiro, fk_id_estado], true);
   
     // Si tuvo conexión a la DB
-    if(res.status(200)) {
+    if(resultado) {
       console.log("[!] Orden de Transporte " + value_id_ordenT + " modificado con éxito");
       res.redirect('/ordenes_transportes');
     } else {

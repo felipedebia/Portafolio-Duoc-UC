@@ -56,10 +56,10 @@ router.post('/crearProducto', async (req, res) => {
     var fk_usuario = req.session.id_usuario;
 
     sql = "CALL PA_PRODUCTO_CREAR(:cantidad, :fecha_creacion, :fk_fruta, :fk_calidad, :fk_usuario, :fk_id_estado)";
-    await settings.OpenConnection(sql, [cantidad, fecha_creacion, fk_fruta, fk_calidad, fk_usuario, fk_id_estado], true);
+    resultado = await settings.OpenConnection(sql, [cantidad, fecha_creacion, fk_fruta, fk_calidad, fk_usuario, fk_id_estado], true);
 
     // Si tuvo conexión a la DB
-    if(res.status(200)) {
+    if(resultado) {
       console.log("[!] Producto creado con éxito");
       res.redirect('/productos');
       //res.refresh();
@@ -85,10 +85,10 @@ router.post("/modificarProducto/:id_producto", async (req, res) => {
     var { cantidad, fk_id_fruta, fk_id_calidad} = req.body;
     
     sql = "CALL PA_PRODUCTO_UPDATE(:id_producto, :cantidad, :fk_id_fruta, :fk_id_calidad)";
-    await settings.OpenConnection(sql, [id_producto, cantidad, fk_id_fruta, fk_id_calidad], true);
+    resultado = await settings.OpenConnection(sql, [id_producto, cantidad, fk_id_fruta, fk_id_calidad], true);
 
     // Si tuvo conexión a la DB
-    if(res.status(200)) {
+    if(resultado) {
       console.log("[!] Producto " + id_producto + " modificado con éxito");
       res.redirect('/productos');
     } else {
@@ -112,9 +112,9 @@ router.get("/anularProducto/:id_producto", async (req, res) => {
     var id_producto_bind = req.params.id_producto;
 
     sql = "CALL PA_PRODUCTO_ANULAR(:id_producto_bind)";
-    await settings.OpenConnection(sql, [id_producto_bind], true);
+    resultado = await settings.OpenConnection(sql, [id_producto_bind], true);
 
-    if(res.status(200)) {
+    if(resultado) {
       console.log("[!] Producto " + id_producto_bind + " anulado con éxito");
       res.redirect('/productos');
     } else {

@@ -49,10 +49,10 @@ router.post('/comprarFrutaRestante', async (req, res) => {
       var fecha_creacion = functions.obtenerFechaActual();
   
       sql = "CALL PA_FRUTA_CREAR(:nombre,:fecha_creacion,:necesita_refrigeracion)";
-      await settings.OpenConnection(sql, [nombre, fecha_creacion, necesita_refrigeracion], true);
+      resultado = await settings.OpenConnection(sql, [nombre, fecha_creacion, necesita_refrigeracion], true);
   
       // Si tuvo conexión a la DB
-      if(res.status(200)) {
+      if(resultado) {
         console.log("[!] Fruta restante comprada con éxito");
         res.redirect('/miscompras');
         //res.refresh();

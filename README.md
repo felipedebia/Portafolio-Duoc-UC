@@ -1,6 +1,7 @@
 # Portafolio
 
-NodeJS - Ejs - OracleDB - Express.js
+Web: NodeJS - Ejs - OracleDB - Express.js
+Móvil: 
 
 # Instalación
 

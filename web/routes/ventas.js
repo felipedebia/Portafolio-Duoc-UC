@@ -100,10 +100,10 @@ router.post('/crearVenta/:id_venta', async (req, res) => {
     var fk_id_tipo = 2;
 
     sql = "INSERT INTO venta(id_venta, fecha_creacion, fecha_actualizacion, fk_id_pedido, fk_id_seguro, fk_id_tipo, fk_id_estado) VALUES (:id_venta_bind, to_DATE(:fecha_creacion,'YYYY/MM/DD'), to_DATE(:fecha_actualizacion,'YYYY/MM/DD'), :fk_id_pedido, :fk_id_seguro, :fk_id_tipo, :fk_id_estado)";
-    await settings.OpenConnection(sql, [id_venta_bind, fecha_creacion, fecha_actualizacion, fk_id_pedido, fk_id_seguro, fk_id_tipo, fk_id_estado], true);
+    resultado = await settings.OpenConnection(sql, [id_venta_bind, fecha_creacion, fecha_actualizacion, fk_id_pedido, fk_id_seguro, fk_id_tipo, fk_id_estado], true);
 
     // Si tuvo conexión a la DB
-    if(res.status(200)) {
+    if(resultado) {
       console.log("[!] Venta " + id_venta_bind + " creada con éxito");
       res.redirect('/ventas');
     } else {
@@ -164,9 +164,9 @@ router.get("/anularVenta/:id_venta", async (req, res) => {
     var id_venta_bind = req.params.id_venta;
 
     sql = "UPDATE venta SET fk_id_estado=7 WHERE id_venta = :id_venta_bind";
-    await settings.OpenConnection(sql, [id_venta_bind], true);
+    resultado = await settings.OpenConnection(sql, [id_venta_bind], true);
 
-    if(res.status(200)) {
+    if(resultado) {
       console.log("[!] Venta " + id_venta_bind + " anulada con éxito");
       res.redirect('/ventas');
     } else {

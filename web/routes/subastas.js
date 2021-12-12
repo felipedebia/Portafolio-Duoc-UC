@@ -61,18 +61,21 @@ router.get('/crearSubastaFruta/:id_subastaF', async (req, res) => {
     console.log(fecha_termino)
     console.log("fin")
 
-    sql = "CALL PA_SUBASTA_FRUTA_CREAR(:id_subastaF, :fecha_creacion, :fecha_actualizacion, :fecha_termino_actual, :fk_id_pedido, :fk_id_estado)";
-    await settings.OpenConnection(sql, [id_subastaF, fecha_creacion, fecha_actualizacion, fecha_termino_actual, fk_id_pedido, fk_id_estado], true);
+    sql1 = "CALL PA_SUBASTA_FRUTA_CREAR(:id_subastaF, :fecha_creacion, :fecha_actualizacion, :fecha_termino_actual, :fk_id_pedido, :fk_id_estado)";
+    resultado1 = await settings.OpenConnection(sql1, [id_subastaF, fecha_creacion, fecha_actualizacion, fecha_termino_actual, fk_id_pedido, fk_id_estado], true);
 
     // Si tuvo conexión a la DB
-    if (res.status(200)) {
+    if (resultado1) {
       console.log("[!] Subasta creada con éxito");
 
       // Actualizamos pedido a estado 3 = en subasta de fruta
       sql2 = "UPDATE pedido SET fk_id_estado=3 WHERE id_pedido = :fk_id_pedido";
-      var consulta = await settings.OpenConnection(sql2, [fk_id_pedido], true);
+      resultado2 = await settings.OpenConnection(sql2, [fk_id_pedido], true);
 
-      res.redirect('/subasta_fruta/' + id_subastaF);
+      if (resultado2) {
+        res.redirect('/subasta_fruta/' + id_subastaF);
+      }
+      
     } else {
       console.log("[!] Ocurrió un error al intentar crear la subasta ");
       res.redirect('/subasta_fruta/' + id_subastaF);
@@ -93,10 +96,10 @@ router.get("/finalizarSubastaFruta/:id_subastaF", async (req, res) => {
 
     var id_subastaF_bind = req.params.id_subastaF;
 
-    sql1 = "CALL PA_SUBASTA_FRUTA_FINALIZAR(:id_subastaF_bind)";
-    resultado1 = await settings.OpenConnection(sql1, [id_subastaF_bind], true);
+    sql = "CALL PA_SUBASTA_FRUTA_FINALIZAR(:id_subastaF_bind)";
+    resultado = await settings.OpenConnection(sql, [id_subastaF_bind], true);
 
-    if (resultado1) {
+    if (resultado) {
       console.log("[!] Subasta de Frutas " + id_subastaF_bind + " finalizada con éxito");
 
       res.redirect('/api_subastas/finalizarSubastaFruta2/' + id_subastaF_bind);
@@ -189,9 +192,9 @@ router.get("/anularSubastaFruta/:id_subastaF", async (req, res) => {
     var id_subastaF_bind = req.params.id_subastaF;
 
     sql = "CALL PA_SUBASTA_FRUTA_ANULAR(:id_subastaF_bind)";
-    await settings.OpenConnection(sql, [id_subastaF_bind], true);
+    resultado = await settings.OpenConnection(sql, [id_subastaF_bind], true);
 
-    if (res.status(200)) {
+    if (resultado) {
       console.log("[!] Subasta de Frutas " + id_subastaF_bind + " anulada con éxito");
 
       // Se tienen que rechazar todas las ofertas de la subasta
@@ -297,9 +300,9 @@ router.get("/anularSubastaTransporte/:id_subastaT", async (req, res) => {
     var id_subastaT_bind = req.params.id_subastaT;
 
     sql = "CALL PA_SUBASTA_TRANSPORTE_ANULAR(:id_subastaT_bind)";
-    await settings.OpenConnection(sql, [id_subastaT_bind], true);
+    resultado = await settings.OpenConnection(sql, [id_subastaT_bind], true);
 
-    if (res.status(200)) {
+    if (resultado) {
       console.log("[!] Subasta de Transportes " + id_subastaT_bind + " anulada con éxito");
 
       // Se tienen que rechazar todas las ofertas de la subasta

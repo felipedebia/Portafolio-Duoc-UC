@@ -49,10 +49,10 @@ router.post('/crearInforme/:id_venta', async (req, res) => {
     var fecha_actualizacion = functions.obtenerFechaActual();
   
     sql = "CALL PA_INFORME_CREAR(:fecha_creacion, :fecha_actualizacion, :descripcion, :fk_id_venta)";
-    await settings.OpenConnection(sql, [fecha_creacion, fecha_actualizacion, descripcion, fk_id_venta], true);
+    resultado = await settings.OpenConnection(sql, [fecha_creacion, fecha_actualizacion, descripcion, fk_id_venta], true);
   
     // Si tuvo conexión a la DB
-    if(res.status(200)) {
+    if(resultado) {
       console.log("[!] Informe de venta creada con éxito");
       res.redirect('/ventas');
     } else {
@@ -78,10 +78,10 @@ router.post("/modificarInforme/:id_informe", async (req, res) => {
     var fecha_actualizacion = functions.obtenerFechaActual();
     
     sql = "CALL PA_INFORME_UPDATE(:value_id_informe, :fecha_actualizacion, :descripcion)";
-    await settings.OpenConnection(sql, [value_id_informe, fecha_actualizacion, descripcion], true);
+    resultado = await settings.OpenConnection(sql, [value_id_informe, fecha_actualizacion, descripcion], true);
   
     // Si tuvo conexión a la DB
-    if(res.status(200)) {
+    if(resultado) {
       console.log("[!] Informe de venta " + value_id_informe + " modificado con éxito");
       res.redirect('/ventas');
     } else {
@@ -105,9 +105,9 @@ router.get("/eliminarInforme/:id_informe", async (req, res) => {
     var value_id_informe = req.params.id_informe;
     
     sql = "CALL PA_INFORME_DELETE(:value_id_informe)";
-    await settings.OpenConnection(sql, [value_id_informe], true);
+    resultado = await settings.OpenConnection(sql, [value_id_informe], true);
   
-    if(res.status(200)) {
+    if(resultado) {
       console.log("[!] Informe " + value_id_informe + " eliminado con éxito");
       res.redirect('/ventas');
     } else {

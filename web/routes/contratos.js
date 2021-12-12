@@ -66,17 +66,17 @@ router.post('/crearContrato', async(req, res) => {
       var id_usuario_creador = req.session.id_usuario;
 
       sql = "CALL PA_CONTRATO_CREAR(:fecha_inicio, :fecha_vencimiento, :fk_id_tipo, :id_usuario_creador, :id_usuario_firmante)";
-      await settings.OpenConnection(sql, [fecha_inicio, fecha_vencimiento, fk_id_tipo, id_usuario_creador, id_usuario_firmante], true);
+      resultado = await settings.OpenConnection(sql, [fecha_inicio, fecha_vencimiento, fk_id_tipo, id_usuario_creador, id_usuario_firmante], true);
 
       // Si tuvo conexión a la DB
-      if (res.status(200)) {
+      if (resultado) {
           console.log("[!] Contrato creado con éxito");
 
           //Con esto tomamos el ultimo registro en la tabla contrato para crear tabla rel y redirigir al documentoContrato y pueda agregar el documento
           sql2 = "SELECT id_contrato FROM (SELECT * FROM contrato ORDER BY id_contrato DESC ) WHERE rownum = 1";
-          result2 = await settings.OpenConnection(sql2, [], true);
+          resultado2 = await settings.OpenConnection(sql2, [], true);
 
-          var idContratoSql = result2.rows[0];
+          var idContratoSql = resultado2.rows[0];
 
           res.redirect('/documentoContrato/' + idContratoSql);
 
@@ -109,9 +109,9 @@ router.post('/subirDocumento/:id_contrato', uploadFile.single('url_documento'), 
     var url_documento = req.file.filename;
 
     sql = "CALL PA_CONTRATO_UPDATE_URLDOCUMENTO(:id_contrato_bind, :url_documento)";
-    await settings.OpenConnection(sql, [id_contrato_bind, url_documento], true);
+    resultado = await settings.OpenConnection(sql, [id_contrato_bind, url_documento], true);
 
-    if(res.status(200)) {
+    if(resultado) {
       console.log("[!] Documento de contrato " + id_contrato_bind + " agregado con éxito");
       res.redirect('/contratos');
     } else {
@@ -136,10 +136,10 @@ router.post("/modificarContrato/:id_contrato", async (req, res) => {
     var { fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado } = req.body;
 
     sql = "CALL PA_CONTRATO_UPDATE(:id_contrato, :fecha_inicio, :fecha_vencimiento, :fk_id_tipo, :fk_id_estado)";
-    await settings.OpenConnection(sql, [value_id_contrato, fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado], true);
+    resultado = await settings.OpenConnection(sql, [value_id_contrato, fecha_inicio, fecha_vencimiento, fk_id_tipo, fk_id_estado], true);
 
     // Si tuvo conexión a la DB
-    if(res.status(200)) {
+    if(resultado) {
       console.log("[!] Contrato " + value_id_contrato + " modificado con éxito");
       res.redirect('/contratos');
     } else {
