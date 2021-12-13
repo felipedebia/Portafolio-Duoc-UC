@@ -49,7 +49,7 @@ router.get('/listarVentaDetalles', async(req, res) => {
   try {
 
     binds = {};
-    sql = "select id_ventaD, costo_fruta, costo_transporte, costo_impuestos, comision_servicio, comision_empresa, precio_final, fk_id_venta, to_char(costo_fruta,'$999,999,999'), to_char(costo_transporte,'$999,999,999'), to_char(costo_impuestos,'$999,999,999'), to_char(comision_servicio,'$999,999,999'), to_char(comision_empresa,'$999,999,999'), to_char(precio_final,'$999,999,999') from venta_detalle";
+    sql = "SELECT id_ventaD, costo_fruta, costo_transporte, costo_impuestos, comision_servicio, comision_empresa, precio_final, fk_id_venta, to_char(costo_fruta,'$999,999,999'), to_char(costo_transporte,'$999,999,999'), to_char(costo_impuestos,'$999,999,999'), to_char(comision_servicio,'$999,999,999'), to_char(comision_empresa,'$999,999,999'), to_char(precio_final,'$999,999,999') from venta_detalle";
     result = await settings.OpenConnection(sql, binds, true);
 
     VentaDetalles = [];
@@ -99,7 +99,7 @@ router.post('/crearVenta/:id_venta', async (req, res) => {
     // Venta externa
     var fk_id_tipo = 2;
 
-    sql = "INSERT INTO venta(id_venta, fecha_creacion, fecha_actualizacion, fk_id_pedido, fk_id_seguro, fk_id_tipo, fk_id_estado) VALUES (:id_venta_bind, to_DATE(:fecha_creacion,'YYYY/MM/DD'), to_DATE(:fecha_actualizacion,'YYYY/MM/DD'), :fk_id_pedido, :fk_id_seguro, :fk_id_tipo, :fk_id_estado)";
+    sql = "CALL PA_VENTA_CREAR(:id_venta,:fecha_creacion,:fecha_actualizacion,:fk_id_pedido,:fk_id_seguro,:fk_id_tipo,:fk_id_estado)";
     resultado = await settings.OpenConnection(sql, [id_venta_bind, fecha_creacion, fecha_actualizacion, fk_id_pedido, fk_id_seguro, fk_id_tipo, fk_id_estado], true);
 
     // Si tuvo conexión a la DB
@@ -128,7 +128,7 @@ router.post('/crearVentaDetalle/:id_venta', async (req, res) => {
     var { costo_impuestos, comision_servicio, comision_empresa, costo_fruta, costo_transporte } = req.body;
     var precio_final = parseInt(costo_impuestos) + parseInt(comision_servicio) + parseInt(comision_empresa) + parseInt(costo_fruta) + parseInt(costo_transporte);
 
-    sql1 = "INSERT INTO venta_detalle(id_ventad, costo_fruta, costo_transporte,costo_impuestos,comision_servicio,comision_empresa,precio_final,fk_id_venta) VALUES (:fk_id_venta_bind,:costo_fruta,:costo_transporte,:costo_impuestos,:comision_servicio,:comision_empresa,:precio_final,:fk_id_venta_bind)";
+    sql1 = "CALL PA_VENTA_DETALLE_CREAR(:id_ventad,:costo_fruta,:costo_transporte,:costo_impuestos,:comision_servicio,:comision_empresa,:precio_final,:fk_id_venta)";
     resultado1 = await settings.OpenConnection(sql1, [fk_id_venta_bind, costo_fruta, costo_transporte, costo_impuestos, comision_servicio, comision_empresa, precio_final, fk_id_venta_bind], true);
 
     // Si tuvo conexión a la DB
@@ -163,7 +163,7 @@ router.get("/anularVenta/:id_venta", async (req, res) => {
 
     var id_venta_bind = req.params.id_venta;
 
-    sql = "UPDATE venta SET fk_id_estado=7 WHERE id_venta = :id_venta_bind";
+    sql = "CALL PA_VENTA_ANULAR(:id_venta_bind)";
     resultado = await settings.OpenConnection(sql, [id_venta_bind], true);
 
     if(resultado) {
