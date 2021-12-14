@@ -119,7 +119,7 @@ router.get('/logout', function(req, res, next) {
 
 // CRUD USUARIOS
 
-router.get('/usuarios', function(req, res) {
+router.get('/usuarios', async (req, res) => {
     if (req.session.isLoggedIn) {
 		var estado_respuesta = req.query.estado;
 		functions.ListarUsuarios();
@@ -730,33 +730,56 @@ router.get('/crearOfertaProductor/:id_subastaF', async function(req, res, next) 
 // CRUD VENTAS
 router.get('/ventas', async function(req, res) {
     if (req.session.isLoggedIn) {
-		
-		// Hacemos una consulta trayendo los costos de transporte
+
+		// Consultamos si hay alguna venta con estado 1, si no hay entonces no se hacen consultas innecesarias
 		binds = { };
-		sql1 = "SELECT v.id_venta, p.id_pedido, sf.id_subastaf, op.id_ofertaP, op.cantidad * precio_por_kilo FROM venta v JOIN pedido p ON p.id_pedido = v.id_venta JOIN subasta_fruta sf ON sf.fk_id_pedido = p.id_pedido JOIN oferta_productor op ON op.fk_id_subastaf = p.id_pedido WHERE op.fk_id_estado = 2";
-		resultado1 = await settings.OpenConnection(sql1, binds, false);
-
-		// Si los datos estan correctos
-		if (resultado1.rows.length > 0) {
-
-			console.log(resultado1.rows);
-			// Hacemos una consulta trayendo los costos de fruta
-			binds = { };
-			sql2 = "SELECT v.id_venta, p.id_pedido, st.id_subastat, ot.id_ofertaT, ot.precio_final FROM venta v JOIN pedido p ON p.id_pedido = v.id_venta JOIN subasta_transporte st ON st.fk_id_pedido = p.id_pedido JOIN oferta_transporte ot ON ot.fk_id_subastat = st.id_subastat WHERE ot.fk_id_estado = 2";
-			resultado2 = await settings.OpenConnection(sql2, binds, false);
-
-			// Si los datos estan correctos
-			if (resultado2.rows.length > 0) {
-
-				console.log(resultado2.rows);
-				// Mostramos la vista
-				functions.ListarVentas();
-				res.render('Ventas', { title: 'Ventas - Maipo Grande', dataPrecio:resultado1.rows, dataTransporte:resultado2.rows, navActive: 'Ventas' });
-
-			}
+		sql0 = "SELECT id_venta FROM venta WHERE fk_id_estado = 1";
+		resultado0 = await settings.OpenConnection(sql0, binds, false);
+		
+		if (resultado0.rows.length > 0) {
 			
+			// Hacemos una consulta trayendo los costos de transporte
+			binds = { };
+			sql1 = "SELECT v.id_venta, p.id_pedido, sf.id_subastaf, op.id_ofertaP, op.cantidad * precio_por_kilo FROM venta v JOIN pedido p ON p.id_pedido = v.id_venta JOIN subasta_fruta sf ON sf.fk_id_pedido = p.id_pedido JOIN oferta_productor op ON op.fk_id_subastaf = p.id_pedido WHERE op.fk_id_estado = 2";
+			resultado1 = await settings.OpenConnection(sql1, binds, false);
+
+			// Si trae datos
+			if (resultado1.rows.length > 0) {
+
+				console.log(resultado1.rows);
+				// Hacemos una consulta trayendo los costos de fruta
+				binds = { };
+				sql2 = "SELECT v.id_venta, p.id_pedido, st.id_subastat, ot.id_ofertaT, ot.precio_final FROM venta v JOIN pedido p ON p.id_pedido = v.id_venta JOIN subasta_transporte st ON st.fk_id_pedido = p.id_pedido JOIN oferta_transporte ot ON ot.fk_id_subastat = st.id_subastat WHERE ot.fk_id_estado = 2";
+				resultado2 = await settings.OpenConnection(sql2, binds, false);
+
+				// Si trae datos
+				if (resultado2.rows.length > 0) {
+
+					console.log(resultado2.rows);
+					// Mostramos la vista
+					functions.ListarVentas();
+					res.render('Ventas', { title: 'Ventas - Maipo Grande', dataPrecio:resultado1.rows, dataTransporte:resultado2.rows, navActive: 'Ventas' });
+
+				}
+				
+			}
+
 		} else {
-			res.send('Error al obtener datos de la base de datos');
+
+			var dataPrecio = [
+				{
+					precioFruta: 0
+				}
+			];
+
+			var dataTransporte = [
+				{
+					precioTransporte: 0
+				}
+			];
+
+			res.render('Ventas', { title: 'Ventas - Maipo Grande', dataPrecio:dataPrecio, dataTransporte:dataTransporte, navActive: 'Ventas' });
+
 		}
 
     } else {
