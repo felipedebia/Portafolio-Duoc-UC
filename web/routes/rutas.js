@@ -119,7 +119,7 @@ router.get('/logout', function(req, res, next) {
 
 // CRUD USUARIOS
 
-router.get('/usuarios', async (req, res) => {
+router.get('/usuarios', function(req, res) {
     if (req.session.isLoggedIn) {
 		var estado_respuesta = req.query.estado;
 		functions.ListarUsuarios();

@@ -53,16 +53,13 @@ router.get('/crearSubastaFruta/:id_subastaF', async (req, res) => {
     var fecha_creacion = functions.obtenerFechaActual();
     var fecha_actualizacion = functions.obtenerFechaActual();
 
-    // Agregamos 1 mes más de plazo para terminar la subasta, falta terminar
     var fecha_termino_actual = functions.obtenerFechaActual();
+    // Agregamos 1 mes más de plazo para terminar la subasta, falta terminar
     var fecha_termino = functions.agregarMesAFecha(new Date(fecha_termino_actual), 1)
+    var fecha_termino_final = moment(fecha_termino).format('YYYYMMDD');
 
-    console.log(fecha_termino_actual)
-    console.log(fecha_termino)
-    console.log("fin")
-
-    sql1 = "CALL PA_SUBASTA_FRUTA_CREAR(:id_subastaF, :fecha_creacion, :fecha_actualizacion, :fecha_termino_actual, :fk_id_pedido, :fk_id_estado)";
-    resultado1 = await settings.OpenConnection(sql1, [id_subastaF, fecha_creacion, fecha_actualizacion, fecha_termino_actual, fk_id_pedido, fk_id_estado], true);
+    sql1 = "CALL PA_SUBASTA_FRUTA_CREAR(:id_subastaF, :fecha_creacion, :fecha_actualizacion, :fecha_termino_final, :fk_id_pedido, :fk_id_estado)";
+    resultado1 = await settings.OpenConnection(sql1, [id_subastaF, fecha_creacion, fecha_actualizacion, fecha_termino_final, fk_id_pedido, fk_id_estado], true);
 
     // Si tuvo conexión a la DB
     if (resultado1) {
