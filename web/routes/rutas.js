@@ -765,21 +765,7 @@ router.get('/ventas', async function(req, res) {
 			}
 
 		} else {
-
-			var dataPrecio = [
-				{
-					precioFruta: 0
-				}
-			];
-
-			var dataTransporte = [
-				{
-					precioTransporte: 0
-				}
-			];
-
-			res.render('Ventas', { title: 'Ventas - Maipo Grande', dataPrecio:dataPrecio, dataTransporte:dataTransporte, navActive: 'Ventas' });
-
+			res.render('Ventas', { title: 'Ventas - Maipo Grande', navActive: 'Ventas' });
 		}
 
     } else {
