@@ -105,7 +105,15 @@ router.post('/crearVenta/:id_venta', async (req, res) => {
     // Si tuvo conexión a la DB
     if(resultado) {
       console.log("[!] Venta " + id_venta_bind + " creada con éxito");
-      res.redirect('/ventas');
+
+      // Actualizamos pedido a 7 = finalizado
+      sql2 = "UPDATE pedido SET fk_id_estado=7 WHERE id_pedido = :fk_id_pedido";
+      resultado2 = await settings.OpenConnection(sql2, [fk_id_pedido], true);
+      
+      if(resultado2) { 
+        res.redirect('/ventas');
+      }
+
     } else {
       console.log("[!] Ocurrió un error al intentar crear la venta " + id_venta_bind);
       res.redirect('/ventas');
@@ -113,7 +121,7 @@ router.post('/crearVenta/:id_venta', async (req, res) => {
 
   } catch (error) {
     res.status(400);
-    res.send("Ocurrió un error al obtener los datos de la base de datos")
+    res.send("[!] Ocurrió un error al obtener los datos de la base de datos")
     console.log(error);
   }
 
@@ -150,7 +158,7 @@ router.post('/crearVentaDetalle/:id_venta', async (req, res) => {
 
   } catch (error) {
     res.status(400);
-    res.send("Ocurrió un error al obtener los datos de la base de datos")
+    res.send("[!] Ocurrió un error al obtener los datos de la base de datos")
     console.log(error);
   }
 
@@ -176,7 +184,7 @@ router.get("/anularVenta/:id_venta", async (req, res) => {
 
   } catch (error) {
     res.status(400);
-    res.send("Ocurrió un error al obtener los datos de la base de datos")
+    res.send("[!] Ocurrió un error al obtener los datos de la base de datos")
     console.log(error);
   }
 

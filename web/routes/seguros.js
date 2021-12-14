@@ -86,7 +86,7 @@ router.post('/crearSeguro', async (req, res) => {
 
   } catch (error) {
     res.status(400);
-    res.send("Ocurrió un error al obtener los datos de la base de datos")
+    res.send("[!] Ocurrió un error al obtener los datos de la base de datos")
     console.log(error);
   }
 
@@ -121,7 +121,7 @@ router.post('/subirDocumento/:id_seguro', uploadFile.single('url_documento'), as
 
   } catch (error) {
     res.status(400);
-    res.send("Ocurrió un error al obtener los datos de la base de datos")
+    res.send("[!] Ocurrió un error al obtener los datos de la base de datos")
     console.log(error);
   }
 
@@ -147,7 +147,7 @@ router.get("/anularSeguro/:id_seguro", async(req, res) => {
 
   } catch (error) {
     res.status(400);
-    res.send("Ocurrió un error al obtener los datos de la base de datos")
+    res.send("[!] Ocurrió un error al obtener los datos de la base de datos")
     console.log(error);
   }
 

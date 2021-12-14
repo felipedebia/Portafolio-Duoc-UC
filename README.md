@@ -52,7 +52,8 @@ Iniciar node en la carpeta web
 - Arreglar error de si no existen pedidos, pagina pedidos se cae
 - Arreglar error de si no tienes pedidos, pagina mispedidos se cae
 - PARA EL FINAL: Comprobación de rango para entrar a las páginas
-- PARA PRESENTACIÓN: NO ELIMINAR UNA FRUTA QUE ESTAMOS USANDO O SE MUERE XD
+- PARA PRESENTACIÓN: No eliminar frutas que se esten usando
+- PARA PRESENTACIÓN: Siempre tener una venta en "En espera"
 
 ## Extras:
 - Agregar limite carasteres (2000) a descripción en informes (vista)

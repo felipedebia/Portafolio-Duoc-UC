@@ -746,7 +746,6 @@ router.get('/ventas', async function(req, res) {
 			// Si trae datos
 			if (resultado1.rows.length > 0) {
 
-				console.log(resultado1.rows);
 				// Hacemos una consulta trayendo los costos de fruta
 				binds = { };
 				sql2 = "SELECT v.id_venta, p.id_pedido, st.id_subastat, ot.id_ofertaT, ot.precio_final FROM venta v JOIN pedido p ON p.id_pedido = v.id_venta JOIN subasta_transporte st ON st.fk_id_pedido = p.id_pedido JOIN oferta_transporte ot ON ot.fk_id_subastat = st.id_subastat WHERE ot.fk_id_estado = 1";
@@ -755,7 +754,6 @@ router.get('/ventas', async function(req, res) {
 				// Si trae datos
 				if (resultado2.rows.length > 0) {
 
-					console.log(resultado2.rows);
 					// Mostramos la vista
 					functions.ListarVentas();
 					res.render('Ventas', { title: 'Ventas - Maipo Grande', dataPrecio:resultado1.rows, dataTransporte:resultado2.rows, navActive: 'Ventas' });
