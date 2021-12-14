@@ -740,7 +740,7 @@ router.get('/ventas', async function(req, res) {
 			
 			// Hacemos una consulta trayendo los costos de transporte
 			binds = { };
-			sql1 = "SELECT v.id_venta, p.id_pedido, sf.id_subastaf, op.id_ofertaP, op.cantidad * precio_por_kilo FROM venta v JOIN pedido p ON p.id_pedido = v.id_venta JOIN subasta_fruta sf ON sf.fk_id_pedido = p.id_pedido JOIN oferta_productor op ON op.fk_id_subastaf = p.id_pedido WHERE op.fk_id_estado = 2";
+			sql1 = "SELECT v.id_venta, p.id_pedido, sf.id_subastaf, op.id_ofertaP, op.cantidad * precio_por_kilo FROM venta v JOIN pedido p ON p.id_pedido = v.id_venta JOIN subasta_fruta sf ON sf.fk_id_pedido = p.id_pedido JOIN oferta_productor op ON op.fk_id_subastaf = p.id_pedido WHERE op.fk_id_estado = 1";
 			resultado1 = await settings.OpenConnection(sql1, binds, false);
 
 			// Si trae datos
@@ -749,7 +749,7 @@ router.get('/ventas', async function(req, res) {
 				console.log(resultado1.rows);
 				// Hacemos una consulta trayendo los costos de fruta
 				binds = { };
-				sql2 = "SELECT v.id_venta, p.id_pedido, st.id_subastat, ot.id_ofertaT, ot.precio_final FROM venta v JOIN pedido p ON p.id_pedido = v.id_venta JOIN subasta_transporte st ON st.fk_id_pedido = p.id_pedido JOIN oferta_transporte ot ON ot.fk_id_subastat = st.id_subastat WHERE ot.fk_id_estado = 2";
+				sql2 = "SELECT v.id_venta, p.id_pedido, st.id_subastat, ot.id_ofertaT, ot.precio_final FROM venta v JOIN pedido p ON p.id_pedido = v.id_venta JOIN subasta_transporte st ON st.fk_id_pedido = p.id_pedido JOIN oferta_transporte ot ON ot.fk_id_subastat = st.id_subastat WHERE ot.fk_id_estado = 1";
 				resultado2 = await settings.OpenConnection(sql2, binds, false);
 
 				// Si trae datos
