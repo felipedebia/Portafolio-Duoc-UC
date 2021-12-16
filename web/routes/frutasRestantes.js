@@ -48,14 +48,15 @@ router.post('/comprarFrutaRestante', async (req, res) => {
       var { nombre, necesita_refrigeracion } = req.body;
       var fecha_creacion = functions.obtenerFechaActual();
   
+      // PENDIENTE
       sql = "CALL PA_FRUTA_CREAR(:nombre,:fecha_creacion,:necesita_refrigeracion)";
       resultado = await settings.OpenConnection(sql, [nombre, fecha_creacion, necesita_refrigeracion], true);
   
       // Si tuvo conexión a la DB
       if(resultado) {
         console.log("[!] Fruta restante comprada con éxito");
-        res.redirect('/miscompras');
-        //res.refresh();
+        var refresh_page = "true";
+        res.redirect('/miscompras/?refresh_status=' + refresh_page);
       } else {
         console.log("[!] Ocurrió un error al intentar comprar la fruta restante");
         res.redirect('/miscompras');

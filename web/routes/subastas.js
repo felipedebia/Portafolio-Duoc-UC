@@ -196,8 +196,8 @@ router.get("/anularSubastaFruta/:id_subastaF", async (req, res) => {
       console.log("[!] Subasta de Frutas " + id_subastaF_bind + " anulada con éxito");
 
       // Se tienen que rechazar todas las ofertas de la subasta
-
-      res.redirect('/subastas_frutas');
+      var refresh_page = "true";
+      res.redirect('/subastas_frutas/?refresh_status=' + refresh_page);
     } else {
       console.log("[!] Ocurrió un error al intentar anular la subasta de Frutas " + id_subastaF_bind);
       res.redirect('/subastas_frutas');
@@ -303,9 +303,9 @@ router.get("/anularSubastaTransporte/:id_subastaT", async (req, res) => {
     if (resultado) {
       console.log("[!] Subasta de Transportes " + id_subastaT_bind + " anulada con éxito");
 
-      // Se tienen que rechazar todas las ofertas de la subasta
-
-      res.redirect('/subastas_transportes');
+      // PENDIENTE: Se tienen que rechazar todas las ofertas de la subasta
+      var refresh_page = "true";
+      res.redirect('/subastas_transportes/?refresh_status=' + refresh_page);
     } else {
       console.log("[!] Ocurrió un error al intentar anular la subasta de Transporte " + id_subastaT_bind);
       res.redirect('/subastas_transportes');

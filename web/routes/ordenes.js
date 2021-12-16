@@ -281,7 +281,8 @@ router.post('/crearOrdenTransporte/:id_venta', async (req, res) => {
       resultado2 = await settings.OpenConnection(sql2, [value_fk_id_venta], true);
 
       if(resultado1) { 
-        res.redirect('/ordenes_transportes');
+        var refresh_page = "true";
+        res.redirect('/ordenes_transportes/?refresh_status=' + refresh_page);
       }
     } else {
       console.log("[!] Ocurrió un error al intentar crear la Orden de Transporte");
@@ -310,7 +311,8 @@ router.post("/modificarOrdenTransporte/:id_ordenT", async (req, res) => {
     // Si tuvo conexión a la DB
     if(resultado) {
       console.log("[!] Orden de Transporte " + value_id_ordenT + " modificado con éxito");
-      res.redirect('/ordenes_transportes');
+      var refresh_page = "true";
+      res.redirect('/ordenes_transportes/?refresh_status=' + refresh_page);
     } else {
       console.log("[!] Ocurrió un error al intentar modificar la orden de transporte " + value_id_ordenT);
       res.redirect('/ordenes_transportes');
@@ -336,9 +338,10 @@ router.get("/anularOrdenTransporte/:id_ordenT", async (req, res) => {
     if(resultado1) {
       console.log("[!] Orden de Transporte " + id_ordenT_bind + " anulada con éxito");
 
-      // Si se anula una orden de transporte, hay que volver atras un estado en venta
+      // PENDIENTE: Si se anula una orden de transporte, hay que volver atras un estado en venta
 
-      res.redirect('/ordenes_transportes');
+      var refresh_page = "true";
+      res.redirect('/ordenes_transportes/?refresh_status=' + refresh_page);
     } else {
       console.log("[!] Ocurrió un error al intentar anular la orden de Transporte " + id_ordenT_bind);
       res.redirect('/ordenes_transportes');

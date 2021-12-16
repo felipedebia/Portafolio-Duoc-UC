@@ -141,8 +141,8 @@ router.post("/modificarContrato/:id_contrato", async (req, res) => {
 
     // Si tuvo conexión a la DB
     if(resultado) {
-      var refresh_page = "true";
       console.log("[!] Contrato " + value_id_contrato + " modificado con éxito");
+      var refresh_page = "true";
       res.redirect('/contratos/?refresh_status=' + refresh_page);
     } else {
       console.log("[!] Ocurrió un error al intentar modificar el contrato " + value_id_contrato);

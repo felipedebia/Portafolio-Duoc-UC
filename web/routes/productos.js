@@ -61,8 +61,8 @@ router.post('/crearProducto', async (req, res) => {
     // Si tuvo conexión a la DB
     if(resultado) {
       console.log("[!] Producto creado con éxito");
-      res.redirect('/productos');
-      //res.refresh();
+      var refresh_page = "true";
+      res.redirect('/productos/?refresh_status=' + refresh_page);
     } else {
       console.log("[!] Ocurrió un error al intentar crear el producto");
       res.redirect('/productos');
@@ -90,7 +90,8 @@ router.post("/modificarProducto/:id_producto", async (req, res) => {
     // Si tuvo conexión a la DB
     if(resultado) {
       console.log("[!] Producto " + id_producto + " modificado con éxito");
-      res.redirect('/productos');
+      var refresh_page = "true";
+      res.redirect('/productos/?refresh_status=' + refresh_page);
     } else {
       console.log("[!] Ocurrió un error al intentar modificar el producto " + id_producto);
       res.redirect('/productos');
@@ -116,7 +117,8 @@ router.get("/anularProducto/:id_producto", async (req, res) => {
 
     if(resultado) {
       console.log("[!] Producto " + id_producto_bind + " anulado con éxito");
-      res.redirect('/productos');
+      var refresh_page = "true";
+      res.redirect('/productos/?refresh_status=' + refresh_page);
     } else {
       console.log("[!] Ocurrió un error al intentar anular el producto " + id_producto_bind);
       res.redirect('/productos');

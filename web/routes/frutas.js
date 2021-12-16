@@ -52,7 +52,8 @@ router.post('/crearFruta', async (req, res) => {
     // Si tuvo conexión a la DB
     if(resultado) {
       console.log("[!] Fruta creada con éxito");
-      res.redirect('/frutas');
+      var refresh_page = "true";
+      res.redirect('/frutas/?refresh_status=' + refresh_page);
       //res.refresh();
     } else {
       console.log("[!] Ocurrió un error al intentar crear la fruta");
@@ -81,7 +82,8 @@ router.post("/modificarFruta/:id_fruta", async (req, res) => {
     // Si tuvo conexión a la DB
     if(resultado) {
       console.log("[!] Fruta " + id_fruta + " modificado con éxito");
-      res.redirect('/frutas');
+      var refresh_page = "true";
+      res.redirect('/frutas/?refresh_status=' + refresh_page);
     } else {
       console.log("[!] Ocurrió un error al intentar modificar la fruta " + id_fruta);
       res.redirect('/frutas');
@@ -106,7 +108,8 @@ router.get("/eliminarFruta/:id_fruta", async (req, res) => {
 
     if(resultado) {
       console.log("[!] Fruta " + id_fruta_bind + " eliminada con éxito");
-      res.redirect('/frutas');
+      var refresh_page = "true";
+      res.redirect('/frutas/?refresh_status=' + refresh_page);
     } else {
       console.log("[!] Ocurrió un error al intentar eliminar la fruta " + id_fruta_bind);
       res.redirect('/frutas');

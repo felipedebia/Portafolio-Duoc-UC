@@ -113,7 +113,8 @@ router.post('/subirDocumento/:id_seguro', uploadFile.single('url_documento'), as
 
     if(resultado) {
       console.log("[!] Documento de Seguro " + id_seguro_bind + " agregado con éxito");
-      res.redirect('/seguros');
+      var refresh_page = "true";
+      res.redirect('/seguros/?refresh_status=' + refresh_page);
     } else {
       console.log("[!] Ocurrió un error al intentar agregar un documento al seguro " + id_seguro_bind);
       res.redirect('/seguros');
@@ -139,7 +140,8 @@ router.get("/anularSeguro/:id_seguro", async(req, res) => {
 
     if(resultado) {
         console.log("[!] Seguro " + id_seguro_bind + " anulado con éxito");
-        res.redirect('/seguros');
+        var refresh_page = "true";
+        res.redirect('/seguros/?refresh_status=' + refresh_page);
     } else {
         console.log("[!] Ocurrió un error al intentar anular el seguro " + id_seguro_bind);
         res.redirect('/seguros');

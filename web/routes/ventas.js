@@ -111,7 +111,8 @@ router.post('/crearVenta/:id_venta', async (req, res) => {
       resultado2 = await settings.OpenConnection(sql2, [fk_id_pedido], true);
       
       if(resultado2) { 
-        res.redirect('/ventas');
+        var refresh_page = "true";
+        res.redirect('/ventas/?refresh_status=' + refresh_page);
       }
 
     } else {
@@ -148,7 +149,8 @@ router.post('/crearVentaDetalle/:id_venta', async (req, res) => {
       resultado2 = await settings.OpenConnection(sql2, [fk_id_venta_bind], true);
       
       if(resultado2) { 
-        res.redirect('/ventas');
+        var refresh_page = "true";
+        res.redirect('/ventas/?refresh_status=' + refresh_page);
       }
       
     } else {
@@ -176,7 +178,8 @@ router.get("/anularVenta/:id_venta", async (req, res) => {
 
     if(resultado) {
       console.log("[!] Venta " + id_venta_bind + " anulada con éxito");
-      res.redirect('/ventas');
+      var refresh_page = "true";
+      res.redirect('/ventas/?refresh_status=' + refresh_page);
     } else {
       console.log("[!] Ocurrió un error al intentar anular la venta " + id_venta_bind);
       res.redirect('/ventas');

@@ -54,7 +54,8 @@ router.post('/crearInforme/:id_venta', async (req, res) => {
     // Si tuvo conexión a la DB
     if(resultado) {
       console.log("[!] Informe de venta creada con éxito");
-      res.redirect('/ventas');
+      var refresh_page = "true";
+      res.redirect('/ventas/?refresh_status=' + refresh_page);
     } else {
       console.log("[!] Ocurrió un error al intentar crear el informe de venta");
       res.redirect('/ventas');
@@ -83,7 +84,8 @@ router.post("/modificarInforme/:id_informe", async (req, res) => {
     // Si tuvo conexión a la DB
     if(resultado) {
       console.log("[!] Informe de venta " + value_id_informe + " modificado con éxito");
-      res.redirect('/ventas');
+      var refresh_page = "true";
+      res.redirect('/ventas/?refresh_status=' + refresh_page);
     } else {
       console.log("[!] Ocurrió un error al intentar modificar el informe de venta " + value_id_informe);
       res.redirect('/ventas');
@@ -109,7 +111,8 @@ router.get("/eliminarInforme/:id_informe", async (req, res) => {
   
     if(resultado) {
       console.log("[!] Informe " + value_id_informe + " eliminado con éxito");
-      res.redirect('/ventas');
+      var refresh_page = "true";
+      res.redirect('/ventas/?refresh_status=' + refresh_page);
     } else {
       console.log("[!] Ocurrió un error al intentar eliminar el informe " + value_id_informe);
       res.redirect('/ventas');

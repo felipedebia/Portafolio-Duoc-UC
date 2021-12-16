@@ -132,7 +132,8 @@ router.post('/crearPedidoDetalle', async(req, res) => {
         if (resultado) {
             console.log("[!] Pedido detalle creado con éxito");
             functions.ListarPedidoDetalles();
-            res.redirect('/pedido_detalles/' + fk_id_pedido);
+            var refresh_page = "true";
+            res.redirect('/pedido_detalles/' + fk_id_pedido + '/?refresh_status=' + refresh_page);
         } else {
             console.log("[!] Ocurrió un error al intentar registrar el pedido detalle ");
             res.redirect('/mispedidos');
@@ -159,7 +160,8 @@ router.get("/confirmarPedido/:id_pedido", async(req, res) => {
 
         if (resultado) {
             console.log("[!] Pedido " + req.params.id_pedido + " enviado con éxito");
-            res.redirect('/mispedidos');
+            var refresh_page = "true";
+            res.redirect('/mispedidos/?refresh_status=' + refresh_page);
         } else {
             console.log("[!] Ocurrió un error al intentar enviar el pedido " + req.params.id_pedido);
             res.redirect('/mispedidos');
@@ -211,7 +213,8 @@ router.get("/anularPedido/:id_pedido", async(req, res) => {
 
         if(resultado) {
             console.log("[!] Pedido " + id_pedido_bind + " anulado con éxito");
-            res.redirect('/pedidos');
+            var refresh_page = "true";
+            res.redirect('/pedidos/?refresh_status=' + refresh_page);
         } else {
             console.log("[!] Ocurrió un error al intentar anular el pedido " + id_pedido_bind);
             res.redirect('/pedidos');
@@ -237,7 +240,8 @@ router.get("/anularMiPedido/:id_pedido", async(req, res) => {
 
         if(resultado) {
             console.log("[!] Pedido " + id_pedido_bind + " anulado con éxito");
-            res.redirect('/mispedidos');
+            var refresh_page = "true";
+            res.redirect('/mispedidos/?refresh_status=' + refresh_page);
         } else {
             console.log("[!] Ocurrió un error al intentar anular el pedido " + id_pedido_bind);
             res.redirect('/mispedidos');

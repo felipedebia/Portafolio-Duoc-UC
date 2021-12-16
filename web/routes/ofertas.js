@@ -93,7 +93,8 @@ router.get("/anularOfertaProductor/:id_ofertaP", async (req, res) => {
 
     if (resultado) {
       console.log("[!] Oferta de Productor " + id_ofertaP_bind + " anulada con éxito");
-      res.redirect('/misOfertas_Productor');
+      var refresh_page = "true";
+      res.redirect('/misOfertas_Productor/?refresh_status=' + refresh_page);
     } else {
       console.log("[!] Ocurrió un error al intentar anular la oferta de Productor " + id_ofertaP_bind);
       res.redirect('/misOfertas_Productor');
@@ -213,7 +214,8 @@ router.get("/aceptarOfertaTransporte/:id_ofertaT", async (req, res) => {
 
           if (resultado4) {
             // Redireccionamos a subasta_transporte
-            res.redirect('/subasta_transporte/' + value_id_subastaT);
+            var refresh_page = "true";
+            res.redirect('/subasta_transporte/' + value_id_subastaT + '/?refresh_status=' + refresh_page);
           }
         }
 
@@ -254,7 +256,8 @@ router.get("/rechazarOfertaTransporte/:id_ofertaT", async (req, res) => {
       var value_id_subastaT = resultado2.rows[0];
 
       if (value_id_subastaT) {
-        res.redirect('/subasta_transporte/' + value_id_subastaT);
+        var refresh_page = "true";
+        res.redirect('/subasta_transporte/' + value_id_subastaT + '/?refresh_status=' + refresh_page);
       }
 
     } else {
@@ -282,7 +285,8 @@ router.get("/anularOfertaTransporte/:id_ofertaT", async (req, res) => {
 
     if (resultado) {
       console.log("[!] Oferta de Transporte " + id_ofertaT_bind + " anulada con éxito");
-      res.redirect('/misOfertas_Transporte');
+      var refresh_page = "true";
+      res.redirect('/misOfertas_Transporte/?refresh_status=' + refresh_page);
     } else {
       console.log("[!] Ocurrió un error al intentar anular la oferta de Transporte " + id_ofertaT_bind);
       res.redirect('/misOfertas_Transporte');

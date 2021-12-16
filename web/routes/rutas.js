@@ -904,11 +904,12 @@ router.get('/reportes', function(req, res) {
 router.get('/miscompras', function(req, res) {
     if (req.session.isLoggedIn) {
 		functions.ListarMisCompras();
+		var refresh_page = req.query.refresh_status;
 		// Si es cliente interno = local
 		if (req.session.tipo_usuario == 4) {
-			res.render('miscompras_interno', { title: 'Mis compras - Maipo Grande', navActive: 'MisCompras' });
+			res.render('miscompras_interno', { title: 'Mis compras - Maipo Grande', navActive: 'MisCompras', refreshPage: refresh_page });
 		} else {
-			res.render('miscompras', { title: 'Mis compras - Maipo Grande', navActive: 'MisCompras' });
+			res.render('miscompras', { title: 'Mis compras - Maipo Grande', navActive: 'MisCompras', refreshPage: refresh_page });
 		}
     } else {
         res.redirect('/');
