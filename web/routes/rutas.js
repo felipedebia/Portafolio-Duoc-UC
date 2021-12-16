@@ -123,7 +123,7 @@ router.get('/usuarios', function(req, res) {
     if (req.session.isLoggedIn) {
 		var estado_respuesta = req.query.estado;
 		functions.ListarUsuarios();
-        res.render('usuarios', { title: 'Usuarios - Maipo Grande', navActive: 'Usuarios', respuesta: estado_respuesta });
+        res.render('usuarios', { title: 'Usuarios - Maipo Grande', navActive: 'Usuarios', respuesta: estado_respuesta, refreshPage: false });
     } else {
         res.redirect('/');
     }
