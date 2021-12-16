@@ -120,8 +120,8 @@ router.post('/crearUsuario', async (req, res) => {
 
     if (resultado1.rows[0] == correo) {
       // FALTA: detallar error especifico de que correo ya existe
-      var string = "error";
-      res.redirect('/usuarios/?estado=' + string);
+      var respuesta_page = "error";
+      res.redirect('/usuarios/?respuesta_page=' + respuesta_page);
     } else {
       // Encriptamos la contraseña del usuario
       var passwordEncrypted = encriptar(password);
@@ -202,10 +202,12 @@ router.post("/modificarMiPerfil/:id_usuario", async (req, res) => {
     // Si tuvo conexión a la DB
     if (resultado) {
       console.log("[!] Usuario " + req.body.correo + " modificado con éxito");
-      res.redirect('/usuarios');
+      var refresh_page = "true";
+      res.redirect('/usuarios/?refresh_status=' + refresh_page);
     } else {
       console.log("[!] Ocurrió un error al intentar modificar el usuario " + req.body.correo);
-      res.redirect('/usuarios');
+      var refresh_page = "false";
+      res.redirect('/usuarios/?refresh_status=' + refresh_page);
     }
 
   } catch (error) {
@@ -235,9 +237,9 @@ router.post("/nuevaContrasena/:id_usuario", async (req, res) => {
     // Si tuvo conexión a la DB
     if (resultado) {
       console.log("[!] Contraseña del usuario " + value_id_usuario + " cambiada con éxito");
+      settings.enviarCorreo('Tu contraseña ha sido cambiada - Maipo Grande', 'usuario_contrasenacambiada');
       req.session.isLoggedIn = false;
       res.redirect('/');
-      settings.enviarCorreo('Tu contraseña ha sido cambiada - Maipo Grande', 'usuario_contrasenacambiada');
     } else {
       console.log("[!] Ocurrió un error al intentar modificar la contraseña del usuario " + value_id_usuario);
       res.redirect('/');
