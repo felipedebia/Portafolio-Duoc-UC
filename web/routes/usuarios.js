@@ -172,8 +172,7 @@ router.post("/modificarUsuario/:id_usuario", async (req, res) => {
       res.redirect('/usuarios/?refresh_status=' + refresh_page);
     } else {
       console.log("[!] Ocurrió un error al intentar modificar el usuario " + req.body.correo);
-      var refresh_page = "false";
-      res.redirect('/usuarios/?refresh_status=' + refresh_page);
+      res.redirect('/usuarios/?respuesta_page=' + respuesta_page);
     }
 
   } catch (error) {
@@ -206,8 +205,7 @@ router.post("/modificarMiPerfil/:id_usuario", async (req, res) => {
       res.redirect('/usuarios/?refresh_status=' + refresh_page);
     } else {
       console.log("[!] Ocurrió un error al intentar modificar el usuario " + req.body.correo);
-      var refresh_page = "false";
-      res.redirect('/usuarios/?refresh_status=' + refresh_page);
+      res.redirect('/usuarios/?respuesta_page=' + respuesta_page);
     }
 
   } catch (error) {
