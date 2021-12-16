@@ -121,9 +121,10 @@ router.get('/logout', function(req, res, next) {
 
 router.get('/usuarios', function(req, res) {
     if (req.session.isLoggedIn) {
-		var estado_respuesta = req.query.estado;
+		var respuesta_page = req.query.respuesta_page;
+		var refresh_page = req.query.refresh_status;
 		functions.ListarUsuarios();
-        res.render('usuarios', { title: 'Usuarios - Maipo Grande', navActive: 'Usuarios', respuesta: estado_respuesta, refreshPage: false });
+        res.render('usuarios', { title: 'Usuarios - Maipo Grande', navActive: 'Usuarios', respuestaPage: respuesta_page, refreshPage: refresh_page });
     } else {
         res.redirect('/');
     }

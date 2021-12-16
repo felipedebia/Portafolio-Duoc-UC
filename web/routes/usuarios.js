@@ -133,13 +133,13 @@ router.post('/crearUsuario', async (req, res) => {
       // Si tuvo conexión a la DB
       if (resultado2) {
         console.log("[!] Usuario " + correo + " creado con éxito");
-        var string = "valido";
-        res.redirect('/usuarios/?estado=' + string);
         settings.enviarCorreo('Usuario registrado con éxito - Maipo Grande', 'usuario_registro');
+        var respuesta_page = "valido";
+        res.redirect('/usuarios/?respuesta_page=' + respuesta_page);
       } else {
         console.log("[!] Ocurrió un error al intentar registrar el usuario " + correo);
-        var string = "error";
-        res.redirect('/usuarios/?estado=' + string);
+        var respuesta_page = "error";
+        res.redirect('/usuarios/?respuesta_page=' + respuesta_page);
       }
     }
 
@@ -168,11 +168,12 @@ router.post("/modificarUsuario/:id_usuario", async (req, res) => {
     // Si tuvo conexión a la DB
     if (resultado) {
       console.log("[!] Usuario " + req.body.correo + " modificado con éxito");
-      res.redirect('/usuarios/');
+      var refresh_page = "true";
+      res.redirect('/usuarios/?refresh_status=' + refresh_page);
     } else {
       console.log("[!] Ocurrió un error al intentar modificar el usuario " + req.body.correo);
-      var string = "error";
-      res.redirect('/usuarios/');
+      var refresh_page = "false";
+      res.redirect('/usuarios/?refresh_status=' + refresh_page);
     }
 
   } catch (error) {

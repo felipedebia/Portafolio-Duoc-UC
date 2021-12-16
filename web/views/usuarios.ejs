@@ -158,7 +158,7 @@
     
 <%- include('partials/footer.ejs') %>
 
-<% if(respuesta == 'valido') { %>
+<% if(respuestaPage == 'valido') { %>
     <script type="text/javascript">
         $(document).ready(function () {
             $.notify({
@@ -183,7 +183,7 @@
     </script>
 <% } %>
 
-<% if(respuesta == 'error') { %>
+<% if(respuestaPage == 'error') { %>
     <script type="text/javascript">
         $(document).ready(function () {
             $.notify({
@@ -208,7 +208,7 @@
     </script>
 <% } %>
 
-<% if(respuesta == 'errorNOID') { %>
+<% if(respuestaPage == 'errorNOID') { %>
     <script type="text/javascript">
         $(document).ready(function () {
             $.notify({
