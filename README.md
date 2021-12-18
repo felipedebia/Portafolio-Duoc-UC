@@ -38,6 +38,7 @@ Iniciar node en la carpeta web
 ## Páginas pendientes:
 
 - CREAR FRUTA RESTANTE AL TERMINAR SUBASTA
+eliminar pedido detalles falta fix f5
 - COMPRAR FRUTA RESTANTE
 - DIFERENCIAR COSTOS DE FRUTA Y TRANSPORTE PARA CADA VENTA EN VENTA_DETALLE
 - Linea 168, 236 y 303 routes subastas
