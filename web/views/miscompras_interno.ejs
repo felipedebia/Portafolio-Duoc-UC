@@ -326,7 +326,93 @@
                 }
             }
         });
-        var table = $('#datatable').DataTable();
+        $('#datatable_listadoMisFrutasRestantes').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        "pagingType": "full_numbers",
+        "pageLength": 15,
+        "bLengthChange": false,
+        responsive: true,
+        language: {
+            search: "_INPUT_",
+            info: "Viendo página _PAGE_ de _PAGES_",
+            zeroRecords: "No hay información que mostrar",
+            infoEmpty: "Sin información",
+            searchPlaceholder: "Buscar pedido",
+            "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            },
+            "buttons": {
+                "copy": "Copiar",
+                "colvis": "Visibilidad",
+                "collection": "Colección",
+                "colvisRestore": "Restaurar visibilidad",
+                "copySuccess": {
+                    "1": "Copiada 1 fila al portapapeles",
+                    "_": "Copiadas %d fila al portapapeles"
+                },
+                "copyTitle": "Copiar al portapapeles",
+                "csv": "CSV",
+                "excel": "Excel",
+                "pageLength": {
+                    "-1": "Mostrar todas las filas",
+                    "_": "Mostrar %d filas"
+                },
+                "pdf": "PDF",
+                "print": "Imprimir"
+            }
+        }
+        });
+        $('#datatable_comprarFrutaRestante').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
+            "pagingType": "full_numbers",
+            "pageLength": 15,
+            "bLengthChange": false,
+            responsive: true,
+            language: {
+                search: "_INPUT_",
+                info: "Viendo página _PAGE_ de _PAGES_",
+                zeroRecords: "No hay información que mostrar",
+                infoEmpty: "Sin información",
+                searchPlaceholder: "Buscar pedido",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                },
+                "buttons": {
+                    "copy": "Copiar",
+                    "colvis": "Visibilidad",
+                    "collection": "Colección",
+                    "colvisRestore": "Restaurar visibilidad",
+                    "copySuccess": {
+                        "1": "Copiada 1 fila al portapapeles",
+                        "_": "Copiadas %d fila al portapapeles"
+                    },
+                    "copyTitle": "Copiar al portapapeles",
+                    "csv": "CSV",
+                    "excel": "Excel",
+                    "pageLength": {
+                        "-1": "Mostrar todas las filas",
+                        "_": "Mostrar %d filas"
+                    },
+                    "pdf": "PDF",
+                    "print": "Imprimir"
+                }
+            }
+        });
+        var tabla_listadoVentas = $('#datatable_listadoVentas').DataTable();
+        var tabla_MisFrutasRestantes = $('#datatable_listadoMisFrutasRestantes').DataTable();
+        var tabla_comprarFrutaRestante = $('#datatable_comprarFrutaRestante').DataTable();
     });
 </script>
 
@@ -356,6 +442,10 @@
         }
 
     }
+</script>
+
+<script> 
+    window.onload = refreshPage(<%=refreshPage%>);
 </script>
 
 </body>

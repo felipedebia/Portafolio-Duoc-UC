@@ -100,7 +100,8 @@ router.post('/crearPago/:id_venta', uploadFile.single('url_comprobante'), async(
                     
                     if(resultado4) { 
                         console.log("[!] Venta actualizada con éxito");
-                        res.redirect('/miscompras');
+                        var refresh_page = "true";
+                        res.redirect('/miscompras/?refresh_status=' + refresh_page);
                     }
                     
                 }

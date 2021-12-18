@@ -7,6 +7,7 @@ configOracle = {
     connectString: "localhost:1521/xe"
 }
 
+// Abrir conexión desde web
 async function OpenConnection(sql, binds, autoCommit) {
     let cnn = await oracledb.getConnection(configOracle);
     let result = await cnn.execute(sql, binds, { autoCommit });
@@ -14,6 +15,7 @@ async function OpenConnection(sql, binds, autoCommit) {
     return result;
 }
 
+// Abrir conexión desde app movil
 async function Open(sql, binds) {
     try {
         cnn = await oracledb.getConnection(configOracle);
@@ -44,10 +46,10 @@ var fs = require("fs");
 const nodemailer = require("nodemailer");
 
 const user_name = 'portafolioduocuc.2021@gmail.com';
-const refresh_token = '1//047CAvJ7HXcrkCgYIARAAGAQSNwF-L9IrQ85dVffnnk6K9IvQFAmMYZ5-fXrAexH68q7FhsOEeh_aZY-35G7LyDXYx4JN_QNvGLQ';
-const access_token = 'ya29.a0ARrdaM_VvHp5fuzNI-PdGvFpcPDqLLFlTkz2fxSzTHMqu0htX4PoBRxkb3_fIHikXJjwLD5MTbEdMfA-K3u79GC7EjyBhm_7uZJAwy2NNlxs9mp4iJYOHsgxjX3hqdgY_6y24mY4Zojh-UbCQtyqfRqFPZua';
-const client_id = '784728793947-our04m9d571mfpck2kcvi3i2t36ft78j.apps.googleusercontent.com';
-const client_secret = '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';
+const refresh_token = '1//04GHr44CHL41_CgYIARAAGAQSNwF-L9IrhGwSsXViQlhohHKQChDDlW3hSGZkpNUfpUpHh0thVi-qpsGxBUmI_Vc9-d2BatvFVRQ';
+const access_token = 'ya29.a0ARrdaM-IDdPGNNoaOEvLi5DSn79XeHVTWoqm6WUFeWd88l0buvQiDfYwkuervSgEibO9ls_uRwgSU_aHv7M-Dkqm7DBV2KLB6pd_mpMiLslZ2LET6XzfYh3VW1vV3hMfrkU7FNLNXqe4te09wS_IYma84ZM3';
+const client_id = '784728793947-reri9bq7th9gra757q28ujsdcfrt2d06.apps.googleusercontent.com';
+const client_secret = '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';
 const templateDir = '/views/correo/';
 
 let transporter = nodemailer

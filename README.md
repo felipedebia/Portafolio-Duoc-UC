@@ -1,6 +1,7 @@
 # Portafolio
 
-NodeJS - Ejs - OracleDB - Express.js
+Web: NodeJS - Ejs - OracleDB - Express.js
+Móvil: 
 
 # Instalación
 
@@ -36,8 +37,8 @@ Iniciar node en la carpeta web
 
 ## Páginas pendientes:
 
-- FALTA PROCEDIMIENTOS VENTAS
 - CREAR FRUTA RESTANTE AL TERMINAR SUBASTA
+- eliminar pedido detalles falta fix f5
 - COMPRAR FRUTA RESTANTE
 - DIFERENCIAR COSTOS DE FRUTA Y TRANSPORTE PARA CADA VENTA EN VENTA_DETALLE
 - Linea 168, 236 y 303 routes subastas
@@ -52,7 +53,8 @@ Iniciar node en la carpeta web
 - Arreglar error de si no existen pedidos, pagina pedidos se cae
 - Arreglar error de si no tienes pedidos, pagina mispedidos se cae
 - PARA EL FINAL: Comprobación de rango para entrar a las páginas
-- PARA PRESENTACIÓN: NO ELIMINAR UNA FRUTA QUE ESTAMOS USANDO O SE MUERE XD
+- PARA PRESENTACIÓN: No eliminar frutas que se esten usando
+- PARA PRESENTACIÓN: Siempre tener una venta en "En espera"
 
 ## Extras:
 - Agregar limite carasteres (2000) a descripción en informes (vista)

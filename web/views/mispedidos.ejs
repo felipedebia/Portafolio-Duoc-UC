@@ -64,23 +64,19 @@
                                                                         <div class="mt-4">
                                                                             <span><strong>Detalles del pedido:</strong></span></br>
                                                                             <ul>
-                                                                                <% for(var pedido_detalle of PedidoDetalles){ %>
-                                                                                    <%if(pedido_detalle.id_pedido == pedido.id_pedido){%>
-                                                                                        <li><strong>Fruta:</strong>
-                                                                                            <%= pedido_detalle.fruta_fk_nombre %> - <strong>Calidad:</strong>
-                                                                                                <%= pedido_detalle.frutacalidad_fk_nombre %> - <strong>Cantidad (en KG):</strong>
-                                                                                                    <%= pedido_detalle.cantidad %>
-                                                                                        </li>
-                                                                                        <% } %>
-                                                                                            <% } %>
+                                                                            <% for(var pedido_detalle of PedidoDetalles){ %>
+                                                                                <%if(pedido_detalle.id_pedido == pedido.id_pedido){%>
+                                                                                    <li><strong>Fruta:</strong> <%= pedido_detalle.fruta_fk_nombre %> - <strong>Calidad:</strong> <%= pedido_detalle.frutacalidad_fk_nombre %> - <strong>Cantidad (en KG):</strong> <%= pedido_detalle.cantidad %></li>
+                                                                                <% } %>
+                                                                            <% } %>
                                                                             </ul>
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <% if(pedido.fk_id_estado == 2){ %>
                                                                             <a href="/pedido_detalles/<%= pedido.id_pedido %>"><button class="btn btn-primary" type="submit">Modificar detalles del pedido</button></a>
-                                                                            <% } %>
-                                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                        <% } %>
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -102,14 +98,14 @@
                                                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPedido<%= pedido.id_pedido %>">Ver detalles</button>
                                                                 <% if(pedido.fk_id_estado == 2){ %>
                                                                     <a href="/pedido_detalles/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Modificar</button></a>
-                                                                    <% } %>
-                                                                        <% if(pedido.fk_id_estado == 1 || pedido.fk_id_estado == 2){ %>
-                                                                            <a href="../api_pedidos/anularMiPedido/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Anular</button></a>
-                                                                            <% } %>
+                                                                <% } %>
+                                                                <% if(pedido.fk_id_estado == 1 || pedido.fk_id_estado == 2){ %>
+                                                                    <a href="../api_pedidos/anularMiPedido/<%= pedido.id_pedido %>"><button type="button" class="btn btn-info btn-sm">Anular</button></a>
+                                                                <% } %>
                                                             </td>
                                                         </tr>
-                                                        <% } %>
-                                                            <% } %>
+                                                    <% } %>
+                                                <% } %>
                                             </tbody>
                                         </table>
                                     </div>
@@ -145,15 +141,11 @@
                                                                         <div class="mt-4">
                                                                             <span><strong>Detalles del pedido:</strong></span></br>
                                                                             <ul>
-                                                                                <% for(var pedido_detalle of PedidoDetalles){ %>
-                                                                                    <%if(pedido_detalle.id_pedido == pedido.id_pedido){%>
-                                                                                        <li><strong>Fruta:</strong>
-                                                                                            <%= pedido_detalle.fruta_fk_nombre %> - <strong>Calidad:</strong>
-                                                                                                <%= pedido_detalle.frutacalidad_fk_nombre %> - <strong>Cantidad (en KG):</strong>
-                                                                                                    <%= pedido_detalle.cantidad %>
-                                                                                        </li>
-                                                                                        <% } %>
-                                                                                            <% } %>
+                                                                            <% for(var pedido_detalle of PedidoDetalles){ %>
+                                                                                <%if(pedido_detalle.id_pedido == pedido.id_pedido){%>
+                                                                                    <li><strong>Fruta:</strong> <%= pedido_detalle.fruta_fk_nombre %> - <strong>Calidad:</strong> <%= pedido_detalle.frutacalidad_fk_nombre %> - <strong>Cantidad (en KG):</strong> <%= pedido_detalle.cantidad %></li>
+                                                                                <% } %>
+                                                                            <% } %>
                                                                             </ul>
                                                                         </div>
                                                                     </div>
@@ -180,8 +172,8 @@
                                                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalPedidoFinalizado<%= pedido.id_pedido %>">Ver detalles</button>
                                                             </td>
                                                         </tr>
-                                                        <% } %>
-                                                            <% } %>
+                                                    <% } %>
+                                                <% } %>
                                             </tbody>
                                         </table>
                                     </div>
@@ -265,117 +257,119 @@
             </div>
         </div>
     </div>
-    <%- include('partials/footer.ejs') %>
+<%- include('partials/footer.ejs') %>
 
-        <script>
-            $(document).ready(function() {
-                $('#datatable_Pedidos').DataTable({
-                    dom: 'Bfrtip',
-                    buttons: [
-                        'copy', 'csv', 'excel', 'pdf', 'print'
-                    ],
-                    "pagingType": "full_numbers",
-                    "pageLength": 15,
-                    "bLengthChange": false,
-                    responsive: true,
-                    language: {
-                        search: "_INPUT_",
-                        info: "Viendo página _PAGE_ de _PAGES_",
-                        zeroRecords: "No hay información que mostrar",
-                        infoEmpty: "Sin información",
-                        searchPlaceholder: "Buscar pedido",
-                        "paginate": {
-                            "first": "Primero",
-                            "last": "Último",
-                            "next": "Siguiente",
-                            "previous": "Anterior"
-                        },
-                        "buttons": {
-                            "copy": "Copiar",
-                            "colvis": "Visibilidad",
-                            "collection": "Colección",
-                            "colvisRestore": "Restaurar visibilidad",
-                            "copySuccess": {
-                                "1": "Copiada 1 fila al portapapeles",
-                                "_": "Copiadas %d fila al portapapeles"
-                            },
-                            "copyTitle": "Copiar al portapapeles",
-                            "csv": "CSV",
-                            "excel": "Excel",
-                            "pageLength": {
-                                "-1": "Mostrar todas las filas",
-                                "_": "Mostrar %d filas"
-                            },
-                            "pdf": "PDF",
-                            "print": "Imprimir"
-                        }
-                    }
-                });
-                $('#datatable_PedidosFinalizados').DataTable({
-                    dom: 'Bfrtip',
-                    buttons: [
-                        'copy', 'csv', 'excel', 'pdf', 'print'
-                    ],
-                    "pagingType": "full_numbers",
-                    "pageLength": 15,
-                    "bLengthChange": false,
-                    responsive: true,
-                    language: {
-                        search: "_INPUT_",
-                        info: "Viendo página _PAGE_ de _PAGES_",
-                        zeroRecords: "No hay información que mostrar",
-                        infoEmpty: "Sin información",
-                        searchPlaceholder: "Buscar pedido",
-                        "paginate": {
-                            "first": "Primero",
-                            "last": "Último",
-                            "next": "Siguiente",
-                            "previous": "Anterior"
-                        },
-                        "buttons": {
-                            "copy": "Copiar",
-                            "colvis": "Visibilidad",
-                            "collection": "Colección",
-                            "colvisRestore": "Restaurar visibilidad",
-                            "copySuccess": {
-                                "1": "Copiada 1 fila al portapapeles",
-                                "_": "Copiadas %d fila al portapapeles"
-                            },
-                            "copyTitle": "Copiar al portapapeles",
-                            "csv": "CSV",
-                            "excel": "Excel",
-                            "pageLength": {
-                                "-1": "Mostrar todas las filas",
-                                "_": "Mostrar %d filas"
-                            },
-                            "pdf": "PDF",
-                            "print": "Imprimir"
-                        }
-                    }
-                });
-                var tabla_Pedidos = $('#datatable_Pedidos').DataTable();
-                var tabla_PedidosFinalizados = $('#datatable_PedidosFinalizados').DataTable();
-            });
-        </script>
+<script>
+    $(document).ready(function() {
+      $('#datatable_Pedidos').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        "pagingType": "full_numbers",
+        "pageLength": 15,
+        "bLengthChange": false,
+        responsive: true,
+        language: {
+            search: "_INPUT_",
+            info: "Viendo página _PAGE_ de _PAGES_",
+            zeroRecords: "No hay información que mostrar",
+            infoEmpty: "Sin información",
+            searchPlaceholder: "Buscar pedido",
+            "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            },
+            "buttons": {
+                "copy": "Copiar",
+                "colvis": "Visibilidad",
+                "collection": "Colección",
+                "colvisRestore": "Restaurar visibilidad",
+                "copySuccess": {
+                    "1": "Copiada 1 fila al portapapeles",
+                    "_": "Copiadas %d fila al portapapeles"
+                },
+                "copyTitle": "Copiar al portapapeles",
+                "csv": "CSV",
+                "excel": "Excel",
+                "pageLength": {
+                    "-1": "Mostrar todas las filas",
+                    "_": "Mostrar %d filas"
+                },
+                "pdf": "PDF",
+                "print": "Imprimir"
+            }
+        }
+      });
+      $('#datatable_PedidosFinalizados').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        "pagingType": "full_numbers",
+        "pageLength": 15,
+        "bLengthChange": false,
+        responsive: true,
+        language: {
+            search: "_INPUT_",
+            info: "Viendo página _PAGE_ de _PAGES_",
+            zeroRecords: "No hay información que mostrar",
+            infoEmpty: "Sin información",
+            searchPlaceholder: "Buscar pedido",
+            "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            },
+            "buttons": {
+                "copy": "Copiar",
+                "colvis": "Visibilidad",
+                "collection": "Colección",
+                "colvisRestore": "Restaurar visibilidad",
+                "copySuccess": {
+                    "1": "Copiada 1 fila al portapapeles",
+                    "_": "Copiadas %d fila al portapapeles"
+                },
+                "copyTitle": "Copiar al portapapeles",
+                "csv": "CSV",
+                "excel": "Excel",
+                "pageLength": {
+                    "-1": "Mostrar todas las filas",
+                    "_": "Mostrar %d filas"
+                },
+                "pdf": "PDF",
+                "print": "Imprimir"
+            }
+        }
+      });
+      var tabla_Pedidos = $('#datatable_Pedidos').DataTable();
+      var tabla_PedidosFinalizados = $('#datatable_PedidosFinalizados').DataTable();
+    });
+</script>
 
-        <script>
-            (function() {
-                'use strict';
-                window.addEventListener('load', function() {
-                    var forms = document.getElementsByClassName('formValidation');
-                    var validation = Array.prototype.filter.call(forms, function(form) {
-                        form.addEventListener('submit', function(event) {
-                            if (form.checkValidity() === false) {
-                                event.preventDefault();
-                                event.stopPropagation();
-                            }
-                            form.classList.add('was-validated');
-                        }, false);
-                    });
-                }, false);
-            })();
-        </script>
+<script> (function () {
+    'use strict';
+    window.addEventListener('load', function () {
+        var forms = document.getElementsByClassName('formValidation');
+        var validation = Array.prototype.filter.call(forms, function (form) {
+            form.addEventListener('submit', function (event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+  })();
+</script>
 
-        </body>
+<script> 
+    window.onload = refreshPage(<%=refreshPage%>);
+</script>
 
-        </html>
+</body>
+</html> 

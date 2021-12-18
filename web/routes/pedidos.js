@@ -88,18 +88,18 @@ router.post('/crearPedido', async(req, res) => {
 
         var fecha_creacion = functions.obtenerFechaActual();
 
-        sql = "CALL PA_PEDIDO_CREAR(:direccion_despacho, :fecha_creacion, :fk_id_tipo, :fk_id_ciudad, :fk_id_usuario, :fk_id_estado)";
-        await settings.OpenConnection(sql, [direccion_despacho, fecha_creacion, fk_id_tipo, fk_id_ciudad, fk_id_usuario, fk_id_estado], true);
+        sql1 = "CALL PA_PEDIDO_CREAR(:direccion_despacho, :fecha_creacion, :fk_id_tipo, :fk_id_ciudad, :fk_id_usuario, :fk_id_estado)";
+        resultado1 = await settings.OpenConnection(sql1, [direccion_despacho, fecha_creacion, fk_id_tipo, fk_id_ciudad, fk_id_usuario, fk_id_estado], true);
 
         // Si tuvo conexión a la DB
-        if (res.status(200)) {
+        if (resultado1) {
             console.log("[!] Pedido creado con éxito");
 
             // Tomamos el ultimo registro en la tabla pedido para redirigir al pedido detalle
             sql2 = "SELECT id_pedido FROM (SELECT * FROM pedido ORDER BY id_pedido DESC ) WHERE rownum = 1";
-            result = await settings.OpenConnection(sql2, [], true);
+            resultado2 = await settings.OpenConnection(sql2, [], true);
 
-            var idPedidoSql = result.rows[0];
+            var idPedidoSql = resultado2.rows[0];
 
             if (idPedidoSql) {
                 res.redirect('/pedido_detalles/' + idPedidoSql);
@@ -126,13 +126,14 @@ router.post('/crearPedidoDetalle', async(req, res) => {
         var fecha_creacion = functions.obtenerFechaActual();
 
         sql = "CALL PA_PEDIDO_DETALLE_CREAR(:cantidad, :fecha_creacion, :fecha_actualizacion, :fk_id_calidad, :fk_id_fruta, :fk_id_pedido)";
-        await settings.OpenConnection(sql, [cantidad, fecha_creacion, fecha_creacion, fk_id_calidad, fk_id_fruta, fk_id_pedido], true);
+        resultado = await settings.OpenConnection(sql, [cantidad, fecha_creacion, fecha_creacion, fk_id_calidad, fk_id_fruta, fk_id_pedido], true);
 
         // Si tuvo conexión a la DB
-        if (res.status(200)) {
+        if (resultado) {
             console.log("[!] Pedido detalle creado con éxito");
             functions.ListarPedidoDetalles();
-            res.redirect('/pedido_detalles/' + fk_id_pedido);
+            var refresh_page = "true";
+            res.redirect('/pedido_detalles/' + fk_id_pedido + '/?refresh_status=' + refresh_page);
         } else {
             console.log("[!] Ocurrió un error al intentar registrar el pedido detalle ");
             res.redirect('/mispedidos');
@@ -155,11 +156,12 @@ router.get("/confirmarPedido/:id_pedido", async(req, res) => {
         
         // Actualizamos pedido a estado 2 = Recepcionado
         sql = "CALL PA_PEDIDO_CONFIRMAR(:id_pedido_bind)";
-        var consulta = await settings.OpenConnection(sql, [id_pedido_bind], true);
+        resultado = await settings.OpenConnection(sql, [id_pedido_bind], true);
 
-        if (consulta) {
+        if (resultado) {
             console.log("[!] Pedido " + req.params.id_pedido + " enviado con éxito");
-            res.redirect('/mispedidos');
+            var refresh_page = "true";
+            res.redirect('/mispedidos/?refresh_status=' + refresh_page);
         } else {
             console.log("[!] Ocurrió un error al intentar enviar el pedido " + req.params.id_pedido);
             res.redirect('/mispedidos');
@@ -181,9 +183,9 @@ router.get("/eliminarPedidoDetalles/:id_pedidoD", async(req, res) => {
         var id_pedido_bind = req.params.id_pedidoD;
 
         sql = "CALL PA_PEDIDO_DETALLE_DELETE(:id_pedido_bind)";
-        var consulta = await settings.OpenConnection(sql, [id_pedido_bind], true);
+        resultado = await settings.OpenConnection(sql, [id_pedido_bind], true);
 
-        if (consulta) {
+        if (resultado) {
             console.log("[!] Pedido detalle " + id_pedido_bind + " eliminado con éxito");
             functions.ListarPedidoDetalles();
             res.redirect(req.get('referer'));
@@ -207,11 +209,12 @@ router.get("/anularPedido/:id_pedido", async(req, res) => {
         var id_pedido_bind = req.params.id_pedido;
 
         sql = "CALL PA_PEDIDO_ANULAR(:id_pedido_bind)";
-        await settings.OpenConnection(sql, [id_pedido_bind], true);
+        resultado = await settings.OpenConnection(sql, [id_pedido_bind], true);
 
-        if(res.status(200)) {
+        if(resultado) {
             console.log("[!] Pedido " + id_pedido_bind + " anulado con éxito");
-            res.redirect('/pedidos');
+            var refresh_page = "true";
+            res.redirect('/pedidos/?refresh_status=' + refresh_page);
         } else {
             console.log("[!] Ocurrió un error al intentar anular el pedido " + id_pedido_bind);
             res.redirect('/pedidos');
@@ -233,11 +236,12 @@ router.get("/anularMiPedido/:id_pedido", async(req, res) => {
         var id_pedido_bind = req.params.id_pedido;
 
         sql = "CALL PA_PEDIDO_ANULAR(:id_pedido_bind)";
-        await settings.OpenConnection(sql, [id_pedido_bind], true);
+        resultado = await settings.OpenConnection(sql, [id_pedido_bind], true);
 
-        if(res.status(200)) {
+        if(resultado) {
             console.log("[!] Pedido " + id_pedido_bind + " anulado con éxito");
-            res.redirect('/mispedidos');
+            var refresh_page = "true";
+            res.redirect('/mispedidos/?refresh_status=' + refresh_page);
         } else {
             console.log("[!] Ocurrió un error al intentar anular el pedido " + id_pedido_bind);
             res.redirect('/mispedidos');
